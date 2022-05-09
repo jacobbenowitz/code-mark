@@ -7,6 +7,7 @@ import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/signup_form_container';
 import ProfileContainer from './profile/profile_container';
 import Footer from './nav/footer';
+import codeEditor from './code_editor/code_editor';
 import '../stylesheets/reset.css';
 import '../stylesheets/app.css';
 import '../stylesheets/session.css';
@@ -14,6 +15,7 @@ import '../stylesheets/layout.css';
 import '../stylesheets/typography.css';
 import '../stylesheets/buttons.css';
 import '../stylesheets/navbar.css';
+import '../stylesheets/landing.css';
 
 const App = () => (
   <div className="grid-pancake-stack">
@@ -21,6 +23,7 @@ const App = () => (
       <NavBarContainer />
     </header>
     <Switch>
+      <AuthRoute path="/" component={codeEditor} />
       <AuthRoute exact path="/" component={SplashPage} />
       <AuthRoute exact path='/login' component={LoginFormContainer} />
       <AuthRoute exact path='/signup' component={SignupFormContainer} />
