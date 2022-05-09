@@ -1,33 +1,33 @@
 body {
-  font-family: 'Open Sans', sans-serif;
-  color: #222222;
+  font-family: 'Inter', sans-serif;
+  color: #FAFAFA;
 }
 
 h1 {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 42px;
-  color: #222222;
+  color: #FAFAFA;
 }
 
 h2 {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 38px;
   font-weight: 600;
-  color: #222222;
+  color: #FAFAFA;
 }
 
 h3 {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 32px;
+  font-family: 'Inter', sans-serif;
+  font-size: 28px;
   font-weight: 800;
-  color: #222222;
+  color: #FAFAFA;
 }
 
 h4 {
   font-size: 24px;
   line-height: 28px;
   font-weight: 800;
-  color: #222222;
+  color: #FAFAFA;
   margin-top: 0.5em;
   margin-bottom: 0.8em;
 }

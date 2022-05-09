@@ -2,7 +2,7 @@
 .session {
   grid-column: 1 / span 12;
   height: 100vh;
-  background-color: #F7F8FA;
+  background-color: #2D2D2D;
 }
 
 #session-form {
@@ -19,7 +19,7 @@
   left: calc(50% - 402px/2);
   top: calc(50% - 591px/2);
 
-  background: #FFFFFF;
+  background: #202124;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
 
   border: 1px solid #EEEFF2;
@@ -52,4 +52,41 @@
 }
 .alt-session-link > p {
   margin-right: 0.5rem;
+}
+
+.text-input, .date-input {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 12px 11px;
+  height: 40px;
+  width: 100%;
+  background: #FFFFFF;
+  border: 1px solid #D7D8DB;
+  border-radius: 3px;
+  margin: 4px 0px;
+}
+
+.form-input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.date-input {
+  height: fit-content;
+}
+
+.radio-group {
+  padding: 12px 11px;
+}
+
+.form-input > label {
+  font-size: 14px;
+  line-height: 20px;
+  color: rgb(109, 115, 120);
+  margin-bottom: 4px;
 }

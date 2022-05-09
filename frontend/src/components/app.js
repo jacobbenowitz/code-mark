@@ -12,6 +12,7 @@ import '../stylesheets/app.css';
 import '../stylesheets/session.css';
 import '../stylesheets/layout.css';
 import '../stylesheets/typography.css';
+import '../stylesheets/buttons.css';
 
 const App = () => (
   <div>
