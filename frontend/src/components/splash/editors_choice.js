@@ -6,13 +6,13 @@ const photoCredit = (
 );
 
 export const EditorsChoiceLanding = (
-    <div id="editors-choice-landing">
+    <div className="editors-choice-landing">
         <div className="landing-image-header">
             <div className="landing-header-content">
                 <div className="icon-container">
                     <img src="https://my5000px-static.s3.amazonaws.com/editors-choice.svg" />
                 </div>
-                <h2>Editor's Choice</h2>
+                <h2>Smart bookmarks for code</h2>
                 {photoCredit}
             </div>
         </div>
@@ -20,9 +20,9 @@ export const EditorsChoiceLanding = (
         <div id="editors-gallery"
             className="landing-gallery-container">
             <div className="landing-gallery-header">
-                <h4>The best of the best.</h4>
-                <span>Our editors are always on the lookout for jaw dropping content for you to discover and stay inspired. Check back weekly to see what’s new.</span>
-                <Link to={'/'} className="landing-large-button">View Editor's Choice</Link>
+                <h5>Find the best code.</h5>
+                <span>Our discover page is the best place to find new and valuable code</span>
+                <Link to={'/'} className="landing-large-button">View Discovery Page</Link>
             </div>
 
             <div className="image-gallery-2-row">
@@ -107,33 +107,6 @@ export const EditorsChoiceLanding = (
                         </div>
 
                     </div>
-
-                    <div className="editors-gallery-col">
-                        <div className="editors-box">
-                            <Link to={'#'} >
-                                <img className="editors-gal-img"
-                                    src="https://my5000px-static.s3.amazonaws.com/800px/jazz-performer-plays-the-saxophone.jpg" alt="" />
-                            </Link>
-                            <div className="editors-img-attribution">
-                                <Link to={'#'} className="img-attribution-link">
-                                    <span>Photo by Username</span>
-                                </Link>
-                            </div>
-                        </div>
-
-                        <div className="editors-box">
-                            <Link to={'#'} >
-                                <img className="editors-gal-img"
-                                    src="https://my5000px-static.s3.amazonaws.com/800px/moody-autumn-day-in-the-dolomites-forest.jpg" alt="Photo by Username" />
-                            </Link>
-                            <div className="editors-img-attribution">
-                                <Link to={'#'} className="img-attribution-link">
-                                    <span>Photo by Username</span>
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>

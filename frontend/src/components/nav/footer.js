@@ -9,10 +9,8 @@ const NavFooter = () => (
                     <h5>Community</h5>
                 </div>
                 <div className="footer-link-list">
-                    <NavLink to={'/'}>Popular Codesnippets</NavLink>
-                    <NavLink to={'/'}>Upcoming Codesnippets</NavLink>
-                    <NavLink to={'/'}>Fresh Codesnippets</NavLink>
-                    <NavLink to={'/'}>Editors Choice</NavLink>
+                    <NavLink to={'/'}>Discover</NavLink>
+                    <NavLink to={'/'}>Following</NavLink>
                 </div>
             </div>
 
@@ -21,28 +19,26 @@ const NavFooter = () => (
                     <h5>Social</h5>
                 </div>
                 <div className="footer-link-list">
-                    <NavLink to={'/'}>Github</NavLink>
-                    <NavLink to={'/'}>LinkedIn</NavLink>
-                    <NavLink to={'/'}>Porfolio</NavLink>
+                    <a href="https://github.com/jacobbenowitz" target="_blank" rel="noreferrer">
+                        Jacob Benowitz
+                    </a>
+                    <a href="https://github.com/jacobbenowitz" target="_blank" rel="noreferrer">
+                        Christopher Moore
+                    </a>
+                    <a href="https://github.com/jacobbenowitz" target="_blank" rel="noreferrer">
+                        Johnny Mei
+                    </a>
                 </div>
             </div>
 
             <div className="nav-col-03">
                 <div className="footer-header">
-                    <h5>Company</h5>
+                    <h5>Project Links</h5>
                 </div>
                 <div className="footer-link-list">
-                    <Link to={'/'}>CSS Animation Game</Link>
-                </div>
-            </div>
-
-            <div className="nav-col-04">
-                <div className="footer-header">
-                    <h5>Download the app</h5>
-                </div>
-                <div className="footer-link-list">
-                    <Link to={'/'}>App Store</Link>
-                    <Link to={'/'}>Play Store</Link>
+                    <a href="https://github.com/jacobbenowitz/code-mark" target="_blank" rel="noreferrer">
+                        CodeMark Github
+                    </a>
                 </div>
             </div>
         </div>
