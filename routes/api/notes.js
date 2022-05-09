@@ -12,7 +12,7 @@ const validateNoteInput = require('../../validation/notes');
 router.get('/', (req, res) => {
     Note.find()
         .then(notes => res.json(notes))
-        .catch(err => res.status(404).json({ notweetsfound: 'No Notes found' }));
+        .catch(err => res.status(404).json({ notweetsfound: 'No Notes Found' }));
 });
 
 //get notes of one user
@@ -20,7 +20,7 @@ router.get('/user/:user_id', (req, res) => {
     Note.find({user: req.params.user_id})
         .then(notes => res.json(notes))
         .catch(err =>
-            res.status(404).json({ nonotesfound: 'No notes found from that user' }
+            res.status(404).json({ nonotesfound: 'No Notes Found From That User' }
         )
     );
 });
@@ -30,7 +30,7 @@ router.get('/:id', (req, res) => {
     Note.findById(req.params.id)
         .then(note => res.json(note))
         .catch(err =>
-            res.status(404).json({ nonotefound: 'No note found with that ID' })
+            res.status(404).json({ nonotefound: 'No Note Found With That ID' })
         );
 });
 
@@ -60,13 +60,14 @@ router.post('/',
 );
 
 //edit a note if the current user made it
-router.post('/:id/edit',
+router.patch('/:id/edit',
     passport.authenticate('jwt', { session: false }),
     (req,res) => {
     Note.findById(req.params.id)
         .then(note => {
-            if(note.user !== req.user.id){
-                res.status(404).json({editnotallowed: 'Not Authorized to edit note'})
+            User.findById(note.user).then(user => console.log(user));
+            if(note.user.toString() !== req.user.id){
+                res.status(404).json({editnotallowed: 'Not Authorized To Edit Note'})
             }else {
                 note.codebody = req.body.codebody;
                 note.title = req.body.title;
@@ -76,30 +77,34 @@ router.post('/:id/edit',
             }
         })
         .catch(err =>
-            res.status(404).json({ nonotefound: 'No note found with that ID' })
+            res.status(404).json({ nonotefound: 'No Note Found With That ID' })
         )
 })
 
+//delete note if the current user made it
 router.delete('/:id',
     passport.authenticate('jwt', { session: false }),
     (req,res) => {
         Note.findById(req.params.id)
             .then(note => {
-                if(note.user !== req.user.id){
-                    res.status(404).json({deletenotallowed: 'Not Authorized to delete note'})
+                if(note.user.toString() !== req.user.id){
+                    res.status(404).json({deletenotallowed: 'Not Authorized To Delete Note'})
                 }else{
                     const noteid = note.id;
                     const userid = note.user;
                     Note.deleteOne({_id: req.params.id})
                         .then(() => {
-                            var user = User.findById(userid);
-                            user.notes = user.notes.filter(item => item !== noteid)
-                            user.save().then(user => res.json(user))
+                            User.findById(userid)
+                                .then(user => {
+                                    user.notes = user.notes.filter(item => item.toString() !== noteid);
+                                    user.save().then(user => res.json(user));
+                                })
                         })
                 }
             })
             .catch(err =>
-                res.status(404).json({ nonotefound: 'No note found with that ID' }) 
+                res.status(404).json({ nonotefound: 'No Note Found With That ID' }) 
+                // res.status(404).json(err.message) 
             )
     }
 )
