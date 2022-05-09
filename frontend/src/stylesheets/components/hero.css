@@ -1,0 +1,36 @@
+#hero-container {
+  grid-column: 1 / span 12;
+  height: 600px;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  background: url('https://my5000px-static.s3.amazonaws.com/home_hero_opti.jpg') rgba(26, 26, 26, 0.3);
+  background-size:cover;
+  background-blend-mode: multiply;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.hero-graphic {
+  grid-column: 1 / span 2;
+  align-self: flex-end;
+  position: relative;
+  top: 5px;
+}
+
+#hero-content {
+  grid-column: 1 / span 1;
+  padding-top: 80px;
+  margin: 0 64px 0 64px
+}
+
+.hero-tagline, .hero-h1 {
+  padding-bottom: 10px;
+  color: white;
+}
+
+.hero-h1 {
+  font-weight: 800;
+  font-size: 42px;
+}

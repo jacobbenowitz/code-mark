@@ -1,0 +1,266 @@
+.file-upload-input::-webkit-file-upload-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  visibility: hidden;
+  z-index: 200;
+}
+
+.file-upload-input::before {
+  content: "Select photo";
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 14px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  color: #FFFFFF;
+  background: #316ECA;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.file-upload-input:hover::before {
+  background: #2986F7;
+  transition: background 250ms ease-in-out, transform 150ms ease;
+}
+
+button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 30px;
+  background: #316ECA;
+  color: white;
+  border-radius: 30px;
+  margin: 8px;
+  text-align: center;
+  transition: background 250ms ease-in-out;
+}
+
+button:hover {
+  background-color: #2986F7;
+}
+
+button:focus {
+  background-color: #2B5FA8;
+}
+
+
+.sign-up {
+  font-weight: 600;
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 15px;
+
+  position: static;
+  /* width: 90px; */
+  height: 30px;
+  left: 70px;
+  top: 3px;
+
+  /* darkest-grey */
+
+  border: 2px solid #222222;
+  box-sizing: border-box;
+  border-radius: 30px;
+}
+
+/* session */
+
+.login, .signup, .demo_button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 30px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  position: static;
+  width: 100%;
+  height: 48px;
+  left: calc(50% - 342px/2);
+  top: 166px;
+
+  background: #316ECA;
+  border-radius: 30px;
+  color: white;
+}
+
+
+.login:hover, .signup:hover, .demo_button:hover {
+  background-color: #2986F7;
+}
+
+.login:focus, .signup:focus, .demo_button:focus {
+  background-color: #2B5FA8;
+}
+
+.save-profile {
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 30px;
+
+  position: static;
+  /* width: 167px; */
+  height: 32px;
+  left: 165px;
+  top: 23px;
+
+  background: #316ECA;
+  border-radius: 30px;
+}
+
+input {
+  border: 2px solid transparent;
+}
+
+input:focus {
+  border: 1px solid #316ECA;
+  background-color: #fdfdfd;
+}
+
+.sign-up-large {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 15px;
+
+  padding: 0 24px 0 24px;
+  height: 56px;
+  width: 180px;
+  left: 20px;
+  top: 190px;
+
+  /* white */
+
+  color: #222222;
+  background: #FFFFFF;
+  border-radius: 100px;
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: 14px;
+}
+
+.sign-up-large:hover {
+  background-color: #EEEFF2;
+  color: #222222;
+}
+
+.sign-up-large:focus {
+  background-color: #FFFFFF;
+  color: #316ECA;
+}
+
+.landing-large-button {
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0 32px 0 32px;
+
+  /* position: static; */
+  width: auto;
+  height: 55px;
+  font-size: 24px;
+  line-height: 64px;
+  font-weight: 600;
+
+  /* darkest-grey */
+
+  background: #222222;
+  border-radius: 30px;
+}
+
+.landing-large-button:hover {
+  background-color: #363636;
+  color: white;
+}
+
+.landing-large-button:focus {
+  background-color: #316ECA;
+}
+
+.upload-button {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  width: auto;
+  min-width: 84px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #222222;
+  border-radius: 28px;
+  max-height: 48px;
+  padding: 10px 22px 10px 14px;
+  background-color: white;
+  color: #222222;
+}
+
+.upload-button:hover {
+  background-color: #f8f8f8;
+}
+
+#upload-button-content {
+  display: flex;
+  flex-basis: auto;
+  align-items: center;
+}
+
+#upload-icon {
+  padding-right: 6px;
+}
+
+.demo-sign-up-large {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 15px;
+
+  padding: 0 24px 0 24px;
+  height: 56px;
+  width: 180px;
+  left: 20px;
+  top: 190px;
+
+  border: 2px solid transparent;
+
+  /* white */
+  color: rgb(69, 69, 124);
+  background: #FFFFFF;
+  border-radius: 100px;
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: 14px;
+  -webkit-box-shadow:0px 0px 20px 0px rgba(45,255,196,0.79);
+  -moz-box-shadow: 0px 0px 20px 0px rgba(45,255,196,0.79);
+  box-shadow: 0px 0px 20px 0px rgba(45,255,196,0.79);
+}
+
+.demo-sign-up-large:hover {
+  border: 2px solid #B05C87;
+  color: #B05C87;
+  -webkit-box-shadow:0px 0px 20px 0px #B05C87;
+  -moz-box-shadow: 0px 0px 20px 0px #B05C87;
+  box-shadow: 0px 0px 20px 0px #B05C87;
+}
+
+.demo-sign-up-large:focus {
+  background-color: rgb(69, 69, 124);
+  color: #FFFFFF;
+}

@@ -13,6 +13,7 @@ import '../stylesheets/reset.css';
 import '../stylesheets/app.css';
 import '../stylesheets/session.css';
 import '../stylesheets/layout.css';
+import '../stylesheets/allstyles.css';
 import '../stylesheets/typography.css';
 import '../stylesheets/buttons.css';
 import '../stylesheets/navbar.css';
