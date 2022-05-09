@@ -1,0 +1,41 @@
+.new-note-container {
+  box-sizing: border-box;
+  min-width: 400px;
+  min-height: 236px;
+  padding: 1.4rem;
+  display: flex;
+  
+  background: #202124;
+  border: 1px solid #FFFFFF;
+  /* bg-shadow-lg */
+
+  box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.12);
+  border-radius: 5px;
+
+}
+
+.new-note-form {
+  display: flex;
+  flex-grow: 1;
+  flex-flow: column nowrap;
+}
+
+.title-input {
+  font-size: 24px;
+}
+
+.title-input:focus {
+  background: none;
+  border: 2px solid transparent;
+}
+
+.note-input-details {
+  width: 100%;
+  resize: none;
+}
+
+.note-input {
+  margin-top: 1.4rem;
+}
+
+/* .code-editor */
