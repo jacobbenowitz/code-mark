@@ -1,3 +1,4 @@
+const path = require('path');
 const mongoose = require('mongoose');
 const express = require("express");
 const bodyParser = require('body-parser');
@@ -7,20 +8,30 @@ const passport = require('passport');
 const app = express();
 const db = require('./config/keys').mongoURI;
 
+// production settings
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('frontend/build'));
+    app.get('/', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+    })
+};
+
+// connect to MongoDB via mongoose
 mongoose
     .connect(db, { useNewUrlParser: true })
     .then(() => console.log("Connected to MongoDB successfully"))
     .catch(err => console.log(err));
 
-app.get("/", (req, res) => res.send("Hello World"));
-
-app.use(passport.initialize());
-require('./config/passport')(passport);
-
+// setup middleware for body parser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// tell Express to use imported routes
 app.use("/api/users", users);
+
+// setup middleware for passport
+app.use(passport.initialize());
+require('./config/passport')(passport);
 
 const port = process.env.PORT || 5001;
 
