@@ -19,12 +19,15 @@ router.get('/', (req, res) => {
 
 //get notes of one user
 router.get('/user/:user_id', (req, res) => {
-    Note.find({ user: req.params.user_id })
-        .then(notes => res.json(notes))
+    User.findById(req.params.user_id)
+        .then(user => {
+            Note.find({'_id': {$in: Object.values(user.notes)}})
+                .then(notes => res.json(notes))
+                .catch(err => res.status(404).json(err.message))
+        })
         .catch(err =>
-            res.status(404).json({ nonotesfound: 'No Notes Found From That User' }
-            )
-        );
+            res.status(404).json({ nouserfound: 'No Such User Found' }
+        ))
 });
 
 //get one note by id
