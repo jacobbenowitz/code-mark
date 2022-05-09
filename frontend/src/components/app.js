@@ -7,8 +7,11 @@ import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/signup_form_container';
 import ProfileContainer from './profile/profile_container';
 import Footer from './nav/footer';
-import '../stylesheets/reset.css'
-import '../stylesheets/app.css'
+import '../stylesheets/reset.css';
+import '../stylesheets/app.css';
+import '../stylesheets/session.css';
+import '../stylesheets/layout.css';
+import '../stylesheets/typography.css';
 
 const App = () => (
   <div>
