@@ -6,8 +6,8 @@ const heroH1 = (
 );
 
 const heroTagline = (
-    <p className="hero-tagline">Expand your coding knowledge by cementing it in 
-    a note, and explore the resources for it that's automatically generated for you!</p>
+    <p className="hero-tagline">Expand your coding knowledge by cementing it in
+        a note, and explore the resources for it that's automatically generated for you!</p>
 );
 
 const heroCredit = (
@@ -25,7 +25,7 @@ export const Hero = (
         </div>
 
         <div className="hero-graphic">
-            <img src="https://my5000px-static.s3.amazonaws.com/hero_graphic/size%3Dlarge.svg" />
+            <img src="https://code-mark.s3.amazonaws.com/dark-hero-graphic.svg" />
         </div>
 
     </div>

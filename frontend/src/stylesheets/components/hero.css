@@ -3,7 +3,7 @@
   height: 600px;
   display: grid;
   grid-template-columns: 1.5fr 1fr;
-  background: url('https://my5000px-static.s3.amazonaws.com/home_hero_opti.jpg') rgba(26, 26, 26, 0.3);
+  background: url('https://code-mark.s3.amazonaws.com/abstract-background-2021-09-02-22-40-23-utc.jpg') rgba(26, 26, 26, 0.3);
   background-size:cover;
   background-blend-mode: multiply;
   background-position: center;

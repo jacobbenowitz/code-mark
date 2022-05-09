@@ -30,6 +30,7 @@ export default class NewNote extends React.Component {
             </div>
             <div className='note-input'>
               <textarea
+                id='details-textarea'
                 className='note-input-details'
                 placeholder='test'
               />
