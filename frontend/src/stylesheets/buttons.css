@@ -7,15 +7,7 @@ input:focus {
   background-color: #fdfdfd;
 }
 
-.login:hover, .signup:hover, .demo_button:hover {
-  background-color: #2986F7;
-}
-
-.login:focus, .signup:focus, .demo_button:focus {
-  background-color: #2B5FA8;
-}
-
-button {
+button, .button {
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
@@ -30,12 +22,15 @@ button {
   border-radius: 4px;
 
   transition: border 250ms ease-in-out;
+  transition: color 250ms ease-in-out;
 }
 
-button:hover {
+button:hover, .signup:hover, .login:hover {
+  color: #37F3FF;
   border: 1px solid #37F3FF;
 }
 
-button:focus {
+button:focus, .signup:focus, .login:focus {
+  color: #37F3FF;
   background: #0D4649;
 }

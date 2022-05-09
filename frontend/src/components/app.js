@@ -13,10 +13,13 @@ import '../stylesheets/session.css';
 import '../stylesheets/layout.css';
 import '../stylesheets/typography.css';
 import '../stylesheets/buttons.css';
+import '../stylesheets/navbar.css';
 
 const App = () => (
-  <div>
-    <NavBarContainer />
+  <div className="grid-pancake-stack">
+    <header className="header-top-stack">
+      <NavBarContainer />
+    </header>
     <Switch>
       <AuthRoute exact path="/" component={SplashPage} />
       <AuthRoute exact path='/login' component={LoginFormContainer} />

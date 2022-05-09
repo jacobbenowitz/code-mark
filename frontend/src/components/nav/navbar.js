@@ -18,17 +18,14 @@ export default class NavBar extends React.Component {
     if (this.props.loggedIn) {
       return (
         <div>
-          <Link to={'/home'}>My notes</Link>
-          <Link to={'/discover'}>discover</Link>
-          <Link to={'following'}>Following</Link>
           <button onClick={this.logoutUser}>Logout</button>
         </div>
       );
     } else {
       return (
-        <div>
-          <Link to={'/signup'}>Signup</Link>
-          <Link to={'/login'}>Login</Link>
+        <div className="user-links">
+          <Link to={'/signup'} className="signup button">Signup</Link>
+          <Link to={'/login'} className="login button">Login</Link>
         </div>
       );
     }
@@ -36,10 +33,17 @@ export default class NavBar extends React.Component {
 
   render() {
     return (
-      <div>
-        {/* Logo HERE */}
-        <span>CodeMark</span>
-        {this.getLinks()}
+      <div id="nav-header">
+        <div id="logo-container">
+          <Link to={'/'}
+          >Code<strong>Mark</strong>
+          </Link>
+        </div>
+        <div className="search-bar">
+        </div>
+        <div id="user-links-container">
+          {this.getLinks()}
+        </div>
       </div>
     )
   }

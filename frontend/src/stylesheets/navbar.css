@@ -1,0 +1,76 @@
+header {
+  grid-column: 1 / span 12;
+  padding-left: 64px;
+  padding-right: 64px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  background-color: white;
+  top: 0;
+  z-index: 400;
+  background: #202124;
+}
+
+#nav-header {
+  display: flex;
+  overflow: hidden;
+  justify-content: space-between;
+  align-items: center;
+  height: 72px;
+  width: 100%;
+  margin: auto;
+}
+
+#logo-container {
+  height: 16px;
+  min-width: 16px;
+  position: relative;
+}
+
+#primary-logo {
+  height: 16px;
+  min-width: 16px;
+}
+
+.nav-links {
+  display: flex;
+  flex: 1 1 0%;
+  flex-flow: row wrap;
+  align-items: center;
+  max-height: 30px;
+  overflow: hidden;
+}
+
+.user-links > a {
+  margin-left: 24px;
+  cursor: pointer;
+}
+
+#user-links-container {
+  display: flex;
+  justify-content: flex-end;
+  flex-flow: row wrap;
+  align-items: center;
+  overflow: hidden;
+}
+
+.user-links {
+  display: flex;
+  flex-direction: row;
+}
+
+#user-avatar, #login-link {
+  margin-right: 24px;
+}
+
+#user-avatar {
+  /* background-color: #454578; */
+  color: white;
+  border-radius: 50%;
+  /* width: 32px;
+  height: 32px; */
+  /* display: grid;
+  place-items: center; */
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
