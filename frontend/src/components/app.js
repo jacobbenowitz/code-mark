@@ -6,6 +6,7 @@ import NavBarContainer from './nav/navbar_container';
 import SplashPage from './splash/splash_page';
 import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/signup_form_container';
+import NavFooter from "./nav/footer";
 import ProfileContainer from './profile/profile_container';
 import Footer from './nav/footer';
 import Home from './main/home';
@@ -36,7 +37,9 @@ const App = () => (
       {/* <ProtectedRoute exact path='/discover' component={DiscoverContainer} /> */}
       {/* <ProtectedRoute exact path='/following' component={FollowingContainer} /> */}
     </Switch>
-    {/* <Footer /> */}
+    <footer className="grid-bottom-stack">
+      <NavFooter />
+    </footer>
   </div>
 );
 
