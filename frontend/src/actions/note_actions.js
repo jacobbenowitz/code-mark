@@ -1,13 +1,17 @@
 import {
   getNotes,
   getUserNotes,
-  writeNote
+  writeNote,
+  patchNote,
+  deleteNote
 } from '../util/note_api_util';
 
 export const RECEIVE_NOTES = "RECEIVE_NOTES";
 export const RECEIVE_USER_NOTES = "RECEIVE_USER_NOTES";
 export const RECEIVE_NEW_NOTE = "RECEIVE_NEW_NOTE";
 export const RECEIVE_NOTE_ERRORS = "RECEIVE_NOTE_ERRORS";
+export const RECEIVE_UPDATED_NOTE = "RECEIVE_UPDATED_NOTE";
+export const RECEIVE_DELETE_NOTE = "RECEIVE_DELETE_NOTE";
 
 export const receiveNotes = notes => ({
   type: RECEIVE_NOTES,
@@ -29,6 +33,16 @@ export const receiveNoteErrors = errors => ({
   errors
 })
 
+export const receiveUpdateNote = note => ({
+  type: RECEIVE_UPDATED_NOTE,
+  note
+})
+
+export const receiveDeleteNote = noteId => ({
+  type: RECEIVE_DELETE_NOTE,
+  noteId
+})
+
 export const fetchNotes = () => dispatch => (
   getNotes()
     .then(notes => dispatch(receiveNotes(notes)))
@@ -44,5 +58,17 @@ export const fetchUserNotes = id => dispatch => (
 export const composeNote = data => dispatch => (
   writeNote(data)
     .then(note => dispatch(receiveNewNote(note)))
+    .catch(err => dispatch(receiveNoteErrors(err)))
+);
+
+export const updateNote = data => dispatch => (
+  patchNote()
+    .then(note => dispatch(receiveUpdateNote(note)))
+    .catch(err => dispatch(receiveNoteErrors(err)))
+);
+
+export const deleteNote = noteId => dispatch => (
+  deleteNote()
+    .then(note => dispatch(receiveDeleteNote(note.id)))
     .catch(err => dispatch(receiveNoteErrors(err)))
 );
