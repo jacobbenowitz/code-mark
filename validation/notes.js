@@ -7,8 +7,8 @@ module.exports = function validateNoteInput(data) {
   data.codebody = validText(data.codebody) ? data.codebody : '';
   data.textdetails = validText(data.textdetails) ? data.textdetails: '';
 
-  if (!Validator.isLength(data.codebody, { min: 5, max: 140 })) {
-    errors.codebody = 'Code Body must be between 5 and 140 characters';
+  if (!Validator.isLength(data.codebody, { min: 5, max: 5000 })) {
+    errors.codebody = 'Code Body must be between 5 and 5000 characters';
   }
 
   if (Validator.isEmpty(data.codebody)) {
