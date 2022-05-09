@@ -9,5 +9,13 @@ export const getUserNotes = userId => {
 };
 
 export const writeNote = data => {
-  return axios.post('/api/notes/', data)
+  return axios.post('/api/notes', data)
+};
+
+export const updateNote = (data, noteId) => {
+  return axios.patch(`/api/note/${noteId}/edit`, data)
+};
+
+export const deleteNote = noteId => {
+  return axios.delete(`api/note/${noteId}`)
 };

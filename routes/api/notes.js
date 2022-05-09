@@ -15,14 +15,16 @@ router.get('/', (req, res) => {
         .catch(err => res.status(404).json({ nonotesfound: 'No Notes Found' }));
 });
 
+//
+
 //get notes of one user
 router.get('/user/:user_id', (req, res) => {
-    Note.find({user: req.params.user_id})
+    Note.find({ user: req.params.user_id })
         .then(notes => res.json(notes))
         .catch(err =>
             res.status(404).json({ nonotesfound: 'No Notes Found From That User' }
-        )
-    );
+            )
+        );
 });
 
 //get one note by id
@@ -38,23 +40,23 @@ router.get('/:id', (req, res) => {
 router.post('/',
     passport.authenticate('jwt', { session: false }),
     (req, res) => {
-      const { errors, isValid } = validateNoteInput(req.body);
-  
-      if (!isValid) {
-        return res.status(400).json(errors);
-      }
-  
-      const newNote = new Note({
-        codebody: req.body.codebody,
-        user: req.user.id,
-        title: req.body.title,
-        textdetails: req.body.textdetails
-      });
-  
-      newNote.save().then(note => {
-          req.user.notes.push(newNote.id)
-          req.user.save()
-            .then(() => res.json(note))
+        const { errors, isValid } = validateNoteInput(req.body);
+
+        if (!isValid) {
+            return res.status(400).json(errors);
+        }
+
+        const newNote = new Note({
+            codebody: req.body.codebody,
+            user: req.user.id,
+            title: req.body.title,
+            textdetails: req.body.textdetails
+        });
+
+        newNote.save().then(note => {
+            req.user.notes.push(newNote.id)
+            req.user.save()
+                .then(() => res.json(note))
         });
     }
 );
@@ -62,37 +64,37 @@ router.post('/',
 //edit a note if the current user made it
 router.patch('/:id/edit',
     passport.authenticate('jwt', { session: false }),
-    (req,res) => {
-    Note.findById(req.params.id)
-        .then(note => {
-            User.findById(note.user).then(user => console.log(user));
-            if(note.user.toString() !== req.user.id){
-                res.status(404).json({editnotallowed: 'Not Authorized To Edit Note'})
-            }else {
-                note.codebody = req.body.codebody;
-                note.title = req.body.title;
-                note.textdetails = req.body.textdetails;
-                note.save()
-                    .then(note => res.json(note))
-            }
-        })
-        .catch(err =>
-            res.status(404).json({ nonotefound: 'No Note Found With That ID' })
-        )
-})
+    (req, res) => {
+        Note.findById(req.params.id)
+            .then(note => {
+                User.findById(note.user).then(user => console.log(user));
+                if (note.user.toString() !== req.user.id) {
+                    res.status(404).json({ editnotallowed: 'Not Authorized To Edit Note' })
+                } else {
+                    note.codebody = req.body.codebody;
+                    note.title = req.body.title;
+                    note.textdetails = req.body.textdetails;
+                    note.save()
+                        .then(note => res.json(note))
+                }
+            })
+            .catch(err =>
+                res.status(404).json({ nonotefound: 'No Note Found With That ID' })
+            )
+    })
 
 //delete note if the current user made it
 router.delete('/:id',
     passport.authenticate('jwt', { session: false }),
-    (req,res) => {
+    (req, res) => {
         Note.findById(req.params.id)
             .then(note => {
-                if(note.user.toString() !== req.user.id){
-                    res.status(404).json({deletenotallowed: 'Not Authorized To Delete Note'})
-                }else{
+                if (note.user.toString() !== req.user.id) {
+                    res.status(404).json({ deletenotallowed: 'Not Authorized To Delete Note' })
+                } else {
                     const noteid = note.id;
                     const userid = note.user;
-                    Note.deleteOne({_id: req.params.id})
+                    Note.deleteOne({ _id: req.params.id })
                         .then(() => {
                             User.findById(userid)
                                 .then(user => {
@@ -103,7 +105,7 @@ router.delete('/:id',
                 }
             })
             .catch(err =>
-                res.status(404).json({ nonotefound: 'No Note Found With That ID' }) 
+                res.status(404).json({ nonotefound: 'No Note Found With That ID' })
                 // res.status(404).json(err.message) 
             )
     }
