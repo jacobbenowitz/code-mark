@@ -1,0 +1,36 @@
+.text-input, .date-input {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 12px 11px;
+  height: 40px;
+  width: 100%;
+  background: #FFFFFF;
+  border: 1px solid #D7D8DB;
+  border-radius: 3px;
+  margin: 4px 0px;
+}
+
+.form-input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.date-input {
+  height: fit-content;
+}
+
+.radio-group {
+  padding: 12px 11px;
+}
+
+.form-input > label {
+  font-size: 14px;
+  line-height: 20px;
+  color: rgb(109, 115, 120);
+  margin-bottom: 4px;
+}

@@ -1,0 +1,9 @@
+/* components */
+
+@import '../stylesheets/components/hero.css';
+@import '../stylesheets/components/demo_info.css';
+@import '../stylesheets/components/buttons.css';
+@import '../stylesheets/components/editors_choice.css';
+@import '../stylesheets/components/input_elements.css';
+@import '../stylesheets/components/landing_page.css';
+@import '../stylesheets/components/photo_show.css';
