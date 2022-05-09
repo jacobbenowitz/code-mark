@@ -12,7 +12,7 @@ const validateNoteInput = require('../../validation/notes');
 router.get('/', (req, res) => {
     Note.find()
         .then(notes => res.json(notes))
-        .catch(err => res.status(404).json({ notweetsfound: 'No Notes Found' }));
+        .catch(err => res.status(404).json({ nonotesfound: 'No Notes Found' }));
 });
 
 //get notes of one user

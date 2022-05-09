@@ -8,11 +8,11 @@ module.exports = function validateNoteInput(data) {
   data.textdetails = validText(data.textdetails) ? data.textdetails: '';
 
   if (!Validator.isLength(data.codebody, { min: 5, max: 140 })) {
-    errors.codebody = 'Tweet must be between 5 and 140 characters';
+    errors.codebody = 'Code Body must be between 5 and 140 characters';
   }
 
   if (Validator.isEmpty(data.codebody)) {
-    errors.codebody = 'Text field is required';
+    errors.codebody = 'Code Body field is required';
   }
 
   return {
