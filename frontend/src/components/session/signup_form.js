@@ -53,22 +53,29 @@ class SignupForm extends React.Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <br />
-            <input type={'email'}
-              value={this.state.email}
-              onChange={this.update('email')}
-              placeholder='email'
-            />
-            <br />
-            <input type={'text'}
-              value={this.state.username}
-              onChange={this.update('username')}
-              placeholder='username'
-            />
-            <br />
+      <div className='session center-simple'>
+        <div id='session-form'>
+          <h3>Create a new account</h3>
+          <form onSubmit={this.handleSubmit}>
+            <div className='form-input'>
+              <label htmlFor='email'>Email</label>
+              <input type={'email'}
+                value={this.state.email}
+                onChange={this.update('email')}
+                placeholder='email'
+              />
+            </div>
+            <div className='form-input'>
+              <label htmlFor='username'>username</label>
+              <input type={'text'}
+                value={this.state.username}
+                onChange={this.update('username')}
+                placeholder='username'
+              />
+            </div>
+            <div>
+
+            </div>
             <input type={'password'}
               value={this.state.password}
               onChange={this.update('password')}
@@ -83,8 +90,8 @@ class SignupForm extends React.Component {
             <button type='submit'
               className={'button-session'}>Signup</button>
             {this.renderErrors()}
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     )
   }
