@@ -39,39 +39,51 @@ class LoginForm extends React.Component {
 
   renderErrors() {
     return (
-      <ul>
-        {Object.keys(this.state.errors).map((error, i) => (
-          <li key={`error-${i}`}>
-            {this.state.errors[error]}
-          </li>
-        ))}
-      </ul>
+      <div className="error-modal">
+        <ul className="error-list">
+          {Object.keys(this.state.errors).map((error, i) => (
+            <li key={`error-${i}`}>
+              {this.state.errors[error]}
+            </li>
+          ))}
+        </ul>
+      </div>
     );
   }
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <input type={'text'}
-              value={this.state.username}
-              onChange={this.update('username')}
-              placeholder='username'
-            />
-            <br />
-            <input type={'password'}
-              value={this.state.password}
-              onChange={this.update('password')}
-              placeholder='password'
-            />
-            <br />
-            <button type='submit'
-              className={'button-session'}>Login</button>
+      <div className="session center-simple">
+        <div id="session-form">
+          <h3>Log in to Code-Mark</h3>
+          <form onSubmit={this.handleSubmit}>
+            <div className="form-input">
+              <label htmlFor="username">Username</label>
+                <input type={'text'}
+                  value={this.state.username}
+                  onChange={this.update('username')}
+                  placeholder='username'
+                  className="text-input"
+                />
+            </div>
+            <div className="form-input">
+              <label htmlFor="password">Password</label>
+              <input type={'password'}
+                value={this.state.password}
+                onChange={this.update('password')}
+                placeholder='password'
+                className="text-input"
+              />
+            </div>
+            <button type='submit'className={'button-session'}>Login</button>
             {this.renderErrors()}
-          </div>
-        </form>
-      </div>
+            <span className="alt-session-link">
+              <p>Don't have an account?</p>
+              <Link to={'/signup'}>Sign up</Link>
+            </span>
+          </form>
+        </div >
+    </div>
     )
   }
 }
