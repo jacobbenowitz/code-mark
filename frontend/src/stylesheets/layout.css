@@ -2,7 +2,7 @@ html {
   height: 100vh; 
 }
 body { 
-  min-height: 100vw; 
+  /* min-height: 100vw;  */
   overflow-x: hidden;
 }
 /* layouts */
@@ -11,6 +11,12 @@ body {
   display: grid;
   max-width: 100vw;
   grid-template-rows: auto 1fr auto;
+}
+
+.main-sidebar {
+  display: grid;
+  grid-template-columns: minmax(150px, 25%) 1fr;
+  gap: 2rem;
 }
 
 .header-top-stack {
@@ -71,4 +77,9 @@ html {
 }
 #bottom-footer-links a {
   margin-left: 10px;
+}
+
+.grid-pancake-stack {
+  display: border-box;
+  min-height: 100vh;
 }

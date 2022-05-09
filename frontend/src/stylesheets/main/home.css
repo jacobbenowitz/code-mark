@@ -1,0 +1,32 @@
+#root {
+  background: #2D2D2D;
+}
+
+.main-sidebar {
+  grid-column: 1 / span 12;
+  padding-top: 2rem;
+}
+
+.home-main {
+  padding-right: 64px;
+}
+
+.nv-boxes {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+}
+
+.nav-sidecar {
+  min-height: 300px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  /* padding: 50px 50px; */
+
+  width: 100%;
+
+  background: #202124;
+  border-radius: 0px 9px 9px 0px;
+}
