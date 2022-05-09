@@ -5,7 +5,7 @@ import {
 
 const _nullErrors = [];
 
-export default SessionErrorsReducer = (state = _nullErrors, action) => {
+const SessionErrorsReducer = (state = _nullErrors, action) => {
   Object.freeze(state);
 
   switch (action.type) {
@@ -17,3 +17,5 @@ export default SessionErrorsReducer = (state = _nullErrors, action) => {
       return state;
   }
 };
+
+export default SessionErrorsReducer;
