@@ -4,6 +4,7 @@ const express = require("express");
 const bodyParser = require('body-parser');
 const users = require("./routes/api/users");
 const passport = require('passport');
+const notes = require("./routes/api/notes");
 
 const app = express();
 const db = require('./config/keys').mongoURI;
@@ -28,6 +29,7 @@ app.use(bodyParser.json());
 
 // tell Express to use imported routes
 app.use("/api/users", users);
+app.use("/api/notes", notes);
 
 // setup middleware for passport
 app.use(passport.initialize());
