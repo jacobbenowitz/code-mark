@@ -1,25 +1,25 @@
-import React from 'react'
-import {withRouter} from 'react-router-dom';
+import React from 'react';
+import { withRouter } from 'react-router-dom';
 
-class LoginForm extends React.Component {
+class SignupForm extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
+      email: '',
       username: '',
       password: '',
+      password2: '',
       errors: {}
-    };
-
+    }
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.renderErrors = this.renderErrors.bind(this);
+    this.clearedErrors = false;
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.currentuser === true) {
-      this.props.history.push('/home') // redirect if authenticated
+    if (nextProps.signedIn === true) {
+      this.props.history.push('/home') // redirect if not authenticated
     }
-    this.setState({errors: nextProps.errors})
+    this.setState({ errors: nextProps.errors })
   }
 
   update(field) {
@@ -31,10 +31,12 @@ class LoginForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     let user = {
+      email: this.state.email,
       username: this.state.username,
-      password: this.state.password
+      password: this.state.password,
+      password2: this.state.password2,
     };
-    this.props.login(user);
+    this.props.signup(user, this.props.history);
   }
 
   renderErrors() {
@@ -54,6 +56,13 @@ class LoginForm extends React.Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <div>
+            <br />
+            <input type={'email'}
+              value={this.state.email}
+              onChange={this.update('email')}
+              placeholder='email'
+            />
+            <br />
             <input type={'text'}
               value={this.state.username}
               onChange={this.update('username')}
@@ -66,10 +75,14 @@ class LoginForm extends React.Component {
               placeholder='password'
             />
             <br />
-            <button type='submit' value={'Login'}
-              className={'button-session'}
+            <input type={'password'}
+              value={this.state.password2}
+              onChange={this.update('password2')}
+              placeholder='confirm password'
             />
-            { this.renderErrors() }
+            <button type='submit'
+              className={'button-session'}>Signup</button>
+            {this.renderErrors()}
           </div>
         </form>
       </div>
@@ -77,4 +90,4 @@ class LoginForm extends React.Component {
   }
 }
 
-export default withRouter(LoginForm)
+export default withRouter(SignupForm);

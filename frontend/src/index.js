@@ -1,12 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import Root from './components/root';
 import configureStore from './store/store';
 import jwt_decode from 'jwt-decode';
 import { setAuthToken } from './util/session_api_util';
-import { logout } from './util/session_api_util';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { logout } from './actions/session_actions';
+import App from './components/app';
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -46,4 +45,4 @@ document.addEventListener('DOMContentLoaded', () => {
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals(console.log);
+// reportWebVitals(console.log);
