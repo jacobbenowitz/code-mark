@@ -17,7 +17,7 @@ import '../stylesheets/allstyles.css';
 import '../stylesheets/typography.css';
 import '../stylesheets/buttons.css';
 import '../stylesheets/navbar.css';
-import '../stylesheets/landing.css';
+// import '../stylesheets/landing.css';
 import '../stylesheets/note_form/note_form.css';
 import '../stylesheets/main/home.css'
 
