@@ -1,13 +1,14 @@
 import React from 'react';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
 import { Switch } from 'react-router-dom';
-
 import NavBarContainer from './nav/navbar_container';
 import SplashPage from './splash/splash_page';
 import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/signup_form_container';
 import ProfileContainer from './profile/profile_container';
 import Footer from './nav/footer';
+import '../stylesheets/reset.css'
+import '../stylesheets/app.css'
 
 const App = () => (
   <div>
