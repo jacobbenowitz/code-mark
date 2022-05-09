@@ -1,0 +1,47 @@
+#demo-info {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+#demo-title {
+  display: grid;
+  place-items: center;
+  padding: 2em;
+}
+
+.info-box {
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.info-box-text {
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+.info-box-text span {
+  display: flex;
+  flex-direction: column;
+}
+.icon-container {
+  display: flex;
+  width: 80px;
+  height: 80px;
+}
+
+.info-sub-header {
+  display: flex;
+  min-height: 90px;
+}
+
+.info-desc-box {
+  display: flex;
+}
+
+.buttons-center {
+  padding-top: 36px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-evenly;
+}
