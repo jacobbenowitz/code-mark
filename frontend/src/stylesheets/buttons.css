@@ -3,7 +3,7 @@ input {
 }
 
 input:focus {
-  border: 1px solid #316ECA;
+  border: 2px solid #37F3FF;
   background-color: #fdfdfd;
 }
 
