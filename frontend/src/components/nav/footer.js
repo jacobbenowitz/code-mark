@@ -16,7 +16,7 @@ const NavFooter = () => (
 
             <div className="nav-col-02">
                 <div className="footer-header">
-                    <h5>Social</h5>
+                    <h5>Developers</h5>
                 </div>
                 <div className="footer-link-list">
                     <a href="https://github.com/jacobbenowitz" target="_blank" rel="noreferrer">
@@ -49,10 +49,10 @@ const NavFooter = () => (
                 >Code<strong>Mark</strong>
                 </Link>
             </div>
-            <div id="bottom-footer-links">
+            {/* <div id="bottom-footer-links">
                 <NavLink to={'/'}>Privacy</NavLink>
                 <NavLink to={'/'}>Terms</NavLink>
-            </div>
+            </div> */}
         </div>
 
     </div>

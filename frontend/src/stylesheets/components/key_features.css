@@ -1,9 +1,10 @@
 #features-container {
   grid-column: 1 / span 12;
-  max-height: 400px;
+  max-height: 700px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin-top: 50px;
+  
 }
 
 #features-left-container {
@@ -14,7 +15,6 @@
 
 #features-right-container{
     grid-column: 2 / span 1;
-
 }
 
 
