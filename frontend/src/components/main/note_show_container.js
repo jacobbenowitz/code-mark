@@ -1,5 +1,5 @@
 
-const mapStateToProps = (state, {match}) => {
+const mapStateToProps = (state, { match }) => {
   return {
     noteId: match.params.noteId,
     note: state.notes.all[match.params.noteId]
@@ -7,5 +7,5 @@ const mapStateToProps = (state, {match}) => {
 }
 
 const mapDispatchToProps = dispatch => {
-  fetchNote
+  fetchNote: noteId => dispatch(fetchNote(noteId))
 }

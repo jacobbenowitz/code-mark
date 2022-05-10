@@ -1,6 +1,7 @@
 import {
   RECEIVE_NEW_NOTE,
   RECEIVE_NOTES,
+  RECEIVE_NOTE,
   RECEIVE_USER_NOTES,
   RECEIVE_DELETE_NOTE,
   RECEIVE_UPDATED_NOTE
@@ -27,7 +28,7 @@ const notesReducer = (prevState = initialState, action) => {
     case RECEIVE_NOTES:
       nextState.all = action.notes.data;
       return nextState;
-    case RECEIVE_NOTES:
+    case RECEIVE_NOTE:
       nextState.all[action.note.data._id] = action.note.data;
       return nextState;
     case RECEIVE_DELETE_NOTE:
