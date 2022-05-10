@@ -6,35 +6,27 @@ class RecentNotes extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      recentNotes: []
+      note: undefined
     };
   }
 
-  componentWillMount() {
-    this.props.fetchUserNotes()
-  };
-
   componentWillReceiveProps(nextState) {
+    debugger
     this.setState({
-      notes: nextState.notes
+      note: nextState.newNote
     })
   }
 
-
   render() {
-    if (this.state.recentNotes.length < 1) {
-      return (<span>No notes found :(</span>)
-    } else {
-      return (
-        this.state.recentNotes.map(note => (
-          <CodeNoteItem key={note._id}
-            title={note.title}
-            textDetails={note.textdetails}
-            codeBody={note.codebody}
-          />
-        ))
-      )
-    }
+    return this.state.note ? (
+      <CodeNoteItem key={this.state.note._id}
+        title={this.state.note.title}
+        textDetails={this.state.note.textdetails}
+        codeBody={this.state.note.codebody}
+      />
+    ) : (
+      <span>No recent notes</span>
+    )
   }
 }
 

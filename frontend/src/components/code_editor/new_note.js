@@ -10,7 +10,6 @@ export default class NewNote extends React.Component {
       title: "",
       codebody: "",
       textdetails: "",
-      newNote: "",
       isOpen: false // true when user clicks or types, false otherwise
     }
 
@@ -45,13 +44,12 @@ export default class NewNote extends React.Component {
       codebody: codebody,
       textdetails: textdetails
     }
-    debugger
+    // debugger
     this.props.composeNote(note)
     this.setState({
       title: "",
       codebody: "",
       textdetails: "",
-      newNote: "",
       isOpen: false
     })
   }

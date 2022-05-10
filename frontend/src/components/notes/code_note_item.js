@@ -11,11 +11,9 @@ export default class CodeNoteItem extends React.Component {
         <div className="code-note-text">
           <span className="code-note-title">
             {this.props.title}
-            Test title here
           </span>
           <span className="code-note-body">
             {this.props.textDetails}
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam ipsum dolor sit amet ...
           </span>
         </div>
         <div className="code-note-preview">

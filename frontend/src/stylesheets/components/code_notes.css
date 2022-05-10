@@ -1,9 +1,16 @@
+
+:root {
+  --module-size: 66vw;
+}
+
 .code-note-item {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding: 7px 9px;
-  max-width: 275px;
+  width: calc(var(--module-size) / 2.5);
+  /* max-width: 46%;
+  min-width: 45%; */
   min-height: 200px;
   left: 20px;
   top: 351.62px;
@@ -36,4 +43,8 @@
 .code-note-title {
   font-weight: 700;
   font-size: 1.2rem;
+}
+
+.code-note-preview {
+  width: 100%
 }
