@@ -51,8 +51,6 @@ button:focus, .signup:focus, .login:focus, .hide-button:focus {
 
 #hidden-demo {
   display: none;
-  /* color: grey; */
-
 }
 .sign-up-large {
   display: flex;
