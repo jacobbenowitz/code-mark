@@ -5,7 +5,7 @@ export const getNotes = () => {
 };
 
 export const getNote = noteId => {
-  return axios.get(`/api/note/${noteId}`)
+  return axios.get(`/api/notes/${noteId}`)
 }
 
 export const getUserNotes = userId => {
