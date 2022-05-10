@@ -39,6 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // render root component passing in store
   const root = document.getElementById('root');
 
+  /// TEST START ///
+  window.getState = store.getState;
+  window.dispatch = store.dispatch;
+  /// TEST END ///
   ReactDOM.render(<Root store={store} />, root);
 })
 

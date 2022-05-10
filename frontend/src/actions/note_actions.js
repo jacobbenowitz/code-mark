@@ -67,7 +67,7 @@ export const updateNote = data => dispatch => (
     .catch(err => dispatch(receiveNoteErrors(err)))
 );
 
-export const deleteNote = noteId => dispatch => (
+export const removeNote = noteId => dispatch => (
   deleteNote()
     .then(note => dispatch(receiveDeleteNote(note.id)))
     .catch(err => dispatch(receiveNoteErrors(err)))

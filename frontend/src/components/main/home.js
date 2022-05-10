@@ -1,5 +1,7 @@
 import React from 'react';
-import NewNote from '../code_editor/new_note.js';
+import NewNoteContainer from '../code_editor/new_note_container';
+import CodeNoteItem from '../notes/code_note_item';
+import RecentNotesContainer from '../notes/recent_notes_container';
 
 export default class Home extends React.Component {
 
@@ -21,8 +23,29 @@ export default class Home extends React.Component {
         </div>
 
         <div className='home-main'>
-          <NewNote />
+          <NewNoteContainer />
+
+          <div className='notes-section recent-notes'>
+            <div className='section-title'>
+              <h5>Recent Notes</h5>
+            </div>
+            <div className='note-list-container'>
+              <RecentNotesContainer />
+            </div>
+          </div>
+
+          <div className='notes-section all-notes'>
+            <div className='section-title'>
+              <h5>All Notes</h5>
+            </div>
+            <div className='note-list-container'>
+              <CodeNoteItem />
+              <CodeNoteItem />
+            </div>
+          </div>
+
         </div>
+
       </div>
     )
   }

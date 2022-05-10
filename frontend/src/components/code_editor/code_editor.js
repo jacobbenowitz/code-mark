@@ -5,7 +5,7 @@ import { oneDark } from '@codemirror/theme-one-dark';
 const CodeEditor = () => {
   return (
     <CodeMirror
-      value="Save a new note..."
+      placeholder={"Save a new note..."}
       height="200px"
       theme='dark'
       extensions={[javascript({ jsx: true })]}

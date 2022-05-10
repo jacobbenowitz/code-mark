@@ -9,6 +9,8 @@
 
 .home-main {
   padding-right: 64px;
+  display: grid;
+  grid-template-rows: auto 1fr 1fr;
 }
 
 .nv-boxes {
@@ -29,4 +31,19 @@
 
   background: #202124;
   border-radius: 0px 9px 9px 0px;
+}
+
+.notes-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 16px;
+}
+
+.note-list-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 1rem;
 }
