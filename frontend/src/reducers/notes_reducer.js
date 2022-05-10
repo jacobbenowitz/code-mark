@@ -21,9 +21,15 @@ const notesReducer = (prevState = initialState, action) => {
       return nextState;
     case RECEIVE_USER_NOTES:
       nextState.user = action.notes.data;
+      nextState.all = Object.assign({},
+        nextState.notes, action.notes.data)
       return nextState;
     case RECEIVE_NOTES:
       nextState.all = action.notes.data;
+      return nextState;
+    case RECEIVE_NOTES:
+      nextState.all[action.note.data._id] = action.note.data;
+      return nextState;
     case RECEIVE_DELETE_NOTE:
       delete nextState.all[action.noteId.data]
       delete nextState.user[action.noteId.data]

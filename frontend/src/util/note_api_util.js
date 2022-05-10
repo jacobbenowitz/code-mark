@@ -4,6 +4,10 @@ export const getNotes = () => {
   return axios.get('/api/notes')
 };
 
+export const getNote = noteId => {
+  return axios.get(`/api/note/${noteId}`)
+}
+
 export const getUserNotes = userId => {
   return axios.get(`/api/notes/user/${userId}`)
 };

@@ -7,7 +7,7 @@ class LoginForm extends React.Component {
     super(props);
 
     this.state = {
-      username: '',
+      usernameOrEmail: '',
       password: '',
       errors: {}
     };
@@ -32,7 +32,7 @@ class LoginForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     let user = {
-      username: this.state.username,
+      usernameOrEmail: this.state.usernameOrEmail,
       password: this.state.password
     };
     this.props.login(user);
@@ -59,11 +59,11 @@ class LoginForm extends React.Component {
           <h3>Log in to Code-Mark</h3>
           <form onSubmit={this.handleSubmit}>
             <div className="form-input">
-              <label htmlFor="username">Username</label>
+              <label htmlFor="usernameOrEmail">Username or Email</label>
               <input type={'text'}
-                value={this.state.username}
-                onChange={this.update('username')}
-                placeholder='username'
+                value={this.state.usernameOrEmail}
+                onChange={this.update('usernameOrEmail')}
+                placeholder='username or email'
                 className="text-input"
               />
             </div>
