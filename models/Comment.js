@@ -13,6 +13,9 @@ const CommentSchema = new Schema({
     textbody: {
         type: String,
         required: true
+    },
+    codeSnippet: {
+        type: String
     }
 },
 {timestamps: true}
