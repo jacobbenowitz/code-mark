@@ -48,9 +48,7 @@ export const logout = () => dispatch => {
 };
 
 export const signup = user => dispatch => {
-  debugger
   return APIUtil.signup(user)
-    // .then(() => login(user))
     .then(() => {
       APIUtil.login(user).then(res => {
         const { token } = res.data;

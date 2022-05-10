@@ -1,5 +1,6 @@
 import {
   getNotes,
+  getNote,
   getUserNotes,
   writeNote,
   patchNote,
@@ -7,6 +8,7 @@ import {
 } from '../util/note_api_util';
 
 export const RECEIVE_NOTES = "RECEIVE_NOTES";
+export const RECEIVE_NOTE = "RECEIVE_NOTE";
 export const RECEIVE_USER_NOTES = "RECEIVE_USER_NOTES";
 export const RECEIVE_NEW_NOTE = "RECEIVE_NEW_NOTE";
 export const RECEIVE_NOTE_ERRORS = "RECEIVE_NOTE_ERRORS";
@@ -16,6 +18,11 @@ export const RECEIVE_DELETE_NOTE = "RECEIVE_DELETE_NOTE";
 export const receiveNotes = notes => ({
   type: RECEIVE_NOTES,
   notes
+});
+
+export const receiveNote = note => ({
+  type: RECEIVE_NOTE,
+  note
 });
 
 export const receiveUserNotes = notes => ({
@@ -48,6 +55,13 @@ export const fetchNotes = () => dispatch => (
     .then(notes => dispatch(receiveNotes(notes)))
     .catch(err => dispatch(receiveNoteErrors(err)))
 );
+
+export const fetchNote = noteId => dispatch => (
+  getNote(noteId)
+    .then(note => dispatch(receiveNote(note)))
+    .catch(err => dispatch(receiveNoteErrors(err)))
+  
+)
 
 export const fetchUserNotes = id => dispatch => (
   getUserNotes(id)
