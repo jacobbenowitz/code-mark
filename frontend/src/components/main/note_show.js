@@ -23,17 +23,19 @@ export default class NoteShow extends React.Component {
   render() {
     const { note } = this.props;
     return note ? (
-      <div className='note-show-container'>
+      <div className='note-show-container center-span-7'>
         <div className='note-show-top-icons'>
-          <div className='back-page'>
+          <div className='back-page icon-button'
+            onClick={() => this.props.history.push('/home')}
+          >
+            <i className="fa-solid fa-arrow-left fa-lg"></i>
             <span>
-              <i className="fa-solid fa-arrow-left fa-lg"></i>
               Back
             </span>
           </div>
-          <div className='delete-note'>
+          <div className='delete-note icon-button'>
+            <i className="fa-solid fa-trash fa-lg"></i>
             <span>
-              <i className="fa-solid fa-trash fa-lg"></i>
               Delete
             </span>
           </div>
@@ -46,7 +48,7 @@ export default class NoteShow extends React.Component {
 
           <div className='code-note-body'>
             <CodeEditorReadOnly
-              codeBody={note.codeBody}
+              codeBody={note.codebody}
             />
           </div>
 

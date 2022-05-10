@@ -8,4 +8,5 @@
 @import '../stylesheets/components/landing_page.css';
 @import '../stylesheets/components/photo_show.css';
 
-@import '../stylesheets/components/code_notes.css'
+@import '../stylesheets/components/code_notes.css';
+@import '../stylesheets/main/note_show.css';
