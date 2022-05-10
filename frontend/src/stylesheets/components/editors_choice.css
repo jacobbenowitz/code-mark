@@ -10,10 +10,6 @@
   }
 }
 
-.landing-gallery-header span {
-  text-align: center;
-}
-
 .editors-img-gallery-row {
   display: flex;
   flex-flow: row wrap;
