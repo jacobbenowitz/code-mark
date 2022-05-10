@@ -58,9 +58,10 @@ router.post('/login', (req, res) => {
     }
 
     const username = req.body.username;
+    const email = req.body.email;
     const password = req.body.password;
 
-    User.findOne({ username })
+    User.findOne({$or: [{ username },{ email }]})
         .then(user => {
             if (!user) {
                 return res.status(404).json({ username: 'This user does not exist' });
