@@ -8,8 +8,8 @@ import {
 } from '../actions/note_actions';
 
 const initialState = {
-  all: {},
-  user: {},
+  all: [],
+  user: [],
   new: undefined
 };
 
@@ -19,23 +19,29 @@ const notesReducer = (prevState = initialState, action) => {
   switch (action.type) {
     case RECEIVE_NEW_NOTE:
       nextState.new = action.note.data;
+      nextState.user.push(action.note.data);
       return nextState;
     case RECEIVE_USER_NOTES:
-      nextState.user = action.notes.data;
-      nextState.all = Object.assign({},
-        nextState.notes, action.notes.data)
+      nextState.user = Object.values(action.notes.data);
+      nextState.all = nextState.all.concat(Object.values(action.notes.data));
       return nextState;
     case RECEIVE_NOTES:
-      nextState.all = action.notes.data;
+      nextState.all = Object.values(action.notes.data);
       return nextState;
     case RECEIVE_NOTE:
-      nextState.all[action.note.data._id] = action.note.data;
+      nextState.all.push(action.note.data);
       return nextState;
     case RECEIVE_DELETE_NOTE:
-      delete nextState.all[action.noteId.data]
-      delete nextState.user[action.noteId.data]
-      return nextState;
+      debugger
+    /// NEED TO FILTER THROUGH ARRAY
+
+    // delete nextState.all[action.noteId.data]
+    // delete nextState.user[action.noteId.data]
+    // return nextState;
     case RECEIVE_UPDATED_NOTE:
+      debugger
+      /// NEED TO FILTER THROUGH ARRAY
+
       nextState.all[action.note.data.id] = action.note.data
       nextState.user[action.noteId.data.id] = action.note.data
       return nextState;
