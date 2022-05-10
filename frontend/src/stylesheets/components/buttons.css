@@ -108,3 +108,9 @@ button:focus, .signup:focus, .login:focus, .hide-button:focus {
 .delete-note:hover {
   background-color: #390000;
 }
+
+/* errors */
+
+.error-list {
+  color: #EB5750;
+}
