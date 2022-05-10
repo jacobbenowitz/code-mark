@@ -15,7 +15,8 @@ const NoteSchema = new Schema({
   },
   textdetails: {
       type: String
-  }
+  },
+  comments: [{type: Schema.Types.ObjectId, ref:"comments"}]
 },
 {timestamps: true}
 );
