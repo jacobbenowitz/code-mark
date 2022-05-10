@@ -51,7 +51,7 @@ button:focus, .signup:focus, .login:focus, .hide-button:focus {
 
 .sign-up-large {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 10px 15px;
@@ -71,6 +71,7 @@ button:focus, .signup:focus, .login:focus, .hide-button:focus {
   font-weight: 600;
   margin-top: 14px;
 }
+
 .sign-up-large:hover {
   background-color: #EEEFF2;
   color: #222222;
