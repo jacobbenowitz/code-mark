@@ -46,6 +46,10 @@ body {
   grid-column: 5 / span 4;
 }
 
+.center-span-7 {
+  grid-column: 4 / span 6;
+}
+
 .grid-4-col {
   display: grid;
   width: 100%;
