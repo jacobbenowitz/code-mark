@@ -25,12 +25,26 @@ button, .button {
   transition: color 250ms ease-in-out;
 }
 
-button:hover, .signup:hover, .login:hover {
+button:hover, .signup:hover, .login:hover, .hide-button:hover {
   color: #37F3FF;
   border: 1px solid #37F3FF;
 }
 
-button:focus, .signup:focus, .login:focus {
+button:focus, .signup:focus, .login:focus, .hide-button:focus {
   color: #37F3FF;
   background: #0D4649;
+}
+
+.hide-button {
+  position: absolute;
+  border: 1px solid transparent;
+  cursor: pointer;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 16px;
+  box-shadow: 0px 0px 18px rgb(0 0 0 / 12%);
+  border-radius: 4px;
+  width: fit-content;
+  place-self: end;
 }

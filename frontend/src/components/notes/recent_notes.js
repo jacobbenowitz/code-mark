@@ -11,7 +11,7 @@ class RecentNotes extends React.Component {
   }
 
   componentWillReceiveProps(nextState) {
-    debugger
+    // debugger
     this.setState({
       note: nextState.newNote
     })

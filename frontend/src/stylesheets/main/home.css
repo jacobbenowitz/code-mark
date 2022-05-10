@@ -10,7 +10,7 @@
 .home-main {
   padding-right: 64px;
   display: grid;
-  grid-template-rows: auto 1fr 1fr;
+  grid-template-rows: auto auto auto;
 }
 
 .nv-boxes {
