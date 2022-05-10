@@ -2,14 +2,10 @@ import React from "react";
 
 export const DemoInfo = (
     <div id="landing-info">
-        <div id="demo-title">
-            <h3>Learn and grow your code!</h3>
-        </div>
-
         <div id="demo-info">
             <div id="info-1" className="info-box">
                 <div className="icon-container">
-                    <img src="https://my5000px-static.s3.amazonaws.com/landing_page_icons/grow.svg" />
+                    <img src="https://code-mark.s3.amazonaws.com/built+in.svg" />
                 </div>
                 <div className="info-box-text">
                     <div className="info-sub-header">
@@ -26,7 +22,7 @@ export const DemoInfo = (
 
             <div id="info-2" className="info-box">
                 <div className="icon-container">
-                    <img src="https://my5000px-static.s3.amazonaws.com/landing_page_icons/career.svg" />
+                    <img src="https://code-mark.s3.amazonaws.com/file.svg" />
                 </div>
                 <div className="info-box-text">
                     <div className="info-sub-header">
@@ -42,7 +38,7 @@ export const DemoInfo = (
 
             <div id="info-3" className="info-box">
                 <div className="icon-container">
-                    <img src="https://my5000px-static.s3.amazonaws.com/landing_page_icons/performance.svg" />
+                    <img src="https://code-mark.s3.amazonaws.com/internet.svg" />
                 </div>
                 <div className="info-box-text">
                     <div className="info-sub-header">
@@ -58,7 +54,7 @@ export const DemoInfo = (
 
             <div id="info-4" className="info-box">
                 <div className="icon-container">
-                    <img src="https://my5000px-static.s3.amazonaws.com/landing_page_icons/money.svg"></img>
+                    <img src="https://code-mark.s3.amazonaws.com/milestone.svg"></img>
                 </div>
                 <div className="info-box-text">
                     <div className="info-sub-header">

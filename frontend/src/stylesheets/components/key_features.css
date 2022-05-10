@@ -1,0 +1,20 @@
+#features-container {
+  grid-column: 1 / span 12;
+  max-height: 400px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 50px;
+}
+
+#features-left-container {
+    grid-column: 1 / span 1;
+    margin-left: 28px;
+
+}
+
+#features-right-container{
+    grid-column: 2 / span 1;
+
+}
+
+

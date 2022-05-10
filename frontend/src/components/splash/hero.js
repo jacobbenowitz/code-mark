@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import NewNote from "../code_editor/new_note";
 
 const heroH1 = (
     <h1 className="hero-h1">Smart bookmarks for code</h1>
@@ -16,7 +17,12 @@ const heroCredit = (
 
 export const Hero = (
     <div id='hero-container' >
+    <div id="sample-code-editor">
+        <NewNote />
+    </div>
+
         <div id='hero-content'>
+
             <div id='hero-text'>
                 {heroH1}
                 {heroTagline}
@@ -25,7 +31,7 @@ export const Hero = (
         </div>
 
         <div className="hero-graphic">
-            <img src="https://code-mark.s3.amazonaws.com/dark-hero-graphic.svg" />
+            {/* <img src="https://code-mark.s3.amazonaws.com/dark-hero-graphic.svg" /> */}
         </div>
 
     </div>
