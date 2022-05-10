@@ -58,7 +58,7 @@ const AXIOS_OPTIONS = {
     },
 };
 
-const getGoogleAdvice = (search) => {
+export const getGoogleAdvice = (search) => {
     const encodedString = encodeURI(search);
     console.log(`https://www.google.com/search?q=${encodedString}&hl=en&gl=us`);
     return axios
@@ -96,7 +96,7 @@ const getGoogleAdvice = (search) => {
 
 // getAdvice('ruby');
 
-getGoogleAdvice('onclick()').then(data => console.log(data))
+// getGoogleAdvice('onclick()').then(data => console.log(data))
 
 
 // const getPostTitles = async () => {

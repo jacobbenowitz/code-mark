@@ -52,7 +52,9 @@ router.post('/',
             codebody: req.body.codebody,
             user: req.user.id,
             title: req.body.title,
-            textdetails: req.body.textdetails
+            textdetails: req.body.textdetails,
+            resources: req.body.resources,
+            tags: req.body.tags
         });
 
         newNote.save().then(note => {
@@ -76,6 +78,8 @@ router.patch('/:id/edit',
                     note.codebody = req.body.codebody;
                     note.title = req.body.title;
                     note.textdetails = req.body.textdetails;
+                    note.resources = req.body.resources;
+                    note.tags = req.body.tags
                     note.save()
                         .then(note => res.json(note))
                 }
