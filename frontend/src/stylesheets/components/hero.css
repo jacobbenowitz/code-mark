@@ -2,14 +2,22 @@
   grid-column: 1 / span 12;
   height: 600px;
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  background: url('https://code-mark.s3.amazonaws.com/abstract-background-2021-09-02-22-40-23-utc.jpg') rgba(26, 26, 26, 0.3);
+  grid-template-columns: 1fr 1fr;
+  background: url('https://code-mark.s3.amazonaws.com/codemark-hero-1-opti.jpg') rgba(26, 26, 26, 0.3);
   background-size:cover;
   background-blend-mode: multiply;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
+  place-items: center;
+
+}
+
+#hero-text {
+    display: flex;
+    flex-direction: column;
+    place-items: end;
 }
 
 .hero-graphic {
@@ -20,9 +28,10 @@
 }
 
 #hero-content {
-  grid-column: 1 / span 1;
-  padding-top: 80px;
-  margin: 0 64px 0 64px
+  grid-column: 2 / span 1;
+  /* padding-top: 80px; */
+  margin: 0 64px 0 64px;
+  text-align: right;
 }
 
 .hero-tagline, .hero-h1 {

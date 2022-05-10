@@ -1,7 +1,7 @@
 
 
 .landing-image-header {
-  background-image: url('https://my5000px-static.s3.amazonaws.com/2000px/brooklyn-bridge.jpg');
+  background-image: url('https://code-mark.s3.amazonaws.com/codemark-hero-2-opti.jpg');
   display: grid;
   place-items: center;
   height: 400px;
@@ -96,11 +96,19 @@
   min-height: 200px;
 }
 
+#info-2, #info-4 {
+background: #DEDEDE;
+} 
+
+#info-1, #info-3 {
+background: #EEEEEE;
+} 
+
 #landing-info {
   display: flex;
   flex-direction: column;
-  margin: 0 64px 0 64px;
-  padding: 25px 0 25px 0;
+  margin: 0 5px 0 5px;
+  /* padding: 25px 0 25px 0; */
 }
 
 .info-container {

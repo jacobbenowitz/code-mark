@@ -1,19 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const photoCredit = (
-    <span className="photo-credit">Photo by <strong>Photographer Name</strong></span>
-);
 
 export const EditorsChoiceLanding = (
     <div className="editors-choice-landing">
         <div className="landing-image-header">
             <div className="landing-header-content">
                 <div className="icon-container">
-                    <img src="https://my5000px-static.s3.amazonaws.com/editors-choice.svg" />
+                    {/* icon image */}
+                    <img src="https://code-mark.s3.amazonaws.com/process.svg" />
                 </div>
                 <h2>Smart bookmarks for code</h2>
-                {photoCredit}
+               
             </div>
         </div>
 

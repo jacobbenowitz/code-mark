@@ -1,7 +1,8 @@
 #demo-info {
   display: grid;
-  grid-gap: 1rem;
+  /* grid-gap: 1rem; */
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  
 }
 
 #demo-title {
@@ -13,6 +14,8 @@
 .info-box {
   display: grid;
   grid-template-rows: auto 1fr;
+  padding: 1rem;
+  color: black;
 }
 
 .info-box-text {
@@ -29,9 +32,11 @@
   height: 80px;
 }
 
-.info-sub-header {
+.info-sub-header h4 {
   display: flex;
   min-height: 90px;
+  color: #2D2D2D;
+
 }
 
 .info-desc-box {
