@@ -17,9 +17,9 @@ export const writeNote = data => {
 };
 
 export const patchNote = (data, noteId) => {
-  return axios.patch(`/api/note/${noteId}/edit`, data)
+  return axios.patch(`/api/notes/${noteId}/edit`, data)
 };
 
 export const deleteNote = noteId => {
-  return axios.delete(`api/note/${noteId}`)
+  return axios.delete(`api/notes/${noteId}`)
 };

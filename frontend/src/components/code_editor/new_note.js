@@ -82,6 +82,7 @@ export default class NewNote extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     let { title, codebody, textdetails } = this.state;
+    debugger
     let note = {
       title: title,
       codebody: codebody,
@@ -115,7 +116,7 @@ export default class NewNote extends React.Component {
               <div className='note-input'>
                 <CodeMirror
                   value={this.state.codebody}
-                  onChange={this.updateCode}
+                  onChange={this.updateCode()}
                   height="200px"
                   theme='dark'
                   extensions={[javascript({ jsx: true })]}

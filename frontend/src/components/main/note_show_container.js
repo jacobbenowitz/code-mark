@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import NoteShow from "./note_show";
-import { fetchNote } from "../../actions/note_actions";
+import { fetchNote, removeNote } from "../../actions/note_actions";
 
 const mapStateToProps = (state, { match }) => {
   return {
@@ -11,7 +11,8 @@ const mapStateToProps = (state, { match }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchNote: noteId => dispatch(fetchNote(noteId))
+    fetchNote: noteId => dispatch(fetchNote(noteId)),
+    removeNote: noteId => dispatch(removeNote(noteId))
   }
 }
 

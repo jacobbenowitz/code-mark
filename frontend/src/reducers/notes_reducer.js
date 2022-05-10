@@ -23,13 +23,12 @@ const notesReducer = (prevState = initialState, action) => {
       return nextState;
     case RECEIVE_USER_NOTES:
       nextState.user = Object.values(action.notes.data);
-      nextState.all = nextState.all.concat(Object.values(action.notes.data));
       return nextState;
     case RECEIVE_NOTES:
-      nextState.all = Object.values(action.notes.data);
+      nextState.all = action.notes.data;
       return nextState;
     case RECEIVE_NOTE:
-      nextState.all.push(action.note.data);
+      nextState.all[action.note.data._id] = action.note.data;
       return nextState;
     case RECEIVE_DELETE_NOTE:
       debugger

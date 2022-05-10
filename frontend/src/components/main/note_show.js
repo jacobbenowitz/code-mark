@@ -8,6 +8,7 @@ export default class NoteShow extends React.Component {
     this.state = {
       note: undefined
     }
+    this.deleteNote = this.deleteNote.bind(this);
   }
 
   componentWillMount() {
@@ -17,6 +18,13 @@ export default class NoteShow extends React.Component {
   componentWillReceiveProps(nextProps) {
     this.setState({
       note: nextProps.note
+    })
+  }
+
+  deleteNote(e) {
+    e.preventDefault();
+    this.props.removeNote(this.props.noteId).then(() => {
+      this.props.history.push('/home')
     })
   }
 
@@ -33,7 +41,7 @@ export default class NoteShow extends React.Component {
               Back
             </span>
           </div>
-          <div className='delete-note icon-button'>
+          <div className='delete-note icon-button' onClick={this.deleteNote}>
             <i className="fa-solid fa-trash fa-lg"></i>
             <span>
               Delete
