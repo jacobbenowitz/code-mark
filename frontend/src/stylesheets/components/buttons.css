@@ -49,6 +49,10 @@ button:focus, .signup:focus, .login:focus, .hide-button:focus {
   place-self: end;
 }
 
+#hidden-demo {
+  color: grey;
+
+}
 .sign-up-large {
   display: flex;
   flex-direction: column;
