@@ -48,3 +48,35 @@ button:focus, .signup:focus, .login:focus, .hide-button:focus {
   width: fit-content;
   place-self: end;
 }
+
+.sign-up-large {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 15px;
+
+  padding: 0 24px 0 24px;
+  height: 56px;
+  width: 180px;
+  left: 20px;
+  top: 190px;
+
+  /* white */
+
+  color: #222222;
+  background: #FFFFFF;
+  border-radius: 100px;
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: 14px;
+}
+.sign-up-large:hover {
+  background-color: #EEEFF2;
+  color: #222222;
+}
+
+.sign-up-large:focus {
+  background-color: #FFFFFF;
+  color: #316ECA;
+}
