@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import Demo from "./demo_user_signup"
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class SignupForm extends React.Component {
       errors: {}
     }
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.demoSignup = this.demoSignup.bind(this);
     this.clearedErrors = false;
   }
 
@@ -27,6 +29,25 @@ class SignupForm extends React.Component {
       [field]: e.currentTarget.value
     });
   };
+
+  demoScript(e) {
+    e.preventDefault();
+    debugger
+    Demo.demoSignupForm();
+  }
+
+  demoSignup = (e) => {
+    debugger
+    e.preventDefault();
+    const user = {
+      email: 'Guest',
+      username: 'Guest',
+      password: 'password',
+      password2: 'password'
+    }
+    debugger
+    this.props.loginGuest(user);
+  }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -60,6 +81,7 @@ class SignupForm extends React.Component {
             <div className='form-input'>
               <label htmlFor='email'>Email</label>
               <input type={'email'}
+                id="email-signup"
                 value={this.state.email}
                 onChange={this.update('email')}
                 placeholder='email'
@@ -70,6 +92,7 @@ class SignupForm extends React.Component {
               <label htmlFor='username'>username</label>
               <input type={'text'}
                 value={this.state.username}
+                id="username-signup"
                 onChange={this.update('username')}
                 placeholder='username'
                 className="text-input"
@@ -79,6 +102,7 @@ class SignupForm extends React.Component {
               <label htmlFor='password'>Password</label>
               <input type={'password'}
                 value={this.state.password}
+                id="password-signup"
                 onChange={this.update('password')}
                 placeholder='password'
                 className="text-input"
@@ -88,6 +112,7 @@ class SignupForm extends React.Component {
               <label htmlFor="password2">Confirm Password</label>
               <input type={'password'}
                 value={this.state.password2}
+                id="password-signup2"
                 onChange={this.update('password2')}
                 placeholder='confirm password'
                 className="text-input"
@@ -97,6 +122,16 @@ class SignupForm extends React.Component {
               className={'button-session'}>Signup</button>
             {this.renderErrors()}
           </form>
+
+          <button className="demo_button"
+            id="demo-signup"
+            onClick={this.demoScript}
+          >Demo account</button>
+
+          <button 
+            onClick={this.demoSignup}
+            id="hidden-demo">Demo only
+          </button>
         </div>
       </div>
     )
