@@ -32,20 +32,20 @@ class SignupForm extends React.Component {
 
   demoScript(e) {
     e.preventDefault();
-    debugger
+     
     Demo.demoSignupForm();
   }
 
   demoSignup = (e) => {
-    debugger
+     
     e.preventDefault();
     const user = {
-      email: 'Guest',
+      email: 'Guest@gmail.com',
       username: 'Guest',
       password: 'password',
       password2: 'password'
     }
-    debugger
+     debugger
     this.props.loginGuest(user);
   }
 

@@ -8,7 +8,7 @@ const Demo = {
   async demoSignupForm() {
     // create variables for inputs and submit
     const username = document.getElementById('username-signup');
-    debugger
+     
     const email = document.getElementById('email-signup');
     const password = document.getElementById('password-signup');
     const password2 = document.getElementById('password-signup2');
