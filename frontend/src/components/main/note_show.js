@@ -3,6 +3,7 @@ import CodeEditorReadOnly from '../code_editor/code_editor_readonly';
 import NoteShowEditorLoader from '../code_editor/code_show_editor_loader';
 import EditNote from '../code_editor/edit_note';
 import CommentItem from '../notes/comments/comment_item';
+import CommentForm from '../notes/comments/comment_form';
 
 export default class NoteShow extends React.Component {
   constructor(props) {
@@ -137,6 +138,7 @@ export default class NoteShow extends React.Component {
               <h4>Comments</h4>
             </div>
             <div className='comments-list'>
+              <CommentForm />
               <CommentItem />
             </div>
           </div>

@@ -74,9 +74,7 @@ export default class EditNote extends React.Component {
     observe(text, 'paste', delayedResize);
     observe(text, 'drop', delayedResize);
     observe(text, 'keydown', delayedResize);
-
-    text.focus();
-    text.select();
+    
     resize();
   }
 

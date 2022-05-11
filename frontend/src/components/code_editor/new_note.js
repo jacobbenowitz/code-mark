@@ -74,8 +74,6 @@ export default class NewNote extends React.Component {
     observe(text, 'drop', delayedResize);
     observe(text, 'keydown', delayedResize);
 
-    text.focus();
-    text.select();
     resize();
   }
 
@@ -129,7 +127,6 @@ export default class NewNote extends React.Component {
                   className='note-input-details'
                   placeholder='Any additional notes?'
                   value={this.state.textdetails}
-
                 />
               </div>
               <button type='submit' id='code-note-submit'
