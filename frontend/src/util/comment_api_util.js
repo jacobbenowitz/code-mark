@@ -4,6 +4,10 @@ export const getComments = () => {
     return axios.get('/api/comments')
 };
 
+export const getNoteComments = noteId => {
+    return axios.get(`/api/comments/note/${noteId}`)
+}
+
 export const getComment = commentId => {
     return axios.get(`/api/comments/${commentId}`)
 }

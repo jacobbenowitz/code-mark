@@ -4,10 +4,11 @@ import {
     getUserComments,
     writeComment,
     patchComment,
-    deleteComment
+    deleteComment,
+    getNoteComments
 } from '../util/comment_api_util';
 
-
+export const RECEIVE_NOTE_COMMENTS = "RECEIVE_NOTE_COMMENTS";
 export const RECEIVE_COMMENTS = "RECEIVE_COMMENTS";
 export const RECEIVE_COMMENT = "RECEIVE_COMMENT";
 export const RECEIVE_USER_COMMENTS = "RECEIVE_USER_COMMENTS";
@@ -18,6 +19,11 @@ export const RECEIVE_DELETE_COMMENT = "RECEIVE_DELETE_COMMENT";
 
 export const receiveComments = comments => ({
     type: RECEIVE_COMMENTS,
+    comments
+});
+
+export const receiveNoteComments = comments => ({
+    type: RECEIVE_NOTE_COMMENTS,
     comments
 });
 
@@ -57,6 +63,12 @@ export const fetchComments = () => dispatch => (
         .catch(err => dispatch(receiveCommentErrors(err)))
 );
 
+export const fetchNoteComments = noteId => dispatch => (
+    getNoteComments(noteId)
+        .then(comments => dispatch(receiveNoteComments(comments)))
+        .catch(err => dispatch(receiveCommentErrors(err)))
+);
+
 export const fetchComment = commentId => dispatch => (
     getComment(commentId)
         .then(comment => dispatch(receiveComment(comment)))
@@ -84,6 +96,6 @@ export const updateComment = (data, commentId) => dispatch => {
 
 export const removeComment = commentId => dispatch => (
     deleteComment(commentId)
-        .then(comment => dispatch(receiveDeleteComment(comment.id)))
+        .then(commentid => dispatch(receiveDeleteComment(commentid)))
         .catch(err => dispatch(receiveCommentErrors(err)))
 );
