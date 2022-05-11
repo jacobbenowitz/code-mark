@@ -20,6 +20,7 @@ import '../stylesheets/navbar.css';
 import '../stylesheets/note_form/note_form.css';
 import '../stylesheets/main/home.css'
 import NoteShowContainer from './main/note_show_container';
+import HighlightTest from './highlight_test';
 
 const App = () => (
   <div className="grid-pancake-stack">
@@ -35,6 +36,7 @@ const App = () => (
       {/* <ProtectedRoute exact path='/profile' component={ProfileContainer} /> */}
       {/* <ProtectedRoute exact path='/discover' component={DiscoverContainer} /> */}
       {/* <ProtectedRoute exact path='/following' component={FollowingContainer} /> */}
+      <Route exact path='/testinghighlight' component={HighlightTest} />
     </Switch>
     <footer className="grid-bottom-stack">
       <NavFooter />

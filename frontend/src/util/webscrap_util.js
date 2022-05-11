@@ -48,13 +48,13 @@ export async function getNightmareStuff(words){
     return data;
 }
 
-let words = 'ruby java onclick() onchange() componentdidmount()';
+// let words = 'ruby java onclick() onchange() componentdidmount()';
 
-// let words = 'ruby java onclick() onchange()';
-// let res1 = await getNightmareStuff(words);
+// // let words = 'ruby java onclick() onchange()';
+// // let res1 = await getNightmareStuff(words);
 
-let res2 = await getStuff(words);
+// let res2 = await getStuff(words);
 
-// console.log(res1);
+// // console.log(res1);
 
-console.log(res2.filter(ele => ele !== undefined));
+// console.log(res2.filter(ele => ele !== undefined));
