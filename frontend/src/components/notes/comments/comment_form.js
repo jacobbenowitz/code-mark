@@ -13,12 +13,12 @@ export default class CommentForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     let { codeSnippet, textbody } = this.state;
-    // debugger
+    //  
     let comment = {
       codeSnippet: codeSnippet,
       textbody: textbody
     }
-    // debugger
+    //  
     this.props.writeComment(comment)
       .then(() => (
         this.setState({

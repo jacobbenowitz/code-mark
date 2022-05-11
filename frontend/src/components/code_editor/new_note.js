@@ -80,13 +80,13 @@ export default class NewNote extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     let { title, codebody, textdetails } = this.state;
-    // debugger
+    //  
     let note = {
       title: title,
       codebody: codebody,
       textdetails: textdetails
     }
-    // debugger
+    //  
     this.props.composeNote(note)
       .then(() => (
         this.setState({
