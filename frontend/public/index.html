@@ -10,6 +10,32 @@
       content="Web site created using create-react-app"
     />
     <script src="https://kit.fontawesome.com/63bcdc1112.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet"
+    href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <!-- <script>
+      document.addEventListener('DOMContentLoaded', (event) => {
+        document.querySelectorAll('pre code').forEach((el) => {
+          hljs.highlightElement(el);
+        });
+      });
+    </script> -->
+    <script>
+      hljs.COMMENT(
+      '/\\*', // begin
+      '\\*/', // end
+      {
+        contains: [
+          {
+            scope: 'doc', begin: '@\\w+'
+          }
+        ]
+      }
+    )
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">

@@ -1,31 +1,24 @@
 import React from "react";
-let hljs = require('highlight.js');
+const hljs = require('highlight.js');
 
 export default class HighlightTest extends React.Component {
     render(){
+        const code_test = hljs.highlightAuto("var date = Date.now();",['Ruby','C','JavaScript','CSS','HTML']);
         return(
+            // <pre><code>
+            //     "document.addEventListener('DOMContentLoaded', (event) =&gt; {
+            //         document.querySelectorAll('pre code').forEach((el) => {
+            //         hljs.highlightElement(el)
+            //         })
+            //     })"
+            // </code></pre>
             <div>
-                <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css"></link>
-                <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
-                <script>
-                    hljs.highlightAll();
-                    html = hljs.highlightAuto('<h1>Hello World!</h1>').value
-                </script>
-                <script>
-                    document.addEventListener('DOMContentLoaded', (event) => {
-                        document.querySelectorAll('pre code').forEach((el) => {
-                            hljs.highlightElement(el)
-                        })
-                    })
-                </script>
-                <pre><code className="javascript">
-                    document.addEventListener('DOMContentLoaded', (event) => {
-                        document.querySelectorAll('pre code').forEach((el) => {
-                            hljs.highlightElement(el)
-                        })
-                    })
+                <pre><code>
                 </code></pre>
+                    {code_test.value}
             </div>
-            )
-        }
+            // <span id='test'>
+            // </span>
+        )
+    }
 }
