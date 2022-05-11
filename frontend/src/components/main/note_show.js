@@ -22,8 +22,7 @@ export default class NoteShow extends React.Component {
     })
   }
 
-  deleteNote(e) {
-    e.preventDefault();
+  deleteNote() {
     this.props.removeNote(this.props.noteId).then(() => {
       this.props.history.push('/home')
     })
@@ -31,10 +30,19 @@ export default class NoteShow extends React.Component {
 
   toggleEditModal() {
     const editNoteModal = document.getElementById('edit-note-container');
-    if (editNoteModal.className = "modal-off") {
+    if (editNoteModal.className === "modal-off") {
       editNoteModal.className = "modal-on"
     } else {
       editNoteModal.className = "modal-off"
+    }
+  }
+
+  toggleDeleteModal() {
+    const deleteModal = document.getElementById('confirm-modal-container');
+    if (deleteModal.className === "modal-off") {
+      deleteModal.className = "modal-on";
+    } else {
+      deleteModal.className = "modal-off";
     }
   }
 
@@ -42,8 +50,31 @@ export default class NoteShow extends React.Component {
     const { note, currentUser, updateNote, noteId } = this.props;
     return note ? (
       <>
+        <div id='confirm-modal-container' className='modal-off' >
+          <div className='modal-wrapper'>
+            <div className='cancel-modal'>
+              <span>Are you sure you want to delete this note?</span>
+              <div className='modal-buttons'>
+                <div className='delete-note icon-button'
+                  onClick={() => this.deleteNote()}>
+                  <i className="fa-solid fa-trash fa-lg"></i>
+                  <span>
+                    Delete
+                  </span>
+                </div>
+                <div className='cancel icon-button'
+                  onClick={() => this.toggleDeleteModal()}>
+                  <i class="fa-solid fa-ban fa-lg"></i>
+                  <span>
+                    Cancel
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div id='edit-note-container' className="modal-off">
-          <div className='edit-wrapper'>
+          <div className='modal-wrapper'>
             <EditNote note={note} updateNote={updateNote}
               currentUser={currentUser} noteId={noteId} />
           </div>
@@ -59,13 +90,13 @@ export default class NoteShow extends React.Component {
             </div>
             <div className='edit-note icon-button'
               onClick={() => this.toggleEditModal()}>
-              <i class="fa-solid fa-pen-to-square fa-lg"></i>
+              <i className="fa-solid fa-pen-to-square fa-lg"></i>
               <span>
                 Edit
               </span>
             </div>
             <div className='delete-note icon-button'
-              onClick={() => this.deleteNote()}>
+              onClick={() => this.toggleDeleteModal()}>
               <i className="fa-solid fa-trash fa-lg"></i>
               <span>
                 Delete
