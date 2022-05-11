@@ -39,13 +39,13 @@ export default class NoteShow extends React.Component {
   }
 
   render() {
-    const { note, currentUser, updateNote } = this.props;
+    const { note, currentUser, updateNote, noteId } = this.props;
     return note ? (
       <>
         <div id='edit-note-container' className="modal-off">
           <div className='edit-wrapper'>
             <EditNote note={note} updateNote={updateNote}
-              currentUser={currentUser} />
+              currentUser={currentUser} noteId={noteId} />
           </div>
         </div>
         <div className='note-show-container center-span-7'>
@@ -101,9 +101,9 @@ export default class NoteShow extends React.Component {
           </div>
         </div>
       </>
-        ) : (
-        <NoteShowEditorLoader />
-        )
+    ) : (
+      <NoteShowEditorLoader />
+    )
 
   }
 }

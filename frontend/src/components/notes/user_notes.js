@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import { orderUserNotes } from '../../util/selectors';
 import CodeNoteItem from './code_note_item';
 
 class UserNotes extends React.Component {
@@ -17,7 +18,7 @@ class UserNotes extends React.Component {
   componentWillReceiveProps(nextState) {
     if (nextState.userNotes) {
       this.setState({
-        userNotes: nextState.userNotes
+        userNotes: orderUserNotes(nextState.userNotes)
       })
     }
   }
