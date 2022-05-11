@@ -31,15 +31,13 @@ const commentsReducer = (prevState = initialState, action) => {
             return nextState;
         case RECEIVE_DELETE_COMMENT:
             //  
-            nextState.all.filter(comment => 
+            return nextState.all.filter(comment => 
                 comment._id !== action.commentId.data
                 )
-                nextState.user.filter(comment => 
-                    comment._id !== action.commentId.data
-                    )
+            
                     
-                    debugger
-            return nextState;
+                    
+           
         case RECEIVE_UPDATED_COMMENT:
             //  
             nextState.all.map(comment => {
