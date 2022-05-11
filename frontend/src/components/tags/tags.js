@@ -6,7 +6,7 @@ export default class Tags extends React.Component {
     super(props);
     this.state = {
       tags: [],
-      newtag: "",
+      newTag: "",
       tagForm: false
     }
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -15,7 +15,13 @@ export default class Tags extends React.Component {
 
   componentDidCatch() {
     this.setState({
-      tags: this.props.tags
+      tags: this.props.note.tags,
+    })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      tags: nextProps.note.tags
     })
   }
 
@@ -29,17 +35,25 @@ export default class Tags extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // debugger
-    let tag = {
+    let newTags = this.state.tags.concat([this.state.newTag]);
+
+    const { title, codebody, textdetails, resources, _id } = this.props.note;
+
+    let nextNote = {
       title: title,
-      noteId: this.props.noteId
+      codebody: codebody,
+      textdetails: textdetails,
+      resources: resources,
+      tags: newTags,
     }
-    // debugger
-    this.props.submitNewTag(tag)
+
+    debugger
+    this.props.updateNote(nextNote, _id)
       .then(() => (
         this.setState({
           newTag: "",
-          tags: this.state.tags.push(tag)
+          tagForm: false,
+          tags: newTags
         }, () => this.toggleTagForm())
       ))
   }
@@ -52,7 +66,6 @@ export default class Tags extends React.Component {
     } else {
       this.setState({ tagForm: false }, () =>
         tagForm.className = "tag-form-off")
-
     }
   }
 
@@ -61,7 +74,7 @@ export default class Tags extends React.Component {
     // const tags = this.state.tags.map(tag => {
     //   <TagItem title={tag.title} />
     // })
-
+    // debugger
     return (
       <div className='note-tags-list'>
         <div className="tag-item-wrapper tag-icon-new"
@@ -74,18 +87,23 @@ export default class Tags extends React.Component {
           )}
         </div>
 
-        <div className="tag-form-off" id="new-tag-form">
-          <div className="tag-icon-save">
-            <i className="fa-solid fa-floppy-disk"></i>
-          </div>
+
+        <form onSubmit={this.handleSubmit}
+          className="tag-form-off" id="new-tag-form">
           <input type={'text'}
             className={'tag-form-input'}
             onChange={this.update('newTag')}
             placeholder={'New tag...'}
-          ></input>
-        </div>
-        <TagItem />
-        {/* {tags} */}
+            value={this.state.newTag}
+          />
+          <button id='tag-icon-save' type='submit'>
+            <i className="fa-solid fa-floppy-disk" />
+          </button>
+        </form>
+        {this.state.tags.length ? (
+          this.state.tags.map((tag, i) =>
+            <TagItem title={tag} key={`tag-${i}`} />)
+        ) : ""}
       </div>
     )
   }

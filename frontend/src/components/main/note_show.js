@@ -120,11 +120,9 @@ export default class NoteShow extends React.Component {
             </div>
 
             <div className='note-tags-wrapper'>
-
-              <Tags />
-              {/* <div className='note-tags-list'>
-                <TagItem />
-              </div> */}
+              <Tags note={this.state.note}
+                updateNote={this.props.updateNote}
+              />
             </div>
 
             <div className='note-textDetails'>
