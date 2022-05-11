@@ -113,44 +113,6 @@
   word-break: break-word;
 }
 
-.avatar-container { 
-  display: flex;
-  align-items: center;
-  position: relative;
-  min-width: 64px;
-}
-
-.avatar-container-sm { 
-  display: flex;
-  align-items: center;
-  position: relative;
-  max-width: 38px;
-}
-
-.user-details {
-  word-break: break-word;
-  max-width: 100%;
-  margin-left: 14px;
-}
-
-.photo-show-title {
-  margin-bottom: 4px;
-}
-
-.user-avatar-lg {
-  border-radius: 50%;
-  overflow: hidden;
-  width: 64px;
-  height: 64px;
-}
 a {
   cursor: pointer;
-}
-
-.photo-description {
-  padding-top: 1.4rem;
-}
-
-.img-test {
-  width: 20px;
 }

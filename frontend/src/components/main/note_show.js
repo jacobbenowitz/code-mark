@@ -1,7 +1,8 @@
 import React from 'react';
 import CodeEditorReadOnly from '../code_editor/code_editor_readonly';
 import NoteShowEditorLoader from '../code_editor/code_show_editor_loader';
-import EditNote from '../code_editor/edit_note'
+import EditNote from '../code_editor/edit_note';
+import CommentItem from '../notes/comments/comment_item';
 
 export default class NoteShow extends React.Component {
   constructor(props) {
@@ -64,7 +65,7 @@ export default class NoteShow extends React.Component {
                 </div>
                 <div className='cancel icon-button'
                   onClick={() => this.toggleDeleteModal()}>
-                  <i class="fa-solid fa-ban fa-lg"></i>
+                  <i className="fa-solid fa-ban fa-lg"></i>
                   <span>
                     Cancel
                   </span>
@@ -128,6 +129,15 @@ export default class NoteShow extends React.Component {
             </div>
             <div className='resources-list'>
               {/* resourceItem components */}
+            </div>
+          </div>
+
+          <div className='note-comments'>
+            <div className='comments-title'>
+              <h4>Comments</h4>
+            </div>
+            <div className='comments-list'>
+              <CommentItem />
             </div>
           </div>
         </div>

@@ -1,5 +1,4 @@
 function orderByDate(a, b) {
-  debugger
   if (a.updatedAt > b.updatedAt) {
     return -1;
   }
