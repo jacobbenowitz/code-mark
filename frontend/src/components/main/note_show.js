@@ -3,24 +3,27 @@ import CodeEditorReadOnly from '../code_editor/code_editor_readonly';
 import NoteShowEditorLoader from '../code_editor/code_show_editor_loader';
 import EditNote from '../code_editor/edit_note';
 import CommentItem from '../notes/comments/comment_item';
-import CommentForm from '../notes/comments/comment_form';
+import CommentFormContainer from '../notes/comments/comment_form_container';
 
 export default class NoteShow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      note: undefined
+      note: undefined,
+      comments: []
     }
     this.deleteNote = this.deleteNote.bind(this);
   }
 
   componentWillMount() {
     this.props.fetchNote(this.props.noteId);
+    this.props.fetchNoteComments(this.props.noteId)
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      note: nextProps.note
+      note: nextProps.note,
+      comments: nextProps.comments
     })
   }
 
@@ -50,6 +53,7 @@ export default class NoteShow extends React.Component {
 
   render() {
     const { note, currentUser, updateNote, noteId } = this.props;
+    debugger
     return note ? (
       <>
         <div id='confirm-modal-container' className='modal-off' >
@@ -138,8 +142,12 @@ export default class NoteShow extends React.Component {
               <h4>Comments</h4>
             </div>
             <div className='comments-list'>
-              <CommentForm />
-              <CommentItem />
+              <CommentFormContainer />
+              {this.props.comments.map(comment => {
+                return  <CommentItem 
+                        // comment = {comment}
+                      />
+              })}
             </div>
           </div>
         </div>

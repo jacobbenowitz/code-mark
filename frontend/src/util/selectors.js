@@ -11,3 +11,10 @@ function orderByDate(a, b) {
 export const orderUserNotes = (notes) => {
   return notes.sort(orderByDate);
 }
+
+export const selectNoteComments = (comments, noteId) => {
+   
+  return comments?.filter( comment => {
+    return comment.note === noteId
+  })
+}

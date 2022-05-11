@@ -10,16 +10,19 @@ export default class CommentForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+    // give this the thunk action of composeComment ? 
   handleSubmit(e) {
     e.preventDefault();
     let { codeSnippet, textbody } = this.state;
     //  
     let comment = {
       codeSnippet: codeSnippet,
-      textbody: textbody
+      textbody: textbody,
+      note: this.props.noteId
     }
     //  
-    this.props.writeComment(comment)
+     
+    this.props.composeComment(comment)
       .then(() => (
         this.setState({
           codeSnippet: "",
