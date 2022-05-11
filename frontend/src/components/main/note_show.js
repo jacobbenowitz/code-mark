@@ -4,6 +4,8 @@ import NoteShowEditorLoader from '../code_editor/code_show_editor_loader';
 import EditNote from '../code_editor/edit_note';
 import CommentItem from '../notes/comments/comment_item';
 import CommentForm from '../notes/comments/comment_form';
+import TagItem from '../tags/tag_item';
+import Tags from '../tags/tags';
 
 export default class NoteShow extends React.Component {
   constructor(props) {
@@ -115,6 +117,14 @@ export default class NoteShow extends React.Component {
               <CodeEditorReadOnly
                 codeBody={note.codebody}
               />
+            </div>
+
+            <div className='note-tags-wrapper'>
+
+              <Tags />
+              {/* <div className='note-tags-list'>
+                <TagItem />
+              </div> */}
             </div>
 
             <div className='note-textDetails'>
