@@ -128,7 +128,8 @@ router.delete('/:id',
                                     note.comments = note.comments.filter(item => item.toString() !== commentid);
                                     note.save().then(note => res.json(note));
                                 });
-                        });
+                        })
+                        .then(() => res.json(commentid));
                 }
             })
             .catch(err => 
