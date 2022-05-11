@@ -49,7 +49,10 @@ export const logout = () => dispatch => {
 export const signup = user => dispatch => {
   return APIUtil.signup(user)
     .then(() => {
-      APIUtil.login(user).then(res => {
+      APIUtil.login({
+        usernameOrEmail: user.username,
+        password: user.password
+      }).then(res => {
         const { token } = res.data;
         localStorage.setItem('jwtToken', token);
         APIUtil.setAuthToken(token);

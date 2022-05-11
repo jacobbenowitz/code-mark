@@ -32,21 +32,17 @@ class SignupForm extends React.Component {
 
   demoScript(e) {
     e.preventDefault();
-     
+    
     Demo.demoSignupForm();
   }
 
   demoSignup = (e) => {
-     
     e.preventDefault();
-    const user = {
-      email: 'Guest@gmail.com',
-      username: 'Guest',
-      password: 'password',
-      password2: 'password'
+    const guest = {
+      usernameOrEmail: 'Guest',
+      password: 'password'
     }
-     debugger
-    this.props.loginGuest(user);
+    this.props.loginGuest(guest);
   }
 
   handleSubmit(e) {
@@ -129,7 +125,7 @@ class SignupForm extends React.Component {
             onClick={this.demoScript}
           >Demo account</button>
 
-          <button 
+          <button
             onClick={this.demoSignup}
             id="hidden-demo">Demo only
           </button>
