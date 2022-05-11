@@ -20,6 +20,7 @@ class RecentNotes extends React.Component {
   render() {
     return this.state.note ? (
       <CodeNoteItem key={this.state.note._id}
+        id={this.state.note._id}
         title={this.state.note.title}
         textDetails={this.state.note.textdetails}
         codeBody={this.state.note.codebody}

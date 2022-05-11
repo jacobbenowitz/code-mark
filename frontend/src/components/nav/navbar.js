@@ -19,7 +19,8 @@ export default class NavBar extends React.Component {
     if (this.props.loggedIn) {
       return (
         <div>
-          <button onClick={this.logoutUser}>Logout</button>
+          <Link className="logout button" to={'/'}
+            onClick={this.logoutUser}>Logout</Link>
         </div>
       );
     } else {

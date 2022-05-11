@@ -17,7 +17,7 @@
 #hero-text {
     display: flex;
     flex-direction: column;
-    place-items: end;
+    place-items: flex-end;
 }
 
 .hero-graphic {
