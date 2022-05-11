@@ -4,7 +4,8 @@ import {
     RECEIVE_COMMENT,
     RECEIVE_USER_COMMENTS,
     RECEIVE_DELETE_COMMENT,
-    RECEIVE_UPDATED_COMMENT
+    RECEIVE_UPDATED_COMMENT,
+    RECEIVE_NOTE_COMMENTS
 } from '../actions/comment_actions';
 
 const initialState = {
@@ -30,14 +31,9 @@ const commentsReducer = (prevState = initialState, action) => {
             nextState.all.push(action.comment.data); 
             return nextState;
         case RECEIVE_DELETE_COMMENT:
-            //  
             return nextState.all.filter(comment => 
                 comment._id !== action.commentId.data
-                )
-            
-                    
-                    
-           
+                )        
         case RECEIVE_UPDATED_COMMENT:
             //  
             nextState.all.map(comment => {
@@ -46,7 +42,12 @@ const commentsReducer = (prevState = initialState, action) => {
                 }
                 else return comment
             });
-           
+            return nextState;
+        case RECEIVE_NOTE_COMMENTS:
+            // debugger
+            action.comments.data.forEach(comment => {
+                nextState.all.push(comment)
+            });
             return nextState;
         default:
             return prevState;

@@ -2,14 +2,13 @@ import { connect } from "react-redux";
 import NoteShow from "./note_show";
 import { fetchNote, removeNote, updateNote } from "../../actions/note_actions";
 import { fetchNoteComments } from "../../actions/comment_actions";
-import { selectNoteComments } from "../../util/selectors";
 
 const mapStateToProps = (state, { match }) => {
   return {
     noteId: match.params.noteId,
     note: state.notes.all[match.params.noteId],
     currentUser: state.session.user,
-    comments: selectNoteComments(state.comments.all, match.params.noteId)
+    allComments: state.comments.all
   }
 }
 

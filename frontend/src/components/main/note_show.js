@@ -4,6 +4,7 @@ import NoteShowEditorLoader from '../code_editor/code_show_editor_loader';
 import EditNote from '../code_editor/edit_note';
 import CommentItem from '../notes/comments/comment_item';
 import CommentFormContainer from '../notes/comments/comment_form_container';
+import { selectNoteComments } from "../../util/selectors";
 
 export default class NoteShow extends React.Component {
   constructor(props) {
@@ -17,13 +18,15 @@ export default class NoteShow extends React.Component {
 
   componentWillMount() {
     this.props.fetchNote(this.props.noteId);
-    this.props.fetchNoteComments(this.props.noteId)
+    this.props.fetchNoteComments(this.props.noteId);
+    debugger
   }
 
   componentWillReceiveProps(nextProps) {
+    debugger
     this.setState({
       note: nextProps.note,
-      comments: nextProps.comments
+      comments: selectNoteComments(nextProps.allComments, nextProps.noteId)
     })
   }
 
@@ -53,7 +56,7 @@ export default class NoteShow extends React.Component {
 
   render() {
     const { note, currentUser, updateNote, noteId } = this.props;
-    debugger
+     
     return note ? (
       <>
         <div id='confirm-modal-container' className='modal-off' >
@@ -143,11 +146,13 @@ export default class NoteShow extends React.Component {
             </div>
             <div className='comments-list'>
               <CommentFormContainer />
-              {this.props.comments.map(comment => {
-                return  <CommentItem 
-                        // comment = {comment}
-                      />
-              })}
+              {this.state.comments ? (
+                this.state.comments.map(comment => {
+                  return  <CommentItem 
+                  key={comment._id} comment={comment}
+                        />
+                })) : ( <h5>No comments yet...</h5>)
+              }
             </div>
           </div>
         </div>
