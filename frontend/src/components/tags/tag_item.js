@@ -22,7 +22,7 @@ class TagItem extends React.Component {
       resources: resources,
       tags: newTags
     }
-    // debugger
+    // /debugger
     this.props.updateNote(nextNote, _id)
   }
 

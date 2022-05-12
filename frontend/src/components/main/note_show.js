@@ -20,6 +20,7 @@ export default class NoteShow extends React.Component {
       new: undefined
     }
     this.deleteNote = this.deleteNote.bind(this);
+    this.deleteThisComment = this.deleteThisComment.bind(this);
   }
 
   componentWillMount() {
@@ -51,6 +52,16 @@ export default class NoteShow extends React.Component {
     }
   }
 
+  deleteThisComment(commentId) {
+    const comments = this.state.comments.filter(comment => 
+      comment._id !== commentId
+    )
+    this.setState({comments: comments}, () => {
+      /debugger
+      this.props.removeComment(commentId)
+    })
+  }
+
   toggleDeleteModal() {
     const deleteModal = document.getElementById('confirm-modal-container');
     if (deleteModal.className === "modal-off") {
@@ -64,7 +75,7 @@ export default class NoteShow extends React.Component {
   commentOnSelection(selection) {
     const commentSection = document.getElementById("comments");
     document.getElementById("code-snippet-new").value = selection;
-    debugger
+    /debugger
     commentSection.scrollIntoView({ behavior: 'smooth' })
   }
 
@@ -171,7 +182,7 @@ export default class NoteShow extends React.Component {
           >Copy selection</div>
           <div className="menu-item" onMouseDown={() => {
             let selection = window.getSelection()
-            debugger
+            /debugger
             this.commentOnSelection(window.getSelection().toString())
           }}
           >Comment 1</div>
@@ -281,7 +292,8 @@ export default class NoteShow extends React.Component {
                   key={comment._id} 
                   id={comment._id} 
                   comment={comment} 
-                  removeComment={ this.props.removeComment }
+                  /debugger
+                  removeComment={ commentId => this.deleteThisComment(commentId) }
                   />
               })}
             </div>

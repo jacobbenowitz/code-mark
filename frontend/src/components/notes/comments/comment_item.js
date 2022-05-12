@@ -19,6 +19,7 @@ const CommentItem = props => {
 
   return props.comment ? (
     <div className="comment-wrapper">
+      <h2> something here </h2>
       <div className="user-info-wrapper">
         <div className="avatar-wrapper">
           <div className="avatar-container-sm">
@@ -50,7 +51,7 @@ const CommentItem = props => {
                 onClick={() => props.removeComment(props.id)}>
                 <i className="fa-solid fa-trash fa-lg"></i>
                 <span>
-                  Delete
+                  Delete 
                 </span>
               </div>
               <div className='cancel icon-button'
@@ -72,7 +73,7 @@ const CommentItem = props => {
               <span>
                 Delete
               </span>
-            </div>
+      </div>
       </div>
   ) : (<h4>Loading Comments</h4>)
 }

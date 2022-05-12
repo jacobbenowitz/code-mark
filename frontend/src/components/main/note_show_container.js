@@ -1,8 +1,7 @@
 import { connect } from "react-redux";
 import NoteShow from "./note_show";
 import { fetchNote, removeNote, updateNote } from "../../actions/note_actions";
-import { fetchNoteComments } from "../../actions/comment_actions";
-import { removeComment } from "../../actions/comment_actions";
+import { fetchNoteComments, removeComment } from "../../actions/comment_actions";
 
 const mapStateToProps = (state, { match }) => {
   return {
