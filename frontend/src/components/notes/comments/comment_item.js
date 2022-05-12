@@ -19,6 +19,7 @@ const CommentItem = props => {
 
   return (
     <div>
+      {/* modal div */}
       {/* <div id='comment-modal-container' className='modal-off' >
         <div className='modal-wrapper'>
           <div className='cancel-modal'>

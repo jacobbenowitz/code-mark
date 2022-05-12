@@ -28,7 +28,6 @@ export default class NoteShow extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    debugger
     this.setState({
       note: nextProps.note,
       comments: orderNoteComments(nextProps.comments),
