@@ -41,26 +41,33 @@
   height: 43px;
 }
 
+.add-code-snippet-wrapper {
+  display: flex;
+  width: 100%;
+}
+
 .code-snippet-comment {
   box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+  /* display: flex;
+  flex-direction: column;
+  align-items: flex-start; */
   padding: 10px;
   gap: 10px;
 
   width: 100%;
-  min-height: 80px;
 
   background: #35373E;
   border-left: 1px solid #D0D0D0;
+}
+
+textarea {
+  height: auto;
 }
 
 .code {
   font-family: 'Source Code Pro', monospace;
   resize: none;
   width: fit-content;
-  height: fit-content;
   padding: 0;
   margin: 0;
   width: 100%;
@@ -105,6 +112,6 @@
 
 #comment-submit {
   position: relative;
-  bottom: -16px;
+  bottom: 0px;
   align-self: flex-end;
 }

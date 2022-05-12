@@ -7,13 +7,15 @@ import { selectNoteComments } from "../../util/selectors";
 import CommentItem from '../notes/comments/comment_item';
 import Tags from '../tags/tags';
 // credit context menu: https://itnext.io/how-to-create-a-custom-right-click-menu-with-javascript-9c368bb58724
+// textarea resize: https://stackoverflow.com/questions/20775824/after-clicking-on-selected-text-window-selection-is-not-giving-updated-range
 
 export default class NoteShow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       note: undefined,
-      comments: []
+      comments: [],
+      selection: ""
     }
     this.deleteNote = this.deleteNote.bind(this);
   }
@@ -56,9 +58,17 @@ export default class NoteShow extends React.Component {
   }
 
 
+  commentOnSelection(selection) {
+    const commentSection = document.getElementById("comments");
+    document.getElementById("code-snippet-new").value = selection;
+    debugger
+    commentSection.scrollIntoView({ behavior: 'smooth' })
+  }
+
 
 
   render() {
+
     const { note, currentUser, updateNote, noteId } = this.props;
 
     const contextMenu = document.getElementById("context-menu");
@@ -118,23 +128,56 @@ export default class NoteShow extends React.Component {
 
     scope.addEventListener("click", (e) => {
       // ? close the menu if the user clicks outside of it
-      if (e.target.offsetParent != contextMenu) {
-        contextMenu.classList.remove("visible");
-      }
+      // if (e.target.offsetParent != contextMenu) {
+      //   contextMenu.classList.remove("visible");
+      // }
+
+      contextMenu.classList.remove("visible");
     });
+
+    // textarea resize
+    const tx = document.getElementsByTagName("textarea");
+    for (let i = 0; i < tx.length; i++) {
+      tx[i].setAttribute("style", "height:" + (tx[i].scrollHeight) + "px;overflow-y:hidden;");
+      tx[i].addEventListener("input", OnInput, false);
+    }
+
+    function OnInput() {
+      this.style.height = "auto";
+      this.style.height = (this.scrollHeight) + "px";
+    }
+
+    // listen for selection and update state
+    document.onselectionchange = () => {
+      console.log(document.getSelection().toString())
+      let selection = document.getSelection()
+      this.setState({ selection: selection.toString() });
+    };
+
 
     debugger
     return note ? (
       <>
+
         <div id="context-menu">
           <div className="menu-item"
             onMouseDown={() => {
-              let selection = window.getSelection();
-              console.log(selection, selection.toString())
+              let selection = window.getSelection().toString();
+              navigator.clipboard.writeText(selection)
             }
             }
           >Copy selection</div>
+          <div className="menu-item" onMouseDown={() => {
+            let selection = window.getSelection()
+            debugger
+            this.commentOnSelection(window.getSelection().toString())
+          }}
+          >Comment 1</div>
+          <div className="menu-item" onMouseDown={() =>
+            this.commentOnSelection(this.state.selection)}
+          >Comment 2</div>
         </div>
+
         <div id='confirm-modal-container' className='modal-off' >
           <div className='modal-wrapper'>
             <div className='cancel-modal'>
@@ -222,7 +265,7 @@ export default class NoteShow extends React.Component {
             </div>
           </div>
 
-          <div className='note-comments'>
+          <section id={'comments'} className='note-comments'>
             <div className='comments-title'>
               <h4>Comments</h4>
             </div>
@@ -233,7 +276,7 @@ export default class NoteShow extends React.Component {
                   key={comment._id} comment={comment} />
               })}
             </div>
-          </div>
+          </section>
         </div>
       </>
     ) : (
