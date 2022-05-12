@@ -1,4 +1,5 @@
-import { getGoogleAdvice, getAdvice } from './webscraping.js';
+// import { getGoogleAdvice, getAdvice } from './webscraping.js';
+import { getGoogleAdvice} from './webscraping.js';
 const hljs = require('highlight.js');
 // import hljs  from 'highlight.js';
 
@@ -17,30 +18,30 @@ function getResources (keywords,codebody) {
                 // console.log(typeof data);
                 return data;
             }));
-        resources.push(getAdvice(keyword)
-            .then(data => {
-                // console.log(data);
-                return data;
-            }));
+        // resources.push(getAdvice(keyword)
+        //     .then(data => {
+        //         // console.log(data);
+        //         return data;
+        //     }));
     });
     // console.log(resources);
     return resources;
 }
 
-function getNightmareResources (code) {
-    var keywords = code.split(' ');
-    keywords = [...new Set(keywords)];
-    var resources = [];
-    // console.log(keywords);
-    keywords.forEach(keyword => {
-        resources.push(getAdvice(keyword)
-            .then(data => {
-                // console.log(data);
-                return data;
-            }))
-    });
-    return resources;
-}
+// function getNightmareResources (code) {
+//     var keywords = code.split(' ');
+//     keywords = [...new Set(keywords)];
+//     var resources = [];
+//     // console.log(keywords);
+//     keywords.forEach(keyword => {
+//         resources.push(getAdvice(keyword)
+//             .then(data => {
+//                 // console.log(data);
+//                 return data;
+//             }))
+//     });
+//     return resources;
+// }
 
 export async function getStuff(keywords,codebody){
     let response = await Promise.all(getResources(keywords,codebody));
@@ -48,11 +49,11 @@ export async function getStuff(keywords,codebody){
     return response.flat().filter(ele => ele !== undefined);
 }
 
-export async function getNightmareStuff(words){
-    let data = await Promise.all(getNightmareResources(words));
-    // console.log(data);
-    return data;
-}
+// export async function getNightmareStuff(words){
+//     let data = await Promise.all(getNightmareResources(words));
+//     // console.log(data);
+//     return data;
+// }
 
 // const ignore = ['(',')','{','}',';'];
 
