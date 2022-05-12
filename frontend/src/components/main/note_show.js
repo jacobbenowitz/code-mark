@@ -278,7 +278,11 @@ export default class NoteShow extends React.Component {
                 "" }
               {this.state.comments.map(comment => {
                 return <CommentItem
-                  key={comment._id} comment={comment} />
+                  key={comment._id} 
+                  id={comment._id} 
+                  comment={comment} 
+                  removeComment={ this.props.removeComment }
+                  />
               })}
             </div>
           </section>
