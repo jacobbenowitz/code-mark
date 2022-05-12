@@ -88,7 +88,7 @@ export const getGoogleAdvice = (search) => {
                 };
             }
             // console.log(result);
-            return result.slice(0,3);
+            return result.slice(0,1);
 
         })
 }
