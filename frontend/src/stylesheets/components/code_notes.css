@@ -49,3 +49,7 @@
 .code-note-preview {
   width: 100%
 }
+
+.ͼ1 .cm-scroller::-webkit-scrollbar  {
+  display: none;
+}

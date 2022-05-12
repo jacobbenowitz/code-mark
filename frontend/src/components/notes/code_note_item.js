@@ -15,15 +15,21 @@ export default class CodeNoteItem extends React.Component {
           {this.props.tags.map(tag =>
             <div className="note-tag-mini">{tag}</div>)}
         </div>
-
-        <div className="code-note-text">
-          <span className="code-note-title">
-            {this.props.title}
-          </span>
-          <span className="code-note-body">
-            {this.props.textDetails}
-          </span>
-        </div>
+        {this.props.title || this.props.textDetails ? (
+          <div className="code-note-text">
+            {this.props.title ? (
+              <span className="code-note-title">
+                {this.props.title}
+              </span>
+            ) : ""}
+            {this.props.textDetails ? (
+              <span className="code-note-body">
+                {this.props.textDetails}
+              </span>
+            ) : ""}
+          </div>
+        ) : ""
+        }
         <div className="code-note-preview">
           <CodeEditorReadOnly
             codeBody={this.props.codeBody} />
