@@ -71,7 +71,7 @@ router.patch('/:id/edit',
     (req, res) => {
         Note.findById(req.params.id)
             .then(note => {
-                User.findById(note.user).then(user => console.log(user));
+                // User.findById(note.user).then(user => console.log(user));
                 if (note.user.toString() !== req.user.id) {
                     res.status(404).json({ editnotallowed: 'Not Authorized To Edit Note' })
                 } else {
@@ -79,7 +79,7 @@ router.patch('/:id/edit',
                     note.title = req.body.title;
                     note.textdetails = req.body.textdetails;
                     note.resources = req.body.resources;
-                    note.tags = req.body.tags
+                    note.tags = req.body.tags;
                     note.save()
                         .then(note => res.json(note))
                 }

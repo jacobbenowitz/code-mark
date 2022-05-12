@@ -1,55 +1,59 @@
-const axios = require('axios');
-const cheerio = require('cheerio');
-const Nightmare = require('nightmare');
+import axios from 'axios';
+import cheerio from 'cheerio';
+import Nightmare from 'nightmare';
+import fs from 'fs';
 
-const getAdvice = (keyword) => {
-    var advice;
+export const getAdvice = (keyword) => {
     // const nightmare = Nightmare({ show: true });
     const nightmare = Nightmare();
-    nightmare
+    return nightmare
         .goto('https://developer.mozilla.org/en-US/')
         .wait('#hp-search-q')
         .type('#hp-search-q',keyword)
         .click('#hp-search-form > button.button.action.has-icon.search-button')
         .wait('#content > article > div.search-results > ul > li:nth-child(1) > p.search-result-url > a')
-        // .evaluate(() => document.querySelector('ul.search-results-list li:first-child p.search-result-url a').href)
-        .evaluate(() => document.querySelector('#content > article > div.search-results > ul > li:nth-child(1) > p.search-result-url > a').href)
+        //need wait to timeout for gibberish words so wrong wait query
+        .evaluate(() => {
+                let link = document.querySelector('#content > article > div.search-results > ul > li:nth-child(1) > h3 > a').href;
+                let title = document.querySelector('#content > article > div.search-results > ul > li:nth-child(1) > h3 > a').textContent;
+                return {link,title};
+            })
         .end()
-        // .then(response => advice.push(response))
-        .then(console.log)
-        // .then(response => advice = response)
         .catch(err => console.log('search failed:',err))
-    return advice;
 }
 
-const getAdvice2 = async (keyword) => {
-    try {
-        // keywords.forEach(async (keyword) => {
-            const {data} = await axios.get(`https://developer.mozilla.org/en-US/search?q=${keyword.split(' ').join('+')}`);
-            // const {data} = await axios.get(`https://www.google.com/search?q=${keyword.split(' ').join('+')}`);
-            const $ = cheerio.load(data);
-            const advice = [];
-            // console.log($('.search-result-url > a'));
-            // $('.search-result-url > a').each((_idx,element) => {
-            console.log(`https://developer.mozilla.org/en-US/search?q=${keyword.split(' ').join('+')}`)
-            console.log($('p.search-result-url ').length)
-            // $('main > article > div.search-results > ul > li:nth-child(1) > p.search-result-url > a').each((idx,element) => {
-            $('p.search-result-url ').each((idx,element) => {
-            // $(".yuRUbf > a").each((idx,element) => {
-                console.log($(element).attr('href'))
-                advice.push($(element).attr('href'));
-            });
-            // $('.search-result-url').each((_idx,element) => advice.push($(element).text()));
-            // console.log(help);
-            // if (help.length !== 0){
-            //     // advice.push(help)
-            // }
-        // })
-        return advice;
-    } catch (error) {
-        throw error;
-    }
-};
+// const getAdvice2 = async (keyword) => {
+//     try {
+//         // keywords.forEach(async (keyword) => {
+//             const {data} = await axios.get(`https://developer.mozilla.org/en-US/search?q=${keyword.split(' ').join('+')}`);
+//             // const {data} = await axios.get(`https://www.google.com/search?q=${keyword.split(' ').join('+')}`);
+//             const $ = cheerio.load(data);
+//             console.log(data);
+//             const advice = [];
+//             // console.log($('.search-result-url > a'));
+//             // $('.search-result-url > a').each((_idx,element) => {
+//             console.log(`https://developer.mozilla.org/en-US/search?q=${keyword.split(' ').join('+')}`)
+//             // console.log($('h3').length)
+//             $('h > a').each((_idx,element) => {
+//             // $('p.search-result-url ').each((idx,element) => {
+//             // $(".yuRUbf > a").each((idx,element) => {
+//                 // console.log($(element).attr('href'))
+//                 // console.log($(element).text())
+//                 // advice.push($(element).attr('href'));
+//                 advice.push($(element).text());
+//             });
+//             // $('.search-result-url').each((_idx,element) => advice.push($(element).text()));
+//             // console.log(help);
+//             // if (help.length !== 0){
+//             //     // advice.push(help)
+//             // }
+//         // })
+//         return advice;
+//     } catch (error) {
+//         throw error;
+//     }
+// };
+//cheerio doesn't work for dynamically populated websites
 
 const AXIOS_OPTIONS = {
     headers: {
@@ -60,7 +64,7 @@ const AXIOS_OPTIONS = {
 
 export const getGoogleAdvice = (search) => {
     const encodedString = encodeURI(search);
-    console.log(`https://www.google.com/search?q=${encodedString}&hl=en&gl=us`);
+    // console.log(`https://www.google.com/search?q=${encodedString}&hl=en&gl=us`);
     return axios
         .get(`https://www.google.com/search?q=${encodedString}&hl=en&gl=us`, AXIOS_OPTIONS)
         .then(({data}) => {
@@ -84,39 +88,7 @@ export const getGoogleAdvice = (search) => {
                 };
             }
             // console.log(result);
-            return result.slice(0,3);
+            return result.slice(0,1);
 
         })
 }
-
-// // export default getAdvice;
-
-// getAdvice2('ruby')
-//     .then(data => console.log(data));
-
-// getAdvice('ruby');
-
-// getGoogleAdvice('onclick()').then(data => console.log(data))
-
-
-// const getPostTitles = async () => {
-// 	try {
-// 		const { data } = await axios.get(
-// 			'https://old.reddit.com/r/programming/'
-// 		);
-// 		const $ = cheerio.load(data);
-// 		const postTitles = [];
-
-// 		$('div > p.title > a').each((_idx, el) => {
-// 			const postTitle = $(el).text()
-// 			postTitles.push(postTitle)
-// 		});
-
-// 		return postTitles;
-// 	} catch (error) {
-// 		throw error;
-// 	}
-// };
-
-// getPostTitles()
-// .then((postTitles) => console.log(postTitles));
