@@ -60,8 +60,8 @@ export const fetchNote = noteId => dispatch => (
   getNote(noteId)
     .then(note => dispatch(receiveNote(note)))
     .catch(err => dispatch(receiveNoteErrors(err)))
-  
-)
+
+);
 
 export const fetchUserNotes = id => dispatch => (
   getUserNotes(id)
@@ -69,20 +69,21 @@ export const fetchUserNotes = id => dispatch => (
     .catch(err => dispatch(receiveNoteErrors(err)))
 );
 
-export const composeNote = data => dispatch => (
-  writeNote(data)
+export const composeNote = data => dispatch => {
+  return writeNote(data)
     .then(note => dispatch(receiveNewNote(note)))
     .catch(err => dispatch(receiveNoteErrors(err)))
-);
+};
 
-export const updateNote = data => dispatch => (
-  patchNote()
+export const updateNote = (data, noteId) => dispatch => {
+   
+  return patchNote(data, noteId)
     .then(note => dispatch(receiveUpdateNote(note)))
     .catch(err => dispatch(receiveNoteErrors(err)))
-);
+};
 
 export const removeNote = noteId => dispatch => (
-  deleteNote()
+  deleteNote(noteId)
     .then(note => dispatch(receiveDeleteNote(note.id)))
     .catch(err => dispatch(receiveNoteErrors(err)))
 );

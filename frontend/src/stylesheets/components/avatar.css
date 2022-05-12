@@ -1,0 +1,31 @@
+.avatar-container { 
+  display: flex;
+  align-items: center;
+  position: relative;
+  min-width: 64px;
+}
+
+.avatar-container-sm { 
+  display: flex;
+  align-items: center;
+  width: 1fr;
+  height: 100%;
+}
+
+.user-avatar-lg {
+  border-radius: 50%;
+  overflow: hidden;
+  width: 64px;
+  height: 64px;
+}
+
+.avatar-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 45px;
+  width: 45px;
+  background-color: #0D4649;
+  border-radius: 50%;
+}

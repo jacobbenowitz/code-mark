@@ -21,7 +21,7 @@
 .code-note-tags {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: flex-start;
   padding: 0px;
   position: static;
@@ -38,6 +38,7 @@
   grid-template-rows: auto 1fr;
   gap: 0.7rem;
   margin-bottom: 1rem;
+  margin-top: 1.3rem;
 }
 
 .code-note-title {
@@ -47,4 +48,8 @@
 
 .code-note-preview {
   width: 100%
+}
+
+.ͼ1 .cm-scroller::-webkit-scrollbar  {
+  display: none;
 }

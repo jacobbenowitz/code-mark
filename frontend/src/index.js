@@ -6,7 +6,8 @@ import jwt_decode from 'jwt-decode';
 import { setAuthToken } from './util/session_api_util';
 import { logout } from './actions/session_actions';
 import App from './components/app';
-import { fetchNote } from '../../frontend/src/actions/note_actions';
+import { composeNote, updateNote } from '../../frontend/src/actions/note_actions';
+import { composeComment, fetchNoteComments, removeComment, updateComment, fetchComments } from '../../frontend/src/actions/comment_actions';
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -43,7 +44,13 @@ document.addEventListener('DOMContentLoaded', () => {
   /// TEST START ///
   window.getState = store.getState;
   window.dispatch = store.dispatch;
-  window.fetchNote = noteId => fetchNote(noteId);
+  window.composeNote = noteData => composeNote(noteData);
+  window.updateNote = noteData => updateNote(noteData);
+  window.composeComment = comment => composeComment(comment);
+  window.removeComment = commentId => removeComment(commentId);
+  window.fetchComments = () => fetchComments();
+  window.fetchNoteComments = noteId => fetchNoteComments(noteId);
+  window.updateComment = (comment, commentId) => updateComment(comment, commentId);
   /// TEST END ///
   ReactDOM.render(<Root store={store} />, root);
 })

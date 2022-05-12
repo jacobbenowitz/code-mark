@@ -74,20 +74,19 @@ export default class NewNote extends React.Component {
     observe(text, 'drop', delayedResize);
     observe(text, 'keydown', delayedResize);
 
-    text.focus();
-    text.select();
     resize();
   }
 
   handleSubmit(e) {
     e.preventDefault();
     let { title, codebody, textdetails } = this.state;
+    //  
     let note = {
       title: title,
       codebody: codebody,
       textdetails: textdetails
     }
-    // debugger
+    //  
     this.props.composeNote(note)
       .then(() => (
         this.setState({
@@ -115,7 +114,7 @@ export default class NewNote extends React.Component {
               <div className='note-input'>
                 <CodeMirror
                   value={this.state.codebody}
-                  onChange={this.updateCode}
+                  onChange={this.updateCode()}
                   height="200px"
                   theme='dark'
                   extensions={[javascript({ jsx: true })]}
@@ -128,7 +127,6 @@ export default class NewNote extends React.Component {
                   className='note-input-details'
                   placeholder='Any additional notes?'
                   value={this.state.textdetails}
-
                 />
               </div>
               <button type='submit' id='code-note-submit'

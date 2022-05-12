@@ -35,6 +35,25 @@ button:focus, .signup:focus, .login:focus, .hide-button:focus {
   background: #0D4649;
 }
 
+.view-link {
+  padding: 0.4rem;
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.show-link-wrapper {
+  align-self: flex-end;
+}
+
+.view-link:hover {
+  padding: 0.4rem;
+  background: #2D2D2D;
+  /* bg-shadow-lg */
+  box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+}
+
 .hide-button {
   position: absolute;
   border: 1px solid transparent;
@@ -46,9 +65,12 @@ button:focus, .signup:focus, .login:focus, .hide-button:focus {
   background: none;
   border-radius: 4px;
   width: fit-content;
-  place-self: end;
+  place-self: flex-end;
 }
 
+#hidden-demo {
+  display: none;
+}
 .sign-up-large {
   display: flex;
   flex-direction: column;
@@ -81,4 +103,36 @@ button:focus, .signup:focus, .login:focus, .hide-button:focus {
   background-color: #FFFFFF;
   color: #316ECA;
 
+}
+
+.icon-button {
+  border: 1px solid transparent;
+  cursor: pointer;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 1rem;
+  padding: 6px 16px;
+  border-radius: 4px;
+  width: fit-content;
+  place-items: baseline;
+  background-color: #2D2D2D;
+  box-shadow: 0px 0px 18px rgb(0 0 0 / 0%);
+  transition: box-show 500ms ease-in-out;
+}
+
+.icon-button:hover {
+  background-color: #2D2D2D;
+  box-shadow: 0px 0px 18px rgb(0 0 0 / 25%);
+}
+
+
+.delete-note:hover {
+  background-color: #390000;
+}
+
+/* errors */
+
+.error-list {
+  color: #EB5750;
 }
