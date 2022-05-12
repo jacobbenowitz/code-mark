@@ -1,17 +1,19 @@
 import { connect } from "react-redux";
-import { composeNote } from "../../actions/note_actions";
+import { composeNote, updateNote } from "../../actions/note_actions";
 import NewNote from "./new_note";
 
 const mapStateToProps = state => {
   return {
     currentUser: state.session.user,
-    newNote: state.notes.new
+    newNote: state.notes.new,
+    newResources: state.notes.newResources
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    composeNote: noteData => dispatch(composeNote(noteData))
+    composeNote: noteData => dispatch(composeNote(noteData)),
+    updateNote: (noteData, noteId) => dispatch(updateNote(noteData, noteId))
   }
 }
 

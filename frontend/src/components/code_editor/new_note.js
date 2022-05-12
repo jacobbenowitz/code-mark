@@ -2,6 +2,7 @@ import React from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
 import { oneDark } from '@codemirror/theme-one-dark';
+import CheckBoxItem from './checkbox_item'
 
 export default class NewNote extends React.Component {
   constructor(props) {
@@ -10,7 +11,8 @@ export default class NewNote extends React.Component {
       title: "",
       codebody: "",
       textdetails: "",
-      isOpen: false // true when user clicks or types, false otherwise
+      isOpen: false, // true when user clicks or types, false otherwise
+      keywordsSelected: []
     }
     // this.resizeOnInput()
     this.bindHandlers();
@@ -20,6 +22,7 @@ export default class NewNote extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.init = this.init.bind(this);
     this.toggleForm = this.toggleForm.bind(this);
+    this.updateKeywords = this.updateKeywords.bind(this);
   }
 
 
@@ -36,6 +39,15 @@ export default class NewNote extends React.Component {
       this.setState({
         codebody: e
       })
+    }
+  }
+
+  toggleResourcesModal() {
+    const resourcesNoteModal = document.getElementById('resources-note-container');
+    if (resourcesNoteModal.className === "modal-off") {
+      resourcesNoteModal.className = "modal-on"
+    } else {
+      resourcesNoteModal.className = "modal-off"
     }
   }
 
@@ -93,13 +105,38 @@ export default class NewNote extends React.Component {
           title: "",
           codebody: "",
           textdetails: "",
-        }, () => this.toggleForm())
+        }, () => this.toggleResourcesModal())
       ))
+  }
+
+  updateKeywords(e) {
+    const pushed = this.state.keywordsSelected.push(e.target.value)
+    this.setState({
+      keywordsSelected: pushed
+    })
+  }
+
+  handleResourcesSubmit(e) {
+    e.preventDefault();
+    this.props.updateNote(noteData, noteId)
   }
 
   render() {
     return (
       <>
+        <div id='resources-note-container' className='modal-on' >
+          <div className='modal-wrapper'>
+            <div className='resources-modal'>
+              <h4>Resources</h4>
+              <span>Select the keywords that you'd like resources for</span>
+              <form className='resource-options'
+                onChange={this.updateKeywords}>
+                {this.props.newResources?.map(keyword =>
+                  <CheckBoxItem keyword={keyword} />)}
+              </form>
+            </div>
+          </div>
+        </div>
         <div className='new-note-container' id='new-note-full'>
           <div className='new-note-form'>
             <form onSubmit={this.handleSubmit}>
