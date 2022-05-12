@@ -1,12 +1,14 @@
 import { connect } from "react-redux";
 import NoteShow from "./note_show";
 import { fetchNote, removeNote, updateNote } from "../../actions/note_actions";
+import { fetchNoteComments } from "../../actions/comment_actions";
 
 const mapStateToProps = (state, { match }) => {
   return {
     noteId: match.params.noteId,
     note: state.notes.all[match.params.noteId],
-    currentUser: state.session.user
+    currentUser: state.session.user,
+    allComments: state.comments.all
   }
 }
 
@@ -15,6 +17,7 @@ const mapDispatchToProps = dispatch => {
     fetchNote: noteId => dispatch(fetchNote(noteId)),
     removeNote: noteId => dispatch(removeNote(noteId)),
     updateNote: (noteData, noteId) => dispatch(updateNote(noteData, noteId)),
+    fetchNoteComments: (noteId) => dispatch(fetchNoteComments(noteId))
   }
 }
 

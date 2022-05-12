@@ -2,27 +2,32 @@ import React from 'react';
 import CodeEditorReadOnly from '../code_editor/code_editor_readonly';
 import NoteShowEditorLoader from '../code_editor/code_show_editor_loader';
 import EditNote from '../code_editor/edit_note';
+import CommentFormContainer from '../notes/comments/comment_form_container';
+import { selectNoteComments } from "../../util/selectors";
 import CommentItem from '../notes/comments/comment_item';
-import CommentForm from '../notes/comments/comment_form';
-import TagItem from '../tags/tag_item';
 import Tags from '../tags/tags';
 
 export default class NoteShow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      note: undefined
+      note: undefined,
+      comments: []
     }
     this.deleteNote = this.deleteNote.bind(this);
   }
 
   componentWillMount() {
     this.props.fetchNote(this.props.noteId);
+    this.props.fetchNoteComments(this.props.noteId);
+    debugger
   }
 
   componentWillReceiveProps(nextProps) {
+    debugger
     this.setState({
-      note: nextProps.note
+      note: nextProps.note,
+      comments: selectNoteComments(nextProps.allComments, nextProps.noteId)
     })
   }
 
@@ -52,6 +57,7 @@ export default class NoteShow extends React.Component {
 
   render() {
     const { note, currentUser, updateNote, noteId } = this.props;
+    
     return note ? (
       <>
         <div id='confirm-modal-container' className='modal-off' >
@@ -146,8 +152,14 @@ export default class NoteShow extends React.Component {
               <h4>Comments</h4>
             </div>
             <div className='comments-list'>
-              <CommentForm />
-              <CommentItem />
+              <CommentFormContainer />
+              {this.state.comments ? (
+                this.state.comments.map(comment => {
+                  return  <CommentItem 
+                  key={comment._id} comment={comment}
+                        />
+                })) : ( <h5>No comments yet...</h5>)
+              }
             </div>
           </div>
         </div>

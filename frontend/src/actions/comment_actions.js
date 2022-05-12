@@ -63,11 +63,12 @@ export const fetchComments = () => dispatch => (
         .catch(err => dispatch(receiveCommentErrors(err)))
 );
 
-export const fetchNoteComments = noteId => dispatch => (
+export const fetchNoteComments = noteId => dispatch => {
+    debugger
     getNoteComments(noteId)
         .then(comments => dispatch(receiveNoteComments(comments)))
         .catch(err => dispatch(receiveCommentErrors(err)))
-);
+};
 
 export const fetchComment = commentId => dispatch => (
     getComment(commentId)
