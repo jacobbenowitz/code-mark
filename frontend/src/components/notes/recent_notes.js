@@ -1,5 +1,4 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
 import CodeNoteItem from './code_note_item';
 
 class RecentNotes extends React.Component {
@@ -20,6 +19,7 @@ class RecentNotes extends React.Component {
     return this.state.note ? (
       <CodeNoteItem key={this.state.note._id}
         id={this.state.note._id}
+        tags={this.state.note.tags}
         title={this.state.note.title}
         textDetails={this.state.note.textdetails}
         codeBody={this.state.note.codebody}
@@ -30,4 +30,4 @@ class RecentNotes extends React.Component {
   }
 }
 
-export default withRouter(RecentNotes);
+export default RecentNotes;

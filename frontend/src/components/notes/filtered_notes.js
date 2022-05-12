@@ -19,7 +19,7 @@ class FilteredNotes extends React.Component {
 
   componentWillReceiveProps(nextState) {
     if (nextState.userNotes && nextState.filter !== this.state.filter) {
-      /debugger
+      //debugger
       let filtered = filterNotesByTag(nextState.filter, nextState.userNotes);
       this.setState({
         notes: orderUserNotes(filtered),
@@ -30,7 +30,7 @@ class FilteredNotes extends React.Component {
 
 
   render() {
-    /debugger
+    //debugger
     if (this.state.notes.length === 0) {
       return (<span>No notes found</span>)
     } else {

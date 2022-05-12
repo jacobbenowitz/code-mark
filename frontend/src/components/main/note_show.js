@@ -9,6 +9,7 @@ import CommentItem from '../notes/comments/comment_item';
 import Tags from '../tags/tags';
 // credit context menu: https://itnext.io/how-to-create-a-custom-right-click-menu-with-javascript-9c368bb58724
 // textarea resize: https://stackoverflow.com/questions/20775824/after-clicking-on-selected-text-window-selection-is-not-giving-updated-range
+import CommentIndex from '../notes/comments/comment_index';
 
 export default class NoteShow extends React.Component {
   constructor(props) {
@@ -16,8 +17,6 @@ export default class NoteShow extends React.Component {
     this.state = {
       note: undefined,
       comments: [],
-      selection: "",
-      new: undefined
     }
     this.deleteNote = this.deleteNote.bind(this);
     this.deleteThisComment = this.deleteThisComment.bind(this);
@@ -29,11 +28,11 @@ export default class NoteShow extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-     
+    debugger
     this.setState({
       note: nextProps.note,
       comments: orderNoteComments(nextProps.comments),
-      new: nextProps.new
+      newComment: nextProps.newComment
     })
   }
 
@@ -53,11 +52,12 @@ export default class NoteShow extends React.Component {
   }
 
   deleteThisComment(commentId) {
-    const comments = this.state.comments.filter(comment => 
+    debugger
+    const comments = this.state.comments.filter(comment =>
       comment._id !== commentId
     )
-    this.setState({comments: comments}, () => {
-      /debugger
+    this.setState({ comments: comments }, () => {
+      debugger
       this.props.removeComment(commentId)
     })
   }
@@ -74,8 +74,10 @@ export default class NoteShow extends React.Component {
 
   commentOnSelection(selection) {
     const commentSection = document.getElementById("comments");
-    document.getElementById("code-snippet-new").value = selection;
-    /debugger
+    const newSnippetField = document.getElementById("code-snippet-new")
+    newSnippetField.focus()
+    newSnippetField.value = selection
+    debugger
     commentSection.scrollIntoView({ behavior: 'smooth' })
   }
 
@@ -162,11 +164,11 @@ export default class NoteShow extends React.Component {
     }
 
     // listen for selection and update state
-    document.onselectionchange = () => {
-      console.log(document.getSelection().toString())
-      let selection = document.getSelection()
-      this.setState({ selection: selection.toString() });
-    };
+    // document.onselectionchange = () => {
+    //   console.log(document.getSelection().toString())
+    //   let selection = document.getSelection()
+    //   this.setState({ selection: selection.toString() });
+    // };
 
 
     return note ? (
@@ -182,13 +184,12 @@ export default class NoteShow extends React.Component {
           >Copy selection</div>
           <div className="menu-item" onMouseDown={() => {
             let selection = window.getSelection()
-            /debugger
             this.commentOnSelection(window.getSelection().toString())
           }}
           >Comment 1</div>
-          <div className="menu-item" onMouseDown={() =>
+          {/* <div className="menu-item" onMouseDown={() =>
             this.commentOnSelection(this.state.selection)}
-          >Comment 2</div>
+          >Comment 2</div> */}
         </div>
 
         <div id='confirm-modal-container' className='modal-off' >
@@ -277,26 +278,13 @@ export default class NoteShow extends React.Component {
               {/* resourceItem components */}
             </div>
           </div>
-
           <section id={'comments'} className='note-comments'>
             <div className='comments-title'>
               <h4>Comments</h4>
             </div>
-            <div className='comments-list'>
-              {/* added a new comment item to refresh state */}
-              <CommentFormContainer />
-              {this.state.new ? <CommentItem key={this.state.new._id} comment={this.state.new} /> : 
-                "" }
-              {this.state.comments.map(comment => {
-                return <CommentItem
-                  key={comment._id} 
-                  id={comment._id} 
-                  comment={comment} 
-                  /debugger
-                  removeComment={ commentId => this.deleteThisComment(commentId) }
-                  />
-              })}
-            </div>
+            <CommentIndex comments={this.state.comments}
+              newComment={this.props.newComment}
+              note={this.props.note} />
           </section>
         </div>
       </>
