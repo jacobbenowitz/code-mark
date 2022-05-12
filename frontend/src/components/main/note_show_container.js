@@ -18,7 +18,6 @@ const mapDispatchToProps = dispatch => {
     removeNote: noteId => dispatch(removeNote(noteId)),
     updateNote: (noteData, noteId) => dispatch(updateNote(noteData, noteId)),
     fetchNoteComments: (noteId) => dispatch(fetchNoteComments(noteId))
-
   }
 }
 

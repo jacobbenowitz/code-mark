@@ -2,9 +2,10 @@ import React from 'react';
 import CodeEditorReadOnly from '../code_editor/code_editor_readonly';
 import NoteShowEditorLoader from '../code_editor/code_show_editor_loader';
 import EditNote from '../code_editor/edit_note';
-import CommentItem from '../notes/comments/comment_item';
 import CommentFormContainer from '../notes/comments/comment_form_container';
 import { selectNoteComments } from "../../util/selectors";
+import CommentItem from '../notes/comments/comment_item';
+import Tags from '../tags/tags';
 
 export default class NoteShow extends React.Component {
   constructor(props) {
@@ -56,7 +57,7 @@ export default class NoteShow extends React.Component {
 
   render() {
     const { note, currentUser, updateNote, noteId } = this.props;
-     
+    
     return note ? (
       <>
         <div id='confirm-modal-container' className='modal-off' >
@@ -121,6 +122,12 @@ export default class NoteShow extends React.Component {
             <div className='code-note-body'>
               <CodeEditorReadOnly
                 codeBody={note.codebody}
+              />
+            </div>
+
+            <div className='note-tags-wrapper'>
+              <Tags note={this.state.note}
+                updateNote={this.props.updateNote}
               />
             </div>
 
