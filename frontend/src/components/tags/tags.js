@@ -47,7 +47,6 @@ export default class Tags extends React.Component {
       tags: newTags,
     }
 
-    debugger
     this.props.updateNote(nextNote, _id)
       .then(() => (
         this.setState({
@@ -70,11 +69,6 @@ export default class Tags extends React.Component {
   }
 
   render() {
-
-    // const tags = this.state.tags.map(tag => {
-    //   <TagItem title={tag.title} />
-    // })
-    // debugger
     return (
       <div className='note-tags-list'>
         <div className="tag-item-wrapper tag-icon-new"
@@ -100,10 +94,14 @@ export default class Tags extends React.Component {
             <i className="fa-solid fa-floppy-disk" />
           </button>
         </form>
-        {this.state.tags.length ? (
-          this.state.tags.map((tag, i) =>
-            <TagItem title={tag} key={`tag-${i}`} />)
-        ) : ""}
+        {
+          this.state.tags?.map((tag, i) =>
+            <TagItem title={tag} key={`tag-${i}`}
+              updateNote={this.props.updateNote}
+              note={this.props.note}
+              tags={this.state.tags}
+            />)
+        }
       </div>
     )
   }
