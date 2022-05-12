@@ -57,7 +57,7 @@ export default class NoteShow extends React.Component {
 
   render() {
     const { note, currentUser, updateNote, noteId } = this.props;
-    
+
     return note ? (
       <>
         <div id='confirm-modal-container' className='modal-off' >
@@ -153,12 +153,10 @@ export default class NoteShow extends React.Component {
             </div>
             <div className='comments-list'>
               <CommentFormContainer />
-              {this.state.comments ? (
-                this.state.comments.map(comment => {
-                  return  <CommentItem 
-                  key={comment._id} comment={comment}
-                        />
-                })) : ( <h5>No comments yet...</h5>)
+              {this.state.comments.map(comment => {
+                return <CommentItem
+                  key={comment._id} comment={comment} />
+              })
               }
             </div>
           </div>

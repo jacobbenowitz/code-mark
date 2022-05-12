@@ -13,7 +13,7 @@ export const orderUserNotes = (notes) => {
 }
 
 export const selectNoteComments = (comments, noteId) => {
-   
+  
   return comments?.filter( comment => {
     return comment.note === noteId
   })

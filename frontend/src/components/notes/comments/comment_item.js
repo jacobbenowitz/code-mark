@@ -2,7 +2,7 @@ import React from "react";
 
 const CommentItem = props => {
   debugger
-  props.comment ? ( 
+  return props.comment ? (
     <div className="comment-wrapper">
       <div className="user-info-wrapper">
         <div className="avatar-wrapper">
@@ -24,7 +24,7 @@ const CommentItem = props => {
         <span className="comment-body">{props.comment.textbody}</span>
       </div>
     </div>
-    ) : ( <h4>Loading Comments</h4> )
+  ) : (<h4>Loading Comments</h4>)
 }
 
 export default CommentItem;
