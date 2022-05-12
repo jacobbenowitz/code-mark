@@ -13,8 +13,14 @@ export const orderUserNotes = (notes) => {
 }
 
 export const selectNoteComments = (comments, noteId) => {
-  
-  return comments?.filter( comment => {
+
+  return comments?.filter(comment => {
     return comment.note === noteId
   })
+}
+
+export const selectNoteTags = notes => {
+  const tags = notes.map(note => note.tags)
+  debugger
+  return tags.flat();
 }

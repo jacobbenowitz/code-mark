@@ -20,6 +20,7 @@ import '../stylesheets/navbar.css';
 import '../stylesheets/note_form/note_form.css';
 import '../stylesheets/main/home.css'
 import NoteShowContainer from './main/note_show_container';
+import HomeContainer from './main/home_container';
 
 const App = () => (
   <div className="grid-pancake-stack">
@@ -30,7 +31,7 @@ const App = () => (
       <AuthRoute exact path="/" component={SplashPage} />
       <AuthRoute exact path='/login' component={LoginFormContainer} />
       <AuthRoute exact path='/signup' component={SignupFormContainer} />
-      <ProtectedRoute exact path='/home' component={Home} />
+      <ProtectedRoute exact path='/home' component={HomeContainer} />
       <ProtectedRoute exact path={'/notes/:noteId'} component={NoteShowContainer} />
       {/* <ProtectedRoute exact path='/profile' component={ProfileContainer} /> */}
       {/* <ProtectedRoute exact path='/discover' component={DiscoverContainer} /> */}

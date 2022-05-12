@@ -3,13 +3,13 @@ import NewNoteContainer from '../code_editor/new_note_container';
 import UserNotesContainer from '../notes/user_notes_container';
 import RecentNotesContainer from '../notes/recent_notes_container';
 import { NavLink } from 'react-router-dom';
+import NavTagItem from '../tags/nav_tag_item';
 
 export default class Home extends React.Component {
 
   render() {
     return (
       <div className='main-sidebar'>
-
         <div className='nav-sidecar'>
           <div className='nav-boxes'>
             <div className='nav-pages'>
@@ -31,12 +31,12 @@ export default class Home extends React.Component {
                   </div>
                 </NavLink>
               </ul>
-
               <h5>Tags</h5>
               <ul className='nav-list'>
-                <div className='nav-item-link'>
+                {this.props.tags?.map(tag => <NavTagItem tag={tag} />)}
+                {/* <div className='nav-item-link'>
                   <img src="https://code-mark.s3.amazonaws.com/type%3Dcustom_tag.svg" /> <span>Custom tag</span>
-                </div>
+                </div> */}
               </ul>
             </div>
           </div>
@@ -54,7 +54,7 @@ export default class Home extends React.Component {
           </div>
           <div className='notes-section'>
             <div className='section-title'>
-              <h5>All Notes</h5>
+              <h5>My Notes</h5>
             </div>
             <div className='note-list-container'>
               <UserNotesContainer />
