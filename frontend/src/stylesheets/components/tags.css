@@ -30,9 +30,14 @@
   border-radius: 4px;
 }
 
-/* .tag-icon-wrapper {
+.tag-delete-icon-wrapper {
+  padding: 0.2rem 0.4rem 0.2rem 0.4rem;
+  background: transparent;
+}
 
-} */
+.tag-delete-icon-wrapper:hover {
+  background: transparent;
+}
 
 .tag-form-off {
   display: none;
@@ -61,10 +66,50 @@
   background: #35373E;
   border-radius: 4px;
 }
-/* 
-.tag-form-input {
-  
-} */
+
+.tag-delete-icon-wrapper {
+  cursor: pointer;
+}
+
+.tag-delete-icon-wrapper:hover {
+  background: #35373E;
+  border-radius: 4px;
+}
+
+#tag-icon-save:hover {
+  background-color: darkcyan;
+}
+
+
+.tag-delete-button {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0.2rem 0.4rem;
+
+  color: white;
+  background: #2D2D2D;
+  border: none;
+  /* bg-shadow-lg */
+  box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+
+  transition: background 250ms ease-in-out;
+}
+
+.tag-delete-button:hover {
+  background: #5b0606;
+  border: none;
+  color: white;
+}
+
+.tag-delete-button:focus {
+  color: white;
+  background: #490d0d;
+  border: none;
+}
 
 .tag-icon-new {
   cursor: pointer;
