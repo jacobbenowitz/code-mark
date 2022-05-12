@@ -1,7 +1,7 @@
 import React from "react";
 
 const CommentItem = props => {
-   
+
 
   // Only show comment delete button if the note's user is the current user 
   // session.user.id === notes.all[0].id
@@ -41,7 +41,7 @@ const CommentItem = props => {
       </div>
 
       {/* modal div */}
-      <div id='comment-modal-container' className='modal-off' >
+      {/* <div id='comment-modal-container' className='modal-off' >
         <div className='modal-wrapper'>
           <div className='cancel-modal'>
             <span>Are you sure you want to delete this comment?</span>
@@ -63,17 +63,17 @@ const CommentItem = props => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
-    {/* toggle modal */}
-      <div className='delete-note icon-button'
+      {/* toggle modal */}
+      {/* <div className='delete-note icon-button'
               onClick={() => toggleDeleteModal()}>
               <i className="fa-solid fa-trash fa-lg"></i>
               <span>
                 Delete
               </span>
-            </div>
-      </div>
+            </div> */}
+    </div>
   ) : (<h4>Loading Comments</h4>)
 }
 

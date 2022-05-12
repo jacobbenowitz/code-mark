@@ -28,7 +28,6 @@ export default class NoteShow extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-     
     this.setState({
       note: nextProps.note,
       comments: orderNoteComments(nextProps.comments),
@@ -274,15 +273,16 @@ export default class NoteShow extends React.Component {
             <div className='comments-list'>
               {/* added a new comment item to refresh state */}
               <CommentFormContainer />
-              {this.state.new ? <CommentItem key={this.state.new._id} comment={this.state.new} /> : 
-                "" }
+              {this.state.new ? <CommentItem key={this.state.new._id} comment={this.state.new} /> :
+                ""}
               {this.state.comments.map(comment => {
                 return <CommentItem
-                  key={comment._id} 
-                  id={comment._id} 
-                  comment={comment} 
-                  removeComment={ this.props.removeComment }
-                  />
+                  key={comment._id}
+                  id={comment._id}
+                  tags={comment.tags}
+                  comment={comment}
+                  removeComment={this.props.removeComment}
+                />
               })}
             </div>
           </section>
