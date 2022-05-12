@@ -24,3 +24,8 @@ export const selectNoteTags = notes => {
   debugger
   return tags.flat();
 }
+
+export const filterNotesByTag = (tag, notes) => {
+  debugger
+  return notes.filter(note => note.tags.includes(tag))
+}
