@@ -6,6 +6,7 @@ import CommentFormContainer from '../notes/comments/comment_form_container';
 import { selectNoteComments } from "../../util/selectors";
 import CommentItem from '../notes/comments/comment_item';
 import Tags from '../tags/tags';
+// credit context menu: https://itnext.io/how-to-create-a-custom-right-click-menu-with-javascript-9c368bb58724
 
 export default class NoteShow extends React.Component {
   constructor(props) {
@@ -54,11 +55,86 @@ export default class NoteShow extends React.Component {
     }
   }
 
+
+
+
   render() {
     const { note, currentUser, updateNote, noteId } = this.props;
+
+    const contextMenu = document.getElementById("context-menu");
+    const scope = document.querySelector("body");
+
+    const normalizePozition = (mouseX, mouseY) => {
+      // ? compute what is the mouse position relative to the container element (scope)
+      const {
+        left: scopeOffsetX,
+        top: scopeOffsetY,
+      } = scope.getBoundingClientRect();
+
+      const scopeX = mouseX - scopeOffsetX;
+      const scopeY = mouseY - scopeOffsetY;
+
+      // ? check if the element will go out of bounds
+      const outOfBoundsOnX =
+        scopeX + contextMenu.clientWidth > scope.clientWidth;
+
+      const outOfBoundsOnY =
+        scopeY + contextMenu.clientHeight > scope.clientHeight;
+
+      let normalizedX = mouseX;
+      let normalizedY = mouseY;
+
+      // ? normalzie on X
+      if (outOfBoundsOnX) {
+        normalizedX =
+          scopeOffsetX + scope.clientWidth - contextMenu.clientWidth;
+      }
+
+      // ? normalize on Y
+      if (outOfBoundsOnY) {
+        normalizedY =
+          scopeOffsetY + scope.clientHeight - contextMenu.clientHeight;
+      }
+
+      return { normalizedX, normalizedY };
+    };
+
+    scope.addEventListener("contextmenu", (event) => {
+      event.preventDefault();
+
+      const { clientX: mouseX, clientY: mouseY } = event;
+
+      const { normalizedX, normalizedY } = normalizePozition(mouseX, mouseY);
+
+      contextMenu.classList.remove("visible");
+
+      contextMenu.style.top = `${normalizedY}px`;
+      contextMenu.style.left = `${normalizedX}px`;
+
+      setTimeout(() => {
+        contextMenu.classList.add("visible");
+      });
+    });
+
+    scope.addEventListener("click", (e) => {
+      // ? close the menu if the user clicks outside of it
+      if (e.target.offsetParent != contextMenu) {
+        contextMenu.classList.remove("visible");
+      }
+    });
+
     debugger
     return note ? (
       <>
+        <div id="context-menu">
+          <div className="menu-item"
+            onMouseDown={() => {
+              let selection = window.getSelection();
+              console.log(selection, selection.toString())
+            }
+            }
+          >Copy selection</div>
+        </div>
         <div id='confirm-modal-container' className='modal-off' >
           <div className='modal-wrapper'>
             <div className='cancel-modal'>
