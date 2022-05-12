@@ -155,8 +155,7 @@ export default class NoteShow extends React.Component {
               {this.state.comments.map(comment => {
                 return <CommentItem
                   key={comment._id} comment={comment} />
-              })
-              }
+              })}
             </div>
           </div>
         </div>
