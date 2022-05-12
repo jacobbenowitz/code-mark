@@ -241,7 +241,15 @@ const seed = async (users,notes) => {
                     })
                 note_ids.push(newNote.id)
             })
+            .then(() => {
+                
+            })
     })
+    // Comment.find()
+    //     .then(() => {
+    //         console.log("Going to close connection");
+    //         mongoose.connection.close()
+    // })
     // comments.forEach((comment,idx) => {
     //     const user_id = user_ids[idx % user_ids.length]
     //     var note_id;
