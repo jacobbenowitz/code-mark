@@ -4,6 +4,10 @@ import {
   RECEIVE_USER_SIGN_IN
 } from "../actions/session_actions";
 
+import {
+  RECEIVE_USER_NOTES
+} from '../actions/note_actions';
+
 const initialState = {
   isAuthenticated: false,
   user: {}
