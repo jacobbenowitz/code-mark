@@ -10,18 +10,17 @@ export default class CommentForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-    // give this the thunk action of composeComment ? 
+
   handleSubmit(e) {
     e.preventDefault();
     let { codeSnippet, textbody } = this.state;
-    //  
+
     let comment = {
       codeSnippet: codeSnippet,
       textbody: textbody,
       note: this.props.noteId
     }
-    //  
-     
+
     this.props.composeComment(comment)
       .then(() => (
         this.setState({
@@ -30,32 +29,6 @@ export default class CommentForm extends React.Component {
         })
       ))
   }
-
-  init() {
-    const observe = (element, event, handler) => {
-      element.addEventListener(event, handler, false);
-    };
-
-    var text = document.getElementById('comment-textarea');
-    function resize() {
-      text.style.height = 'auto';
-      text.style.height = text.scrollHeight + 'px';
-    }
-    /* 0-timeout to get the already changed text */
-    function delayedResize() {
-      window.setTimeout(resize, 0);
-    }
-    observe(text, 'change', resize);
-    observe(text, 'cut', delayedResize);
-    observe(text, 'paste', delayedResize);
-    observe(text, 'drop', delayedResize);
-    observe(text, 'keydown', delayedResize);
-
-    text.focus();
-    text.select();
-    resize();
-  }
-
 
   update(type) {
     return e => {
@@ -66,12 +39,31 @@ export default class CommentForm extends React.Component {
   }
 
   render() {
+    const tx = document.getElementsByTagName("textarea");
+    for (let i = 0; i < tx.length; i++) {
+      tx[i].setAttribute("style", "height:" + (tx[i].scrollHeight) + "px;overflow-y:hidden;");
+      tx[i].addEventListener("input", OnInput, false);
+    }
+
+    function OnInput() {
+      this.style.height = "auto";
+      this.style.height = (this.scrollHeight) + "px";
+    }
+
     return (
       <div className='new-comment-container'>
         <form onSubmit={this.handleSubmit} className='comment-form'>
+          <div className='add-code-snippet-wrapper'>
+            <div className="code-snippet-comment">
+              <textarea id='code-snippet-new' className="code code-textarea"
+                // defaultValue={"Code from note "}
+                value={this.state.codeSnippet}
+                onChange={this.update('codeSnippet')}
+              />
+            </div>
+          </div>
           <textarea
             onChange={this.update('textbody')}
-            onFocus={this.init}
             id='comment-textarea'
             className='comment-body-input'
             placeholder='Have a question about this CodeMark? Let the author know!'

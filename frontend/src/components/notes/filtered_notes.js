@@ -1,35 +1,41 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { orderUserNotes } from '../../util/selectors';
+import { filterNotesByTag, orderUserNotes } from '../../util/selectors';
 import CodeNoteItem from './code_note_item';
 
-class UserNotes extends React.Component {
+class FilteredNotes extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userNotes: []
+      notes: [],
+      filter: undefined
     };
   }
 
   componentWillMount() {
+    // this.props.userNotes ? this.render() :
     this.props.fetchUserNotes(this.props.currentUser.id)
   };
 
   componentWillReceiveProps(nextState) {
-    if (nextState.userNotes) {
+    if (nextState.userNotes && nextState.filter !== this.state.filter) {
+      debugger
+      let filtered = filterNotesByTag(nextState.filter, nextState.userNotes);
       this.setState({
-        userNotes: orderUserNotes(nextState.userNotes)
+        notes: orderUserNotes(filtered),
+        filter: nextState.filter
       })
     }
   }
 
 
   render() {
-    if (this.state.userNotes.length === 0) {
-      return (<span>No notes found :(</span>)
+    debugger
+    if (this.state.notes.length === 0) {
+      return (<span>No notes found</span>)
     } else {
       return (
-        this.state.userNotes.map((note) => (
+        this.state.notes.map(note =>
           <CodeNoteItem key={note._id}
             title={note.title}
             tags={note.tags}
@@ -37,10 +43,10 @@ class UserNotes extends React.Component {
             codeBody={note.codebody}
             id={note._id}
           />
-        ))
+        )
       )
     }
   }
 }
 
-export default withRouter(UserNotes);
+export default withRouter(FilteredNotes);

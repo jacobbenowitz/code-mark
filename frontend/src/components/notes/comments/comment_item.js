@@ -25,8 +25,8 @@ const CommentItem = props => {
         </div>
       </div>
       <div className="code-snippet-comment">
-        <textarea className="code code-textarea" rows={4}
-          defaultValue={"Code from note = highlighted => {" + "\n" + "  by user" + "\n" + "}"} />
+        <textarea className="code code-textarea"
+          defaultValue={"Code from note "} />
       </div>
       <div className="comment-body-wrapper">
         <span className="comment-body">{props.comment.textbody}</span>

@@ -35,6 +35,25 @@ button:focus, .signup:focus, .login:focus, .hide-button:focus {
   background: #0D4649;
 }
 
+.view-link {
+  padding: 0.4rem;
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.show-link-wrapper {
+  align-self: flex-end;
+}
+
+.view-link:hover {
+  padding: 0.4rem;
+  background: #2D2D2D;
+  /* bg-shadow-lg */
+  box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+}
+
 .hide-button {
   position: absolute;
   border: 1px solid transparent;

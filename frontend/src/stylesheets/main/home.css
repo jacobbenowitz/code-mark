@@ -87,6 +87,7 @@
   height: 48px;
   background: #202124;
   transition: background 500ms ease-in-out;
+  cursor: pointer;
 }
 
 .nav-item-link img {
@@ -97,6 +98,7 @@
 
 .nav-item-link:hover {
   background: #454545;
+  color: #37F3FF;
   transition: background 500ms ease-in-out;
 }
 

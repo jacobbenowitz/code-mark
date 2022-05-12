@@ -1,14 +1,13 @@
 import React from 'react';
 import NewNoteContainer from '../code_editor/new_note_container';
-import UserNotesContainer from '../notes/user_notes_container';
 import RecentNotesContainer from '../notes/recent_notes_container';
 import { NavLink } from 'react-router-dom';
 import NavTagItem from '../tags/nav_tag_item';
+import FilteredNotesContainer from '../notes/filtered_notes_container';
 
-export default class Home extends React.Component {
+export default class HomeFiltered extends React.Component {
 
   render() {
-    
     return (
       <div className='main-sidebar'>
         <div className='nav-sidecar'>
@@ -34,10 +33,7 @@ export default class Home extends React.Component {
               </ul>
               <h5>Tags</h5>
               <ul className='nav-list'>
-                {
-                  this.props.tags?.map((tag, i) =>
-                    <NavTagItem key={`tag-${i}`} tag={tag} />)
-                }
+                {this.props.tags?.map(tag => <NavTagItem tag={tag} />)}
               </ul>
             </div>
           </div>
@@ -47,18 +43,11 @@ export default class Home extends React.Component {
           <NewNoteContainer />
           <div className='notes-section'>
             <div className='section-title'>
-              <h5>Recent Notes</h5>
+              <h1>My notes</h1>
+              <h5>Filtered by: {this.props.filter}</h5>
             </div>
             <div className='note-list-container'>
-              <RecentNotesContainer />
-            </div>
-          </div>
-          <div className='notes-section'>
-            <div className='section-title'>
-              <h5>My Notes</h5>
-            </div>
-            <div className='note-list-container'>
-              <UserNotesContainer />
+              <FilteredNotesContainer />
             </div>
           </div>
         </div>

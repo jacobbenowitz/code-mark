@@ -7,10 +7,12 @@ import {
 import {
   RECEIVE_USER_NOTES
 } from '../actions/note_actions';
+import { selectNoteTags } from "../util/selectors";
 
 const initialState = {
   isAuthenticated: false,
-  user: {}
+  user: {},
+  tags: []
 };
 
 const SessionReducer = (state = initialState, action) => {
@@ -31,6 +33,10 @@ const SessionReducer = (state = initialState, action) => {
         ...state,
         isSignedIn: true
       }
+    case RECEIVE_USER_NOTES:
+      let nextState = Object.assign({}, state)
+      nextState.tags = selectNoteTags(action.notes.data)
+      return nextState;
     default:
       return state;
   }
