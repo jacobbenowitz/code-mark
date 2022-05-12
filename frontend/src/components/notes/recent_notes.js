@@ -1,5 +1,4 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
 import CodeNoteItem from './code_note_item';
 
 class RecentNotes extends React.Component {
@@ -31,4 +30,4 @@ class RecentNotes extends React.Component {
   }
 }
 
-export default withRouter(RecentNotes);
+export default RecentNotes;

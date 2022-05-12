@@ -22,10 +22,21 @@
 }
 
 .code-note-tags {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 0.4rem;
+  position: static;
+  width: 100%;
+  height: auto;
+  left: 4px;
+  top: 4px;
+  overflow-x: scroll;
   -ms-overflow-style: none; 
   scrollbar-width: none;
   gap: 0.4rem;
-  padding: 0.2rem;
+  font-size: 14px;
 }
 
 .code-note-tags::-webkit-scrollbar,

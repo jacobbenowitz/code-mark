@@ -1,8 +1,8 @@
 function orderByDate(a, b) {
-  if (a.updatedAt > b.updatedAt) {
+  if (a?.updatedAt > b?.updatedAt) {
     return -1;
   }
-  if (a.updatedAt < b.updatedAt) {
+  if (a?.updatedAt < b?.updatedAt) {
     return 1;
   }
   return 0;
@@ -13,6 +13,7 @@ export const orderUserNotes = (notes) => {
 }
 
 export const orderNoteComments = (comments) => {
+  //debugger
   return comments.sort(orderByDate);
 }
 
@@ -25,11 +26,11 @@ export const selectNoteComments = (comments, noteId) => {
 
 export const selectNoteTags = notes => {
   const tags = notes.map(note => note.tags)
-  debugger
+  //debugger
   return tags.flat();
 }
 
 export const filterNotesByTag = (tag, notes) => {
-  debugger
+  //debugger
   return notes.filter(note => note.tags.includes(tag))
 }

@@ -1,8 +1,16 @@
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import NoteShow from "./note_show";
-import { fetchNote, removeNote, updateNote } from "../../actions/note_actions";
-import { fetchNoteComments } from "../../actions/comment_actions";
-import { removeComment } from "../../actions/comment_actions";
+import {
+  fetchNote,
+  removeNote, updateNote
+} from "../../actions/note_actions";
+import {
+  fetchNoteComments,
+  removeComment,
+  composeComment,
+  updateComment,
+} from "../../actions/comment_actions";
 
 const mapStateToProps = (state, { match }) => {
   return {
@@ -10,8 +18,7 @@ const mapStateToProps = (state, { match }) => {
     note: state.notes.all[match.params.noteId],
     currentUser: state.session.user,
     comments: state.comments.note,
-    new: state.comments.new
-   
+    newComment: state.comments.new
   }
 }
 
@@ -21,7 +28,8 @@ const mapDispatchToProps = dispatch => {
     removeNote: noteId => dispatch(removeNote(noteId)),
     updateNote: (noteData, noteId) => dispatch(updateNote(noteData, noteId)),
     fetchNoteComments: (noteId) => dispatch(fetchNoteComments(noteId)),
-    removeComment: (commentId) => dispatch(removeComment(commentId))
+    removeComment: (commentId) => dispatch(removeComment(commentId)),
+    composeComment: (data) => dispatch(composeComment(data)),        updateComment: (data, commentId) => dispatch(updateComment(data, commentId))
   }
 }
 
