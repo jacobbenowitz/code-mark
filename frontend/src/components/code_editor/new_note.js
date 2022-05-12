@@ -116,10 +116,10 @@ export default class NewNote extends React.Component {
     })
   }
 
-  handleResourcesSubmit(e) {
-    e.preventDefault();
-    this.props.updateNote(noteData, noteId)
-  }
+  // handleResourcesSubmit(e) {
+  //   e.preventDefault();
+  //   this.props.updateNote(noteData, noteId)
+  // }
 
   render() {
     return (
