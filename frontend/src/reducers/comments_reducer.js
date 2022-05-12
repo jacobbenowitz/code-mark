@@ -45,7 +45,7 @@ const commentsReducer = (prevState = initialState, action) => {
             });
             return nextState;
         case RECEIVE_NOTE_COMMENTS:
-            // debugger
+            //  
             nextState.note = action.comments;
             return nextState;
         default:

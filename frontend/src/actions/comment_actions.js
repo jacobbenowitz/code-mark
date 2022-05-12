@@ -64,7 +64,7 @@ export const fetchComments = () => dispatch => (
 );
 
 export const fetchNoteComments = noteId => dispatch => {
-    debugger
+     
     getNoteComments(noteId)
         .then(comments => dispatch(receiveNoteComments(comments.data)))
         .catch(err => dispatch(receiveCommentErrors(err)))

@@ -3,7 +3,8 @@ import CodeEditorReadOnly from '../code_editor/code_editor_readonly';
 import NoteShowEditorLoader from '../code_editor/code_show_editor_loader';
 import EditNote from '../code_editor/edit_note';
 import CommentFormContainer from '../notes/comments/comment_form_container';
-import { selectNoteComments } from "../../util/selectors";
+// import { selectNoteComments } from "../../util/selectors";
+import { orderNoteComments } from "../../util/selectors";
 import CommentItem from '../notes/comments/comment_item';
 import Tags from '../tags/tags';
 
@@ -12,7 +13,8 @@ export default class NoteShow extends React.Component {
     super(props);
     this.state = {
       note: undefined,
-      comments: []
+      comments: [],
+      new: undefined
     }
     this.deleteNote = this.deleteNote.bind(this);
   }
@@ -23,10 +25,11 @@ export default class NoteShow extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    debugger
+     
     this.setState({
       note: nextProps.note,
-      comments: nextProps.comments
+      comments: orderNoteComments(nextProps.comments),
+      new: nextProps.new
     })
   }
 
@@ -56,7 +59,7 @@ export default class NoteShow extends React.Component {
 
   render() {
     const { note, currentUser, updateNote, noteId } = this.props;
-    debugger
+     
     return note ? (
       <>
         <div id='confirm-modal-container' className='modal-off' >
@@ -151,7 +154,10 @@ export default class NoteShow extends React.Component {
               <h4>Comments</h4>
             </div>
             <div className='comments-list'>
+              {/* added a new comment item to refresh state */}
               <CommentFormContainer />
+              {this.state.new ? <CommentItem key={this.state.new._id} comment={this.state.new} /> : 
+                "" }
               {this.state.comments.map(comment => {
                 return <CommentItem
                   key={comment._id} comment={comment} />

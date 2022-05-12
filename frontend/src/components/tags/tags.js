@@ -46,7 +46,7 @@ export default class Tags extends React.Component {
       resources: resources,
       tags: newTags,
     }
-
+    
     this.props.updateNote(nextNote, _id)
       .then(() => (
         this.setState({
@@ -69,6 +69,7 @@ export default class Tags extends React.Component {
   }
 
   render() {
+
     return (
       <div className='note-tags-list'>
         <div className="tag-item-wrapper tag-icon-new"
