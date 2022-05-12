@@ -53,7 +53,7 @@ const ignore = ['(',')','{','}',';'];
 export function getKeywords(codebody){
     // let words = codebody.replace(/[\W_]+/g," ");
     let words = codebody.split(" ");
-    words.filter(word => !ignore.includes(word));
+    words = words.filter(word => !ignore.includes(word));
     words = [...new Set(words)];
     return words.filter(word => word.length > 1);
 }
