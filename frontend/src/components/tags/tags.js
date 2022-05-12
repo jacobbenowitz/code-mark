@@ -47,7 +47,7 @@ export default class Tags extends React.Component {
       tags: newTags,
     }
 
-    debugger
+     
     this.props.updateNote(nextNote, _id)
       .then(() => (
         this.setState({
@@ -74,7 +74,7 @@ export default class Tags extends React.Component {
     // const tags = this.state.tags.map(tag => {
     //   <TagItem title={tag.title} />
     // })
-    // debugger
+    //  
     return (
       <div className='note-tags-list'>
         <div className="tag-item-wrapper tag-icon-new"

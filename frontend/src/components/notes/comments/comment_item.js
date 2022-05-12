@@ -1,7 +1,7 @@
 import React from "react";
 
 const CommentItem = props => {
-  debugger
+   
   return props.comment ? (
     <div className="comment-wrapper">
       <div className="user-info-wrapper">

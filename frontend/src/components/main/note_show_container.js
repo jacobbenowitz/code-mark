@@ -8,7 +8,8 @@ const mapStateToProps = (state, { match }) => {
     noteId: match.params.noteId,
     note: state.notes.all[match.params.noteId],
     currentUser: state.session.user,
-    comments: state.comments.note
+    comments: state.comments.note,
+    new: state.comments.new
   }
 }
 
