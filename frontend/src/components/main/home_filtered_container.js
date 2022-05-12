@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom';
 import HomeFiltered from "./home_filtered";
+import { fetchUserNotes } from "../../actions/note_actions";
 
 const mapStateToProps = (state, { match }) => {
   return {
