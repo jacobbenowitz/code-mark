@@ -9,10 +9,10 @@ const bcrypt = require('bcryptjs');
 // const {getResources} = require('./frontend/src/actions/webscrap_actions');
 // const {getStuff} = require('./frontend/src/util/webscrap_util');
 
-// mongoose
-//     .connect(db, {useNewUrlParser: true})
-//     .then(() => console.log('Connected to MongoDB successfully'))
-//     .catch(err => console.log(err));
+mongoose
+    .connect(db, {useNewUrlParser: true})
+    .then(() => console.log('Connected to MongoDB successfully'))
+    .catch(err => console.log(err));
 
 function makePasswordHash(password){
     const salt = bcrypt.genSaltSync(10)
@@ -26,76 +26,76 @@ function makePasswordHash(password){
 
 let seedUsers = [
     {
-        username: 'demo',
-        email: 'demo@email.com',
-        password: makePasswordHash('password'),
+        username: "demo",
+        email: "demo@email.com",
+        password: makePasswordHash("password"),
         notes: [],
         comments: []
     },
     {
-        username: 'demo1',
-        email: 'demo1@email.com',
-        password: makePasswordHash('password'),
+        username: "Jacob",
+        email: "jacob@email.com",
+        password: makePasswordHash("password"),
         notes: [],
         comments: []
     }
-    // ,
-    // {
-    //     username: 'demo2',
-    //     email: 'demo2@email.com',
-    //     password: makePasswordHash('password'),
-    //     notes: [],
-    //     comments: []
-    // },
-    // {
-    //     username: 'demo3',
-    //     email: 'demo3@email.com',
-    //     password: makePasswordHash('password'),
-    //     notes: [],
-    //     comments: []
-    // },
-    // {
-    //     username: 'demo4',
-    //     email: 'demo4@email.com',
-    //     password: makePasswordHash('password'),
-    //     notes: [],
-    //     comments: []
-    // },
-    // {
-    //     username: 'demo5',
-    //     email: 'demo5@email.com',
-    //     password: makePasswordHash('password'),
-    //     notes: [],
-    //     comments: []
-    // },
-    // {
-    //     username: 'demo6',
-    //     email: 'demo6@email.com',
-    //     password: makePasswordHash('password'),
-    //     notes: [],
-    //     comments: []
-    // },
-    // {
-    //     username: 'demo7',
-    //     email: 'demo7@email.com',
-    //     password: makePasswordHash('password'),
-    //     notes: [],
-    //     comments: []
-    // },
-    // {
-    //     username: 'demo8',
-    //     email: 'demo8@email.com',
-    //     password: makePasswordHash('password'),
-    //     notes: [],
-    //     comments: []
-    // },
-    // {
-    //     username: 'demo9',
-    //     email: 'demo9@email.com',
-    //     password: makePasswordHash('password'),
-    //     notes: [],
-    //     comments: []
-    // }
+    ,
+    {
+        username: "Chris",
+        email: "chris@email.com",
+        password: makePasswordHash("password"),
+        notes: [],
+        comments: []
+    },
+    {
+        username: "Johnny",
+        email: "johnny@email.com",
+        password: makePasswordHash("password"),
+        notes: [],
+        comments: []
+    },
+    {
+        username: "Ghost of Jim",
+        email: "ghostofjim@email.com",
+        password: makePasswordHash("password"),
+        notes: [],
+        comments: []
+    },
+    {
+        username: "Jim's Return",
+        email: "returnjim@email.com",
+        password: makePasswordHash("password"),
+        notes: [],
+        comments: []
+    },
+    {
+        username: "Jim's Revenge",
+        email: "jimrevenge@email.com",
+        password: makePasswordHash("password"),
+        notes: [],
+        comments: []
+    },
+    {
+        username: "Jim's Toe",
+        email: "jimtoe@email.com",
+        password: makePasswordHash("password"),
+        notes: [],
+        comments: []
+    },
+    {
+        username: "Amin",
+        email: "amin@email.com",
+        password: makePasswordHash("password"),
+        notes: [],
+        comments: []
+    },
+    {
+        username: "Kyle",
+        email: "kyle@email.com",
+        password: makePasswordHash("password"),
+        notes: [],
+        comments: []
+    }
 ]
 
 // let seedNotes = [
@@ -291,11 +291,12 @@ const connectToMongo = async () => {
 
 
 const seedDB = async () => {
-    await connectToMongo();
-    // await User.deleteMany();
-    // await Note.deleteMany();
-    // await Comment.deleteMany();
-    await seed(seedUsers,seedNotes);
+    // await connectToMongo();
+    await User.deleteMany();
+    await Note.deleteMany();
+    await Comment.deleteMany();
+    await User.insertMany(seedUsers);
+    // await seed(seedUsers,seedNotes);
 };
 
 seedDB().then(() => {
