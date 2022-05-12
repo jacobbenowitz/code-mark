@@ -11,6 +11,7 @@ import {
 const initialState = {
     all: [],
     user: [],
+    note: [],
     new: undefined
 };
 
@@ -19,35 +20,33 @@ const commentsReducer = (prevState = initialState, action) => {
     let nextState = Object.assign({}, prevState)
     switch (action.type) {
         case RECEIVE_NEW_COMMENT:
-            nextState.new = action.comment.data;
+            nextState.new = action.comment;
             return nextState;
         case RECEIVE_USER_COMMENTS:
-            nextState.user = Object.values(action.comments.data)
+            nextState.user = Object.values(action.comments)
             return nextState;
         case RECEIVE_COMMENTS:
-            nextState.all = action.comments.data;
+            nextState.all = action.comments
             return nextState;
         case RECEIVE_COMMENT:
-            nextState.all.push(action.comment.data); 
+            nextState.all.push(action.comment);
             return nextState;
         case RECEIVE_DELETE_COMMENT:
-            return nextState.all.filter(comment => 
-                comment._id !== action.commentId.data
-                )        
+            return nextState.all.filter(comment =>
+                comment._id !== action.commentId
+            )
         case RECEIVE_UPDATED_COMMENT:
             //  
             nextState.all.map(comment => {
-                if (comment._id === action.comment.data._id) {
-                    return action.comment.data
+                if (comment._id === action.comment._id) {
+                    return action.comment
                 }
                 else return comment
             });
             return nextState;
         case RECEIVE_NOTE_COMMENTS:
             // debugger
-            action.comments.data.forEach(comment => {
-                nextState.all.push(comment)
-            });
+            nextState.note = action.comments;
             return nextState;
         default:
             return prevState;

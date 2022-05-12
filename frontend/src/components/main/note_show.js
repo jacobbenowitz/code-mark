@@ -20,14 +20,13 @@ export default class NoteShow extends React.Component {
   componentWillMount() {
     this.props.fetchNote(this.props.noteId);
     this.props.fetchNoteComments(this.props.noteId);
-    debugger
   }
 
   componentWillReceiveProps(nextProps) {
     debugger
     this.setState({
       note: nextProps.note,
-      comments: selectNoteComments(nextProps.allComments, nextProps.noteId)
+      comments: nextProps.comments
     })
   }
 
@@ -57,7 +56,7 @@ export default class NoteShow extends React.Component {
 
   render() {
     const { note, currentUser, updateNote, noteId } = this.props;
-
+    debugger
     return note ? (
       <>
         <div id='confirm-modal-container' className='modal-off' >
