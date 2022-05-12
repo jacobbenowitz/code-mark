@@ -1,4 +1,4 @@
-import { getStuff } from "../util/webscrap_util";
+import { getStuff, getKeywords } from "../util/webscrap_util";
 
 export const RECEIVE_NOTE_RESOURCES = 'RECEIVE_NOTE_RESOURCES';
 
@@ -7,11 +7,15 @@ export const receiveResources = resources => ({
     resources
 })
 
-export const getResources = words => dispatch => {
-    return getStuff(words)
+export const getResources = codebody => dispatch => {
+    var keywords = getKeywords(codebody);
+    return getStuff(keywords,codebody)
         .then(res => {
             const links = res.map(obj => obj.link)
             const unique_links = res.filter(({link},idx) => !links.includes(link, idx+1))
             dispatch(receiveResources(unique_links))
         })
 }
+
+// let code = "var x = myFunction(4, 3); document.getElementById('demo').innerHTML = x; function myFunction(a, b) { return a * b;}"
+// console.log(getKeywords(code));

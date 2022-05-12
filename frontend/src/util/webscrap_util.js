@@ -1,9 +1,15 @@
 import { getGoogleAdvice, getAdvice } from './webscraping.js';
+const hljs = require('highlight.js');
+// import hljs  from 'highlight.js';
 
-function getResources (keywords) {
+function getResources (keywords,codebody) {
+    const languages = ['Ruby','C','JavaScript','CSS','HTML'];
+    const code_test = hljs.highlightAuto(codebody,languages);
     // var keywords = code.split(' ');
+
     // keywords = [...new Set(keywords)];
     var resources = [];
+    keywords.map(keyword => code_test.language + ' ' + keyword);
     keywords.forEach(keyword => {
         // resources.push(keyword);
         resources.push(getGoogleAdvice(keyword)
@@ -36,8 +42,8 @@ function getNightmareResources (code) {
     return resources;
 }
 
-export async function getStuff(words){
-    let response = await Promise.all(getResources(words));
+export async function getStuff(keywords,codebody){
+    let response = await Promise.all(getResources(keywords,codebody));
     // console.log(response);
     return response.flat().filter(ele => ele !== undefined);
 }
@@ -48,14 +54,27 @@ export async function getNightmareStuff(words){
     return data;
 }
 
-const ignore = ['(',')','{','}',';'];
+// const ignore = ['(',')','{','}',';'];
 
 export function getKeywords(codebody){
+    const comment_markers = {'JavaScript':/(\/\/.*\n)/g,'HTML':/(<!--.*-->)/g,'CSS':/(\/\*.*\*\/)/g,'C':/(\/\/.*\n)/g,'Ruby':/(#.*\n)/g};
+    const comment_replace = {'JavaScript': '\n','HTML': '', 'CSS':'','C':'\n','Ruby':'\n'};
+    const languages = ['Ruby','C','JavaScript','CSS','HTML'];
     // let words = codebody.replace(/[\W_]+/g," ");
-    let words = codebody.split(" ");
-    words = words.filter(word => !ignore.includes(word));
+    const language = hljs.highlightAuto(codebody,languages).language;
+    let lines = codebody;
+    if(Object.keys(comment_markers).includes(language)){
+        console.log('deleted comments');
+        // lines.map(line => line.slice(0,line.indexOf(comment_markers[language])));
+        lines = lines.replaceAll(comment_markers[language],comment_replace[language]);
+    }
+    lines = lines.split('\n')
+    let words = lines.join(" ").replaceAll("\"","'");
+    words = words.split(" ");
     words = [...new Set(words)];
-    return words.filter(word => word.length > 1);
+    // words = words.filter(word => !ignore.includes(word));
+    return words = words.filter(word => word.length > 1);
+    // return words.map(word => code_test.language + ' ' + word);
 }
 
 // let words = 'ruby java onclick() onchange() componentdidmount()';
@@ -68,3 +87,7 @@ export function getKeywords(codebody){
 // // console.log(res1);
 
 // console.log(res2.filter(ele => ele !== undefined));
+// let code = "var x = myFunction(4,3); document.getElementById('demo').innerHTML = x; //asdfasdfsd \n function myFunction(a,b) { return a*b;}"
+// let code = "body { \n background-color: lightblue; \n } \n h1 { \n color: white; \n text-align: center; \n} \n p  \n font-family: verdana; \n font-size: 20px; \n}"
+// let code = "#include <stdio.h> \nint main() {\nprintf(\"Hello World!\"'); \n return 0; \n}"
+// console.log(getKeywords(code));
