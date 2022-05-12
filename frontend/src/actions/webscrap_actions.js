@@ -1,4 +1,5 @@
 import { getStuff, getKeywords } from "../util/webscrap_util";
+// const {getStuff, getKeywords} = require('../util/webscrap_util');
 
 export const RECEIVE_NOTE_RESOURCES = 'RECEIVE_NOTE_RESOURCES';
 
