@@ -12,6 +12,10 @@ export const orderUserNotes = (notes) => {
   return notes.sort(orderByDate);
 }
 
+export const orderNoteComments = (comments) => {
+  return comments.sort(orderByDate);
+}
+
 export const selectNoteComments = (comments, noteId) => {
 
   return comments?.filter(comment => {
