@@ -32,6 +32,7 @@ class UserNotes extends React.Component {
         this.state.userNotes.map((note) => (
           <CodeNoteItem key={note._id}
             title={note.title}
+            tags={note.tags}
             textDetails={note.textdetails}
             codeBody={note.codebody}
             id={note._id}

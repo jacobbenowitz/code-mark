@@ -35,14 +35,15 @@ class FilteredNotes extends React.Component {
       return (<span>No notes found</span>)
     } else {
       return (
-        this.state.notes.map((note) => (
+        this.state.notes.map(note =>
           <CodeNoteItem key={note._id}
             title={note.title}
+            tags={note.tags}
             textDetails={note.textdetails}
             codeBody={note.codebody}
             id={note._id}
           />
-        ))
+        )
       )
     }
   }
