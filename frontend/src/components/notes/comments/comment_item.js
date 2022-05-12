@@ -2,33 +2,20 @@ import React from "react";
 
 const CommentItem = props => {
    
-  // add thunk action to note container?
 
   // Only show comment delete button if the note's user is the current user 
   // session.user.id === notes.all[0].id
 
 
-  // deleteComment() {
-  //   this.props.removeComment(this.props.noteId).then(() => {
-  //     this.props.history.push('/home')
-  //   })
+  function toggleDeleteModal() {
+    const deleteModal = document.getElementById('comment-modal-container');
+    if (deleteModal.className === "modal-off") {
+      deleteModal.className = "modal-on";
+    } else {
+      deleteModal.className = "modal-off";
+    }
+  }
 
-  // deleteTag() {
-  //   let newTags = this.props.tags.filter(tag =>
-  //     tag !== this.props.title);
-  //   const { title, codebody, textdetails, resources, _id } = this.props.note;
-
-  //   let nextNote = {
-  //     title: title,
-  //     codebody: codebody,
-  //     textdetails: textdetails,
-  //     resources: resources,
-  //     tags: newTags
-  //   }
-  //  
-  //   this.props.updateNote(nextNote, _id)
-  // }
-  // }
 
   return props.comment ? (
     <div className="comment-wrapper">
@@ -52,14 +39,41 @@ const CommentItem = props => {
       <div className="comment-body-wrapper">
         <span className="comment-body">{props.comment.textbody}</span>
       </div>
-      <div className='delete-note icon-button'
-        onClick={() => this.deleteComment()}>
-        <i className="fa-solid fa-trash fa-lg"></i>
-        <span>
-          Delete Comment
-        </span>
+
+      {/* modal div */}
+      <div id='comment-modal-container' className='modal-off' >
+        <div className='modal-wrapper'>
+          <div className='cancel-modal'>
+            <span>Are you sure you want to delete this comment?</span>
+            <div className='modal-buttons'>
+              <div className='delete-note icon-button'
+                onClick={() => props.removeComment(props.id)}>
+                <i className="fa-solid fa-trash fa-lg"></i>
+                <span>
+                  Delete
+                </span>
+              </div>
+              <div className='cancel icon-button'
+                onClick={() => toggleDeleteModal()}>
+                <i className="fa-solid fa-ban fa-lg"></i>
+                <span>
+                  Cancel
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+
+    {/* toggle modal */}
+      <div className='delete-note icon-button'
+              onClick={() => toggleDeleteModal()}>
+              <i className="fa-solid fa-trash fa-lg"></i>
+              <span>
+                Delete
+              </span>
+            </div>
+      </div>
   ) : (<h4>Loading Comments</h4>)
 }
 
