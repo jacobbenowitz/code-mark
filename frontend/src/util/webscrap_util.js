@@ -3,14 +3,19 @@ import { getGoogleAdvice} from './webscraping.js';
 const hljs = require('highlight.js');
 // import hljs  from 'highlight.js';
 
-function getResources (keywords,codebody) {
+export function getLanguage(codebody){
     const languages = ['Ruby','C','JavaScript','CSS','HTML'];
     const code_test = hljs.highlightAuto(codebody,languages);
+    return code_test.language;
+}
+
+function getResources (keywords,codebody) {
+    const language = getLanguage(codebody);
     // var keywords = code.split(' ');
 
     // keywords = [...new Set(keywords)];
     var resources = [];
-    keywords.map(keyword => code_test.language + ' ' + keyword);
+    keywords.map(keyword => language + ' ' + keyword);
     keywords.forEach(keyword => {
         // resources.push(keyword);
         resources.push(getGoogleAdvice(keyword)
