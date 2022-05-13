@@ -74,6 +74,7 @@ export default class NewNote extends React.Component {
   toggleForm() {
     const fullForm = document.getElementById('new-note-full');
     const miniForm = document.getElementById('new-note-mini');
+    const titleCode = document.getElementById('title-code');
     if (fullForm.style.display == 'none') {
       fullForm.style.display = 'flex';
       miniForm.style.display = 'none';
@@ -82,6 +83,7 @@ export default class NewNote extends React.Component {
       fullForm.style.display = 'none';
       miniForm.style.display = 'flex';
     }
+    titleCode.focus();
   }
 
   // credit https://stackoverflow.com/questions/454202/creating-a-textarea-with-auto-resize
