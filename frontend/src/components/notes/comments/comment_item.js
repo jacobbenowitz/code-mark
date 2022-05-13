@@ -47,21 +47,20 @@ const CommentItem = props => {
         <div className="user-info-wrapper">
           <div className="avatar-wrapper">
             <div className="avatar-container-sm">
-              {/* match comment user to user to get username*/}
-              {/* {props.comment.username} */}
-              <span>{props.user.username.slice(0,2).toUpperCase()}</span>
+              <span>{props.user.username?.slice(0, 2).toUpperCase()}</span>
             </div>
           </div>
           <div className="user-details">
-            <span className="username-comment">{props.user.username}</span>
+            <span className="username-comment">{props.user?.username}</span>
             <span className="comment-time">{props.comment.created_at}</span>
           </div>
         </div>
 
         <div className="code-snippet-comment">
-          <textarea className="code code-textarea">
-            {props.comment.codeSnippet}
-          </textarea>
+          <textarea className="code code-textarea"
+            value={props.comment.codeSnippet}
+          />
+
         </div>
         <div className="comment-body-wrapper">
           <span className="comment-body">

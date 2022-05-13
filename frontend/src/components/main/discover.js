@@ -6,7 +6,7 @@ import AllNotes from './all_notes';
 export default class Discover extends React.Component {
 
   componentWillMount() {
-    this.props.fetchNotes()
+    this.props.fetchNotes();
   };
 
   render() {
@@ -47,9 +47,9 @@ export default class Discover extends React.Component {
               <h1>Discover Notes</h1>
             </div>
             <div className='note-list-container'>
-             {this.props.allNotes.length === 0  ?(
-               <span>No notes found</span>
-             ) :
+            {this.props.allNotes.length === 0  ?(
+                <span>No notes found</span>
+            ) :
                 <AllNotes notes={this.props.allNotes }/>
               }
 

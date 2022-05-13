@@ -17,15 +17,18 @@ class RecentNotes extends React.Component {
 
   render() {
     return this.state.note ? (
-      <CodeNoteItem key={this.state.note._id}
-        id={this.state.note._id}
-        tags={this.state.note.tags}
-        title={this.state.note.title}
-        textDetails={this.state.note.textdetails}
-        codeBody={this.state.note.codebody}
-      />
+      <div className='note-list-container'>
+        <CodeNoteItem key={this.state.note._id}
+          id={this.state.note._id}
+          tags={this.state.note.tags}
+          title={this.state.note.title}
+          textDetails={this.state.note.textdetails}
+          codeBody={this.state.note.codebody}
+          createdAt={note.createdAt}
+        />
+      </div>
     ) : (
-      <span>No recent notes</span>
+      <span className='none-found'>No recent notes</span>
     )
   }
 }

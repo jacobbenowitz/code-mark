@@ -8,7 +8,7 @@ import NavTagItem from '../tags/nav_tag_item';
 export default class Home extends React.Component {
 
   render() {
-    
+
     return (
       <div className='main-sidebar'>
         <div className='nav-sidecar'>
@@ -49,13 +49,11 @@ export default class Home extends React.Component {
             <div className='section-title'>
               <h5>Recent Notes</h5>
             </div>
-            <div className='note-list-container'>
-              <RecentNotesContainer />
-            </div>
+            <RecentNotesContainer />
           </div>
           <div className='notes-section'>
             <div className='section-title'>
-              <h5>My Notes</h5>
+              <h3>My Notes</h3>
             </div>
             <div className='note-list-container'>
               <UserNotesContainer />

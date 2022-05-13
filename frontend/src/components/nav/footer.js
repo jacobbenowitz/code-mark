@@ -22,10 +22,10 @@ const NavFooter = () => (
                     <a href="https://github.com/jacobbenowitz" target="_blank" rel="noreferrer">
                         Jacob Benowitz
                     </a>
-                    <a href="https://github.com/jacobbenowitz" target="_blank" rel="noreferrer">
+                    <a href="https://github.com/MIFUNEKINSKi" target="_blank" rel="noreferrer">
                         Christopher Moore
                     </a>
-                    <a href="https://github.com/jacobbenowitz" target="_blank" rel="noreferrer">
+                    <a href="https://github.com/rmei6" target="_blank" rel="noreferrer">
                         Johnny Mei
                     </a>
                 </div>

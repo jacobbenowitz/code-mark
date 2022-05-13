@@ -82,6 +82,17 @@ footer {
 #navFooter {
   display: grid;
   grid-template-rows: auto auto;
+  margin-top: 4rem;
+}
+
+.nav-col-01 {
+  margin-left: 2rem;
+}
+.nav-col-02 {
+  margin-left: 2rem;
+}
+.nav-col-03 {
+  margin-left: 2rem;
 }
 
 #footer-top {

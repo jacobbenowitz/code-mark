@@ -40,6 +40,7 @@ button:focus, .signup:focus, .login:focus, .hide-button:focus {
   display: flex;
   gap: 0.4rem;
   align-items: center;
+  background: none;
 }
 
 .show-link-wrapper {
@@ -52,6 +53,7 @@ button:focus, .signup:focus, .login:focus, .hide-button:focus {
   /* bg-shadow-lg */
   box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.12);
   border-radius: 4px;
+  background: none;
 }
 
 .hide-button {

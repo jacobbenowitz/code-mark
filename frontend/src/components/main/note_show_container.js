@@ -32,7 +32,8 @@ const mapDispatchToProps = dispatch => {
     fetchNoteComments: (noteId) => dispatch(fetchNoteComments(noteId)),
     removeComment: (commentId) => dispatch(removeComment(commentId)),
     composeComment: (data) => dispatch(composeComment(data)),
-    updateComment: (data, commentId) => dispatch(updateComment(data, commentId)),
+    updateComment: (data, commentId) =>
+      dispatch(updateComment(data, commentId)),
     fetchUsers: () => dispatch(fetchUsers()),
     fetchUser: () => dispatch(fetchUser())
   }

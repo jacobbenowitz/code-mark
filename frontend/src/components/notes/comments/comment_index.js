@@ -19,7 +19,6 @@ export default class CommentIndex extends React.Component {
   render() {
 
     const { comments, note } = this.props;
-    debugger;
     return (
 
       <div className='comments-list'>
@@ -29,13 +28,12 @@ export default class CommentIndex extends React.Component {
         {this.props.comments && this.props.users ? (
           <div>
             {comments.map(comment => {
-              let user = filterUsersByComment(this.props.users , comment);
+              let user = filterUsersByComment(this.props.users, comment);
               return <CommentItem
                 key={comment._id}
                 id={comment._id}
                 comment={comment}
                 user={user}
-                // username={comment.username}
               // deleteThisComment={this.deleteThisComment}
               />
             })}

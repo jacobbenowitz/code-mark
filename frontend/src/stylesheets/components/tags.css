@@ -31,11 +31,10 @@
   justify-content: flex-start;
   align-items: flex-start;
   margin-bottom: 0.4rem;
+  margin-top: 0.4rem;
   position: static;
   width: 100%;
   height: auto;
-  left: 4px;
-  top: 4px;
   overflow-x: scroll;
   -ms-overflow-style: none; 
   scrollbar-width: none;

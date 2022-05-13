@@ -82,14 +82,16 @@ export default class NewNote extends React.Component {
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     let codemirrors = document.getElementsByClassName('codemirror');
-    for (var i = 0; i < codemirrors.length; i++){
+    for (var i = 0; i < codemirrors.length; i++) {
       codemirrors[i].style.display = 'none';
     }
     let chosen = document.getElementsByClassName('javascript');
-    for (var j = 0; j < chosen.length; j++){
+    for (var j = 0; j < chosen.length; j++) {
       chosen[j].style.display = 'block';
+    }
+  }
 
   toggleResourcesModal() {
     const resourcesNoteModal = document.getElementById('resources-note-container');

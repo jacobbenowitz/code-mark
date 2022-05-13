@@ -3,11 +3,11 @@ import { composeComment, updateComment, removeComment } from '../../../actions/c
 import CommentForm from './comment_form';
 import { withRouter } from 'react-router-dom';
 
-const mapStateToProps = (state, { match }) => {
+const mapStateToProps = (state, {match}) => {
     return {
         currentUser: state.session.user,
         noteId: match.params.noteId,
-        newComment: state.comments.new
+        newComment: state.comments.new,
     }
 };
 

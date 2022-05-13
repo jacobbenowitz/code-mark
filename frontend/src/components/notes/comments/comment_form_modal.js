@@ -1,26 +1,23 @@
 import React from 'react';
 import CommentItem from './comment_item';
 
-export default class CommentForm extends React.Component {
+export default class CommentFormModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      codeSnippet: "Add a code snippet",
+      codeSnippet: '',
       textbody: "",
       newComment: undefined
     }
     this.handleSubmit = this.handleSubmit.bind(this);
+
   }
 
   componentWillReceiveProps(nextProps) {
-    debugger
-    nextProps.selectedText ? (
-      this.setState({
-        codeSnippet: nextProps.newComment
-      })) : nextProps.newComment ? (
-        this.setState({
-          newComment: nextProps.newComment
-        })) : undefined
+    // debugger
+    this.setState({
+      codeSnippet: nextProps.selectedText
+    })
   }
 
 
@@ -38,7 +35,7 @@ export default class CommentForm extends React.Component {
       codeSnippet: "",
       textbody: "",
       newComment: comment
-    })
+    }, () => this.props.toggleCommentModal())
   }
 
   update(type) {
@@ -50,47 +47,41 @@ export default class CommentForm extends React.Component {
   }
 
   render() {
-    const tx = document.querySelectorAll("#code-snippet-new");
-    for (let i = 0; i < tx.length; i++) {
-      tx[i].setAttribute("style", "height:" + (tx[i].scrollHeight) + "px;overflow-y:hidden;");
-      tx[i].addEventListener("input", OnInput, false);
-    }
+    // debugger
+    // const tx = document.getElementsByTagName("textarea");
+    // for (let i = 0; i < tx.length; i++) {
+    //   tx[i].setAttribute("style", "height:" + (tx[i].scrollHeight) + "px;overflow-y:hidden;");
+    //   tx[i].addEventListener("input", OnInput, false);
+    // }
 
-    function OnInput() {
-      this.style.height = "auto";
-      this.style.height = (this.scrollHeight) + "px";
-    }
-
+    // function OnInput() {
+    //   this.style.height = "auto";
+    //   this.style.height = (this.scrollHeight) + "px";
+    // }
+    // const codeSnippetField = document.getElementById('code-snippet-new');
+    // codeSnippetField.focus()
     return (
       <>
         <div className='new-comment-container'>
           <form onSubmit={this.handleSubmit} className='comment-form'>
             <div className='add-code-snippet-wrapper'>
               <div className="code-snippet-comment">
-                <textarea id='code-snippet-new' className="code code-textarea"
+                <textarea id='code-snippet-new-modal' className="code"
                   value={this.state.codeSnippet}
-                  // defaultValue={'Code snippet here'}
                   onChange={this.update('codeSnippet')}
-                ></textarea>
+                />
               </div>
             </div>
             <textarea
               onChange={this.update('textbody')}
               id='comment-textarea'
               className='comment-body-input'
-              defaultValue={'Have a question about this CodeMark? Let the author know!'}
+              placeholder='Have a question about this CodeMark? Let the author know!'
             // value={this.state.textbody}
             />
             <button id="comment-submit" type='submit'>Comment</button>
           </form>
         </div>
-        {this.state.newComment ? (
-          <CommentItem
-            key={'new-comment-1'}
-            id={this.state.newComment._id}
-            comment={this.state.newComment}
-          // deleteThisComment={this.deleteThisComment}
-          />) : ''}
       </>
     )
   }

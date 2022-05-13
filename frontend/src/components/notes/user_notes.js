@@ -36,6 +36,7 @@ class UserNotes extends React.Component {
             textDetails={note.textdetails}
             codeBody={note.codebody}
             id={note._id}
+            createdAt={note.createdAt}
           />
         ))
       )

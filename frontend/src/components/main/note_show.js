@@ -3,6 +3,8 @@ import CodeEditorReadOnly from '../code_editor/code_editor_readonly';
 import NoteShowEditorLoader from '../code_editor/code_show_editor_loader';
 import EditNote from '../code_editor/edit_note';
 import CommentFormContainer from '../notes/comments/comment_form_container';
+import CommentForm from '../notes/comments/comment_form';
+import CommentFormModal from '../notes/comments/comment_form_modal';
 // import { selectNoteComments } from "../../util/selectors";
 import { orderNoteComments } from "../../util/selectors";
 import CommentItem from '../notes/comments/comment_item';
@@ -21,9 +23,12 @@ export default class NoteShow extends React.Component {
     this.state = {
       note: undefined,
       comments: [],
+      selectedText: '',
+      commentModal: false
     }
     this.deleteNote = this.deleteNote.bind(this);
     this.deleteThisComment = this.deleteThisComment.bind(this);
+    // this.toggleCommentModal = this.toggleCommentModal.bind(this);
   }
 
   componentWillMount() {
@@ -75,14 +80,30 @@ export default class NoteShow extends React.Component {
     }
   }
 
+  // toggleCommentModal() {
+  //   this.setState({ commentModal: !this.state.commentModal })
+  // }
+  toggleCommentModal() {
+    const commentModal = document.getElementById('comment-modal-container');
+    if (commentModal.className === "modal-off") {
+      commentModal.className = "modal-on"
+    } else {
+      commentModal.className = "modal-off";
+    }
+  }
+
 
   commentOnSelection(selection) {
-    const commentSection = document.getElementById("comments");
-    const newSnippetField = document.getElementById("code-snippet-new")
-    newSnippetField.focus()
-    newSnippetField.value = selection
-
-    commentSection.scrollIntoView({ behavior: 'smooth' })
+    this.setState({
+      commentModal: true,
+      selectedText: selection
+    })
+    // const commentSection = document.getElementById("comments");
+    // const newSnippetField = document.getElementById("code-snippet-new")
+    // newSnippetField.value = selection
+    // newSnippetField.focus()
+    // commentSection.scrollIntoView({ behavior: 'smooth' })
+    // this.toggleCommentModal()
   }
 
 
@@ -90,88 +111,86 @@ export default class NoteShow extends React.Component {
   render() {
 
     const { note, currentUser, updateNote, noteId } = this.props;
-
     const contextMenu = document.getElementById("context-menu");
     const scope = document.querySelector("body");
 
-    const normalizePozition = (mouseX, mouseY) => {
-      // ? compute what is the mouse position relative to the container element (scope)
-      const {
-        left: scopeOffsetX,
-        top: scopeOffsetY,
-      } = scope.getBoundingClientRect();
+    // const normalizePozition = (mouseX, mouseY) => {
+    //   // ? compute what is the mouse position relative to the container element (scope)
+    //   const {
+    //     left: scopeOffsetX,
+    //     top: scopeOffsetY,
+    //   } = scope.getBoundingClientRect();
 
-      const scopeX = mouseX - scopeOffsetX;
-      const scopeY = mouseY - scopeOffsetY;
+    //   const scopeX = mouseX - scopeOffsetX;
+    //   const scopeY = mouseY - scopeOffsetY;
 
-      // ? check if the element will go out of bounds
-      const outOfBoundsOnX =
-        scopeX + contextMenu.clientWidth > scope.clientWidth;
+    //   // ? check if the element will go out of bounds
+    //   const outOfBoundsOnX =
+    //     scopeX + contextMenu.clientWidth > scope.clientWidth;
 
-      const outOfBoundsOnY =
-        scopeY + contextMenu.clientHeight > scope.clientHeight;
+    //   const outOfBoundsOnY =
+    //     scopeY + contextMenu.clientHeight > scope.clientHeight;
 
-      let normalizedX = mouseX;
-      let normalizedY = mouseY;
+    //   let normalizedX = mouseX;
+    //   let normalizedY = mouseY;
 
-      // ? normalzie on X
-      if (outOfBoundsOnX) {
-        normalizedX =
-          scopeOffsetX + scope.clientWidth - contextMenu.clientWidth;
-      }
+    //   // ? normalzie on X
+    //   if (outOfBoundsOnX) {
+    //     normalizedX =
+    //       scopeOffsetX + scope.clientWidth - contextMenu.clientWidth;
+    //   }
 
-      // ? normalize on Y
-      if (outOfBoundsOnY) {
-        normalizedY =
-          scopeOffsetY + scope.clientHeight - contextMenu.clientHeight;
-      }
+    //   // ? normalize on Y
+    //   if (outOfBoundsOnY) {
+    //     normalizedY =
+    //       scopeOffsetY + scope.clientHeight - contextMenu.clientHeight;
+    //   }
 
-      return { normalizedX, normalizedY };
-    };
+    //   return { normalizedX, normalizedY };
+    // };
 
     scope.addEventListener("contextmenu", (event) => {
       event.preventDefault();
 
       const { clientX: mouseX, clientY: mouseY } = event;
 
-      const { normalizedX, normalizedY } = normalizePozition(mouseX, mouseY);
 
       contextMenu.classList.remove("visible");
 
-      contextMenu.style.top = `${normalizedY}px`;
-      contextMenu.style.left = `${normalizedX}px`;
+      contextMenu.style.top = `${mouseY}px`;
+      contextMenu.style.left = `${mouseX}px`;
 
       setTimeout(() => {
         contextMenu.classList.add("visible");
       });
     });
 
+    // ? close the menu if the user clicks outside of it
     scope.addEventListener("click", (e) => {
-      // ? close the menu if the user clicks outside of it
-      // if (e.target.offsetParent != contextMenu) {
-      //   contextMenu.classList.remove("visible");
-      // }
+      if (e.target.offsetParent != contextMenu) {
+        contextMenu.classList.remove("visible");
+      }
 
       contextMenu.classList.remove("visible");
     });
 
     // textarea resize
-    const tx = document.getElementsByTagName("textarea");
-    for (let i = 0; i < tx.length; i++) {
-      tx[i].setAttribute("style", "height:" + (tx[i].scrollHeight) + "px;overflow-y:hidden;");
-      tx[i].addEventListener("input", OnInput, false);
-    }
+    // const tx = document.querySelectorAll("textarea ");
+    // for (let i = 0; i < tx.length; i++) {
+    //   tx[i].setAttribute("style", "height:" + (tx[i].scrollHeight) + "px;overflow-y:hidden;");
+    //   tx[i].addEventListener("input", OnInput, false);
+    // }
 
-    function OnInput() {
-      this.style.height = "auto";
-      this.style.height = (this.scrollHeight) + "px";
-    }
+    // function OnInput() {
+    //   this.style.height = "auto";
+    //   this.style.height = (this.scrollHeight) + "px";
+    // }
 
     // listen for selection and update state
     // document.onselectionchange = () => {
-    //   console.log(document.getSelection().toString())
+    //   // console.log(document.getSelection().toString())
     //   let selection = document.getSelection()
-    //   this.setState({ selection: selection.toString() });
+    //   this.setState({ selectedText: selection.toString() });
     // };
 
 
@@ -190,12 +209,29 @@ export default class NoteShow extends React.Component {
             let selection = window.getSelection()
             this.commentOnSelection(window.getSelection().toString())
           }}
-          >Comment 1</div>
+          >Comment on this selection</div>
           {/* <div className="menu-item" onMouseDown={() =>
             this.commentOnSelection(this.state.selection)}
           >Comment 2</div> */}
         </div>
 
+        <div id='comment-modal-container'
+          className={this.state.commentModal ? 'modal-on' : 'modal-off'} >
+          <div className='modal-wrapper'>
+            <div className='comment-modal'>
+              <div className='close-x'
+                onMouseUp={this.toggleCommentModal}>
+                <i className="fa-solid fa-xmark"></i>
+              </div>
+              <CommentFormModal
+                noteId={this.props.noteId}
+                selectedText={this.state.selectedText}
+                composeComment={this.props.composeComment}
+                toggleCommentModal={this.toggleCommentModal}
+              />
+            </div>
+          </div>
+        </div>
         <div id='confirm-modal-container' className='modal-off' >
           <div className='modal-wrapper'>
             <div className='cancel-modal'>
@@ -263,15 +299,15 @@ export default class NoteShow extends React.Component {
               <h1>{note.title}</h1>
             </div>
 
-            <div className='code-note-body'>
-              <CodeEditorReadOnly
-                codeBody={note.codebody}
-              />
-            </div>
-
             <div className='note-tags-wrapper'>
               <Tags note={this.state.note}
                 updateNote={this.props.updateNote}
+              />
+            </div>
+
+            <div className='code-note-body'>
+              <CodeEditorReadOnly
+                codeBody={note.codebody}
               />
             </div>
 
@@ -281,17 +317,18 @@ export default class NoteShow extends React.Component {
               </span>
             </div>
           </div>
-
-          <div className='note-resources'>
-            <div className='resources-title'>
-              <h4>Resources</h4>
+          {this.props.note.resources.length ? (
+            <div className='note-resources'>
+              <div className='resources-title'>
+                <h4>Resources</h4>
+              </div>
+              <div className='resources-list'>
+                {this.props.note.resources.map(resource =>
+                  <ResourceItem resource={resource} />
+                )}
+              </div>
             </div>
-            <div className='resources-list'>
-              {this.props.note.resources?.map(resource =>
-                <ResourceItem resource={resource} />
-              )}
-            </div>
-          </div>
+          ) : ""}
           <section id={'comments'} className='note-comments'>
             <div className='comments-title'>
               <h4>Comments</h4>
@@ -299,7 +336,7 @@ export default class NoteShow extends React.Component {
             <CommentIndex comments={this.state.comments}
               newComment={this.props.newComment}
               note={this.props.note}
-              users={this.props.users}/>
+              users={this.props.users} />
           </section>
         </div>
       </>

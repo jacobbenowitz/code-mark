@@ -9,16 +9,16 @@ import { css } from '@codemirror/lang-css';
 
 const CodeEditorReadOnly = props => {
   const language = getLanguage(props.codeBody);
-  const extensions = {'JavaScript':[javascript({ jsx: true })],
-                      'HTML':[html()],
-                      'CSS':[css()],
-                      'C++':[cpp()]
-                      }
+  const extensions = {
+    'JavaScript': [javascript({ jsx: true })],
+    'HTML': [html()],
+    'CSS': [css()],
+    'C++': [cpp()]
+  }
   return (
     <CodeMirror
       readOnly={true}
       value={props.codeBody}
-      height="200px"
       width='100%'
       theme='dark'
       extensions={extensions[language] ? extensions[language] : [javascript({ jsx: true })]}
