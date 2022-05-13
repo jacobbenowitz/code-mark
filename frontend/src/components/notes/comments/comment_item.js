@@ -8,7 +8,7 @@ const CommentItem = props => {
 
 
   // function toggleDeleteModal() {
-  //   debugger
+  //    
   //   const deleteModal = document.getElementById('comment-modal-container');
   //   if (deleteModal.className === "modal-off") {
   //     deleteModal.className = "modal-on";

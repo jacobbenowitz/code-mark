@@ -13,7 +13,7 @@ export const orderUserNotes = (notes) => {
 }
 
 export const orderNoteComments = (comments) => {
-  //debugger
+  // 
   return comments.sort(orderByDate);
 }
 
@@ -26,11 +26,11 @@ export const selectNoteComments = (comments, noteId) => {
 
 export const selectNoteTags = notes => {
   const tags = notes.map(note => note.tags)
-  //debugger
+  // 
   return tags.flat();
 }
 
 export const filterNotesByTag = (tag, notes) => {
-  //debugger
+  // 
   return notes.filter(note => note.tags.includes(tag))
 }
