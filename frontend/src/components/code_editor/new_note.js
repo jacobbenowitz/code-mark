@@ -107,6 +107,7 @@ export default class NewNote extends React.Component {
       textdetails: textdetails
     }
     //  
+    debugger
     this.props.composeNote(note)
       .then(() => (
         this.setState({
@@ -146,7 +147,7 @@ export default class NewNote extends React.Component {
   render() {
     return (
       <>
-        <div id='resources-note-container' className='modal-on' >
+        <div id='resources-note-container' className='modal-off' >
           <div className='modal-wrapper'>
             <div className='resources-modal'>
               <button onClick={this.toggleResourcesModal}>ToggleTesting</button>
