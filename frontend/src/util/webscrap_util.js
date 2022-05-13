@@ -12,7 +12,6 @@ export function getLanguage(codebody){
 function getResources (keywords,codebody) {
     const language = getLanguage(codebody);
     // var keywords = code.split(' ');
-
     // keywords = [...new Set(keywords)];
     var resources = [];
     keywords.map(keyword => language + ' ' + keyword);
@@ -48,8 +47,8 @@ function getResources (keywords,codebody) {
 //     return resources;
 // }
 
-export async function getStuff(keywords,codebody){
-    let response = await Promise.all(getResources(keywords,codebody));
+export async function getStuff(keywords, codebody) {
+    let response = await Promise.all(getResources(keywords, codebody));
     // console.log(response);
     return response.flat().filter(ele => ele !== undefined);
 }
@@ -62,20 +61,20 @@ export async function getStuff(keywords,codebody){
 
 // const ignore = ['(',')','{','}',';'];
 
-export function getKeywords(codebody){
-    const comment_markers = {'JavaScript':/(\/\/.*\n)/g,'HTML':/(<!--.*-->)/g,'CSS':/(\/\*.*\*\/)/g,'C':/(\/\/.*\n)/g,'Ruby':/(#.*\n)/g};
-    const comment_replace = {'JavaScript': '\n','HTML': '', 'CSS':'','C':'\n','Ruby':'\n'};
-    const languages = ['Ruby','C','JavaScript','CSS','HTML'];
+export function getKeywords(codebody) {
+    const comment_markers = { 'JavaScript': /(\/\/.*\n)/g, 'HTML': /(<!--.*-->)/g, 'CSS': /(\/\*.*\*\/)/g, 'C': /(\/\/.*\n)/g, 'Ruby': /(#.*\n)/g };
+    const comment_replace = { 'JavaScript': '\n', 'HTML': '', 'CSS': '', 'C': '\n', 'Ruby': '\n' };
+    const languages = ['Ruby', 'C', 'JavaScript', 'CSS', 'HTML'];
     // let words = codebody.replace(/[\W_]+/g," ");
-    const language = hljs.highlightAuto(codebody,languages).language;
+    const language = hljs.highlightAuto(codebody, languages).language;
     let lines = codebody;
-    if(Object.keys(comment_markers).includes(language)){
+    if (Object.keys(comment_markers).includes(language)) {
         console.log('deleted comments');
         // lines.map(line => line.slice(0,line.indexOf(comment_markers[language])));
-        lines = lines.replaceAll(comment_markers[language],comment_replace[language]);
+        lines = lines.replaceAll(comment_markers[language], comment_replace[language]);
     }
     lines = lines.split('\n')
-    let words = lines.join(" ").replaceAll("\"","'");
+    let words = lines.join(" ").replaceAll("\"", "'");
     words = words.split(" ");
     words = [...new Set(words)];
     // words = words.filter(word => !ignore.includes(word));

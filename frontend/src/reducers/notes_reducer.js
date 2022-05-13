@@ -7,10 +7,13 @@ import {
   RECEIVE_UPDATED_NOTE
 } from '../actions/note_actions';
 
+import { RECEIVE_NOTE_RESOURCES } from '../actions/webscrap_actions';
+
 const initialState = {
   all: {},
   user: [],
-  new: undefined
+  new: undefined,
+  newResources: []
 };
 
 const notesReducer = (prevState = initialState, action) => {
@@ -36,6 +39,9 @@ const notesReducer = (prevState = initialState, action) => {
       return nextState;
     case RECEIVE_UPDATED_NOTE:
       nextState.all[action.note.data._id] = action.note.data;
+      return nextState;
+    case RECEIVE_NOTE_RESOURCES:
+      nextState.newResources = action.resources.data;
       return nextState;
     default:
       return prevState;
