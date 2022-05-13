@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import NewNote from "../code_editor/new_note";
+import DummyHeroNote from "../code_editor/dummy_hero_note";
 
 const heroH1 = (
     <h1 className="hero-h1">Smart bookmarks for code</h1>
@@ -18,7 +18,7 @@ const heroCredit = (
 export const Hero = (
     <div id='hero-container' >
     <div id="sample-code-editor">
-        <NewNote />
+            <DummyHeroNote />
     </div>
 
         <div id='hero-content'>
