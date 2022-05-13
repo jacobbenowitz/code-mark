@@ -23,8 +23,10 @@
   },
   "homepage": "https://github.com/jacobbenowitz/code-mark#readme",
   "dependencies": {
+    "axios": "^0.27.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
+    "cheerio": "^1.0.0-rc.10",
     "concurrently": "^7.1.0",
     "express": "^4.18.1",
     "jsonwebtoken": "^8.5.1",

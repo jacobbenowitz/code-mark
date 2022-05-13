@@ -8,6 +8,7 @@ import { logout } from './actions/session_actions';
 import App from './components/app';
 import { composeNote, updateNote } from '../../frontend/src/actions/note_actions';
 import { composeComment, fetchNoteComments, removeComment, updateComment, fetchComments } from '../../frontend/src/actions/comment_actions';
+import { getLanguage } from '../src/util/webscrap_util';
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -51,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.fetchComments = () => fetchComments();
   window.fetchNoteComments = noteId => fetchNoteComments(noteId);
   window.updateComment = (comment, commentId) => updateComment(comment, commentId);
+  window.getLanguage = getLanguage;
   /// TEST END ///
   ReactDOM.render(<Root store={store} />, root);
 })

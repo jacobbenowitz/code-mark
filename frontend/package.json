@@ -15,7 +15,6 @@
     "electron": "^11.0.1",
     "highlight.js": "^11.5.1",
     "jwt-decode": "^3.1.2",
-    "nightmare": "^3.0.2",
     "react": "^16.14.0",
     "react-content-loader": "^6.2.0",
     "react-dom": "^16.6.3",
@@ -51,5 +50,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
   }
 }

@@ -11,7 +11,7 @@ export default class CodeNoteItem extends React.Component {
       <div className="code-note-item">
 
         <Link to={`/notes/${this.props.id}`} className="show-link-wrapper">
-          <div className="view-link">View note
+          <div className="view-link">View
             <i className="fa-solid fa-arrow-right"></i></div>
         </Link>
         <div className="code-note-tags">
