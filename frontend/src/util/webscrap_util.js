@@ -6,7 +6,6 @@ function getResources(keywords, codebody) {
     const languages = ['Ruby', 'C', 'JavaScript', 'CSS', 'HTML'];
     const code_test = hljs.highlightAuto(codebody, languages);
     // var keywords = code.split(' ');
-
     // keywords = [...new Set(keywords)];
     var resources = [];
     keywords.map(keyword => code_test.language + ' ' + keyword);

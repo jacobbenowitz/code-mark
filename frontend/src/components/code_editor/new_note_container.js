@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import { composeNote, updateNote } from "../../actions/note_actions";
+import { getResources } from "../../actions/webscrap_actions";
 import NewNote from "./new_note";
 
 const mapStateToProps = state => {

@@ -96,6 +96,7 @@ export default class NewNote extends React.Component {
     resize();
   }
 
+
   handleSubmit(e) {
     e.preventDefault();
     let { title, codebody, textdetails } = this.state;
@@ -112,7 +113,7 @@ export default class NewNote extends React.Component {
           title: "",
           codebody: "",
           textdetails: "",
-        }, () => this.toggleResourcesModal())
+        }, () => this.props.getResources(note.codebody))
       ))
   }
 
