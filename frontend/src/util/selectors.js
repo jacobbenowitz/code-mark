@@ -34,3 +34,8 @@ export const filterNotesByTag = (tag, notes) => {
   // 
   return notes.filter(note => note.tags.includes(tag))
 }
+
+export const filterUsersByComment = (users,comment) => {
+  // debugger;
+  return Object.values(users)?.filter(user => user._id === comment.user)[0]
+}

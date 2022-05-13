@@ -2,8 +2,18 @@ import CodeMirror from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
 import { oneDark } from '@codemirror/theme-one-dark';
 import React from 'react';
+import { getLanguage } from '../../util/webscrap_util';
+import { html } from '@codemirror/lang-html';
+import { cpp } from '@codemirror/lang-cpp';
+import { css } from '@codemirror/lang-css';
 
 const CodeEditorReadOnly = props => {
+  const language = getLanguage(props.codeBody);
+  const extensions = {'JavaScript':[javascript({ jsx: true })],
+                      'HTML':[html()],
+                      'CSS':[css()],
+                      'C++':[cpp()]
+                      }
   return (
     <CodeMirror
       readOnly={true}
@@ -11,7 +21,7 @@ const CodeEditorReadOnly = props => {
       height="200px"
       width='100%'
       theme='dark'
-      extensions={[javascript({ jsx: true })]}
+      extensions={extensions[language] ? extensions[language] : [javascript({ jsx: true })]}
     />
   );
 }
