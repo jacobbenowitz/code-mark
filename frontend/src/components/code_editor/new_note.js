@@ -29,12 +29,12 @@ export default class NewNote extends React.Component {
   }
 
   // DISABLED UNTIL SCRAPER IS RESOLVED
-  // componentWillReceiveProps(nextProps) {
-  //   debugger
-  //   nextProps.newResources ? this.setState({
-  //     newResources: nextProps.newResources
-  //   }, () => this.toggleResourcesModal()) : undefined
-  // }
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps.newResources)
+    // this.setState({
+    //   newResources: nextProps.newResources
+    // }, () => this.toggleResourcesModal())
+  }
 
   bindHandlers() {
     this.addLangTag = this.addLangTag.bind(this);
@@ -69,15 +69,15 @@ export default class NewNote extends React.Component {
   }
 
 
-  handleChange(e){
+  handleChange(e) {
     e.preventDefault();
     // this.setState({lang: e.target.value});
     let codemirrors = document.getElementsByClassName('codemirror');
-    for (var i = 0; i < codemirrors.length; i++){
+    for (var i = 0; i < codemirrors.length; i++) {
       codemirrors[i].style.display = 'none';
     }
     let chosen = document.getElementsByClassName(e.target.value);
-    for (var j = 0; j < chosen.length; j++){
+    for (var j = 0; j < chosen.length; j++) {
       chosen[j].style.display = 'block';
     }
   }
@@ -153,14 +153,13 @@ export default class NewNote extends React.Component {
       codebody: codebody,
       textdetails: textdetails
     }
-    debugger
     this.props.composeNote(note)
       .then(() => (
         this.setState({
           title: "",
           codebody: "",
           textdetails: "",
-        }, () => this.props.getResources(note.codebody))
+        })
       ))
   }
 
@@ -233,25 +232,7 @@ export default class NewNote extends React.Component {
   render() {
     return (
       <>
-        <div id='resources-note-container' className='modal-off' >
-          <div className='modal-wrapper'>
-            <div className='resources-modal'>
-              {/* <button onClick={this.toggleResourcesModal}>ToggleTesting</button> */}
-              <h4>Resources</h4>
-              <span>Select the keywords that you'd like resources for</span>
-              <form className='resource-options'
-                onSubmit={this.handleResourcesSubmit}
-              >
-                {this.props.newResources?.map(keyword =>
-                  <CheckBoxItem keyword={keyword}
-                    updateKeywords={this.updateKeywords}
-                  />)
-                }
-                <button type="submit">Submit</button>
-              </form>
-            </div>
-          </div>
-        </div>
+
         <div className='new-note-container' id='new-note-full'>
           {/* <button onClick={this.toggleResourcesModal}>ToggleTesting</button> */}
           <div className='new-note-form'>
@@ -264,12 +245,15 @@ export default class NewNote extends React.Component {
                   value={this.state.title}
                   placeholder={'Title'} />
               </div>
-              <select value={this.state.lang} onChange={this.handleChange}>
-                <option value={'javascript'} selected>JavaScript</option>
-                <option value={'html'}>HTML</option>
-                <option value={'cpp'}>C++</option>
-                <option value={'css'}>CSS</option>
-              </select>
+              <div className='select-wrapper'>
+                <select id='lang-select'
+                  value={this.state.lang} onChange={this.handleChange}>
+                  <option value={'javascript'} selected>JavaScript</option>
+                  <option value={'html'}>HTML</option>
+                  <option value={'cpp'}>C++</option>
+                  <option value={'css'}>CSS</option>
+                </select>
+              </div>
               <div className='note-input'>
                 <CodeMirror className='codemirror javascript'
                   value={this.state.codebody}
@@ -322,8 +306,11 @@ export default class NewNote extends React.Component {
 
             <div className='recommended-tag'
               onClick={() => this.addLangTag(this.state.suggestedLanguage)}>
-              <span className='rec-tag'>Recommended tag:</span>
-              <span className='lang-tag'>{this.state.suggestedLanguage}</span>
+              {this.state.suggestedLanguage ? (
+                <>
+                  <span className='rec-tag'>Detected language:</span>
+                  <span className='lang-tag'>{this.state.suggestedLanguage}</span>
+                </>) : " "}
             </div>
 
             <div className='note-tags-list new'>
@@ -404,3 +391,24 @@ export default class NewNote extends React.Component {
     )
   }
 }
+
+
+// <div id='resources-note-container' className='modal-off' >
+//   <div className='modal-wrapper'>
+//     <div className='resources-modal'>
+//       {/* <button onClick={this.toggleResourcesModal}>ToggleTesting</button> */}
+//       <h4>Resources</h4>
+//       <span>Select the keywords that you'd like resources for</span>
+//       <form className='resource-options'
+//         onSubmit={this.toggleResourcesModal}
+//       >
+//         {this.props.newResources?.map(keyword =>
+//           <CheckBoxItem keyword={keyword}
+//             updateKeywords={this.updateKeywords}
+//           />)
+//         }
+//         <button type="submit">Submit</button>
+//       </form>
+//     </div>
+//   </div>
+// </div>

@@ -16,11 +16,16 @@ export default class EditNote extends React.Component {
   }
 
   componentDidMount() {
+    this._isMounted = true;
     this.setState({
       title: this.props.note.title,
       codebody: this.props.note.codebody,
       textdetails: this.props.note.textdetails,
     })
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   bindHandlers() {
@@ -74,7 +79,7 @@ export default class EditNote extends React.Component {
     observe(text, 'paste', delayedResize);
     observe(text, 'drop', delayedResize);
     observe(text, 'keydown', delayedResize);
-    
+
     resize();
   }
 

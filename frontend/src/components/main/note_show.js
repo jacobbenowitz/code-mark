@@ -37,6 +37,14 @@ export default class NoteShow extends React.Component {
     this.props.fetchUsers();
   }
 
+  componentDidMount() {
+    this._isMounted = true;
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
   componentWillReceiveProps(nextProps) {
     this.setState({
       note: nextProps.note,
@@ -110,7 +118,8 @@ export default class NoteShow extends React.Component {
 
   render() {
 
-    const { note, currentUser, updateNote, noteId } = this.props;
+    const { currentUser, updateNote, noteId } = this.props;
+    const { note } = this.state;
     const contextMenu = document.getElementById("context-menu");
     const scope = document.querySelector("body");
 
@@ -317,18 +326,18 @@ export default class NoteShow extends React.Component {
               </span>
             </div>
           </div>
-          {this.props.note.resources.length ? (
-            <div className='note-resources'>
-              <div className='resources-title'>
-                <h4>Resources</h4>
-              </div>
-              <div className='resources-list'>
-                {this.props.note.resources.map(resource =>
-                  <ResourceItem resource={resource} />
-                )}
-              </div>
+          {/* {this.props.note.resources.length ? ( */}
+          <div className='note-resources'>
+            <div className='resources-title'>
+              <h4>Resources</h4>
             </div>
-          ) : ""}
+            <div className='resources-list'>
+              {this.props.note.resources?.map(resource =>
+                <ResourceItem resource={resource} />
+              )}
+            </div>
+          </div>
+          {/* ) : ""} */}
           <section id={'comments'} className='note-comments'>
             <div className='comments-title'>
               <h4>Comments</h4>

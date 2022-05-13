@@ -14,6 +14,37 @@
 
 }
 
+#lang-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* background: transparent url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat 100% center; */
+  display: flex;
+  position: relative;
+
+  margin: 5px 0px;
+  padding: 0px 0.4rem;
+  font-size: 16px;
+  z-index: 10;
+  line-height: 1.75;
+  color: rgb(213, 213, 213);
+  border: none;
+  background-color: transparent;
+  background-image: none;
+  -ms-word-break: normal;
+  word-break: normal;
+}
+
+.select-wrapper {
+  display: flex;
+  padding: 0.2rem;
+  justify-content: flex-end;
+}
+
+#lang-select:hover {
+  color: #34D9E3;
+}
+
 #new-note-full {
   display: none;
 }
@@ -94,11 +125,11 @@
 }
 
 .modal-on {
-  /* visibility: visible; */
+  visibility: visible;
   display: block;
 }
 
 .modal-off {
-  /* visibility: hidden; */
-  display: none;
+  visibility: hidden;
+  /* display: none; */
 }

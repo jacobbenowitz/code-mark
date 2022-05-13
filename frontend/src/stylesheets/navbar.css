@@ -20,6 +20,12 @@ header {
   margin: auto;
 }
 
+#navFooter {
+  padding-top: 68px;
+  padding-left: 68px;
+  padding-right: 68px;
+}
+
 #logo-container {
   height: 16px;
   min-width: 16px;
@@ -73,26 +79,34 @@ header {
   cursor: pointer;
   margin-right: 1rem;
 }
+.footer-logo {
+  padding-top: 1rem;
+  margin-left: 2rem;
+  padding-bottom: 1rem;
+}
 
 footer {
   grid-column: 1 / span 12;
-  padding: 32px 68px 0 68px;
+  padding-top: 32px;
 }
 
 #navFooter {
   display: grid;
   grid-template-rows: auto auto;
   margin-top: 4rem;
+  background-color: #202124;
 }
 
 .nav-col-01 {
   margin-left: 2rem;
+  text-align: start;
 }
 .nav-col-02 {
-  margin-left: 2rem;
+  text-align: center;
 }
 .nav-col-03 {
-  margin-left: 2rem;
+  margin-right: 2rem;
+  text-align: end;
 }
 
 #footer-top {
@@ -113,6 +127,7 @@ footer {
   bottom: 0px;
   height: fit-content;
   width: 100%;
+  display: flex;
 }
 
 .footer-link-list {
