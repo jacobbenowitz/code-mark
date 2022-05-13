@@ -1,7 +1,8 @@
 import React from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
-import CheckBoxItem from './checkbox_item'
+import CheckBoxItem from './checkbox_item';
+import NewNoteTagItem from '../tags/new_note_tag_item';
 
 export default class NewNote extends React.Component {
   constructor(props) {
@@ -10,6 +11,9 @@ export default class NewNote extends React.Component {
       title: "",
       codebody: "",
       textdetails: "",
+      tags: [],
+      newTag: "",
+      tagForm: false,
       isOpen: false, // true when user clicks or types, false otherwise
       keywordsSelected: [],
       newResources: []
@@ -18,13 +22,18 @@ export default class NewNote extends React.Component {
     this.bindHandlers();
   }
 
-  componentWillReceiveProps(nextProps) {
-    nextProps.newResources ? this.setState({
-      newResources: nextProps.newResources
-    }, () => this.toggleResourcesModal()) : undefined
-  }
+  // DISABLED UNTIL SCRAPER IS RESOLVED
+  // componentWillReceiveProps(nextProps) {
+  //   debugger
+  //   nextProps.newResources ? this.setState({
+  //     newResources: nextProps.newResources
+  //   }, () => this.toggleResourcesModal()) : undefined
+  // }
 
   bindHandlers() {
+    this.deleteTag = this.deleteTag.bind(this);
+    this.updateTags = this.updateTags.bind(this);
+    this.toggleTagForm = this.toggleTagForm.bind(this);
     this.updateKeywords = this.updateKeywords.bind(this);
     this.handleResourcesSubmit = this.handleResourcesSubmit.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -97,16 +106,16 @@ export default class NewNote extends React.Component {
   }
 
 
+
+
   handleSubmit(e) {
     e.preventDefault();
     let { title, codebody, textdetails } = this.state;
-    //  
     let note = {
       title: title,
       codebody: codebody,
       textdetails: textdetails
     }
-    //  
     debugger
     this.props.composeNote(note)
       .then(() => (
@@ -140,8 +149,42 @@ export default class NewNote extends React.Component {
     e.preventDefault();
 
     debugger
-    // this.props.updateNote(noteData, noteId);
+    this.props.updateNote(noteData, noteId);
     this.toggleResourcesModal();
+  }
+
+
+  toggleTagForm() {
+    const tagForm = document.getElementById('new-tag-form');
+    if (tagForm.className === "tag-form-off") {
+      this.setState({ tagForm: true }, () =>
+        tagForm.className = "tag-form-on")
+    } else {
+      this.setState({ tagForm: false }, () =>
+        tagForm.className = "tag-form-off")
+    }
+  }
+
+  updateTags() {
+    let newTags = this.state.newTag.length ? (
+      this.state.tags.concat([this.state.newTag])
+    ) : this.state.tags
+    this.setState({
+      newTag: "",
+      tagForm: false,
+      tags: newTags
+    }, () => this.toggleTagForm())
+    console.log(this.state)
+  }
+
+  deleteTag(title) {
+    let newTags = this.state.tags.filter(tag =>
+      tag !== title);
+
+    this.setState({
+      tags: newTags
+    })
+    console.log(this.state)
   }
 
   render() {
@@ -150,7 +193,7 @@ export default class NewNote extends React.Component {
         <div id='resources-note-container' className='modal-off' >
           <div className='modal-wrapper'>
             <div className='resources-modal'>
-              <button onClick={this.toggleResourcesModal}>ToggleTesting</button>
+              {/* <button onClick={this.toggleResourcesModal}>ToggleTesting</button> */}
               <h4>Resources</h4>
               <span>Select the keywords that you'd like resources for</span>
               <form className='resource-options'
@@ -167,7 +210,7 @@ export default class NewNote extends React.Component {
           </div>
         </div>
         <div className='new-note-container' id='new-note-full'>
-          <button onClick={this.toggleResourcesModal}>ToggleTesting</button>
+          {/* <button onClick={this.toggleResourcesModal}>ToggleTesting</button> */}
           <div className='new-note-form'>
             <form onSubmit={this.handleSubmit}>
               <div className='note-input'>
@@ -200,6 +243,39 @@ export default class NewNote extends React.Component {
                 className='submit button'>Save</button>
             </form>
             <span className='hide-button' onClick={this.toggleForm}>Hide</span>
+
+            <div className='note-tags-list'>
+              <div className="tag-item-wrapper tag-icon-new"
+                id='toggle-tag-form-button'
+                onClick={this.toggleTagForm}>
+                {this.state.tagForm ? (
+                  <i className="fa-solid fa-minus"></i>
+                ) : (
+                  <i className="fa-solid fa-circle-plus"></i>
+                )}
+              </div>
+
+
+              <form onSubmit={this.updateTags}
+                className="tag-form-off" id="new-tag-form">
+                <input type={'text'}
+                  className={'tag-form-input'}
+                  onChange={this.update('newTag')}
+                  placeholder={'New tag...'}
+                  value={this.state.newTag}
+                />
+                <button id='tag-icon-save' type='submit'>
+                  <i className="fa-solid fa-floppy-disk" />
+                </button>
+              </form>
+              {
+                this.state.tags?.map((tag, i) =>
+                  <NewNoteTagItem title={tag} key={`tag-${i}`}
+                    deleteTag={this.deleteTag}
+                  />)
+              }
+            </div>
+
           </div>
         </div>
         <div className='new-note-container' id='new-note-mini'

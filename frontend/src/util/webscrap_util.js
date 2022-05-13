@@ -1,15 +1,15 @@
 // import { getGoogleAdvice, getAdvice } from './webscraping.js';
-import { getGoogleAdvice} from './webscraping.js';
+import { getGoogleAdvice } from './webscraping.js';
 const hljs = require('highlight.js');
 // import hljs  from 'highlight.js';
 
-export function getLanguage(codebody){
-    const languages = ['Ruby','C','JavaScript','CSS','HTML'];
-    const code_test = hljs.highlightAuto(codebody,languages);
+export function getLanguage(codebody) {
+    const languages = ['Ruby', 'C', 'JavaScript', 'CSS', 'HTML'];
+    const code_test = hljs.highlightAuto(codebody, languages);
     return code_test.language;
 }
 
-function getResources (keywords,codebody) {
+function getResources(keywords, codebody) {
     const language = getLanguage(codebody);
     // var keywords = code.split(' ');
     // keywords = [...new Set(keywords)];
