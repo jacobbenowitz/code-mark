@@ -11,6 +11,7 @@ import {
   composeComment,
   updateComment,
 } from "../../actions/comment_actions";
+import { fetchUsers, fetchUser } from "../../actions/user_actions";
 
 const mapStateToProps = (state, { match }) => {
   return {
@@ -18,7 +19,8 @@ const mapStateToProps = (state, { match }) => {
     note: state.notes.all[match.params.noteId],
     currentUser: state.session.user,
     comments: state.comments.note,
-    newComment: state.comments.new
+    newComment: state.comments.new,
+    users: state.users.all
   }
 }
 
@@ -29,7 +31,10 @@ const mapDispatchToProps = dispatch => {
     updateNote: (noteData, noteId) => dispatch(updateNote(noteData, noteId)),
     fetchNoteComments: (noteId) => dispatch(fetchNoteComments(noteId)),
     removeComment: (commentId) => dispatch(removeComment(commentId)),
-    composeComment: (data) => dispatch(composeComment(data)),        updateComment: (data, commentId) => dispatch(updateComment(data, commentId))
+    composeComment: (data) => dispatch(composeComment(data)),
+    updateComment: (data, commentId) => dispatch(updateComment(data, commentId)),
+    fetchUsers: () => dispatch(fetchUsers()),
+    fetchUser: () => dispatch(fetchUser())
   }
 }
 

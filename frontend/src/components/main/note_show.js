@@ -29,6 +29,7 @@ export default class NoteShow extends React.Component {
   componentWillMount() {
     this.props.fetchNote(this.props.noteId);
     this.props.fetchNoteComments(this.props.noteId);
+    this.props.fetchUsers();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -297,7 +298,8 @@ export default class NoteShow extends React.Component {
             </div>
             <CommentIndex comments={this.state.comments}
               newComment={this.props.newComment}
-              note={this.props.note} />
+              note={this.props.note}
+              users={this.props.users}/>
           </section>
         </div>
       </>
