@@ -14,6 +14,7 @@ export default class NewNote extends React.Component {
       tags: [],
       newTag: "",
       tagForm: false,
+      suggestedLanguage: undefined,
       isOpen: false, // true when user clicks or types, false otherwise
       keywordsSelected: [],
       newResources: []
@@ -31,6 +32,7 @@ export default class NewNote extends React.Component {
   // }
 
   bindHandlers() {
+    this.addLangTag = this.addLangTag.bind(this);
     this.deleteTag = this.deleteTag.bind(this);
     this.updateTags = this.updateTags.bind(this);
     this.toggleTagForm = this.toggleTagForm.bind(this);
@@ -51,9 +53,11 @@ export default class NewNote extends React.Component {
   }
 
   updateCode() {
+    let lang = this.props.getLanguage(this.state.codebody)
     return e => {
       this.setState({
-        codebody: e
+        codebody: e,
+        suggestedLanguage: lang
       })
     }
   }
@@ -139,7 +143,6 @@ export default class NewNote extends React.Component {
     ) : (
       result = [e.target.value, ...this.state.keywordsSelected]
     )
-    console.log(result)
     this.setState({
       keywordsSelected: result
     })
@@ -155,7 +158,7 @@ export default class NewNote extends React.Component {
 
 
   toggleTagForm() {
-    const tagForm = document.getElementById('new-tag-form');
+    const tagForm = document.getElementById('new-tag-form-new-note');
     if (tagForm.className === "tag-form-off") {
       this.setState({ tagForm: true }, () =>
         tagForm.className = "tag-form-on")
@@ -168,13 +171,21 @@ export default class NewNote extends React.Component {
   updateTags() {
     let newTags = this.state.newTag.length ? (
       this.state.tags.concat([this.state.newTag])
-    ) : this.state.tags
+    ) : [this.state.newTag]
     this.setState({
       newTag: "",
       tagForm: false,
       tags: newTags
     }, () => this.toggleTagForm())
-    console.log(this.state)
+  }
+
+  addLangTag(lang) {
+    let newTags = this.state.newTag.length ? (
+      this.state.tags.concat(lang)
+    ) : [lang]
+    this.setState({
+      tags: newTags
+    })
   }
 
   deleteTag(title) {
@@ -184,7 +195,6 @@ export default class NewNote extends React.Component {
     this.setState({
       tags: newTags
     })
-    console.log(this.state)
   }
 
   render() {
@@ -244,8 +254,14 @@ export default class NewNote extends React.Component {
             </form>
             <span className='hide-button' onClick={this.toggleForm}>Hide</span>
 
-            <div className='note-tags-list'>
-              <div className="tag-item-wrapper tag-icon-new"
+            <div className='recommended-tag'
+              onClick={() => this.addLangTag(this.state.suggestedLanguage)}>
+              <span className='rec-tag'>Recommended tag:</span>
+              <span className='lang-tag'>{this.state.suggestedLanguage}</span>
+            </div>
+
+            <div className='note-tags-list new'>
+              <div className="tag-item-wrapper tag-icon-new new"
                 id='toggle-tag-form-button'
                 onClick={this.toggleTagForm}>
                 {this.state.tagForm ? (
@@ -255,9 +271,8 @@ export default class NewNote extends React.Component {
                 )}
               </div>
 
-
               <form onSubmit={this.updateTags}
-                className="tag-form-off" id="new-tag-form">
+                className="tag-form-off" id="new-tag-form-new-note">
                 <input type={'text'}
                   className={'tag-form-input'}
                   onChange={this.update('newTag')}

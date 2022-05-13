@@ -17,7 +17,7 @@ const mapDispatchToProps = dispatch => {
     composeNote: noteData => dispatch(composeNote(noteData)),
     updateNote: (noteData, noteId) => dispatch(updateNote(noteData, noteId)),
     getResources: codebody => getResources(codebody),
-    getLanguage: codebody => getLanguage
+    getLanguage: codebody => getLanguage(codebody)
   }
 }
 

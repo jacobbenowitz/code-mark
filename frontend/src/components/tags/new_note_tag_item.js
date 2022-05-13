@@ -22,7 +22,7 @@ class NewNoteTagItem extends React.Component {
 
   render() {
     return (
-      <div className="tag-item-wrapper"
+      <div className="tag-item-wrapper new"
         onMouseEnter={this.toggleDelete} onMouseLeave={this.toggleDelete}>
         <div className="tag-icon-wrapper">
           <i className="fa-solid fa-tag"></i>

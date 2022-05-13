@@ -10,6 +10,7 @@ import Tags from '../tags/tags';
 // credit context menu: https://itnext.io/how-to-create-a-custom-right-click-menu-with-javascript-9c368bb58724
 // textarea resize: https://stackoverflow.com/questions/20775824/after-clicking-on-selected-text-window-selection-is-not-giving-updated-range
 import CommentIndex from '../notes/comments/comment_index';
+import ResourceItem from '../notes/resources/resource_item';
 
 
 
@@ -54,12 +55,12 @@ export default class NoteShow extends React.Component {
   }
 
   deleteThisComment(commentId) {
-     
+
     const comments = this.state.comments.filter(comment =>
       comment._id !== commentId
     )
     this.setState({ comments: comments }, () => {
-       
+
       this.props.removeComment(commentId)
     })
   }
@@ -79,14 +80,14 @@ export default class NoteShow extends React.Component {
     const newSnippetField = document.getElementById("code-snippet-new")
     newSnippetField.focus()
     newSnippetField.value = selection
-     
+
     commentSection.scrollIntoView({ behavior: 'smooth' })
   }
 
- 
+
 
   render() {
-     
+
     const { note, currentUser, updateNote, noteId } = this.props;
 
     const contextMenu = document.getElementById("context-menu");
@@ -172,7 +173,7 @@ export default class NoteShow extends React.Component {
     //   this.setState({ selection: selection.toString() });
     // };
 
-    
+
     return note ? (
       <>
 
@@ -225,8 +226,8 @@ export default class NoteShow extends React.Component {
         </div>
         <div className='note-show-container center-span-7'>
           <div className='note-show-top-icons'>
-            <div    className='back-page icon-button'
-           
+            <div className='back-page icon-button'
+
               onClick={() => this.props.history.goBack()}>
               <i className="fa-solid fa-arrow-left fa-lg"></i>
               <span>
@@ -236,16 +237,16 @@ export default class NoteShow extends React.Component {
 
 
             {this.props.currentUser.id === this.props.note.user ? (
-            <div className='edit-note icon-button'
+              <div className='edit-note icon-button'
                 onClick={() => this.toggleEditModal()}>
-              <i className="fa-solid fa-pen-to-square fa-lg"></i>
-              <span>
-                Edit
-              </span>
-            </div>
+                <i className="fa-solid fa-pen-to-square fa-lg"></i>
+                <span>
+                  Edit
+                </span>
+              </div>
             ) :
-            undefined
-          }
+              undefined
+            }
 
             <div className='delete-note icon-button'
               onClick={() => this.toggleDeleteModal()}>
@@ -285,7 +286,9 @@ export default class NoteShow extends React.Component {
               <h4>Resources</h4>
             </div>
             <div className='resources-list'>
-              {/* resourceItem components */}
+              {this.props.note.resources?.map(resource =>
+                <ResourceItem resource={resource} />
+              )}
             </div>
           </div>
           <section id={'comments'} className='note-comments'>
