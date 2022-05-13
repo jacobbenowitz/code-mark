@@ -11,6 +11,9 @@ import Tags from '../tags/tags';
 // textarea resize: https://stackoverflow.com/questions/20775824/after-clicking-on-selected-text-window-selection-is-not-giving-updated-range
 import CommentIndex from '../notes/comments/comment_index';
 
+
+
+
 export default class NoteShow extends React.Component {
   constructor(props) {
     super(props);
@@ -51,12 +54,12 @@ export default class NoteShow extends React.Component {
   }
 
   deleteThisComment(commentId) {
-    debugger
+     
     const comments = this.state.comments.filter(comment =>
       comment._id !== commentId
     )
     this.setState({ comments: comments }, () => {
-      debugger
+       
       this.props.removeComment(commentId)
     })
   }
@@ -76,14 +79,14 @@ export default class NoteShow extends React.Component {
     const newSnippetField = document.getElementById("code-snippet-new")
     newSnippetField.focus()
     newSnippetField.value = selection
-    debugger
+     
     commentSection.scrollIntoView({ behavior: 'smooth' })
   }
 
-
+ 
 
   render() {
-
+     
     const { note, currentUser, updateNote, noteId } = this.props;
 
     const contextMenu = document.getElementById("context-menu");
@@ -169,7 +172,7 @@ export default class NoteShow extends React.Component {
     //   this.setState({ selection: selection.toString() });
     // };
 
-
+    
     return note ? (
       <>
 
@@ -222,20 +225,28 @@ export default class NoteShow extends React.Component {
         </div>
         <div className='note-show-container center-span-7'>
           <div className='note-show-top-icons'>
-            <div className='back-page icon-button'
-              onClick={() => this.props.history.push('/home')}>
+            <div    className='back-page icon-button'
+           
+              onClick={() => this.props.history.goBack()}>
               <i className="fa-solid fa-arrow-left fa-lg"></i>
               <span>
                 Back
               </span>
             </div>
+
+
+            {this.props.currentUser.id === this.props.note.user ? (
             <div className='edit-note icon-button'
-              onClick={() => this.toggleEditModal()}>
+                onClick={() => this.toggleEditModal()}>
               <i className="fa-solid fa-pen-to-square fa-lg"></i>
               <span>
                 Edit
               </span>
             </div>
+            ) :
+            undefined
+          }
+
             <div className='delete-note icon-button'
               onClick={() => this.toggleDeleteModal()}>
               <i className="fa-solid fa-trash fa-lg"></i>

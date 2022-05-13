@@ -28,11 +28,12 @@ export default class CommentIndex extends React.Component {
         {this.props.comments ? (
           <div>
             {comments.map(comment => {
-              debugger
+               
               return <CommentItem
                 key={comment._id}
                 id={comment._id}
                 comment={comment}
+                // username={comment.username}
               // deleteThisComment={this.deleteThisComment}
               />
             })}
