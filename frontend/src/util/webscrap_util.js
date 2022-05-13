@@ -1,3 +1,4 @@
+// import { getGoogleAdvice, getAdvice } from './webscraping.js';
 import { getGoogleAdvice} from './webscraping.js';
 const hljs = require('highlight.js');
 // import hljs  from 'highlight.js';
