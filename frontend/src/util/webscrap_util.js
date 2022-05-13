@@ -1,10 +1,10 @@
-import { getGoogleAdvice, getAdvice } from './webscraping.js';
+import { getGoogleAdvice } from './webscraping.js';
 const hljs = require('highlight.js');
 // import hljs  from 'highlight.js';
 
-function getResources (keywords,codebody) {
-    const languages = ['Ruby','C','JavaScript','CSS','HTML'];
-    const code_test = hljs.highlightAuto(codebody,languages);
+function getResources(keywords, codebody) {
+    const languages = ['Ruby', 'C', 'JavaScript', 'CSS', 'HTML'];
+    const code_test = hljs.highlightAuto(codebody, languages);
     // var keywords = code.split(' ');
 
     // keywords = [...new Set(keywords)];
@@ -17,59 +17,59 @@ function getResources (keywords,codebody) {
                 // console.log(typeof data);
                 return data;
             }));
-        resources.push(getAdvice(keyword)
-            .then(data => {
-                // console.log(data);
-                return data;
-            }));
+        // resources.push(getAdvice(keyword)
+        //     .then(data => {
+        //         // console.log(data);
+        //         return data;
+        //     }));
     });
     // console.log(resources);
     return resources;
 }
 
-function getNightmareResources (code) {
-    var keywords = code.split(' ');
-    keywords = [...new Set(keywords)];
-    var resources = [];
-    // console.log(keywords);
-    keywords.forEach(keyword => {
-        resources.push(getAdvice(keyword)
-            .then(data => {
-                // console.log(data);
-                return data;
-            }))
-    });
-    return resources;
-}
+// function getNightmareResources (code) {
+//     var keywords = code.split(' ');
+//     keywords = [...new Set(keywords)];
+//     var resources = [];
+//     // console.log(keywords);
+//     keywords.forEach(keyword => {
+//         resources.push(getAdvice(keyword)
+//             .then(data => {
+//                 // console.log(data);
+//                 return data;
+//             }))
+//     });
+//     return resources;
+// }
 
-export async function getStuff(keywords,codebody){
-    let response = await Promise.all(getResources(keywords,codebody));
+export async function getStuff(keywords, codebody) {
+    let response = await Promise.all(getResources(keywords, codebody));
     // console.log(response);
     return response.flat().filter(ele => ele !== undefined);
 }
 
-export async function getNightmareStuff(words){
-    let data = await Promise.all(getNightmareResources(words));
-    // console.log(data);
-    return data;
-}
+// export async function getNightmareStuff(words) {
+//     let data = await Promise.all(getNightmareResources(words));
+//     // console.log(data);
+//     return data;
+// }
 
 // const ignore = ['(',')','{','}',';'];
 
-export function getKeywords(codebody){
-    const comment_markers = {'JavaScript':/(\/\/.*\n)/g,'HTML':/(<!--.*-->)/g,'CSS':/(\/\*.*\*\/)/g,'C':/(\/\/.*\n)/g,'Ruby':/(#.*\n)/g};
-    const comment_replace = {'JavaScript': '\n','HTML': '', 'CSS':'','C':'\n','Ruby':'\n'};
-    const languages = ['Ruby','C','JavaScript','CSS','HTML'];
+export function getKeywords(codebody) {
+    const comment_markers = { 'JavaScript': /(\/\/.*\n)/g, 'HTML': /(<!--.*-->)/g, 'CSS': /(\/\*.*\*\/)/g, 'C': /(\/\/.*\n)/g, 'Ruby': /(#.*\n)/g };
+    const comment_replace = { 'JavaScript': '\n', 'HTML': '', 'CSS': '', 'C': '\n', 'Ruby': '\n' };
+    const languages = ['Ruby', 'C', 'JavaScript', 'CSS', 'HTML'];
     // let words = codebody.replace(/[\W_]+/g," ");
-    const language = hljs.highlightAuto(codebody,languages).language;
+    const language = hljs.highlightAuto(codebody, languages).language;
     let lines = codebody;
-    if(Object.keys(comment_markers).includes(language)){
+    if (Object.keys(comment_markers).includes(language)) {
         console.log('deleted comments');
         // lines.map(line => line.slice(0,line.indexOf(comment_markers[language])));
-        lines = lines.replaceAll(comment_markers[language],comment_replace[language]);
+        lines = lines.replaceAll(comment_markers[language], comment_replace[language]);
     }
     lines = lines.split('\n')
-    let words = lines.join(" ").replaceAll("\"","'");
+    let words = lines.join(" ").replaceAll("\"", "'");
     words = words.split(" ");
     words = [...new Set(words)];
     // words = words.filter(word => !ignore.includes(word));

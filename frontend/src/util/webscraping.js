@@ -1,25 +1,25 @@
 import axios from 'axios';
 import cheerio from 'cheerio';
-import Nightmare from 'nightmare';
+// import Nightmare from 'nightmare';
 
-export const getAdvice = (keyword) => {
-    // const nightmare = Nightmare({ show: true });
-    const nightmare = Nightmare();
-    return nightmare
-        .goto('https://developer.mozilla.org/en-US/')
-        .wait('#hp-search-q')
-        .type('#hp-search-q', keyword)
-        .click('#hp-search-form > button.button.action.has-icon.search-button')
-        .wait('#content > article > div.search-results > ul > li:nth-child(1) > p.search-result-url > a')
-        //need wait to timeout for gibberish words so wrong wait query
-        .evaluate(() => {
-            let link = document.querySelector('#content > article > div.search-results > ul > li:nth-child(1) > h3 > a').href;
-            let title = document.querySelector('#content > article > div.search-results > ul > li:nth-child(1) > h3 > a').textContent;
-            return { link, title };
-        })
-        .end()
-        .catch(err => console.log('search failed:', err))
-}
+// export const getAdvice = (keyword) => {
+//     // const nightmare = Nightmare({ show: true });
+//     const nightmare = Nightmare();
+//     return nightmare
+//         .goto('https://developer.mozilla.org/en-US/')
+//         .wait('#hp-search-q')
+//         .type('#hp-search-q', keyword)
+//         .click('#hp-search-form > button.button.action.has-icon.search-button')
+//         .wait('#content > article > div.search-results > ul > li:nth-child(1) > p.search-result-url > a')
+//         //need wait to timeout for gibberish words so wrong wait query
+//         .evaluate(() => {
+//             let link = document.querySelector('#content > article > div.search-results > ul > li:nth-child(1) > h3 > a').href;
+//             let title = document.querySelector('#content > article > div.search-results > ul > li:nth-child(1) > h3 > a').textContent;
+//             return { link, title };
+//         })
+//         .end()
+//         .catch(err => console.log('search failed:', err))
+// }
 
 // const getAdvice2 = async (keyword) => {
 //     try {

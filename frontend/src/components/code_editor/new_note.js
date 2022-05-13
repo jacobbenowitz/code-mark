@@ -1,7 +1,6 @@
 import React from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
-import { oneDark } from '@codemirror/theme-one-dark';
 import CheckBoxItem from './checkbox_item'
 
 export default class NewNote extends React.Component {
@@ -12,17 +11,25 @@ export default class NewNote extends React.Component {
       codebody: "",
       textdetails: "",
       isOpen: false, // true when user clicks or types, false otherwise
-      keywordsSelected: []
+      keywordsSelected: [],
+      newResources: []
     }
     // this.resizeOnInput()
     this.bindHandlers();
   }
 
+  componentWillReceiveProps(nextProps) {
+    nextProps.newResources ? this.setState({
+      newResources: nextProps.newResources
+    }, () => this.toggleResourcesModal()) : undefined
+  }
+
   bindHandlers() {
+    this.updateKeywords = this.updateKeywords.bind(this);
+    this.handleResourcesSubmit = this.handleResourcesSubmit.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.init = this.init.bind(this);
     this.toggleForm = this.toggleForm.bind(this);
-    this.updateKeywords = this.updateKeywords.bind(this);
   }
 
 
@@ -109,16 +116,30 @@ export default class NewNote extends React.Component {
       ))
   }
 
+  // remove if possible
   updateKeywords(e) {
-    const pushed = this.state.keywordsSelected.push(e.target.value)
+    e.preventDefault();
+    // e.target.checked ? e.target.checked = false : e.target.checked = true;
+    const keyword = e.target.value;
+    let result;
+    debugger
+    this.state.keywordsSelected.includes(keyword) ? (
+      result = this.state.keywordsSelected.filter(word => word !== keyword)
+    ) : (
+      result = [e.target.value, ...this.state.keywordsSelected]
+    )
+    console.log(result)
     this.setState({
-      keywordsSelected: pushed
+      keywordsSelected: result
     })
   }
 
   handleResourcesSubmit(e) {
     e.preventDefault();
-    this.props.updateNote(noteData, noteId)
+
+    debugger
+    // this.props.updateNote(noteData, noteId);
+    this.toggleResourcesModal();
   }
 
   render() {
@@ -127,17 +148,24 @@ export default class NewNote extends React.Component {
         <div id='resources-note-container' className='modal-on' >
           <div className='modal-wrapper'>
             <div className='resources-modal'>
+              <button onClick={this.toggleResourcesModal}>ToggleTesting</button>
               <h4>Resources</h4>
               <span>Select the keywords that you'd like resources for</span>
               <form className='resource-options'
-                onChange={this.updateKeywords}>
+                onSubmit={this.handleResourcesSubmit}
+              >
                 {this.props.newResources?.map(keyword =>
-                  <CheckBoxItem keyword={keyword} />)}
+                  <CheckBoxItem keyword={keyword}
+                    updateKeywords={this.updateKeywords}
+                  />)
+                }
+                <button type="submit">Submit</button>
               </form>
             </div>
           </div>
         </div>
         <div className='new-note-container' id='new-note-full'>
+          <button onClick={this.toggleResourcesModal}>ToggleTesting</button>
           <div className='new-note-form'>
             <form onSubmit={this.handleSubmit}>
               <div className='note-input'>

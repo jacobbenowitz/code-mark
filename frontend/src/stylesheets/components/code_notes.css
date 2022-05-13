@@ -39,3 +39,22 @@
 .ͼ1 .cm-scroller::-webkit-scrollbar  {
   display: none;
 }
+
+.checkbox-option {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.resource-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
