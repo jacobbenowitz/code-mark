@@ -167,7 +167,7 @@ export default class NewNote extends React.Component {
     // e.target.checked ? e.target.checked = false : e.target.checked = true;
     const keyword = e.target.value;
     let result;
-    debugger
+    // debugger
     this.state.keywordsSelected.includes(keyword) ? (
       result = this.state.keywordsSelected.filter(word => word !== keyword)
     ) : (

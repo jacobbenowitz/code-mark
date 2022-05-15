@@ -13,7 +13,7 @@ export default class CommentForm extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    debugger
+    // debugger
     nextProps.selectedText ? (
       this.setState({
         codeSnippet: nextProps.newComment

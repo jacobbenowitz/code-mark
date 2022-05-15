@@ -7,7 +7,7 @@ import { cpp } from '@codemirror/lang-cpp';
 import { css } from '@codemirror/lang-css';
 
 class CodeEditor extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       lang: [javascript({ jsx: true })]
@@ -15,11 +15,11 @@ class CodeEditor extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(e){
-    this.setState({lang: e.target.value});
+  handleChange(e) {
+    this.setState({ lang: e.target.value });
   }
 
-  render(){
+  render() {
     return (
       <div>
         <select value={this.state.lang} onChange={this.handleChange}>
@@ -38,8 +38,8 @@ class CodeEditor extends React.Component {
           }}
         />
       </div>
-      );
-    }
+    );
+  }
 }
 
 export default CodeEditor;

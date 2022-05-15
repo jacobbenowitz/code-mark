@@ -10,10 +10,10 @@ export const receiveResources = resources => ({
 
 export const getResources = codebody => dispatch => {
     var keywords = getKeywords(codebody);
-    debugger
+    // debugger
     return getStuff(keywords,codebody)
         .then(res => {
-            debugger
+            // debugger
             const links = res.map(obj => obj.link)
             const unique_links = res.filter(({link},idx) => !links.includes(link, idx+1))
             dispatch(receiveResources(unique_links))
