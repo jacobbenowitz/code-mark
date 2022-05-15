@@ -14,21 +14,7 @@ class RecentNotes extends React.Component {
   // }
 
   render() {
-    // return this.props.note ? (
-    //   <div className='note-list-container'>
-    //     <CodeNoteItem key={this.props.note?._id}
-    //       id={this.props.note?._id}
-    //       tags={this.props.note?.tags}
-    //       title={this.props.note?.title}
-    //       textDetails={this.props.note?.textdetails}
-    //       codeBody={this.props.note?.codebody}
-    //       createdAt={this.propsnote?.createdAt}
-    //     />
-    //   </div>
-    // ) : (
-    //   <span className='none-found'>No recent notes</span>
-    // )
-    return (
+    return this.props.note ? (
       <div className='note-list-container'>
         <CodeNoteItem key={this.props.note?._id}
           id={this.props.note?._id}
@@ -39,7 +25,21 @@ class RecentNotes extends React.Component {
           createdAt={this.propsnote?.createdAt}
         />
       </div>
+    ) : (
+      <span className='none-found'>No recent notes</span>
     )
+    // return (
+    //   <div className='note-list-container'>
+    //     <CodeNoteItem key={this.props.note?._id}
+    //       id={this.props.note?._id}
+    //       tags={this.props.note?.tags}
+    //       title={this.props.note?.title}
+    //       textDetails={this.props.note?.textdetails}
+    //       codeBody={this.props.note?.codebody}
+    //       createdAt={this.propsnote?.createdAt}
+    //     />
+    //   </div>
+    // )
   }
 }
 

@@ -29,7 +29,7 @@ class UserNotes extends React.Component {
       return (<span>No notes found :(</span>)
     } else {
       return (
-        this.state.userNotes.map((note) => (
+        this.state.userNotes?.map((note) => (
           <CodeNoteItem key={note._id}
             title={note.title}
             tags={note.tags}
@@ -44,4 +44,4 @@ class UserNotes extends React.Component {
   }
 }
 
-export default withRouter(UserNotes);
+export default UserNotes;

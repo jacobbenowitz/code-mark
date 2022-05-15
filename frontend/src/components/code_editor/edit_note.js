@@ -137,7 +137,8 @@ export default class EditNote extends React.Component {
             <button type='submit' id='code-note-submit'
               className='submit button'>Save</button>
           </form>
-          <span className='hide-button' onClick={this.toggleEditModal}>Hide</span>
+          <span className='hide-button'
+            onClick={this.toggleEditModal}>Hide</span>
         </div>
       </div>
     )

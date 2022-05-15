@@ -42,7 +42,7 @@ export default class NewNote extends React.Component {
     this.updateTags = this.updateTags.bind(this);
     this.toggleTagForm = this.toggleTagForm.bind(this);
     this.updateKeywords = this.updateKeywords.bind(this);
-    this.handleResourcesSubmit = this.handleResourcesSubmit.bind(this);
+    // this.handleResourcesSubmit = this.handleResourcesSubmit.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.init = this.init.bind(this);
     this.toggleForm = this.toggleForm.bind(this);
@@ -93,14 +93,14 @@ export default class NewNote extends React.Component {
     }
   }
 
-  toggleResourcesModal() {
-    const resourcesNoteModal = document.getElementById('resources-note-container');
-    if (resourcesNoteModal.className === "modal-off") {
-      resourcesNoteModal.className = "modal-on"
-    } else {
-      resourcesNoteModal.className = "modal-off"
-    }
-  }
+  // toggleResourcesModal() {
+  //   const resourcesNoteModal = document.getElementById('resources-note-container');
+  //   if (resourcesNoteModal.className === "modal-off") {
+  //     resourcesNoteModal.className = "modal-on"
+  //   } else {
+  //     resourcesNoteModal.className = "modal-off"
+  //   }
+  // }
 
   toggleForm() {
     const fullForm = document.getElementById('new-note-full');
@@ -143,8 +143,6 @@ export default class NewNote extends React.Component {
   }
 
 
-
-
   handleSubmit(e) {
     e.preventDefault();
     let { title, codebody, textdetails } = this.state;
@@ -180,13 +178,13 @@ export default class NewNote extends React.Component {
     })
   }
 
-  handleResourcesSubmit(e) {
-    e.preventDefault();
+  // handleResourcesSubmit(e) {
+  //   e.preventDefault();
 
-    debugger
-    this.props.updateNote(noteData, noteId);
-    this.toggleResourcesModal();
-  }
+  //   debugger
+  //   this.props.updateNote(noteData, noteId);
+  //   this.toggleResourcesModal();
+  // }
 
 
   toggleTagForm() {

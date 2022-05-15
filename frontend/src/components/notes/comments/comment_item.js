@@ -47,7 +47,8 @@ const CommentItem = props => {
         <div className="user-info-wrapper">
           <div className="avatar-wrapper">
             <div className="avatar-container-sm">
-              <span>{props.user.username?.slice(0, 2).toUpperCase()}</span>
+              {/* <span>{props.user.username?.slice(0, 2).toUpperCase()}</span> */}
+              <span>JM</span>
             </div>
           </div>
           <div className="user-details">
