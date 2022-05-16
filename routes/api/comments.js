@@ -62,12 +62,12 @@ router.post('/',
         }
 
         const newComment = new Comment({
-            user: req.user.id,
+            // user: req.user.id,
+            user: req.user.username,
             note: req.body.note,
             textbody: req.body.textbody,
             codeSnippet: req.body.codeSnippet
         });
-
         newComment.save()
             .then(() => {
                 req.user.comments.push(newComment.id)
@@ -80,6 +80,9 @@ router.post('/',
                         note.save()
                     });
             })
+            // .then(() => {
+            //     newComment.populate('user');
+            // })
             .then(() => res.json(newComment));
     }
 );

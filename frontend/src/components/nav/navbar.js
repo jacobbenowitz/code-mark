@@ -4,14 +4,7 @@ import { Link } from 'react-router-dom';
 export default class NavBar extends React.Component {
   constructor(props) {
     super(props);
-    this.logoutUser = this.logoutUser.bind(this);
     this.getLinks = this.getLinks.bind(this);
-  }
-
-  logoutUser(e) {
-    e.preventDefault();
-    this.props.logout();
-    this.props.history.push('/')
   }
 
   // render links based on loggedIn
@@ -19,8 +12,8 @@ export default class NavBar extends React.Component {
     if (this.props.loggedIn) {
       return (
         <div>
-          <Link className="logout button" to={'/'}
-            onClick={this.logoutUser}>Logout</Link>
+          <Link className="logout button" to={''}
+            onClick={() => this.props.logout()}>Logout</Link>
         </div>
       );
     } else {

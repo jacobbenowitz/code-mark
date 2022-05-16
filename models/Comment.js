@@ -7,8 +7,10 @@ const CommentSchema = new Schema({
         ref: 'notes'
     },
     user: {
-        type: Schema.Types.ObjectId,
-        ref: 'users'
+        // type: Schema.Types.ObjectId,
+        // ref: 'users'
+        type: String
+        // ref: 'users'
     },
     textbody: {
         type: String,

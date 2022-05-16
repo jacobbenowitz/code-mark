@@ -16,7 +16,8 @@ const UserSchema = new Schema({
     }
     ,
     notes: [{type: Schema.Types.ObjectId, ref: "notes"}],
-    comments: [{type: Schema.Types.ObjectId, ref: "comments"}]
+    comments: [{type: Schema.Types.ObjectId, ref: "comments"}],
+    likes: [{type: Schema.Types.ObjectId, ref: "notes"}]
     }, 
     {timestamps: true}
 )
