@@ -1,6 +1,9 @@
 {
   "name": "code-mark",
   "version": "1.0.0",
+  "engines": {
+    "node": "16.14.2"
+  },
   "description": "mern project",
   "main": "app.js",
   "scripts": {
