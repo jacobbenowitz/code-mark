@@ -9,7 +9,7 @@ const CommentSchema = new Schema({
     user: {
         // type: Schema.Types.ObjectId,
         // ref: 'users'
-        type: String
+        type: Object
         // ref: 'users'
     },
     textbody: {

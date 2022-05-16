@@ -50,7 +50,7 @@ router.post('/',
 
         const newNote = new Note({
             codebody: req.body.codebody,
-            user: req.user.id,
+            user: {username : req.user.username, userId : req.user.id},
             title: req.body.title,
             textdetails: req.body.textdetails,
             resources: req.body.resources,
