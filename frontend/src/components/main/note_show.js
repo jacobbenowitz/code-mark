@@ -29,7 +29,7 @@ export default class NoteShow extends React.Component {
     }
     this.deleteNote = this.deleteNote.bind(this);
     this.deleteThisComment = this.deleteThisComment.bind(this);
-    // this.toggleCommentModal = this.toggleCommentModal.bind(this);
+    this.toggleCommentModal = this.toggleCommentModal.bind(this);
   }
 
   componentWillMount() {
@@ -107,6 +107,7 @@ export default class NoteShow extends React.Component {
       commentModal: true,
       selectedText: selection
     })
+    this.toggleCommentModal()
     // const commentSection = document.getElementById("comments");
     // const newSnippetField = document.getElementById("code-snippet-new")
     // newSnippetField.value = selection
@@ -164,9 +165,7 @@ export default class NoteShow extends React.Component {
 
       const { clientX: mouseX, clientY: mouseY } = event;
 
-
       contextMenu.classList.remove("visible");
-
       contextMenu.style.top = `${mouseY}px`;
       contextMenu.style.left = `${mouseX}px`;
 
@@ -180,7 +179,6 @@ export default class NoteShow extends React.Component {
       if (e.target.offsetParent != contextMenu) {
         contextMenu.classList.remove("visible");
       }
-
       contextMenu.classList.remove("visible");
     });
 
@@ -211,14 +209,11 @@ export default class NoteShow extends React.Component {
             onMouseDown={() => {
               let selection = window.getSelection().toString();
               navigator.clipboard.writeText(selection)
-            }
-            }
-          >Copy selection</div>
+            }}>Copy selection</div>
           <div className="menu-item" onMouseDown={() => {
             let selection = window.getSelection()
-            this.commentOnSelection(window.getSelection().toString())
-          }}
-          >Comment on this selection</div>
+            this.commentOnSelection(selection.toString())
+          }}>Comment on this selection</div>
           {/* <div className="menu-item" onMouseDown={() =>
             this.commentOnSelection(this.state.selection)}
           >Comment 2</div> */}
@@ -228,10 +223,6 @@ export default class NoteShow extends React.Component {
           className={this.state.commentModal ? 'modal-on' : 'modal-off'} >
           <div className='modal-wrapper'>
             <div className='comment-modal'>
-              <div className='close-x'
-                onMouseUp={this.toggleCommentModal}>
-                <i className="fa-solid fa-xmark"></i>
-              </div>
               <CommentFormModal
                 noteId={this.props.noteId}
                 selectedText={this.state.selectedText}

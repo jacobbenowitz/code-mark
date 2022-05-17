@@ -3,10 +3,12 @@ import ContentLoader from "react-content-loader"
 import CodeNoteItem from "../notes/code_note_item"
 
 const AllNotes = (props) => (
-    props.notes?.map( (note) =>
+    props.notes?.map((note) =>
         <CodeNoteItem key={note._id}
             title={note.title}
             tags={note.tags}
+            username={note.user.username}
+            userId={note.user.userId}
             textDetails={note.textdetails}
             codeBody={note.codebody}
             id={note._id}
@@ -15,7 +17,7 @@ const AllNotes = (props) => (
             createdAt={note.createdAt}
         />
     )
-    
+
 )
 
 

@@ -6,7 +6,9 @@ import AllNotes from './all_notes';
 export default class UserFiltered extends React.Component {
 
   componentWillMount() {
+    console.log(this.props.userId)
     this.props.fetchUserNotes(this.props.userId);
+    this.props.fetchUser(this.props.userId)
   };
 
   render() {
@@ -44,7 +46,7 @@ export default class UserFiltered extends React.Component {
         <div className='home-main'>
           <div className='notes-section'>
             <div className='section-title'>
-              <h1>User's Notes</h1>
+              <h1>{this.props.user.username}'s Notes</h1>
             </div>
             <div className='note-list-container'>
               {this.props.userNotes.length === 0 ? (
