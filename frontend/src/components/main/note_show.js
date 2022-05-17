@@ -26,7 +26,6 @@ export default class NoteShow extends React.Component {
       commentModal: false
     }
     this.deleteNote = this.deleteNote.bind(this);
-    this.toggleCommentModal = this.toggleCommentModal.bind(this);
   }
 
   componentWillMount() {
@@ -78,31 +77,18 @@ export default class NoteShow extends React.Component {
     }
   }
 
-  // toggleCommentModal() {
-  //   this.setState({ commentModal: !this.state.commentModal })
-  // }
-  toggleCommentModal() {
-    const commentModal = document.getElementById('comment-modal-container');
-    if (commentModal.className === "modal-off") {
-      commentModal.className = "modal-on"
-    } else {
-      commentModal.className = "modal-off";
-    }
-  }
-
 
   commentOnSelection(selection) {
-    this.setState({
-      commentModal: true,
-      selectedText: selection
-    })
+    // this.setState({
+    //   commentModal: true,
+    //   selectedText: selection
+    // })
+    const commentSection = document.getElementById("comments");
+    const newSnippetField = document.getElementById("code-snippet-new")
+    newSnippetField.value = selection
+    newSnippetField.focus()
+    commentSection.scrollIntoView({ behavior: 'smooth' })
     this.toggleCommentModal()
-    // const commentSection = document.getElementById("comments");
-    // const newSnippetField = document.getElementById("code-snippet-new")
-    // newSnippetField.value = selection
-    // newSnippetField.focus()
-    // commentSection.scrollIntoView({ behavior: 'smooth' })
-    // this.toggleCommentModal()
   }
 
 
@@ -113,6 +99,7 @@ export default class NoteShow extends React.Component {
     const { note } = this.state;
     const contextMenu = document.getElementById("context-menu");
     const scope = document.querySelector("body");
+    const codeNote = document.getElementById('code-note-view')
 
     // const normalizePozition = (mouseX, mouseY) => {
     //   // ? compute what is the mouse position relative to the container element (scope)
@@ -185,9 +172,9 @@ export default class NoteShow extends React.Component {
 
     // listen for selection and update state
     // document.onselectionchange = () => {
-    //   // console.log(document.getSelection().toString())
-    //   let selection = document.getSelection()
-    //   this.setState({ selectedText: selection.toString() });
+    // let selection = document.getSelection()
+    // console.log(document.getSelection())
+    // this.setState({ selectedText: selection.toString() });
     // };
 
 
@@ -208,19 +195,6 @@ export default class NoteShow extends React.Component {
           >Comment 2</div> */}
         </div>
 
-        <div id='comment-modal-container'
-          className={this.state.commentModal ? 'modal-on' : 'modal-off'} >
-          <div className='modal-wrapper'>
-            <div className='comment-modal'>
-              <CommentFormModal
-                noteId={this.props.noteId}
-                selectedText={this.state.selectedText}
-                composeComment={this.props.composeComment}
-                toggleCommentModal={this.toggleCommentModal}
-              />
-            </div>
-          </div>
-        </div>
         <div id='confirm-modal-container' className='modal-off' >
           <div className='modal-wrapper'>
             <div className='cancel-modal'>
@@ -300,7 +274,10 @@ export default class NoteShow extends React.Component {
               />
             </div>
 
-            <div className='code-note-body'>
+            <div className='code-note-body' id='code-note-view'>
+              <div className='info-icon'>
+                <i className="fa-solid fa-circle-question fa-lg"></i>
+              </div>
               <CodeEditorReadOnly
                 codeBody={note.codebody}
               />
@@ -327,6 +304,7 @@ export default class NoteShow extends React.Component {
           <section id={'comments'} className='note-comments'>
             <div className='comments-title'>
               <h4>Comments</h4>
+              <p>Select any part of the CodeMark above and right click to comment on that snippet!</p>
             </div>
             <CommentIndex
               isCurrentUser={this.props.currentUser.id === this.props.note.user.userId}
