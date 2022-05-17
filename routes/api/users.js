@@ -10,10 +10,10 @@ const validateLoginInput = require('../../validation/login');
 
 router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 
-router.get('/', (req,res) => {
+router.get('/', (req, res) => {
     User.find()
         .then(users => res.json(users))
-        .catch(err => res.status(404).json({ nousersfound: 'No Users Found'}));
+        .catch(err => res.status(404).json({ nousersfound: 'No Users Found' }));
 })
 
 router.post('/register', (req, res) => {
@@ -27,29 +27,29 @@ router.post('/register', (req, res) => {
             if (user) {
                 return res.status(400).json({ email: "A user has already registered with this address" })
             } else {
-                User.findOne({username: req.body.username})
+                User.findOne({ username: req.body.username })
                     .then(user => {
                         if (user) {
                             return res.status(400).json({ username: "A user has already registered with this name" })
-                        }else{
+                        } else {
                             const newUser = new User({
                                 username: req.body.username,
                                 email: req.body.email,
                                 password: req.body.password
                             })
-                            
+
                             bcrypt.genSalt(10, (err, salt) => {
                                 bcrypt.hash(newUser.password, salt, (err, hash) => {
                                     if (err) throw err;
                                     newUser.password = hash;
                                     newUser.save()
-                                    .then(user => res.json(user))
-                                    .catch(err => console.log(err))
+                                        .then(user => res.json(user))
+                                        .catch(err => console.log(err))
                                 })
                             })
                         }
                     }
-                )
+                    )
             }
         })
 }
@@ -65,7 +65,7 @@ router.post('/login', (req, res) => {
     const nameValue = req.body.usernameOrEmail;
     const password = req.body.password;
 
-    User.findOne({$or: [{ username: nameValue },{ email: nameValue}]})
+    User.findOne({ $or: [{ username: nameValue }, { email: nameValue }] })
         .then(user => {
             if (!user) {
                 return res.status(404).json({ username: 'This user does not exist' });
@@ -102,11 +102,12 @@ router.get('/current', passport.authenticate('jwt', { session: false }), (req, r
     });
 })
 
-router.get('/:id', (req,res) => {
-    User.findById(req.params.id)
+router.get('/:userId', (req, res) => {
+    debugger
+    User.findById(req.params.userId)
         .then(user => res.json(user))
-        .catch(err => 
-            res.status(404).json({ nouserfound: "No User Found With That ID"})
+        .catch(err =>
+            res.status(404).json({ nouserfound: "No User Found With That ID" })
         );
 });
 
