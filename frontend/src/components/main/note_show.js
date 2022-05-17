@@ -93,7 +93,6 @@ export default class NoteShow extends React.Component {
   //   this.setState({ commentModal: !this.state.commentModal })
   // }
   toggleCommentModal() {
-    debugger
     const commentModal = document.getElementById('comment-modal-container');
     if (commentModal.className === "modal-off") {
       commentModal.className = "modal-on"

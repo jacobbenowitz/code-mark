@@ -103,7 +103,6 @@ router.get('/current', passport.authenticate('jwt', { session: false }), (req, r
 })
 
 router.get('/:userId', (req, res) => {
-    debugger
     User.findById(req.params.userId)
         .then(user => res.json(user))
         .catch(err =>
