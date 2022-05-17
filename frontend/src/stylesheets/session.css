@@ -26,8 +26,34 @@
   box-sizing: border-box;
 }
 
+.signup-buttons-wrapper {
+  margin-top: 1rem;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+}
+
 #session-form > h3 {
   padding-bottom: 15px;
+}
+
+.demo_button {
+  border: 1px solid transparent;
+  background: #2d2d2d00;
+  margin-left: 2rem;
+}
+
+.demo_button:hover {
+  border: 1px solid transparent;
+  background: #2d2d2d00;
+  color: #37F3FF;
+  box-shadow: 0px 0px 18px rgb(0 0 0 / 50%);
+  border-radius: 4px;
+  z-index: 20;
+  padding: 0.4rem 1rem 0.4rem 1rem;
 }
 
 #session-form form {

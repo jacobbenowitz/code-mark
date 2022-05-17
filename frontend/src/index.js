@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (decodedUser.exp < currentTime) {
       // logout user and redirect to login
       store.dispatch(logout());
-      window.location.href = '/login';
+      window.location.href = '/';
     }
   } else {
     // no session token = empty store

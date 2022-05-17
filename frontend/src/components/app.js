@@ -31,7 +31,6 @@ const App = () => (
       <NavBarContainer />
     </header>
     <Switch>
-      <AuthRoute exact path="/" component={SplashPage} />
       <AuthRoute exact path='/login' component={LoginFormContainer} />
       <AuthRoute exact path='/signup' component={SignupFormContainer} />
       <ProtectedRoute exact path='/home' component={HomeContainer} />
@@ -41,6 +40,7 @@ const App = () => (
       {/* <ProtectedRoute exact path='/profile' component={ProfileContainer} /> */}
       <ProtectedRoute exact path='/discover' component={DiscoverContainer} />
       {/* <ProtectedRoute exact path='/following' component={FollowingContainer} /> */}
+      <AuthRoute path="/" component={SplashPage} />
     </Switch>
     <footer className="grid-bottom-stack">
       <NavFooter />

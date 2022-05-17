@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import Demo from "./demo_user_signup"
+import { Link } from 'react-router-dom';
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class SignupForm extends React.Component {
 
   demoScript(e) {
     e.preventDefault();
-    
+
     Demo.demoSignupForm();
   }
 
@@ -53,7 +54,7 @@ class SignupForm extends React.Component {
       password: this.state.password,
       password2: this.state.password2,
     };
-     
+
     this.props.signup(user, this.props.history);
   }
 
@@ -115,20 +116,25 @@ class SignupForm extends React.Component {
                 className="text-input"
               />
             </div>
-            <button type='submit'
-              className={'button-session'}>Signup</button>
+            <div className='signup-buttons-wrapper'>
+              <button type='submit'
+                className={'button-session'}>Signup</button>
+              <button className="demo_button"
+                id="demo-signup"
+                onClick={this.demoScript}
+              >Demo account</button>
+              <button
+                onClick={this.demoSignup}
+                id="hidden-demo">Demo only
+              </button>
+            </div>
             {this.renderErrors()}
           </form>
 
-          <button className="demo_button"
-            id="demo-signup"
-            onClick={this.demoScript}
-          >Demo account</button>
-
-          <button
-            onClick={this.demoSignup}
-            id="hidden-demo">Demo only
-          </button>
+          <span className="alt-session-link">
+            <p>Already have an account?</p>
+            <Link to={'/login'}>Login</Link>
+          </span>
         </div>
       </div>
     )

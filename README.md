@@ -1,3 +1,3 @@
 # CodeMark
 
-**Live link: [CodeMark](https://code-mark.herokuapp.com/#/)**
+**Live link: [CodeMark](https://code-mark.herokuapp.com/)**
