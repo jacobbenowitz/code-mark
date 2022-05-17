@@ -123,14 +123,14 @@ router.delete('/:id',
                             User.findById(userid)
                                 .then(user => {
                                     user.comments = user.comments.filter(item => item.toString() !== commentid);
-                                    user.save().then(user => res.json(user));
+                                    user.save();
                                 });
                         })
                         .then(() => {
                             Note.findById(noteid)
                                 .then(note => {
                                     note.comments = note.comments.filter(item => item.toString() !== commentid);
-                                    note.save().then(note => res.json(note));
+                                    note.save();
                                 });
                         })
                         .then(() => res.json(commentid));

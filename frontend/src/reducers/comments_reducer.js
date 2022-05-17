@@ -33,9 +33,9 @@ const commentsReducer = (prevState = initialState, action) => {
             nextState.all.push(action.comment);
             return nextState;
         case RECEIVE_DELETE_COMMENT:
-            return nextState.deleted = nextState.deleted.push(action.commentId)
+            nextState.deleted.push(action.commentId.data);
+            return nextState;
         case RECEIVE_UPDATED_COMMENT:
-            //  
             nextState.all.map(comment => {
                 if (comment._id === action.comment._id) {
                     return action.comment
@@ -44,7 +44,6 @@ const commentsReducer = (prevState = initialState, action) => {
             });
             return nextState;
         case RECEIVE_NOTE_COMMENTS:
-            //  
             nextState.note = action.comments;
             return nextState;
         default:

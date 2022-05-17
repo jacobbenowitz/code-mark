@@ -16,8 +16,6 @@ import ResourceItem from '../notes/resources/resource_item';
 import { Link, Redirect } from 'react-router-dom';
 
 
-
-
 export default class NoteShow extends React.Component {
   constructor(props) {
     super(props);
@@ -34,7 +32,6 @@ export default class NoteShow extends React.Component {
   componentWillMount() {
     this.props.fetchNote(this.props.noteId);
     this.props.fetchNoteComments(this.props.noteId);
-    this.props.fetchUsers();
   }
 
   componentDidMount() {
@@ -45,24 +42,16 @@ export default class NoteShow extends React.Component {
     this._isMounted = false;
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.deletedComments.length > 0) {
-      debugger
-      let filtered = this.state.comments.filter(comment =>
-        !nextProps.deletedComments.includes(comment._id))
-      this.setState({
-        note: nextProps.note,
-        comments: orderNoteComments(filtered),
-        newComment: nextProps.newComment
-      })
-    } else {
-      this.setState({
-        note: nextProps.note,
-        comments: orderNoteComments(nextProps.comments),
-        newComment: nextProps.newComment
-      })
-    }
+  componentDidUpdate() {
+    debugger
+  }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      note: nextProps.note,
+      comments: orderNoteComments(nextProps.comments),
+      newComment: nextProps.newComment
+    })
   }
 
   deleteNote() {
@@ -347,6 +336,8 @@ export default class NoteShow extends React.Component {
               note={this.props.note}
               users={this.props.users}
               deletedComments={this.props.deletedComments}
+              fetchNote={this.props.fetchNote}
+              noteId={this.props.noteId}
             />
           </section>
         </div>

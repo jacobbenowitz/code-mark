@@ -18,6 +18,18 @@ class CommentItem extends React.Component {
     }
   }
 
+  deleteComment() {
+    this.props.removeComment(this.props.comment._id);
+    this.toggleDeleteModal();
+    this.hideComment();
+  }
+
+  hideComment() {
+    let commentWrapper = document.getElementById(`${this.props.comment._id}`)
+    debugger
+    commentWrapper.className = "hidden"
+  }
+
 
   render() {
     return (
@@ -29,7 +41,7 @@ class CommentItem extends React.Component {
               <span>Are you sure you want to delete this comment?</span>
               <div className='modal-buttons-2'>
                 <div className='delete-note icon-button'
-                  onClick={() => this.props.removeComment(this.props.comment._id)}>
+                  onClick={() => this.deleteComment()}>
                   <i className="fa-solid fa-trash fa-lg"></i>
                   <span>Delete </span>
                 </div>
@@ -45,7 +57,7 @@ class CommentItem extends React.Component {
           </div>
         </div>
 
-        <div className="comment-wrapper">
+        <div id={this.props.comment._id} className="comment-wrapper">
           <div className="comment-top-wrapper">
             <div className="user-info-wrapper">
               <div className="user-details">

@@ -20,6 +20,10 @@
 
 } */
 
+.hidden {
+  display: none;
+}
+
 .comment-time-ago {
   font-size: 0.8rem;
   width: 98%;

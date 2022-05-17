@@ -26,6 +26,8 @@ export default class CommentIndex extends React.Component {
                 comment={comment}
                 user={comment.user}
                 removeComment={removeComment}
+                fetchNote={this.props.fetchNote}
+                noteId={this.props.noteId}
               />
             })}
           </div>) : ''}
