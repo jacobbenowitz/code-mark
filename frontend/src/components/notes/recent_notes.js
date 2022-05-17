@@ -18,8 +18,8 @@ class RecentNotes extends React.Component {
       <div className='note-list-container'>
         <CodeNoteItem key={this.props.note?._id}
           id={this.props.note?._id}
-          username={note.user.username}
-          userId={note.user.userId}
+          username={this.props.note.user.username}
+          userId={this.props.note.user.userId}
           tags={this.props.note?.tags}
           title={this.props.note?.title}
           textDetails={this.props.note?.textdetails}
