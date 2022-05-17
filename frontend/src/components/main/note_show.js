@@ -28,7 +28,6 @@ export default class NoteShow extends React.Component {
       commentModal: false
     }
     this.deleteNote = this.deleteNote.bind(this);
-    this.deleteThisComment = this.deleteThisComment.bind(this);
     this.toggleCommentModal = this.toggleCommentModal.bind(this);
   }
 
@@ -47,11 +46,23 @@ export default class NoteShow extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      note: nextProps.note,
-      comments: orderNoteComments(nextProps.comments),
-      newComment: nextProps.newComment
-    })
+    if (nextProps.deletedComments.length > 0) {
+      debugger
+      let filtered = this.state.comments.filter(comment =>
+        !nextProps.deletedComments.includes(comment._id))
+      this.setState({
+        note: nextProps.note,
+        comments: orderNoteComments(filtered),
+        newComment: nextProps.newComment
+      })
+    } else {
+      this.setState({
+        note: nextProps.note,
+        comments: orderNoteComments(nextProps.comments),
+        newComment: nextProps.newComment
+      })
+    }
+
   }
 
   deleteNote() {
@@ -67,17 +78,6 @@ export default class NoteShow extends React.Component {
     } else {
       editNoteModal.className = "modal-off"
     }
-  }
-
-  deleteThisComment(commentId) {
-
-    const comments = this.state.comments.filter(comment =>
-      comment._id !== commentId
-    )
-    this.setState({ comments: comments }, () => {
-
-      this.props.removeComment(commentId)
-    })
   }
 
   toggleDeleteModal() {
@@ -339,10 +339,15 @@ export default class NoteShow extends React.Component {
             <div className='comments-title'>
               <h4>Comments</h4>
             </div>
-            <CommentIndex comments={this.state.comments}
+            <CommentIndex
+              isCurrentUser={this.props.currentUser.id === this.props.note.user.userId}
+              comments={this.state.comments}
               newComment={this.props.newComment}
+              removeComment={this.props.removeComment}
               note={this.props.note}
-              users={this.props.users} />
+              users={this.props.users}
+              deletedComments={this.props.deletedComments}
+            />
           </section>
         </div>
       </>

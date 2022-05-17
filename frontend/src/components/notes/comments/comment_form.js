@@ -5,7 +5,7 @@ export default class CommentForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      codeSnippet: "Add a code snippet",
+      codeSnippet: "",
       textbody: "",
       newComment: undefined
     }
@@ -72,7 +72,7 @@ export default class CommentForm extends React.Component {
               <div className="code-snippet-comment">
                 <textarea id='code-snippet-new' className="code code-textarea"
                   value={this.state.codeSnippet}
-                  // defaultValue={'Code snippet here'}
+                  defaultValue={'Add a code snippet'}
                   onChange={this.update('codeSnippet')}
                 ></textarea>
               </div>
@@ -92,7 +92,8 @@ export default class CommentForm extends React.Component {
             key={'new-comment-1'}
             id={this.state.newComment._id}
             comment={this.state.newComment}
-          // deleteThisComment={this.deleteThisComment}
+            user={this.props.currentUser}
+            removeComment={this.props.removeComment}
           />) : ''}
       </>
     )

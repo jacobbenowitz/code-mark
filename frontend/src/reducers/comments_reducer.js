@@ -12,6 +12,7 @@ const initialState = {
     all: [],
     user: [],
     note: [],
+    deleted: [],
     new: undefined
 };
 
@@ -32,9 +33,7 @@ const commentsReducer = (prevState = initialState, action) => {
             nextState.all.push(action.comment);
             return nextState;
         case RECEIVE_DELETE_COMMENT:
-            return nextState.all.filter(comment =>
-                comment._id !== action.commentId
-            )
+            return nextState.deleted = nextState.deleted.push(action.commentId)
         case RECEIVE_UPDATED_COMMENT:
             //  
             nextState.all.map(comment => {
