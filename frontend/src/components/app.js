@@ -22,6 +22,7 @@ import NoteShowContainer from './main/note_show_container';
 import HomeContainer from './main/home_container';
 import HomeFilteredContainer from './main/home_filtered_container';
 import DiscoverContainer from './main/discover_container';
+import UserFilteredContainer from './main/user_filtered_container';
 
 
 const App = () => (
@@ -36,6 +37,7 @@ const App = () => (
       <ProtectedRoute exact path='/home' component={HomeContainer} />
       <ProtectedRoute exact path={'/notes/:noteId'} component={NoteShowContainer} />
       <ProtectedRoute path='/notes/tags/:tag' component={HomeFilteredContainer} />
+      <ProtectedRoute path='/users/:userId' component={UserFilteredContainer} />
       {/* <ProtectedRoute exact path='/profile' component={ProfileContainer} /> */}
       <ProtectedRoute exact path='/discover' component={DiscoverContainer} />
       {/* <ProtectedRoute exact path='/following' component={FollowingContainer} /> */}

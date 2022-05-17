@@ -13,6 +13,7 @@ import Tags from '../tags/tags';
 // textarea resize: https://stackoverflow.com/questions/20775824/after-clicking-on-selected-text-window-selection-is-not-giving-updated-range
 import CommentIndex from '../notes/comments/comment_index';
 import ResourceItem from '../notes/resources/resource_item';
+import { Link, Redirect } from 'react-router-dom';
 
 
 
@@ -55,7 +56,7 @@ export default class NoteShow extends React.Component {
 
   deleteNote() {
     this.props.removeNote(this.props.noteId).then(() => {
-      this.props.history.push('/home')
+      <Redirect to={'/home'} />
     })
   }
 
@@ -184,16 +185,16 @@ export default class NoteShow extends React.Component {
     });
 
     // textarea resize
-    // const tx = document.querySelectorAll("textarea ");
-    // for (let i = 0; i < tx.length; i++) {
-    //   tx[i].setAttribute("style", "height:" + (tx[i].scrollHeight) + "px;overflow-y:hidden;");
-    //   tx[i].addEventListener("input", OnInput, false);
-    // }
+    const tx = document.querySelectorAll("textarea ");
+    for (let i = 0; i < tx.length; i++) {
+      tx[i].setAttribute("style", "height:" + (tx[i].scrollHeight) + "px;overflow-y:hidden;");
+      tx[i].addEventListener("input", OnInput, false);
+    }
 
-    // function OnInput() {
-    //   this.style.height = "auto";
-    //   this.style.height = (this.scrollHeight) + "px";
-    // }
+    function OnInput() {
+      this.style.height = "auto";
+      this.style.height = (this.scrollHeight) + "px";
+    }
 
     // listen for selection and update state
     // document.onselectionchange = () => {
@@ -205,7 +206,6 @@ export default class NoteShow extends React.Component {
 
     return note ? (
       <>
-
         <div id="context-menu">
           <div className="menu-item"
             onMouseDown={() => {
@@ -282,7 +282,7 @@ export default class NoteShow extends React.Component {
             </div>
 
 
-            {this.props.currentUser.id === this.props.note.user ? (
+            {this.props.currentUser.id === this.props.note.user.userId ? (
               <div className='edit-note icon-button'
                 onClick={() => this.toggleEditModal()}>
                 <i className="fa-solid fa-pen-to-square fa-lg"></i>
@@ -291,25 +291,31 @@ export default class NoteShow extends React.Component {
                 </span>
               </div>
             ) :
-              undefined
+              ""
             }
 
-            <div className='delete-note icon-button'
-              onClick={() => this.toggleDeleteModal()}>
-              <i className="fa-solid fa-trash fa-lg"></i>
-              <span>
-                Delete
-              </span>
-            </div>
+            {this.props.currentUser.id === this.props.note.user.userId ? (
+              <div className='delete-note icon-button'
+                onClick={() => this.toggleDeleteModal()}>
+                <i className="fa-solid fa-trash fa-lg"></i>
+                <span>
+                  Delete
+                </span>
+              </div>
+            ) :
+              ""
+            }
           </div>
-
           <div className='note-show-main'>
             <div className='note-show-title'>
+              <Link className='username'
+                to={`/users/${note.user.userId}`}>@{note.user.username}</Link>
               <h1>{note.title}</h1>
             </div>
 
             <div className='note-tags-wrapper'>
               <Tags note={this.state.note}
+                isCurrentUser={this.props.currentUser.id === this.props.note.user.userId}
                 updateNote={this.props.updateNote}
               />
             </div>
@@ -326,18 +332,18 @@ export default class NoteShow extends React.Component {
               </span>
             </div>
           </div>
-          {/* {this.props.note.resources.length ? ( */}
-          <div className='note-resources'>
-            <div className='resources-title'>
-              <h4>Resources</h4>
+          {this.props.note.resources.length ? (
+            <div className='note-resources'>
+              <div className='resources-title'>
+                <h4>Resources</h4>
+              </div>
+              <div className='resources-list'>
+                {this.props.note.resources?.map(resource =>
+                  <ResourceItem resource={resource} />
+                )}
+              </div>
             </div>
-            <div className='resources-list'>
-              {this.props.note.resources?.map(resource =>
-                <ResourceItem resource={resource} />
-              )}
-            </div>
-          </div>
-          {/* ) : ""} */}
+          ) : ""}
           <section id={'comments'} className='note-comments'>
             <div className='comments-title'>
               <h4>Comments</h4>

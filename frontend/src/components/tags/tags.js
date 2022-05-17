@@ -46,7 +46,7 @@ export default class Tags extends React.Component {
       resources: resources,
       tags: newTags,
     }
-    
+
     this.props.updateNote(nextNote, _id)
       .then(() => (
         this.setState({
@@ -72,15 +72,17 @@ export default class Tags extends React.Component {
 
     return (
       <div className='note-tags-list'>
-        <div className="tag-item-wrapper tag-icon-new"
-          id='toggle-tag-form-button'
-          onClick={this.toggleTagForm}>
-          {this.state.tagForm ? (
-            <i className="fa-solid fa-minus"></i>
-          ) : (
-            <i className="fa-solid fa-circle-plus"></i>
-          )}
-        </div>
+        {this.props.isCurrentUser ? (
+          <div className="tag-item-wrapper tag-icon-new"
+            id='toggle-tag-form-button'
+            onClick={this.toggleTagForm}>
+            {this.state.tagForm ? (
+              <i className="fa-solid fa-minus"></i>
+            ) : (
+              <i className="fa-solid fa-circle-plus"></i>
+            )}
+          </div>
+        ) : undefined}
 
 
         <form onSubmit={this.handleSubmit}
@@ -98,6 +100,7 @@ export default class Tags extends React.Component {
         {
           this.state.tags?.map((tag, i) =>
             <TagItem title={tag} key={`tag-${i}`}
+              isCurrentUser={this.props.isCurrentUser}
               updateNote={this.props.updateNote}
               note={this.props.note}
               tags={this.state.tags}
