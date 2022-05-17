@@ -20,12 +20,12 @@ const CodeNoteItem = props => (
         <div className="note-tag-mini">{tag}</div>)}
     </div>
     <div className="code-note-text">
-      <span className="code-note-title">
-        {props?.title}
-      </span>
       <div className="updated-at">
         <span>{moment(props?.createdAt).fromNow()}</span>
       </div>
+      <Link className="code-note-title" to={`/notes/${props.id}`}>
+        {props?.title}
+      </Link>
       <span className="code-note-body">
         {props?.textDetails}
       </span>
