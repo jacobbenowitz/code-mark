@@ -5,9 +5,9 @@ import moment from 'moment';
 import { useHistory } from 'react-router-dom';
 
 const CodeNoteItem = props => (
-  // <div className="code-note-item"
-  //   onClick={<Redirect to={`/notes/${props.id}`} />}>
-  <div className="code-note-item">
+  <div className="code-note-item"
+    onClick={<Redirect to={`/notes/${props.id}`} />}>
+    {/* <div className="code-note-item"> */}
     <div className="note-item-top">
       <div className="comment-count">
         <i class="fa-solid fa-comments"></i>

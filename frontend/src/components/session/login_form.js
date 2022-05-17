@@ -77,7 +77,17 @@ class LoginForm extends React.Component {
                 className="text-input"
               />
             </div>
-            <button type='submit' className={'button-session'}>Login</button>
+            <div className='signup-buttons-wrapper'>
+              <button type='submit' className={'button-session'}>Login</button>
+              <button className="demo_button"
+                id="demo-signup"
+                onClick={this.demoScript}
+              >Demo account</button>
+              <button
+                onClick={this.demoSignup}
+                id="hidden-demo">Demo only
+              </button>
+            </div>
             {this.renderErrors()}
             <span className="alt-session-link">
               <p>Don't have an account?</p>
