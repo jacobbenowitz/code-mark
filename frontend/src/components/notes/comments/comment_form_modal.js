@@ -63,6 +63,10 @@ export default class CommentFormModal extends React.Component {
     return (
       <>
         <div className='new-comment-container'>
+          <div className='close-x'
+            onMouseUp={this.props.toggleCommentModal}>
+            <i className="fa-solid fa-xmark"></i>
+          </div>
           <form onSubmit={this.handleSubmit} className='comment-form'>
             <div className='add-code-snippet-wrapper'>
               <div className="code-snippet-comment">

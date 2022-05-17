@@ -36,20 +36,29 @@ class TagItem extends React.Component {
 
   render() {
     return (
-      <div className="tag-item-wrapper"
-        onMouseEnter={this.toggleDelete} onMouseLeave={this.toggleDelete}>
-        <div className="tag-icon-wrapper">
-          <i className="fa-solid fa-tag"></i>
+      this.props.isCurrentUser ? (
+        <div className="tag-item-wrapper"
+          onMouseEnter={this.toggleDelete} onMouseLeave={this.toggleDelete}>
+          <div className="tag-icon-wrapper">
+            <i className="fa-solid fa-tag"></i>
+          </div>
+          <span className="tag-text">{this.props.title}</span>
+          {this.state.showDelete ? (
+            <button className='tag-delete-button'
+              onClick={() => this.deleteTag()}
+            >
+              <span>delete</span>
+            </button>
+          ) : ('')}
         </div>
-        <span className="tag-text">{this.props.title}</span>
-        {this.state.showDelete ? (
-          <button className='tag-delete-button'
-            onClick={() => this.deleteTag()}
-          >
-            <span>delete</span>
-          </button>
-        ) : ('')}
-      </div>
+      ) : (
+        <div className="tag-item-wrapper">
+          <div className="tag-icon-wrapper">
+            <i className="fa-solid fa-tag"></i>
+          </div>
+          <span className="tag-text">{this.props.title}</span>
+        </div>
+      )
     )
   }
 }

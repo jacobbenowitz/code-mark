@@ -33,6 +33,8 @@ class UserNotes extends React.Component {
           <CodeNoteItem key={note._id}
             title={note.title}
             tags={note.tags}
+            username={note.user.username}
+            userId={note.user.userId}
             textDetails={note.textdetails}
             codeBody={note.codebody}
             id={note._id}

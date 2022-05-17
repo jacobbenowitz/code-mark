@@ -8,7 +8,7 @@ const CodeNoteItem = props => (
     <div className="note-item-top">
       <div className="comment-count">
         <i class="fa-solid fa-comments"></i>
-        <span>{props.comments?.length}</span>
+        <span>{props.comments?.length || 0}</span>
       </div>
       <Link to={`/notes/${props.id}`} className="show-link-wrapper">
         <div className="view-link">View
@@ -23,6 +23,9 @@ const CodeNoteItem = props => (
       <span className="code-note-title">
         {props?.title}
       </span>
+      <Link className="code-note-username" to={`users/${props.userId}`}>
+        @{props?.username}
+      </Link>
       <div className="updated-at">
         <span>{moment(props?.createdAt).fromNow()}</span>
       </div>
