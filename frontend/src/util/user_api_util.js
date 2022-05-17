@@ -5,6 +5,5 @@ export const getUsers = () => {
 };
 
 export const getUser = userId => {
-    debugger
     return axios.get(`/api/users/${userId}`)
 }

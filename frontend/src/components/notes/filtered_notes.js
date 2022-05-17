@@ -38,6 +38,8 @@ class FilteredNotes extends React.Component {
         this.state.notes.map(note =>
           <CodeNoteItem key={note._id}
             title={note.title}
+            username={note.user.username}
+            userId={note.user.userId}
             tags={note.tags}
             textDetails={note.textdetails}
             codeBody={note.codebody}

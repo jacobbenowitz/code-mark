@@ -81,8 +81,8 @@ export default class CommentForm extends React.Component {
               onChange={this.update('textbody')}
               id='comment-textarea'
               className='comment-body-input'
-              defaultValue={'Have a question about this CodeMark? Let the author know!'}
-            // value={this.state.textbody}
+              placeholder={'Have a question about this CodeMark? Let the author know!'}
+              value={this.state.textbody}
             />
             <button id="comment-submit" type='submit'>Comment</button>
           </form>
