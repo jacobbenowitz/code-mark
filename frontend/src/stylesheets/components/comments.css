@@ -35,6 +35,19 @@
   height: 1fr;
 }
 
+.code-note-username {
+  font-family: Source Code Pro;
+  font-size: 13px;
+}
+
+.updated-at-and-username {
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 2px;
+}
+
 .username-comment {
   font-family: Source Code Pro;
 }

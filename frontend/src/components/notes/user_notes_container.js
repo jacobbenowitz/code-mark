@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { fetchUserNotes } from '../../actions/note_actions';
 import UserNotes from './user_notes';
+import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = state => {
   return {
@@ -15,4 +16,4 @@ const mapDispatchToProps = dispatch => {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserNotes);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(UserNotes));

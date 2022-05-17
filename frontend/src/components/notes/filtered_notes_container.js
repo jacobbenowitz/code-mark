@@ -17,4 +17,4 @@ const mapDispatchToProps = dispatch => {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FilteredNotes)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FilteredNotes));

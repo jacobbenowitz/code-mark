@@ -22,4 +22,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserFiltered);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(UserFiltered));
