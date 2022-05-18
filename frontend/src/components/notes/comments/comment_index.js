@@ -2,6 +2,7 @@ import React from 'react';
 import { orderNoteComments } from "../../../util/selectors";
 import CommentItem from '../comments/comment_item';
 import CommentFormContainer from './comment_form_container';
+import CommentForm from './comment_form';
 import { filterUsersByComment } from "../../../util/selectors";
 
 export default class CommentIndex extends React.Component {
@@ -10,16 +11,22 @@ export default class CommentIndex extends React.Component {
 
   }
   render() {
-    debugger
-    const { note, comments, isCurrentUser, removeComment } = this.props;
+    const { note, comments, isCurrentUser, removeComment, noteId, updateComment,
+      composeComment, selectedText, newComment, currentUser } = this.props;
     return (
-
       <div className='comments-list'>
-        <CommentFormContainer />
+        <CommentForm
+          noteId={noteId}
+          composeComment={composeComment}
+          selectedText={selectedText}
+          newComment={newComment}
+          currentUser={currentUser}
+        />
         {comments ? (
-          <div>
+          <div className='comment-items-list'>
             {comments.map(comment => {
               return <CommentItem
+                updateComment={updateComment}
                 isCurrentUser={isCurrentUser}
                 key={comment._id}
                 id={comment._id}

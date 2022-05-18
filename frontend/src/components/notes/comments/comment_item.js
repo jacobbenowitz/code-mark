@@ -6,8 +6,21 @@ class CommentItem extends React.Component {
 
   constructor(props) {
     super(props)
+
+    this.state = {
+      codeSnippet: "",
+      textbody: "",
+      editActive: false
+    }
+    this.handleEdit = this.handleEdit.bind(this);
   }
 
+  componentDidMount() {
+    this.setState({
+      codeSnippet: this.props.comment.codeSnippet,
+      textbody: this.props.comment.textbody
+    })
+  }
 
   toggleDeleteModal() {
     const deleteModal = document.getElementById('comment-delete-modal-container');
@@ -15,6 +28,29 @@ class CommentItem extends React.Component {
       deleteModal.className = "modal-on";
     } else {
       deleteModal.className = "modal-off";
+    }
+  }
+
+  handleEdit(e) {
+    e.preventDefault();
+    let { codeSnippet, textbody } = this.state;
+    const comment = {
+      codeSnippet: codeSnippet,
+      textbody: textbody,
+      note: this.props.noteId
+    }
+
+    this.props.updateComment(comment, this.props.comment._id)
+    this.setState({
+      editActive: false
+    })
+  }
+
+  toggleEdit() {
+    if (this.state.editActive) {
+      this.setState({ editActive: false })
+    } else {
+      this.setState({ editActive: true })
     }
   }
 
@@ -28,6 +64,14 @@ class CommentItem extends React.Component {
     let commentWrapper = document.getElementById(`${this.props.comment._id}`)
     debugger
     commentWrapper.className = "hidden"
+  }
+
+  update(type) {
+    return e => {
+      this.setState({
+        [type]: e.target.value
+      })
+    }
   }
 
 
@@ -57,7 +101,7 @@ class CommentItem extends React.Component {
           </div>
         </div>
 
-        <div id={this.props.comment._id} className="comment-wrapper">
+        <div id={this.props.comment._id} className="comment-outer-wrapper">
           <div className="comment-top-wrapper">
             <div className="user-info-wrapper">
               <div className="user-details">
@@ -70,28 +114,60 @@ class CommentItem extends React.Component {
                   className="username-comment">{this.props.user?.username}</Link>
               </div>
               {this.props.isCurrentUser ? (
-                <div className='delete-note icon-button'
-                  onClick={() => this.toggleDeleteModal()}>
-                  <i className="fa-solid fa-trash fa-lg"></i>
-                  <span>Delete</span>
+                <div className="comment-icons">
+                  <div className='delete-note comment-icon-button'
+                    aria-label="delete note" title="delete"
+                    onClick={() => this.toggleDeleteModal()}>
+                    <i className="fa-solid fa-trash fa-lg"></i>
+                  </div>
+                  <div className='edit-note comment-icon-button'
+                    aria-label="edit note" title="edit"
+                    onClick={() => this.toggleEdit()}>
+                    <i className="fa-solid fa-pencil fa-lg"></i>
+                  </div>
                 </div>
               ) : ""
               }
             </div>
             <span className="comment-time-ago">{moment(this.props.comment.createdAt).fromNow()}</span>
           </div>
-
-          <div className="code-snippet-comment">
-            <textarea className="code code-textarea"
-              value={this.props.comment.codeSnippet}
-            />
-
-          </div>
-          <div className="comment-body-wrapper">
-            <span className="comment-body">
-              {this.props.comment.textbody}
-            </span>
-          </div>
+          {this.state.editActive ? (
+            <div className="comment-wrapper">
+              <form onSubmit={this.handleEdit} className='comment-form'>
+                <span className='comment-form-title'>Edit comment</span>
+                <div className='add-code-snippet-wrapper'>
+                  <div className="code-snippet-comment">
+                    <textarea id='code-snippet-new' className="code code-textarea"
+                      value={this.state.codeSnippet}
+                      onChange={this.update('codeSnippet')}
+                    ></textarea>
+                  </div>
+                </div>
+                <textarea
+                  onChange={this.update('textbody')}
+                  id='comment-textarea'
+                  className='comment-body-input'
+                  placeholder={'Have a question about this CodeMark? Let the author know!'}
+                  value={this.state.textbody}
+                  required
+                />
+                <button id="comment-submit" type='submit'>Update</button>
+              </form>
+            </div>
+          ) : (
+            <div className="comment-wrapper">
+              <div className="code-snippet-comment">
+                <textarea className="code code-textarea"
+                  readOnly
+                  value={this.props.comment.codeSnippet} />
+              </div>
+              <div className="comment-body-wrapper">
+                <span className="comment-body">
+                  {this.props.comment.textbody}
+                </span>
+              </div>
+            </div>
+          )}
         </div>
       </div >
     )

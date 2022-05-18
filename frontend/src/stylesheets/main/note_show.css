@@ -38,6 +38,80 @@
   overflow: hidden;
 }
 
+.info-wrapper {
+  display: flex;
+  position: relative;
+  width: 99%;
+  height: 25px;
+  z-index: 20;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+}
+
+.info-icon {
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+}
+
+.info-icon:hover::before {
+  content: "Select any part of the CodeMark and right click to comment!";
+  width: 248px;
+  position: absolute;
+  right: 0;
+  top: 35px;
+  text-align: end;
+  background: #393939;
+  padding: 0.4rem;
+  border-radius: 4px;
+  box-shadow: 0px 2px 16px rgb(0 0 0 / 30%);
+  animation: fadeIn 1000ms ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+
+.comment-icon-button {
+  cursor: pointer;
+  box-sizing: border-box;
+  border-radius: 50%;
+  display: flex;
+  position: relative;
+  height: 24px;
+  width: 24px;
+  padding: 1rem;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  box-shadow: 0px 0px 11px rgb(0 0 0 / 00%);
+  transition: background 250ms ease-in;
+  transition: box-shadow 250ms ease-in;
+}
+
+.comment-icons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  align-content: center;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.comment-icon-button:hover {
+  background: #515151;
+  box-shadow: 0px 0px 11px rgb(0 0 0 / 30%);
+
+}
+
 .note-resources {
   padding: 2rem;
 }

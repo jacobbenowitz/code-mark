@@ -41,10 +41,6 @@ export default class NoteShow extends React.Component {
     this._isMounted = false;
   }
 
-  componentDidUpdate() {
-    debugger
-  }
-
   componentWillReceiveProps(nextProps) {
     this.setState({
       note: nextProps.note,
@@ -79,16 +75,14 @@ export default class NoteShow extends React.Component {
 
 
   commentOnSelection(selection) {
-    // this.setState({
-    //   commentModal: true,
-    //   selectedText: selection
-    // })
+    this.setState({
+      selectedText: selection
+    })
     const commentSection = document.getElementById("comments");
-    const newSnippetField = document.getElementById("code-snippet-new")
-    newSnippetField.value = selection
-    newSnippetField.focus()
-    commentSection.scrollIntoView({ behavior: 'smooth' })
-    this.toggleCommentModal()
+    const newSnippetField = document.getElementById("code-snippet-new");
+    newSnippetField.focus();
+    newSnippetField.value = selection;
+    commentSection.scrollIntoView({ behavior: 'smooth' });
   }
 
 
@@ -275,8 +269,10 @@ export default class NoteShow extends React.Component {
             </div>
 
             <div className='code-note-body' id='code-note-view'>
-              <div className='info-icon'>
-                <i className="fa-solid fa-circle-question fa-lg"></i>
+              <div className='info-wrapper'>
+                <div className='info-icon'>
+                  <i className="fa-solid fa-circle-question fa-lg"></i>
+                </div>
               </div>
               <CodeEditorReadOnly
                 codeBody={note.codebody}
@@ -307,9 +303,13 @@ export default class NoteShow extends React.Component {
               <p>Select any part of the CodeMark above and right click to comment on that snippet!</p>
             </div>
             <CommentIndex
+              selectedText={this.state.selectedText}
               isCurrentUser={this.props.currentUser.id === this.props.note.user.userId}
+              currentUser={this.props.currentUser}
               comments={this.state.comments}
               newComment={this.props.newComment}
+              composeComment={this.props.composeComment}
+              updateComment={this.props.updateComment}
               removeComment={this.props.removeComment}
               note={this.props.note}
               users={this.props.users}
