@@ -9,6 +9,7 @@ async function getResources(keywords) {
 }
 
 function getPromises(keywords) {
+    debugger;
     const resources = [];
     keywords.forEach(keyword => {
         resources.push(getGoogleAdvice(keyword)
@@ -41,4 +42,4 @@ const getGoogleAdvice = (search) => {
 
 module.exports = getResources;
 
-getGoogleAdvice('github');
+// getResources(['github','haha','console.log','ruby','html','body','javascript','java','eventlistener','print']).then(res => console.log(res));
