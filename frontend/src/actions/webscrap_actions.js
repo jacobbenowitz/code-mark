@@ -20,5 +20,17 @@ export const getResources = codebody => dispatch => {
         })
 }
 
+export const testResources = (keyword,codebody) => dispatch => {
+    // var keywords = getKeywords(codebody);
+    // debugger
+    return getStuff(keyword,codebody)
+        .then(res => {
+            // debugger
+            const links = res.map(obj => obj.link)
+            const unique_links = res.filter(({link},idx) => !links.includes(link, idx+1))
+            dispatch(receiveResources(unique_links))
+        })
+}
+
 // let code = "var x = myFunction(4, 3); document.getElementById('demo').innerHTML = x; function myFunction(a, b) { return a * b;}"
 // console.log(getKeywords(code));

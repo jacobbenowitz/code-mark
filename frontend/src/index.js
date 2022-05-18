@@ -9,8 +9,11 @@ import App from './components/app';
 import { composeNote, updateNote } from '../../frontend/src/actions/note_actions';
 import { composeComment, fetchNoteComments, removeComment, updateComment, fetchComments } from '../../frontend/src/actions/comment_actions';
 import { getLanguage } from '../src/util/webscrap_util';
+import {testResources} from '../src/actions/webscrap_actions';
+// import 'dotenv/config';
 
 document.addEventListener('DOMContentLoaded', () => {
+  // console.log(process.env.REACT_APP_TEST_API_KEY);
   let store;
 
   // check for session token in localStorage
@@ -53,6 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
   window.fetchNoteComments = noteId => fetchNoteComments(noteId);
   window.updateComment = (comment, commentId) => updateComment(comment, commentId);
   window.getLanguage = getLanguage;
+
+  window.testResources = testResources;
   /// TEST END ///
   ReactDOM.render(<Root store={store} />, root);
 })

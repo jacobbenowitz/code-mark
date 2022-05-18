@@ -35,6 +35,32 @@
       }
     )
     </script>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="https://apis.google.com/js/platform.js"></script>
+    <script>
+      // function loadClient() {
+      //   gapi.client.setApiKey("AIzaSyBbMNb35uKdamKUgLuPoM0pIQYjdQnzXC0");
+      //   gapi.client.init({ 'clientId': '997672679088-785p3ssh8ct1alunahva81nkdi001pds.apps.googleusercontent.com'});
+      //   return gapi.client.load("https://content.googleapis.com/discovery/v1/apis/customsearch/v1/rest")
+      //       .then(function() { console.log("GAPI client loaded for API"); },
+      //             function(err) { console.error("Error loading GAPI client for API", err); });
+      // }
+
+      // function execute(search) {
+      //   return gapi.client.search.cse.list({
+      //     "cx": "82db9046b5c6d06ba",
+      //     "num": 1,
+      //     "q": search
+      //   })
+      //       .then(function(response) {
+      //               // Handle the results here (response.result has the parsed body).
+      //               // console.log("Response", response);
+      //               return response;
+      //           },
+      //           function(err) { console.error("Execute error", err); });
+      // }
+      gapi.load("client");
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

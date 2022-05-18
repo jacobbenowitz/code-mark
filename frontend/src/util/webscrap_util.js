@@ -1,5 +1,6 @@
 // import { getGoogleAdvice, getAdvice } from './webscraping.js';
-import { getGoogleAdvice } from './webscraping.js';
+// import { getGoogleAdvice } from './webscraping.js';
+import { getAdvice } from './webscraping.js';
 const hljs = require('highlight.js');
 // import hljs  from 'highlight.js';
 
@@ -17,7 +18,7 @@ function getResources(keywords, codebody) {
     keywords.map(keyword => language + ' ' + keyword);
     keywords.forEach(keyword => {
         // resources.push(keyword);
-        resources.push(getGoogleAdvice(keyword)
+        resources.push(getAdvice(keyword)
             .then(data => {
                 // console.log(typeof data);
                 return data;

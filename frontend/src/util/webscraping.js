@@ -1,5 +1,7 @@
+/* global gapi */
 import axios from 'axios';
-import cheerio from 'cheerio';
+import cheerio, { load } from 'cheerio';
+// import keys from '../../../config/keys';
 // import Nightmare from 'nightmare';
 // import fs from 'fs';
 
@@ -90,5 +92,43 @@ export const getGoogleAdvice = (search) => {
             // console.log(result);
             return result.slice(0, 1);
 
+        })
+}
+
+function loadClient() {
+    gapi.client.setApiKey("AIzaSyBbMNb35uKdamKUgLuPoM0pIQYjdQnzXC0");
+    gapi.client.init({ 
+        clientId: '997672679088-785p3ssh8ct1alunahva81nkdi001pds.apps.googleusercontent.com',
+        scope: "https://www.googleapis.com/auth/spreadsheets.readonly"
+    });
+    return gapi.client.load("https://content.googleapis.com/discovery/v1/apis/customsearch/v1/rest")
+        .then(function() { console.log("GAPI client loaded for API"); },
+              function(err) { console.error("Error loading GAPI client for API", err); });
+}
+
+function execute(search) {
+    return gapi.client.search.cse.list({
+      "cx": "82db9046b5c6d06ba",
+      "num": 1,
+      "q": search
+    })
+        .then(function(response) {
+                // Handle the results here (response.result has the parsed body).
+                // console.log("Response", response);
+                return response;
+            },
+            function(err) { console.error("Execute error", err); });
+}
+
+export const getAdvice = (search) => {
+    return loadClient()
+        .then(() => {
+            return execute(search)
+            .then(response => {
+                return {
+                    link: response.items[0].link,
+                    title: response.items[0].title
+                };
+            })
         })
 }

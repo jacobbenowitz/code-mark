@@ -93,7 +93,7 @@ router.patch('/:id/edit',
     (req, res) => {
         Comment.findById(req.params.id)
             .then(comment => {
-                if (comment.user.toString() !== req.user.id) {
+                if (comment.user.userId.toString() !== req.user.id) {
                     res.status(404).json({ editnotallowed: 'Not Authorized to Edit Note'})
                 }else{
                     comment.textbody = req.body.textbody;
@@ -112,12 +112,12 @@ router.delete('/:id',
     (req,res) => {
         Comment.findById(req.params.id)
             .then(comment => {
-                if(comment.user.toString() !== req.user.id) {
-                    res.status(404).json({ deletenotallowed: 'Not Authorized To Delete Note' })
-                } else {
+                // if(comment.user.userId.toString() !== req.user.id) {
+                //     res.status(404).json({ deletenotallowed: 'Not Authorized To Delete Note' })
+                // } else {
                     const commentid = comment.id;
                     const noteid = comment.note;
-                    const userid = comment.user;
+                    const userid = comment.user.userId;
                     Comment.deleteOne({_id: req.params.id})
                         .then(() => {
                             User.findById(userid)
@@ -134,7 +134,7 @@ router.delete('/:id',
                                 });
                         })
                         .then(() => res.json(commentid));
-                }
+                // }
             })
             .catch(err => 
                 res.status(404).json({ nocommentfound: 'No Comment Found With That ID' })

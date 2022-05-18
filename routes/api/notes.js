@@ -7,6 +7,8 @@ const Note = require('../../models/Note');
 const User = require('../../models/User');
 const validateNoteInput = require('../../validation/notes');
 
+const getResources = require('../../resources/resources');
+
 //get all notes
 router.get('/', (req, res) => {
     Note.find()
@@ -48,20 +50,23 @@ router.post('/',
             return res.status(400).json(errors);
         }
 
-        const newNote = new Note({
-            codebody: req.body.codebody,
-            user: {username : req.user.username, userId : req.user.id},
-            title: req.body.title,
-            textdetails: req.body.textdetails,
-            resources: req.body.resources,
-            tags: req.body.tags
-        });
-
-        newNote.save().then(note => {
-            req.user.notes.push(newNote.id)
-            req.user.save()
-                .then(() => res.json(note))
-        });
+        getResources(req.body.keywords)
+            .then(resources => {
+                const newNote = new Note({
+                    codebody: req.body.codebody,
+                    user: {username : req.user.username, userId : req.user.id},
+                    title: req.body.title,
+                    textdetails: req.body.textdetails,
+                    resources: resources,
+                    tags: req.body.tags
+                });
+                
+                newNote.save().then(note => {
+                    req.user.notes.push(newNote.id)
+                    req.user.save()
+                    .then(() => res.json(note))
+                });
+            })
     }
 );
 
@@ -72,7 +77,7 @@ router.patch('/:id/edit',
         Note.findById(req.params.id)
             .then(note => {
                 // User.findById(note.user).then(user => console.log(user));
-                if (note.user.toString() !== req.user.id) {
+                if (note.user.userId.toString() !== req.user.id) {
                     res.status(404).json({ editnotallowed: 'Not Authorized To Edit Note' })
                 } else {
                     note.codebody = req.body.codebody;
@@ -95,11 +100,11 @@ router.delete('/:id',
     (req, res) => {
         Note.findById(req.params.id)
             .then(note => {
-                if (note.user.toString() !== req.user.id) {
+                if (note.user.userId.toString() !== req.user.id) {
                     res.status(404).json({ deletenotallowed: 'Not Authorized To Delete Note' })
                 } else {
                     const noteid = note.id;
-                    const userid = note.user;
+                    const userid = note.user.userId;
                     Note.deleteOne({ _id: req.params.id })
                         .then(() => {
                             User.findById(userid)

@@ -7,6 +7,12 @@ const passport = require('passport');
 const notes = require("./routes/api/notes");
 const comments = require("./routes/api/comments");
 
+// require('dotenv').config();
+// console.log(process.env);
+// console.log(process.env.REACT_APP_TEST_API_KEY);
+
+
+
 const app = express();
 const db = require('./config/keys').mongoURI;
 
