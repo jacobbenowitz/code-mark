@@ -5,7 +5,7 @@ export default class CommentForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      codeSnippet: "Add a code snippet",
+      codeSnippet: "",
       textbody: "",
       newComment: undefined
     }
@@ -13,7 +13,6 @@ export default class CommentForm extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // debugger
     if (nextProps.selectedText) {
       this.setState({
         codeSnippet: nextProps.selectedText
@@ -68,11 +67,12 @@ export default class CommentForm extends React.Component {
       <>
         <div className='new-comment-container'>
           <form onSubmit={this.handleSubmit} className='comment-form'>
+            <span className='comment-form-title'>Write a new comment</span>
             <div className='add-code-snippet-wrapper'>
               <div className="code-snippet-comment">
                 <textarea id='code-snippet-new' className="code code-textarea"
                   value={this.state.codeSnippet}
-                  // defaultValue={'Code snippet here'}
+                  defaultValue={'Add a code snippet'}
                   onChange={this.update('codeSnippet')}
                 ></textarea>
               </div>
@@ -83,6 +83,7 @@ export default class CommentForm extends React.Component {
               className='comment-body-input'
               placeholder={'Have a question about this CodeMark? Let the author know!'}
               value={this.state.textbody}
+              required
             />
             <button id="comment-submit" type='submit'>Comment</button>
           </form>
@@ -92,7 +93,8 @@ export default class CommentForm extends React.Component {
             key={'new-comment-1'}
             id={this.state.newComment._id}
             comment={this.state.newComment}
-          // deleteThisComment={this.deleteThisComment}
+            user={this.props.currentUser}
+            removeComment={this.props.removeComment}
           />) : ''}
       </>
     )

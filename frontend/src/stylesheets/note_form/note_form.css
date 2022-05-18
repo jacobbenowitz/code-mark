@@ -125,6 +125,21 @@
   padding: 1rem;
 }
 
+.modal-wrapper-2 {
+  position: absolute;
+  margin-top: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.modal-buttons-2 {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+
 .modal-on {
   visibility: visible;
   display: block;
@@ -133,4 +148,10 @@
 .modal-off {
   visibility: hidden;
   /* display: none; */
+}
+
+#comment-delete-modal-container {
+  position: relative;
+  top: 2rem;
+  left: 3rem;
 }

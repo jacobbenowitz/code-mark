@@ -20,7 +20,8 @@ const mapStateToProps = (state, { match }) => {
     currentUser: state.session.user,
     comments: state.comments.note,
     newComment: state.comments.new,
-    users: state.users.all
+    users: state.users.all,
+    deletedComments: state.comments.deleted
   }
 }
 

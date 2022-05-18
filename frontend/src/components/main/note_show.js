@@ -16,8 +16,6 @@ import ResourceItem from '../notes/resources/resource_item';
 import { Link, Redirect } from 'react-router-dom';
 
 
-
-
 export default class NoteShow extends React.Component {
   constructor(props) {
     super(props);
@@ -28,14 +26,11 @@ export default class NoteShow extends React.Component {
       commentModal: false
     }
     this.deleteNote = this.deleteNote.bind(this);
-    this.deleteThisComment = this.deleteThisComment.bind(this);
-    this.toggleCommentModal = this.toggleCommentModal.bind(this);
   }
 
   componentWillMount() {
     this.props.fetchNote(this.props.noteId);
     this.props.fetchNoteComments(this.props.noteId);
-    this.props.fetchUsers();
   }
 
   componentDidMount() {
@@ -69,17 +64,6 @@ export default class NoteShow extends React.Component {
     }
   }
 
-  deleteThisComment(commentId) {
-
-    const comments = this.state.comments.filter(comment =>
-      comment._id !== commentId
-    )
-    this.setState({ comments: comments }, () => {
-
-      this.props.removeComment(commentId)
-    })
-  }
-
   toggleDeleteModal() {
     const deleteModal = document.getElementById('confirm-modal-container');
     if (deleteModal.className === "modal-off") {
@@ -89,31 +73,16 @@ export default class NoteShow extends React.Component {
     }
   }
 
-  // toggleCommentModal() {
-  //   this.setState({ commentModal: !this.state.commentModal })
-  // }
-  toggleCommentModal() {
-    const commentModal = document.getElementById('comment-modal-container');
-    if (commentModal.className === "modal-off") {
-      commentModal.className = "modal-on"
-    } else {
-      commentModal.className = "modal-off";
-    }
-  }
-
 
   commentOnSelection(selection) {
     this.setState({
-      commentModal: true,
       selectedText: selection
     })
-    this.toggleCommentModal()
-    // const commentSection = document.getElementById("comments");
-    // const newSnippetField = document.getElementById("code-snippet-new")
-    // newSnippetField.value = selection
-    // newSnippetField.focus()
-    // commentSection.scrollIntoView({ behavior: 'smooth' })
-    // this.toggleCommentModal()
+    const commentSection = document.getElementById("comments");
+    const newSnippetField = document.getElementById("code-snippet-new");
+    newSnippetField.focus();
+    newSnippetField.value = selection;
+    commentSection.scrollIntoView({ behavior: 'smooth' });
   }
 
 
@@ -124,6 +93,7 @@ export default class NoteShow extends React.Component {
     const { note } = this.state;
     const contextMenu = document.getElementById("context-menu");
     const scope = document.querySelector("body");
+    const codeNote = document.getElementById('code-note-view')
 
     // const normalizePozition = (mouseX, mouseY) => {
     //   // ? compute what is the mouse position relative to the container element (scope)
@@ -196,9 +166,9 @@ export default class NoteShow extends React.Component {
 
     // listen for selection and update state
     // document.onselectionchange = () => {
-    //   // console.log(document.getSelection().toString())
-    //   let selection = document.getSelection()
-    //   this.setState({ selectedText: selection.toString() });
+    // let selection = document.getSelection()
+    // console.log(document.getSelection())
+    // this.setState({ selectedText: selection.toString() });
     // };
 
 
@@ -219,19 +189,6 @@ export default class NoteShow extends React.Component {
           >Comment 2</div> */}
         </div>
 
-        <div id='comment-modal-container'
-          className={this.state.commentModal ? 'modal-on' : 'modal-off'} >
-          <div className='modal-wrapper'>
-            <div className='comment-modal'>
-              <CommentFormModal
-                noteId={this.props.noteId}
-                selectedText={this.state.selectedText}
-                composeComment={this.props.composeComment}
-                toggleCommentModal={this.toggleCommentModal}
-              />
-            </div>
-          </div>
-        </div>
         <div id='confirm-modal-container' className='modal-off' >
           <div className='modal-wrapper'>
             <div className='cancel-modal'>
@@ -311,7 +268,12 @@ export default class NoteShow extends React.Component {
               />
             </div>
 
-            <div className='code-note-body'>
+            <div className='code-note-body' id='code-note-view'>
+              <div className='info-wrapper'>
+                <div className='info-icon'>
+                  <i className="fa-solid fa-circle-question fa-lg"></i>
+                </div>
+              </div>
               <CodeEditorReadOnly
                 codeBody={note.codebody}
               />
@@ -338,11 +300,23 @@ export default class NoteShow extends React.Component {
           <section id={'comments'} className='note-comments'>
             <div className='comments-title'>
               <h4>Comments</h4>
+              <p>Select any part of the CodeMark above and right click to comment on that snippet!</p>
             </div>
-            <CommentIndex comments={this.state.comments}
+            <CommentIndex
+              selectedText={this.state.selectedText}
+              isCurrentUser={this.props.currentUser.id === this.props.note.user.userId}
+              currentUser={this.props.currentUser}
+              comments={this.state.comments}
               newComment={this.props.newComment}
+              composeComment={this.props.composeComment}
+              updateComment={this.props.updateComment}
+              removeComment={this.props.removeComment}
               note={this.props.note}
-              users={this.props.users} />
+              users={this.props.users}
+              deletedComments={this.props.deletedComments}
+              fetchNote={this.props.fetchNote}
+              noteId={this.props.noteId}
+            />
           </section>
         </div>
       </>

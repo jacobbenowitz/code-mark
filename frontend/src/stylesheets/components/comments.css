@@ -1,24 +1,62 @@
 .note-comments {
-  padding: 2rem
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: 2rem;
 }
 
 /* .comments-list {
 
 } */
 
+.comment-outer-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  gap: 23px;
+  width: 470px;
+  border-radius: 8px;
+  min-height: 200px;
+  background-color: #202124;
+}
+
 .comment-wrapper {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 14px;
   gap: 23px;
-  width: 495px;
-  min-height: 200px;
+  width: 470px;
+  border-radius: 8px;
 }
 
 /* .avatar-wrapper {
 
 } */
+
+.hidden {
+  display: none;
+}
+
+.comment-time-ago {
+  font-size: 0.8rem;
+  width: 98%;
+  margin-right: 12px;
+  text-align: end;
+}
+
+.comment-top-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: flex-start;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+}
+
 
 .code-snippet-new-modal {
   height: auto;
@@ -31,8 +69,9 @@
   align-items: flex-start;
   padding: 0.4rem 0.8rem 0.4rem 0;
   gap: 24px;
-  width: 1fr;
-  height: 1fr;
+  width: 100%;
+  align-content: center;
+  justify-content: space-between;
 }
 
 .code-note-username {
@@ -50,20 +89,34 @@
 
 .username-comment {
   font-family: Source Code Pro;
+  font-size: 14px;
 }
 .username-comment::before {
   content: "@";
   font-family: Source Code Pro;
 }
 
-.user-details {
+.comments-list, .comment-items-list {
   display: flex;
   flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
   align-items: flex-start;
+  align-content: flex-start;
+  gap: 2rem;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   padding: 0px;
-  justify-content: center;
-  min-width: 115px;
-  height: 43px;
+  justify-content: flex-start;
+  gap: 0.7rem;
+  /* min-width: 115px;
+  height: 43px; */
+  flex-wrap: nowrap;
+  align-content: center;
 }
 
 .add-code-snippet-wrapper {
@@ -122,6 +175,17 @@ textarea {
   right: -235px;
 }
 
+.comment-form-title {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 2rem;
+}
+
+#comment-textarea:focus {
+  background-color: #2c2d30;
+  border: 0.5px solid white;
+}
+
 .new-comment-container {
   display: flex;
   flex-direction: column;
@@ -132,6 +196,7 @@ textarea {
   width: 470px;
   min-height: 90px;
   height: fit-content;
+  border: 1px solid white;
   background: #202124;
   border-radius: 8px;
 }
@@ -146,9 +211,8 @@ textarea {
 
 #comment-textarea {
   height: fit-content;
-  padding: 0;
-  margin: 0;
-  width: 100%;
+  padding: 0.4rem;
+  width: 97%;
   resize: none;
 }
 

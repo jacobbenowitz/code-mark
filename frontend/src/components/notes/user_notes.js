@@ -35,6 +35,7 @@ class UserNotes extends React.Component {
             tags={note.tags}
             username={note.user.username}
             userId={note.user.userId}
+            comments={note.comments}
             textDetails={note.textdetails}
             codeBody={note.codebody}
             id={note._id}

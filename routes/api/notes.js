@@ -50,7 +50,7 @@ router.post('/',
 
         const newNote = new Note({
             codebody: req.body.codebody,
-            user: {username : req.user.username, userId : req.user.id},
+            user: { username: req.user.username, userId: req.user.id },
             title: req.body.title,
             textdetails: req.body.textdetails,
             resources: req.body.resources,
@@ -72,7 +72,7 @@ router.patch('/:id/edit',
         Note.findById(req.params.id)
             .then(note => {
                 // User.findById(note.user).then(user => console.log(user));
-                if (note.user.toString() !== req.user.id) {
+                if (note.user.userId.toString() !== req.user.id) {
                     res.status(404).json({ editnotallowed: 'Not Authorized To Edit Note' })
                 } else {
                     note.codebody = req.body.codebody;
@@ -95,11 +95,11 @@ router.delete('/:id',
     (req, res) => {
         Note.findById(req.params.id)
             .then(note => {
-                if (note.user.toString() !== req.user.id) {
+                if (note.user.userId.toString() !== req.user.id) {
                     res.status(404).json({ deletenotallowed: 'Not Authorized To Delete Note' })
                 } else {
                     const noteid = note.id;
-                    const userid = note.user;
+                    const userid = note.user.userId;
                     Note.deleteOne({ _id: req.params.id })
                         .then(() => {
                             User.findById(userid)
