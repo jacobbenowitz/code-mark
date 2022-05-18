@@ -145,11 +145,12 @@ export default class NewNote extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let { title, codebody, textdetails } = this.state;
+    let { title, codebody, textdetails, tags } = this.state;
     let note = {
       title: title,
       codebody: codebody,
-      textdetails: textdetails
+      textdetails: textdetails,
+      tags: tags
     }
     this.props.composeNote(note)
       .then(() => (
@@ -157,8 +158,10 @@ export default class NewNote extends React.Component {
           title: "",
           codebody: "",
           textdetails: "",
+          tags: [],
         })
       ))
+      .then(() => this.toggleForm())
   }
 
   // remove if possible

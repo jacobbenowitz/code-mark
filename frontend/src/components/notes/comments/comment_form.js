@@ -7,20 +7,16 @@ export default class CommentForm extends React.Component {
     this.state = {
       codeSnippet: "",
       textbody: "",
-      newComment: undefined
+      // newComment: undefined
     }
     this.handleSubmit = this.handleSubmit.bind(this);
+    // this.toggleForm = this.toggleForm.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.selectedText) {
       this.setState({
         codeSnippet: nextProps.selectedText
-      })
-    }
-    if (nextProps.newComment) {
-      this.setState({
-        newComment: nextProps.newComment
       })
     }
   }
@@ -36,11 +32,15 @@ export default class CommentForm extends React.Component {
     }
 
     this.props.composeComment(comment)
-    this.setState({
-      codeSnippet: "",
-      textbody: "",
-      newComment: comment
-    })
+      .then(() => {
+        this.setState({
+          codeSnippet: "",
+          textbody: "",
+        })
+      })
+    // .then(() => {
+    //   this.props.fetchNoteComments(this.props.noteId)
+    // })
   }
 
   update(type) {
@@ -62,6 +62,10 @@ export default class CommentForm extends React.Component {
       this.style.height = "auto";
       this.style.height = (this.scrollHeight) + "px";
     }
+
+    // toggleForm() {
+    //   const 
+    // }
 
     return (
       <>
@@ -88,14 +92,13 @@ export default class CommentForm extends React.Component {
             <button id="comment-submit" type='submit'>Comment</button>
           </form>
         </div>
-        {this.state.newComment ? (
+        {/* {this.state.newComment ? (
           <CommentItem
+            currentUser={this.props.currentUser}
             key={'new-comment-1'}
-            id={this.state.newComment._id}
             comment={this.state.newComment}
             user={this.props.currentUser}
-            removeComment={this.props.removeComment}
-          />) : ''}
+          />) : ''} */}
       </>
     )
   }

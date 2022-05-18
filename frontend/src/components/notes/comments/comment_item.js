@@ -33,6 +33,7 @@ class CommentItem extends React.Component {
 
   handleEdit(e) {
     e.preventDefault();
+    debugger
     let { codeSnippet, textbody } = this.state;
     const comment = {
       codeSnippet: codeSnippet,
@@ -40,7 +41,7 @@ class CommentItem extends React.Component {
       note: this.props.noteId
     }
 
-    this.props.updateComment(comment, this.props.comment._id)
+    this.props.updateComment(comment, this.props.comment._id);
     this.setState({
       editActive: false
     })
@@ -55,15 +56,9 @@ class CommentItem extends React.Component {
   }
 
   deleteComment() {
-    this.props.removeComment(this.props.comment._id);
+    this.props.removeComment(this.props.comment._id)
+    // setTimeout(this.props.fetchNoteComments(this.props.noteId), 100)
     this.toggleDeleteModal();
-    this.hideComment();
-  }
-
-  hideComment() {
-    let commentWrapper = document.getElementById(`${this.props.comment._id}`)
-    debugger
-    commentWrapper.className = "hidden"
   }
 
   update(type) {
@@ -101,7 +96,7 @@ class CommentItem extends React.Component {
           </div>
         </div>
 
-        <div id={this.props.comment._id} className="comment-outer-wrapper">
+        <div id={this.props.comment?._id || 'newComment'} className="comment-outer-wrapper">
           <div className="comment-top-wrapper">
             <div className="user-info-wrapper">
               <div className="user-details">
@@ -113,21 +108,22 @@ class CommentItem extends React.Component {
                 <Link to={`/users/${this.props.user.userId}`}
                   className="username-comment">{this.props.user?.username}</Link>
               </div>
-              {this.props.isCurrentUser ? (
-                <div className="comment-icons">
+              <div className="comment-icons">
+                {this.props.isCurrentUser || this.props.currentUser.id === this.props.comment.user.userId ? (
                   <div className='delete-note comment-icon-button'
                     aria-label="delete note" title="delete"
                     onClick={() => this.toggleDeleteModal()}>
                     <i className="fa-solid fa-trash fa-lg"></i>
                   </div>
+                ) : ""}
+                {this.props.currentUser.id === this.props.comment.user.userId ? (
                   <div className='edit-note comment-icon-button'
                     aria-label="edit note" title="edit"
                     onClick={() => this.toggleEdit()}>
                     <i className="fa-solid fa-pencil fa-lg"></i>
                   </div>
-                </div>
-              ) : ""
-              }
+                ) : ""}
+              </div>
             </div>
             <span className="comment-time-ago">{moment(this.props.comment.createdAt).fromNow()}</span>
           </div>

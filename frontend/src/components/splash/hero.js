@@ -17,9 +17,9 @@ const heroCredit = (
 
 export const Hero = (
     <div id='hero-container' >
-    <div id="sample-code-editor">
-            <DummyHeroNote />
-    </div>
+        <div id="sample-code-editor">
+            {/* <DummyHeroNote /> */}
+        </div>
 
         <div id='hero-content'>
 

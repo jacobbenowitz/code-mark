@@ -6,14 +6,15 @@ import { getLanguage } from '../../util/webscrap_util';
 import { html } from '@codemirror/lang-html';
 import { cpp } from '@codemirror/lang-cpp';
 import { css } from '@codemirror/lang-css';
+import { EditorView } from '@codemirror/basic-setup';
 
 const CodeEditorReadOnly = props => {
   const language = getLanguage(props.codeBody);
   const extensions = {
-    'JavaScript': [javascript({ jsx: true })],
-    'HTML': [html()],
-    'CSS': [css()],
-    'C++': [cpp()]
+    'JavaScript': javascript({ jsx: true }),
+    'HTML': html(),
+    'CSS': css(),
+    'C++': cpp(),
   }
   return (
     <CodeMirror
@@ -21,7 +22,10 @@ const CodeEditorReadOnly = props => {
       value={props.codeBody}
       width='100%'
       theme='dark'
-      extensions={extensions[language] ? extensions[language] : [javascript({ jsx: true })]}
+      extensions={[
+        extensions[language] ? extensions[language] : javascript({ jsx: true }),
+        EditorView.lineWrapping
+      ]}
     />
   );
 }
