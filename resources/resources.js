@@ -1,16 +1,24 @@
-// /* global gapi */
 const axios = require('axios');
 const apiKey = require('../config/keys').apiKey;
 const engineId = require('../config/keys').engineId;
+const hljs = require('highlight.js')
 
-async function getResources(keywords) {
-    let response = await Promise.all(getPromises(keywords));
+async function getResources(keywords,codebody) {
+    let response = await Promise.all(getPromises(keywords,codebody));
     return response.filter(ele => ele !== undefined);
 }
 
-function getPromises(keywords) {
-    debugger;
+function getLanguage(codebody) {
+    const languages = ['Ruby', 'C', 'JavaScript', 'CSS', 'HTML'];
+    const code_test = hljs.highlightAuto(codebody, languages);
+    return code_test.language;
+}
+
+function getPromises(keywords,codebody) {
+    // debugger;
+    const language = getLanguage(codebody);
     const resources = [];
+    keywords.map(keyword => language + ' ' + keyword);
     keywords.forEach(keyword => {
         resources.push(getGoogleAdvice(keyword)
             .then(data => {

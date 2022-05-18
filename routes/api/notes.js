@@ -50,7 +50,7 @@ router.post('/',
             return res.status(400).json(errors);
         }
 
-        getResources(req.body.keywords)
+        getResources(req.body.keywords,req.body.codebody)
             .then(resources => {
                 const newNote = new Note({
                     codebody: req.body.codebody,
@@ -105,6 +105,7 @@ router.delete('/:id',
                 } else {
                     const noteid = note.id;
                     const userid = note.user.userId;
+                    const comments = note.comments;
                     Note.deleteOne({ _id: req.params.id })
                         .then(() => {
                             User.findById(userid)
@@ -112,6 +113,21 @@ router.delete('/:id',
                                     user.notes = user.notes.filter(item => item.toString() !== noteid);
                                     user.save().then(user => res.json(user));
                                 })
+                        })
+                        .then(() => {
+                            comments.forEach(commentid => {
+                                Comment.findById(commentid)
+                                    .then(comment => {
+                                        Comment.deleteOne({ _id: commentid })
+                                    })
+                                    .then(comment => {
+                                        User.findById(comment.user.userId)
+                                            .then(user => {
+                                                user.comments = user.comments.filter(item => item.toString() !== commentid);
+                                                user.save().then(user => res.json(user));
+                                            })
+                                    })
+                            })
                         })
                 }
             })
