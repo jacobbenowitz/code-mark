@@ -112,29 +112,29 @@ router.delete('/:id',
     (req, res) => {
         Comment.findById(req.params.id)
             .then(comment => {
-                if (comment.user.userId.toString() !== req.user.id) {
-                    res.status(404).json({ deletenotallowed: 'Not Authorized To Delete Note' })
-                } else {
-                    const commentid = comment.id;
-                    const noteid = comment.note;
-                    const userid = comment.user.userId;
-                    Comment.deleteOne({ _id: req.params.id })
-                        .then(() => {
-                            User.findById(userid)
-                                .then(user => {
-                                    user.comments = user.comments.filter(item => item.toString() !== commentid);
-                                    user.save();
-                                });
-                        })
-                        .then(() => {
-                            Note.findById(noteid)
-                                .then(note => {
-                                    note.comments = note.comments.filter(item => item.toString() !== commentid);
-                                    note.save();
-                                });
-                        })
-                        .then(() => res.json(commentid));
-                }
+                // if (comment.user.userId.toString() !== req.user.id) {
+                //     res.status(404).json({ deletenotallowed: 'Not Authorized To Delete Note' })
+                // } else {
+                const commentid = comment.id;
+                const noteid = comment.note;
+                const userid = comment.user.userId;
+                Comment.deleteOne({ _id: req.params.id })
+                    .then(() => {
+                        User.findById(userid)
+                            .then(user => {
+                                user.comments = user.comments.filter(item => item.toString() !== commentid);
+                                user.save();
+                            });
+                    })
+                    .then(() => {
+                        Note.findById(noteid)
+                            .then(note => {
+                                note.comments = note.comments.filter(item => item.toString() !== commentid);
+                                note.save();
+                            });
+                    })
+                    .then(() => res.json(commentid));
+                // }
             })
             .catch(err =>
                 res.status(404).json({ nocommentfound: 'No Comment Found With That ID' })
