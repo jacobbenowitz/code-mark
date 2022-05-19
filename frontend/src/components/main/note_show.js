@@ -346,7 +346,10 @@ export default class NoteShow extends React.Component {
 
             <div className='code-note-body' id='code-note-view'>
               <div className='icons-wrapper'>
-                <div className='note-icon info-icon'>
+                <div className='hidden' id='highlight-instructions'>
+                  <span>Highlight any section of the CodeMark and right click to comment!</span>
+                </div>
+                <div className='note-icon info-icon' id='highlight-comment-code-icon'>
                   <i className="fa-solid fa-circle-question fa-lg"></i>
                 </div>
                 <div id='export-img-icon' className='note-icon'

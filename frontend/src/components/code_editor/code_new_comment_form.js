@@ -8,7 +8,7 @@ import { cpp } from '@codemirror/lang-cpp';
 import { css } from '@codemirror/lang-css';
 import { EditorView } from '@codemirror/basic-setup';
 
-const CodeCommentReadOnly = props => {
+const CodeNewComment = props => {
   const language = getLanguage(props.codeSnippet);
   const extensions = {
     'JavaScript': javascript({ jsx: true }),
@@ -30,4 +30,4 @@ const CodeCommentReadOnly = props => {
     />
   );
 }
-export default CodeCommentReadOnly;
+export default CodeNewComment;
