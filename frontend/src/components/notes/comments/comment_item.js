@@ -1,6 +1,7 @@
 import React from "react";
 import moment from 'moment';
 import { Link } from "react-router-dom";
+import CodeCommentReadOnly from "../../code_editor/code_comment_readonly";
 
 class CommentItem extends React.Component {
 
@@ -133,10 +134,10 @@ class CommentItem extends React.Component {
                 <span className='comment-form-title'>Edit comment</span>
                 <div className='add-code-snippet-wrapper'>
                   <div className="code-snippet-comment">
-                    <textarea id='code-snippet-new' className="code code-textarea"
-                      value={this.state.codeSnippet}
-                      onChange={this.update('codeSnippet')}
-                    ></textarea>
+                    <div className="code-snippet-comment">
+                      <CodeCommentReadOnly
+                        codeSnippet={this.props.comment.codeSnippet} />
+                    </div>
                   </div>
                 </div>
                 <textarea
@@ -154,9 +155,8 @@ class CommentItem extends React.Component {
             <div className="comment-wrapper">
               {this.props.comment.codeSnippet.length ? (
                 <div className="code-snippet-comment">
-                  <textarea className="code code-textarea"
-                    readOnly
-                    value={this.props.comment.codeSnippet} />
+                  <CodeCommentReadOnly
+                    codeSnippet={this.props.comment.codeSnippet} />
                 </div>
               ) : ""}
               <div className="comment-body-wrapper">

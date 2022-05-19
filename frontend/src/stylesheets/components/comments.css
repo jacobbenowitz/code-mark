@@ -134,8 +134,17 @@
 
   width: 100%;
 
-  background: #35373E;
-  border-left: 1px solid #D0D0D0;
+  /* background: #35373E; */
+  /* border-left: 1px solid #D0D0D0; */
+}
+
+.comment-body-wrapper {
+  padding: 10px;
+}
+
+.comment-code {
+  font-size: 16px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
 }
 
 textarea {

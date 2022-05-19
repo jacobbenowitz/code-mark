@@ -1,5 +1,6 @@
 import React from 'react';
 import CommentItem from './comment_item';
+import CodeCommentReadOnly from '../../code_editor/code_comment_readonly';
 
 export default class CommentForm extends React.Component {
   constructor(props) {
@@ -63,10 +64,6 @@ export default class CommentForm extends React.Component {
       this.style.height = (this.scrollHeight) + "px";
     }
 
-    // toggleForm() {
-    //   const 
-    // }
-
     return (
       <>
         <div className='new-comment-container'>
@@ -74,11 +71,11 @@ export default class CommentForm extends React.Component {
             <span className='comment-form-title'>Write a new comment</span>
             <div className='add-code-snippet-wrapper'>
               <div className="code-snippet-comment">
-                <textarea id='code-snippet-new' className="code code-textarea"
-                  value={this.state.codeSnippet}
-                  defaultValue={'Add a code snippet'}
-                  onChange={this.update('codeSnippet')}
-                ></textarea>
+                <div className="code-snippet-comment">
+                  <CodeCommentReadOnly
+                    onChange={this.update('codeSnippet')}
+                    codeSnippet={this.state.codeSnippet} />
+                </div>
               </div>
             </div>
             <textarea
@@ -92,13 +89,6 @@ export default class CommentForm extends React.Component {
             <button id="comment-submit" type='submit'>Comment</button>
           </form>
         </div>
-        {/* {this.state.newComment ? (
-          <CommentItem
-            currentUser={this.props.currentUser}
-            key={'new-comment-1'}
-            comment={this.state.newComment}
-            user={this.props.currentUser}
-          />) : ''} */}
       </>
     )
   }
