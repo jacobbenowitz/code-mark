@@ -37,7 +37,6 @@ const commentsReducer = (prevState = initialState, action) => {
                 comment._id !== action.commentId.data);
             return nextState;
         case RECEIVE_UPDATED_COMMENT:
-            debugger
             let updated = nextState.note.map(comment => {
                 if (comment._id === action.comment._id) {
                     return action.comment

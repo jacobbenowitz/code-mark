@@ -89,7 +89,6 @@ export const composeComment = data => dispatch => {
 };
 
 export const updateComment = (data, commentId) => dispatch => {
-    debugger
     return patchComment(data, commentId)
         .then(comment => dispatch(receiveUpdateComment(comment.data)))
         .catch(err => dispatch(receiveCommentErrors(err)))

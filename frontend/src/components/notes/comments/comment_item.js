@@ -34,7 +34,6 @@ class CommentItem extends React.Component {
 
   handleEdit(e) {
     e.preventDefault();
-    debugger
     let { codeSnippet, textbody } = this.state;
     const comment = {
       codeSnippet: codeSnippet,

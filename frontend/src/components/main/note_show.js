@@ -55,7 +55,6 @@ export default class NoteShow extends React.Component {
 
   deleteNote() {
     this.props.removeNote(this.props.noteId).then(() => {
-      debugger
       this.props.history.goBack()
     })
   }
