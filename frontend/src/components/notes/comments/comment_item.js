@@ -152,11 +152,13 @@ class CommentItem extends React.Component {
             </div>
           ) : (
             <div className="comment-wrapper">
-              <div className="code-snippet-comment">
-                <textarea className="code code-textarea"
-                  readOnly
-                  value={this.props.comment.codeSnippet} />
-              </div>
+              {this.props.comment.codeSnippet.length ? (
+                <div className="code-snippet-comment">
+                  <textarea className="code code-textarea"
+                    readOnly
+                    value={this.props.comment.codeSnippet} />
+                </div>
+              ) : ""}
               <div className="comment-body-wrapper">
                 <span className="comment-body">
                   {this.props.comment.textbody}
