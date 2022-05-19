@@ -1,11 +1,33 @@
 const axios = require('axios');
 const apiKey = require('../config/keys').apiKey;
 const engineId = require('../config/keys').engineId;
+const Resource = require('../models/Resource');
 const hljs = require('highlight.js')
 
 async function getResources(keywords,codebody) {
-    let response = await Promise.all(getPromises(keywords,codebody));
-    return response.filter(ele => ele !== undefined);
+    // debugger;
+    const language = getLanguage(codebody);
+    const languageKeywords = keywords.map(keyword => language + ' ' + keyword);
+    const search = [];
+    languageKeywords.forEach(keyword => {
+        // debugger;
+        search.push(Resource.findOne({ keyword: keyword })
+            .then(resource => {
+                // found.push(resource);
+                return resource;
+            }));
+    })
+    let found = await Promise.all(search);
+    // debugger;
+    // console.log(found);
+    let savedResources = found.filter(ele => ele !== null).map(ele => ele._doc);
+    let foundWords = savedResources.map(ele => ele.keyword);
+    const notfound = languageKeywords.filter(word => !foundWords.includes(word))
+    // debugger;
+    let response = await Promise.all(getPromises(notfound));
+    let foundResources = response.map(ele => ele._doc);
+    // return response.filter(ele => ele !== undefined);
+    return foundResources.concat(savedResources).filter(ele => ele !== undefined);
 }
 
 function getLanguage(codebody) {
@@ -14,17 +36,23 @@ function getLanguage(codebody) {
     return code_test.language;
 }
 
-function getPromises(keywords,codebody) {
+function getPromises(keywords) {
     // debugger;
-    const language = getLanguage(codebody);
     const resources = [];
-    keywords.map(keyword => language + ' ' + keyword);
     keywords.forEach(keyword => {
         resources.push(getGoogleAdvice(keyword)
             .then(data => {
-                return data;
+                const newResource = new Resource({
+                    keyword: data.keyword,
+                    link: data.link,
+                    title: data.title
+                })
+                return newResource.save()
+                    .then(() => {return newResource;});
+                // return newResource;
             }));
     });
+    // debugger;
     return resources;
 }
 
@@ -41,7 +69,9 @@ const getGoogleAdvice = (search) => {
         .get(`https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${engineId}&q=${encodedString}&hl=en&gl=us`, AXIOS_OPTIONS)
         .then(({data}) => {
             // console.log(data.items[0]);
+            // debugger;
             return {
+                keyword: search,
                 link: data.items[0].link,
                 title: data.items[0].title
             }

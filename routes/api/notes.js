@@ -49,9 +49,9 @@ router.post('/',
         if (!isValid) {
             return res.status(400).json(errors);
         }
-
         getResources(req.body.keywords,req.body.codebody)
             .then(resources => {
+                // debugger;
                 const newNote = new Note({
                     codebody: req.body.codebody,
                     user: {username : req.user.username, userId : req.user.id},
@@ -83,7 +83,7 @@ router.patch('/:id/edit',
                     note.codebody = req.body.codebody;
                     note.title = req.body.title;
                     note.textdetails = req.body.textdetails;
-                    note.resources = req.body.resources;
+                    // note.resources = req.body.resources;
                     note.tags = req.body.tags;
                     note.save()
                         .then(note => res.json(note))
