@@ -32,12 +32,12 @@ export default class NewNote extends React.Component {
   }
 
   // DISABLED UNTIL SCRAPER IS RESOLVED
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps.newResources)
-    // this.setState({
-    //   newResources: nextProps.newResources
-    // })
-  }
+  // componentWillReceiveProps(nextProps) {
+  // console.log(nextProps.newResources)
+  // this.setState({
+  //   newResources: nextProps.newResources
+  // })
+  // }
 
   bindHandlers() {
     this.addLangTag = this.addLangTag.bind(this);
@@ -104,7 +104,7 @@ export default class NewNote extends React.Component {
   toggleResourcesModal() {
     const resourcesNoteModal = document.getElementById('resources-note-container');
     if (resourcesNoteModal.className === "modal-off") {
-      debugger
+      // debugger
       const keywords = getKeywords(this.state.codebody);
       this.setState({
         allKeywords: keywords
@@ -168,7 +168,7 @@ export default class NewNote extends React.Component {
       tags: tags,
       keywords: keywordsSelected
     }
-    debugger
+    // debugger
     this.props.composeNote(note)
       .then(() => (
         this.setState({
@@ -191,7 +191,7 @@ export default class NewNote extends React.Component {
   // remove if possible
   updateKeywords(e) {
     e.preventDefault();
-    debugger
+    // debugger
     // e.target.checked ? e.target.checked = false : e.target.checked = true;
     const keyword = e.target.value || e.target.innerHTML;
     let spaceRemoved = keyword.replace(/\s/g, '');
@@ -210,7 +210,7 @@ export default class NewNote extends React.Component {
   handleResourcesSubmit(e) {
     e.preventDefault();
 
-    debugger
+    // debugger
     this.props.updateNote(noteData, noteId);
     this.toggleResourcesModal();
   }

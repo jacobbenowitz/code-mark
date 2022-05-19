@@ -45,11 +45,9 @@ router.post('/',
     passport.authenticate('jwt', { session: false }),
     (req, res) => {
         const { errors, isValid } = validateNoteInput(req.body);
-
         if (!isValid) {
             return res.status(400).json(errors);
         }
-        debugger
         getResources(req.body.keywords, req.body.codebody)
             .then(resources => {
                 // debugger;
