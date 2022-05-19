@@ -8,6 +8,7 @@ import { css } from '@codemirror/lang-css';
 import CheckBoxItem from './checkbox_item';
 import NewNoteTagItem from '../tags/new_note_tag_item';
 import { getKeywords } from '../../util/webscrap_util';
+import { EditorView } from '@codemirror/basic-setup';
 
 export default class NewNote extends React.Component {
   constructor(props) {
@@ -305,7 +306,8 @@ export default class NewNote extends React.Component {
                   onChange={this.updateCode()}
                   height="200px"
                   theme='dark'
-                  extensions={[javascript({ jsx: true })]}
+                  extensions={[javascript({ jsx: true }),
+                  EditorView.lineWrapping]}
                 />
               </div>
               <div className='note-input'>
@@ -314,7 +316,8 @@ export default class NewNote extends React.Component {
                   onChange={this.updateCode()}
                   height="200px"
                   theme='dark'
-                  extensions={[html()]}
+                  extensions={[html(),
+                  EditorView.lineWrapping]}
                 />
               </div>
               <div className='note-input'>
@@ -323,7 +326,8 @@ export default class NewNote extends React.Component {
                   onChange={this.updateCode()}
                   height="200px"
                   theme='dark'
-                  extensions={[cpp()]}
+                  extensions={[cpp(),
+                  EditorView.lineWrapping]}
                 />
               </div>
               <div className='note-input'>
@@ -332,7 +336,8 @@ export default class NewNote extends React.Component {
                   onChange={this.updateCode()}
                   height="200px"
                   theme='dark'
-                  extensions={[css()]}
+                  extensions={[css(),
+                  EditorView.lineWrapping]}
                 />
               </div>
               <div className='note-input'>
@@ -400,7 +405,8 @@ export default class NewNote extends React.Component {
                 value={"Save a new note..."}
                 height="56px"
                 theme='dark'
-                extensions={[javascript({ jsx: true })]}
+                extensions={[javascript({ jsx: true }),
+                EditorView.lineWrapping]}
               />
             </div>
             <div className='note-input' onClick={this.toggleForm}>
@@ -409,7 +415,8 @@ export default class NewNote extends React.Component {
                 value={"Save a new note..."}
                 height="56px"
                 theme='dark'
-                extensions={[html()]}
+                extensions={[html(),
+                EditorView.lineWrapping]}
               />
             </div>
             <div className='note-input' onClick={this.toggleForm}>
@@ -418,7 +425,8 @@ export default class NewNote extends React.Component {
                 value={"Save a new note..."}
                 height="56px"
                 theme='dark'
-                extensions={[cpp()]}
+                extensions={[cpp(),
+                EditorView.lineWrapping]}
               />
             </div>
             <div className='note-input' onClick={this.toggleForm}>
@@ -427,7 +435,8 @@ export default class NewNote extends React.Component {
                 value={"Save a new note..."}
                 height="56px"
                 theme='dark'
-                extensions={[css()]}
+                extensions={[css(),
+                EditorView.lineWrapping]}
               />
             </div>
           </div>

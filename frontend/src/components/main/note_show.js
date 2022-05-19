@@ -83,9 +83,9 @@ export default class NoteShow extends React.Component {
       selectedText: selection
     })
     const commentSection = document.getElementById("comments");
-    const newSnippetField = document.getElementById("code-snippet-new");
-    newSnippetField.focus();
-    newSnippetField.value = selection;
+    // const newSnippetField = document.getElementById("code-snippet-new");
+    // newSnippetField.focus();
+    // newSnippetField.value = selection;
     commentSection.scrollIntoView({ behavior: 'smooth' });
   }
 
@@ -233,7 +233,7 @@ export default class NoteShow extends React.Component {
         </div>
 
 
-        <div id="note-export-modal" className='modal-off'>
+        {/* <div id="note-export-modal" className='modal-off'>
           <div className='export-controls'>
             <div className='cancel icon-button'
               onClick={() => this.toggleExportModal()}>
@@ -259,7 +259,7 @@ export default class NoteShow extends React.Component {
               </span>
             </div>
           </div>
-        </div>
+        </div> */}
 
 
         <div id='confirm-modal-container' className='modal-off' >
@@ -353,7 +353,6 @@ export default class NoteShow extends React.Component {
                 </div>
                 <div id='export-img-icon' className='note-icon'
                   onClick={this.exportImage}
-                  // onClick={this.exportImage}
                   title="export a screenshot">
                   <i class="fa-solid fa-camera-retro fa-lg"></i>
                 </div>
