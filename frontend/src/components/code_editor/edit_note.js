@@ -86,7 +86,6 @@ export default class EditNote extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     let { title, codebody, textdetails } = this.state;
-    //  
     let note = {
       title: title,
       codebody: codebody,
@@ -94,13 +93,7 @@ export default class EditNote extends React.Component {
     }
     //  
     this.props.updateNote(note, this.props.noteId)
-      .then(() => (
-        this.setState({
-          title: "",
-          codebody: "",
-          textdetails: "",
-        }, () => this.toggleEditModal())
-      ))
+      .then(() => this.toggleEditModal())
   }
 
   render() {

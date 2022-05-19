@@ -10,7 +10,7 @@ const CodeNoteItem = props => (
   <div className="code-note-item">
     <div className="note-item-top">
       <div className="comment-count">
-        <i class="fa-solid fa-comments"></i>
+        <i className="fa-solid fa-comments"></i>
         <span>{props.comments?.length || 0}</span>
       </div>
       <Link to={`/notes/${props.id}`} className="show-link-wrapper">

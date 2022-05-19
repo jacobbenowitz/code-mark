@@ -8,8 +8,8 @@ import { cpp } from '@codemirror/lang-cpp';
 import { css } from '@codemirror/lang-css';
 import { EditorView } from '@codemirror/basic-setup';
 
-const CodeEditorReadOnly = props => {
-  const language = getLanguage(props.codeBody);
+const CodeNewComment = props => {
+  const language = getLanguage(props.codeSnippet);
   const extensions = {
     'JavaScript': javascript({ jsx: true }),
     'HTML': html(),
@@ -18,8 +18,9 @@ const CodeEditorReadOnly = props => {
   }
   return (
     <CodeMirror
-      readOnly={true}
-      value={props.codeBody}
+      id='code-snippet-new'
+      className="comment-code"
+      value={props.codeSnippet}
       width='100%'
       theme='dark'
       extensions={[
@@ -29,4 +30,4 @@ const CodeEditorReadOnly = props => {
     />
   );
 }
-export default CodeEditorReadOnly;
+export default CodeNewComment;
