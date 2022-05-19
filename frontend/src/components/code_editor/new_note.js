@@ -7,6 +7,7 @@ import { cpp } from '@codemirror/lang-cpp';
 import { css } from '@codemirror/lang-css';
 import CheckBoxItem from './checkbox_item';
 import NewNoteTagItem from '../tags/new_note_tag_item';
+import { getKeywords } from '../../util/webscrap_util';
 
 export default class NewNote extends React.Component {
   constructor(props) {
@@ -22,6 +23,7 @@ export default class NewNote extends React.Component {
       suggestedLanguage: undefined,
       isOpen: false, // true when user clicks or types, false otherwise
       keywordsSelected: [],
+      allKeywords: [],
       newResources: []
     }
     // this.resizeOnInput()
@@ -33,7 +35,7 @@ export default class NewNote extends React.Component {
     console.log(nextProps.newResources)
     // this.setState({
     //   newResources: nextProps.newResources
-    // }, () => this.toggleResourcesModal())
+    // })
   }
 
   bindHandlers() {
@@ -47,6 +49,7 @@ export default class NewNote extends React.Component {
     this.init = this.init.bind(this);
     this.toggleForm = this.toggleForm.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.toggleResourcesModal = this.toggleResourcesModal.bind(this);
   }
 
 
@@ -93,14 +96,24 @@ export default class NewNote extends React.Component {
     }
   }
 
-  // toggleResourcesModal() {
-  //   const resourcesNoteModal = document.getElementById('resources-note-container');
-  //   if (resourcesNoteModal.className === "modal-off") {
-  //     resourcesNoteModal.className = "modal-on"
-  //   } else {
-  //     resourcesNoteModal.className = "modal-off"
-  //   }
+  // createKeywords() {
+
   // }
+
+  toggleResourcesModal() {
+    const resourcesNoteModal = document.getElementById('resources-note-container');
+    if (resourcesNoteModal.className === "modal-off") {
+      debugger
+      const keywords = getKeywords(this.state.codebody);
+      this.setState({
+        allKeywords: keywords
+      }, () => {
+        resourcesNoteModal.className = "modal-on"
+      })
+    } else {
+      resourcesNoteModal.className = "modal-off"
+    }
+  }
 
   toggleForm() {
     const fullForm = document.getElementById('new-note-full');
@@ -145,13 +158,16 @@ export default class NewNote extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let { title, codebody, textdetails, tags } = this.state;
-    let note = {
+    const { title, codebody, textdetails, tags, keywordsSelected } = this.state;
+
+    const note = {
       title: title,
       codebody: codebody,
       textdetails: textdetails,
-      tags: tags
+      tags: tags,
+      keywords: keywordsSelected
     }
+    debugger
     this.props.composeNote(note)
       .then(() => (
         this.setState({
@@ -159,6 +175,13 @@ export default class NewNote extends React.Component {
           codebody: "",
           textdetails: "",
           tags: [],
+          newTag: "",
+          tagForm: false,
+          suggestedLanguage: undefined,
+          isOpen: false,
+          keywordsSelected: [],
+          allKeywords: [],
+          newResources: []
         })
       ))
       .then(() => this.toggleForm())
@@ -167,27 +190,29 @@ export default class NewNote extends React.Component {
   // remove if possible
   updateKeywords(e) {
     e.preventDefault();
+    debugger
     // e.target.checked ? e.target.checked = false : e.target.checked = true;
-    const keyword = e.target.value;
+    const keyword = e.target.value || e.target.innerHTML;
+    let spaceRemoved = keyword.replace(/\s/g, '');
     let result;
     // debugger
-    this.state.keywordsSelected.includes(keyword) ? (
-      result = this.state.keywordsSelected.filter(word => word !== keyword)
+    this.state.keywordsSelected.includes(spaceRemoved) ? (
+      result = this.state.keywordsSelected.filter(word => word !== spaceRemoved)
     ) : (
-      result = [e.target.value, ...this.state.keywordsSelected]
+      result = [spaceRemoved, ...this.state.keywordsSelected]
     )
     this.setState({
       keywordsSelected: result
-    })
+    });
+  };
+
+  handleResourcesSubmit(e) {
+    e.preventDefault();
+
+    debugger
+    this.props.updateNote(noteData, noteId);
+    this.toggleResourcesModal();
   }
-
-  // handleResourcesSubmit(e) {
-  //   e.preventDefault();
-
-  //   debugger
-  //   this.props.updateNote(noteData, noteId);
-  //   this.toggleResourcesModal();
-  // }
 
 
   toggleTagForm() {
@@ -233,11 +258,30 @@ export default class NewNote extends React.Component {
   render() {
     return (
       <>
+        <div id='resources-note-container' className='modal-off' >
+          <div className='modal-wrapper'>
+            <div className='resources-modal'>
+              <button onClick={this.toggleResourcesModal}>ToggleTesting</button>
+              <h4>Resources</h4>
+              <span>Select the keywords that you'd like resources for</span>
+              <form className='resource-options'
+                onSubmit={this.handleSubmit}>
+                {this.state.allKeywords?.map(keyword =>
+                  <CheckBoxItem keyword={keyword}
+                    updateKeywords={this.updateKeywords}
+                  />)
+                }
+                <button type="submit">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
 
         <div className='new-note-container' id='new-note-full'>
           {/* <button onClick={this.toggleResourcesModal}>ToggleTesting</button> */}
           <div className='new-note-form'>
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.toggleResourcesModal}>
               <div className='note-input'>
                 <input type={'text'}
                   onChange={this.update('title')}
@@ -392,24 +436,3 @@ export default class NewNote extends React.Component {
     )
   }
 }
-
-
-// <div id='resources-note-container' className='modal-off' >
-//   <div className='modal-wrapper'>
-//     <div className='resources-modal'>
-//       {/* <button onClick={this.toggleResourcesModal}>ToggleTesting</button> */}
-//       <h4>Resources</h4>
-//       <span>Select the keywords that you'd like resources for</span>
-//       <form className='resource-options'
-//         onSubmit={this.toggleResourcesModal}
-//       >
-//         {this.props.newResources?.map(keyword =>
-//           <CheckBoxItem keyword={keyword}
-//             updateKeywords={this.updateKeywords}
-//           />)
-//         }
-//         <button type="submit">Submit</button>
-//       </form>
-//     </div>
-//   </div>
-// </div>

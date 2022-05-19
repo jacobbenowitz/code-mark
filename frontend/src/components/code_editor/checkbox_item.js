@@ -14,6 +14,7 @@ class CheckBoxItem extends React.Component {
           name={keyword}
           className='checkbox' />
         <label htmlFor={`${keyword}-check`}
+          onMouseUp={updateKeywords}
           className='checkbox-label'>
           {keyword} </label>
       </div>

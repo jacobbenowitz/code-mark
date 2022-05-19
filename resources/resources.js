@@ -4,21 +4,26 @@ const engineId = require('../config/keys').engineId;
 const Resource = require('../models/Resource');
 const hljs = require('highlight.js')
 
-async function getResources(keywords,codebody) {
-    // debugger;
+async function getResources(keywords, codebody) {
+    debugger;
     const language = getLanguage(codebody);
     const languageKeywords = keywords.map(keyword => language + ' ' + keyword);
     const search = [];
+    debugger;
     languageKeywords.forEach(keyword => {
-        // debugger;
         search.push(Resource.findOne({ keyword: keyword })
             .then(resource => {
                 // found.push(resource);
+                debugger
                 return resource;
+            })
+            .catch(err => {
+                debugger
+                return null
             }));
     })
     let found = await Promise.all(search);
-    // debugger;
+    debugger;
     // console.log(found);
     let savedResources = found.filter(ele => ele !== null).map(ele => ele._doc);
     let foundWords = savedResources.map(ele => ele.keyword);
@@ -48,8 +53,14 @@ function getPromises(keywords) {
                     title: data.title
                 })
                 return newResource.save()
-                    .then(() => {return newResource;});
+                    .then(() => { return newResource; })
+                    .catch(err => {
+                        debugger
+                    });
                 // return newResource;
+            })
+            .catch(err => {
+                debugger
             }));
     });
     // debugger;
@@ -64,17 +75,21 @@ const AXIOS_OPTIONS = {
 };
 
 const getGoogleAdvice = (search) => {
+    debugger;
     const encodedString = encodeURI(search);
     return axios
         .get(`https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${engineId}&q=${encodedString}&hl=en&gl=us`, AXIOS_OPTIONS)
-        .then(({data}) => {
+        .then(({ data }) => {
             // console.log(data.items[0]);
-            // debugger;
+            debugger;
             return {
                 keyword: search,
                 link: data.items[0].link,
                 title: data.items[0].title
             }
+        })
+        .catch(err => {
+            debugger;
         })
 }
 
