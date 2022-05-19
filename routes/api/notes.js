@@ -7,6 +7,8 @@ const Note = require('../../models/Note');
 const User = require('../../models/User');
 const validateNoteInput = require('../../validation/notes');
 
+const getResources = require('../../resources/resources');
+
 //get all notes
 router.get('/', (req, res) => {
     Note.find()
@@ -47,21 +49,24 @@ router.post('/',
         if (!isValid) {
             return res.status(400).json(errors);
         }
-
-        const newNote = new Note({
-            codebody: req.body.codebody,
-            user: { username: req.user.username, userId: req.user.id },
-            title: req.body.title,
-            textdetails: req.body.textdetails,
-            resources: req.body.resources,
-            tags: req.body.tags
-        });
-
-        newNote.save().then(note => {
-            req.user.notes.push(newNote.id)
-            req.user.save()
-                .then(() => res.json(note))
-        });
+        getResources(req.body.keywords,req.body.codebody)
+            .then(resources => {
+                // debugger;
+                const newNote = new Note({
+                    codebody: req.body.codebody,
+                    user: {username : req.user.username, userId : req.user.id},
+                    title: req.body.title,
+                    textdetails: req.body.textdetails,
+                    resources: resources,
+                    tags: req.body.tags
+                });
+                
+                newNote.save().then(note => {
+                    req.user.notes.push(newNote.id)
+                    req.user.save()
+                    .then(() => res.json(note))
+                });
+            })
     }
 );
 
@@ -78,7 +83,7 @@ router.patch('/:id/edit',
                     note.codebody = req.body.codebody;
                     note.title = req.body.title;
                     note.textdetails = req.body.textdetails;
-                    note.resources = req.body.resources;
+                    // note.resources = req.body.resources;
                     note.tags = req.body.tags;
                     note.save()
                         .then(note => res.json(note))
@@ -100,6 +105,7 @@ router.delete('/:id',
                 } else {
                     const noteid = note.id;
                     const userid = note.user.userId;
+                    const comments = note.comments;
                     Note.deleteOne({ _id: req.params.id })
                         .then(() => {
                             User.findById(userid)
@@ -107,6 +113,21 @@ router.delete('/:id',
                                     user.notes = user.notes.filter(item => item.toString() !== noteid);
                                     user.save().then(user => res.json(user));
                                 })
+                        })
+                        .then(() => {
+                            comments.forEach(commentid => {
+                                Comment.findById(commentid)
+                                    .then(comment => {
+                                        Comment.deleteOne({ _id: commentid })
+                                    })
+                                    .then(comment => {
+                                        User.findById(comment.user.userId)
+                                            .then(user => {
+                                                user.comments = user.comments.filter(item => item.toString() !== commentid);
+                                                user.save().then(user => res.json(user));
+                                            })
+                                    })
+                            })
                         })
                 }
             })

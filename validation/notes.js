@@ -9,8 +9,8 @@ module.exports = function validateNoteInput(data) {
   // we should ensure the title is valid text as well
   // data.title = validText(data.title) ? data.title: '';
 
-  if (!Validator.isLength(data.codebody, { min: 5, max: 5000 })) {
-    errors.codebody = 'Code Body must be between 5 and 5000 characters';
+  if (!Validator.isLength(data.codebody, { min: 2, max: 5000 })) {
+    errors.codebody = 'Code Body must be between 2 and 5000 characters';
   }
 
   if (Validator.isEmpty(data.codebody)) {
