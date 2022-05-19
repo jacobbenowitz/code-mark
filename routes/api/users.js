@@ -110,4 +110,45 @@ router.get('/:userId', (req, res) => {
         );
 });
 
+router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,res) => {
+    if(req.params.userId !== req.user.id){
+        res.status(400).json({ editnotallowed: 'Not Authorized to Edit User'})
+    }else{
+        const { errors, isValid } = validateRegisterInput(req.body);
+        if(!isValid){return res.status(400).json(errors)}
+        User.findById(req.params.userId)
+            .then(mainuser => {
+                User.findOne({ username: req.body.username })
+                    .then(user => {
+                        if(user){
+                            return res.status(400).json({ email: "A user has already registered with this username" })
+                        }else{
+                            User.findOne({ email: req.body.email})
+                                .then(user => {
+                                    if(user){
+                                        return res.status(400).json({ email: "A user has already registered with this email address" })
+                                    }else{
+                                        mainuser.username = req.body.username;
+                                        mainuser.email = req.body.email;
+                                        
+                                        bcrypt.genSalt(10, (err,salt) => {
+                                            bcrypt.hash(req.body.password, salt, (err, hash) => {
+                                                if(err){throw err}
+                                                mainuser.password = hash;
+                                                mainuser.save()
+                                                    .then(user => res.json(user))
+                                                    .catch(err => console.log(err))
+                                            })
+                                        })
+                                    }
+                                })
+                        }
+                    })
+            })
+            .catch(err =>
+                res.status(404).json({ nouserfound: "No User Found With That ID" })  
+            );
+    }
+})
+
 module.exports = router;
