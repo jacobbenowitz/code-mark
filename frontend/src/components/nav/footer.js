@@ -30,13 +30,19 @@ const NavFooter = () => (
                     <h5>Developers</h5>
                 </div>
                 <div className="footer-link-list">
-                    <a href="https://github.com/jacobbenowitz" target="_blank" rel="noreferrer">
+                    <a href="https://github.com/jacobbenowitz"
+                        className="a-link"
+                        target="_blank" rel="noreferrer">
                         Jacob Benowitz
                     </a>
-                    <a href="https://github.com/MIFUNEKINSKi" target="_blank" rel="noreferrer">
+                    <a href="https://github.com/MIFUNEKINSKi"
+                        className="a-link"
+                        target="_blank" rel="noreferrer">
                         Christopher Moore
                     </a>
-                    <a href="https://github.com/rmei6" target="_blank" rel="noreferrer">
+                    <a href="https://github.com/rmei6"
+                        className="a-link"
+                        target="_blank" rel="noreferrer">
                         Johnny Mei
                     </a>
                 </div>

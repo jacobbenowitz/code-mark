@@ -64,8 +64,7 @@ export const fetchComments = () => dispatch => (
 );
 
 export const fetchNoteComments = noteId => dispatch => {
-     
-    getNoteComments(noteId)
+    return getNoteComments(noteId)
         .then(comments => dispatch(receiveNoteComments(comments.data)))
         .catch(err => dispatch(receiveCommentErrors(err)))
 };
@@ -95,8 +94,8 @@ export const updateComment = (data, commentId) => dispatch => {
         .catch(err => dispatch(receiveCommentErrors(err)))
 };
 
-export const removeComment = commentId => dispatch => (
+export const removeComment = commentId => dispatch => {
     deleteComment(commentId)
         .then(commentid => dispatch(receiveDeleteComment(commentid)))
         .catch(err => dispatch(receiveCommentErrors(err)))
-);
+};

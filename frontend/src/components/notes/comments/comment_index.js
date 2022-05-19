@@ -2,39 +2,39 @@ import React from 'react';
 import { orderNoteComments } from "../../../util/selectors";
 import CommentItem from '../comments/comment_item';
 import CommentFormContainer from './comment_form_container';
+import CommentForm from './comment_form';
 import { filterUsersByComment } from "../../../util/selectors";
 
 export default class CommentIndex extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   newComment: undefined,
-    // }
+
   }
-
-  // componentDidCatch() {
-  // this.props.comments ? 
-  // }
-
   render() {
-
-    const { comments, note } = this.props;
+    const { note, comments, isCurrentUser, removeComment, noteId, updateComment,
+      composeComment, selectedText, newComment, currentUser } = this.props;
     return (
-
       <div className='comments-list'>
-
-        <CommentFormContainer />
-
-        {this.props.comments && this.props.users ? (
-          <div>
+        <CommentForm
+          noteId={noteId}
+          composeComment={composeComment}
+          selectedText={selectedText}
+          newComment={newComment}
+          currentUser={currentUser}
+        />
+        {comments ? (
+          <div className='comment-items-list'>
             {comments.map(comment => {
-              let user = filterUsersByComment(this.props.users, comment);
               return <CommentItem
+                updateComment={updateComment}
+                isCurrentUser={isCurrentUser}
                 key={comment._id}
                 id={comment._id}
                 comment={comment}
-                user={user}
-              // deleteThisComment={this.deleteThisComment}
+                user={comment.user}
+                removeComment={removeComment}
+                fetchNote={this.props.fetchNote}
+                noteId={this.props.noteId}
               />
             })}
           </div>) : ''}

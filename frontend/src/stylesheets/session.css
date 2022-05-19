@@ -26,6 +26,10 @@
   box-sizing: border-box;
 }
 
+.button-session {
+  flex: 1;
+}
+
 .signup-buttons-wrapper {
   margin-top: 1rem;
   display: flex;

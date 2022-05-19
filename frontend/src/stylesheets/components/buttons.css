@@ -35,6 +35,14 @@ button:focus, .signup:focus, .login:focus, .hide-button:focus {
   background: #0D4649;
 }
 
+.a-link {
+  color: #222222;
+}
+
+.a-link:hover {
+  color: #37F3FF;
+}
+
 .view-link {
   padding: 0.4rem;
   display: flex;
