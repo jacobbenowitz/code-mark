@@ -207,13 +207,12 @@ export default class NewNote extends React.Component {
     });
   };
 
-  handleResourcesSubmit(e) {
-    e.preventDefault();
-
-    // debugger
-    this.props.updateNote(noteData, noteId);
-    this.toggleResourcesModal();
-  }
+  // handleResourcesSubmit(e) {
+  //   e.preventDefault();
+  // debugger
+  //   this.props.updateNote(noteData, noteId);
+  //   this.toggleResourcesModal();
+  // }
 
 
   toggleTagForm() {
