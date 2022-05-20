@@ -121,12 +121,12 @@ router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,
       .then(mainuser => {
         User.findOne({ username: req.body.username })
           .then(user => {
-            if (user) {
+            if (user && user.username !== req.user.username) {
               return res.status(400).json({ email: "A user has already registered with this username" })
             } else {
               User.findOne({ email: req.body.email })
                 .then(user => {
-                  if (user) {
+                  if (user && user.email !== req.user.email) {
                     return res.status(400).json({ email: "A user has already registered with this email address" })
                   } else {
                     mainuser.username = req.body.username;
