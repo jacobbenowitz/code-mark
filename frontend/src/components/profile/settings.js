@@ -8,6 +8,7 @@ export default class Settings extends React.Component {
       username: '',
       password: '',
       password2: '',
+      updated: false,
       errors: {}
     }
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,9 +31,15 @@ export default class Settings extends React.Component {
     )
   }
 
+  confirmedDelete() {
+    this.props.removeUser(this.props.currentUser.id);
+    this.props.logout();
+  }
+
   update(field) {
     return e => this.setState({
-      [field]: e.currentTarget.value
+      [field]: e.currentTarget.value,
+      updated: true
     });
   };
 
@@ -57,6 +64,7 @@ export default class Settings extends React.Component {
       }
     )
     this.props.updateUser(user);
+    this.setState({ updated: false })
   }
 
   renderErrors() {
@@ -90,7 +98,7 @@ export default class Settings extends React.Component {
               <span>All of your notes and comments will be permanently removed.</span>
               <div className='modal-buttons'>
                 <div className='delete-note icon-button'
-                  onClick={() => this.props.removeUser(this.props.currentUser.id)}>
+                  onClick={() => this.confirmedDelete()}>
                   <i className="fa-solid fa-trash fa-lg"></i>
                   <span>
                     Delete
@@ -163,8 +171,8 @@ export default class Settings extends React.Component {
               />
             </div>
             <div className='signup-buttons-wrapper'>
-              <button type='submit'
-                className={'button-session'}>Update account</button>
+              <button type='submit' disabled={!this.state.updated}
+                className={this.state.updated ? 'button-session' : 'button-session disabled'}>Update account</button>
             </div>
             {this.renderErrors()}
           </form>

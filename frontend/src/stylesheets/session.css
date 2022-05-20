@@ -29,6 +29,13 @@
 .button-session {
   flex: 1;
 }
+.button-session.disabled {
+  border: 1px solid transparent;
+  color: #727272;
+  background: #373737;
+  box-shadow: none;
+  cursor: not-allowed;
+}
 
 .signup-buttons-wrapper {
   margin-top: 1rem;

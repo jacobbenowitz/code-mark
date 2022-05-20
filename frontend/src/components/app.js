@@ -31,8 +31,8 @@ const App = () => (
       <NavBarContainer />
     </header>
     <Switch>
-      <AuthRoute exact path='/login' component={LoginFormContainer} />
       <AuthRoute exact path='/signup' component={SignupFormContainer} />
+      <AuthRoute exact path='/login' component={LoginFormContainer} />
       <ProtectedRoute exact path='/home' component={HomeContainer} />
       <ProtectedRoute exact path={'/notes/:noteId'} component={NoteShowContainer} />
       <ProtectedRoute path='/notes/tags/:tag' component={HomeFilteredContainer} />

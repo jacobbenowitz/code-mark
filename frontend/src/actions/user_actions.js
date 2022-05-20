@@ -52,6 +52,6 @@ export const updateUser = userData => dispatch => {
 export const removeUser = userId => dispatch => {
     return deleteUser(userId)
         .then((userId) => dispatch(receiveDeletedUser(userId)))
-        .then(() => dispatch(logout()))
+        // .then(() => logout())
         .catch(err => console.log(err))
 }

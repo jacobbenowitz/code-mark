@@ -1,5 +1,6 @@
 
 import { connect } from 'react-redux';
+import { logout } from '../../actions/session_actions';
 import {
   fetchUser,
   updateUser,
@@ -18,7 +19,8 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchUser: userId => dispatch(fetchUser(userId)),
     updateUser: userData => dispatch(updateUser(userData)),
-    removeUser: userId => dispatch(removeUser(userId))
+    removeUser: userId => dispatch(removeUser(userId)),
+    logout: () => logout(),
   }
 }
 

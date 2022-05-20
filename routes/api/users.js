@@ -8,6 +8,7 @@ const passport = require('passport');
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
 const Note = require("../../models/Note");
+const Comment = require("../../models/Comment")
 
 router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 
@@ -195,13 +196,15 @@ router.delete('/:userId', passport.authenticate('jwt', { session: false }), (req
                           .catch(err => res.status(404).json({ nocommentfound: "No Comment Found With That ID" }))
                       })
                     })
-
                 })
-                .catch(err => res.status(404).json({ nonotefound: "No Note Found With That ID" }))
+                .catch(err => res.status(404).json(
+                  { nonotefound: "No Note Found With That ID" }
+                ))
             })
           })
       })
-      .then(deleteuser => res.json(deleteuser.id))
+      .then(() => res.json(req.params.userId)) // was id
+      // .then(deleteuser => res.json(deleteuser._id)) // was id
       .catch(err =>
         res.status(404).json({ nouserfound: "No User Found With That ID" })
       );
