@@ -157,7 +157,7 @@ router.delete('/:userId', passport.authenticate('jwt', { session: false }), (req
     }else{
         User.findById(req.params.userId)
             .then(deleteuser => {
-                
+                console.log("hello");
             })
             .catch(err =>
                 res.status(404).json({ nouserfound: "No User Found With That ID" })  
