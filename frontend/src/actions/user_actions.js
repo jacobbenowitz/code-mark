@@ -19,9 +19,10 @@ export const fetchUsers = () => dispatch => (
         .catch(err => console.log(err))
 );
 
-export const fetchUser = userId => dispatch => (
-    getUser(userId)
+export const fetchUser = userId => dispatch => {
+    debugger
+    return getUser(userId)
         .then(user => dispatch(receiveUser(user)))
         .catch(err => console.log(err))
-);
+};
 

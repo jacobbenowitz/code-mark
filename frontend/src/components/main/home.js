@@ -6,17 +6,6 @@ import { NavLink } from 'react-router-dom';
 import NavTagItem from '../tags/nav_tag_item';
 
 export default class Home extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     tags: []
-  //   }
-  // }
-
-  // componentDidMount() {
-  //   let filtered = this.tags.map
-  //   this.setState({tags: })
-  // }
 
   render() {
     return (

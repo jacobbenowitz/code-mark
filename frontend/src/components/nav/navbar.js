@@ -24,8 +24,8 @@ export default class NavBar extends React.Component {
       return (
         <div>
           <Link className="settings nav-item"
-            to={''}>Settings</Link>
-          <Link className="logout nav-item" to={''}
+            to={'/settings'}>Settings</Link>
+          <Link className="logout nav-item" to={'/'}
             onClick={() => this.props.logout()}>Logout</Link>
         </div>
       );

@@ -7,7 +7,7 @@ import SplashPage from './splash/splash_page';
 import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/signup_form_container';
 import NavFooter from "./nav/footer";
-import ProfileContainer from './profile/profile_container';
+import SettingsContainer from './profile/settings_container';
 import Footer from './nav/footer';
 import '../stylesheets/reset.css';
 import '../stylesheets/app.css';
@@ -40,6 +40,7 @@ const App = () => (
       {/* <ProtectedRoute exact path='/profile' component={ProfileContainer} /> */}
       <ProtectedRoute exact path='/discover' component={DiscoverContainer} />
       {/* <ProtectedRoute exact path='/following' component={FollowingContainer} /> */}
+      <ProtectedRoute exact path='/settings' component={SettingsContainer} />
       <AuthRoute path="/" component={SplashPage} />
     </Switch>
     <footer className="grid-bottom-stack">
