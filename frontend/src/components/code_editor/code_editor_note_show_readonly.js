@@ -8,7 +8,7 @@ import { cpp } from '@codemirror/lang-cpp';
 import { css } from '@codemirror/lang-css';
 import { EditorView } from '@codemirror/basic-setup';
 
-const CodeEditorReadOnly = props => {
+const CodeEditorNoteShow = props => {
   const language = getLanguage(props.codeBody);
   const extensions = {
     'JavaScript': javascript({ jsx: true }),
@@ -17,8 +17,9 @@ const CodeEditorReadOnly = props => {
     'C++': cpp(),
   }
   const fixedHeightEditor = EditorView.theme({
-    "&": { 'max-height': "300px" },
-    ".cm-scroller": { 'overflow': "auto" }
+    "&": { "min-height": "200px" },
+    ".cm-scroller": { "overflow": "auto" },
+    ".cm-editor": { "font-size": '1rem' }
   })
   return (
     <CodeMirror
@@ -33,4 +34,4 @@ const CodeEditorReadOnly = props => {
     />
   );
 }
-export default CodeEditorReadOnly;
+export default CodeEditorNoteShow;

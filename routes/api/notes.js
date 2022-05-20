@@ -45,26 +45,25 @@ router.post('/',
     passport.authenticate('jwt', { session: false }),
     (req, res) => {
         const { errors, isValid } = validateNoteInput(req.body);
-
         if (!isValid) {
             return res.status(400).json(errors);
         }
-        getResources(req.body.keywords,req.body.codebody)
+        getResources(req.body.keywords, req.body.codebody)
             .then(resources => {
                 // debugger;
                 const newNote = new Note({
                     codebody: req.body.codebody,
-                    user: {username : req.user.username, userId : req.user.id},
+                    user: { username: req.user.username, userId: req.user.id },
                     title: req.body.title,
                     textdetails: req.body.textdetails,
                     resources: resources,
                     tags: req.body.tags
                 });
-                
+
                 newNote.save().then(note => {
                     req.user.notes.push(newNote.id)
                     req.user.save()
-                    .then(() => res.json(note))
+                        .then(() => res.json(note))
                 });
             })
     }

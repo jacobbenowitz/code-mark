@@ -40,7 +40,6 @@ export default class HomeFiltered extends React.Component {
         </div>
 
         <div className='home-main'>
-          <NewNoteContainer />
           <div className='notes-section'>
             <div className='section-title'>
               <h1>My notes</h1>

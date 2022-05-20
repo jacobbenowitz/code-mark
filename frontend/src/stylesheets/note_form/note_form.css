@@ -151,6 +151,7 @@
 }
 
 #comment-delete-modal-container {
+  z-index: 100;
   position: relative;
   top: 2rem;
   left: 3rem;

@@ -12,7 +12,7 @@ export default class CommentIndex extends React.Component {
   }
   render() {
     const { note, comments, isCurrentUser, removeComment, noteId, updateComment,
-      composeComment, selectedText, newComment, currentUser } = this.props;
+      composeComment, selectedText, newComment, currentUser, fetchNoteComments } = this.props;
     return (
       <div className='comments-list'>
         <CommentForm
@@ -21,6 +21,7 @@ export default class CommentIndex extends React.Component {
           selectedText={selectedText}
           newComment={newComment}
           currentUser={currentUser}
+          fetchNoteComments={fetchNoteComments}
         />
         {comments ? (
           <div className='comment-items-list'>
@@ -28,12 +29,14 @@ export default class CommentIndex extends React.Component {
               return <CommentItem
                 updateComment={updateComment}
                 isCurrentUser={isCurrentUser}
+                currentUser={currentUser}
                 key={comment._id}
                 id={comment._id}
                 comment={comment}
                 user={comment.user}
                 removeComment={removeComment}
                 fetchNote={this.props.fetchNote}
+                fetchNoteComments={fetchNoteComments}
                 noteId={this.props.noteId}
               />
             })}
