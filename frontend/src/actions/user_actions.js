@@ -4,6 +4,7 @@ import {
     patchUser,
     deleteUser
 } from "../util/user_api_util";
+import { logout } from "./session_actions";
 
 export const RECEIVE_USERS = "RECEIVE_USERS";
 export const RECEIVE_USER = "RECEIVE_USER";
@@ -51,5 +52,6 @@ export const updateUser = userData => dispatch => {
 export const removeUser = userId => dispatch => {
     return deleteUser(userId)
         .then((userId) => dispatch(receiveDeletedUser(userId)))
+        .then(() => dispatch(logout()))
         .catch(err => console.log(err))
 }

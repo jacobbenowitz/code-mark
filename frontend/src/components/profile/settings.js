@@ -41,6 +41,7 @@ export default class Settings extends React.Component {
     let user;
     this.state.password2.length ? (
       user = {
+        id: this.props.currentUser.id,
         email: this.state.email,
         username: this.state.username,
         password: this.state.password,
@@ -48,6 +49,7 @@ export default class Settings extends React.Component {
       }
     ) : (
       user = {
+        id: this.props.currentUser.id,
         email: this.state.email,
         username: this.state.username,
         password: this.props.user.password,
@@ -88,7 +90,7 @@ export default class Settings extends React.Component {
               <span>All of your notes and comments will be permanently removed.</span>
               <div className='modal-buttons'>
                 <div className='delete-note icon-button'
-                  onClick={() => this.props.deleteUser(this.props.currentUser.id)}>
+                  onClick={() => this.props.removeUser(this.props.currentUser.id)}>
                   <i className="fa-solid fa-trash fa-lg"></i>
                   <span>
                     Delete
@@ -110,7 +112,7 @@ export default class Settings extends React.Component {
           <div className='icon-buttons-wrapper'>
             <div className='icon-button' onClick={() =>
               this.props.history.goBack()}>
-              <i class="fa-solid fa-arrow-left"></i>
+              <i className="fa-solid fa-arrow-left"></i>
               <span>Go back</span>
             </div>
             <div className='icon-button' onClick={this.toggleDeleteModal}>

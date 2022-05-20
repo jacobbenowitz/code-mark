@@ -1,7 +1,6 @@
 import {
     RECEIVE_USER,
     RECEIVE_USERS,
-    RECEIVE_DELETED_USER,
     RECEIVE_UPDATED_USER
 } from "../actions/user_actions";
 
@@ -21,8 +20,6 @@ const usersReducer = (prevState = initialState, action) => {
         case RECEIVE_USERS:
             nextState.all = action.users.data;
             return nextState;
-        case RECEIVE_DELETED_USER:
-            return initialState;
         case RECEIVE_UPDATED_USER:
             nextState.user = action.user.data;
             return nextState;

@@ -63,6 +63,10 @@ header {
   overflow: hidden;
 }
 
+.avatar-wrapper {
+  cursor: pointer;
+}
+
 .user-links {
   display: flex;
   flex-direction: row;
