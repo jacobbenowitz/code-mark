@@ -95,14 +95,16 @@ export default class CommentForm extends React.Component {
             <form onSubmit={this.handleSubmit} className='comment-form'>
               <span className='comment-form-title'>Write a new comment</span>
               <div className='add-code-snippet-wrapper'>
-                <div className="code-snippet-comment"
-                  onClick={this.promptCodeHighlight}>
+                <div className="code-snippet-comment">
+                  {/* onClick={this.promptCodeHighlight}> */}
                   {/* <div className='icon-button' id='code-highlight-button-1'
                     onClick={this.promptCodeHighlight}>
                     <i class="fa-solid fa-highlighter fa-lg"></i>
                     <span>Mention code from the note in your comment</span>
                   </div> */}
-                  <CodeCommentReadOnly codeSnippet={this.state.codeSnippet} />
+                  <CodeCommentReadOnly
+                    promptCodeHighlight={this.promptCodeHighlight}
+                    codeSnippet={this.state.codeSnippet} />
                 </div>
               </div>
               <textarea

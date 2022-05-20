@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 const CodeNoteItem = props => (
   // <div className="code-note-item"
   // onClick={<Redirect to={`/notes/${props.id}`} />}>
-  <div className="code-note-item">
+  <div className="code-note-item" key={props.id}>
     <div className="note-item-top">
       <div className="comment-count">
         <i className="fa-solid fa-comments"></i>
@@ -19,8 +19,8 @@ const CodeNoteItem = props => (
       </Link>
     </div>
     <div className="code-note-tags">
-      {props.tags?.map(tag =>
-        <div className="note-tag-mini">{tag}</div>)}
+      {props.tags?.map((tag, i) =>
+        <div className="note-tag-mini" key={`${i}-tag`}>{tag}</div>)}
     </div>
     <div className="code-note-text">
       <div className="updated-at-and-username">

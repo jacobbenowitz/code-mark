@@ -266,8 +266,9 @@ export default class NewNote extends React.Component {
               <span>Select the keywords that you'd like resources for</span>
               <form className='resource-options'
                 onSubmit={this.handleSubmit}>
-                {this.state.allKeywords?.map(keyword =>
-                  <CheckBoxItem keyword={keyword}
+                {this.state.allKeywords?.map((keyword, i) =>
+                  <CheckBoxItem keyword={keyword} index={i}
+                    key={i}
                     updateKeywords={this.updateKeywords}
                   />)
                 }

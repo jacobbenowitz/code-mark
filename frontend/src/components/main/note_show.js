@@ -1,6 +1,7 @@
 import React from 'react';
 import CodeEditorReadOnly from '../code_editor/code_editor_readonly';
 import NoteShowEditorLoader from '../code_editor/code_show_editor_loader';
+import CodeEditorNoteShow from '../code_editor/code_editor_note_show_readonly';
 import EditNote from '../code_editor/edit_note';
 import CommentFormContainer from '../notes/comments/comment_form_container';
 import CommentForm from '../notes/comments/comment_form';
@@ -323,11 +324,8 @@ export default class NoteShow extends React.Component {
                   Delete
                 </span>
               </div>
-            ) :
-              ""
-            }
+            ) : ""}
           </div>
-
 
           <div id="note-show-main" className='note-show-main'>
             <div className='note-show-title'>
@@ -357,7 +355,7 @@ export default class NoteShow extends React.Component {
                   <i class="fa-solid fa-camera-retro fa-lg"></i>
                 </div>
               </div>
-              <CodeEditorReadOnly
+              <CodeEditorNoteShow
                 codeBody={note.codebody}
               />
             </div>

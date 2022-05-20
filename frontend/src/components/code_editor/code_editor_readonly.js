@@ -16,6 +16,10 @@ const CodeEditorReadOnly = props => {
     'CSS': css(),
     'C++': cpp(),
   }
+  const fixedHeightEditor = EditorView.theme({
+    "&": { 'max-height': "300px" },
+    ".cm-scroller": { 'overflow': "auto" }
+  })
   return (
     <CodeMirror
       readOnly={true}
@@ -24,7 +28,7 @@ const CodeEditorReadOnly = props => {
       theme='dark'
       extensions={[
         extensions[language] ? extensions[language] : javascript({ jsx: true }),
-        EditorView.lineWrapping
+        EditorView.lineWrapping, fixedHeightEditor
       ]}
     />
   );
