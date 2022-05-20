@@ -81,6 +81,7 @@ export function getKeywords(codebody) {
     // words = words.filter(word => !ignore.includes(word));
     return words.filter(word => word.length > 1);
     // return words.map(word => code_test.language + ' ' + word);
+  
 }
 
 // let words = 'ruby java onclick() onchange() componentdidmount()';

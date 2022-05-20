@@ -7,6 +7,7 @@ const keys = require('../../config/keys');
 const passport = require('passport');
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
+const Note = require("../../models/Note");
 
 router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 
@@ -130,16 +131,21 @@ router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,
                                     }else{
                                         mainuser.username = req.body.username;
                                         mainuser.email = req.body.email;
-                                        
-                                        bcrypt.genSalt(10, (err,salt) => {
-                                            bcrypt.hash(req.body.password, salt, (err, hash) => {
-                                                if(err){throw err}
-                                                mainuser.password = hash;
-                                                mainuser.save()
+                                        if(req.body.password !== mainuser.password){
+                                            bcrypt.genSalt(10, (err,salt) => {
+                                                bcrypt.hash(req.body.password, salt, (err, hash) => {
+                                                    if(err){throw err}
+                                                    mainuser.password = hash;
+                                                    mainuser.save()
                                                     .then(user => res.json(user))
                                                     .catch(err => console.log(err))
+                                                })
                                             })
-                                        })
+                                        }else{
+                                            mainuser.save()
+                                                .then(user => res.json(user))
+                                                .catch(err => console.log(err))
+                                        }
                                     }
                                 })
                         }
@@ -157,8 +163,45 @@ router.delete('/:userId', passport.authenticate('jwt', { session: false }), (req
     }else{
         User.findById(req.params.userId)
             .then(deleteuser => {
-                console.log("hello");
-            })
+                var noteIds = deleteuser.notes;
+                var commentIds = deleteuser.comments;
+                User.deleteOne({ _id: deleteuser.id })
+                    .then(() => {
+                        commentIds.forEach(commentid => {
+                            Comment.findById(commentid)
+                            .then(comment => {
+                                Comment.deleteOne({ _id: commentid })
+                            })
+                            .catch(err => res.status(404).json({ nocommentfound: "No Comment Found With That ID"}))
+                        })
+                        noteIds.forEach(noteId => {
+                            Note.findById(noteId)
+                            .then(note => {
+                                const innercommentIds = note.comments;
+                                Note.deleteOne({ _id: noteId })
+                                .then(() => {
+                                    innercommentIds.forEach(innercommentid => {
+                                        Comment.findById({ _id: innercommentid})
+                                        .then(comment => {
+                                            Comment.deleteOne({ _id: innercommentid })
+                                        })
+                                        .then(comment => {
+                                            User.findById(comment.user.userId)
+                                            .then(user => {
+                                                user.comments = user.comments.filter(item => item.toString() !== innercommentid);
+                                                user.save().then(user => res.json(user));
+                                            })
+                                        })
+                                        .catch(err => res.status(404).json({ nocommentfound: "No Comment Found With That ID"}))
+                                    })
+                                })
+                                
+                            })
+                            .catch(err => res.status(404).json({ nonotefound: "No Note Found With That ID"}))
+                        })
+                    })
+                })
+            .then(deleteuser => res.json(deleteuser.id))
             .catch(err =>
                 res.status(404).json({ nouserfound: "No User Found With That ID" })  
             );
