@@ -14,8 +14,8 @@ const ResourceItem = ({ resource }) => (
       <span className="resource-heading">
         {resource.title}
       </span>
-      <Link to={resource.link} className="resource-link"
-      >{resource.link}</Link>
+      <a href={resource.link} target="_blank" className="resource-link"
+      >{resource.link}</a>
     </div>
 
   </div>

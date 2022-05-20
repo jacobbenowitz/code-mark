@@ -1,6 +1,7 @@
 import React from 'react';
 import CodeEditorReadOnly from '../code_editor/code_editor_readonly';
 import NoteShowEditorLoader from '../code_editor/code_show_editor_loader';
+import CodeEditorNoteShow from '../code_editor/code_editor_note_show_readonly';
 import EditNote from '../code_editor/edit_note';
 import CommentFormContainer from '../notes/comments/comment_form_container';
 import CommentForm from '../notes/comments/comment_form';
@@ -9,11 +10,14 @@ import CommentFormModal from '../notes/comments/comment_form_modal';
 import { orderNoteComments } from "../../util/selectors";
 import CommentItem from '../notes/comments/comment_item';
 import Tags from '../tags/tags';
+import TagsExport from '../tags/tags_export';
 // credit context menu: https://itnext.io/how-to-create-a-custom-right-click-menu-with-javascript-9c368bb58724
 // textarea resize: https://stackoverflow.com/questions/20775824/after-clicking-on-selected-text-window-selection-is-not-giving-updated-range
 import CommentIndex from '../notes/comments/comment_index';
 import ResourceItem from '../notes/resources/resource_item';
 import { Link, Redirect } from 'react-router-dom';
+import domtoimage from 'dom-to-image';
+import { saveAs } from 'file-saver';
 
 
 export default class NoteShow extends React.Component {
@@ -26,6 +30,7 @@ export default class NoteShow extends React.Component {
       commentModal: false
     }
     this.deleteNote = this.deleteNote.bind(this);
+    this.exportImage = this.exportImage.bind(this);
   }
 
   componentWillMount() {
@@ -51,7 +56,7 @@ export default class NoteShow extends React.Component {
 
   deleteNote() {
     this.props.removeNote(this.props.noteId).then(() => {
-      <Redirect to={'/home'} />
+      this.props.history.goBack()
     })
   }
 
@@ -79,12 +84,51 @@ export default class NoteShow extends React.Component {
       selectedText: selection
     })
     const commentSection = document.getElementById("comments");
-    const newSnippetField = document.getElementById("code-snippet-new");
-    newSnippetField.focus();
-    newSnippetField.value = selection;
+    // const newSnippetField = document.getElementById("code-snippet-new");
+    // newSnippetField.focus();
+    // newSnippetField.value = selection;
     commentSection.scrollIntoView({ behavior: 'smooth' });
   }
 
+  toggleExportModal() {
+    const exportModal = document.getElementById('note-export-modal');
+    if (exportModal.className === 'modal-on') {
+      exportModal.className = 'modal-off'
+    } else {
+      exportModal.className = 'modal-on'
+    }
+  }
+
+  exportImage() {
+    const noteItem = document.getElementById('note-show-main');
+
+    // domtoimage.toPng(noteItem)
+    //   .then(function (dataUrl) {
+    //     var img = new Image();
+    //     img.src = dataUrl;
+    //     document.body.appendChild(img);
+    //   })
+    //   .catch(function (error) {
+    //     console.error('oops, something went wrong!', error);
+    //   });
+
+    const scale = 2;
+    const image = domtoimage.toPng(noteItem, {
+      height: noteItem.offsetHeight * scale,
+      style: {
+        transform: `scale(${scale}) translate(${noteItem.offsetWidth / 2 / scale}px, ${noteItem.offsetHeight / 2 / scale}px)`
+      },
+      width: noteItem.offsetWidth * scale
+    }).then(function (scaledImg) {
+      window.saveAs(scaledImg, 'test-img-scaled.png')
+    })
+
+
+    // domtoimage.toBlob(noteItem, { height: 2000, width: 1000 })
+    //   .then(function (blob) {
+    //     window.saveAs(blob, 'test-img.png')
+    //   });
+  };
 
 
   render() {
@@ -189,6 +233,36 @@ export default class NoteShow extends React.Component {
           >Comment 2</div> */}
         </div>
 
+
+        {/* <div id="note-export-modal" className='modal-off'>
+          <div className='export-controls'>
+            <div className='cancel icon-button'
+              onClick={() => this.toggleExportModal()}>
+              <i class="fa-solid fa-xmark fa-xl" />
+            </div>
+          </div>
+
+
+          <div id='content-export' className='note-show-main'>
+            <div className='note-show-title'>
+              <span className='username'>@{note.user.username}</span>
+              <h1>{note.title}</h1>
+            </div>
+            <div className='note-tags-wrapper'>
+              <TagsExport note={this.state.note} />
+            </div>
+            <div className='code-note-body' id='code-note-view'>
+              <CodeEditorReadOnly codeBody={note.codebody} />
+            </div>
+            <div className='note-textDetails'>
+              <span className='textDetails-show'>
+                {note.textdetails}
+              </span>
+            </div>
+          </div>
+        </div> */}
+
+
         <div id='confirm-modal-container' className='modal-off' >
           <div className='modal-wrapper'>
             <div className='cancel-modal'>
@@ -250,11 +324,10 @@ export default class NoteShow extends React.Component {
                   Delete
                 </span>
               </div>
-            ) :
-              ""
-            }
+            ) : ""}
           </div>
-          <div className='note-show-main'>
+
+          <div id="note-show-main" className='note-show-main'>
             <div className='note-show-title'>
               <Link className='username'
                 to={`/users/${note.user.userId}`}>@{note.user.username}</Link>
@@ -269,23 +342,31 @@ export default class NoteShow extends React.Component {
             </div>
 
             <div className='code-note-body' id='code-note-view'>
-              <div className='info-wrapper'>
-                <div className='info-icon'>
+              <div className='icons-wrapper'>
+                <div className='hidden' id='highlight-instructions'>
+                  <span>Highlight any section of the CodeMark and right click to comment!</span>
+                </div>
+                <div className='note-icon info-icon' id='highlight-comment-code-icon'>
                   <i className="fa-solid fa-circle-question fa-lg"></i>
                 </div>
+                <div id='export-img-icon' className='note-icon'
+                  onClick={this.exportImage}
+                  title="export a screenshot">
+                  <i class="fa-solid fa-camera-retro fa-lg"></i>
+                </div>
               </div>
-              <CodeEditorReadOnly
+              <CodeEditorNoteShow
                 codeBody={note.codebody}
               />
             </div>
-
             <div className='note-textDetails'>
               <span className='textDetails-show'>
                 {note.textdetails}
               </span>
             </div>
           </div>
-          {this.props.note.resources.length ? (
+
+          {this.props.note.resources?.length ? (
             <div className='note-resources'>
               <div className='resources-title'>
                 <h4>Resources</h4>
@@ -315,6 +396,7 @@ export default class NoteShow extends React.Component {
               users={this.props.users}
               deletedComments={this.props.deletedComments}
               fetchNote={this.props.fetchNote}
+              fetchNoteComments={this.props.fetchNoteComments}
               noteId={this.props.noteId}
             />
           </section>

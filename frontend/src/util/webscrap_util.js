@@ -63,6 +63,7 @@ export async function getStuff(keywords, codebody) {
 // const ignore = ['(',')','{','}',';'];
 
 export function getKeywords(codebody) {
+    // debugger
     const comment_markers = { 'JavaScript': /(\/\/.*\n)/g, 'HTML': /(<!--.*-->)/g, 'CSS': /(\/\*.*\*\/)/g, 'C': /(\/\/.*\n)/g, 'Ruby': /(#.*\n)/g };
     const comment_replace = { 'JavaScript': '\n', 'HTML': '', 'CSS': '', 'C': '\n', 'Ruby': '\n' };
     const languages = ['Ruby', 'C', 'JavaScript', 'CSS', 'HTML'];

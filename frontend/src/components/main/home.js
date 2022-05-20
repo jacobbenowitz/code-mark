@@ -44,12 +44,12 @@ export default class Home extends React.Component {
 
         <div className='home-main'>
           <NewNoteContainer />
-          <div className='notes-section'>
+          {/* <div className='notes-section'>
             <div className='section-title'>
               <h5>Recent Notes</h5>
             </div>
             <RecentNotesContainer />
-          </div>
+          </div> */}
           <div className='notes-section'>
             <div className='section-title'>
               <h3>My Notes</h3>
