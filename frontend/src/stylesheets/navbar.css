@@ -179,9 +179,9 @@ footer {
   animation: modalUp 700ms ease-in;
 }
 
-#user-modal.nav-modal-container.modal-off {
+/* #user-modal.nav-modal-container.modal-off {
   animation: modalDown 700ms ease-in;
-}
+} */
 
 @keyframes modalUp {
   0% {
@@ -219,4 +219,13 @@ footer {
 
 .nav-item:focus {
   background-color: #1a1a1a;
+}
+
+.icon-buttons-wrapper {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
 }

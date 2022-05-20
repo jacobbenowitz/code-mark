@@ -20,9 +20,11 @@ export const fetchUsers = () => dispatch => (
 );
 
 export const fetchUser = userId => dispatch => {
-    debugger
     return getUser(userId)
         .then(user => dispatch(receiveUser(user)))
         .catch(err => console.log(err))
 };
 
+// export const updateUser = userData => dispatch => {
+//     return update
+// }

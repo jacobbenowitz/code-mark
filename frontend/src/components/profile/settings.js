@@ -15,12 +15,19 @@ export default class Settings extends React.Component {
   }
 
   componentDidMount() {
-    const { email, username, password } = this.props.user;
     this.props.fetchUser(this.props.currentUser.id)
-    this.setState({
-      email: email,
-      username: username,
-    })
+  }
+
+  componentDidUpdate() {
+    const { email, username } = this.props.user;
+    this.state.email.length ? (
+      undefined
+    ) : (
+      this.setState({
+        email: email,
+        username: username,
+      })
+    )
   }
 
   update(field) {
@@ -53,10 +60,55 @@ export default class Settings extends React.Component {
     );
   }
 
+  toggleDeleteModal() {
+    const deleteModal = document.getElementById('confirm-modal-container');
+    if (deleteModal.className === "modal-off") {
+      deleteModal.className = "modal-on";
+    } else {
+      deleteModal.className = "modal-off";
+    }
+  }
+
   render() {
     return (
       <div className='session center-simple'>
+        <div id='confirm-modal-container' className='modal-off' >
+          <div className='modal-wrapper'>
+            <div className='cancel-modal'>
+              <h5>Are you sure you want to delete your account?</h5>
+              <span>All of your notes and comments will be permanently removed.</span>
+              <div className='modal-buttons'>
+                <div className='delete-note icon-button'
+                  onClick={() => this.deleteUser()}>
+                  <i className="fa-solid fa-trash fa-lg"></i>
+                  <span>
+                    Delete
+                  </span>
+                </div>
+                <div className='cancel icon-button'
+                  onClick={() => this.toggleDeleteModal()}>
+                  <i className="fa-solid fa-ban fa-lg"></i>
+                  <span>
+                    Cancel
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div id='session-form'>
+          <div className='icon-buttons-wrapper'>
+            <div className='icon-button' onClick={() =>
+              this.props.history.goBack()}>
+              <i class="fa-solid fa-arrow-left"></i>
+              <span>Go back</span>
+            </div>
+            <div className='icon-button' onClick={this.toggleDeleteModal}>
+              <i className="fa-solid fa-trash fa-lg"></i>
+              <span>Delete account</span>
+            </div>
+          </div>
           <h3>Update your account</h3>
           <form onSubmit={this.handleSubmit}>
             <div className='form-input'>
@@ -65,7 +117,7 @@ export default class Settings extends React.Component {
                 id="email-signup"
                 value={this.state.email}
                 onChange={this.update('email')}
-                placeholder='email'
+                // placeholder='email'
                 className="text-input"
               />
             </div>
@@ -75,12 +127,12 @@ export default class Settings extends React.Component {
                 value={this.state.username}
                 id="username-signup"
                 onChange={this.update('username')}
-                placeholder='username'
+                // placeholder='username'
                 className="text-input"
               />
             </div>
             <div className='form-input'>
-              <label htmlFor='password'>Password</label>
+              <label htmlFor='password'>New Password</label>
               <input type={'password'}
                 value={this.state.password}
                 id="password-signup"
@@ -90,7 +142,7 @@ export default class Settings extends React.Component {
               />
             </div>
             <div className="form-input">
-              <label htmlFor="password2">Confirm Password</label>
+              <label htmlFor="password2">Confirm New Password</label>
               <input type={'password'}
                 value={this.state.password2}
                 id="password-signup2"
