@@ -131,7 +131,7 @@ router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,
                                     }else{
                                         mainuser.username = req.body.username;
                                         mainuser.email = req.body.email;
-                                        if(req.body.password.length !== 0){
+                                        if(req.body.password !== mainuser.password){
                                             bcrypt.genSalt(10, (err,salt) => {
                                                 bcrypt.hash(req.body.password, salt, (err, hash) => {
                                                     if(err){throw err}
