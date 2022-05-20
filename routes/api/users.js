@@ -151,4 +151,18 @@ router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,
     }
 })
 
+router.delete('/:userId', passport.authenticate('jwt', { session: false }), (req,res) => {
+    if(req.params.userId !== req.user.id){
+        res.status(400).json({ deletenotallowed: 'Not Authorized to Delete User'})
+    }else{
+        User.findById(req.params.userId)
+            .then(deleteuser => {
+                
+            })
+            .catch(err =>
+                res.status(404).json({ nouserfound: "No User Found With That ID" })  
+            );
+    }
+})
+
 module.exports = router;

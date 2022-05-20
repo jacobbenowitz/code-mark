@@ -70,7 +70,6 @@ export function getKeywords(codebody) {
     const language = hljs.highlightAuto(codebody, languages).language;
     let lines = codebody;
     if (Object.keys(comment_markers).includes(language)) {
-        console.log('deleted comments');
         // lines.map(line => line.slice(0,line.indexOf(comment_markers[language])));
         lines = lines.replaceAll(comment_markers[language], comment_replace[language]);
     }
@@ -79,7 +78,7 @@ export function getKeywords(codebody) {
     words = words.split(" ");
     words = [...new Set(words)];
     // words = words.filter(word => !ignore.includes(word));
-    return words = words.filter(word => word.length > 1);
+    return words.filter(word => word.length > 1);
     // return words.map(word => code_test.language + ' ' + word);
 }
 
