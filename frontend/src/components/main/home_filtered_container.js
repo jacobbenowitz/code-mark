@@ -4,12 +4,10 @@ import HomeFiltered from "./home_filtered";
 import { fetchUserNotes } from "../../actions/note_actions";
 
 const mapStateToProps = (state, { match }) => {
-  const uniqueTags = [...new Set(state.session.tags)]
-
   return {
     userNotes: state.notes.user,
     currentUser: state.session.user,
-    tags: uniqueTags,
+    tags: state.session.tags,
     filter: match.params.tag
   }
 }

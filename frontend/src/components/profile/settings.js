@@ -38,14 +38,23 @@ export default class Settings extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const user = {
-      email: this.state.email,
-      username: this.state.username,
-      password: this.state.password,
-      password2: this.state.password2,
-    };
-
-    // this.props.updateUser(user, this.props.history);
+    let user;
+    this.state.password2.length ? (
+      user = {
+        email: this.state.email,
+        username: this.state.username,
+        password: this.state.password,
+        password2: this.state.password2,
+      }
+    ) : (
+      user = {
+        email: this.state.email,
+        username: this.state.username,
+        password: this.props.user.password,
+        password2: this.props.user.password,
+      }
+    )
+    this.props.updateUser(user);
   }
 
   renderErrors() {
@@ -79,7 +88,7 @@ export default class Settings extends React.Component {
               <span>All of your notes and comments will be permanently removed.</span>
               <div className='modal-buttons'>
                 <div className='delete-note icon-button'
-                  onClick={() => this.deleteUser()}>
+                  onClick={() => this.props.deleteUser(this.props.currentUser.id)}>
                   <i className="fa-solid fa-trash fa-lg"></i>
                   <span>
                     Delete

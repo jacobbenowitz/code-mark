@@ -9,6 +9,11 @@ import {
 } from '../actions/note_actions';
 import { selectNoteTags } from "../util/selectors";
 
+import {
+  RECEIVE_UPDATED_USER,
+  RECEIVE_DELETED_USER
+} from "../actions/user_actions"
+
 const initialState = {
   isAuthenticated: false,
   user: {},
@@ -16,6 +21,8 @@ const initialState = {
 };
 
 const SessionReducer = (state = initialState, action) => {
+  let nextState = Object.assign({}, state)
+
   switch (action.type) {
     case RECEIVE_USER_LOGOUT:
       return {
@@ -33,8 +40,18 @@ const SessionReducer = (state = initialState, action) => {
         ...state,
         isSignedIn: true
       }
+    case RECEIVE_UPDATED_USER:
+      nextState.user = {
+        id: action.user.data._id,
+        username: action.user.data.username
+      }
+      return nextState;
+    case RECEIVE_DELETED_USER:
+      return {
+        isAuthenticated: false,
+        user: undefined
+      }
     case RECEIVE_USER_NOTES:
-      let nextState = Object.assign({}, state)
       nextState.tags = selectNoteTags(action.notes.data)
       return nextState;
     default:

@@ -3,10 +3,9 @@ import Home from "./home";
 import { withRouter } from "react-router-dom";
 
 const mapStateToProps = state => {
-  const uniqueTags = [...new Set(state.session.tags)]
   return {
     userNotes: state.notes.user,
-    tags: uniqueTags
+    tags: state.session.tags
   }
 }
 
