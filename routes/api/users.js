@@ -131,16 +131,21 @@ router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,
                                     }else{
                                         mainuser.username = req.body.username;
                                         mainuser.email = req.body.email;
-                                        
-                                        bcrypt.genSalt(10, (err,salt) => {
-                                            bcrypt.hash(req.body.password, salt, (err, hash) => {
-                                                if(err){throw err}
-                                                mainuser.password = hash;
-                                                mainuser.save()
+                                        if(req.body.password.length !== 0){
+                                            bcrypt.genSalt(10, (err,salt) => {
+                                                bcrypt.hash(req.body.password, salt, (err, hash) => {
+                                                    if(err){throw err}
+                                                    mainuser.password = hash;
+                                                    mainuser.save()
                                                     .then(user => res.json(user))
                                                     .catch(err => console.log(err))
+                                                })
                                             })
-                                        })
+                                        }else{
+                                            mainuser.save()
+                                                .then(user => res.json(user))
+                                                .catch(err => console.log(err))
+                                        }
                                     }
                                 })
                         }
