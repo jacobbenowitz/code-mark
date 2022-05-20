@@ -6,10 +6,12 @@ import { fetchUsers } from "../../actions/user_actions";
 
 
 const mapStateToProps = (state, { match }) => {
+  const uniqueTags = [...new Set(state.session.tags)]
+
   return {
     allNotes: Object.values(state.notes.all),
     currentUser: state.session.user,
-    tags: state.session.tags,
+    tags: uniqueTags,
     users: state.users.all
   }
 }

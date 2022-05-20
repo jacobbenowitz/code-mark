@@ -10,6 +10,10 @@ header {
   background: #202124;
 }
 
+.nav-logo {
+  width: 130px;
+}
+
 #nav-header {
   display: flex;
   overflow: hidden;
@@ -139,3 +143,80 @@ footer {
   margin-bottom: 16px;
 }
 
+.nav-modal-container {
+  visibility: visible;
+  position: fixed;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1rem;
+  padding-bottom: 0.7rem;
+  border-radius: 8px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2), 
+  0px 0px 4px rgba(0, 0, 0, 0.08);
+  background-color: #37393e;
+}
+
+.nav-modal-container::after {
+  content: "";
+  position: absolute;
+  top: -8px;
+  right: 12px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #37393e;
+  filter: drop-shadow(rgba(0, 0, 0, 0.1) 0px -2px 1px);
+}
+
+#user-modal.nav-modal-container {
+  right: 65px;
+  top: 70px;
+  opacity: 100%;
+}
+
+#user-modal.nav-modal-container.on {
+  animation: modalUp 700ms ease-in;
+}
+
+#user-modal.nav-modal-container.modal-off {
+  animation: modalDown 700ms ease-in;
+}
+
+@keyframes modalUp {
+  0% {
+    top: 80px;
+    opacity: 0%;
+  }
+  100% {
+    top: 70px;
+    opacity: 100%;
+  }
+}
+@keyframes modalDown {
+  0% {
+    visibility: visible;
+    top: 70px;
+    opacity: 100%;
+  }
+  100% {
+    visibility: hidden;
+    top: 80px;
+    opacity: 0%;
+  }
+}
+
+.nav-item {
+  display: flex;
+  padding: 0.5rem;
+  color: white;
+  background-color: #37393e;
+}
+
+.nav-item:hover {
+  background-color: #2a2a2a;
+}
+
+.nav-item:focus {
+  background-color: #1a1a1a;
+}

@@ -327,6 +327,7 @@ export default class NoteShow extends React.Component {
             ) : ""}
           </div>
 
+
           <div id="note-show-main" className='note-show-main'>
             <div className='note-show-title'>
               <Link className='username'
