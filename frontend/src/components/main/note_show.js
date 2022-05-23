@@ -353,7 +353,7 @@ export default class NoteShow extends React.Component {
                 <div id='export-img-icon' className='note-icon'
                   onClick={this.exportImage}
                   title="export a screenshot">
-                  <i class="fa-solid fa-camera-retro fa-lg"></i>
+                  <i className="fa-solid fa-camera-retro fa-lg"></i>
                 </div>
               </div>
               <CodeEditorNoteShow

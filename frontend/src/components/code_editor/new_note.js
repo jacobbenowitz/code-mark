@@ -126,7 +126,9 @@ class NewNote extends React.Component {
   closeSuccessModal() {
     const resourcesNoteModal = document.getElementById('resources-note-container');
     const step2 = document.getElementById('resources-step-2');
+    const step1 = document.getElementById('resources-step-1');
     resourcesNoteModal.className = 'modal-off';
+    step1.className = 'resources-modal'
     step2.className = 'modal-off';
     this.toggleForm();
   }
@@ -281,8 +283,7 @@ class NewNote extends React.Component {
                 onSubmit={this.handleSubmit}>
                 {this.state.allKeywords?.map((keyword, i) =>
                   <CheckBoxItem keyword={keyword} index={i}
-                    key={i}
-                    updateKeywords={this.updateKeywords}
+                    key={i} updateKeywords={this.updateKeywords}
                   />)
                 }
                 <button type="submit">Submit</button>
@@ -296,7 +297,7 @@ class NewNote extends React.Component {
                   <img src="https://code-mark.s3.amazonaws.com/type%3DHome.svg" />
                   <span>Home</span>
                 </div>
-                <div className='icon-button view-note' onClick={() => this.props.history.push(`/note/${this.props.newNote._id}`)}>
+                <div className='icon-button view-note' onClick={() => this.props.history.push(`/notes/${this.props.newNote._id}`)}>
                   <span>View note</span>
                   <i className="fa-solid fa-arrow-right-long"></i>
                 </div>
@@ -376,6 +377,7 @@ class NewNote extends React.Component {
                   value={this.state.textdetails}
                 />
               </div>
+              {/* Need to add conditional logic to disable submit button if codebody empty */}
               <button type='submit' id='code-note-submit'
                 className='submit button'>Save</button>
             </form>

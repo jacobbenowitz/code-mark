@@ -8,7 +8,8 @@ class CheckBoxItem extends React.Component {
     let { keyword, updateKeywords, index } = this.props;
     return (
       <div className='checkbox-option' key={index}>
-        <input type='checkbox' id={`${keyword}-check`}
+        <input type='checkbox' 
+          id={`${keyword}-check`}
           key={`${keyword}-check`}
           onMouseUp={updateKeywords}
           value={keyword}
