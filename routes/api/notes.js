@@ -57,7 +57,8 @@ router.post('/',
                     title: req.body.title,
                     textdetails: req.body.textdetails,
                     resources: resources,
-                    tags: req.body.tags
+                    tags: req.body.tags,
+                    public: req.body.public
                 });
 
                 newNote.save().then(note => {
@@ -103,6 +104,7 @@ router.patch('/:id/edit',
                     // note.resources = req.body.resources;
                     note.likes = req.body.likes || note.likes;
                     note.tags = req.body.tags || note.tags;
+                    note.public = req.body.public || note.public;
                     note.save()
                         .then(note => res.json(note))
                 }
