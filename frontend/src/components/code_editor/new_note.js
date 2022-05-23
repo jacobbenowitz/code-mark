@@ -10,8 +10,9 @@ import NewNoteTagItem from '../tags/new_note_tag_item';
 import { getKeywords } from '../../util/webscrap_util';
 import { EditorView } from '@codemirror/basic-setup';
 import { FontAwesomeIcon } from '@fortawesome/fontawesome-free';
+import { withRouter } from 'react-router-dom'
 
-export default class NewNote extends React.Component {
+class NewNote extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -51,6 +52,8 @@ export default class NewNote extends React.Component {
     this.toggleForm = this.toggleForm.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.toggleResourcesModal = this.toggleResourcesModal.bind(this);
+    this.toggleSuccessModal = this.toggleSuccessModal.bind(this);
+    this.closeSuccessModal = this.closeSuccessModal.bind(this);
   }
 
 
@@ -112,21 +115,20 @@ export default class NewNote extends React.Component {
       resourcesNoteModal.className = "modal-off"
     }
   }
-  
-  toggleSuccessModal(e) {
-    e.preventDefault();
-    const resourcesSuccessModal = document.getElementById('resources-success-container');
-    if (resourcesNoteModal.className === "modal-off") {
-      // debugger
-      const keywords = getKeywords(this.state.codebody);
-      this.setState({
-        allKeywords: keywords
-      }, () => {
-        resourcesNoteModal.className = "modal-on"
-      })
-    } else {
-      resourcesNoteModal.className = "modal-off"
-    }
+
+  toggleSuccessModal() {
+    const step1 = document.getElementById('resources-step-1');
+    const step2 = document.getElementById('resources-step-2');
+    step1.className = 'modal-off'
+    step2.className = 'modal-on resources-modal'
+  }
+
+  closeSuccessModal() {
+    const resourcesNoteModal = document.getElementById('resources-note-container');
+    const step2 = document.getElementById('resources-step-2');
+    resourcesNoteModal.className = 'modal-off';
+    step2.className = 'modal-off';
+    this.toggleForm();
   }
 
   toggleForm() {
@@ -197,7 +199,7 @@ export default class NewNote extends React.Component {
           newResources: []
         })
       ))
-      .then(() => this.toggleForm())
+      .then(() => this.toggleSuccessModal())
   }
 
   // remove if possible
@@ -287,16 +289,16 @@ export default class NewNote extends React.Component {
               </form>
             </div>
             <div id="resources-step-2" className='modal-off'>
-              <h4>Success</h4>
-              <span>Your CodeMark has saved and your resources are waiting for you!</span>
+              <h4>Success!</h4>
+              <span>Your CodeMark has been saved and your resources are ready to review.</span>
               <div className='buttons-wrapper'>
-                <div className='icon-button'>
+                <div className='icon-button' onClick={this.closeSuccessModal}>
                   <img src="https://code-mark.s3.amazonaws.com/type%3DHome.svg" />
                   <span>Home</span>
                 </div>
-                <div className='icon-button'>
+                <div className='icon-button view-note' onClick={() => this.props.history.push(`/note/${this.props.newNote._id}`)}>
                   <span>View note</span>
-                  <i class="fa-solid fa-arrow-right-long"></i>
+                  <i className="fa-solid fa-arrow-right-long"></i>
                 </div>
               </div>
             </div>
@@ -474,3 +476,5 @@ export default class NewNote extends React.Component {
     )
   }
 }
+
+export default withRouter(NewNote);
