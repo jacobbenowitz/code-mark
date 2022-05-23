@@ -1,7 +1,9 @@
 import {
     RECEIVE_USER,
     RECEIVE_USERS,
-    RECEIVE_UPDATED_USER
+    RECEIVE_UPDATED_USER,
+    RECEIVE_USER_FOLLOW,
+    RECEIVE_USER_UNFOLLOW
 } from "../actions/user_actions";
 
 const initialState = {
@@ -18,7 +20,16 @@ const usersReducer = (prevState = initialState, action) => {
             nextState.user = action.user.data;
             return nextState;
         case RECEIVE_USERS:
-            nextState.all = action.users.data;
+            let allUsers = {};
+            nextState.all = action.users.data.map(user => 
+                allUsers[user._id] = user)
+            nextState.all = allUsers;
+            return nextState;
+        case RECEIVE_USER_FOLLOW:
+            nextState.all[action.user.data._id] = action.user.data;
+            return nextState;
+        case RECEIVE_USER_UNFOLLOW:
+            nextState.all[action.user.data._id] = action.user.data;
             return nextState;
         case RECEIVE_UPDATED_USER:
             nextState.user = action.user.data;

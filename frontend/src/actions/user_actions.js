@@ -33,6 +33,8 @@ export const receiveUpdatedUser = user => ({
     user
 })
 
+/// new actions for RECEIVE_USER_FOLLOW / UNFOLLOW
+
 export const fetchUsers = () => dispatch => (
     getUsers()
         .then(users => dispatch(receiveUsers(users)))
@@ -68,3 +70,5 @@ export const removeUserFollower = (userData) => {
         .then(user => dispatch(receiveUpdatedUser(user)))
         .catch(err => console.log(err))
 }
+
+/// edit user thunk replace above thunks

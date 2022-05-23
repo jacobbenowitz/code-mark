@@ -30,7 +30,12 @@ const notesReducer = (prevState = initialState, action) => {
       nextState.user = Object.values(action.notes.data)
       return nextState;
     case RECEIVE_NOTES:
-      nextState.all = action.notes.data;
+      // k-v pairs of notes in obj {id: {key: data}, ...}
+      let allNotes = {}
+      action.notes.data.map(note =>
+        allNotes[note._id] = note
+      )
+      nextState.all = allNotes;
       return nextState;
     case RECEIVE_NOTE:
       nextState.all[action.note.data._id] = action.note.data;
@@ -46,21 +51,11 @@ const notesReducer = (prevState = initialState, action) => {
       nextState.newResources = action.resources.data;
       return nextState;
     case RECEIVE_NOTE_LIKE:
-      // find the note and replace it with updated
-      let updatedLikes = Object.values(nextState.all).map(note => {
-        if (note._id === action.note.data._id) {
-          return action.note.data
-        } else return note
-      })
-      return updatedLikes;
-    case RECEIVE_NOTE_UNLIKE:
-      // find the note and replace it with updated
-      let updatedUnlike = Object.values(nextState.all).map(note => {
-        if (note._id === action.note.data._id) {
-          return action.note.data
-        } else return note
-      })
-      return updatedUnlike;
+      nextState.all[action.note.data._id] = action.note.data;
+      return nextState;
+      case RECEIVE_NOTE_UNLIKE:
+      nextState.all[action.note.data._id] = action.note.data;
+      return nextState;
     default:
       return prevState;
   }

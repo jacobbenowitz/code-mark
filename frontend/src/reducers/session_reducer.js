@@ -14,6 +14,11 @@ import {
   RECEIVE_DELETED_USER
 } from "../actions/user_actions"
 
+import {
+  RECEIVE_USER_FOLLOW,
+  RECEIVE_USER_UNFOLLOW
+} from '../actions/user_actions';
+
 const initialState = {
   isAuthenticated: false,
   user: {},
@@ -51,6 +56,8 @@ const SessionReducer = (state = initialState, action) => {
         isAuthenticated: false,
         user: undefined
       }
+    // case RECEIVE_USER_FOLLOW:
+      // nextState.user.follows ... logic here
     case RECEIVE_USER_NOTES:
       nextState.tags = selectNoteTags(action.notes.data)
       return nextState;

@@ -75,7 +75,7 @@ router.post('/login', (req, res) => {
       bcrypt.compare(password, user.password)
         .then(isMatch => {
           if (isMatch) {
-            const payload = { id: user.id, username: user.username };
+            const payload = { id: user.id, username: user.username, followers: user.followers, follows: user.follows };
 
             jwt.sign(
               payload,
@@ -113,22 +113,22 @@ router.get('/:userId', (req, res) => {
 });
 
 // only backend route for updating a user's followers
-router.patch('/followers/:userId', passport.authenticate('jwt', { session: false }), (req,res) => {
+router.patch('/followers/:userId', passport.authenticate('jwt', { session: false }), (req, res) => {
   User.findById(req.params.userId)
     .then(user => {
       user.followers = req.body.followers;
       user.save()
         .then(user => {
-          if(user.followers.includes(req.user.id)){
+          if (user.followers.includes(req.user.id)) {
             req.user.follows.push(user.id);
-          }else{
+          } else {
             req.user.follows = req.user.follows.filter(item => item !== user.id)
           }
           req.user.save();
         });
     })
     .catch(err => res.status(404).json({ nouserfound: "No User Found With That ID" }));
-}) 
+})
 
 router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req, res) => {
   if (req.params.userId !== req.user.id) {
