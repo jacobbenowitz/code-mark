@@ -2,8 +2,9 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import NoteShow from "./note_show";
 import {
+  addNoteLike,
   fetchNote,
-  removeNote, updateNote
+  removeNote, removeNoteLike, updateNote
 } from "../../actions/note_actions";
 import {
   fetchNoteComments,
@@ -36,7 +37,9 @@ const mapDispatchToProps = dispatch => {
     updateComment: (data, commentId) =>
       dispatch(updateComment(data, commentId)),
     fetchUsers: () => dispatch(fetchUsers()),
-    fetchUser: () => dispatch(fetchUser())
+    fetchUser: () => dispatch(fetchUser()),
+    addNoteLike: () => dispatch(addNoteLike(data, noteId)),
+    removeNoteLike: () => dispatch(removeNoteLike(data, noteId))
   }
 }
 
