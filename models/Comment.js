@@ -18,7 +18,8 @@ const CommentSchema = new Schema({
     },
     codeSnippet: {
         type: String
-    }
+    },
+    likes: [{type: Schema.Types.ObjectId, ref:"users"}]
 },
 {timestamps: true}
 );

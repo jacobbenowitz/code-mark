@@ -132,6 +132,14 @@ router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,
                   } else {
                     mainuser.username = req.body.username;
                     mainuser.email = req.body.email;
+                    mainuser.comment_likes = req.body.comment_likes;    //update notes and comments the user liked
+                    mainuser.note_likes = req.body.note_likes;
+                    mainuser.follows = req.body.follows;      //updates followings
+                    User.findById(mainuser.follows[mainuser.follows.length - 1])
+                      .then(user => {
+                        user.followers.push(mainuser.id);
+                        user.save();
+                      })
                     if (req.body.password !== mainuser.password) {
                       bcrypt.genSalt(10, (err, salt) => {
                         bcrypt.hash(req.body.password, salt, (err, hash) => {
@@ -166,8 +174,42 @@ router.delete('/:userId', passport.authenticate('jwt', { session: false }), (req
       .then(deleteuser => {
         var noteIds = deleteuser.notes;
         var commentIds = deleteuser.comments;
+        var commentLikesIds = deleteuser.comment_likes;
+        var noteLikesIds = deleteuser.note_likes;
+        var followers = deleteuser.followers;
+        var follows = deleteuser.follows;
         User.deleteOne({ _id: deleteuser.id })
           .then(() => {
+            followers.forEach(followerId => {
+              User.findById(followerId)
+                .then(user => {
+                  user.follows = user.follows.filter(item => item.toString() !== req.params.userId);
+                  user.save();
+                })
+            })
+            follows.forEach(followId => {
+              User.findById(followId)
+                .then(user => {
+                  user.followers = user.followers.filter(item => item.toString() !== req.params.userId);
+                  user.save();
+                })
+            })
+            commentLikesIds.forEach(commentLikeId => {
+              Comment.findById(commentLikeId)
+                .then(comment => {
+                  comment.likes = comment.likes.filter(item => item.toString() !== req.params.userId);
+                  comment.save().then(comment => res.json(comment));
+                })
+                .catch(err => res.status(404).json({ nocommentfound: "No Comment Found With That ID" }))
+            })
+            noteLikesIds.forEach(noteLikeId => {
+              Note.findById(noteLikeId)
+                .then(note => {
+                  note.likes = note.likes.filter(item => item.toString() !== req.params.userId);
+                  note.save().then(note => res.json(note));
+                })
+                .catch(err => res.status(404).json({ nonotefound: "No Note Found With That ID" }))
+            })
             commentIds.forEach(commentid => {
               Comment.findById(commentid)
                 .then(comment => {
