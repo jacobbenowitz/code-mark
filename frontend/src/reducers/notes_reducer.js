@@ -4,7 +4,9 @@ import {
   RECEIVE_NOTE,
   RECEIVE_USER_NOTES,
   RECEIVE_DELETE_NOTE,
-  RECEIVE_UPDATED_NOTE
+  RECEIVE_UPDATED_NOTE,
+  RECEIVE_NOTE_LIKE,
+  RECEIVE_NOTE_UNLIKE
 } from '../actions/note_actions';
 
 import { RECEIVE_NOTE_RESOURCES } from '../actions/webscrap_actions';
@@ -43,6 +45,22 @@ const notesReducer = (prevState = initialState, action) => {
     case RECEIVE_NOTE_RESOURCES:
       nextState.newResources = action.resources.data;
       return nextState;
+    case RECEIVE_NOTE_LIKE:
+      // find the note and replace it with updated
+      let updatedLikes = nextState.all.map(note => {
+        if (note._id === action.note.data._id) {
+          return action.note.data
+        } else return note
+      })
+      return updatedLikes;
+    case RECEIVE_NOTE_UNLIKE:
+      // find the note and replace it with updated
+      let updatedUnlike = nextState.all.map(note => {
+        if (note._id === action.note.data._id) {
+          return action.note.data
+        } else return note
+      })
+      return updatedUnlike;
     default:
       return prevState;
   }

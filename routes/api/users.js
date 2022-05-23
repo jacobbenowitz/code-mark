@@ -112,6 +112,8 @@ router.get('/:userId', (req, res) => {
     );
 });
 
+router.patch('/followers/:userId') // only backend route for updating a user's followers
+
 router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req, res) => {
   if (req.params.userId !== req.user.id) {
     res.status(400).json({ editnotallowed: 'Not Authorized to Edit User' })
