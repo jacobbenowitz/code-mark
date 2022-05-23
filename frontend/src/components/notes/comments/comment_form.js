@@ -124,7 +124,7 @@ export default class CommentForm extends React.Component {
                 <div className="code-snippet-comment">
                   <div className='icon-button' id='code-highlight-button-2'
                     onClick={this.promptCodeHighlight}>
-                    <i class="fa-solid fa-highlighter fa-lg"></i>
+                    <i className="fa-solid fa-highlighter fa-lg"></i>
                     <span>Mention code from the note in your comment</span>
                   </div>
                 </div>

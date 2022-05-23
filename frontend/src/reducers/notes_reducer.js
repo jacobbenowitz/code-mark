@@ -47,7 +47,7 @@ const notesReducer = (prevState = initialState, action) => {
       return nextState;
     case RECEIVE_NOTE_LIKE:
       // find the note and replace it with updated
-      let updatedLikes = nextState.all.map(note => {
+      let updatedLikes = Object.values(nextState.all).map(note => {
         if (note._id === action.note.data._id) {
           return action.note.data
         } else return note
@@ -55,7 +55,7 @@ const notesReducer = (prevState = initialState, action) => {
       return updatedLikes;
     case RECEIVE_NOTE_UNLIKE:
       // find the note and replace it with updated
-      let updatedUnlike = nextState.all.map(note => {
+      let updatedUnlike = Object.values(nextState.all).map(note => {
         if (note._id === action.note.data._id) {
           return action.note.data
         } else return note
