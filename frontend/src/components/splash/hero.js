@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import DummyHeroNote from "../code_editor/dummy_hero_note";
 
 const heroH1 = (
-    <h1 className="hero-h1">Smart bookmarks for code</h1>
+    <h1 className="hero-h1">Smart notes for code</h1>
 );
 
 const heroTagline = (
