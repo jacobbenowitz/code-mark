@@ -47,6 +47,10 @@
   overflow: hidden;
 }
 
+.icon-wrapper {
+  display: flex;
+}
+
 .icons-wrapper {
   display: flex;
   position: relative;
