@@ -15,10 +15,12 @@ export const receiveUserSignIn = () => ({
   type: RECEIVE_USER_SIGN_IN
 })
 
-export const receiveErrors = errors => ({
-  type: RECEIVE_SESSION_ERRORS,
-  errors
-})
+export const receiveErrors = errors => {
+  return {
+    type: RECEIVE_SESSION_ERRORS,
+    errors
+  }
+}
 
 export const logoutUser = () => ({
   type: RECEIVE_USER_LOGOUT

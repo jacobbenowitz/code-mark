@@ -58,17 +58,13 @@ class SignupForm extends React.Component {
     this.props.signup(user, this.props.history);
   }
 
-  renderErrors() {
+  renderErrors(field) {
     return (
-      <ul className="error-list">
-        {Object.keys(this.state.errors).map((error, i) => (
-          <li key={`error-${i}`}>
-            {this.state.errors[error]}
-          </li>
-        ))}
-      </ul>
-    );
-  }
+          <span className="error-item" key={`error-${field}`}>
+            {this.state.errors[field]}
+          </span>
+        )
+  };
 
   render() {
     return (
@@ -85,7 +81,9 @@ class SignupForm extends React.Component {
                 placeholder='email'
                 className="text-input"
               />
+              {this.renderErrors('email')}
             </div>
+            
             <div className='form-input'>
               <label htmlFor='username'>username</label>
               <input type={'text'}
@@ -95,6 +93,7 @@ class SignupForm extends React.Component {
                 placeholder='username'
                 className="text-input"
               />
+              {this.renderErrors('username')}
             </div>
             <div className='form-input'>
               <label htmlFor='password'>Password</label>
@@ -105,6 +104,7 @@ class SignupForm extends React.Component {
                 placeholder='password'
                 className="text-input"
               />
+              {this.renderErrors('password')}
             </div>
             <div className="form-input">
               <label htmlFor="password2">Confirm Password</label>
@@ -115,6 +115,7 @@ class SignupForm extends React.Component {
                 placeholder='confirm password'
                 className="text-input"
               />
+              {this.renderErrors('password2')}
             </div>
             <div className='signup-buttons-wrapper'>
               <button type='submit'
@@ -128,7 +129,6 @@ class SignupForm extends React.Component {
                 id="hidden-demo">Demo only
               </button>
             </div>
-            {this.renderErrors()}
           </form>
 
           <span className="alt-session-link">

@@ -20,15 +20,13 @@ export default class Settings extends React.Component {
   }
 
   componentDidUpdate() {
-    const { email, username } = this.props.user;
-    this.state.email.length ? (
-      undefined
-    ) : (
+    let { email, username } = this.props.user;
+    if (!this.state.email.length) { 
       this.setState({
         email: email,
         username: username,
       })
-    )
+    }
   }
 
   confirmedDelete() {

@@ -123,13 +123,17 @@ background: #EEEEEE;
 }
 
 .simple-cta-section {
-  padding: 64px;
-  color: white;
-  background-color: #0D4649;
-;
+  /* content: ""; */
+  /* background-color: rgba(0, 0, 0, 0.4); */
+  background-image: url('https://code-mark.s3.amazonaws.com/cta-bg-codemark.png');
   display: grid;
   grid-template-rows: 1fr auto;
   place-items: center;
+  padding: 64px;
+  /* background-blend-mode: multiply; */
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
 
 .simple-section-copy {

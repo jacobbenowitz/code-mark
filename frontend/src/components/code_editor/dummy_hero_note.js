@@ -109,7 +109,7 @@ export default class DummyHeroNote extends React.Component {
                                     id='title-code'
                                     className='title-input'
                                     value={this.state.title}
-                                    placeholder={'Title'} />
+                                    placeholder={'Test out a title'} />
                             </div>
                             <div className='note-input'>
                                 <CodeMirror
@@ -125,12 +125,13 @@ export default class DummyHeroNote extends React.Component {
                                     onChange={this.update('textdetails')}
                                     id='details-textarea'
                                     className='note-input-details'
-                                    placeholder='Any additional notes?'
+                                    placeholder='Here you could save additional notes'
                                     value={this.state.textdetails}
                                 />
                             </div>
-                            <button type='submit' id='code-note-submit'
-                                className='submit button'>Save</button>
+                            {/* this would be a save button */}
+                            {/* <button type='submit' id='code-note-submit'
+                                className='submit button'>Save</button> */}
                         </form>
                         <span className='hide-button' onClick={this.toggleForm}>Hide</span>
                     </div>
@@ -141,7 +142,7 @@ export default class DummyHeroNote extends React.Component {
                         <div className='note-input' onClick={this.toggleForm}>
                             <CodeMirror
                                 onMouseDown={this.toggleForm}
-                                value={"Save a new note..."}
+                                value={"Sign up to give it a try!"}
                                 height="56px"
                                 theme='dark'
                                 extensions={[javascript({ jsx: true })]}
