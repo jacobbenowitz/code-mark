@@ -112,7 +112,23 @@ router.get('/:userId', (req, res) => {
     );
 });
 
-router.patch('/followers/:userId') // only backend route for updating a user's followers
+// only backend route for updating a user's followers
+router.patch('/followers/:userId', passport.authenticate('jwt', { session: false }), (req,res) => {
+  User.findById(req.params.userId)
+    .then(user => {
+      user.followers = req.body.followers;
+      user.save()
+        .then(user => {
+          if(user.followers.includes(req.user.id)){
+            req.user.follows.push(user.id);
+          }else{
+            req.user.follows = req.user.follows.filter(item => item !== user.id)
+          }
+          req.user.save();
+        });
+    })
+    .catch(err => res.status(404).json({ nouserfound: "No User Found With That ID" }));
+}) 
 
 router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req, res) => {
   if (req.params.userId !== req.user.id) {
@@ -134,14 +150,14 @@ router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,
                   } else {
                     mainuser.username = req.body.username || mainuser.username;
                     mainuser.email = req.body.email || mainuser.email;
-                    mainuser.comment_likes = req.body.comment_likes || mainuser.comment_likes;    //update notes and comments the user liked
-                    mainuser.note_likes = req.body.note_likes || mainuser.note_likes;
-                    mainuser.follows = req.body.follows || mainuser.follows;      //updates followings
-                    User.findById(mainuser.follows[mainuser.follows.length - 1])
-                      .then(user => {
-                        user.followers.push(mainuser.id);
-                        user.save();
-                      })
+                    // mainuser.comment_likes = req.body.comment_likes || mainuser.comment_likes;    //update notes and comments the user liked
+                    // mainuser.note_likes = req.body.note_likes || mainuser.note_likes;
+                    // mainuser.follows = req.body.follows || mainuser.follows;      //updates followings
+                    // User.findById(mainuser.follows[mainuser.follows.length - 1])
+                    //   .then(user => {
+                    //     user.followers.push(mainuser.id);
+                    //     user.save();
+                    //   })
                     if (req.body.password !== mainuser.password) {
                       bcrypt.genSalt(10, (err, salt) => {
                         bcrypt.hash(req.body.password, salt, (err, hash) => {

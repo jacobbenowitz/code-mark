@@ -87,6 +87,24 @@ router.post('/',
     }
 );
 
+// only backend route for updating a comment's likes
+router.patch('/comment_likes/:id', passport.authenticate('jwt', { session: false }), (req,res) => {
+    Comment.findById(req.params.id)
+      .then(comment => {
+        comment.likes = req.body.likes;
+        comment.save()
+            .then(comment => {
+                if(comment.likes.includes(req.user.id)){
+                    req.user.comment_likes.push(comment.id);
+                }else{
+                    req.user.comment_likes = req.user.comment_likes.filter(item => item !== comment.id);
+                }
+                req.user.save();
+            });
+      })
+      .catch(err => res.status(404).json({ nocommentfound: "No Comment Found With That ID" }));
+}) 
+
 //edit a comment if the current user made it
 router.patch('/:id/edit',
     passport.authenticate('jwt', { session: false }),
