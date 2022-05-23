@@ -189,11 +189,13 @@
   margin-bottom: 1.2rem;
   margin-top: 1.2rem;
   border-radius: 4px;
+  background-color: #35373e3e;
 }
 
 #title-code {
-  width: 90%;
   padding: 0.2rem;
+  width: 100%;
+  border-radius: 4px;
 }
 
 #title-code:focus {

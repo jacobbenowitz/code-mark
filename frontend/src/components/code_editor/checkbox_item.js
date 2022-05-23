@@ -6,7 +6,6 @@ class CheckBoxItem extends React.Component {
   }
   render() {
     let { keyword, updateKeywords, index } = this.props;
-    debugger
     return (
       <div className='checkbox-option' key={index}>
         <input type='checkbox' id={`${keyword}-check`}

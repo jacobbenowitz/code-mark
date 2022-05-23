@@ -49,6 +49,16 @@
   display: none;
 }
 
+#note-title-input {
+  margin-top: 1rem;
+}
+
+#hide-note-form {
+  position: absolute;
+  top: 107px;
+  right: 67px;
+}
+
 .new-note-form {
   display: flex;
   flex-grow: 1;

@@ -9,6 +9,7 @@ import CheckBoxItem from './checkbox_item';
 import NewNoteTagItem from '../tags/new_note_tag_item';
 import { getKeywords } from '../../util/webscrap_util';
 import { EditorView } from '@codemirror/basic-setup';
+import { FontAwesomeIcon } from '@fortawesome/fontawesome-free';
 
 export default class NewNote extends React.Component {
   constructor(props) {
@@ -22,7 +23,6 @@ export default class NewNote extends React.Component {
       newTag: "",
       tagForm: false,
       suggestedLanguage: undefined,
-      isOpen: false, // true when user clicks or types, false otherwise
       keywordsSelected: [],
       allKeywords: [],
       newResources: []
@@ -97,11 +97,8 @@ export default class NewNote extends React.Component {
     }
   }
 
-  // createKeywords() {
-
-  // }
-
-  toggleResourcesModal() {
+  toggleResourcesModal(e) {
+    e.preventDefault();
     const resourcesNoteModal = document.getElementById('resources-note-container');
     if (resourcesNoteModal.className === "modal-off") {
       // debugger
@@ -179,7 +176,6 @@ export default class NewNote extends React.Component {
           newTag: "",
           tagForm: false,
           suggestedLanguage: undefined,
-          isOpen: false,
           keywordsSelected: [],
           allKeywords: [],
           newResources: []
@@ -283,7 +279,7 @@ export default class NewNote extends React.Component {
           {/* <button onClick={this.toggleResourcesModal}>ToggleTesting</button> */}
           <div className='new-note-form'>
             <form onSubmit={this.toggleResourcesModal}>
-              <div className='note-input'>
+              <div id="note-title-input" className='note-input'>
                 <input type={'text'}
                   onChange={this.update('title')}
                   id='title-code'
@@ -294,7 +290,7 @@ export default class NewNote extends React.Component {
               <div className='select-wrapper'>
                 <select id='lang-select'
                   value={this.state.lang} onChange={this.handleChange}>
-                  <option value={'javascript'} selected>JavaScript</option>
+                  <option value={'javascript'} defaultValue>JavaScript</option>
                   <option value={'html'}>HTML</option>
                   <option value={'cpp'}>C++</option>
                   <option value={'css'}>CSS</option>
@@ -352,7 +348,10 @@ export default class NewNote extends React.Component {
               <button type='submit' id='code-note-submit'
                 className='submit button'>Save</button>
             </form>
-            <span className='hide-button' onClick={this.toggleForm}>Hide</span>
+            <div id='hide-note-form' className='icon-only-button' onClick={this.toggleForm}>
+              <i className="fa-solid fa-square-minus"></i>
+            </div>
+            {/* <span className='hide-button' onClick={this.toggleForm}>Hide</span> */}
 
             <div className='recommended-tag'
               onClick={() => this.addLangTag(this.state.suggestedLanguage)}>
@@ -364,6 +363,7 @@ export default class NewNote extends React.Component {
             </div>
 
             <div className='note-tags-list new'>
+              <span>Tags</span>
               <div className="tag-item-wrapper tag-icon-new new"
                 id='toggle-tag-form-button'
                 onClick={this.toggleTagForm}>
