@@ -112,6 +112,22 @@ export default class NewNote extends React.Component {
       resourcesNoteModal.className = "modal-off"
     }
   }
+  
+  toggleSuccessModal(e) {
+    e.preventDefault();
+    const resourcesSuccessModal = document.getElementById('resources-success-container');
+    if (resourcesNoteModal.className === "modal-off") {
+      // debugger
+      const keywords = getKeywords(this.state.codebody);
+      this.setState({
+        allKeywords: keywords
+      }, () => {
+        resourcesNoteModal.className = "modal-on"
+      })
+    } else {
+      resourcesNoteModal.className = "modal-off"
+    }
+  }
 
   toggleForm() {
     const fullForm = document.getElementById('new-note-full');
@@ -256,8 +272,7 @@ export default class NewNote extends React.Component {
       <>
         <div id='resources-note-container' className='modal-off' >
           <div className='modal-wrapper'>
-            <div className='resources-modal'>
-              <button onClick={this.toggleResourcesModal}>ToggleTesting</button>
+            <div id="resources-step-1" className='resources-modal'>
               <h4>Resources</h4>
               <span>Select the keywords that you'd like resources for</span>
               <form className='resource-options'
@@ -270,6 +285,20 @@ export default class NewNote extends React.Component {
                 }
                 <button type="submit">Submit</button>
               </form>
+            </div>
+            <div id="resources-step-2" className='modal-off'>
+              <h4>Success</h4>
+              <span>Your CodeMark has saved and your resources are waiting for you!</span>
+              <div className='buttons-wrapper'>
+                <div className='icon-button'>
+                  <img src="https://code-mark.s3.amazonaws.com/type%3DHome.svg" />
+                  <span>Home</span>
+                </div>
+                <div className='icon-button'>
+                  <span>View note</span>
+                  <i class="fa-solid fa-arrow-right-long"></i>
+                </div>
+              </div>
             </div>
           </div>
         </div>
