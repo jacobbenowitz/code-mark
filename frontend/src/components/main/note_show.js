@@ -18,6 +18,7 @@ import ResourceItem from '../notes/resources/resource_item';
 import { Link, Redirect } from 'react-router-dom';
 import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
+import LikeNoteIcon from '../notes/like_note_icon';
 
 
 export default class NoteShow extends React.Component {
@@ -344,16 +345,27 @@ export default class NoteShow extends React.Component {
 
             <div className='code-note-body' id='code-note-view'>
               <div className='icons-wrapper'>
-                <div className='hidden' id='highlight-instructions'>
-                  <span>Highlight any section of the CodeMark and right click to comment!</span>
+                <div className='icons-left-col'>
+                  <LikeNoteIcon
+                    addNoteLike={this.props.addNoteLike}
+                    removeNoteLike={this.props.removeNoteLike}
+                    currentUserId={this.props.currentUser.id}
+                    noteId={this.props.noteId}
+                    likes={this.props.note.likes}
+                  />
                 </div>
-                <div className='note-icon info-icon' id='highlight-comment-code-icon'>
-                  <i className="fa-solid fa-circle-question fa-lg"></i>
-                </div>
-                <div id='export-img-icon' className='note-icon'
-                  onClick={this.exportImage}
-                  title="export a screenshot">
-                  <i className="fa-solid fa-camera-retro fa-lg"></i>
+                <div className='icons-right-col'>
+                  <div className='hidden' id='highlight-instructions'>
+                    <span>Highlight any section of the CodeMark and right click to comment!</span>
+                  </div>
+                  <div className='note-icon info-icon' id='highlight-comment-code-icon'>
+                    <i className="fa-solid fa-circle-question fa-lg"></i>
+                  </div>
+                  <div id='export-img-icon' className='note-icon'
+                    onClick={this.exportImage}
+                    title="export a screenshot">
+                    <i className="fa-solid fa-camera-retro fa-lg"></i>
+                  </div>
                 </div>
               </div>
               <CodeEditorNoteShow
