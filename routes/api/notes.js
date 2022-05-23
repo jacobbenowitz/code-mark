@@ -79,11 +79,12 @@ router.patch('/:id/edit',
                 if (note.user.userId.toString() !== req.user.id) {
                     res.status(404).json({ editnotallowed: 'Not Authorized To Edit Note' })
                 } else {
-                    note.codebody = req.body.codebody;
-                    note.title = req.body.title;
-                    note.textdetails = req.body.textdetails;
+                    note.codebody = req.body.codebody || note.codebody;
+                    note.title = req.body.title || note.title;
+                    note.textdetails = req.body.textdetails || note.textdetails;
                     // note.resources = req.body.resources;
-                    note.tags = req.body.tags;
+                    note.likes = req.body.likes || note.likes;
+                    note.tags = req.body.tags || note.tags;
                     note.save()
                         .then(note => res.json(note))
                 }
@@ -105,6 +106,7 @@ router.delete('/:id',
                     const noteid = note.id;
                     const userid = note.user.userId;
                     const comments = note.comments;
+                    const likes = note.likes;
                     Note.deleteOne({ _id: req.params.id })
                         .then(() => {
                             User.findById(userid)
@@ -125,6 +127,15 @@ router.delete('/:id',
                                                 user.comments = user.comments.filter(item => item.toString() !== commentid);
                                                 user.save().then(user => res.json(user));
                                             })
+                                    })
+                            })
+                        })
+                        .then(() => {
+                            likes.forEach(likeId =>{
+                                User.findById(likeId)
+                                    .then(user => {
+                                        user.note_likes = user.note_likes.filter(item => item.toString() !== noteid)
+                                        user.save().then(user => res.json(user));
                                     })
                             })
                         })

@@ -96,7 +96,8 @@ router.patch('/:id/edit',
                 if (comment.user.userId.toString() !== req.user.id) {
                     res.status(404).json({ editnotallowed: 'Not Authorized to Edit Note'})
                 }else{
-                    comment.textbody = req.body.textbody;
+                    comment.textbody = req.body.textbody || comment.textbody;
+                    comment.likes = req.body.likes || comment.likes;
                     // comment.codeSnippet = req.body.codeSnippet;
                     comment.save().then(comment => res.json(comment))
                 }
@@ -119,6 +120,7 @@ router.delete('/:id',
                 const commentid = comment.id;
                 const noteid = comment.note;
                 const userid = comment.user.userId;
+                const likes = comment.likes;
                 Comment.deleteOne({ _id: req.params.id })
                     .then(() => {
                         User.findById(userid)
@@ -133,6 +135,15 @@ router.delete('/:id',
                                 note.comments = note.comments.filter(item => item.toString() !== commentid);
                                 note.save();
                             });
+                    })
+                    .then(() => {
+                        likes.forEach(likeId =>{
+                            User.findById(likeId)
+                                .then(user => {
+                                    user.comment_likes = user.comment_likes.filter(item => item.toString() !== commentid)
+                                    user.save().then(user => res.json(user));
+                                })
+                        })
                     })
                     .then(() => res.json(commentid));
                 // }

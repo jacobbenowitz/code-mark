@@ -19,7 +19,8 @@ const NoteSchema = new Schema({
   },
   comments: [{type: Schema.Types.ObjectId, ref:"comments"}],
   resources: [Object],
-  tags: [String]
+  tags: [String],
+  likes: [{type: Schema.Types.ObjectId, ref:"users"}]
 },
 {timestamps: true}
 );
