@@ -13,8 +13,9 @@ mongoose
 const seedDB = async () => {
       // await connectToMongo();
       // await User.deleteMany();
-      await Note.updateMany({"likes":{$exists:false}},{$set:{"likes":[]}});
-      await Comment.updateMany({"likes":{$exists:false}},{$set:{"likes":[]}});
+      // await Note.updateMany({"likes":{$exists:false}},{$set:{"likes":[]}});
+      await Note.updateMany({"public":{$exists:false}},{$set:{"public":true}});
+      // await Comment.updateMany({"likes":{$exists:false}},{$set:{"likes":[]}});
       // await User.insertMany(seedUsers);
       // await seed(seedUsers,seedNotes);
   };
