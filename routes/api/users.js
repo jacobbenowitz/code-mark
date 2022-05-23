@@ -130,11 +130,11 @@ router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,
                   if (user && user.email !== req.user.email) {
                     return res.status(400).json({ email: "A user has already registered with this email address" })
                   } else {
-                    mainuser.username = req.body.username;
-                    mainuser.email = req.body.email;
-                    mainuser.comment_likes = req.body.comment_likes;    //update notes and comments the user liked
-                    mainuser.note_likes = req.body.note_likes;
-                    mainuser.follows = req.body.follows;      //updates followings
+                    mainuser.username = req.body.username || mainuser.username;
+                    mainuser.email = req.body.email || mainuser.email;
+                    mainuser.comment_likes = req.body.comment_likes || mainuser.comment_likes;    //update notes and comments the user liked
+                    mainuser.note_likes = req.body.note_likes || mainuser.note_likes;
+                    mainuser.follows = req.body.follows || mainuser.follows;      //updates followings
                     User.findById(mainuser.follows[mainuser.follows.length - 1])
                       .then(user => {
                         user.followers.push(mainuser.id);

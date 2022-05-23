@@ -96,8 +96,8 @@ router.patch('/:id/edit',
                 if (comment.user.userId.toString() !== req.user.id) {
                     res.status(404).json({ editnotallowed: 'Not Authorized to Edit Note'})
                 }else{
-                    comment.textbody = req.body.textbody;
-                    comment.likes = req.body.likes;
+                    comment.textbody = req.body.textbody || comment.textbody;
+                    comment.likes = req.body.likes || comment.likes;
                     // comment.codeSnippet = req.body.codeSnippet;
                     comment.save().then(comment => res.json(comment))
                 }

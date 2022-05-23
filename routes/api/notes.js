@@ -79,12 +79,12 @@ router.patch('/:id/edit',
                 if (note.user.userId.toString() !== req.user.id) {
                     res.status(404).json({ editnotallowed: 'Not Authorized To Edit Note' })
                 } else {
-                    note.codebody = req.body.codebody;
-                    note.title = req.body.title;
-                    note.textdetails = req.body.textdetails;
+                    note.codebody = req.body.codebody || note.codebody;
+                    note.title = req.body.title || note.title;
+                    note.textdetails = req.body.textdetails || note.textdetails;
                     // note.resources = req.body.resources;
-                    note.likes = req.body.likes;
-                    note.tags = req.body.tags;
+                    note.likes = req.body.likes || note.likes;
+                    note.tags = req.body.tags || note.tags;
                     note.save()
                         .then(note => res.json(note))
                 }
