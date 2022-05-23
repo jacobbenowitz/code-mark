@@ -14,6 +14,7 @@ export const RECEIVE_NEW_NOTE = "RECEIVE_NEW_NOTE";
 export const RECEIVE_NOTE_ERRORS = "RECEIVE_NOTE_ERRORS";
 export const RECEIVE_UPDATED_NOTE = "RECEIVE_UPDATED_NOTE";
 export const RECEIVE_DELETE_NOTE = "RECEIVE_DELETE_NOTE";
+export const RECEIVE_NOTE_LIKE = "RECEIVE_NOTE_LIKE";
 
 export const receiveNotes = notes => ({
   type: RECEIVE_NOTES,
@@ -48,6 +49,11 @@ export const receiveUpdateNote = note => ({
 export const receiveDeleteNote = noteId => ({
   type: RECEIVE_DELETE_NOTE,
   noteId
+})
+
+export const receiveNoteLike = userId => ({
+  type: RECEIVE_NOTE_LIKE,
+  userId
 })
 
 export const fetchNotes = () => dispatch => (
@@ -87,3 +93,9 @@ export const removeNote = noteId => dispatch => (
     .then(note => dispatch(receiveDeleteNote(note.id)))
     .catch(err => dispatch(receiveNoteErrors(err)))
 );
+
+export const updateNoteLikes = (data, noteId) => dispatch => (
+  patchNote(data, noteId)
+    .then(note => dispatch(receiveUpdateNote(note)))
+    .catch(err => dispatch(receiveNoteErrors(err)))
+)

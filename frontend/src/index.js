@@ -6,7 +6,7 @@ import jwt_decode from 'jwt-decode';
 import { setAuthToken } from './util/session_api_util';
 import { logout } from './actions/session_actions';
 import App from './components/app';
-import { composeNote, updateNote } from '../../frontend/src/actions/note_actions';
+import { composeNote, updateNote, updateNoteLikes } from '../../frontend/src/actions/note_actions';
 import { composeComment, fetchNoteComments, removeComment, updateComment, fetchComments } from '../../frontend/src/actions/comment_actions';
 import { getLanguage } from '../src/util/webscrap_util';
 import {testResources} from '../src/actions/webscrap_actions';
@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.fetchNoteComments = noteId => fetchNoteComments(noteId);
   window.updateComment = (comment, commentId) => updateComment(comment, commentId);
   window.getLanguage = getLanguage;
+  window.updateNoteLikes = updateNoteLikes;
 
   window.testResources = testResources;
   /// TEST END ///
