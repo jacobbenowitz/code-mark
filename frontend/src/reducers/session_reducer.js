@@ -19,6 +19,10 @@ import {
   RECEIVE_USER_UNFOLLOW
 } from '../actions/user_actions';
 
+import {
+  RECEIVE_NOTE_LIKE, RECEIVE_NOTE_UNLIKE
+} from '../actions/note_actions'
+
 const initialState = {
   isAuthenticated: false,
   user: {},
@@ -60,12 +64,18 @@ const SessionReducer = (state = initialState, action) => {
       // nextState.user.follows[action.user.data._id] = action.user.data;
       // following...
       return nextState;
-      case RECEIVE_USER_UNFOLLOW:
-        // nextState.user.follows[action.user.data._id] = action.user.data;
-        // following...
+    case RECEIVE_USER_UNFOLLOW:
+      // nextState.user.follows[action.user.data._id] = action.user.data;
+      // following...
       return nextState;
     case RECEIVE_USER_NOTES:
       nextState.tags = selectNoteTags(action.notes.data)
+      return nextState;
+    case RECEIVE_NOTE_LIKE:
+      nextState.user.noteLikes = nextState.user.noteLikes.concat([action.note.data._id])
+      return nextState;
+    case RECEIVE_NOTE_UNLIKE:
+      nextState.user.noteLikes = nextState.user.noteLikes.filter(id => id !== action.note.data._id)
       return nextState;
     default:
       return state;

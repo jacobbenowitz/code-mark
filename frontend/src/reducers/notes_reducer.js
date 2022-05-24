@@ -53,7 +53,7 @@ const notesReducer = (prevState = initialState, action) => {
     case RECEIVE_NOTE_LIKE:
       nextState.all[action.note.data._id] = action.note.data;
       return nextState;
-      case RECEIVE_NOTE_UNLIKE:
+    case RECEIVE_NOTE_UNLIKE:
       nextState.all[action.note.data._id] = action.note.data;
       return nextState;
     default:
