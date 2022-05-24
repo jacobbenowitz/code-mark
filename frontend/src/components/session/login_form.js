@@ -1,6 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import Demo from "./demo_user_login"
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -29,6 +30,21 @@ class LoginForm extends React.Component {
     });
   };
 
+  demoScript(e) {
+    e.preventDefault();
+
+    Demo.demoSignupForm();
+  }
+
+  demoSignup = (e) => {
+    e.preventDefault();
+    const guest = {
+      usernameOrEmail: 'Guest',
+      password: 'password'
+    }
+    this.props.loginGuest(guest);
+  }
+
   handleSubmit(e) {
     e.preventDefault();
     let user = {
@@ -39,19 +55,13 @@ class LoginForm extends React.Component {
     this.props.history.push('/home')
   }
 
-  renderErrors() {
+  renderErrors(field) {
     return (
-      <div className="error-modal">
-        <ul className="error-list">
-          {Object.keys(this.state.errors).map((error, i) => (
-            <li key={`error-${i}`}>
-              {this.state.errors[error]}
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
+      <span className="error-item" key={`error-${field}`}>
+        {this.state.errors[field]}
+      </span>
+    )
+  };
 
   render() {
     return (
@@ -62,23 +72,28 @@ class LoginForm extends React.Component {
             <div className="form-input">
               <label htmlFor="usernameOrEmail">Username or Email</label>
               <input type={'text'}
+                id='usernameOrEmail'
                 value={this.state.usernameOrEmail}
                 onChange={this.update('usernameOrEmail')}
                 placeholder='username or email'
                 className="text-input"
               />
+              {this.renderErrors('usernameOrEmail')}
             </div>
             <div className="form-input">
               <label htmlFor="password">Password</label>
               <input type={'password'}
+                id='password'
                 value={this.state.password}
                 onChange={this.update('password')}
                 placeholder='password'
                 className="text-input"
               />
+              {this.renderErrors('password')}
             </div>
             <div className='signup-buttons-wrapper'>
               <button type='submit' className={'button-session'}>Login</button>
+
               <button className="demo_button"
                 id="demo-signup"
                 onClick={this.demoScript}
