@@ -83,10 +83,23 @@
   gap: 1.3rem;
 }
 
+.note-stats-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.note-public-switch-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+}
+
 .note-show-title {
   display: flex;
   gap: 1rem;
   flex-direction: column;
+  width: 100%;
 }
 
 .note-show-main {

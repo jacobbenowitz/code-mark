@@ -105,7 +105,10 @@ router.patch('/:id/edit',
                     // note.resources = req.body.resources;
                     note.likes = req.body.likes || note.likes;
                     note.tags = req.body.tags || note.tags;
-                    note.public = req.body.public || note.public;
+                    if (req.body.public != null &&
+                        req.body.public !== undefined) {
+                        note.public = req.body.public
+                    }
                     note.save()
                         .then(note => res.json(note))
                 }

@@ -9,7 +9,6 @@ import CheckBoxItem from './checkbox_item';
 import NewNoteTagItem from '../tags/new_note_tag_item';
 import { getKeywords } from '../../util/webscrap_util';
 import { EditorView } from '@codemirror/basic-setup';
-import { FontAwesomeIcon } from '@fortawesome/fontawesome-free';
 import { withRouter } from 'react-router-dom'
 
 class NewNote extends React.Component {
