@@ -37,6 +37,7 @@ class FilteredNotes extends React.Component {
       return (
         this.state.notes.map(note =>
           <CodeNoteItem key={note._id}
+            likes={note.likes}
             title={note.title}
             username={note.user.username}
             userId={note.user.userId}

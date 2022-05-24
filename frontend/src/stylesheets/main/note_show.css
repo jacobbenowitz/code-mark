@@ -29,7 +29,7 @@
   content: 'likes';
   position: absolute;
   width: max-content;
-  top: 30px;
+  top: -40px;
   left: -5px;
   background: #393939;
   padding: 0.4rem;
@@ -41,7 +41,7 @@
   content: 'time since updated';
   position: absolute;
   width: max-content;
-  top: 30px;
+  top: -40px;
   left: -5px;
   background: #393939;
   padding: 0.4rem;
@@ -53,7 +53,19 @@
   content: 'time since created';
   position: absolute;
   width: max-content;
-  top: 30px;
+  top: -40px;
+  left: -5px;
+  background: #393939;
+  padding: 0.4rem;
+  border-radius: 4px;
+  box-shadow: 0px 2px 16px rgb(0 0 0 / 30%);
+  animation: fadeIn 1000ms ease-in-out;
+}
+.note-stat.comments:hover::before {
+  content: 'comments';
+  position: absolute;
+  width: max-content;
+  top: -40px;
   left: -5px;
   background: #393939;
   padding: 0.4rem;

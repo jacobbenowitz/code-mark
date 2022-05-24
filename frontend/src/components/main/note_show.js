@@ -340,6 +340,10 @@ export default class NoteShow extends React.Component {
                   <i className="fa-solid fa-heart"></i>
                   <span>{this.props.note.likes.length}</span>
                 </div>
+                <div className="note-stat comments">
+                  <i className="fa-solid fa-comments"></i>
+                  <span>{this.props.comments.length}</span>
+                </div>
                 <div className='note-stat updated-at'>
                   <i class="fa-solid fa-pencil"></i>
                   <span>{moment(this.props.note.updatedAt).fromNow()}</span>
