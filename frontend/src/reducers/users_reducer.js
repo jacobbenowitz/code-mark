@@ -2,7 +2,7 @@ import {
     RECEIVE_USER,
     RECEIVE_USERS,
     RECEIVE_UPDATED_USER,
-    RECEIVE_USER_NEW_FOLLOWS
+    RECEIVE_USER_NEW_FOLLOWING
 } from "../actions/user_actions";
 
 const initialState = {
@@ -24,7 +24,7 @@ const usersReducer = (prevState = initialState, action) => {
                 allUsers[user._id] = user)
             nextState.all = allUsers;
             return nextState;
-        case RECEIVE_USER_NEW_FOLLOWS:
+        case RECEIVE_USER_NEW_FOLLOWING:
             debugger;
             // nextState.all[action.user.data._id] = action.user.data;
             nextState.user = action.users.data.followedUser;

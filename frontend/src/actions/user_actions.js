@@ -11,7 +11,7 @@ export const RECEIVE_USERS = "RECEIVE_USERS";
 export const RECEIVE_USER = "RECEIVE_USER";
 export const RECEIVE_UPDATED_USER = "RECEIVE_UPDATED_USER";
 export const RECEIVE_DELETED_USER = "RECEIVE_DELETED_USER";
-export const RECEIVE_USER_NEW_FOLLOWS = "RECEIVE_USER_NEW_FOLLOWS";
+export const RECEIVE_USER_NEW_FOLLOWING = "RECEIVE_USER_NEW_FOLLOWING";
 // export const RECEIVE_USER_UNFOLLOW = "RECEIVE_USER_UNFOLLOW";
 
 export const receiveUsers = users => ({
@@ -34,15 +34,10 @@ export const receiveUpdatedUser = user => ({
     user
 })
 
-export const receiveUserNewFollows = users => ({
-    type: RECEIVE_USER_NEW_FOLLOWS,
+export const receiveUserNewFollowing = users => ({
+    type: RECEIVE_USER_NEW_FOLLOWING,
     users
 })
-
-// export const receiveUserUnfollow = user => ({
-//     type: RECEIVE_USER_NEW_FOLLOWS,
-//     user
-// })
 
 /// new actions for RECEIVE_USER_FOLLOW / UNFOLLOW
 
@@ -74,7 +69,7 @@ export const removeUser = userId => dispatch => {
 export const changeUserFollowers = (userId) => dispatch => {
     debugger;
     return editUserFollowers(userId)
-        .then(users => dispatch(receiveUserNewFollows(users)))
+        .then(users => dispatch(receiveUserNewFollowing(users)))
         .catch(err => console.log(err))
 }
 

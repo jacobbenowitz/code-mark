@@ -79,7 +79,7 @@ router.post('/login', (req, res) => {
               id: user.id,
               username: user.username,
               followers: user.followers,
-              following: user.follows,
+              following: user.following,
               noteLikes: user.note_likes
             };
 
@@ -120,7 +120,7 @@ router.patch('/followers/:userId', passport.authenticate('jwt', { session: false
   User.findById(req.params.userId)
     .then(user => {
       // debugger;
-      if (req.user.follows.includes(user.id)) {
+      if (req.user.following.includes(user.id)) {
         user.followers = user.followers.filter(item => item.toString() !== req.user.id);
       } else {
         user.followers.push(req.user.id);
@@ -130,9 +130,9 @@ router.patch('/followers/:userId', passport.authenticate('jwt', { session: false
           // debugger;
           // res.json({followedUser:user})
           if (user.followers.includes(req.user.id)) {
-            req.user.follows.push(user.id);
+            req.user.following.push(user.id);
           } else {
-            req.user.follows = req.user.follows.filter(item => item.toString() !== user.id)
+            req.user.following = req.user.following.filter(item => item.toString() !== user.id)
           }
           res.json({ followedUser: user, currentUser: req.user });
           req.user.save();
@@ -164,8 +164,8 @@ router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,
                     mainuser.email = req.body.email || mainuser.email;
                     // mainuser.comment_likes = req.body.comment_likes || mainuser.comment_likes;    //update notes and comments the user liked
                     // mainuser.note_likes = req.body.note_likes || mainuser.note_likes;
-                    // mainuser.follows = req.body.follows || mainuser.follows;      //updates followings
-                    // User.findById(mainuser.follows[mainuser.follows.length - 1])
+                    // mainuser.following = req.body.following || mainuser.following;      //updates followings
+                    // User.findById(mainuser.following[mainuser.following.length - 1])
                     //   .then(user => {
                     //     user.followers.push(mainuser.id);
                     //     user.save();
@@ -207,17 +207,17 @@ router.delete('/:userId', passport.authenticate('jwt', { session: false }), (req
         var commentLikesIds = deleteuser.comment_likes;
         var noteLikesIds = deleteuser.note_likes;
         var followers = deleteuser.followers;
-        var follows = deleteuser.follows;
+        var following = deleteuser.following;
         User.deleteOne({ _id: deleteuser.id })
           .then(() => {
             followers.forEach(followerId => {
               User.findById(followerId)
                 .then(user => {
-                  user.follows = user.follows.filter(item => item.toString() !== req.params.userId);
+                  user.following = user.following.filter(item => item.toString() !== req.params.userId);
                   user.save();
                 })
             })
-            follows.forEach(followId => {
+            following.forEach(followId => {
               User.findById(followId)
                 .then(user => {
                   user.followers = user.followers.filter(item => item.toString() !== req.params.userId);

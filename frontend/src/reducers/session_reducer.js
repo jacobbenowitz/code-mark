@@ -12,7 +12,7 @@ import { selectNoteTags } from "../util/selectors";
 import {
   RECEIVE_UPDATED_USER,
   RECEIVE_DELETED_USER,
-  RECEIVE_USER_NEW_FOLLOWS
+  RECEIVE_USER_NEW_FOLLOWING
 } from "../actions/user_actions"
 
 import {
@@ -49,7 +49,7 @@ const SessionReducer = (state = initialState, action) => {
       debugger
       nextState.user = action.user.data;
       return nextState;
-    case RECEIVE_USER_NEW_FOLLOWS:
+    case RECEIVE_USER_NEW_FOLLOWING:
       debugger;
       nextState.user = action.users.data.currentUser;
       return nextState;

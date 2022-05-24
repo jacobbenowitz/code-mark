@@ -20,7 +20,7 @@ export const deleteUser = userId => {
   return axios.delete(`/api/users/${userId}`)
 }
 
-// edit user follows util
+// edit user following util
 export const editUserFollowers = userId => {
   debugger;
   return axios.patch(`/api/users/followers/${userId}`)
