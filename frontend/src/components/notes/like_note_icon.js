@@ -11,32 +11,28 @@ export default class LikeNoteIcon extends React.Component {
   }
 
   componentDidMount() {
-    // this.props.likes.includes(this.props.currentUserId) ? (
-    //   this.setState({ liked: true })
-    // ) : (
-    //   this.setState({ liked: false })
-    // )
+    this.props.likes.includes(this.props.currentUserId) ? (
+      this.setState({ liked: true })
+    ) : (
+      this.setState({ liked: false })
+    )
   }
 
   addLike() {
-    // let newLikes = this.props.likes.push(this.props.currentUserId);
-    // let data = { "likes": newLikes };
-    this.setState(
-      { liked: true })
-    // this.setState(
-    //   { liked: true },
-    //   this.props.addNoteLike(data, this.props.noteId))
+    let newLikes = this.props.likes.concat([this.props.currentUserId]);
+    let data = { "likes": newLikes };
+    // debugger
+    this.props.addNoteLike(data, this.props.noteId);
+    this.setState({ liked: true });
   }
 
   removeLike() {
-    // let filteredLikes = this.props.likes.filter(userId =>
-    //   userId !== this.props.currentUserId);
-    // let data = { "likes": filteredLikes };
-    this.setState(
-      { liked: false })
-    // this.setState(
-    //   { liked: false },
-    //   this.props.addNoteLike(data, this.props.noteId))
+    let filteredLikes = this.props.likes.filter(userId =>
+      userId !== this.props.currentUserId);
+    let data = { "likes": filteredLikes };
+    // debugger
+    this.props.removeNoteLike(data, this.props.noteId);
+    this.setState({ liked: false });
   }
 
   getIcon() {
@@ -57,9 +53,7 @@ export default class LikeNoteIcon extends React.Component {
   }
 
   handleClick() {
-    this.state.liked ? (
-      this.setState({ liked: false })
-    ) : this.setState({ liked: true })
+    this.state.liked ? this.removeLike() : this.addLike()
   }
 
   render() {

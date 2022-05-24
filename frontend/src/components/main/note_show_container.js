@@ -38,8 +38,8 @@ const mapDispatchToProps = dispatch => {
       dispatch(updateComment(data, commentId)),
     fetchUsers: () => dispatch(fetchUsers()),
     fetchUser: () => dispatch(fetchUser()),
-    addNoteLike: () => dispatch(addNoteLike(data, noteId)),
-    removeNoteLike: () => dispatch(removeNoteLike(data, noteId))
+    addNoteLike: (data, noteId) => dispatch(addNoteLike(data, noteId)),
+    removeNoteLike: (data, noteId) => dispatch(removeNoteLike(data, noteId))
   }
 }
 
