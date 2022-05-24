@@ -15,4 +15,5 @@
 @import '../stylesheets/components/avatar.css';
 @import '../stylesheets/components/tags.css';
 @import '../stylesheets/components/context_menu.css';
-@import '../stylesheets/components/resources.css'
+@import '../stylesheets/components/resources.css';
+@import '../stylesheets/components/switch.css';

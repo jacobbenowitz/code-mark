@@ -4,7 +4,8 @@ import {
   getUserNotes,
   writeNote,
   patchNote,
-  deleteNote
+  deleteNote,
+  patchNoteLikes
 } from '../util/note_api_util';
 
 export const RECEIVE_NOTES = "RECEIVE_NOTES";
@@ -58,7 +59,7 @@ export const receiveNoteLike = note => ({
 })
 
 export const receiveNoteUnlike = note => ({
-  type: RECEIVE_NOTE_LIKE,
+  type: RECEIVE_NOTE_UNLIKE,
   note
 })
 
@@ -89,6 +90,7 @@ export const composeNote = data => dispatch => {
 };
 
 export const updateNote = (data, noteId) => dispatch => {
+  debugger
   return patchNote(data, noteId)
     .then(note => dispatch(receiveUpdateNote(note)))
     .catch(err => dispatch(receiveNoteErrors(err)))
@@ -101,13 +103,13 @@ export const removeNote = noteId => dispatch => (
 );
 
 export const addNoteLike = (data, noteId) => dispatch => (
-  patchNote(data, noteId)
+  patchNoteLikes(data, noteId)
     .then(note => dispatch(receiveNoteLike(note)))
     .catch(err => dispatch(receiveNoteErrors(err)))
 )
 
 export const removeNoteLike = (data, noteId) => dispatch => (
-  patchNote(data, noteId)
+  patchNoteLikes(data, noteId)
     .then(note => dispatch(receiveNoteUnlike(note)))
     .catch(err => dispatch(receiveNoteErrors(err)))
 )

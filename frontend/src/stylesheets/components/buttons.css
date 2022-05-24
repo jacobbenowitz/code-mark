@@ -90,7 +90,7 @@ button:focus, .signup:focus, .login:focus, .hide-button:focus {
 
   padding: 0 24px 0 24px;
   height: 56px;
-  width: 180px;
+  min-width: 180px;
   left: 20px;
   top: 190px;
 
@@ -142,8 +142,21 @@ button:focus, .signup:focus, .login:focus, .hide-button:focus {
 }
 
 /* errors */
+/* .error-modal {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 23px;
 
-.error-list {
+  position: relative;
+  top: 125px;
+  min-width: 500px;
+  min-height: 70px;
+
+  background: #222222;
+} */
+
+.error-item {
   color: #EB5750;
 }
 

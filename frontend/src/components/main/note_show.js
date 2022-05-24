@@ -19,6 +19,8 @@ import { Link, Redirect } from 'react-router-dom';
 import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
 import LikeNoteIcon from '../notes/like_note_icon';
+import moment from 'moment';
+import SwitchButton from '../UI/switch_button';
 
 
 export default class NoteShow extends React.Component {
@@ -28,10 +30,13 @@ export default class NoteShow extends React.Component {
       note: undefined,
       comments: [],
       selectedText: '',
-      commentModal: false
+      commentModal: false,
+      public: undefined,
+      textHeight: undefined,
     }
     this.deleteNote = this.deleteNote.bind(this);
     this.exportImage = this.exportImage.bind(this);
+    this.handlePublicSwitch = this.handlePublicSwitch.bind(this);
   }
 
   componentWillMount() {
@@ -51,7 +56,8 @@ export default class NoteShow extends React.Component {
     this.setState({
       note: nextProps.note,
       comments: orderNoteComments(nextProps.comments),
-      newComment: nextProps.newComment
+      public: nextProps.note.public
+      // newComment: nextProps.newComment
     })
   }
 
@@ -79,6 +85,16 @@ export default class NoteShow extends React.Component {
     }
   }
 
+  handlePublicSwitch() {
+    let newStatus = !this.state.public
+    this.props.updateNote(
+      { public: newStatus }, this.props.noteId
+    ).then(() => {
+      this.setState(
+        { public: newStatus }
+      )
+    })
+  }
 
   commentOnSelection(selection) {
     this.setState({
@@ -191,6 +207,7 @@ export default class NoteShow extends React.Component {
 
     // ? close the menu if the user clicks outside of it
     scope.addEventListener("click", (e) => {
+      // add conditional id contextmenu is visible
       if (e.target.offsetParent != contextMenu) {
         contextMenu.classList.remove("visible");
       }
@@ -198,7 +215,8 @@ export default class NoteShow extends React.Component {
     });
 
     // textarea resize
-    const tx = document.querySelectorAll("textarea ");
+    // use state for textarea height and pass props 
+    const tx = document.querySelectorAll("textarea");
     for (let i = 0; i < tx.length; i++) {
       tx[i].setAttribute("style", "height:" + (tx[i].scrollHeight) + "px;overflow-y:hidden;");
       tx[i].addEventListener("input", OnInput, false);
@@ -206,10 +224,10 @@ export default class NoteShow extends React.Component {
 
     function OnInput() {
       this.style.height = "auto";
-      this.style.height = (this.scrollHeight) + "px";
+      this.style.height = (this.scrollHeight) + "px"; 
     }
 
-    // listen for selection and update state
+    // listen for selection and update state 
     // document.onselectionchange = () => {
     // let selection = document.getSelection()
     // console.log(document.getSelection())
@@ -220,15 +238,15 @@ export default class NoteShow extends React.Component {
     return note ? (
       <>
         <div id="context-menu">
+          <div className="menu-item" onMouseDown={() => {
+            let selection = window.getSelection()
+            this.commentOnSelection(selection.toString())
+          }}>Comment on this selection</div>
           <div className="menu-item"
             onMouseDown={() => {
               let selection = window.getSelection().toString();
               navigator.clipboard.writeText(selection)
             }}>Copy selection</div>
-          <div className="menu-item" onMouseDown={() => {
-            let selection = window.getSelection()
-            this.commentOnSelection(selection.toString())
-          }}>Comment on this selection</div>
           {/* <div className="menu-item" onMouseDown={() =>
             this.commentOnSelection(this.state.selection)}
           >Comment 2</div> */}
@@ -334,6 +352,34 @@ export default class NoteShow extends React.Component {
               <Link className='username'
                 to={`/users/${note.user.userId}`}>@{note.user.username}</Link>
               <h1>{note.title}</h1>
+              <div className='note-stats-wrapper'>
+                <div className='note-stats'>
+                  <div className='note-stat likes'>
+                    <i className="fa-solid fa-heart"></i>
+                    <span>{this.props.note.likes.length}</span>
+                  </div>
+                  <div className="note-stat comments">
+                    <i className="fa-solid fa-comments"></i>
+                    <span>{this.props.comments.length}</span>
+                  </div>
+                  <div className='note-stat updated-at'>
+                    <i className="fa-solid fa-pencil"></i>
+                    <span>{moment(this.props.note.updatedAt).fromNow()}</span>
+                  </div>
+                  <div className='note-stat created-at'>
+                    <i className="fa-solid fa-cloud-arrow-up"></i>
+                    <span>{moment(this.props.note.createdAt).fromNow()}</span>
+                  </div>
+                </div>
+                <div className='note-public-switch-wrapper'>
+                  <div className='note-public-switch'>
+                    <SwitchButton
+                      isToggled={this.state.public}
+                      onToggle={this.handlePublicSwitch}
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div className='note-tags-wrapper'>
@@ -411,6 +457,8 @@ export default class NoteShow extends React.Component {
               fetchNote={this.props.fetchNote}
               fetchNoteComments={this.props.fetchNoteComments}
               noteId={this.props.noteId}
+              addCommentLike={this.props.addCommentLike}
+              removeCommentLike={this.props.removeCommentLike}
             />
           </section>
         </div>

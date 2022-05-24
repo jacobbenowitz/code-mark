@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // window.removeUserFollower = removeUserFollower;
 
   window.testResources = testResources;
+  window.removeUserFollower = removeUserFollower;
   /// TEST END ///
   ReactDOM.render(<Root store={store} />, root);
 })

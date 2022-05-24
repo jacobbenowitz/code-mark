@@ -11,6 +11,8 @@ import {
   removeComment,
   composeComment,
   updateComment,
+  addCommentLike,
+  removeCommentLike,
 } from "../../actions/comment_actions";
 import { fetchUsers, fetchUser } from "../../actions/user_actions";
 
@@ -39,7 +41,10 @@ const mapDispatchToProps = dispatch => {
     fetchUsers: () => dispatch(fetchUsers()),
     fetchUser: () => dispatch(fetchUser()),
     addNoteLike: (data, noteId) => dispatch(addNoteLike(data, noteId)),
-    removeNoteLike: (data, noteId) => dispatch(removeNoteLike(data, noteId))
+    removeNoteLike: (data, noteId) => dispatch(removeNoteLike(data, noteId)),
+    addCommentLike: (data, commentId) =>
+      dispatch(addCommentLike(data, commentId)),
+    removeCommentLike: (data, commentId) => dispatch(removeCommentLike(data, commentId))
   }
 }
 

@@ -7,6 +7,7 @@ const AllNotes = (props) => (
         <CodeNoteItem key={note._id}
             title={note.title}
             tags={note.tags}
+            likes={note.likes}
             username={note.user.username}
             userId={note.user.userId}
             textDetails={note.textdetails}

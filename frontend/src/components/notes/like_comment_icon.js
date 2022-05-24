@@ -1,6 +1,6 @@
 import React from "react";
 
-export default class LikeNoteIcon extends React.Component {
+export default class LikeCommentIcon extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,8 +21,7 @@ export default class LikeNoteIcon extends React.Component {
   addLike() {
     let newLikes = this.props.likes.concat([this.props.currentUserId]);
     let data = { "likes": newLikes };
-    // debugger
-    this.props.addNoteLike(data, this.props.noteId);
+    this.props.addCommentLike(data, this.props.commentId);
     this.setState({ liked: true });
   }
 
@@ -30,8 +29,7 @@ export default class LikeNoteIcon extends React.Component {
     let filteredLikes = this.props.likes.filter(userId =>
       userId !== this.props.currentUserId);
     let data = { "likes": filteredLikes };
-    // debugger
-    this.props.removeNoteLike(data, this.props.noteId);
+    this.props.removeCommentLike(data, this.props.commentId);
     this.setState({ liked: false });
   }
 

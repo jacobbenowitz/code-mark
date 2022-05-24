@@ -1,0 +1,59 @@
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch::after {
+  content: 'Public Note';
+  position: absolute;
+  right: 80px;
+  width: max-content;
+  top: 8px;
+  font-weight: 600;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  
+  background-color: #49454F;
+  border-radius: 30px;
+  transition: 0.4s;
+}
+
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  border-radius: 30px;
+  background-color: #262828;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #295655;
+}
+
+input:checked + .slider::before {
+  background-color: #37F3FF;
+}
+
+input:checked + .slider::before {
+  transform: translateX(26px);
+}

@@ -5,7 +5,9 @@ import {
     RECEIVE_USER_COMMENTS,
     RECEIVE_DELETE_COMMENT,
     RECEIVE_UPDATED_COMMENT,
-    RECEIVE_NOTE_COMMENTS
+    RECEIVE_NOTE_COMMENTS,
+    RECEIVE_COMMENT_LIKE,
+    RECEIVE_COMMENT_UNLIKE
 } from '../actions/comment_actions';
 
 const initialState = {
@@ -47,6 +49,22 @@ const commentsReducer = (prevState = initialState, action) => {
             return nextState;
         case RECEIVE_NOTE_COMMENTS:
             nextState.note = action.comments;
+            return nextState;
+        case RECEIVE_COMMENT_LIKE:
+            let nextComments = nextState.note.map(comment => {
+                if (comment._id = action.comment.data._id) {
+                    return action.comment.data
+                } else return comment
+            })
+            nextState.note = nextComments;
+            return nextState;
+        case RECEIVE_COMMENT_UNLIKE:
+            let unlikedComments = nextState.note.map(comment => {
+                if (comment._id = action.comment.data._id) {
+                    return action.comment.data
+                } else return comment
+            })
+            nextState.note = unlikedComments;
             return nextState;
         default:
             return prevState;

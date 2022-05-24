@@ -23,3 +23,7 @@ export const patchNote = (data, noteId) => {
 export const deleteNote = noteId => {
   return axios.delete(`api/notes/${noteId}`)
 };
+
+export const patchNoteLikes = (data, id) => (
+  axios.patch(`/api/notes/note_likes/${id}`, data)
+)

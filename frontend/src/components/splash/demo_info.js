@@ -7,6 +7,7 @@ export const DemoInfo = (
                 <div className="icon-container">
                     <img src="https://code-mark.s3.amazonaws.com/built+in.svg" />
                 </div>
+                
                 <div className="info-box-text">
                     <div className="info-sub-header">
                         <h4>Grow as a coder</h4>

@@ -2,6 +2,7 @@ import React from "react";
 import moment from 'moment';
 import { Link } from "react-router-dom";
 import CodeCommentReadOnly from "../../code_editor/code_comment_readonly";
+import LikeCommentIcon from "../like_comment_icon";
 
 class CommentItem extends React.Component {
 
@@ -110,22 +111,38 @@ class CommentItem extends React.Component {
               </div>
               <div className="comment-icons">
                 {this.props.isCurrentUser || this.props.currentUser.id === this.props.comment.user.userId ? (
-                  <div className='delete-note comment-icon-button'
-                    aria-label="delete note" title="delete"
+                  <div className='delete-comments comment-icon-button'
+                    aria-label="delete comment" title="delete"
                     onClick={() => this.toggleDeleteModal()}>
                     <i className="fa-solid fa-trash fa-lg"></i>
                   </div>
                 ) : ""}
                 {this.props.currentUser.id === this.props.comment.user.userId ? (
-                  <div className='edit-note comment-icon-button'
-                    aria-label="edit note" title="edit"
+                  <div className='edit-comments comment-icon-button'
+                    aria-label="edit comment" title="edit"
                     onClick={() => this.toggleEdit()}>
                     <i className="fa-solid fa-pencil fa-lg"></i>
                   </div>
                 ) : ""}
+                <div className='like-comments comment-icon-button'
+                  aria-label="delete comments" title="like">
+                  <LikeCommentIcon
+                    addCommentLike={this.props.addCommentLike}
+                    removeCommentLike={this.props.removeCommentLike}
+                    currentUserId={this.props.currentUser.id}
+                    commentId={this.props.comment._id}
+                    likes={this.props.comment.likes}
+                  />
+                </div>
               </div>
             </div>
-            <span className="comment-time-ago">{moment(this.props.comment.createdAt).fromNow()}</span>
+            <div className="comment-stats">
+              <span className="comment-time-ago">{moment(this.props.comment.createdAt).fromNow()}</span>
+              <div className='note-stat likes'>
+                <i className="fa-solid fa-heart"></i>
+                <span>{this.props.comment.likes.length}</span>
+              </div>
+            </div>
           </div>
           {this.state.editActive ? (
             <div className="comment-wrapper">

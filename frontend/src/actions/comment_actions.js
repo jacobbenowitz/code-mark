@@ -5,7 +5,8 @@ import {
     writeComment,
     patchComment,
     deleteComment,
-    getNoteComments
+    getNoteComments,
+    patchCommentLikes
 } from '../util/comment_api_util';
 
 export const RECEIVE_NOTE_COMMENTS = "RECEIVE_NOTE_COMMENTS";
@@ -16,6 +17,8 @@ export const RECEIVE_NEW_COMMENT = "RECEIVE_NEW_COMMENT";
 export const RECEIVE_COMMENT_ERRORS = "RECEIVE_COMMENT_ERRORS";
 export const RECEIVE_UPDATED_COMMENT = "RECEIVE_UPDATED_COMMENT";
 export const RECEIVE_DELETE_COMMENT = "RECEIVE_DELETE_COMMENT";
+export const RECEIVE_COMMENT_LIKE = "RECEIVE_COMMENT_LIKE";
+export const RECEIVE_COMMENT_UNLIKE = "RECEIVE_COMMENT_UNLIKE";
 
 export const receiveComments = comments => ({
     type: RECEIVE_COMMENTS,
@@ -55,6 +58,16 @@ export const receiveUpdateComment = comment => ({
 export const receiveDeleteComment = commentId => ({
     type: RECEIVE_DELETE_COMMENT,
     commentId
+})
+
+export const receiveCommentLike = comment => ({
+    type: RECEIVE_COMMENT_LIKE,
+    comment
+})
+
+export const receiveCommentUnlike = comment => ({
+    type: RECEIVE_COMMENT_UNLIKE,
+    comment
 })
 
 export const fetchComments = () => dispatch => (
@@ -99,3 +112,15 @@ export const removeComment = (commentId) => dispatch => {
         .then(commentid => dispatch(receiveDeleteComment(commentid)))
         .catch(err => dispatch(receiveCommentErrors(err)))
 };
+
+export const addCommentLike = (data, commentId) => dispatch => (
+    patchCommentLikes(data, commentId)
+        .then(comment => dispatch(receiveCommentLike(comment)))
+        .catch(err => dispatch(receiveCommentErrors(err)))
+)
+
+export const removeCommentLike = (data, commentId) => dispatch => (
+    patchCommentLikes(data, commentId)
+        .then(comment => dispatch(receiveCommentUnlike(comment)))
+        .catch(err => dispatch(receiveCommentErrors(err)))
+)
