@@ -8,7 +8,7 @@ import { logout } from './actions/session_actions';
 import App from './components/app';
 import { testResources } from '../src/actions/webscrap_actions';
 // import 'dotenv/config';
-import { addUserFollower, removeUserFollower } from '../src/actions/user_actions';
+// import { addUserFollower, removeUserFollower } from '../src/actions/user_actions';
 import { addNoteLike, removeNoteLike } from '../src/actions/note_actions';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -47,9 +47,12 @@ document.addEventListener('DOMContentLoaded', () => {
   /// TEST START ///
   window.getState = store.getState;
   window.dispatch = store.dispatch;
-  window.addUserFollower = addUserFollower;
+  // window.addUserFollower = addUserFollower;
   window.addNoteLike = addNoteLike;
   window.removeNoteLike = removeNoteLike;
+  // window.removeUserFollower = removeUserFollower;
+
+  window.testResources = testResources;
   window.removeUserFollower = removeUserFollower;
   /// TEST END ///
   ReactDOM.render(<Root store={store} />, root);

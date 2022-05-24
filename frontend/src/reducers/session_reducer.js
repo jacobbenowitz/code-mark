@@ -11,7 +11,8 @@ import { selectNoteTags } from "../util/selectors";
 
 import {
   RECEIVE_UPDATED_USER,
-  RECEIVE_DELETED_USER
+  RECEIVE_DELETED_USER,
+  RECEIVE_USER_NEW_FOLLOWS
 } from "../actions/user_actions"
 
 import {
@@ -46,10 +47,13 @@ const SessionReducer = (state = initialState, action) => {
         isSignedIn: true
       }
     case RECEIVE_UPDATED_USER:
-      nextState.user = {
-        id: action.user.data._id,
-        username: action.user.data.username
-      }
+      nextState.user.follows = action.user.data.follows;
+      nextState.user.followers = action.user.data.followers;
+      return nextState;
+    case RECEIVE_USER_NEW_FOLLOWS:
+      debugger;
+      nextState.user.follows = action.users.data.currentUser.follows;
+      nextState.user.followers = action.users.data.currentUser.followers;
       return nextState;
     case RECEIVE_DELETED_USER:
       return {

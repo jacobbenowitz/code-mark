@@ -114,17 +114,27 @@ router.get('/:userId', (req, res) => {
 
 // only backend route for updating a user's followers
 router.patch('/followers/:userId', passport.authenticate('jwt', { session: false }), (req, res) => {
+  // debugger;
   User.findById(req.params.userId)
     .then(user => {
-      user.followers = req.body.followers;
+      // debugger;
+      if(req.user.follows.includes(user.id)){
+        user.followers = user.followers.filter(item => item.toString() !== req.user.id);
+      }else{
+        user.followers.push(req.user.id);
+      }
       user.save()
         .then(user => {
+          // debugger;
+          // res.json({followedUser:user})
           if (user.followers.includes(req.user.id)) {
             req.user.follows.push(user.id);
           } else {
-            req.user.follows = req.user.follows.filter(item => item !== user.id)
+            req.user.follows = req.user.follows.filter(item => item.toString() !== user.id)
           }
+          res.json({followedUser:user,currentUser:req.user});
           req.user.save();
+            // .then(user => res.json({currentUser:user}));
         });
     })
     .catch(err => res.status(404).json({ nouserfound: "No User Found With That ID" }));

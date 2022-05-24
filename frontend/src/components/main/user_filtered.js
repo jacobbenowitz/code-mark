@@ -10,15 +10,49 @@ export default class UserFiltered extends React.Component {
     this.state = {
       following: undefined
     }
+    this.handleFollow = this.handleFollow.bind(this);
+    this.handleUnfollow = this.handleUnfollow.bind(this);
   }
 
   componentWillMount() {
     this.props.fetchUserNotes(this.props.userId);
     this.props.fetchUser(this.props.userId);
     // setState of following status
+    
+    // debugger;
+    // document.getElementById('user-follow').style.display = this.state.following ? 'none' : 'block';
+    // document.getElementById('user-unfollow').style.display = this.state.following ? 'block' : 'none';
   };
 
+  componentWillReceiveProps(nextProps){
+    if(typeof this.state.following === 'undefined'){
+      this.setState({following:nextProps.following});
+    }
+  }
+
+  handleFollow(){
+    debugger;
+    // document.getElementById('user-follow').style.display = 'none';
+    // document.getElementById('user-unfollow').style.display = 'block';
+    // debugger;
+    // let newUser = this.props.user;
+    // newUser.followers.push(this.props.currentUser.id);
+    this.props.changeUserFollowers(this.props.userId);
+    this.setState({following:true});
+  }
+
+  handleUnfollow(){
+    debugger;
+    // document.getElementById('user-follow').style.display = 'block';
+    // document.getElementById('user-unfollow').style.display = 'none';
+    // let newUser = this.props.user;
+    // newUser.followers = newUser.followers.filter(item => item !== this.props.currentUser.id);
+    this.props.changeUserFollowers(this.props.userId);
+    this.setState({following:false});
+  }
+
   render() {
+    // debugger;
     return (
       <div className='main-sidebar'>
         <div className='nav-sidecar'>
@@ -54,6 +88,15 @@ export default class UserFiltered extends React.Component {
           <div className='notes-section'>
             <div className='section-title'>
               <h1>{this.props.user.username}'s Notes</h1>
+              {
+                this.props.currentUser.id !== this.props.user._id ?
+                  this.state.following ? 
+                  <button id='user-unfollow' onClick={() => this.handleUnfollow()}>Unfollow</button>
+                  :
+                  <button id='user-follow' onClick={() => this.handleFollow()}>Follow</button>
+                  :
+                  ''
+              }
             </div>
             <div className='note-list-container'>
               {this.props.userNotes.length === 0 ? (
