@@ -7,7 +7,6 @@ import { setAuthToken } from './util/session_api_util';
 import { logout } from './actions/session_actions';
 import App from './components/app';
 import { testResources } from '../src/actions/webscrap_actions';
-// import 'dotenv/config';
 // import { addUserFollower, removeUserFollower } from '../src/actions/user_actions';
 import { addNoteLike, removeNoteLike } from '../src/actions/note_actions';
 
@@ -50,10 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // window.addUserFollower = addUserFollower;
   window.addNoteLike = addNoteLike;
   window.removeNoteLike = removeNoteLike;
-  // window.removeUserFollower = removeUserFollower;
-
-  window.testResources = testResources;
-  window.removeUserFollower = removeUserFollower;
   /// TEST END ///
   ReactDOM.render(<Root store={store} />, root);
 })

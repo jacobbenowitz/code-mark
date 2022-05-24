@@ -12,8 +12,7 @@ const mapStateToProps = (state, { match }) => {
     currentUser: state.session.user,
     tags: state.session.tags,
     userId: match.params.userId,
-    user: state.users.user,
-    following: state.session.user.follows.includes(match.params.userId)
+    user: state.users.user
   }
 }
 

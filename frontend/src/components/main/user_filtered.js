@@ -17,38 +17,24 @@ export default class UserFiltered extends React.Component {
   componentWillMount() {
     this.props.fetchUserNotes(this.props.userId);
     this.props.fetchUser(this.props.userId);
-    // setState of following status
-    
-    // debugger;
-    // document.getElementById('user-follow').style.display = this.state.following ? 'none' : 'block';
-    // document.getElementById('user-unfollow').style.display = this.state.following ? 'block' : 'none';
   };
 
-  componentWillReceiveProps(nextProps){
-    if(typeof this.state.following === 'undefined'){
-      this.setState({following:nextProps.following});
+  componentWillReceiveProps(nextProps) {
+    const following = nextProps.user.follows.includes(nextProps.userId);
+
+    if (typeof this.state.following === 'undefined') {
+      this.setState({ following: following });
     }
   }
 
-  handleFollow(){
-    debugger;
-    // document.getElementById('user-follow').style.display = 'none';
-    // document.getElementById('user-unfollow').style.display = 'block';
-    // debugger;
-    // let newUser = this.props.user;
-    // newUser.followers.push(this.props.currentUser.id);
+  handleFollow() {
     this.props.changeUserFollowers(this.props.userId);
-    this.setState({following:true});
+    this.setState({ following: true });
   }
 
-  handleUnfollow(){
-    debugger;
-    // document.getElementById('user-follow').style.display = 'block';
-    // document.getElementById('user-unfollow').style.display = 'none';
-    // let newUser = this.props.user;
-    // newUser.followers = newUser.followers.filter(item => item !== this.props.currentUser.id);
+  handleUnfollow() {
     this.props.changeUserFollowers(this.props.userId);
-    this.setState({following:false});
+    this.setState({ following: false });
   }
 
   render() {
@@ -90,10 +76,10 @@ export default class UserFiltered extends React.Component {
               <h1>{this.props.user.username}'s Notes</h1>
               {
                 this.props.currentUser.id !== this.props.user._id ?
-                  this.state.following ? 
-                  <button id='user-unfollow' onClick={() => this.handleUnfollow()}>Unfollow</button>
-                  :
-                  <button id='user-follow' onClick={() => this.handleFollow()}>Follow</button>
+                  this.state.following ?
+                    <button id='user-unfollow' onClick={() => this.handleUnfollow()}>Unfollow</button>
+                    :
+                    <button id='user-follow' onClick={() => this.handleFollow()}>Follow</button>
                   :
                   ''
               }
