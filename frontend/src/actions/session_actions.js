@@ -1,4 +1,5 @@
 import * as APIUtil from '../util/session_api_util';
+import { getCurrentUser } from '../util/user_api_util';
 import jwt_decode from 'jwt-decode';
 
 export const RECEIVE_USER_LOGOUT = 'RECEIVE_USER_LOGOUT';
@@ -25,6 +26,11 @@ export const receiveErrors = errors => {
 export const logoutUser = () => ({
   type: RECEIVE_USER_LOGOUT
 });
+
+export const fetchCurrentUser = () => dispatch => {
+  return getCurrentUser()
+    .then(user => dispatch(receiveCurrentUser(user)))
+}
 
 export const login = user => dispatch => {
   return APIUtil.login(user).then(res => {

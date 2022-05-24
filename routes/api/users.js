@@ -103,11 +103,7 @@ router.post('/login', (req, res) => {
 })
 
 router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
-  res.json({
-    id: req.user.id,
-    username: req.user.username,
-    email: req.user.email
-  });
+  res.json(req.user);
 })
 
 router.get('/:userId', (req, res) => {
@@ -124,9 +120,9 @@ router.patch('/followers/:userId', passport.authenticate('jwt', { session: false
   User.findById(req.params.userId)
     .then(user => {
       // debugger;
-      if(req.user.follows.includes(user.id)){
+      if (req.user.follows.includes(user.id)) {
         user.followers = user.followers.filter(item => item.toString() !== req.user.id);
-      }else{
+      } else {
         user.followers.push(req.user.id);
       }
       user.save()
@@ -138,9 +134,9 @@ router.patch('/followers/:userId', passport.authenticate('jwt', { session: false
           } else {
             req.user.follows = req.user.follows.filter(item => item.toString() !== user.id)
           }
-          res.json({followedUser:user,currentUser:req.user});
+          res.json({ followedUser: user, currentUser: req.user });
           req.user.save();
-            // .then(user => res.json({currentUser:user}));
+          // .then(user => res.json({currentUser:user}));
         });
     })
     .catch(err => res.status(404).json({ nouserfound: "No User Found With That ID" }));

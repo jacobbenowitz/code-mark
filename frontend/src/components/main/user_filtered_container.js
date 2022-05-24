@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import UserFiltered from "./user_filtered";
 import { fetchUserNotes } from "../../actions/note_actions";
 import { fetchUser, changeUserFollowers } from "../../actions/user_actions";
-
+import { fetchCurrentUser } from '../../actions/session_actions';
 
 const mapStateToProps = (state, { match }) => {
   // debugger;
@@ -20,7 +20,7 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchUserNotes: userId => dispatch(fetchUserNotes(userId)),
     fetchUser: userId => dispatch(fetchUser(userId)),
-    changeUserFollowers: userId => dispatch(changeUserFollowers(userId))
+    changeUserFollowers: userId => dispatch(changeUserFollowers(userId)),
   }
 }
 

@@ -46,13 +46,12 @@ const SessionReducer = (state = initialState, action) => {
         isSignedIn: true
       }
     case RECEIVE_UPDATED_USER:
-      nextState.user.follows = action.user.data.follows;
-      nextState.user.followers = action.user.data.followers;
+      debugger
+      nextState.user = action.user.data;
       return nextState;
     case RECEIVE_USER_NEW_FOLLOWS:
       debugger;
-      nextState.user.follows = action.users.data.currentUser.follows;
-      nextState.user.followers = action.users.data.currentUser.followers;
+      nextState.user = action.users.data.currentUser;
       return nextState;
     case RECEIVE_DELETED_USER:
       return {
@@ -60,6 +59,7 @@ const SessionReducer = (state = initialState, action) => {
         user: undefined
       }
     case RECEIVE_USER_NOTES:
+      debugger
       nextState.tags = selectNoteTags(action.notes.data)
       return nextState;
     case RECEIVE_NOTE_LIKE:

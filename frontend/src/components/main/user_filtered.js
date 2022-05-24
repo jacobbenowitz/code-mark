@@ -2,13 +2,16 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import NavTagItem from '../tags/nav_tag_item';
 import AllNotes from './all_notes';
+import SideCarMenu from './side_car_menu'
 
 export default class UserFiltered extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      following: undefined
+      following: undefined,
+      user: {},
+      userNotes: []
     }
     this.handleFollow = this.handleFollow.bind(this);
     this.handleUnfollow = this.handleUnfollow.bind(this);
@@ -20,10 +23,18 @@ export default class UserFiltered extends React.Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    const following = nextProps.user.follows.includes(nextProps.userId);
 
-    if (typeof this.state.following === 'undefined') {
+    if (typeof this.state.following === 'undefined' &&
+      nextProps.currentUser.following) {
+      const following = nextProps.currentUser.following.includes(nextProps.userId)
+      // const following = nextProps.user.follows.includes(nextProps.userId)
       this.setState({ following: following });
+    }
+    if (!this.state.userNotes.length && nextProps.userNotes.length) {
+      this.setState({
+        user: nextProps.user,
+        userNotes: nextProps.userNotes
+      });
     }
   }
 
@@ -41,34 +52,8 @@ export default class UserFiltered extends React.Component {
     // debugger;
     return (
       <div className='main-sidebar'>
-        <div className='nav-sidecar'>
-          <div className='nav-boxes'>
-            <div className='nav-pages'>
-              <h5>Pages</h5>
-              <ul className='nav-list'>
-                <NavLink to={'/home'} className='nav-item-container'>
-                  <div className='nav-item-link nav-home'>
-                    <img src="https://code-mark.s3.amazonaws.com/type%3DHome.svg" /> <span>Home</span>
-                  </div>
-                </NavLink>
-                <NavLink to={'/discover'} className='nav-item-container'>
-                  <div className='nav-item-link'>
-                    <img src="https://code-mark.s3.amazonaws.com/type%3DDiscover.svg" /> <span>Discover</span>
-                  </div>
-                </NavLink>
-                <NavLink to={'/following'} className='nav-item-container'>
-                  <div className='nav-item-link'>
-                    <img src="https://code-mark.s3.amazonaws.com/type%3DFollowing.svg" /> <span>Following</span>
-                  </div>
-                </NavLink>
-              </ul>
-              <h5>Tags</h5>
-              <ul className='nav-list'>
-                {this.props.tags?.map(tag => <NavTagItem tag={tag} />)}
-              </ul>
-            </div>
-          </div>
-        </div>
+        {/* NEEDS TO BE REFACTORED FOR FILTERING USER'S TAGS (NOT HOME) */}
+        <SideCarMenu tags={this.props.tags} tagType={'/home'} />
 
         <div className='home-main'>
           <div className='notes-section'>
