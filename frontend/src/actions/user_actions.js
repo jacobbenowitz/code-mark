@@ -2,7 +2,8 @@ import {
     getUser,
     getUsers,
     patchUser,
-    deleteUser
+    deleteUser,
+    editUserFollowers
 } from "../util/user_api_util";
 import { logout } from "./session_actions";
 
@@ -10,8 +11,8 @@ export const RECEIVE_USERS = "RECEIVE_USERS";
 export const RECEIVE_USER = "RECEIVE_USER";
 export const RECEIVE_UPDATED_USER = "RECEIVE_UPDATED_USER";
 export const RECEIVE_DELETED_USER = "RECEIVE_DELETED_USER";
-export const RECEIVE_USER_FOLLOW = "RECEIVE_USER_FOLLOW";
-export const RECEIVE_USER_UNFOLLOW = "RECEIVE_USER_UNFOLLOW";
+export const RECEIVE_USER_NEW_FOLLOWS = "RECEIVE_USER_NEW_FOLLOWS";
+// export const RECEIVE_USER_UNFOLLOW = "RECEIVE_USER_UNFOLLOW";
 
 export const receiveUsers = users => ({
     type: RECEIVE_USERS,
@@ -33,7 +34,18 @@ export const receiveUpdatedUser = user => ({
     user
 })
 
+export const receiveUserNewFollows = users => ({
+    type: RECEIVE_USER_NEW_FOLLOWS,
+    users
+})
+
+// export const receiveUserUnfollow = user => ({
+//     type: RECEIVE_USER_NEW_FOLLOWS,
+//     user
+// })
+
 /// new actions for RECEIVE_USER_FOLLOW / UNFOLLOW
+
 
 export const fetchUsers = () => dispatch => (
     getUsers()
@@ -59,16 +71,17 @@ export const removeUser = userId => dispatch => {
         .catch(err => console.log(err))
 }
 
-export const addUserFollower = (userData) => {
-    return patchUser(userData)
-        .then(user => dispatch(receiveUpdatedUser(user)))
+export const changeUserFollowers = (userId) => dispatch => {
+    debugger;
+    return editUserFollowers(userId)
+        .then(users => dispatch(receiveUserNewFollows(users)))
         .catch(err => console.log(err))
 }
 
-export const removeUserFollower = (userData) => {
-    return patchUser(userData)
-        .then(user => dispatch(receiveUpdatedUser(user)))
-        .catch(err => console.log(err))
-}
+// export const removeUserFollower = (userData) => dispatch => {
+//     return patchUser(userData)
+//         .then(user => dispatch(receiveUpdatedUser(user)))
+//         .catch(err => console.log(err))
+// }
 
 /// edit user thunk replace above thunks

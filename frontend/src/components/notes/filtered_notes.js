@@ -8,13 +8,14 @@ class FilteredNotes extends React.Component {
     super(props);
     this.state = {
       notes: [],
-      filter: undefined
+      filter: undefined,
+      following: false
     };
   }
 
   componentWillMount() {
     // this.props.userNotes ? this.render() :
-    this.props.fetchUserNotes(this.props.currentUser.id)
+    // this.props.fetchUserNotes(this.props.currentUser.id)
   };
 
   componentWillReceiveProps(nextState) {

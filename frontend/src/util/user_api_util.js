@@ -17,3 +17,7 @@ export const deleteUser = userId => {
 }
 
 // edit user follows util
+export const editUserFollowers = userId => {
+  debugger;
+  return axios.patch(`/api/users/followers/${userId}`)
+}
