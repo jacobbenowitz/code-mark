@@ -31,7 +31,8 @@ export default class NoteShow extends React.Component {
       comments: [],
       selectedText: '',
       commentModal: false,
-      public: undefined
+      public: undefined,
+      textHeight: undefined,
     }
     this.deleteNote = this.deleteNote.bind(this);
     this.exportImage = this.exportImage.bind(this);
@@ -206,6 +207,7 @@ export default class NoteShow extends React.Component {
 
     // ? close the menu if the user clicks outside of it
     scope.addEventListener("click", (e) => {
+      // add conditional id contextmenu is visible
       if (e.target.offsetParent != contextMenu) {
         contextMenu.classList.remove("visible");
       }
@@ -213,7 +215,8 @@ export default class NoteShow extends React.Component {
     });
 
     // textarea resize
-    const tx = document.querySelectorAll("textarea ");
+    // use state for textarea height and pass props 
+    const tx = document.querySelectorAll("textarea");
     for (let i = 0; i < tx.length; i++) {
       tx[i].setAttribute("style", "height:" + (tx[i].scrollHeight) + "px;overflow-y:hidden;");
       tx[i].addEventListener("input", OnInput, false);
@@ -221,10 +224,10 @@ export default class NoteShow extends React.Component {
 
     function OnInput() {
       this.style.height = "auto";
-      this.style.height = (this.scrollHeight) + "px";
+      this.style.height = (this.scrollHeight) + "px"; 
     }
 
-    // listen for selection and update state
+    // listen for selection and update state 
     // document.onselectionchange = () => {
     // let selection = document.getSelection()
     // console.log(document.getSelection())
@@ -235,15 +238,15 @@ export default class NoteShow extends React.Component {
     return note ? (
       <>
         <div id="context-menu">
+          <div className="menu-item" onMouseDown={() => {
+            let selection = window.getSelection()
+            this.commentOnSelection(selection.toString())
+          }}>Comment on this selection</div>
           <div className="menu-item"
             onMouseDown={() => {
               let selection = window.getSelection().toString();
               navigator.clipboard.writeText(selection)
             }}>Copy selection</div>
-          <div className="menu-item" onMouseDown={() => {
-            let selection = window.getSelection()
-            this.commentOnSelection(selection.toString())
-          }}>Comment on this selection</div>
           {/* <div className="menu-item" onMouseDown={() =>
             this.commentOnSelection(this.state.selection)}
           >Comment 2</div> */}
