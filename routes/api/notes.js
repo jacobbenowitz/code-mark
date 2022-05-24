@@ -57,7 +57,8 @@ router.post('/',
                     title: req.body.title,
                     textdetails: req.body.textdetails,
                     resources: resources,
-                    tags: req.body.tags
+                    tags: req.body.tags,
+                    public: req.body.public
                 });
 
                 newNote.save().then(note => {
@@ -69,6 +70,25 @@ router.post('/',
     }
 );
 
+// only backend route for updating a note's likes
+router.patch('/note_likes/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+    Note.findById(req.params.id)
+        .then(note => {
+            note.likes = req.body.likes;
+            note.save()
+                .then(note => {
+                    res.json(note)
+                    if (note.likes.includes(req.user.id)) {
+                        req.user.note_likes.push(note.id);
+                    } else {
+                        req.user.note_likes = req.user.note_likes.filter(item => item !== note.id)
+                    }
+                    req.user.save();
+                })
+        })
+        .catch(err => res.status(404).json({ nonotefound: "No Note Found With That ID" }));
+})
+
 //edit a note if the current user made it
 router.patch('/:id/edit',
     passport.authenticate('jwt', { session: false }),
@@ -79,11 +99,16 @@ router.patch('/:id/edit',
                 if (note.user.userId.toString() !== req.user.id) {
                     res.status(404).json({ editnotallowed: 'Not Authorized To Edit Note' })
                 } else {
-                    note.codebody = req.body.codebody;
-                    note.title = req.body.title;
-                    note.textdetails = req.body.textdetails;
+                    note.codebody = req.body.codebody || note.codebody;
+                    note.title = req.body.title || note.title;
+                    note.textdetails = req.body.textdetails || note.textdetails;
                     // note.resources = req.body.resources;
-                    note.tags = req.body.tags;
+                    note.likes = req.body.likes || note.likes;
+                    note.tags = req.body.tags || note.tags;
+                    if (req.body.public != null &&
+                        req.body.public !== undefined) {
+                        note.public = req.body.public
+                    }
                     note.save()
                         .then(note => res.json(note))
                 }
@@ -105,6 +130,7 @@ router.delete('/:id',
                     const noteid = note.id;
                     const userid = note.user.userId;
                     const comments = note.comments;
+                    const likes = note.likes;
                     Note.deleteOne({ _id: req.params.id })
                         .then(() => {
                             User.findById(userid)
@@ -125,6 +151,15 @@ router.delete('/:id',
                                                 user.comments = user.comments.filter(item => item.toString() !== commentid);
                                                 user.save().then(user => res.json(user));
                                             })
+                                    })
+                            })
+                        })
+                        .then(() => {
+                            likes.forEach(likeId => {
+                                User.findById(likeId)
+                                    .then(user => {
+                                        user.note_likes = user.note_likes.filter(item => item.toString() !== noteid)
+                                        user.save().then(user => res.json(user));
                                     })
                             })
                         })

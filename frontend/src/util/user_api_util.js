@@ -15,3 +15,5 @@ export const patchUser = userData => {
 export const deleteUser = userId => {
   return axios.delete(`/api/users/${userId}`)
 }
+
+// edit user follows util

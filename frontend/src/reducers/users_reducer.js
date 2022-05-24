@@ -18,7 +18,10 @@ const usersReducer = (prevState = initialState, action) => {
             nextState.user = action.user.data;
             return nextState;
         case RECEIVE_USERS:
-            nextState.all = action.users.data;
+            let allUsers = {};
+            nextState.all = action.users.data.map(user => 
+                allUsers[user._id] = user)
+            nextState.all = allUsers;
             return nextState;
         case RECEIVE_UPDATED_USER:
             nextState.user = action.user.data;

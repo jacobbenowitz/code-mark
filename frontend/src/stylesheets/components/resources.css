@@ -11,6 +11,10 @@
   max-width: 250px;
 }
 
+.checkbox:checked + label::after {
+  background-color: blue;
+}
+
 .resource-icon-wrapper {
   width: 46px;
   height: 46px;

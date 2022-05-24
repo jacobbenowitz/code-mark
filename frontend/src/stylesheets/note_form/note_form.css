@@ -41,12 +41,39 @@
   justify-content: flex-end;
 }
 
+#resources-step-1 > h4 {
+  margin-bottom: 0;
+}
+
+.buttons-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.view-note {
+  margin-left: 1rem;
+}
+
 #lang-select:hover {
   color: #34D9E3;
 }
 
 #new-note-full {
   display: none;
+}
+
+#note-title-input {
+  margin-top: 1rem;
+}
+
+#hide-note-form {
+  position: absolute;
+  top: 107px;
+  right: 67px;
 }
 
 .new-note-form {

@@ -5,10 +5,17 @@ import AllNotes from './all_notes';
 
 export default class UserFiltered extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      following: undefined
+    }
+  }
+
   componentWillMount() {
-    console.log(this.props.userId)
     this.props.fetchUserNotes(this.props.userId);
-    this.props.fetchUser(this.props.userId)
+    this.props.fetchUser(this.props.userId);
+    // setState of following status
   };
 
   render() {

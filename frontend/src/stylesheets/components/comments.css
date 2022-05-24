@@ -7,9 +7,15 @@
   gap: 2rem;
 }
 
-/* .comments-list {
-
-} */
+.comment-stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-content: center;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  width: 100%;
+}
 
 .comment-outer-wrapper {
   display: flex;
@@ -42,9 +48,7 @@
 
 .comment-time-ago {
   font-size: 0.8rem;
-  width: 98%;
-  margin-right: 12px;
-  text-align: end;
+  margin-left: 6px;
 }
 
 .comment-top-wrapper {

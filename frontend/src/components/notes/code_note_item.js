@@ -9,9 +9,15 @@ const CodeNoteItem = props => (
   // onClick={<Redirect to={`/notes/${props.id}`} />}>
   <div className="code-note-item" key={props.id}>
     <div className="note-item-top">
-      <div className="comment-count">
-        <i className="fa-solid fa-comments"></i>
-        <span>{props.comments?.length || 0}</span>
+      <div className="note-stats">
+        <div className="comment-count">
+          <i className="fa-solid fa-comments"></i>
+          <span>{props.comments?.length || 0}</span>
+        </div>
+        <div className="like-count">
+          <i className="fa-solid fa-heart"></i>
+          <span>{props.likes?.length || 0}</span>
+        </div>
       </div>
       <Link to={`/notes/${props.id}`} className="show-link-wrapper">
         <div className="view-link">View

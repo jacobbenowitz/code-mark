@@ -2,14 +2,17 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import NoteShow from "./note_show";
 import {
+  addNoteLike,
   fetchNote,
-  removeNote, updateNote
+  removeNote, removeNoteLike, updateNote
 } from "../../actions/note_actions";
 import {
   fetchNoteComments,
   removeComment,
   composeComment,
   updateComment,
+  addCommentLike,
+  removeCommentLike,
 } from "../../actions/comment_actions";
 import { fetchUsers, fetchUser } from "../../actions/user_actions";
 
@@ -36,7 +39,12 @@ const mapDispatchToProps = dispatch => {
     updateComment: (data, commentId) =>
       dispatch(updateComment(data, commentId)),
     fetchUsers: () => dispatch(fetchUsers()),
-    fetchUser: () => dispatch(fetchUser())
+    fetchUser: () => dispatch(fetchUser()),
+    addNoteLike: (data, noteId) => dispatch(addNoteLike(data, noteId)),
+    removeNoteLike: (data, noteId) => dispatch(removeNoteLike(data, noteId)),
+    addCommentLike: (data, commentId) =>
+      dispatch(addCommentLike(data, commentId)),
+    removeCommentLike: (data, commentId) => dispatch(removeCommentLike(data, commentId))
   }
 }
 

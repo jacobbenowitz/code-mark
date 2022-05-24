@@ -91,7 +91,6 @@ export default class EditNote extends React.Component {
       codebody: codebody,
       textdetails: textdetails
     }
-    //  
     this.props.updateNote(note, this.props.noteId)
       .then(() => this.toggleEditModal())
   }

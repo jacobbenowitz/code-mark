@@ -20,8 +20,8 @@ export default class Settings extends React.Component {
   }
 
   componentDidUpdate() {
-    let { email, username } = this.props.user;
-    if (!this.state.email.length) { 
+    const { email, username } = this.props.user;
+    if (!this.state.email.length) {
       this.setState({
         email: email,
         username: username,

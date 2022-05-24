@@ -87,6 +87,25 @@ router.post('/',
     }
 );
 
+// only backend route for updating a comment's likes
+router.patch('/comment_likes/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+    Comment.findById(req.params.id)
+        .then(comment => {
+            comment.likes = req.body.likes;
+            comment.save()
+                .then(comment => {
+                    res.json(comment)
+                    if (comment.likes.includes(req.user.id)) {
+                        req.user.comment_likes.push(comment.id);
+                    } else {
+                        req.user.comment_likes = req.user.comment_likes.filter(item => item !== comment.id);
+                    }
+                    req.user.save();
+                });
+        })
+        .catch(err => res.status(404).json({ nocommentfound: "No Comment Found With That ID" }));
+})
+
 //edit a comment if the current user made it
 router.patch('/:id/edit',
     passport.authenticate('jwt', { session: false }),
@@ -94,9 +113,10 @@ router.patch('/:id/edit',
         Comment.findById(req.params.id)
             .then(comment => {
                 if (comment.user.userId.toString() !== req.user.id) {
-                    res.status(404).json({ editnotallowed: 'Not Authorized to Edit Note'})
-                }else{
-                    comment.textbody = req.body.textbody;
+                    res.status(404).json({ editnotallowed: 'Not Authorized to Edit Note' })
+                } else {
+                    comment.textbody = req.body.textbody || comment.textbody;
+                    comment.likes = req.body.likes || comment.likes;
                     // comment.codeSnippet = req.body.codeSnippet;
                     comment.save().then(comment => res.json(comment))
                 }
@@ -119,6 +139,7 @@ router.delete('/:id',
                 const commentid = comment.id;
                 const noteid = comment.note;
                 const userid = comment.user.userId;
+                const likes = comment.likes;
                 Comment.deleteOne({ _id: req.params.id })
                     .then(() => {
                         User.findById(userid)
@@ -133,6 +154,15 @@ router.delete('/:id',
                                 note.comments = note.comments.filter(item => item.toString() !== commentid);
                                 note.save();
                             });
+                    })
+                    .then(() => {
+                        likes.forEach(likeId => {
+                            User.findById(likeId)
+                                .then(user => {
+                                    user.comment_likes = user.comment_likes.filter(item => item.toString() !== commentid)
+                                    user.save().then(user => res.json(user));
+                                })
+                        })
                     })
                     .then(() => res.json(commentid));
                 // }

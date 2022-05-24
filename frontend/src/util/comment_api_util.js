@@ -27,3 +27,7 @@ export const patchComment = (data, commentId) => {
 export const deleteComment = commentId => {
     return axios.delete(`api/comments/${commentId}`)
 };
+
+export const patchCommentLikes = (data, id) => (
+    axios.patch(`/api/comments/comment_likes/${id}`, data)
+)

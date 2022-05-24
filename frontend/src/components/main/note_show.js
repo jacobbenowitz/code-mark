@@ -18,6 +18,9 @@ import ResourceItem from '../notes/resources/resource_item';
 import { Link, Redirect } from 'react-router-dom';
 import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
+import LikeNoteIcon from '../notes/like_note_icon';
+import moment from 'moment';
+import SwitchButton from '../UI/switch_button';
 
 
 export default class NoteShow extends React.Component {
@@ -27,10 +30,12 @@ export default class NoteShow extends React.Component {
       note: undefined,
       comments: [],
       selectedText: '',
-      commentModal: false
+      commentModal: false,
+      public: undefined
     }
     this.deleteNote = this.deleteNote.bind(this);
     this.exportImage = this.exportImage.bind(this);
+    this.handlePublicSwitch = this.handlePublicSwitch.bind(this);
   }
 
   componentWillMount() {
@@ -50,7 +55,8 @@ export default class NoteShow extends React.Component {
     this.setState({
       note: nextProps.note,
       comments: orderNoteComments(nextProps.comments),
-      newComment: nextProps.newComment
+      public: nextProps.note.public
+      // newComment: nextProps.newComment
     })
   }
 
@@ -78,6 +84,16 @@ export default class NoteShow extends React.Component {
     }
   }
 
+  handlePublicSwitch() {
+    let newStatus = !this.state.public
+    this.props.updateNote(
+      { public: newStatus }, this.props.noteId
+    ).then(() => {
+      this.setState(
+        { public: newStatus }
+      )
+    })
+  }
 
   commentOnSelection(selection) {
     this.setState({
@@ -333,6 +349,34 @@ export default class NoteShow extends React.Component {
               <Link className='username'
                 to={`/users/${note.user.userId}`}>@{note.user.username}</Link>
               <h1>{note.title}</h1>
+              <div className='note-stats-wrapper'>
+                <div className='note-stats'>
+                  <div className='note-stat likes'>
+                    <i className="fa-solid fa-heart"></i>
+                    <span>{this.props.note.likes.length}</span>
+                  </div>
+                  <div className="note-stat comments">
+                    <i className="fa-solid fa-comments"></i>
+                    <span>{this.props.comments.length}</span>
+                  </div>
+                  <div className='note-stat updated-at'>
+                    <i className="fa-solid fa-pencil"></i>
+                    <span>{moment(this.props.note.updatedAt).fromNow()}</span>
+                  </div>
+                  <div className='note-stat created-at'>
+                    <i className="fa-solid fa-cloud-arrow-up"></i>
+                    <span>{moment(this.props.note.createdAt).fromNow()}</span>
+                  </div>
+                </div>
+                <div className='note-public-switch-wrapper'>
+                  <div className='note-public-switch'>
+                    <SwitchButton
+                      isToggled={this.state.public}
+                      onToggle={this.handlePublicSwitch}
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div className='note-tags-wrapper'>
@@ -344,16 +388,27 @@ export default class NoteShow extends React.Component {
 
             <div className='code-note-body' id='code-note-view'>
               <div className='icons-wrapper'>
-                <div className='hidden' id='highlight-instructions'>
-                  <span>Highlight any section of the CodeMark and right click to comment!</span>
+                <div className='icons-left-col'>
+                  <LikeNoteIcon
+                    addNoteLike={this.props.addNoteLike}
+                    removeNoteLike={this.props.removeNoteLike}
+                    currentUserId={this.props.currentUser.id}
+                    noteId={this.props.noteId}
+                    likes={this.props.note.likes}
+                  />
                 </div>
-                <div className='note-icon info-icon' id='highlight-comment-code-icon'>
-                  <i className="fa-solid fa-circle-question fa-lg"></i>
-                </div>
-                <div id='export-img-icon' className='note-icon'
-                  onClick={this.exportImage}
-                  title="export a screenshot">
-                  <i class="fa-solid fa-camera-retro fa-lg"></i>
+                <div className='icons-right-col'>
+                  <div className='hidden' id='highlight-instructions'>
+                    <span>Highlight any section of the CodeMark and right click to comment!</span>
+                  </div>
+                  <div className='note-icon info-icon' id='highlight-comment-code-icon'>
+                    <i className="fa-solid fa-circle-question fa-lg"></i>
+                  </div>
+                  <div id='export-img-icon' className='note-icon'
+                    onClick={this.exportImage}
+                    title="export a screenshot">
+                    <i className="fa-solid fa-camera-retro fa-lg"></i>
+                  </div>
                 </div>
               </div>
               <CodeEditorNoteShow
@@ -399,6 +454,8 @@ export default class NoteShow extends React.Component {
               fetchNote={this.props.fetchNote}
               fetchNoteComments={this.props.fetchNoteComments}
               noteId={this.props.noteId}
+              addCommentLike={this.props.addCommentLike}
+              removeCommentLike={this.props.removeCommentLike}
             />
           </section>
         </div>

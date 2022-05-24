@@ -159,3 +159,24 @@ button:focus, .signup:focus, .login:focus, .hide-button:focus {
 .error-item {
   color: #EB5750;
 }
+
+.icon-only-button {
+  cursor: pointer;
+  box-sizing: border-box;
+  border-radius: 50%;
+  display: flex;
+  position: relative;
+  height: 24px;
+  width: 24px;
+  padding: 1rem;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(85, 82, 82, 0);
+  box-shadow: 0px 0px 11px rgb(0 0 0 / 00%);
+  transition: background-color 500ms ease;
+}
+
+.icon-only-button:hover {
+  background-color: rgba(85, 82, 82, 0.8);
+  box-shadow: 0px 0px 11px rgb(0 0 0 / 30%);
+}
