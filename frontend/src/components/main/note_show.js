@@ -431,6 +431,8 @@ export default class NoteShow extends React.Component {
               fetchNote={this.props.fetchNote}
               fetchNoteComments={this.props.fetchNoteComments}
               noteId={this.props.noteId}
+              addCommentLike={this.props.addCommentLike}
+              removeCommentLike={this.props.removeCommentLike}
             />
           </section>
         </div>

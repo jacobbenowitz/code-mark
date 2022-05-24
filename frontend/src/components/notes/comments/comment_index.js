@@ -27,6 +27,8 @@ export default class CommentIndex extends React.Component {
           <div className='comment-items-list'>
             {comments.map(comment => {
               return <CommentItem
+                addCommentLike={this.props.addCommentLike}
+                removeCommentLike={this.props.removeCommentLike}
                 updateComment={updateComment}
                 isCurrentUser={isCurrentUser}
                 currentUser={currentUser}
