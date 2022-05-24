@@ -17,6 +17,7 @@ class RecentNotes extends React.Component {
     return this.props.note ? (
       <div className='note-list-container'>
         <CodeNoteItem key={this.props.note?._id}
+          likes={this.props.note?.likes}
           id={this.props.note?._id}
           username={this.props.note.user.username}
           userId={this.props.note.user.userId}

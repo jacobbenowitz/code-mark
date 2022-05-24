@@ -19,6 +19,7 @@ import { Link, Redirect } from 'react-router-dom';
 import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
 import LikeNoteIcon from '../notes/like_note_icon';
+import moment from 'moment';
 
 
 export default class NoteShow extends React.Component {
@@ -334,6 +335,25 @@ export default class NoteShow extends React.Component {
               <Link className='username'
                 to={`/users/${note.user.userId}`}>@{note.user.username}</Link>
               <h1>{note.title}</h1>
+              <div className='note-stats'>
+                <div className='note-stat likes'>
+                  <i className="fa-solid fa-heart"></i>
+                  <span>{this.props.note.likes.length}</span>
+                </div>
+                <div className="note-stat comments">
+                  <i className="fa-solid fa-comments"></i>
+                  <span>{this.props.comments.length}</span>
+                </div>
+                <div className='note-stat updated-at'>
+                  <i class="fa-solid fa-pencil"></i>
+                  <span>{moment(this.props.note.updatedAt).fromNow()}</span>
+                </div>
+                <div className='note-stat created-at'>
+                  <i class="fa-solid fa-cloud-arrow-up"></i>
+                  <span>{moment(this.props.note.createdAt).fromNow()}</span>
+                </div>
+
+              </div>
             </div>
 
             <div className='note-tags-wrapper'>
@@ -411,6 +431,8 @@ export default class NoteShow extends React.Component {
               fetchNote={this.props.fetchNote}
               fetchNoteComments={this.props.fetchNoteComments}
               noteId={this.props.noteId}
+              addCommentLike={this.props.addCommentLike}
+              removeCommentLike={this.props.removeCommentLike}
             />
           </section>
         </div>

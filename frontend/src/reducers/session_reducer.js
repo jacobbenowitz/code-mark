@@ -56,8 +56,14 @@ const SessionReducer = (state = initialState, action) => {
         isAuthenticated: false,
         user: undefined
       }
-    // case RECEIVE_USER_FOLLOW:
-      // nextState.user.follows ... logic here
+    case RECEIVE_USER_FOLLOW:
+      // nextState.user.follows[action.user.data._id] = action.user.data;
+      // following...
+      return nextState;
+      case RECEIVE_USER_UNFOLLOW:
+        // nextState.user.follows[action.user.data._id] = action.user.data;
+        // following...
+      return nextState;
     case RECEIVE_USER_NOTES:
       nextState.tags = selectNoteTags(action.notes.data)
       return nextState;

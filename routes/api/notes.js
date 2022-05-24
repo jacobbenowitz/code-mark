@@ -71,22 +71,23 @@ router.post('/',
 );
 
 // only backend route for updating a note's likes
-router.patch('/note_likes/:id', passport.authenticate('jwt', { session: false }), (req,res) => {
+router.patch('/note_likes/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
     Note.findById(req.params.id)
         .then(note => {
-        note.likes = req.body.likes;
-        note.save()
-            .then(note => {
-                if (note.likes.includes(req.user.id)){
-                    req.user.note_likes.push(note.id);
-                } else {
-                    req.user.note_likes = req.user.note_likes.filter(item => item !== note.id)
-                }
-                req.user.save();
-            });
+            note.likes = req.body.likes;
+            note.save()
+                .then(note => {
+                    res.json(note)
+                    if (note.likes.includes(req.user.id)) {
+                        req.user.note_likes.push(note.id);
+                    } else {
+                        req.user.note_likes = req.user.note_likes.filter(item => item !== note.id)
+                    }
+                    req.user.save();
+                })
         })
         .catch(err => res.status(404).json({ nonotefound: "No Note Found With That ID" }));
-}) 
+})
 
 //edit a note if the current user made it
 router.patch('/:id/edit',
@@ -151,7 +152,7 @@ router.delete('/:id',
                             })
                         })
                         .then(() => {
-                            likes.forEach(likeId =>{
+                            likes.forEach(likeId => {
                                 User.findById(likeId)
                                     .then(user => {
                                         user.note_likes = user.note_likes.filter(item => item.toString() !== noteid)

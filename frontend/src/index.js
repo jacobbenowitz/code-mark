@@ -51,8 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addNoteLike = addNoteLike;
   window.removeNoteLike = removeNoteLike;
   window.removeUserFollower = removeUserFollower;
-
-  window.testResources = testResources;
   /// TEST END ///
   ReactDOM.render(<Root store={store} />, root);
 })
