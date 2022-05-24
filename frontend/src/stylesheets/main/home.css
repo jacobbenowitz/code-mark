@@ -168,3 +168,8 @@
   background-color: #0D4649;
 
 }
+
+.nav-item-container.active {
+  color: #37F3FF;
+}
+
