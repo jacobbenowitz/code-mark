@@ -422,7 +422,7 @@ class NewNote extends React.Component {
                 )}
               </div>
 
-              <form onSubmit={this.updateTags}
+              <form onSubmit={this.state.newTag.length ? this.updateTags : undefined}
                 className="tag-form-off" id="new-tag-form-new-note">
                 <input type={'text'}
                   className={'tag-form-input'}
@@ -430,7 +430,7 @@ class NewNote extends React.Component {
                   placeholder={'New tag...'}
                   value={this.state.newTag}
                 />
-                <button id='tag-icon-save' type='submit'>
+                <button className={this.state.newTag.length ? '' : 'save-tag disabled' } id='tag-icon-save' type='submit'>
                   <i className="fa-solid fa-floppy-disk" />
                 </button>
               </form>

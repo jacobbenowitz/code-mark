@@ -76,7 +76,7 @@ class LoginForm extends React.Component {
       <div className="session center-simple">
         <div id="session-form">
           <h3>Log in to Code-Mark</h3>
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.checkAllFields ? this.handleSubmit : undefined}>
             <div className="form-input">
               <label htmlFor="usernameOrEmail">Username or Email</label>
               <input type={'text'}

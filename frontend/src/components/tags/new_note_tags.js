@@ -82,7 +82,7 @@ export default class Tags extends React.Component {
             placeholder={'New tag...'}
             value={this.state.newTag}
           />
-          <button id='tag-icon-save' type='submit'>
+          <button className='save tag' id='tag-icon-save' type='submit'>
             <i className="fa-solid fa-floppy-disk" />
           </button>
         </form>
