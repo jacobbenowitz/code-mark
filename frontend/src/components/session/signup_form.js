@@ -66,6 +66,13 @@ class SignupForm extends React.Component {
         )
   };
 
+  checkAllFields() {
+    if (this.state.username.length && this.state.password.length && this.state.password2.length && this.state.email.length) {
+      return true 
+    }
+    else return false
+  }
+
   render() {
     return (
       <div className='session center-simple'>
@@ -119,7 +126,7 @@ class SignupForm extends React.Component {
             </div>
             <div className='signup-buttons-wrapper'>
               <button type='submit'
-                className={'button-session'}>Signup</button>
+                className={this.checkAllFields() ? 'button-session' : 'button-session disabled'}>Signup</button>
               <button className="demo_button"
                 id="demo-signup"
                 onClick={this.demoScript}
