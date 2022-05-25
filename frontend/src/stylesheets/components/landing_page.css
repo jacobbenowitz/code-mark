@@ -107,8 +107,6 @@ background: #EEEEEE;
 #landing-info {
   display: flex;
   flex-direction: column;
-  margin: 0 5px 0 5px;
-  /* padding: 25px 0 25px 0; */
 }
 
 .info-container {

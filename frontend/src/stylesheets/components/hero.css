@@ -14,17 +14,8 @@
 
 }
 
-#sample-code-editor{
-    position: absolute;
-    top: 100px;
-    left: 50px;
-}
 
-#hero-text {
-    display: flex;
-    flex-direction: column;
-    place-items: flex-end;
-}
+
 
 .hero-graphic {
   grid-column: 1 / span 2;
