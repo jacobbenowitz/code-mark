@@ -323,7 +323,7 @@ class NewNote extends React.Component {
         <div className='new-note-container' id='new-note-full'>
           {/* <button onClick={this.toggleResourcesModal}>ToggleTesting</button> */}
           <div className='new-note-form'>
-            <form onSubmit={this.state.codebody.length ? this.toggleResourcesModal : ""}>
+            <form onSubmit={this.state.codebody.length ? this.toggleResourcesModal : undefined}>
               <div id="note-title-input" className='note-input'>
                 <input type={'text'}
                   onClick={this.placeholderTitle}

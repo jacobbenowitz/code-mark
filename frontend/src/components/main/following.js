@@ -34,7 +34,6 @@ export default class Following extends React.Component {
       selectFollowingUsersNotes(followingUsers, allNotes)
       const publicNotes = filterOnlyPublicNotes(followingNotes)
       const followingTags = selectNoteTags(publicNotes)
-      debugger
       if (followingNotes.length !== this.state.followingNotes.length ||
         followingTags.length !== this.state.followingTags.length) {
         this.setState({
@@ -46,7 +45,6 @@ export default class Following extends React.Component {
   }
 
   render() {
-    debugger
     return (
       <div className='main-sidebar'>
         <SideCarMenu tagType={'following'} tags={this.state.followingTags} />
