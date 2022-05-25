@@ -18,9 +18,12 @@ const initialState = {
   newResources: []
 };
 
+import { merge } from 'lodash';
+
 const notesReducer = (prevState = initialState, action) => {
   Object.freeze(prevState);
-  let nextState = Object.assign({}, prevState)
+  let nextState = merge({}, prevState)
+
   switch (action.type) {
     case RECEIVE_NEW_NOTE:
       nextState.new = action.note.data;

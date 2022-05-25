@@ -5,7 +5,9 @@ import {
   filterOnlyPublicNotes,
   selectNoteTags,
   filterUsersById,
-  selectFollowingUsersNotes
+  selectFollowingUsersNotes,
+  filterNotesByTag,
+  orderUserNotes
 } from '../../util/selectors';
 
 
@@ -27,9 +29,8 @@ export default class FollowingFiltered extends React.Component {
 
   componentDidUpdate() {
     const { allNotes, allUsers, currentUser, filter } = this.props;
-
-    if (Object.values(allNotes).length && Object.values(allUsers).length
-      || filter !== this.state.filter) {
+    // && filter !== this.state.filter
+    if (Object.values(allNotes).length && Object.values(allUsers).length && filter !== this.state.filter) {
       const followingUserIds = currentUser.following;
       const followingUsers = filterUsersById(allUsers, followingUserIds)
       const followingNotes =
@@ -39,8 +40,8 @@ export default class FollowingFiltered extends React.Component {
       const filteredFollowingNotes = filterNotesByTag(filter, publicNotes)
 
       this.setState({
-        notes: orderUserNotes(filteredFollowingNotes),
-        followingNotes: followingTags,
+        followingNotes: orderUserNotes(filteredFollowingNotes),
+        followingTags: followingTags,
         filter: filter
       })
     }
@@ -49,12 +50,13 @@ export default class FollowingFiltered extends React.Component {
   render() {
     return (
       <div className='main-sidebar'>
-        <SideCarMenu tagType={'following'} tags={this.props.tags} />
+        <SideCarMenu tagType={'following'} tags={this.state.followingTags} />
 
         <div className='home-main'>
           <div className='notes-section'>
             <div className='section-title'>
               <h1>My Follower's Notes</h1>
+              <h5>Filtered by: {this.state.filter}</h5>
             </div>
             <div className='note-list-container'>
               {this.state.followingNotes.length === 0 ? (

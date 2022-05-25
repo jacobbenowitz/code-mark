@@ -42,6 +42,7 @@ export default class NoteShow extends React.Component {
   componentWillMount() {
     this.props.fetchNote(this.props.noteId);
     this.props.fetchNoteComments(this.props.noteId);
+    this.props.fetchCurrentUser();
   }
 
   componentDidMount() {
@@ -224,7 +225,7 @@ export default class NoteShow extends React.Component {
 
     function OnInput() {
       this.style.height = "auto";
-      this.style.height = (this.scrollHeight) + "px"; 
+      this.style.height = (this.scrollHeight) + "px";
     }
 
     // listen for selection and update state 
@@ -234,7 +235,7 @@ export default class NoteShow extends React.Component {
     // this.setState({ selectedText: selection.toString() });
     // };
 
-
+    debugger
     return note ? (
       <>
         <div id="context-menu">

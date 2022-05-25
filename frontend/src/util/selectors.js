@@ -38,12 +38,12 @@ export const filterUsersByComment = (users, comment) => {
 }
 
 export const filterOnlyPublicNotes = notes => {
-  debugger
   const filtered = notes.filter(note => note.public)
   return filtered;
 }
 
 export const selectLikedNotes = (notes, likedIds) => {
+  debugger
   return likedIds.map(id => notes[id])
 }
 

@@ -15,6 +15,7 @@ import {
   removeCommentLike,
 } from "../../actions/comment_actions";
 import { fetchUsers, fetchUser } from "../../actions/user_actions";
+import { fetchCurrentUser } from "../../actions/session_actions";
 
 const mapStateToProps = (state, { match }) => {
   return {
@@ -44,7 +45,8 @@ const mapDispatchToProps = dispatch => {
     removeNoteLike: (data, noteId) => dispatch(removeNoteLike(data, noteId)),
     addCommentLike: (data, commentId) =>
       dispatch(addCommentLike(data, commentId)),
-    removeCommentLike: (data, commentId) => dispatch(removeCommentLike(data, commentId))
+    removeCommentLike: (data, commentId) => dispatch(removeCommentLike(data, commentId)),
+    fetchCurrentUser: () => dispatch(fetchCurrentUser())
   }
 }
 
