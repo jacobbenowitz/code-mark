@@ -30,9 +30,6 @@ export const Hero = (
             </div>
         </div>
 
-        <div className="hero-graphic">
-            {/* <img src="https://code-mark.s3.amazonaws.com/dark-hero-graphic.svg" /> */}
-        </div>
 
     </div>
 )

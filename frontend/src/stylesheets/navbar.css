@@ -134,15 +134,15 @@ footer {
 }
 
 .nav-col-01 {
-  /* margin-left: 2rem; */
-  /* text-align: start; */
+  margin-left: 2rem;
+  text-align: start;
 }
 .nav-col-02 {
-  /* text-align: center; */
+  text-align: center;
 }
 .nav-col-03 {
   margin-right: 2rem;
-  /* text-align: end; */
+  text-align: end;
 }
 
 #footer-top {
