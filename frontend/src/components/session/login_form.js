@@ -63,12 +63,20 @@ class LoginForm extends React.Component {
     )
   };
 
+  checkAllFields() {
+    if (this.state.usernameOrEmail.length && this.state.password.length) {
+      return true
+    }
+    else return false
+  }
+
   render() {
+
     return (
       <div className="session center-simple">
         <div id="session-form">
           <h3>Log in to Code-Mark</h3>
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.checkAllFields ? this.handleSubmit : undefined}>
             <div className="form-input">
               <label htmlFor="usernameOrEmail">Username or Email</label>
               <input type={'text'}
@@ -76,8 +84,11 @@ class LoginForm extends React.Component {
                 value={this.state.usernameOrEmail}
                 onChange={this.update('usernameOrEmail')}
                 placeholder='username or email'
-                className="text-input"
+                className={(this.state.errors.username || this.state.errors.email) ? "text-input error" : "text-input"}
+  
               />
+              {/* {this.renderErrors('username')}
+              {this.renderErrors('email')} */}
               {this.renderErrors('usernameOrEmail')}
             </div>
             <div className="form-input">
@@ -87,12 +98,12 @@ class LoginForm extends React.Component {
                 value={this.state.password}
                 onChange={this.update('password')}
                 placeholder='password'
-                className="text-input"
+                className={this.state.errors.password ? "text-input error" : "text-input"}
               />
               {this.renderErrors('password')}
             </div>
             <div className='signup-buttons-wrapper'>
-              <button type='submit' className={'button-session'}>Login</button>
+              <button type='submit' className={this.checkAllFields() ? 'button-session' : 'button-session disabled'}>Login</button>
 
               <button className="demo_button"
                 id="demo-signup"

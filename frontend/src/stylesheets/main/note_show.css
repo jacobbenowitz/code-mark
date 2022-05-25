@@ -37,6 +37,7 @@
   box-shadow: 0px 2px 16px rgb(0 0 0 / 30%);
   animation: fadeIn 1000ms ease-in-out;
 }
+
 .note-stat.updated-at:hover::before {
   content: 'time since updated';
   position: absolute;
@@ -49,6 +50,7 @@
   box-shadow: 0px 2px 16px rgb(0 0 0 / 30%);
   animation: fadeIn 1000ms ease-in-out;
 }
+
 .note-stat.created-at:hover::before {
   content: 'time since created';
   position: absolute;
@@ -61,6 +63,7 @@
   box-shadow: 0px 2px 16px rgb(0 0 0 / 30%);
   animation: fadeIn 1000ms ease-in-out;
 }
+
 .note-stat.comments:hover::before {
   content: 'comments';
   position: absolute;

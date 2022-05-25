@@ -19,12 +19,15 @@ export default class LikedNotes extends React.Component {
 
   componentWillMount() {
     this.props.fetchNotes();
+    this.props.fetchCurrentUser();
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (!this.state.notes.length && nextProps.allNotes) {
-      const likedNotes =
-        selectLikedNotes(nextProps.allNotes, nextProps.likedNoteIds);
+  componentDidUpdate() {
+    const { allNotes, likedNoteIds, currentUser } = this.props;
+    debugger
+    if (Object.values(allNotes).length && likedNoteIds.length && !this.state.notes.length) {
+      debugger
+      const likedNotes = selectLikedNotes(allNotes, likedNoteIds);
       const likedTags = selectNoteTags(likedNotes)
       this.setState({
         notes: likedNotes,
@@ -37,11 +40,12 @@ export default class LikedNotes extends React.Component {
     return window.innerWidth < 600;
   }
 
+
   render() {
     return (
       <div className='main-sidebar'>
         <div className='nav-sidecar'>
-          <SideCarMenu tagType={'discover'} tags={this.props?.tags} />
+          <SideCarMenu tagType={'discover'} tags={this.state.likedTags} />
         </div>
 
         <div className='home-main'>

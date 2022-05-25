@@ -43,11 +43,27 @@ export const filterOnlyPublicNotes = notes => {
 }
 
 export const selectLikedNotes = (notes, likedIds) => {
+  debugger
   return likedIds.map(id => notes[id])
 }
 
 export const selectCommentsCount = (userNotes) => {
-  let allComments = userNotes.map(note => note.comments)
-  // debugger
+
+  const allComments = userNotes.map(note => note.comments)
   return allComments.flat().length;
+}
+
+export const filterUsersById = (allUsers, userIds) => {
+  return userIds.map(userId => allUsers[userId])
+}
+
+export const selectFollowingUsersNotes = (users, allNotes) => {
+  const usersNoteIds = users.map(user => user?.notes).flat()
+  const followingNotes = selectNotesById(usersNoteIds, allNotes)
+  return followingNotes;
+}
+
+export const selectNotesById = (noteIds, allNotes) => {
+  const filteredNotes = noteIds.map(noteId => allNotes[noteId])
+  return filteredNotes;
 }

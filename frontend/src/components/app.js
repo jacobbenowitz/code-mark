@@ -25,6 +25,8 @@ import DiscoverContainer from './main/discover_container';
 import DiscoverFilteredContainer from './main/discover_filtered_container';
 import UserFilteredContainer from './main/user_filtered_container';
 import LikedNotesContainer from './main/liked_notes_container';
+import FollowingContainer from './main/following_container';
+import FollowingFilteredContainer from './main/following_filtered_container';
 
 
 const App = () => (
@@ -52,16 +54,17 @@ const App = () => (
         component={DiscoverFilteredContainer} />
       <ProtectedRoute exact path='/liked_notes'
         component={LikedNotesContainer} />
-      {/* <ProtectedRoute exact path='/profile' 
-        component={ProfileContainer} /> */}
-      {/* <ProtectedRoute exact path='/following' component={FollowingContainer} /> */}
+      <ProtectedRoute exact path='/following'
+        component={FollowingContainer} />
+      <ProtectedRoute exact path='/following/tags/:tag'
+        component={FollowingFilteredContainer} />
       <ProtectedRoute exact path='/settings'
         component={SettingsContainer} />
       <AuthRoute path="/"
         component={SplashPage} />
     </Switch>
 
-    <footer className="grid-bottom-stack">
+    <footer>
       <NavFooter />
     </footer>
   </div>

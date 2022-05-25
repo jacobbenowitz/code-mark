@@ -70,7 +70,7 @@ router.post('/login', (req, res) => {
   User.findOne({ $or: [{ username: nameValue }, { email: nameValue }] })
     .then(user => {
       if (!user) {
-        return res.status(404).json({ username: 'This user does not exist' });
+        return res.status(404).json({ usernameOrEmail: 'This user does not exist' });
       }
       bcrypt.compare(password, user.password)
         .then(isMatch => {
@@ -80,7 +80,7 @@ router.post('/login', (req, res) => {
               username: user.username,
               followers: user.followers,
               following: user.following,
-              noteLikes: user.note_likes
+              note_likes: user.note_likes
             };
 
             jwt.sign(
@@ -103,7 +103,14 @@ router.post('/login', (req, res) => {
 })
 
 router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
-  res.json(req.user);
+  const payload = {
+    id: req.user.id,
+    username: req.user.username,
+    followers: req.user.followers,
+    following: req.user.following,
+    note_likes: req.user.note_likes
+  }
+  return res.json(payload);
 })
 
 router.get('/:userId', (req, res) => {

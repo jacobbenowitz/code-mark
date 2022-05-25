@@ -18,7 +18,7 @@ export const EditorsChoiceLanding = (
         <div id="editors-gallery"
             className="landing-gallery-container">
             <div className="landing-gallery-header">
-                <h5>Find the best code.</h5>
+                <h5>Find the most useful code snippets.</h5>
                 <span>Our discover page is the best place to find new and valuable code</span>
                 <Link to={'/'} className="landing-large-button">View Discovery Page</Link>
             </div>

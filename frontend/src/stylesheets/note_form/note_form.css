@@ -54,6 +54,24 @@
   margin-top: 2rem;
 }
 
+.save-button.disabled {
+  border: 1px solid transparent;
+  color: #727272;
+  background: #373737;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.save-tag.disabled {
+  border: 1px solid transparent;
+  color: #727272;
+  background: #373737;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+
+
 .view-note {
   margin-left: 1rem;
 }

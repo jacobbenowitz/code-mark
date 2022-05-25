@@ -37,6 +37,8 @@
   cursor: not-allowed;
 }
 
+
+
 .signup-buttons-wrapper {
   margin-top: 1rem;
   display: flex;
@@ -103,6 +105,15 @@
   border: 1px solid #D7D8DB;
   border-radius: 3px;
   margin: 4px 0px;
+}
+
+.text-input.error {
+  border: 2px solid #ff0303;
+}
+
+.text-input.error:focus {
+  border: 2px solid #37F3FF;
+  background-color: #fdfdfd;
 }
 
 .form-input {

@@ -53,6 +53,7 @@ class NewNote extends React.Component {
     this.toggleResourcesModal = this.toggleResourcesModal.bind(this);
     this.toggleSuccessModal = this.toggleSuccessModal.bind(this);
     this.closeSuccessModal = this.closeSuccessModal.bind(this);
+    this.placeholderTitle = this.placeholderTitle.bind(this);
   }
 
 
@@ -135,7 +136,7 @@ class NewNote extends React.Component {
   toggleForm() {
     const fullForm = document.getElementById('new-note-full');
     const miniForm = document.getElementById('new-note-mini');
-    const titleCode = document.getElementById('title-code');
+    const codebody = document.getElementById('codebody-js');
     if (fullForm.style.display == 'none') {
       fullForm.style.display = 'flex';
       miniForm.style.display = 'none';
@@ -144,7 +145,7 @@ class NewNote extends React.Component {
       fullForm.style.display = 'none';
       miniForm.style.display = 'flex';
     }
-    titleCode.focus();
+    // codebody.focus();
   }
 
   // credit https://stackoverflow.com/questions/454202/creating-a-textarea-with-auto-resize
@@ -178,7 +179,7 @@ class NewNote extends React.Component {
     const { title, codebody, textdetails, tags, keywordsSelected } = this.state;
 
     const note = {
-      title: title,
+      title: (title.length ? title : "Untitled note"),
       codebody: codebody,
       textdetails: textdetails,
       tags: tags,
@@ -270,6 +271,19 @@ class NewNote extends React.Component {
     })
   }
 
+  placeholderTitle(e){
+    // const title = this.state.codebody.slice(0, 20);
+    const title = this.state.codebody.split('\n')[0];
+    const selection = window.getSelection();
+    
+    this.setState({ title: title });
+    setTimeout(() => {
+      const titleInput = document.getElementById('title-code');
+      titleInput.select()
+    }, 0);
+    // selection.setBaseAndExtent(titleInput, 0, titleInput, 1);
+  }
+
   render() {
     return (
       <>
@@ -309,14 +323,15 @@ class NewNote extends React.Component {
         <div className='new-note-container' id='new-note-full'>
           {/* <button onClick={this.toggleResourcesModal}>ToggleTesting</button> */}
           <div className='new-note-form'>
-            <form onSubmit={this.toggleResourcesModal}>
+            <form onSubmit={this.state.codebody.length ? this.toggleResourcesModal : undefined}>
               <div id="note-title-input" className='note-input'>
                 <input type={'text'}
+                  onClick={this.placeholderTitle}
                   onChange={this.update('title')}
                   id='title-code'
                   className='title-input'
                   value={this.state.title}
-                  placeholder={'Title'} />
+                  placeholder={'Untitled Note'} />
               </div>
               <div className='select-wrapper'>
                 <select id='lang-select'
@@ -329,6 +344,7 @@ class NewNote extends React.Component {
               </div>
               <div className='note-input'>
                 <CodeMirror className='codemirror javascript'
+                  id='codebody-js'
                   value={this.state.codebody}
                   onChange={this.updateCode()}
                   height="200px"
@@ -378,7 +394,7 @@ class NewNote extends React.Component {
               </div>
               {/* Need to add conditional logic to disable submit button if codebody empty */}
               <button type='submit' id='code-note-submit'
-                className='submit button'>Save</button>
+                className={this.state.codebody.length ? 'save-button' : "save-button disabled"}>Save</button>
             </form>
             <div id='hide-note-form' className='icon-only-button' onClick={this.toggleForm}>
               <i className="fa-solid fa-square-minus"></i>
@@ -406,7 +422,7 @@ class NewNote extends React.Component {
                 )}
               </div>
 
-              <form onSubmit={this.updateTags}
+              <form onSubmit={this.state.newTag.length ? this.updateTags : undefined}
                 className="tag-form-off" id="new-tag-form-new-note">
                 <input type={'text'}
                   className={'tag-form-input'}
@@ -414,7 +430,7 @@ class NewNote extends React.Component {
                   placeholder={'New tag...'}
                   value={this.state.newTag}
                 />
-                <button id='tag-icon-save' type='submit'>
+                <button className={this.state.newTag.length ? '' : 'save-tag disabled' } id='tag-icon-save' type='submit'>
                   <i className="fa-solid fa-floppy-disk" />
                 </button>
               </form>

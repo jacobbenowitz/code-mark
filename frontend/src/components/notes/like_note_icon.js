@@ -19,6 +19,7 @@ export default class LikeNoteIcon extends React.Component {
   }
 
   addLike() {
+    debugger
     let newLikes = this.props.likes.concat([this.props.currentUserId]);
     let data = { "likes": newLikes };
     // debugger
@@ -27,6 +28,7 @@ export default class LikeNoteIcon extends React.Component {
   }
 
   removeLike() {
+    debugger
     let filteredLikes = this.props.likes.filter(userId =>
       userId !== this.props.currentUserId);
     let data = { "likes": filteredLikes };

@@ -45,6 +45,7 @@
   justify-content: space-between;
   gap: 26px;
   align-items: center;
+  position: relative;
 }
 
 .user-header-wrapper {
@@ -75,4 +76,59 @@
   padding-left: 2rem;
   padding-right: 2rem;
   border: 1px solid transparent;
+  background-color: #383838;
+}
+
+.fa-check-double {
+  color: #6EEBE7;
+}
+
+#user-follow {
+  gap: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  background-color: #0D4649;
+}
+
+#user-follow, #user-unfollow {
+  height: 42px;
+}
+
+.user-notes-stat.notes:hover::before {
+  content: 'total notes';
+  position: absolute;
+  width: max-content;
+  top: -30px;
+  left: -15px;
+  background: #393939;
+  padding: 0.4rem;
+  border-radius: 4px;
+  box-shadow: 0px 2px 16px rgb(0 0 0 / 30%);
+  animation: fadeIn 1000ms ease-in-out;
+}
+
+.user-notes-stat.comments:hover::before {
+  content: 'total comments received';
+  position: absolute;
+  width: max-content;
+  top: -30px;
+  left: -5px;
+  background: #393939;
+  padding: 0.4rem;
+  border-radius: 4px;
+  box-shadow: 0px 2px 16px rgb(0 0 0 / 30%);
+  animation: fadeIn 1000ms ease-in-out;
+}
+
+.user-notes-stat.followers:hover::before {
+  content: 'total followers and following';
+  position: absolute;
+  width: max-content;
+  top: -30px;
+  /* left: -5px; */
+  background: #393939;
+  padding: 0.4rem;
+  border-radius: 4px;
+  box-shadow: 0px 2px 16px rgb(0 0 0 / 30%);
+  animation: fadeIn 1000ms ease-in-out;
 }

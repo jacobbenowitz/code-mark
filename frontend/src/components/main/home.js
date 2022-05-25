@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom';
 import NavTagItem from '../tags/nav_tag_item';
 import SideCarMenu from './side_car_menu';
 
+
 export default class Home extends React.Component {
 
   render() {
