@@ -51,3 +51,10 @@ export const selectCommentsCount = (userNotes) => {
   debugger
   return allComments.flat().length;
 }
+
+export const selectFollowingNotes = (userIds, allNotes) => {
+  let followingNotes = userIds.map(userId => 
+      allNotes.userId === userId
+  )
+  return followingNotes;
+}
