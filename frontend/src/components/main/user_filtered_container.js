@@ -21,6 +21,7 @@ const mapDispatchToProps = dispatch => {
     fetchUserNotes: userId => dispatch(fetchUserNotes(userId)),
     fetchUser: userId => dispatch(fetchUser(userId)),
     changeUserFollowers: userId => dispatch(changeUserFollowers(userId)),
+    fetchCurrentUser: () => dispatch(fetchCurrentUser())
   }
 }
 

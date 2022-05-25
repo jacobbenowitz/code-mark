@@ -29,7 +29,7 @@ export const logoutUser = () => ({
 
 export const fetchCurrentUser = () => dispatch => {
   return getCurrentUser()
-    .then(user => dispatch(receiveCurrentUser(user)))
+    .then(user => dispatch(receiveCurrentUser(user.data)))
 }
 
 export const login = user => dispatch => {

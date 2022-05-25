@@ -67,7 +67,7 @@ export const removeUser = userId => dispatch => {
 }
 
 export const changeUserFollowers = (userId) => dispatch => {
-    debugger;
+    // debugger;
     return editUserFollowers(userId)
         .then(users => dispatch(receiveUserNewFollowing(users)))
         .catch(err => console.log(err))

@@ -22,7 +22,10 @@ import {
 const initialState = {
   isAuthenticated: false,
   user: {},
-  tags: []
+  tags: [],
+  followers: [],
+  following: [],
+  noteLikes: []
 };
 
 const SessionReducer = (state = initialState, action) => {
@@ -46,11 +49,11 @@ const SessionReducer = (state = initialState, action) => {
         isSignedIn: true
       }
     case RECEIVE_UPDATED_USER:
-      debugger
+      // debugger
       nextState.user = action.user.data;
       return nextState;
     case RECEIVE_USER_NEW_FOLLOWING:
-      debugger;
+      // debugger;
       nextState.user = action.users.data.currentUser;
       return nextState;
     case RECEIVE_DELETED_USER:
@@ -59,7 +62,7 @@ const SessionReducer = (state = initialState, action) => {
         user: undefined
       }
     case RECEIVE_USER_NOTES:
-      debugger
+      // debugger
       nextState.tags = selectNoteTags(action.notes.data)
       return nextState;
     case RECEIVE_NOTE_LIKE:

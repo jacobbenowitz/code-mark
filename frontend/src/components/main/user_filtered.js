@@ -24,7 +24,7 @@ export default class UserFiltered extends React.Component {
     if (!this.state.userNotes.length && this.props.userNotes.length) {
       this.setState({
         user: this.props.user,
-        userNotes: this.props.userNotes
+        userNotes: this.props.userNotes,
       });
     }
   }
@@ -38,7 +38,13 @@ export default class UserFiltered extends React.Component {
         <div className='home-main'>
           <div className='notes-section'>
             <div className='section-title'>
-              <UserHeader user={this.props.user} />
+              <UserHeader
+                fetchCurrentUser={this.props.fetchCurrentUser}
+                user={this.props.user}
+                currentUser={this.props.currentUser}
+                userId={this.props.userId}
+                changeUserFollowers={this.props.changeUserFollowers}
+              />
             </div>
             <div className='note-list-container'>
               {this.props.userNotes.length === 0 ? (
