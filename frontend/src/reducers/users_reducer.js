@@ -5,6 +5,8 @@ import {
     RECEIVE_USER_NEW_FOLLOWING
 } from "../actions/user_actions";
 
+import { merge } from 'lodash';
+
 const initialState = {
     all: {},
     user: {},
@@ -13,7 +15,8 @@ const initialState = {
 
 const usersReducer = (prevState = initialState, action) => {
     Object.freeze(prevState);
-    let nextState = Object.assign({}, prevState)
+    let nextState = merge({}, prevState);
+    
     switch (action.type) {
         case RECEIVE_USER:
             nextState.user = action.user.data;

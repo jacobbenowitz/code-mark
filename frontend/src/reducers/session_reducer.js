@@ -30,8 +30,9 @@ const initialState = {
   note_likes: []
 };
 
-const SessionReducer = (state = initialState, action) => {
-  let nextState = merge({}, state);
+const SessionReducer = (prevState = initialState, action) => {
+  Object.freeze(prevState);
+  let nextState = merge({}, prevState);
 
   switch (action.type) {
     case RECEIVE_USER_LOGOUT:
@@ -41,13 +42,13 @@ const SessionReducer = (state = initialState, action) => {
       }
     case RECEIVE_CURRENT_USER:
       return {
-        ...state,
+        ...prevState,
         isAuthenticated: !!action.currentUser,
         user: action.currentUser
       }
     case RECEIVE_USER_SIGN_IN:
       return {
-        ...state,
+        ...prevState,
         isSignedIn: true
       }
     case RECEIVE_UPDATED_USER:
@@ -75,7 +76,7 @@ const SessionReducer = (state = initialState, action) => {
         id => id !== action.note.data._id)
       return nextState;
     default:
-      return state;
+      return prevState;
   }
 }
 
