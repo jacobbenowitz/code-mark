@@ -8,6 +8,11 @@ export default class Discover extends React.Component {
     this.props.fetchNotes();
   };
 
+  isMobile(){
+    debugger;
+    return window.innerWidth < 600;
+  }
+
   render() {
     return (
       <div className='main-sidebar'>
@@ -22,7 +27,9 @@ export default class Discover extends React.Component {
               {this.props.allNotes.length === 0 ? (
                 <span>No notes found</span>
               ) :
-                <AllNotes notes={this.props.allNotes} />
+                this.isMobile() ?
+                <MobileNotes notes={this.props.userNotes} />
+                : <AllNotes notes={this.props.userNotes} />
               }
 
             </div>

@@ -4,6 +4,7 @@ import NavTagItem from '../tags/nav_tag_item';
 import AllNotes from './all_notes';
 import SideCarMenu from './side_car_menu';
 import UserHeader from '../profile/user_header';
+import MobileNotes from './mobile_notes';
 
 export default class UserFiltered extends React.Component {
 
@@ -38,6 +39,9 @@ export default class UserFiltered extends React.Component {
   }
 
   // isMobile
+  isMobile(){
+    return window.innerWidth < 600;
+  }
 
   render() {
     // debugger;
@@ -62,10 +66,10 @@ export default class UserFiltered extends React.Component {
               {this.props.userNotes.length === 0 ? (
                 <span>No notes found</span>
               ) :
-                <AllNotes notes={this.props.userNotes} />
-                // isMobile ?
-                  // <MobileNotes notes={this.props.userNotes} />
-                  // : <AllNotes notes={this.props.userNotes} />
+                // <AllNotes notes={this.props.userNotes} />
+                this.isMobile() ?
+                  <MobileNotes notes={this.props.userNotes} />
+                  : <AllNotes notes={this.props.userNotes} />
               }
             </div>
           </div>

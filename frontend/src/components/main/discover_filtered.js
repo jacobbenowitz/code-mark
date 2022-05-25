@@ -30,6 +30,10 @@ export default class DiscoverFiltered extends React.Component {
     }
   }
 
+  isMobile(){
+    return window.innerWidth < 600;
+  }
+
   render() {
     return (
       <div className='main-sidebar'>
@@ -47,7 +51,9 @@ export default class DiscoverFiltered extends React.Component {
               {this.state.notes.length === 0 ? (
                 <span>No notes found</span>
               ) :
-                <AllNotes notes={this.state.notes} />
+                this.isMobile() ?
+                <MobileNotes notes={this.state.notes} />
+                : <AllNotes notes={this.state.notes} />
               }
             </div>
           </div>

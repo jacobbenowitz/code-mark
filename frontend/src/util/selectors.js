@@ -48,6 +48,6 @@ export const selectLikedNotes = (notes, likedIds) => {
 
 export const selectCommentsCount = (userNotes) => {
   let allComments = userNotes.map(note => note.comments)
-  debugger
+  // debugger
   return allComments.flat().length;
 }

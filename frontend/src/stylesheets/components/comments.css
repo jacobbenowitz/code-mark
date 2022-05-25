@@ -89,6 +89,7 @@
   flex-direction: row;
   justify-content: space-between;
   padding-right: 2px;
+  width: 95%;
 }
 
 .username-comment {
