@@ -47,14 +47,21 @@ export const selectLikedNotes = (notes, likedIds) => {
 }
 
 export const selectCommentsCount = (userNotes) => {
-  let allComments = userNotes.map(note => note.comments)
-  debugger
+  const allComments = userNotes.map(note => note.comments)
   return allComments.flat().length;
 }
 
-export const selectFollowingNotes = (userIds, allNotes) => {
-  let followingNotes = userIds.map(userId => 
-      allNotes.userId === userId
-  )
+export const filterUsersById = (allUsers, userIds) => {
+  return userIds.map(userId => allUsers[userId])
+}
+
+export const selectFollowingUsersNotes = (users, allNotes) => {
+  const usersNoteIds = users.map(user => user?.notes).flat()
+  const followingNotes = selectNotesById(usersNoteIds, allNotes)
   return followingNotes;
+}
+
+export const selectNotesById = (noteIds, allNotes) => {
+  const filteredNotes = noteIds.map(noteId => allNotes[noteId])
+  return filteredNotes;
 }

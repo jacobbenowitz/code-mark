@@ -86,6 +86,7 @@
   gap: 1rem;
   padding-left: 2rem;
   padding-right: 2rem;
+  background-color: #0D4649;
 }
 
 #user-follow, #user-unfollow {
