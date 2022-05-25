@@ -45,3 +45,9 @@ export const filterOnlyPublicNotes = notes => {
 export const selectLikedNotes = (notes, likedIds) => {
   return likedIds.map(id => notes[id])
 }
+
+export const selectCommentsCount = (userNotes) => {
+  let allComments = userNotes.map(note => note.comments)
+  debugger
+  return allComments.flat().length;
+}

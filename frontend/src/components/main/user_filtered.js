@@ -37,6 +37,8 @@ export default class UserFiltered extends React.Component {
     // }
   }
 
+  // isMobile
+
   render() {
     // debugger;
     return (
@@ -49,17 +51,21 @@ export default class UserFiltered extends React.Component {
               {this.state.currentUser._id ? (
                 <UserHeader
                   user={this.state.user}
+                  userNotes={this.state.userNotes}
                   currentUser={this.state.currentUser}
                   userId={this.props.userId}
                   changeUserFollowers={this.props.changeUserFollowers}
                 />
               ) : ""}
             </div>
-            <div className='note-list-container'>
+            <div className={'note-list-container'}>
               {this.props.userNotes.length === 0 ? (
                 <span>No notes found</span>
               ) :
                 <AllNotes notes={this.props.userNotes} />
+                // isMobile ?
+                  // <MobileNotes notes={this.props.userNotes} />
+                  // : <AllNotes notes={this.props.userNotes} />
               }
             </div>
           </div>
