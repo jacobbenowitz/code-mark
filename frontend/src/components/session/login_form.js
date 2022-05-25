@@ -87,9 +87,9 @@ class LoginForm extends React.Component {
                 className={(this.state.errors.username || this.state.errors.email) ? "text-input error" : "text-input"}
   
               />
-              {this.renderErrors('username')}
-              {this.renderErrors('email')}
-              {/* {this.renderErrors('usernameOrEmail')} */}
+              {/* {this.renderErrors('username')}
+              {this.renderErrors('email')} */}
+              {this.renderErrors('usernameOrEmail')}
             </div>
             <div className="form-input">
               <label htmlFor="password">Password</label>

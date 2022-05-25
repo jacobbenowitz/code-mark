@@ -179,7 +179,7 @@ class NewNote extends React.Component {
     const { title, codebody, textdetails, tags, keywordsSelected } = this.state;
 
     const note = {
-      title: title,
+      title: (title.length ? title : "Untitled note"),
       codebody: codebody,
       textdetails: textdetails,
       tags: tags,
