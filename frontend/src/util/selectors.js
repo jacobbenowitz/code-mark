@@ -48,6 +48,7 @@ export const selectLikedNotes = (notes, likedIds) => {
 }
 
 export const selectCommentsCount = (userNotes) => {
+
   const allComments = userNotes.map(note => note.comments)
   return allComments.flat().length;
 }

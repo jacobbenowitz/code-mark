@@ -1,6 +1,7 @@
 import React from 'react';
 import AllNotes from './all_notes';
 import SideCarMenu from './side_car_menu';
+import MobileNotes from './mobile_notes';
 import {
   filterNotesByTag,
   orderUserNotes
@@ -35,17 +36,10 @@ export default class LikedNotes extends React.Component {
     }
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //   if (!this.state.notes.length && nextProps.allNotes) {
-  //     const likedNotes =
-  //       selectLikedNotes(nextProps.allNotes, nextProps.likedNoteIds);
-  //     const likedTags = selectNoteTags(likedNotes)
-  //     this.setState({
-  //       notes: likedNotes,
-  //       likedTags: likedTags
-  //     })
-  //   }
-  // }
+  isMobile(){
+    return window.innerWidth < 600;
+  }
+
 
   render() {
     return (
@@ -63,7 +57,9 @@ export default class LikedNotes extends React.Component {
               {this.state.notes.length === 0 ? (
                 <span>No notes found</span>
               ) :
-                <AllNotes notes={this.state.notes} />
+              this.isMobile() ?
+              <MobileNotes notes={this.state.notes} />
+              : <AllNotes notes={this.state.notes} />
               }
             </div>
           </div>

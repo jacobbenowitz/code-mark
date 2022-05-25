@@ -39,7 +39,7 @@ const CodeNoteItem = props => (
         {props?.title}
       </Link>
       <span className="code-note-body">
-        {props?.textDetails}
+        {props?.textDetails.length < 260 ? props?.textDetails : `${props?.textDetails.slice(0,260)}...`}
       </span>
     </div>
     <div className="code-note-preview">
