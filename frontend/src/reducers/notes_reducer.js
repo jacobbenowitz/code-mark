@@ -34,8 +34,7 @@ const notesReducer = (prevState = initialState, action) => {
       // k-v pairs of notes in obj {id: {key: data}, ...}
       let allNotes = {}
       action.notes.data.map(note =>
-        allNotes[note._id] = note
-      )
+        allNotes[note._id] = note)
       nextState.all = allNotes;
       return nextState;
     case RECEIVE_NOTE:

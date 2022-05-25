@@ -15,10 +15,6 @@
 }
 
 #lang-select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  /* background: transparent url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat 100% center; */
   display: flex;
   position: relative;
 
@@ -62,6 +58,10 @@
   cursor: not-allowed;
 }
 
+button#tag-icon-save.disabled:hover {
+  background: #373737;
+}
+
 .save-tag.disabled {
   border: 1px solid transparent;
   color: #727272;
@@ -69,8 +69,6 @@
   box-shadow: none;
   cursor: not-allowed;
 }
-
-
 
 .view-note {
   margin-left: 1rem;

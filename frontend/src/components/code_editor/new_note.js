@@ -331,7 +331,7 @@ class NewNote extends React.Component {
                   id='title-code'
                   className='title-input'
                   value={this.state.title}
-                  placeholder={'Untitled Note'} />
+                  placeholder={'Untitled note'} />
               </div>
               <div className='select-wrapper'>
                 <select id='lang-select'
@@ -393,8 +393,13 @@ class NewNote extends React.Component {
                 />
               </div>
               {/* Need to add conditional logic to disable submit button if codebody empty */}
-              <button type='submit' id='code-note-submit'
-                className={this.state.codebody.length ? 'save-button' : "save-button disabled"}>Save</button>
+              {this.state.codebody.length ? (
+                <button type='submit' id='code-note-submit'
+                  className='save-button'>Save</button>
+              ) : (
+                <button type='submit' id='code-note-submit' disabled
+                  className={this.state.codebody.length ? 'save-button' : "save-button disabled"}>Save</button>)
+              }
             </form>
             <div id='hide-note-form' className='icon-only-button' onClick={this.toggleForm}>
               <i className="fa-solid fa-square-minus"></i>
