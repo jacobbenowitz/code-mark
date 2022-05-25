@@ -11,22 +11,28 @@ import { selectNoteTags } from "../util/selectors";
 
 import {
   RECEIVE_UPDATED_USER,
-  RECEIVE_DELETED_USER
+  RECEIVE_DELETED_USER,
+  RECEIVE_USER_NEW_FOLLOWING
 } from "../actions/user_actions"
 
 import {
-  RECEIVE_USER_FOLLOW,
-  RECEIVE_USER_UNFOLLOW
-} from '../actions/user_actions';
+  RECEIVE_NOTE_LIKE, RECEIVE_NOTE_UNLIKE
+} from '../actions/note_actions'
+
+import { merge } from 'lodash';
 
 const initialState = {
   isAuthenticated: false,
   user: {},
-  tags: []
+  tags: [],
+  followers: [],
+  following: [],
+  noteLikes: []
 };
 
 const SessionReducer = (state = initialState, action) => {
-  let nextState = Object.assign({}, state)
+  // let nextState = Object.assign({}, state)
+  let nextState = merge({}, state);
 
   switch (action.type) {
     case RECEIVE_USER_LOGOUT:
@@ -46,26 +52,27 @@ const SessionReducer = (state = initialState, action) => {
         isSignedIn: true
       }
     case RECEIVE_UPDATED_USER:
-      nextState.user = {
-        id: action.user.data._id,
-        username: action.user.data.username
-      }
+      // debugger
+      nextState.user = action.user.data;
+      return nextState;
+    case RECEIVE_USER_NEW_FOLLOWING:
+      // debugger;
+      nextState.user = action.users.data.currentUser;
       return nextState;
     case RECEIVE_DELETED_USER:
       return {
         isAuthenticated: false,
         user: undefined
       }
-    case RECEIVE_USER_FOLLOW:
-      // nextState.user.follows[action.user.data._id] = action.user.data;
-      // following...
-      return nextState;
-      case RECEIVE_USER_UNFOLLOW:
-        // nextState.user.follows[action.user.data._id] = action.user.data;
-        // following...
-      return nextState;
     case RECEIVE_USER_NOTES:
+      // debugger
       nextState.tags = selectNoteTags(action.notes.data)
+      return nextState;
+    case RECEIVE_NOTE_LIKE:
+      nextState.user.noteLikes = nextState.user.noteLikes.concat([action.note.data._id])
+      return nextState;
+    case RECEIVE_NOTE_UNLIKE:
+      nextState.user.noteLikes = nextState.user.noteLikes.filter(id => id !== action.note.data._id)
       return nextState;
     default:
       return state;

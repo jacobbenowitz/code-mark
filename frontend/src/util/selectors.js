@@ -36,3 +36,18 @@ export const filterNotesByTag = (tag, notes) => {
 export const filterUsersByComment = (users, comment) => {
   return Object.values(users)?.filter(user => user._id === comment.user)[0]
 }
+
+export const filterOnlyPublicNotes = notes => {
+  const filtered = notes.filter(note => note.public)
+  return filtered;
+}
+
+export const selectLikedNotes = (notes, likedIds) => {
+  return likedIds.map(id => notes[id])
+}
+
+export const selectCommentsCount = (userNotes) => {
+  let allComments = userNotes.map(note => note.comments)
+  debugger
+  return allComments.flat().length;
+}

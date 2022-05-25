@@ -90,7 +90,6 @@ export const composeNote = data => dispatch => {
 };
 
 export const updateNote = (data, noteId) => dispatch => {
- 
   return patchNote(data, noteId)
     .then(note => dispatch(receiveUpdateNote(note)))
     .catch(err => dispatch(receiveNoteErrors(err)))

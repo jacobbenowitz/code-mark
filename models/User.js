@@ -19,7 +19,7 @@ const UserSchema = new Schema({
     comments: [{type: Schema.Types.ObjectId, ref: "comments"}],
     note_likes: [{type: Schema.Types.ObjectId, ref: "notes"}],
     comment_likes: [{type: Schema.Types.ObjectId, ref: "comments"}],
-    follows: [{type: Schema.Types.ObjectId, ref: "users"}],
+    following: [{type: Schema.Types.ObjectId, ref: "users"}],
     followers: [{type: Schema.Types.ObjectId, ref: "users"}]
     }, 
     {timestamps: true}

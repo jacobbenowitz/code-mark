@@ -22,7 +22,9 @@ import NoteShowContainer from './main/note_show_container';
 import HomeContainer from './main/home_container';
 import HomeFilteredContainer from './main/home_filtered_container';
 import DiscoverContainer from './main/discover_container';
+import DiscoverFilteredContainer from './main/discover_filtered_container';
 import UserFilteredContainer from './main/user_filtered_container';
+import LikedNotesContainer from './main/liked_notes_container';
 
 
 const App = () => (
@@ -30,20 +32,36 @@ const App = () => (
     <header className="header-top-stack">
       <NavBarContainer />
     </header>
+
     <Switch>
-      <AuthRoute exact path='/signup' component={SignupFormContainer} />
-      <AuthRoute exact path='/login' component={LoginFormContainer} />
-      <ProtectedRoute exact path='/home' component={HomeContainer} />
-      <ProtectedRoute exact path={'/notes/:noteId'} component={NoteShowContainer} />
-      <ProtectedRoute path='/notes/tags/:tag' component={HomeFilteredContainer} />
-      <ProtectedRoute path='/users/:userId' component={UserFilteredContainer} />
-      {/* <ProtectedRoute exact path='/profile' component={ProfileContainer} /> */}
-      <ProtectedRoute exact path='/discover' component={DiscoverContainer} />
+      <AuthRoute exact path='/signup'
+        component={SignupFormContainer} />
+      <AuthRoute exact path='/login'
+        component={LoginFormContainer} />
+      <ProtectedRoute exact path='/home'
+        component={HomeContainer} />
+      <ProtectedRoute exact path={'/notes/:noteId'}
+        component={NoteShowContainer} />
+      <ProtectedRoute path='/home/tags/:tag'
+        component={HomeFilteredContainer} />
+      <ProtectedRoute path='/users/:userId'
+        component={UserFilteredContainer} />
+      <ProtectedRoute exact path='/discover'
+        component={DiscoverContainer} />
+      <ProtectedRoute exact path='/discover/tags/:tag'
+        component={DiscoverFilteredContainer} />
+      <ProtectedRoute exact path='/liked_notes'
+        component={LikedNotesContainer} />
+      {/* <ProtectedRoute exact path='/profile' 
+        component={ProfileContainer} /> */}
       {/* <ProtectedRoute exact path='/following' component={FollowingContainer} /> */}
-      <ProtectedRoute exact path='/settings' component={SettingsContainer} />
-      <AuthRoute path="/" component={SplashPage} />
+      <ProtectedRoute exact path='/settings'
+        component={SettingsContainer} />
+      <AuthRoute path="/"
+        component={SplashPage} />
     </Switch>
-    <footer className="grid-bottom-stack">
+
+    <footer>
       <NavFooter />
     </footer>
   </div>

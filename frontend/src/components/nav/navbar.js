@@ -51,8 +51,6 @@ export default class NavBar extends React.Component {
             <img className="nav-logo" src="https://code-mark.s3.amazonaws.com/codemark-logo-primary.svg" alt="CodeMark logo" />
           </Link>
         </div>
-        <div className="search-bar">
-        </div>
         <UserNavModal handleClick={this.handleClick}
           userLinks={userLinks} modalClass={modalClass} />
         {this.props.loggedIn ? (

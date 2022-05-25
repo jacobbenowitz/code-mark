@@ -8,6 +8,10 @@ export const getUser = userId => {
   return axios.get(`/api/users/${userId}`)
 }
 
+export const getCurrentUser = () => {
+  return axios.get(`/api/users/current`)
+}
+
 export const patchUser = userData => {
   return axios.patch(`/api/users/${userData.id}`, userData)
 }
@@ -16,4 +20,7 @@ export const deleteUser = userId => {
   return axios.delete(`/api/users/${userId}`)
 }
 
-// edit user follows util
+// edit user following util
+export const editUserFollowers = userId => {
+  return axios.patch(`/api/users/followers/${userId}`)
+}
