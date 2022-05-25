@@ -14,7 +14,6 @@ class UserNotes extends React.Component {
   }
 
   componentWillMount() {
-    debugger
     this.props.fetchUserNotes(this.props.currentUser.id)
   };
 
@@ -27,7 +26,6 @@ class UserNotes extends React.Component {
   }
 
   isMobile(){
-    // debugger;
     return window.innerWidth < 600;
   }
 

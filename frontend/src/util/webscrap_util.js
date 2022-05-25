@@ -1,66 +1,12 @@
 // import { getGoogleAdvice, getAdvice } from './webscraping.js';
 // import { getGoogleAdvice } from './webscraping.js';
-import { getAdvice } from './webscraping.js';
 const hljs = require('highlight.js');
-// import hljs  from 'highlight.js';
 
 export function getLanguage(codebody) {
     const languages = ['Ruby', 'C', 'JavaScript', 'CSS', 'HTML'];
     const code_test = hljs.highlightAuto(codebody, languages);
     return code_test.language;
 }
-
-function getResources(keywords, codebody) {
-    const language = getLanguage(codebody);
-    // var keywords = code.split(' ');
-    // keywords = [...new Set(keywords)];
-    var resources = [];
-    keywords.map(keyword => language + ' ' + keyword);
-    keywords.forEach(keyword => {
-        // resources.push(keyword);
-        resources.push(getAdvice(keyword)
-            .then(data => {
-                // console.log(typeof data);
-                return data;
-            }));
-        // resources.push(getAdvice(keyword)
-        //     .then(data => {
-        //         // console.log(data);
-        //         return data;
-        //     }));
-    });
-    // console.log(resources);
-    return resources;
-}
-
-// function getNightmareResources (code) {
-//     var keywords = code.split(' ');
-//     keywords = [...new Set(keywords)];
-//     var resources = [];
-//     // console.log(keywords);
-//     keywords.forEach(keyword => {
-//         resources.push(getAdvice(keyword)
-//             .then(data => {
-//                 // console.log(data);
-//                 return data;
-//             }))
-//     });
-//     return resources;
-// }
-
-export async function getStuff(keywords, codebody) {
-    let response = await Promise.all(getResources(keywords, codebody));
-    // console.log(response);
-    return response.flat().filter(ele => ele !== undefined);
-}
-
-// export async function getNightmareStuff(words){
-//     let data = await Promise.all(getNightmareResources(words));
-//     // console.log(data);
-//     return data;
-// }
-
-// const ignore = ['(',')','{','}',';'];
 
 export function getKeywords(codebody) {
     // debugger
@@ -81,8 +27,59 @@ export function getKeywords(codebody) {
     // words = words.filter(word => !ignore.includes(word));
     return words.filter(word => word.length > 1);
     // return words.map(word => code_test.language + ' ' + word);
-  
 }
+
+// function getResources(keywords, codebody) {
+//     const language = getLanguage(codebody);
+//     // var keywords = code.split(' ');
+//     // keywords = [...new Set(keywords)];
+//     var resources = [];
+//     keywords.map(keyword => language + ' ' + keyword);
+//     keywords.forEach(keyword => {
+//         // resources.push(keyword);
+//         resources.push(getAdvice(keyword)
+//             .then(data => {
+//                 // console.log(typeof data);
+//                 return data;
+//             }));
+//         // resources.push(getAdvice(keyword)
+//         //     .then(data => {
+//         //         // console.log(data);
+//         //         return data;
+//         //     }));
+//     });
+//     // console.log(resources);
+//     return resources;
+// }
+
+// function getNightmareResources (code) {
+//     var keywords = code.split(' ');
+//     keywords = [...new Set(keywords)];
+//     var resources = [];
+//     // console.log(keywords);
+//     keywords.forEach(keyword => {
+//         resources.push(getAdvice(keyword)
+//             .then(data => {
+//                 // console.log(data);
+//                 return data;
+//             }))
+//     });
+//     return resources;
+// }
+
+// export async function getStuff(keywords, codebody) {
+//     let response = await Promise.all(getResources(keywords, codebody));
+//     // console.log(response);
+//     return response.flat().filter(ele => ele !== undefined);
+// }
+
+// export async function getNightmareStuff(words){
+//     let data = await Promise.all(getNightmareResources(words));
+//     // console.log(data);
+//     return data;
+// }
+
+// const ignore = ['(',')','{','}',';'];
 
 // let words = 'ruby java onclick() onchange() componentdidmount()';
 

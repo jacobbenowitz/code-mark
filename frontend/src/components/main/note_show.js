@@ -235,7 +235,6 @@ export default class NoteShow extends React.Component {
     // this.setState({ selectedText: selection.toString() });
     // };
 
-    debugger
     return note ? (
       <>
         <div id="context-menu">

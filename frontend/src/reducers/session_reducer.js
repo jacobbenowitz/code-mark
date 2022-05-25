@@ -66,12 +66,10 @@ const SessionReducer = (prevState = initialState, action) => {
       nextState.tags = selectNoteTags(action.notes.data)
       return nextState;
     case RECEIVE_NOTE_LIKE:
-      debugger
       nextState.user.note_likes = nextState.user.note_likes.concat(
         [action.note.data._id])
       return nextState;
     case RECEIVE_NOTE_UNLIKE:
-      debugger
       nextState.user.note_likes = nextState.user.note_likes.filter(
         id => id !== action.note.data._id)
       return nextState;

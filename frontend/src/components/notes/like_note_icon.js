@@ -19,20 +19,16 @@ export default class LikeNoteIcon extends React.Component {
   }
 
   addLike() {
-    debugger
     let newLikes = this.props.likes.concat([this.props.currentUserId]);
     let data = { "likes": newLikes };
-    // debugger
     this.props.addNoteLike(data, this.props.noteId);
     this.setState({ liked: true });
   }
 
   removeLike() {
-    debugger
     let filteredLikes = this.props.likes.filter(userId =>
       userId !== this.props.currentUserId);
     let data = { "likes": filteredLikes };
-    // debugger
     this.props.removeNoteLike(data, this.props.noteId);
     this.setState({ liked: false });
   }

@@ -43,7 +43,6 @@ export const filterOnlyPublicNotes = notes => {
 }
 
 export const selectLikedNotes = (notes, likedIds) => {
-  debugger
   return likedIds.map(id => notes[id])
 }
 

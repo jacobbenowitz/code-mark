@@ -81,7 +81,6 @@ router.patch('/note_likes/:id', passport.authenticate('jwt', { session: false })
                     if (note.likes.includes(req.user.id)) {
                         req.user.note_likes.push(note.id);
                     } else {
-                        debugger
                         req.user.note_likes = req.user.note_likes.filter(item => item.toString() !== note.id)
                     }
                     req.user.save();

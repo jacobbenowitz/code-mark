@@ -24,9 +24,7 @@ export default class LikedNotes extends React.Component {
 
   componentDidUpdate() {
     const { allNotes, likedNoteIds, currentUser } = this.props;
-    debugger
     if (Object.values(allNotes).length && likedNoteIds.length && !this.state.notes.length) {
-      debugger
       const likedNotes = selectLikedNotes(allNotes, likedNoteIds);
       const likedTags = selectNoteTags(likedNotes)
       this.setState({
