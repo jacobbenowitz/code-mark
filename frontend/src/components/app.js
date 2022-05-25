@@ -61,7 +61,7 @@ const App = () => (
         component={SplashPage} />
     </Switch>
 
-    <footer className="grid-bottom-stack">
+    <footer>
       <NavFooter />
     </footer>
   </div>
