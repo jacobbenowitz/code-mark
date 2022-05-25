@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { filterNotesByTag, orderUserNotes } from '../../util/selectors';
 import CodeNoteItem from './code_note_item';
 import AllNotes from '../main/all_notes';
+import MobileNotes from '../main/mobile_notes';
 
 class FilteredNotes extends React.Component {
   constructor(props) {

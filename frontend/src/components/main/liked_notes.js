@@ -1,6 +1,7 @@
 import React from 'react';
 import AllNotes from './all_notes';
 import SideCarMenu from './side_car_menu';
+import MobileNotes from './mobile_notes';
 import {
   filterNotesByTag,
   orderUserNotes

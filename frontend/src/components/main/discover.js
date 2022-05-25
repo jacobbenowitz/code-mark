@@ -1,6 +1,7 @@
 import React from 'react';
 import AllNotes from './all_notes';
 import SideCarMenu from './side_car_menu';
+import MobileNotes from './mobile_notes';
 
 export default class Discover extends React.Component {
 
@@ -9,7 +10,7 @@ export default class Discover extends React.Component {
   };
 
   isMobile(){
-    debugger;
+    // debugger;
     return window.innerWidth < 600;
   }
 
@@ -28,8 +29,8 @@ export default class Discover extends React.Component {
                 <span>No notes found</span>
               ) :
                 this.isMobile() ?
-                <MobileNotes notes={this.props.userNotes} />
-                : <AllNotes notes={this.props.userNotes} />
+                <MobileNotes notes={this.props.allNotes} />
+                : <AllNotes notes={this.props.allNotes} />
               }
 
             </div>
