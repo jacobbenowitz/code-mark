@@ -48,9 +48,6 @@ const notesReducer = (prevState = initialState, action) => {
     case RECEIVE_UPDATED_NOTE:
       nextState.all[action.note.data._id] = action.note.data;
       return nextState;
-    case RECEIVE_NOTE_RESOURCES:
-      nextState.newResources = action.resources.data;
-      return nextState;
     case RECEIVE_NOTE_LIKE:
       nextState.all[action.note.data._id] = action.note.data;
       return nextState;
