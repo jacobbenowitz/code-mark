@@ -15,7 +15,6 @@ export default class Following extends React.Component {
     this.state = {
       followingNotes: [],
       followingTags: [],
-      updated: undefined
     }
   }
 
@@ -41,7 +40,6 @@ export default class Following extends React.Component {
         this.setState({
           followingNotes: publicNotes,
           followingTags: followingTags,
-          updated: true
         })
       }
     }

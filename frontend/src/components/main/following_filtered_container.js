@@ -1,19 +1,15 @@
 import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom';
 import { fetchNotes } from "../../actions/note_actions";
-// import { filterOnlyPublicNotes } from "../../util/selectors";
-// import { selectNoteTags, selectFollowingNotes } from "../../util/selectors";
+import { fetchCurrentUser } from "../../actions/session_actions"
+import { fetchUsers } from "../../actions/user_actions"
 import FollowingFiltered from './following_filtered';
 
 const mapStateToProps = (state, {match}) => {
-  // const publicNotes = filterOnlyPublicNotes(Object.values(state.notes.all));
-  // const followingUserIds = state.session.user.following;
-  // const followingNotes = selectFollowingNotes(followingUserIds, publicNotes);
-  // const followingTags = selectNoteTags(followingNotes);
 
   return {
-    followingNotes: followingNotes,
-    tags: followingTags,
+    allNotes: state.notes.all,
+    allUsers: state.users.all,
     currentUser: state.session.user,
     filter: match.params.tag
   }
@@ -21,7 +17,9 @@ const mapStateToProps = (state, {match}) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchNotes: () => dispatch(fetchNotes())
+    fetchNotes: () => dispatch(fetchNotes()),
+    fetchCurrentUser: () => dispatch(fetchCurrentUser()),
+    fetchUsers: () => dispatch(fetchUsers())
   }
 }
 
