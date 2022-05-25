@@ -36,7 +36,6 @@
   display: flex;
   min-height: 60px;
   color: #2D2D2D;
-
 }
 
 .info-desc-box {
@@ -46,7 +45,7 @@
 .buttons-center {
   padding-top: 36px;
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   align-items: center;
   justify-content: space-evenly;
 }
