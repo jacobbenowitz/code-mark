@@ -19,6 +19,8 @@ import {
   RECEIVE_NOTE_LIKE, RECEIVE_NOTE_UNLIKE
 } from '../actions/note_actions'
 
+import { merge } from 'lodash';
+
 const initialState = {
   isAuthenticated: false,
   user: {},
@@ -29,7 +31,8 @@ const initialState = {
 };
 
 const SessionReducer = (state = initialState, action) => {
-  let nextState = Object.assign({}, state)
+  // let nextState = Object.assign({}, state)
+  let nextState = merge({}, state);
 
   switch (action.type) {
     case RECEIVE_USER_LOGOUT:

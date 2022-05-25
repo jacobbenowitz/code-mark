@@ -12,18 +12,13 @@ export default class FollowButton extends React.Component {
 
   componentDidMount() {
     const { currentUser, userId } = this.props;
-    debugger
-    const following = currentUser.following.includes(userId)
-    this.setState({ following: following })
-  }
 
-  componentDidUpdate() {
-    debugger
-    if (this.props.currentUser !== this.state.currentUser) {
-      debugger
-    }
+    currentUser.following.includes(userId) ? (
+      this.setState({ following: true })
+    ) : (
+      this.setState({ following: false })
+    )
   }
-
 
   handleFollow() {
     this.props.changeUserFollowers(this.props.userId);
