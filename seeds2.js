@@ -3,18 +3,14 @@ const User = require('./models/User');
 const Note = require('./models/Note');
 const Comment = require('./models/Comment');
 const db = require('./config/keys').mongoURI;
-
 const bcrypt = require('bcryptjs');
 
-// const {getResources} = require('./frontend/src/actions/webscrap_actions');
-// const {getStuff} = require('./frontend/src/util/webscrap_util');
-
 mongoose
-    .connect(db, {useNewUrlParser: true})
+    .connect(db, { useNewUrlParser: true })
     .then(() => console.log('Connected to MongoDB successfully'))
     .catch(err => console.log(err));
 
-function makePasswordHash(password){
+function makePasswordHash(password) {
     const salt = bcrypt.genSaltSync(10)
     const encrypted = bcrypt.hashSync(password, salt)
     return encrypted;
@@ -123,13 +119,13 @@ let seedUsers = [
 // ]
 
 let seedNotes =
-[
-    {
-        title: "keys",
-        codebody: "let veggies = \"\";\nfor(const x of fruits.keys()) {\nveggies += x;\n}",
-        textdetails: "List all keys",
-        tags: ["Javascript", "random"],
-        resources: [
+    [
+        {
+            title: "keys",
+            codebody: "let veggies = \"\";\nfor(const x of fruits.keys()) {\nveggies += x;\n}",
+            textdetails: "List all keys",
+            tags: ["Javascript", "random"],
+            resources: [
                 {
                     link: "https://www.w3schools.com/js/js_object_maps.asp",
                     title: "JavaScript Maps"
@@ -142,14 +138,14 @@ let seedNotes =
                     link: "https://stackoverflow.com/questions/8763125/get-array-of-objects-keys",
                     title: "Get array of object’s keys - javascript - Stack Overflow"
                 }
-        ]
-    },
-    {
-        title: "keys",
-        codebody: "Math.random()",
-        textdetails: "will always be a number less than 1 ",
-        tags: ["Javascript", "random"],
-        resources: [
+            ]
+        },
+        {
+            title: "keys",
+            codebody: "Math.random()",
+            textdetails: "will always be a number less than 1 ",
+            tags: ["Javascript", "random"],
+            resources: [
                 {
                     link: "https://www.w3schools.com/js/js_object_maps.asp",
                     title: "js object maps"
@@ -162,14 +158,14 @@ let seedNotes =
                     link: "https://www.geeksforgeeks.org/javascript-math-random-method",
                     title: "JavaScript Math random() Method - GeeksforGeeks"
                 }
-        ]
-    },
-    {
-        title: "AJAX - XMLHttpRequest ",
-        codebody: "xhttp.open(\"\GET\"\, \"\ajax_info.txt\"\, false);\nxhttp.send();\ndocument.getElementById(\"\demo\"\).innerHTML = xhttp.responseText;",
-        textdetails: "Sometimes async = false are used for quick testing. You will also find synchronous requests in older JavaScript code.",
-        tags: ["Javascript", "AJAX"],
-        resources: [
+            ]
+        },
+        {
+            title: "AJAX - XMLHttpRequest ",
+            codebody: "xhttp.open(\"\GET\"\, \"\ajax_info.txt\"\, false);\nxhttp.send();\ndocument.getElementById(\"\demo\"\).innerHTML = xhttp.responseText;",
+            textdetails: "Sometimes async = false are used for quick testing. You will also find synchronous requests in older JavaScript code.",
+            tags: ["Javascript", "AJAX"],
+            resources: [
                 {
                     link: "https://www.w3schools.com/js/js_ajax_http_send.asp",
                     title: "Synchronous Request"
@@ -178,9 +174,9 @@ let seedNotes =
                     link: "https://www.tutorialspoint.com/ajax/what_is_xmlhttprequest.htm",
                     title: "AJAX - XMLHttpRequest"
                 }
-        ]
-    }
-]
+            ]
+        }
+    ]
 
 // function makeNotes(notes){
 //     notes.forEach(async note => {
@@ -208,10 +204,10 @@ let seedNotes =
 //     })
 // }
 
-const seed = async (users,notes) => {
+const seed = async (users, notes) => {
     const note_ids = [];
     const user_ids = [];
-    users.forEach((user,idx) => {
+    users.forEach((user, idx) => {
         const newUser = new User({
             username: user.username,
             email: user.email,
@@ -223,7 +219,7 @@ const seed = async (users,notes) => {
             .then(() => user_ids.push(newUser.id))
     })
     // const user_ids = await User.insertMany(users).insertedIds
-    notes.forEach((note,idx) => {
+    notes.forEach((note, idx) => {
         const newNote = new Note({
             codebody: note.codebody,
             title: note.title,
@@ -242,7 +238,7 @@ const seed = async (users,notes) => {
                 note_ids.push(newNote.id)
             })
             .then(() => {
-                
+
             })
     })
     // Comment.find()
@@ -282,7 +278,7 @@ const seed = async (users,notes) => {
 // seed(seedUsers,seedNotes);
 const connectToMongo = async () => {
     await mongoose
-        .connect(db, {useNewUrlParser: true})
+        .connect(db, { useNewUrlParser: true })
         .then(() => console.log('Connected to MongoDB successfully'))
         .catch(err => console.log(err));
     return mongoose;

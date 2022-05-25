@@ -9,8 +9,6 @@ import {
   RECEIVE_NOTE_UNLIKE
 } from '../actions/note_actions';
 
-import { RECEIVE_NOTE_RESOURCES } from '../actions/webscrap_actions';
-
 const initialState = {
   all: {},
   user: [],
