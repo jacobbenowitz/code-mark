@@ -201,6 +201,12 @@ footer {
     margin-top: 5px;
     margin-bottom: 5px;
   }
+
+  .session {
+  grid-column: 1 / span 12;
+  height: 75vh;
+  background-color: #2D2D2D;
+}
  
 }
 
