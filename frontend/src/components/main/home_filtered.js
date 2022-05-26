@@ -7,6 +7,7 @@ import FilteredNotesContainer from '../notes/filtered_notes_container';
 import SideCarMenu from './side_car_menu';
 import AllNotes from './all_notes';
 import { filterNotesByTag, orderUserNotes } from '../../util/selectors';
+import MobileNotes from './mobile_notes';
 
 export default class HomeFiltered extends React.Component {
   constructor(props) {

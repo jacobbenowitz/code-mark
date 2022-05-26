@@ -23,21 +23,43 @@
     flex-wrap: nowrap;
 }
 
-.code-note-tags {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
-  margin-bottom: 0.4rem;
-  margin-top: 0.4rem;
-  position: static;
-  width: 100%;
-  height: auto;
-  overflow-x: scroll;
-  -ms-overflow-style: none; 
-  scrollbar-width: none;
-  gap: 0.4rem;
-  font-size: 14px;
+@media only screen and (max-width: 600px) {
+  .code-note-tags {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 0.4rem;
+    margin-top: 0.4rem;
+    gap: 0.8rem;
+    overflow-x: scroll;
+    line-break: revert;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    font-size: 14px;
+    white-space: nowrap;
+    width: 100vw;
+    max-width: 100%;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .code-note-tags {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 0.4rem;
+    margin-top: 0.4rem;
+    position: static;
+    width: 100%;
+    height: auto;
+    overflow-x: scroll;
+    -ms-overflow-style: none; 
+    scrollbar-width: none;
+    gap: 0.4rem;
+    font-size: 14px;
+  }
 }
 
 .code-note-tags::-webkit-scrollbar,

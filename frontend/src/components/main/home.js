@@ -9,6 +9,10 @@ import SideCarMenu from './side_car_menu';
 
 export default class Home extends React.Component {
 
+  isMobile() {
+    return window.innerWidth < 600;
+  }
+
   render() {
     if (window.innerWidth < 600) {
       return (
@@ -17,6 +21,19 @@ export default class Home extends React.Component {
           <div className='home-main'>
             <NewNoteContainer />
             <div className='notes-section'>
+              <div className='tags-wrapper-mobile'>
+                <span className='tags-mobile-header'>Tags</span>
+                <div className="code-note-tags">
+                  {this.props.tags?.map((tag, i) =>
+                    <NavLink to={`/home/tags/${tag}`}>
+                      <div className="note-tag-mini"
+                        key={`${i}-tag`}>
+                        {tag}
+                      </div>
+                    </NavLink>
+                  )}
+                </div>
+              </div>
               <div className='section-title'>
                 <h3>My Notes</h3>
               </div>
