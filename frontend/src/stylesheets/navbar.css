@@ -96,6 +96,9 @@
 .avatar-wrapper {
   cursor: pointer;
 }
+.avatar-mobile {
+  padding: 12px;
+}
 
 .user-links {
   display: flex;
@@ -203,7 +206,7 @@ footer {
     justify-content: center;
   }
 
-   #features-container {
+  #features-container {
     grid-column: 1 / span 12;
     max-height: 700px;
     display: grid;
@@ -364,4 +367,31 @@ footer {
   align-items: flex-start;
   justify-content: space-between;
   width: 100%;
+}
+
+.nav-menu-mobile {
+  position: fixed;
+  display: flex;
+  top: 0;
+  left: 0;
+  flex-direction: row;
+  align-items: flex-start;
+  height: 100%;
+  width: 78%;
+  z-index: 1000;
+  background: #202124;
+}
+
+.mobile-menu-mask {
+  position: fixed;
+  display: flex;
+  top: 0;
+  left: 0;
+  flex-direction: row;
+  align-items: flex-start;
+  height: 100%;
+  width: 100%;
+  z-index: 999;
+  background: #00000054;
+  backdrop-filter: blur(5px);
 }

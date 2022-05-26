@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import UserNavModal from "./user_nav_modal";
+import MobileNav from "./mobile_nav";
+import Avatar from '../profile/avatar';
 
 export default class NavBar extends React.Component {
   constructor(props) {
@@ -41,6 +43,24 @@ export default class NavBar extends React.Component {
 
   render() {
 
+    let avatarOrHamburger;
+
+    window.innerWidth > 600 ? (
+      avatarOrHamburger = (
+        <Avatar
+          currentUser={this.props.currentUser}
+          handleClick={this.handleClick}
+        />
+      )
+    ) : (
+        avatarOrHamburger = (
+          <MobileNav
+            currentUser={this.props.currentUser}
+            logout={this.props.logout}
+          />
+        )
+    )
+
     const userLinks = this.getLinks();
     const modalClass = this.state.modalOpen ? " on" : " modal-off";
 
@@ -55,11 +75,7 @@ export default class NavBar extends React.Component {
           userLinks={userLinks} modalClass={modalClass} />
         {this.props.loggedIn ? (
           <div id="user-links-container">
-            <div className="avatar-wrapper" onClick={this.handleClick}>
-              <div className="avatar-container-sm">
-                <span>{this.props?.currentUser.username.slice(0, 2).toUpperCase()}</span>
-              </div>
-            </div>
+            {avatarOrHamburger}
           </div>
         ) : (userLinks)}
 
