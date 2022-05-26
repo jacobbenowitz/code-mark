@@ -5,6 +5,7 @@ import {
 } from "../actions/session_actions";
 
 import {
+  RECEIVE_NEW_NOTE,
   RECEIVE_USER_NOTES
 } from '../actions/note_actions';
 import { selectNoteTags } from "../util/selectors";
@@ -64,6 +65,12 @@ const SessionReducer = (prevState = initialState, action) => {
       }
     case RECEIVE_USER_NOTES:
       nextState.tags = selectNoteTags(action.notes.data)
+      return nextState;
+    case RECEIVE_NEW_NOTE:
+      let newUniqueTags =
+        [...new Set(nextState.tags.concat(action.note.data.tags))]
+      nextState.tags = newUniqueTags;
+      debugger
       return nextState;
     case RECEIVE_NOTE_LIKE:
       nextState.user.note_likes = nextState.user.note_likes.concat(

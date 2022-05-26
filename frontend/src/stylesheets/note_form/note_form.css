@@ -100,10 +100,10 @@
   animation: fadeIn 1000ms ease-in-out;
   color: red;
   display: flex;
+}
 
 button#tag-icon-save.disabled:hover {
   background: #373737;
-
 }
 
 .save-tag.disabled {

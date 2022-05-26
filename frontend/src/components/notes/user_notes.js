@@ -34,20 +34,6 @@ class UserNotes extends React.Component {
       return (<span>No notes found :(</span>)
     } else {
       return (
-        // this.state.userNotes?.map((note) => (
-        //   <CodeNoteItem key={note._id}
-        //     title={note.title}
-        //     likes={note.likes}
-        //     tags={note.tags}
-        //     username={note.user.username}
-        //     userId={note.user.userId}
-        //     comments={note.comments}
-        //     textDetails={note.textdetails}
-        //     codeBody={note.codebody}
-        //     id={note._id}
-        //     createdAt={note.createdAt}
-        //   />
-        // ))
         this.isMobile() ?
           <MobileNotes notes={this.state.userNotes} />
           : <AllNotes notes={this.state.userNotes} />

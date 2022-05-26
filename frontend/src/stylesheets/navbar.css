@@ -191,10 +191,10 @@ footer {
     text-align: center;
   }
 
-  .home-main {
+  /* .home-main {
     padding-left: 20px;
     padding-right: 20px;
-  }
+  } */
 
   #hero-content {
     grid-column: 1 / span 2;
@@ -288,6 +288,13 @@ footer {
 
 .footer-link-list a {
   margin-bottom: 16px;
+}
+
+#footer-top a:hover {
+  color: #35D9E3;
+}
+#footer-top a {
+  color: #c6c8cc;
 }
 
 .nav-modal-container {

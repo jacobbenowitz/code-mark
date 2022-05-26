@@ -45,6 +45,7 @@ export default class UserFiltered extends React.Component {
 
   render() {
     // debugger;
+    console.log(this.state)
     return (
       <div className={this.isMobile() ? 'main-mobile' : 'main-sidebar'}>
         {/* NEEDS TO BE REFACTORED FOR FILTERING USER'S TAGS (NOT HOME) */}
@@ -52,7 +53,8 @@ export default class UserFiltered extends React.Component {
         <div className='home-main'>
           <div className='notes-section'>
             <div className='section-title'>
-              {this.state.currentUser._id ? (
+              {Object.values(this.state.currentUser).length &&
+                Object.values(this.state.user).length ? (
                 <UserHeader
                   user={this.state.user}
                   userNotes={this.state.userNotes}

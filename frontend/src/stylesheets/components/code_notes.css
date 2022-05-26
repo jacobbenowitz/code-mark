@@ -58,7 +58,7 @@
 }
 
 .code-note-text {
-  padding: 0.4rem;
+  /* padding: 0.4rem; */
   display: flex;
   gap: 0.7rem;
   margin-bottom: 1rem;
@@ -71,10 +71,9 @@
 .code-note-title {
   font-weight: 700;
   font-size: 1.2rem;
-  white-space: nowrap;
   overflow: hidden;
   width: 100%;
-  text-overflow: ellipsis;
+  overflow-wrap: break-word;
 }
 
 .code-note-preview {
