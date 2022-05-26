@@ -130,7 +130,14 @@ footer {
 @media only screen and (max-width: 800px) {
  #sample-code-editor{
    display: none;
-}
+ }
+  #hero-content {
+    grid-column: 1 / span 2;
+    /* padding-top: 80px; */
+    margin: 0 64px 0 64px;
+    text-align: center;
+
+  }
 }
 
 /* mobile (i.e. less than 600px wide screens) */
@@ -170,12 +177,7 @@ footer {
    
 }
 
-  #hero-content {
-  grid-column: 1 / span 2;
-  /* padding-top: 80px; */
-  margin: 0 64px 0 64px;
-  text-align: center;
-}
+
 
   .home-main {
     padding-left: 20px;
