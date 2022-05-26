@@ -71,28 +71,6 @@ const LayoutDesign = () => {
     )
   } else return (
       <div className='main-mobile'>
-        {/* <div className='nav-menu-mobile'>
-          <div className='nav-boxes'>
-            <div className='nav-pages'>
-              <h5>Pages</h5>
-              <ul className='nav-list'>
-                <NavLink to={'/dev/main-layout'} className='nav-item-container'>
-                  <div className='nav-item-link nav-home'>
-                    <img src="https://code-mark.s3.amazonaws.com/type%3DHome.svg" /> <span>Main Layout</span>
-                  </div>
-                </NavLink>
-              </ul>
-              <h5>Tags</h5>
-              <ul className='nav-list'>
-                <NavLink to={'/dev/main-layout'} className='nav-item-container'>
-                  <div className='nav-item-link nav-home'>
-                    <img src="https://code-mark.s3.amazonaws.com/type%3DHome.svg" /> <span>Main Layout</span>
-                  </div>
-                </NavLink>
-              </ul>
-            </div>
-          </div>
-        </div> */}
         <div className='home-main'>
           <div className='new-note-container'>
             <div className="test-note-spacer"></div>

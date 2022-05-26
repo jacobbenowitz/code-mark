@@ -37,7 +37,7 @@ export default class DiscoverFiltered extends React.Component {
 
   render() {
     return (
-      <div className='main-sidebar'>
+      <div className={this.isMobile() ? 'main-mobile' : 'main-sidebar'}>
         <div className='nav-sidecar'>
           <SideCarMenu tagType={'discover'} tags={this.props.tags} />
         </div>

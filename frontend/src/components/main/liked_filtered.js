@@ -42,9 +42,13 @@ export default class LikedFiltered extends React.Component {
     }
   }
 
+  isMobile() {
+    return window.innerWidth < 600;
+  }
+
   render() {
     return (
-      <div className='main-sidebar'>
+      <div className={this.isMobile() ? 'main-mobile' : 'main-sidebar'}>
         <SideCarMenu tagType={'likes'} tags={this.state.likedTags} />
 
         <div className='home-main'>
@@ -57,7 +61,9 @@ export default class LikedFiltered extends React.Component {
               {this.state.likedNotes.length === 0 ? (
                 <span>No notes found</span>
               ) :
-                <AllNotes notes={this.state.likedNotes} />
+              this.isMobile() ?
+                <MobileNotes notes={this.state.likedNotes} />
+                : <AllNotes notes={this.state.likedNotes} />
               }
 
             </div>

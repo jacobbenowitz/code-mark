@@ -41,7 +41,7 @@ export default class LikedNotes extends React.Component {
 
   render() {
     return (
-      <div className='main-sidebar'>
+      <div className={this.isMobile() ? 'main-mobile' : 'main-sidebar'}>
         <div className='nav-sidecar'>
           <SideCarMenu tagType={'likes'} tags={this.state.likedTags} />
         </div>
