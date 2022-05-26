@@ -36,6 +36,7 @@ export default class EditNote extends React.Component {
   bindHandlers() {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.init = this.init.bind(this);
+    this.placeholderTitle = this.placeholderTitle.bind(this)
   }
 
   update(type) {
@@ -100,6 +101,19 @@ export default class EditNote extends React.Component {
       .then(() => this.toggleEditModal())
   }
 
+  placeholderTitle(e) {
+    // const title = this.state.codebody.slice(0, 20);
+    const title = this.state.codebody.split('\n')[0];
+    const selection = window.getSelection();
+
+    this.setState({ title: title });
+    setTimeout(() => {
+      const titleInput = document.getElementById('title-code');
+      titleInput.select()
+    }, 0);
+    // selection.setBaseAndExtent(titleInput, 0, titleInput, 1);
+  }
+
   render() {
     const language = getLanguage(this.state.codebody);
     const extensions = {
@@ -111,14 +125,15 @@ export default class EditNote extends React.Component {
     return (
       <div className='new-note-container' id='edit-note-full'>
         <div className='new-note-form'>
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.state.codebody.length ? this.handleSubmit : ""}>
             <div className='note-input'>
               <input type={'text'}
+                onClick={this.placeholderTitle}
                 onChange={this.update('title')}
                 id='title-code'
                 className='title-input'
                 value={this.state.title}
-                placeholder={'Title'} />
+                placeholder={'Untitled note'} />
             </div>
             <div className='note-input'>
               <CodeMirror
@@ -142,7 +157,7 @@ export default class EditNote extends React.Component {
               />
             </div>
             <button type='submit' id='code-note-submit'
-              className='submit button'>Save</button>
+              className={(this.state.codebody.length > 1 && this.state.codebody.length < 5001) ? 'save-button' : "save-button disabled"}>Save</button>
           </form>
           <span className='hide-button'
             onClick={this.toggleEditModal}>Hide</span>

@@ -100,7 +100,7 @@ class LoginForm extends React.Component {
                 placeholder='password'
                 className={this.state.errors.password ? "text-input error" : "text-input"}
               />
-              {this.renderErrors('password')}
+             
             </div>
             <div className='signup-buttons-wrapper'>
               <button type='submit' className={this.checkAllFields() ? 'button-session' : 'button-session disabled'}>Login</button>

@@ -284,6 +284,16 @@ class NewNote extends React.Component {
     // selection.setBaseAndExtent(titleInput, 0, titleInput, 1);
   }
 
+
+
+  renderErrors(field) {
+    return (
+      <span className="error-item" key={`error-${field}`}>
+        {this.state.errors[field]}
+      </span>
+    )
+  };
+
   render() {
     return (
       <>
@@ -393,14 +403,13 @@ class NewNote extends React.Component {
                 />
               </div>
               {/* Need to add conditional logic to disable submit button if codebody empty */}
-              {this.state.codebody.length ? (
-                <button type='submit' id='code-note-submit'
-                  className='save-button'>Save</button>
-              ) : (
-                <button type='submit' id='code-note-submit' disabled
-                  className={this.state.codebody.length ? 'save-button' : "save-button disabled"}>Save</button>)
-              }
+              <button type='submit' id='code-note-submit'
+                className={(this.state.codebody.length > 1 && 
+                this.state.codebody.length < 5001) ? 'save-button' : "save-button disabled"}
+                >Save</button>
             </form>
+   
+
             <div id='hide-note-form' className='icon-only-button' onClick={this.toggleForm}>
               <i className="fa-solid fa-square-minus"></i>
             </div>
@@ -415,8 +424,18 @@ class NewNote extends React.Component {
                 </>) : " "}
             </div>
 
-            <div className='note-tags-list new'>
+            <div className='tag-list'>
               <span>Tags</span>
+              {
+                this.state.tags?.map((tag, i) =>
+                  <NewNoteTagItem title={tag} key={`tag-${i}`}
+                    deleteTag={this.deleteTag}
+                  />)
+              }
+            </div>
+
+            <div className='note-tags-list new'>
+              
               <div className="tag-item-wrapper tag-icon-new new"
                 id='toggle-tag-form-button'
                 onClick={this.toggleTagForm}>
@@ -427,24 +446,21 @@ class NewNote extends React.Component {
                 )}
               </div>
 
-              <form onSubmit={this.state.newTag.length ? this.updateTags : undefined}
+              <form onSubmit={this.state.newTag.split(' ').join('').length ? this.updateTags : undefined}
                 className="tag-form-off" id="new-tag-form-new-note">
                 <input type={'text'}
                   className={'tag-form-input'}
                   onChange={this.update('newTag')}
                   placeholder={'New tag...'}
-                  value={this.state.newTag}
+                  value={this.state.newTag.split(' ').join(' ')}
+                  maxlength = "50"
                 />
-                <button className={this.state.newTag.length ? '' : 'save-tag disabled' } id='tag-icon-save' type='submit'>
+
+                <button className={this.state.newTag.split(' ').join('').length ? '' : 'save-tag disabled' } id='tag-icon-save' type='submit'>
                   <i className="fa-solid fa-floppy-disk" />
                 </button>
               </form>
-              {
-                this.state.tags?.map((tag, i) =>
-                  <NewNoteTagItem title={tag} key={`tag-${i}`}
-                    deleteTag={this.deleteTag}
-                  />)
-              }
+             
             </div>
 
           </div>
