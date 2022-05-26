@@ -25,6 +25,10 @@ button, .button {
   transition: color 250ms ease-in-out;
 }
 
+a.active {
+  color: #37f3ff;
+}
+
 button:hover, .signup:hover, .login:hover, .hide-button:hover {
   color: #37F3FF;
   border: 1px solid #37F3FF;
