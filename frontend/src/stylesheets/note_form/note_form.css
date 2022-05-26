@@ -112,6 +112,10 @@
   cursor: not-allowed;
 }
 
+.tag-list {
+    display: flex;
+    gap: 5px;
+}
 
 
 .view-note {

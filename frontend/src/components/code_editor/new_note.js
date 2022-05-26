@@ -422,8 +422,18 @@ class NewNote extends React.Component {
                 </>) : " "}
             </div>
 
-            <div className='note-tags-list new'>
+            <div className='tag-list'>
               <span>Tags</span>
+              {
+                this.state.tags?.map((tag, i) =>
+                  <NewNoteTagItem title={tag} key={`tag-${i}`}
+                    deleteTag={this.deleteTag}
+                  />)
+              }
+            </div>
+
+            <div className='note-tags-list new'>
+              
               <div className="tag-item-wrapper tag-icon-new new"
                 id='toggle-tag-form-button'
                 onClick={this.toggleTagForm}>
@@ -443,19 +453,12 @@ class NewNote extends React.Component {
                   value={this.state.newTag.split(' ').join(' ')}
                   maxlength = "50"
                 />
-                <div>
-                 
-                </div>
+
                 <button className={this.state.newTag.split(' ').join('').length ? '' : 'save-tag disabled' } id='tag-icon-save' type='submit'>
                   <i className="fa-solid fa-floppy-disk" />
                 </button>
               </form>
-              {
-                this.state.tags?.map((tag, i) =>
-                  <NewNoteTagItem title={tag} key={`tag-${i}`}
-                    deleteTag={this.deleteTag}
-                  />)
-              }
+             
             </div>
 
           </div>
