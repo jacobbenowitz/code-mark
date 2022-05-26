@@ -27,7 +27,8 @@ import UserFilteredContainer from './main/user_filtered_container';
 import LikedNotesContainer from './main/liked_notes_container';
 import FollowingContainer from './main/following_container';
 import FollowingFilteredContainer from './main/following_filtered_container';
-
+import LikedFilteredContainer from './main/liked_filtered_container';
+import LayoutDesign from './UI/layout_design';
 
 const App = () => (
   <div className="grid-pancake-stack">
@@ -52,14 +53,18 @@ const App = () => (
         component={DiscoverContainer} />
       <ProtectedRoute exact path='/discover/tags/:tag'
         component={DiscoverFilteredContainer} />
-      <ProtectedRoute exact path='/liked_notes'
+      <ProtectedRoute exact path='/likes'
         component={LikedNotesContainer} />
       <ProtectedRoute exact path='/following'
         component={FollowingContainer} />
       <ProtectedRoute exact path='/following/tags/:tag'
         component={FollowingFilteredContainer} />
+      <ProtectedRoute exact path='/likes/tags/:tag'
+        component={LikedFilteredContainer} />
       <ProtectedRoute exact path='/settings'
         component={SettingsContainer} />
+      <Route exact path='/dev/main-layout'
+        component={LayoutDesign} />
       <AuthRoute path="/"
         component={SplashPage} />
     </Switch>

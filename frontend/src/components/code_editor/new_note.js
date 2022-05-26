@@ -333,7 +333,7 @@ class NewNote extends React.Component {
         <div className='new-note-container' id='new-note-full'>
           {/* <button onClick={this.toggleResourcesModal}>ToggleTesting</button> */}
           <div className='new-note-form'>
-            <form onSubmit={this.state.codebody.length ? this.toggleResourcesModal : ""}>
+            <form onSubmit={this.state.codebody.length ? this.toggleResourcesModal : undefined}>
               <div id="note-title-input" className='note-input'>
                 <input type={'text'}
                   onClick={this.placeholderTitle}
@@ -404,7 +404,9 @@ class NewNote extends React.Component {
               </div>
               {/* Need to add conditional logic to disable submit button if codebody empty */}
               <button type='submit' id='code-note-submit'
-                className={(this.state.codebody.length > 1 && this.state.codebody.length < 5001) ? 'save-button' : "save-button disabled"}>Save</button>
+                className={(this.state.codebody.length > 1 && 
+                this.state.codebody.length < 5001) ? 'save-button' : "save-button disabled"}
+                >Save</button>
             </form>
    
 

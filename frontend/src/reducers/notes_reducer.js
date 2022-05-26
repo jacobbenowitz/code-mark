@@ -9,8 +9,6 @@ import {
   RECEIVE_NOTE_UNLIKE
 } from '../actions/note_actions';
 
-import { RECEIVE_NOTE_RESOURCES } from '../actions/webscrap_actions';
-
 const initialState = {
   all: {},
   user: [],
@@ -18,9 +16,12 @@ const initialState = {
   newResources: []
 };
 
+import { merge } from 'lodash';
+
 const notesReducer = (prevState = initialState, action) => {
   Object.freeze(prevState);
-  let nextState = Object.assign({}, prevState)
+  let nextState = merge({}, prevState)
+
   switch (action.type) {
     case RECEIVE_NEW_NOTE:
       nextState.new = action.note.data;
@@ -33,8 +34,7 @@ const notesReducer = (prevState = initialState, action) => {
       // k-v pairs of notes in obj {id: {key: data}, ...}
       let allNotes = {}
       action.notes.data.map(note =>
-        allNotes[note._id] = note
-      )
+        allNotes[note._id] = note)
       nextState.all = allNotes;
       return nextState;
     case RECEIVE_NOTE:
@@ -46,9 +46,6 @@ const notesReducer = (prevState = initialState, action) => {
       return nextState;
     case RECEIVE_UPDATED_NOTE:
       nextState.all[action.note.data._id] = action.note.data;
-      return nextState;
-    case RECEIVE_NOTE_RESOURCES:
-      nextState.newResources = action.resources.data;
       return nextState;
     case RECEIVE_NOTE_LIKE:
       nextState.all[action.note.data._id] = action.note.data;

@@ -6,9 +6,6 @@ import jwt_decode from 'jwt-decode';
 import { setAuthToken } from './util/session_api_util';
 import { logout } from './actions/session_actions';
 import App from './components/app';
-import { testResources } from '../src/actions/webscrap_actions';
-// import { addUserFollower, removeUserFollower } from '../src/actions/user_actions';
-import { addNoteLike, removeNoteLike } from '../src/actions/note_actions';
 
 document.addEventListener('DOMContentLoaded', () => {
   // console.log(process.env.REACT_APP_TEST_API_KEY);
@@ -43,13 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // render root component passing in store
   const root = document.getElementById('root');
 
-  /// TEST START ///
-  window.getState = store.getState;
-  window.dispatch = store.dispatch;
-  // window.addUserFollower = addUserFollower;
-  window.addNoteLike = addNoteLike;
-  window.removeNoteLike = removeNoteLike;
-  /// TEST END ///
   ReactDOM.render(<Root store={store} />, root);
 })
 

@@ -2,17 +2,12 @@
   background: #2D2D2D;
 }
 
-.main-sidebar {
-  grid-column: 1 / span 12;
-  padding-top: 2rem;
+/* TESTING */
+.test-note-spacer {
+  background-color: #202124;
+  height: 60px;
 }
-
-.home-main {
-  padding-right: 64px;
-  display: grid;
-  grid-template-rows: auto auto auto;
-  gap: 2rem;
-}
+/* END TESTING */
 
 .nv-boxes {
   display: flex;
@@ -21,41 +16,19 @@
   padding: 0px;
 }
 
-.nav-sidecar {
-  min-height: 300px;
-  max-height: fit-content;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  width: 100%;
-}
-
-.nav-menu-mobile {
-  position: absolute;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  height: 100%;
-  width: 100%;
-  background: #202124;
-}
-
 .main-mobile {
   min-height: 300px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
+  grid-column: 1 / span 12;
 }
 
 .none-found {
   font-style: italic;
   font-size: 12px;
   opacity: 70%;
-}
-
-.nav-list {
-  width: -webkit-fill-available;
 }
 
 @media only screen and (max-width: 600px) {
@@ -67,14 +40,43 @@
     align-items: flex-start;
     /* padding: 24px 0px 24px 64px; */
     gap: 10px;
-    width: -webkit-fill-available;
+    min-width: min-content;
+    width: 100%;
+    max-width: 100%;
     background: #202124;
     border-radius: 0px 9px 9px 0px;
   }
+  .home-main {
+    display: grid;
+    grid-template-rows: auto auto auto;
+    gap: 2rem;
+    width: 100%;
+  }
+
+  .nav-sidecar {
+    display: none;
+  }
+
+  .notes-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 1rem;
+  }
+
+  .nav-list {
+    min-width: min-content;
+    width: 100%;
+  }
 }
+
 @media only screen and (max-width: 900px)  {
   .nav-boxes, .tags {
     padding: 16px 0px 16px 16px;
+  }
+  .nav-list {
+    min-width: min-content;
+    width: 100%;
   }
 }
 
@@ -84,12 +86,42 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-start;
-    padding: 24px 0px 24px 64px;
+    padding: 24px 0px 24px 24px;
     gap: 10px;
-    width: -webkit-fill-available;
+    min-width: min-content;
+    width: 80%;
+    /* max-width: max-content; */
     background: #202124;
     border-radius: 0px 9px 9px 0px;
   }
+
+  .nav-list {
+    min-width: min-content;
+    width: 100%;
+  }
+
+  .home-main {
+    padding-right: 32px;
+    display: grid;
+    grid-template-rows: auto auto auto;
+    gap: 2rem;
+  }
+
+  .nav-sidecar {
+    min-height: 300px;
+    max-height: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .notes-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
 }
 
 .nav-pages {
@@ -106,14 +138,12 @@
   margin-top: 2rem;
 }
 
-.notes-section {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
 .section-title {
   margin-bottom: 0.4rem;
+}
+
+.section-title h1 {
+  margin-bottom: 1.3rem;
 }
 
 /* .note-list-container {
@@ -124,11 +154,48 @@
   padding: 0px;
   gap: 1rem;
 } */
+
 .note-list-container {
   margin-top: 1.2rem;
-  display: grid;
-  grid-gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  /* display: grid; */
+  display: flex;
+  /* grid-gap: 1rem; */
+  /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
+  width: 100%;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: space-between;
+  gap: 1rem;
+}
+
+.desktop-notes {
+  width: inherit;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.mobile-notes {
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.column1{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+  margin-right: 2rem;
+}
+
+.column2{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   width: 100%;
 }
 
@@ -137,7 +204,7 @@
   flex-direction: row;
   align-items: center;
   padding: 5px 12px;
-  gap: 26px;
+  gap: 1rem;
   height: 48px;
   background: #202124;
   transition: background 500ms ease-in-out;

@@ -38,7 +38,6 @@ export const filterUsersByComment = (users, comment) => {
 }
 
 export const filterOnlyPublicNotes = notes => {
-  debugger
   const filtered = notes.filter(note => note.public)
   return filtered;
 }
@@ -48,6 +47,7 @@ export const selectLikedNotes = (notes, likedIds) => {
 }
 
 export const selectCommentsCount = (userNotes) => {
+
   const allComments = userNotes.map(note => note.comments)
   return allComments.flat().length;
 }

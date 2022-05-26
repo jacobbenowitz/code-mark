@@ -25,7 +25,7 @@ const SideCarMenu = ({ tags, tagType }) => {
                 <img src="https://code-mark.s3.amazonaws.com/type%3DFollowing.svg" /> <span>Following</span>
               </div>
             </NavLink>
-            <NavLink to={'/liked_notes'} className='nav-item-container'>
+            <NavLink to={'/likes'} className='nav-item-container'>
               <div className='nav-item-link'>
                 <img src="https://code-mark.s3.amazonaws.com/type%3DFollowing.svg" /> <span>Liked</span>
               </div>

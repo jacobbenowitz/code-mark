@@ -27,12 +27,12 @@ const initialState = {
   tags: [],
   followers: [],
   following: [],
-  noteLikes: []
+  note_likes: []
 };
 
-const SessionReducer = (state = initialState, action) => {
-  // let nextState = Object.assign({}, state)
-  let nextState = merge({}, state);
+const SessionReducer = (prevState = initialState, action) => {
+  Object.freeze(prevState);
+  let nextState = merge({}, prevState);
 
   switch (action.type) {
     case RECEIVE_USER_LOGOUT:
@@ -42,21 +42,19 @@ const SessionReducer = (state = initialState, action) => {
       }
     case RECEIVE_CURRENT_USER:
       return {
-        ...state,
+        ...prevState,
         isAuthenticated: !!action.currentUser,
         user: action.currentUser
       }
     case RECEIVE_USER_SIGN_IN:
       return {
-        ...state,
+        ...prevState,
         isSignedIn: true
       }
     case RECEIVE_UPDATED_USER:
-      // debugger
       nextState.user = action.user.data;
       return nextState;
     case RECEIVE_USER_NEW_FOLLOWING:
-      // debugger;
       nextState.user = action.users.data.currentUser;
       return nextState;
     case RECEIVE_DELETED_USER:
@@ -65,17 +63,18 @@ const SessionReducer = (state = initialState, action) => {
         user: undefined
       }
     case RECEIVE_USER_NOTES:
-      // debugger
       nextState.tags = selectNoteTags(action.notes.data)
       return nextState;
     case RECEIVE_NOTE_LIKE:
-      nextState.user.noteLikes = nextState.user.noteLikes.concat([action.note.data._id])
+      nextState.user.note_likes = nextState.user.note_likes.concat(
+        [action.note.data._id])
       return nextState;
     case RECEIVE_NOTE_UNLIKE:
-      nextState.user.noteLikes = nextState.user.noteLikes.filter(id => id !== action.note.data._id)
+      nextState.user.note_likes = nextState.user.note_likes.filter(
+        id => id !== action.note.data._id)
       return nextState;
     default:
-      return state;
+      return prevState;
   }
 }
 

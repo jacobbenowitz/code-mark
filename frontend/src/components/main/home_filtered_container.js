@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom';
 import HomeFiltered from "./home_filtered";
 import { fetchUserNotes } from "../../actions/note_actions";
+import { fetchCurrentUser } from "../../actions/session_actions";
 
 const mapStateToProps = (state, { match }) => {
   return {
@@ -14,7 +15,8 @@ const mapStateToProps = (state, { match }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchUserNotes: userId => dispatch(fetchUserNotes(userId))
+    fetchUserNotes: userId => dispatch(fetchUserNotes(userId)),
+    fetchCurrentUser: () => dispatch(fetchCurrentUser())
   }
 }
 

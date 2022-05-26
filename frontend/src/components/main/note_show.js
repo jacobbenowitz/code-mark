@@ -27,7 +27,7 @@ export default class NoteShow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      note: undefined,
+      note: {},
       comments: [],
       selectedText: '',
       commentModal: false,
@@ -42,6 +42,7 @@ export default class NoteShow extends React.Component {
   componentWillMount() {
     this.props.fetchNote(this.props.noteId);
     this.props.fetchNoteComments(this.props.noteId);
+    this.props.fetchCurrentUser();
   }
 
   componentDidMount() {
@@ -52,13 +53,15 @@ export default class NoteShow extends React.Component {
     this._isMounted = false;
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      note: nextProps.note,
-      comments: orderNoteComments(nextProps.comments),
-      public: nextProps.note.public
-      // newComment: nextProps.newComment
-    })
+  componentDidUpdate() {
+    const { note, comments } = this.props;
+    if (!Object.values(this.state.note).length && this.state.comments !== comments && note.codebody) {
+      this.setState({
+        note: note,
+        comments: orderNoteComments(comments),
+        public: note.public
+      })
+    }
   }
 
   deleteNote() {
@@ -224,7 +227,7 @@ export default class NoteShow extends React.Component {
 
     function OnInput() {
       this.style.height = "auto";
-      this.style.height = (this.scrollHeight) + "px"; 
+      this.style.height = (this.scrollHeight) + "px";
     }
 
     // listen for selection and update state 
@@ -234,8 +237,7 @@ export default class NoteShow extends React.Component {
     // this.setState({ selectedText: selection.toString() });
     // };
 
-
-    return note ? (
+    return Object.values(note).length ? (
       <>
         <div id="context-menu">
           <div className="menu-item" onMouseDown={() => {

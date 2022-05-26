@@ -7,6 +7,8 @@ import {
   filterUsersById,
   selectFollowingUsersNotes
 } from '../../util/selectors';
+import MobileNotes from './mobile_notes';
+
 
 
 export default class Following extends React.Component {
@@ -34,7 +36,6 @@ export default class Following extends React.Component {
       selectFollowingUsersNotes(followingUsers, allNotes)
       const publicNotes = filterOnlyPublicNotes(followingNotes)
       const followingTags = selectNoteTags(publicNotes)
-      debugger
       if (followingNotes.length !== this.state.followingNotes.length ||
         followingTags.length !== this.state.followingTags.length) {
         this.setState({
@@ -45,8 +46,12 @@ export default class Following extends React.Component {
     }
   }
 
+  isMobile() {
+    // debugger;
+    return window.innerWidth < 600;
+  }
+
   render() {
-    debugger
     return (
       <div className='main-sidebar'>
         <SideCarMenu tagType={'following'} tags={this.state.followingTags} />
@@ -60,7 +65,9 @@ export default class Following extends React.Component {
               {this.state.followingNotes.length === 0 ? (
                 <span>No notes found</span>
               ) :
-                <AllNotes notes={this.state.followingNotes} />
+                this.isMobile() ?
+                  <MobileNotes notes={this.state.followingNotes} />
+                  : <AllNotes notes={this.state.followingNotes} />
               }
 
             </div>

@@ -13,14 +13,14 @@ const UserHeader = ({
         <div className="user-header-stats">
           <div className="user-stats">
 
-            <div className="user-notes-stat">
+            <div className="user-notes-stat notes">
               <div className="icon-wrapper">
                 <img className="codemark-icon" src="https://code-mark.s3.amazonaws.com/CodeMark_Icon.svg" alt="CodeMark Notes" />
               </div>
               <span>{user.notes.length}</span>
             </div>
 
-            <div className="user-notes-stat">
+            <div className="user-notes-stat comments">
               <div className="icon-wrapper">
                 <i className="fa-solid fa-comments fa-lg"></i>
               </div>

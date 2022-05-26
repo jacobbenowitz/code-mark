@@ -14,8 +14,11 @@
 
 }
 
-
-
+#hero-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
 
 .hero-graphic {
   grid-column: 1 / span 2;
@@ -26,7 +29,6 @@
 
 #hero-content {
   grid-column: 2 / span 1;
-  /* padding-top: 80px; */
   margin: 0 64px 0 64px;
   text-align: right;
 }

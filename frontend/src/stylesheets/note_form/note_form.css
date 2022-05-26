@@ -1,24 +1,21 @@
 .new-note-container {
   box-sizing: border-box;
-  min-width: 400px;
-  /* min-height: 236px; */
   padding: 1.4rem;
   display: flex;
-  
   background: #202124;
   border: 0.5px solid #FFFFFF;
   /* bg-shadow-lg */
 
   box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.12);
   border-radius: 5px;
-
+}
+@media only screen and (max-width: 600px) {
+  .new-note-container {
+    margin: 1rem;
+  }
 }
 
 #lang-select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  /* background: transparent url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat 100% center; */
   display: flex;
   position: relative;
 
@@ -62,6 +59,7 @@
   cursor: not-allowed;
 }
 
+
 #code-note-submit {
   position: relative;
 }
@@ -102,6 +100,10 @@
   animation: fadeIn 1000ms ease-in-out;
   color: red;
   display: flex;
+
+button#tag-icon-save.disabled:hover {
+  background: #373737;
+
 }
 
 .save-tag.disabled {
@@ -112,11 +114,11 @@
   cursor: not-allowed;
 }
 
+
 .tag-list {
     display: flex;
     gap: 5px;
 }
-
 
 .view-note {
   margin-left: 1rem;
