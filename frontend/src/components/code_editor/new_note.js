@@ -54,6 +54,7 @@ class NewNote extends React.Component {
     this.toggleSuccessModal = this.toggleSuccessModal.bind(this);
     this.closeSuccessModal = this.closeSuccessModal.bind(this);
     this.placeholderTitle = this.placeholderTitle.bind(this);
+    this.errorCheck = this.errorCheck.bind(this)
   }
 
 
@@ -284,6 +285,19 @@ class NewNote extends React.Component {
     // selection.setBaseAndExtent(titleInput, 0, titleInput, 1);
   }
 
+  errorCheck(e){
+    const error = false
+    error = (this.state.codebody.length);
+  }
+
+  renderErrors(field) {
+    return (
+      <span className="error-item" key={`error-${field}`}>
+        {this.state.errors[field]}
+      </span>
+    )
+  };
+
   render() {
     return (
       <>
@@ -394,8 +408,10 @@ class NewNote extends React.Component {
               </div>
               {/* Need to add conditional logic to disable submit button if codebody empty */}
               <button type='submit' id='code-note-submit'
-                className={this.state.codebody.length ? 'save-button' : "save-button disabled"}>Save</button>
+                className={(this.state.codebody.length > 1 && this.state.codebody.length < 5001) ? 'save-button' : "save-button disabled"}>Save</button>
             </form>
+   
+
             <div id='hide-note-form' className='icon-only-button' onClick={this.toggleForm}>
               <i className="fa-solid fa-square-minus"></i>
             </div>
@@ -422,15 +438,19 @@ class NewNote extends React.Component {
                 )}
               </div>
 
-              <form onSubmit={this.state.newTag.length ? this.updateTags : undefined}
+              <form onSubmit={this.state.newTag.split(' ').join('').length ? this.updateTags : undefined}
                 className="tag-form-off" id="new-tag-form-new-note">
                 <input type={'text'}
                   className={'tag-form-input'}
                   onChange={this.update('newTag')}
                   placeholder={'New tag...'}
-                  value={this.state.newTag}
+                  value={this.state.newTag.split(' ').join(' ')}
+                  maxlength = "50"
                 />
-                <button className={this.state.newTag.length ? '' : 'save-tag disabled' } id='tag-icon-save' type='submit'>
+                <div>
+                 
+                </div>
+                <button className={this.state.newTag.split(' ').join('').length ? '' : 'save-tag disabled' } id='tag-icon-save' type='submit'>
                   <i className="fa-solid fa-floppy-disk" />
                 </button>
               </form>

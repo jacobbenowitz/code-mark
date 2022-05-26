@@ -62,6 +62,48 @@
   cursor: not-allowed;
 }
 
+#code-note-submit {
+  position: relative;
+}
+
+#code-note-submit.disabled:hover::after {
+  content: "Invalid codebody";
+  position: absolute;
+  left: 75px;
+  white-space: nowrap;
+  bottom: 0;
+  overflow: hidden;
+  text-align: end;
+  /* background: #222222; */
+  padding: 0.4rem;
+  border-radius: 4px;
+  /* box-shadow: 0px 2px 16px rgb(0 0 0 / 30%); */
+  animation: fadeIn 1000ms ease-in-out;
+  color: red;
+  display: flex;
+}
+
+#tag-icon-save {
+  position: relative;
+}
+
+#tag-icon-save.disabled:hover::after {
+  content: "Invalid tag";
+  position: absolute;
+  left: 75px;
+  white-space: nowrap;
+  bottom: 0;
+  overflow: hidden;
+  text-align: end;
+  /* background: #222222; */
+  padding: 0.4rem;
+  border-radius: 4px;
+  /* box-shadow: 0px 2px 16px rgb(0 0 0 / 30%); */
+  animation: fadeIn 1000ms ease-in-out;
+  color: red;
+  display: flex;
+}
+
 .save-tag.disabled {
   border: 1px solid transparent;
   color: #727272;
