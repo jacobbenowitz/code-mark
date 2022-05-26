@@ -187,15 +187,10 @@ footer {
   }
 
   #hero-content {
-  grid-column: 1 / span 2;
-  margin: 0 64px 0 64px;
-  text-align: center;
-}
-
-  .home-main {
-    padding-left: 20px;
-    padding-right: 20px;
-    }
+    grid-column: 1 / span 2;
+    margin: 0 64px 0 64px;
+    text-align: center;
+  }
 
   #footer-bottom {
     padding: 1rem 0 1rem 0;
@@ -221,8 +216,7 @@ footer {
   grid-column: 1 / span 12;
   height: 75vh;
   background-color: #2D2D2D;
-}
- 
+  }
 }
 
 /* desktop */
@@ -255,6 +249,7 @@ footer {
     width: 100%;
     display: flex;
   }
+
   #sample-code-editor{
     position: absolute;
     top: 100px;
@@ -270,8 +265,7 @@ footer {
   grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
 }
 
-#footer-top h5,
-#footer-top a {
+#footer-top h5, #footer-top a {
   color: rgb(109, 115, 120);
 }
 

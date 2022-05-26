@@ -1,17 +1,18 @@
 .new-note-container {
   box-sizing: border-box;
-  min-width: 400px;
-  /* min-height: 236px; */
   padding: 1.4rem;
   display: flex;
-  
   background: #202124;
   border: 0.5px solid #FFFFFF;
   /* bg-shadow-lg */
 
   box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.12);
   border-radius: 5px;
-
+}
+@media only screen and (max-width: 600px) {
+  .new-note-container {
+    margin: 1rem;
+  }
 }
 
 #lang-select {

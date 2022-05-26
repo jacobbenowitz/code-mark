@@ -6,7 +6,7 @@ const NavTagItem = props => (
   <NavLink to={`/${props.tagType}/tags/${props.tag}`}>
     <div className='nav-item-link'>
       <img src="https://code-mark.s3.amazonaws.com/type%3Dcustom_tag.svg" />
-      <NavLink to={`/${props.tagType}/tags/${props.tag}`}>{props.tag}</NavLink>
+      <span>{props.tag}</span>
     </div>
   </NavLink>
 )

@@ -7,6 +7,8 @@ import {
   filterUsersById,
   selectFollowingUsersNotes
 } from '../../util/selectors';
+import MobileNotes from './mobile_notes';
+
 
 
 export default class Following extends React.Component {
@@ -44,6 +46,11 @@ export default class Following extends React.Component {
     }
   }
 
+  isMobile() {
+    // debugger;
+    return window.innerWidth < 600;
+  }
+
   render() {
     return (
       <div className='main-sidebar'>
@@ -58,7 +65,9 @@ export default class Following extends React.Component {
               {this.state.followingNotes.length === 0 ? (
                 <span>No notes found</span>
               ) :
-                <AllNotes notes={this.state.followingNotes} />
+                this.isMobile() ?
+                  <MobileNotes notes={this.state.followingNotes} />
+                  : <AllNotes notes={this.state.followingNotes} />
               }
 
             </div>

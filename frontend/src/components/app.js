@@ -28,7 +28,7 @@ import LikedNotesContainer from './main/liked_notes_container';
 import FollowingContainer from './main/following_container';
 import FollowingFilteredContainer from './main/following_filtered_container';
 import LikedFilteredContainer from './main/liked_filtered_container';
-
+import LayoutDesign from './UI/layout_design';
 
 const App = () => (
   <div className="grid-pancake-stack">
@@ -63,6 +63,8 @@ const App = () => (
         component={LikedFilteredContainer} />
       <ProtectedRoute exact path='/settings'
         component={SettingsContainer} />
+      <Route exact path='/dev/main-layout'
+        component={LayoutDesign} />
       <AuthRoute path="/"
         component={SplashPage} />
     </Switch>
