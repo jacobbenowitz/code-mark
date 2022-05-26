@@ -27,6 +27,7 @@ import UserFilteredContainer from './main/user_filtered_container';
 import LikedNotesContainer from './main/liked_notes_container';
 import FollowingContainer from './main/following_container';
 import FollowingFilteredContainer from './main/following_filtered_container';
+import LikedFilteredContainer from './main/liked_filtered_container';
 
 
 const App = () => (
@@ -58,6 +59,8 @@ const App = () => (
         component={FollowingContainer} />
       <ProtectedRoute exact path='/following/tags/:tag'
         component={FollowingFilteredContainer} />
+      <ProtectedRoute exact path='/likes/tags/:tag'
+        component={LikedFilteredContainer} />
       <ProtectedRoute exact path='/settings'
         component={SettingsContainer} />
       <AuthRoute path="/"

@@ -116,6 +116,10 @@
   margin-bottom: 0.4rem;
 }
 
+.section-title h1 {
+  margin-bottom: 1.3rem;
+}
+
 /* .note-list-container {
   display: flex;
   flex-direction: row;
