@@ -20,7 +20,11 @@ const UserSchema = new Schema({
     note_likes: [{type: Schema.Types.ObjectId, ref: "notes"}],
     comment_likes: [{type: Schema.Types.ObjectId, ref: "comments"}],
     following: [{type: Schema.Types.ObjectId, ref: "users"}],
-    followers: [{type: Schema.Types.ObjectId, ref: "users"}]
+    followers: [{type: Schema.Types.ObjectId, ref: "users"}],
+    color: {
+        type: String,
+        default: "rgb(14, 70, 73)"
+    }
     }, 
     {timestamps: true}
 )
