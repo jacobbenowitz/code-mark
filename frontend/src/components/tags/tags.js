@@ -85,7 +85,7 @@ export default class Tags extends React.Component {
         ) : undefined}
 
 
-        <form onSubmit={this.handleSubmit}
+        <form onSubmit={this.state.newTag.split(' ').join('').length ? this.handleSubmit : undefined}
           className="tag-form-off" id="new-tag-form">
           <input type={'text'}
             className={'tag-form-input'}
@@ -93,7 +93,7 @@ export default class Tags extends React.Component {
             placeholder={'New tag...'}
             value={this.state.newTag}
           />
-          <button id='tag-icon-save' type='submit'>
+          <button className={this.state.newTag.split(' ').join('').length ? '' : 'save-tag disabled'} id='tag-icon-save' type='submit'>
             <i className="fa-solid fa-floppy-disk" />
           </button>
         </form>

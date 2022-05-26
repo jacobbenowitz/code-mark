@@ -99,7 +99,7 @@ export default class EditNote extends React.Component {
     return (
       <div className='new-note-container' id='edit-note-full'>
         <div className='new-note-form'>
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.state.codebody.length ? this.handleSubmit : ""}>
             <div className='note-input'>
               <input type={'text'}
                 onChange={this.update('title')}
@@ -127,7 +127,7 @@ export default class EditNote extends React.Component {
               />
             </div>
             <button type='submit' id='code-note-submit'
-              className='submit button'>Save</button>
+              className={(this.state.codebody.length > 1 && this.state.codebody.length < 5001) ? 'save-button' : "save-button disabled"}>Save</button>
           </form>
           <span className='hide-button'
             onClick={this.toggleEditModal}>Hide</span>

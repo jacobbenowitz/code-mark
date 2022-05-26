@@ -90,9 +90,9 @@
 #tag-icon-save.disabled:hover::after {
   content: "Invalid tag";
   position: absolute;
-  left: 75px;
+  left: -115px;
   white-space: nowrap;
-  bottom: 0;
+  bottom: -2.5px;
   overflow: hidden;
   text-align: end;
   /* background: #222222; */

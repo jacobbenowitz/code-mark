@@ -54,7 +54,6 @@ class NewNote extends React.Component {
     this.toggleSuccessModal = this.toggleSuccessModal.bind(this);
     this.closeSuccessModal = this.closeSuccessModal.bind(this);
     this.placeholderTitle = this.placeholderTitle.bind(this);
-    this.errorCheck = this.errorCheck.bind(this)
   }
 
 
@@ -285,10 +284,7 @@ class NewNote extends React.Component {
     // selection.setBaseAndExtent(titleInput, 0, titleInput, 1);
   }
 
-  errorCheck(e){
-    const error = false
-    error = (this.state.codebody.length);
-  }
+
 
   renderErrors(field) {
     return (
