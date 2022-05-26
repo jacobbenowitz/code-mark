@@ -341,7 +341,7 @@ class NewNote extends React.Component {
                   id='title-code'
                   className='title-input'
                   value={this.state.title}
-                  placeholder={'Untitled Note'} />
+                  placeholder={'Untitled note'} />
               </div>
               <div className='select-wrapper'>
                 <select id='lang-select'

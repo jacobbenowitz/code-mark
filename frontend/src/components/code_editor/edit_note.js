@@ -31,6 +31,7 @@ export default class EditNote extends React.Component {
   bindHandlers() {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.init = this.init.bind(this);
+    this.placeholderTitle = this.placeholderTitle.bind(this)
   }
 
   update(type) {
@@ -95,6 +96,19 @@ export default class EditNote extends React.Component {
       .then(() => this.toggleEditModal())
   }
 
+  placeholderTitle(e) {
+    // const title = this.state.codebody.slice(0, 20);
+    const title = this.state.codebody.split('\n')[0];
+    const selection = window.getSelection();
+
+    this.setState({ title: title });
+    setTimeout(() => {
+      const titleInput = document.getElementById('title-code');
+      titleInput.select()
+    }, 0);
+    // selection.setBaseAndExtent(titleInput, 0, titleInput, 1);
+  }
+
   render() {
     return (
       <div className='new-note-container' id='edit-note-full'>
@@ -102,11 +116,12 @@ export default class EditNote extends React.Component {
           <form onSubmit={this.state.codebody.length ? this.handleSubmit : ""}>
             <div className='note-input'>
               <input type={'text'}
+                onClick={this.placeholderTitle}
                 onChange={this.update('title')}
                 id='title-code'
                 className='title-input'
                 value={this.state.title}
-                placeholder={'Title'} />
+                placeholder={'Untitled note'} />
             </div>
             <div className='note-input'>
               <CodeMirror
