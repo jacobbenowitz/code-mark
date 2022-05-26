@@ -53,7 +53,7 @@ const App = () => (
         component={DiscoverContainer} />
       <ProtectedRoute exact path='/discover/tags/:tag'
         component={DiscoverFilteredContainer} />
-      <ProtectedRoute exact path='/liked_notes'
+      <ProtectedRoute exact path='/likes'
         component={LikedNotesContainer} />
       <ProtectedRoute exact path='/following'
         component={FollowingContainer} />
