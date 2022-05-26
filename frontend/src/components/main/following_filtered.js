@@ -47,22 +47,29 @@ export default class FollowingFiltered extends React.Component {
     }
   }
 
+  isMobile(){
+    // debugger;
+    return window.innerWidth < 600;
+  }
+
   render() {
     return (
-      <div className='main-sidebar'>
+      <div className={this.isMobile() ? 'main-mobile' : 'main-sidebar'}>
         <SideCarMenu tagType={'following'} tags={this.state.followingTags} />
 
         <div className='home-main'>
           <div className='notes-section'>
             <div className='section-title'>
-              <h1>My Follower's Notes</h1>
+              <h1>Following</h1>
               <h5>Filtered by: {this.state.filter}</h5>
             </div>
             <div className='note-list-container'>
               {this.state.followingNotes.length === 0 ? (
                 <span>No notes found</span>
               ) :
-                <AllNotes notes={this.state.followingNotes} />
+              this.isMobile() ?
+              <MobileNotes notes={this.state.followingNotes} />
+              : <AllNotes notes={this.state.followingNotes} />
               }
 
             </div>

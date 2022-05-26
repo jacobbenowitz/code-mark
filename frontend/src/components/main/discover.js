@@ -16,7 +16,7 @@ export default class Discover extends React.Component {
 
   render() {
     return (
-      <div className='main-sidebar'>
+      <div className={this.isMobile() ? 'main-mobile' : 'main-sidebar'}>
         <SideCarMenu tagType={'discover'} tags={this.props.tags} />
 
         <div className='home-main'>

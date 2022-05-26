@@ -44,7 +44,7 @@ export default class HomeFiltered extends React.Component {
 
   render() {
     return (
-      <div className='main-sidebar'>
+      <div className={this.isMobile() ? 'main-mobile' : 'main-sidebar'}>
         <SideCarMenu tagType={'home'} tags={this.props.tags} />
 
         <div className='home-main'>

@@ -29,7 +29,7 @@ export default class Following extends React.Component {
   componentDidUpdate() {
     const { allNotes, allUsers, currentUser } = this.props;
 
-    if (Object.values(allNotes).length && Object.values(allUsers).length) {
+    if (Object.values(allNotes).length && Object.values(allUsers).length && !this.state.followingNotes.length) {
       const followingUserIds = currentUser.following;
       const followingUsers = filterUsersById(allUsers, followingUserIds)
       const followingNotes =
@@ -53,13 +53,13 @@ export default class Following extends React.Component {
 
   render() {
     return (
-      <div className='main-sidebar'>
+      <div className={this.isMobile() ? 'main-mobile' : 'main-sidebar'}>
         <SideCarMenu tagType={'following'} tags={this.state.followingTags} />
 
         <div className='home-main'>
           <div className='notes-section'>
             <div className='section-title'>
-              <h1>My Follower's Notes</h1>
+              <h1>Following</h1>
             </div>
             <div className='note-list-container'>
               {this.state.followingNotes.length === 0 ? (
