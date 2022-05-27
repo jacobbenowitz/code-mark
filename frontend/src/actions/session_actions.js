@@ -42,6 +42,7 @@ export const login = user => dispatch => {
   })
     .then(() => dispatch(receiveUserSignIn()))
     .catch(err => {
+      debugger
       dispatch(receiveErrors(err.response.data));
     })
 };

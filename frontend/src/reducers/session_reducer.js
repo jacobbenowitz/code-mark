@@ -42,10 +42,14 @@ const SessionReducer = (prevState = initialState, action) => {
         user: undefined
       }
     case RECEIVE_CURRENT_USER:
+      const user = action.currentUser._id ? (
+        action.currentUser
+        ) : action.currentUser.currentUser
+      debugger
       return {
         ...prevState,
-        isAuthenticated: !!action.currentUser,
-        user: action.currentUser
+        isAuthenticated: !!user,
+        user: user
       }
     case RECEIVE_USER_SIGN_IN:
       return {

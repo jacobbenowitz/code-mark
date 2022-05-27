@@ -1,6 +1,6 @@
 import React from 'react'
 import Avatar from './avatar';
-
+import AvatarForm from '../profile/avatar_form';
 
 export default class Settings extends React.Component {
   constructor(props) {
@@ -20,11 +20,11 @@ export default class Settings extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchUser(this.props.currentUser.id)
+    this.props.fetchUser(this.props.currentUser._id)
   }
 
   componentDidUpdate() {
-    const { email, username, color } = this.props.user;
+    const { email, username, color, password, password2 } = this.props.user;
     if (!this.state.email.length) {
       this.setState({
         email: email,
@@ -35,7 +35,7 @@ export default class Settings extends React.Component {
   }
 
   confirmedDelete() {
-    this.props.removeUser(this.props.currentUser.id);
+    this.props.removeUser(this.props.currentUser._id);
     this.props.logout();
   }
 
@@ -46,9 +46,9 @@ export default class Settings extends React.Component {
     });
   };
 
-  toggleSuccessModal(){
+  toggleSuccessModal() {
     const successModal = document.getElementById('success-modal');
-    successModal.className = "success-in modal-on" 
+    successModal.className = "success-in modal-on"
     setTimeout(() => successModal.className = "success-out", 4000)
     setTimeout(() => successModal.className = "modal-off", 5000)
   }
@@ -59,7 +59,7 @@ export default class Settings extends React.Component {
     // debugger;
     this.state.password2.length ? (
       user = {
-        id: this.props.currentUser.id,
+        id: this.props.currentUser._id,
         email: this.state.email,
         username: this.state.username,
         password: this.state.password,
@@ -68,7 +68,7 @@ export default class Settings extends React.Component {
       }
     ) : (
       user = {
-        id: this.props.currentUser.id,
+        id: this.props.currentUser._id,
         email: this.state.email,
         username: this.state.username,
         password: this.props.user.password,
@@ -79,6 +79,7 @@ export default class Settings extends React.Component {
     this.props.updateUser(user);
     this.setState({ updated: false })
     this.toggleSuccessModal()
+    window.scrollTo(0, 0);
   }
 
   renderErrors() {
@@ -103,7 +104,10 @@ export default class Settings extends React.Component {
   }
 
   checkAllFields() {
-    if (this.state.password.length && this.state.password2.length) {
+    if (
+      this.state.username !== this.props.user.username ||
+      this.state.email !== this.props.user.email ||
+      this.state.color !== this.props.user.color) {
       return true
     }
     else return false
@@ -111,7 +115,7 @@ export default class Settings extends React.Component {
 
   render() {
     return (
-  
+
       <div className='session center-simple'>
         <div id='success-modal' className='modal-off'>
           <i className="fa-solid fa-thumbs-up"></i>
@@ -155,7 +159,14 @@ export default class Settings extends React.Component {
             </div>
           </div>
           <h3>Update your account</h3>
-          <form onSubmit={this.handleSubmit}>
+          <AvatarForm
+            color={this.state.color.length ?
+              this.state.color : '#0D4649'}
+            username={this.state.username.length ?
+              this.state.username : 'USER'}
+          />
+          <form onSubmit={this.checkAllFields() ?
+            this.handleSubmit : undefined}>
             <div className='form-input'>
               <label htmlFor='email'>Email</label>
               <input type={'email'}
@@ -167,7 +178,7 @@ export default class Settings extends React.Component {
               />
             </div>
             <div className='form-input'>
-              <label htmlFor='username'>username</label>
+              <label htmlFor='username'>Username</label>
               <input type={'text'}
                 value={this.state.username}
                 id="username-signup"
@@ -196,50 +207,43 @@ export default class Settings extends React.Component {
                 className="text-input"
               />
             </div>
-            <div className='color-change-view'>
-              <div className="form-input">
-              {/* <div> */}
-                <label htmlFor="color">Color</label>
+            <div className='avatar-section-form'>
+              <span className='form-input-label'>Customize Avatar Color</span>
+              <div className='avatar-form'>
                 <input type={'color'}
                   value={this.state.color}
-                  id="color-change"
+                  id="color-signup"
                   onChange={this.update('color')}
-                  />
-              </div>
-              {/* <div>{this.state.color}</div> */}
-              <Avatar 
-                currentUser={this.state}
-                color={this.state.color}
                 />
+              </div>
             </div>
             <div className='signup-buttons-wrapper'>
-              <button type='submit' 
-                className={(this.state.password.length > 6 && this.state.password2.length > 6) ? 'button-session' : 'button-session disabled'}>Update account</button>
+              <button type='submit'
+                className={this.checkAllFields() ? 'button-session' : 'button-session disabled'}>Update account</button>
             </div>
 
             <div className='session-error-wrapper'>
               <div className='session-error'>
-                {(this.state.password.length < 6 || this.state.password2.length < 6) ? 
-                <i className="fa-solid fa-circle-xmark"></i>
-                :
-                <i className="fa-solid fa-circle-check"></i> 
+                {(this.state.password.length < 6 || this.state.password2.length < 6) ?
+                  <i className="fa-solid fa-circle-xmark"></i>
+                  :
+                  <i className="fa-solid fa-circle-check"></i>
                 }
                 <span>Passwords must be 6 characters or more</span>
               </div>
 
-              <div className='session-error'> 
+              <div className='session-error'>
                 {(this.state.password !== this.state.password2 || this.state.password === '') ?
                   <i className="fa-solid fa-circle-xmark"></i>
                   :
                   <i className="fa-solid fa-circle-check"></i>
                 }
                 <span>Passwords Must Match</span>
-               
               </div>
             </div>
-            
-    
-          
+
+
+
             {this.renderErrors()}
           </form>
         </div>

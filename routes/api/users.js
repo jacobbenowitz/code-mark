@@ -77,14 +77,8 @@ router.post('/login', (req, res) => {
         .then(isMatch => {
           if (isMatch) {
             const payload = {
-              id: user.id,
-              username: user.username,
-              followers: user.followers,
-              following: user.following,
-              note_likes: user.note_likes,
-              color: user.color
+              currentUser: user
             };
-
             jwt.sign(
               payload,
               keys.secretOrKey,
@@ -105,15 +99,7 @@ router.post('/login', (req, res) => {
 })
 
 router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
-  const payload = {
-    id: req.user.id,
-    username: req.user.username,
-    followers: req.user.followers,
-    following: req.user.following,
-    note_likes: req.user.note_likes,
-    color: req.user.color
-  }
-  return res.json(payload);
+  return res.json(req.user);
 })
 
 router.get('/:userId', (req, res) => {
@@ -188,8 +174,9 @@ router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,
                     } else {
                       mainuser.save()
                         .then(user => {
+                          res.json(user)
                           // debugger;
-                          if(different){
+                          if (different) {
                             user.comments.forEach(commentId => {
                               Comment.findById(commentId)
                                 .then(comment => {
@@ -203,7 +190,6 @@ router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,
                             })
                           }
                         })
-                        .then(user => res.json(user))
                         .catch(err => console.log(err))
                     }
                   }

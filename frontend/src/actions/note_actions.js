@@ -76,14 +76,14 @@ export const fetchNote = noteId => dispatch => (
 
 );
 
-export const fetchUserNotes = id => dispatch => (
-  getUserNotes(id)
+export const fetchUserNotes = id => dispatch => {
+  debugger
+  return getUserNotes(id)
     .then(notes => dispatch(receiveUserNotes(notes)))
     .catch(err => dispatch(receiveNoteErrors(err)))
-);
+}
 
 export const composeNote = data => dispatch => {
- 
   return writeNote(data)
     .then(note => dispatch(receiveNewNote(note)))
     .catch(err => dispatch(receiveNoteErrors(err)))

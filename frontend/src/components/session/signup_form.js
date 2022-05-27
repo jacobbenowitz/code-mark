@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import Demo from "./demo_user_signup"
 import { Link } from 'react-router-dom';
+import AvatarForm from '../profile/avatar_form';
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class SignupForm extends React.Component {
       username: '',
       password: '',
       password2: '',
-      color: '',
+      color: '#0D4649',
       errors: {}
     }
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -76,11 +77,18 @@ class SignupForm extends React.Component {
   }
 
   render() {
+    window.scrollTo(0, 0);
     return (
       <div className='session center-simple'>
         <div id='session-form'>
           <h3>Create a new account</h3>
           <form onSubmit={this.handleSubmit}>
+            <AvatarForm
+              color={this.state.color.length ?
+                this.state.color : '#0D4649'}
+              username={this.state.username.length ?
+                this.state.username : 'USER'}
+            />
             <div className='form-input'>
               <label htmlFor='email'>Email</label>
               <input type={'email'}
@@ -94,7 +102,7 @@ class SignupForm extends React.Component {
             </div>
             
             <div className='form-input'>
-              <label htmlFor='username'>username</label>
+              <label htmlFor='username'>Username</label>
               <input type={'text'}
                 value={this.state.username}
                 id="username-signup"
@@ -126,15 +134,14 @@ class SignupForm extends React.Component {
               />
               {this.renderErrors('password2')}
             </div>
-            <div className='form-input'>
-              <label htmlFor='color'>Color</label>
+            <div className='avatar-section-form'>
+              <span className='form-input-label'>Customize Avatar Color</span>
+              <div className='avatar-form'>
               <input type={'color'}
                 value={this.state.color}
                 id="color-signup"
                 onChange={this.update('color')}
               />
-              <div>
-                {this.state.color}
               </div>
             </div>
             <div className='signup-buttons-wrapper'>

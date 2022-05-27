@@ -9,20 +9,19 @@ import { withRouter } from "react-router-dom";
 
 const CodeNoteItem = props => {
 
-  function preventBubbleParent(e) {
-    e.stopPropagation();
-    props.history.push(`/notes/${props.id}`);
-  }
+  // function preventBubbleParent(e) {
+  //   e.stopPropagation();
+  //   props.history.push(`/notes/${props.id}`);
+  // }
 
-  function preventBubbleLink(e) {
-    // e.stopPropagation();
-    props.history.push(`/users/${props.userId}`);
-  }
+  // function preventBubbleLink(e) {
+  //   e.stopPropagation();
+  //   props.history.push(`/users/${props.userId}`);
+  // }
   return (
     <>
       {props.id && props.username && props.userId && props.createdAt && props.codeBody ? (
-        <div className="code-note-item" key={props.id}
-          onClick={() => preventBubbleParent()}>
+        <div className="code-note-item" key={props.id}>
           <div className="note-item-top">
             <div className="note-stats">
               <div className="comment-count">
@@ -45,8 +44,7 @@ const CodeNoteItem = props => {
           </div>
           {props.userId && props.createdAt && props?.title ? (
             <div className="code-note-text">
-              <div className="updated-at-and-username"
-                onClick={() => preventBubbleLink()}>
+              <div className="updated-at-and-username">
                 <Link className="code-note-username"
                   to={`/users/${props.userId}`}>
                   @{props?.username}
