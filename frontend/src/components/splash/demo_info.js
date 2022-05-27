@@ -31,7 +31,7 @@ export const DemoInfo = (
                     </div>
                     <div className="info-desc-box">
                         <p>Save invaluable time by having all your saved notes 
-                            and code documen at your fingertips!
+                            and code document at your fingertips!
                         </p>
                     </div>
                 </div>

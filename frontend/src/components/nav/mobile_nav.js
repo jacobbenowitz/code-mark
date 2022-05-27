@@ -74,6 +74,7 @@ export default class MobileNav extends React.Component {
           <div className="avatar-mobile">
             <Avatar
               currentUser={this.props.currentUser}
+              color={this.props.currentUser?.color}
             />
           </div>
         </div>

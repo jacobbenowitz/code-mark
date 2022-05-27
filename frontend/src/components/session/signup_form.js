@@ -11,6 +11,7 @@ class SignupForm extends React.Component {
       username: '',
       password: '',
       password2: '',
+      color: '',
       errors: {}
     }
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -53,6 +54,7 @@ class SignupForm extends React.Component {
       username: this.state.username,
       password: this.state.password,
       password2: this.state.password2,
+      color: this.state.color
     };
 
     this.props.signup(user, this.props.history);
@@ -124,6 +126,17 @@ class SignupForm extends React.Component {
               />
               {this.renderErrors('password2')}
             </div>
+            <div className='form-input'>
+              <label htmlFor='color'>Color</label>
+              <input type={'color'}
+                value={this.state.color}
+                id="color-signup"
+                onChange={this.update('color')}
+              />
+              <div>
+                {this.state.color}
+              </div>
+            </div>
             <div className='signup-buttons-wrapper'>
               <button type='submit'
                 className={this.checkAllFields() ? 'button-session' : 'button-session disabled'}>Signup</button>
@@ -137,6 +150,28 @@ class SignupForm extends React.Component {
               </button>
             </div>
           </form>
+
+          <div className='session-error-wrapper'>
+            <div className='session-error'>
+              {(this.state.password.length < 6 || this.state.password2.length < 6) ?
+                <i className="fa-solid fa-circle-xmark"></i>
+                :
+                <i className="fa-solid fa-circle-check"></i>
+              }
+              <span>Passwords must be 6 characters or more</span>
+            </div>
+
+            <div className='session-error'>
+              {(this.state.password !== this.state.password2 || this.state.password === '') ?
+                <i className="fa-solid fa-circle-xmark"></i>
+                :
+                <i className="fa-solid fa-circle-check"></i>
+              }
+              <span>Passwords Must Match</span>
+
+            </div>
+          </div>
+
 
           <span className="alt-session-link">
             <p>Already have an account?</p>

@@ -280,6 +280,9 @@ footer {
   color: rgb(109, 115, 120);
 }
 
+#footer-top a:hover{
+  color: blue;
+}
 
 .footer-link-list {
   display: flex;

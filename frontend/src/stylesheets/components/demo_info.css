@@ -1,8 +1,13 @@
 #demo-info {
   display: grid;
-  /* grid-gap: 1rem; */
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  
+}
+
+@media only screen and (max-width: 600px) {
+  #demo-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  }
 }
 
 #demo-title {

@@ -50,6 +50,7 @@ export default class NavBar extends React.Component {
         <Avatar
           currentUser={this.props.currentUser}
           handleClick={this.handleClick}
+          color={this.props.currentUser?.color}
         />
       )
     ) : (
