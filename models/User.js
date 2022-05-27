@@ -22,8 +22,7 @@ const UserSchema = new Schema({
     following: [{type: Schema.Types.ObjectId, ref: "users"}],
     followers: [{type: Schema.Types.ObjectId, ref: "users"}],
     color: {
-        type: String,
-        default: "rgb(14, 70, 73)"
+        type: String
     }
     }, 
     {timestamps: true}

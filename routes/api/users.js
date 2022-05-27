@@ -170,17 +170,11 @@ router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,
                   if (user && user.email !== req.user.email) {
                     return res.status(400).json({ email: "A user has already registered with this email address" })
                   } else {
+                    debugger;
+                    let different = req.body.color !== mainuser.color;
                     mainuser.username = req.body.username || mainuser.username;
                     mainuser.email = req.body.email || mainuser.email;
                     mainuser.color = req.body.color || mainuser.color;
-                    // mainuser.comment_likes = req.body.comment_likes || mainuser.comment_likes;    //update notes and comments the user liked
-                    // mainuser.note_likes = req.body.note_likes || mainuser.note_likes;
-                    // mainuser.following = req.body.following || mainuser.following;      //updates followings
-                    // User.findById(mainuser.following[mainuser.following.length - 1])
-                    //   .then(user => {
-                    //     user.followers.push(mainuser.id);
-                    //     user.save();
-                    //   })
                     if (req.body.password !== mainuser.password) {
                       bcrypt.genSalt(10, (err, salt) => {
                         bcrypt.hash(req.body.password, salt, (err, hash) => {
@@ -193,6 +187,22 @@ router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,
                       })
                     } else {
                       mainuser.save()
+                        .then(user => {
+                          debugger;
+                          if(different){
+                            user.comments.forEach(commentId => {
+                              Comment.findById(commentId)
+                                .then(comment => {
+                                  comment.user = {
+                                    username: comment.user.username,
+                                    userId: comment.user.userId,
+                                    color: user.color
+                                  };
+                                  comment.save();
+                                })
+                            })
+                          }
+                        })
                         .then(user => res.json(user))
                         .catch(err => console.log(err))
                     }
