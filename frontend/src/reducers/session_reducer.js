@@ -70,7 +70,7 @@ const SessionReducer = (prevState = initialState, action) => {
       let newUniqueTags =
         [...new Set(nextState.tags.concat(action.note.data.tags))]
       nextState.tags = newUniqueTags;
-      debugger
+      // debugger
       return nextState;
     case RECEIVE_NOTE_LIKE:
       nextState.user.note_likes = nextState.user.note_likes.concat(

@@ -89,7 +89,7 @@ router.post('/login', (req, res) => {
               payload,
               keys.secretOrKey,
               // Tell the key to expire in one hour
-              { expiresIn: 3600 },
+              { expiresIn: 86400 },
               (err, token) => {
                 res.json({
                   success: true,
@@ -170,7 +170,7 @@ router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,
                   if (user && user.email !== req.user.email) {
                     return res.status(400).json({ email: "A user has already registered with this email address" })
                   } else {
-                    debugger;
+                    // debugger;
                     let different = req.body.color !== mainuser.color;
                     mainuser.username = req.body.username || mainuser.username;
                     mainuser.email = req.body.email || mainuser.email;
@@ -188,7 +188,7 @@ router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,
                     } else {
                       mainuser.save()
                         .then(user => {
-                          debugger;
+                          // debugger;
                           if(different){
                             user.comments.forEach(commentId => {
                               Comment.findById(commentId)

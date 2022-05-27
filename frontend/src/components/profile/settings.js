@@ -1,4 +1,5 @@
 import React from 'react'
+import Avatar from './avatar';
 
 export default class Settings extends React.Component {
   constructor(props) {
@@ -46,7 +47,7 @@ export default class Settings extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     let user;
-    debugger;
+    // debugger;
     this.state.password2.length ? (
       user = {
         id: this.props.currentUser.id,
@@ -173,13 +174,21 @@ export default class Settings extends React.Component {
                 className="text-input"
               />
             </div>
-            <div className="form-input">
-              <label htmlFor="color">Color</label>
-              <input type={'color'}
-                value={this.state.color}
-                id="color-change"
-                onChange={this.update('color')}
-              />
+            <div className='color-change-view'>
+              <div className="form-input">
+              {/* <div> */}
+                <label htmlFor="color">Color</label>
+                <input type={'color'}
+                  value={this.state.color}
+                  id="color-change"
+                  onChange={this.update('color')}
+                  />
+              </div>
+              {/* <div>{this.state.color}</div> */}
+              <Avatar 
+                currentUser={this.state}
+                color={this.state.color}
+                />
             </div>
             <div className='signup-buttons-wrapper'>
               <button type='submit' disabled={!this.state.updated}
