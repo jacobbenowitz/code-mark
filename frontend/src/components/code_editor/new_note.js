@@ -358,7 +358,6 @@ class NewNote extends React.Component {
 
 
         <div className='new-note-container' id='new-note-full'>
-          {/* <button onClick={this.toggleResourcesModal}>ToggleTesting</button> */}
           <div className='new-note-form'>
             <form onSubmit={this.state.codebody.length ? this.toggleResourcesModal : undefined}>
               <div id="note-title-input" className='note-input'>
@@ -437,10 +436,12 @@ class NewNote extends React.Component {
             </form>
    
 
-            <div id='hide-note-form' className='icon-only-button' onClick={this.toggleForm}>
+            <div id='hide-note-form'
+              className='icon-only-button'
+              title='hide form'
+              onClick={this.toggleForm}>
               <i className="fa-solid fa-square-minus"></i>
             </div>
-            {/* <span className='hide-button' onClick={this.toggleForm}>Hide</span> */}
 
             <div className='recommended-tag'
               onClick={() => this.addLangTag(this.state.suggestedLanguage)}>
@@ -487,11 +488,11 @@ class NewNote extends React.Component {
                   <i className="fa-solid fa-floppy-disk" />
                 </button>
               </form>
-             
             </div>
 
           </div>
         </div>
+        
         <div className='new-note-container' id='new-note-mini'
           onClick={this.toggleForm}>
           <div className='new-note-form' onClick={this.toggleForm}>

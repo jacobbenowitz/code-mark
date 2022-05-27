@@ -12,7 +12,26 @@
 @media only screen and (max-width: 600px) {
   .new-note-container {
     margin: 1rem;
+    box-sizing: border-box;
+    padding: 1.4rem;
+    display: flex;
+    background: #202124;
+    border: 0.5px solid #FFFFFF;
+    box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.12);
+    border-radius: 5px;
   }
+
+  #hide-note-form {
+    position: absolute;
+    top: -21px;
+    right: -21px;
+  }
+}
+.tags-mobile-header {
+  padding-left: 1rem;
+  padding-bottom: 0.5rem;
+  font-weight: 700;
+  color: #959595;
 }
 
 #lang-select {
@@ -30,6 +49,12 @@
   background-image: none;
   -ms-word-break: normal;
   word-break: normal;
+}
+
+.note-tag-mini.link {
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2), 
+  0px 0px 4px rgba(0, 0, 0, 0.08);
+  color: #9eeef2;
 }
 
 .select-wrapper {
@@ -62,6 +87,13 @@
   background: #373737;
   box-shadow: none;
   cursor: not-allowed;
+}
+
+.tags-wrapper-mobile {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  align-items: flex-start;
 }
 
 
@@ -162,14 +194,15 @@ button#tag-icon-save.disabled:hover {
 
 #hide-note-form {
   position: absolute;
-  top: 107px;
-  right: 67px;
+  top: -18px;
+  right: -18px;
 }
 
 .new-note-form {
   display: flex;
   flex-grow: 1;
   flex-flow: column wrap;
+  position: relative;
 }
 
 .title-input {

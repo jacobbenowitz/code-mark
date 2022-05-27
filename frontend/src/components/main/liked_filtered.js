@@ -10,7 +10,7 @@ import {
   orderUserNotes,
   selectLikedNotes
 } from '../../util/selectors';
-
+import SectionTitle from '../UI/section_title';
 
 export default class LikedFiltered extends React.Component {
   constructor(props) {
@@ -53,10 +53,12 @@ export default class LikedFiltered extends React.Component {
 
         <div className='home-main'>
           <div className='notes-section'>
-            <div className='section-title'>
-              <h1>Liked Notes</h1>
-              <h5>Filtered by: {this.state?.filter}</h5>
-            </div>
+            <SectionTitle
+              type={'filtered'}
+              filter={this.state.filter}
+              title={'Liked'}
+              noteCount={this.state.likedNotes.length}
+            />
             <div className='note-list-container'>
               {this.state.likedNotes.length === 0 ? (
                 <span>No notes found</span>

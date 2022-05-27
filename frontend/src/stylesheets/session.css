@@ -12,11 +12,12 @@
   padding: 30px;
   border-radius: 4px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
-
+  
   position: absolute;
-  width: 415px;
+  max-width: 415px;
+  width: max-content;
   height: min-content;
-  top: calc(50% - 591px/2);
+  /* top: calc(50% - 591px/2); */
 
   background: #202124;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);

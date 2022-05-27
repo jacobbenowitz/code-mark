@@ -55,7 +55,7 @@ export default class NoteShow extends React.Component {
 
   componentDidUpdate() {
     const { note, comments } = this.props;
-    if (!Object.values(this.state.note).length && this.state.comments !== comments && note.codebody) {
+    if (!Object.values(this.state.note).length && this.state.comments !== comments && Object.values(note).length) {
       this.setState({
         note: note,
         comments: orderNoteComments(comments),
@@ -149,6 +149,10 @@ export default class NoteShow extends React.Component {
     //     window.saveAs(blob, 'test-img.png')
     //   });
   };
+
+  isMobile() {
+    return window.innerWidth < 600;
+  }
 
 
   render() {
@@ -254,8 +258,8 @@ export default class NoteShow extends React.Component {
           >Comment 2</div> */}
         </div>
 
-
-        {/* <div id="note-export-modal" className='modal-off'>
+        {/* PHOTO EXPORT MODAL */}
+        <div id="note-export-modal" className='modal-off'>
           <div className='export-controls'>
             <div className='cancel icon-button'
               onClick={() => this.toggleExportModal()}>
@@ -281,7 +285,7 @@ export default class NoteShow extends React.Component {
               </span>
             </div>
           </div>
-        </div> */}
+        </div>
 
 
         <div id='confirm-modal-container' className='modal-off' >
@@ -348,41 +352,79 @@ export default class NoteShow extends React.Component {
             ) : ""}
           </div>
 
-
           <div id="note-show-main" className='note-show-main'>
-            <div className='note-show-title'>
-              <Link className='username'
-                to={`/users/${note.user.userId}`}>@{note.user.username}</Link>
-              <h1>{note.title}</h1>
-              <div className='note-stats-wrapper'>
-                <div className='note-stats'>
-                  <div className='note-stat likes'>
-                    <i className="fa-solid fa-heart"></i>
-                    <span>{this.props.note.likes.length}</span>
+            {this.isMobile() ? (
+              <div className='note-show-title mobile'>
+                <Link className='username'
+                  to={`/users/${note.user.userId}`}>@{note.user.username}</Link>
+                <h1>{note.title}</h1>
+                <div className='note-stats-wrapper'>
+                  <div className='note-stats'>
+                    <div className='note-stat likes'>
+                      <i className="fa-solid fa-heart"></i>
+                      <span>{this.props.note.likes.length}</span>
+                    </div>
+                    <div className="note-stat comments">
+                      <i className="fa-solid fa-comments"></i>
+                      <span>{this.props.comments.length}</span>
+                    </div>
                   </div>
-                  <div className="note-stat comments">
-                    <i className="fa-solid fa-comments"></i>
-                    <span>{this.props.comments.length}</span>
+                  <div className='note-stats'>
+                    <div className='note-stat updated-at'>
+                      <i className="fa-solid fa-pencil"></i>
+                      <span>{moment(this.props.note.updatedAt).fromNow()}</span>
+                    </div>
+                    <div className='note-stat created-at'>
+                      <i className="fa-solid fa-cloud-arrow-up"></i>
+                      <span>{moment(this.props.note.createdAt).fromNow()}</span>
+                    </div>
                   </div>
-                  <div className='note-stat updated-at'>
-                    <i className="fa-solid fa-pencil"></i>
-                    <span>{moment(this.props.note.updatedAt).fromNow()}</span>
-                  </div>
-                  <div className='note-stat created-at'>
-                    <i className="fa-solid fa-cloud-arrow-up"></i>
-                    <span>{moment(this.props.note.createdAt).fromNow()}</span>
-                  </div>
-                </div>
-                <div className='note-public-switch-wrapper'>
-                  <div className='note-public-switch'>
-                    <SwitchButton
-                      isToggled={this.state.public}
-                      onToggle={this.handlePublicSwitch}
-                    />
+                  <div className='note-public-switch-wrapper'>
+                    <div className='note-public-switch'>
+                      <SwitchButton
+                        isToggled={this.state.public}
+                        onToggle={this.handlePublicSwitch}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            ): (
+              <div className='note-show-title'>
+                <Link className='username'
+                  to={`/users/${note.user.userId}`}>@{note.user.username}</Link>
+                <h1>{note.title}</h1>
+                <div className='note-stats-wrapper'>
+                  <div className='note-stats'>
+                    <div className='note-stat likes'>
+                      <i className="fa-solid fa-heart"></i>
+                      <span>{this.props.note.likes.length}</span>
+                    </div>
+                    <div className="note-stat comments">
+                      <i className="fa-solid fa-comments"></i>
+                      <span>{this.props.comments.length}</span>
+                    </div>
+                    <div className='note-stat updated-at'>
+                      <i className="fa-solid fa-pencil"></i>
+                      <span>{moment(this.props.note.updatedAt).fromNow()}</span>
+                    </div>
+                    <div className='note-stat created-at'>
+                      <i className="fa-solid fa-cloud-arrow-up"></i>
+                      <span>{moment(this.props.note.createdAt).fromNow()}</span>
+                    </div>
+                  </div>
+                  <div className='note-public-switch-wrapper'>
+                    <div className='note-public-switch'>
+                      <SwitchButton
+                        isToggled={this.state.public}
+                        onToggle={this.handlePublicSwitch}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+                
+            )}
 
             <div className='note-tags-wrapper'>
               <Tags note={this.state.note}
@@ -410,7 +452,8 @@ export default class NoteShow extends React.Component {
                     <i className="fa-solid fa-circle-question fa-lg"></i>
                   </div>
                   <div id='export-img-icon' className='note-icon'
-                    onClick={this.exportImage}
+                    onClick={this.toggleExportModal}
+                    // onClick={this.exportImage}
                     title="export a screenshot">
                     <i className="fa-solid fa-camera-retro fa-lg"></i>
                   </div>

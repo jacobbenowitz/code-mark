@@ -117,7 +117,10 @@
   .note-show-main {
     padding: 0;
     box-sizing: border-box;
+    width: 100%;
+    max-width: 100vw;
   }
+
   #comments {
     padding: 1rem;
   }
@@ -125,6 +128,29 @@
   .note-show-top-icons {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
+  }
+
+  .note-show-container {
+    margin-top: 0.6rem;
+  }
+
+  .note-stats-wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+
+  .note-public-switch-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-self: flex-end;
+  }
+
+  .new-comment-container {
+    width: fit-content;
+    max-width: 290px;
   }
 }
 
