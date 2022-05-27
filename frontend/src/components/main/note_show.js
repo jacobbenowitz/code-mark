@@ -55,7 +55,7 @@ export default class NoteShow extends React.Component {
 
   componentDidUpdate() {
     const { note, comments } = this.props;
-    if (!Object.values(this.state.note).length && this.state.comments !== comments && note?.codebody) {
+    if (!Object.values(this.state.note).length && this.state.comments !== comments && Object.values(note).length) {
       this.setState({
         note: note,
         comments: orderNoteComments(comments),
@@ -258,8 +258,8 @@ export default class NoteShow extends React.Component {
           >Comment 2</div> */}
         </div>
 
-
-        {/* <div id="note-export-modal" className='modal-off'>
+        {/* PHOTO EXPORT MODAL */}
+        <div id="note-export-modal" className='modal-off'>
           <div className='export-controls'>
             <div className='cancel icon-button'
               onClick={() => this.toggleExportModal()}>
@@ -285,7 +285,7 @@ export default class NoteShow extends React.Component {
               </span>
             </div>
           </div>
-        </div> */}
+        </div>
 
 
         <div id='confirm-modal-container' className='modal-off' >
@@ -452,7 +452,8 @@ export default class NoteShow extends React.Component {
                     <i className="fa-solid fa-circle-question fa-lg"></i>
                   </div>
                   <div id='export-img-icon' className='note-icon'
-                    onClick={this.exportImage}
+                    onClick={this.toggleExportModal}
+                    // onClick={this.exportImage}
                     title="export a screenshot">
                     <i className="fa-solid fa-camera-retro fa-lg"></i>
                   </div>

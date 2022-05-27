@@ -382,6 +382,7 @@ footer {
   align-items: flex-start;
   justify-content: space-between;
   width: 100%;
+  gap: 2rem;
 }
 
 .nav-menu-mobile {

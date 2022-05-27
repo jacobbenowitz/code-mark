@@ -6,6 +6,7 @@ import {
   filterNotesByTag,
   orderUserNotes
 } from '../../util/selectors';
+import SectionTitle from '../UI/section_title';
 
 export default class DiscoverFiltered extends React.Component {
 
@@ -44,10 +45,12 @@ export default class DiscoverFiltered extends React.Component {
 
         <div className='home-main'>
           <div className='notes-section'>
-            <div className='section-title'>
-              <h1>Discover Notes</h1>
-              <h5>Filtered by: {this.state.filter}</h5>
-            </div>
+            <SectionTitle
+              type={'filtered'}
+              noteCount={this.state.notes.length}
+              filter={this.state.filter}
+              title={'Discover'}
+            />
             <div className='note-list-container'>
               {this.state.notes.length === 0 ? (
                 <span>No notes found</span>

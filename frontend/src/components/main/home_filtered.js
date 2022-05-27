@@ -8,6 +8,7 @@ import SideCarMenu from './side_car_menu';
 import AllNotes from './all_notes';
 import { filterNotesByTag, orderUserNotes } from '../../util/selectors';
 import MobileNotes from './mobile_notes';
+import SectionTitle from '../UI/section_title';
 
 export default class HomeFiltered extends React.Component {
   constructor(props) {
@@ -50,10 +51,12 @@ export default class HomeFiltered extends React.Component {
 
         <div className='home-main'>
           <div className='notes-section'>
-            <div className='section-title'>
-              <h1>My notes</h1>
-              <h5>Filtered by: {this.state.filter}</h5>
-            </div>
+            <SectionTitle
+              title={'My notes'}
+              filter={this.state.filter}
+              type={'filtered'}
+              noteCount={this.state.userNotes.length}
+            />
             <div className='note-list-container'>
               {/* <FilteredNotesContainer /> */}
               {this.state.userNotes.length === 0 ? (

@@ -10,7 +10,8 @@ const mapStateToProps = (state) => {
   return {
     allNotes: state.notes.all,
     allUsers: state.users.all,
-    currentUser: state.session.user
+    currentUser: state.session.user,
+    noteCount: state.notes.all.length
   }
 }
 

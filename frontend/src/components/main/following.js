@@ -8,6 +8,7 @@ import {
   selectFollowingUsersNotes
 } from '../../util/selectors';
 import MobileNotes from './mobile_notes';
+import SectionTitle from '../UI/section_title';
 
 
 
@@ -58,9 +59,11 @@ export default class Following extends React.Component {
 
         <div className='home-main'>
           <div className='notes-section'>
-            <div className='section-title'>
-              <h1>Following</h1>
-            </div>
+            <SectionTitle
+              type={'default'}
+              title={'Following'}
+              noteCount={this.state.followingNotes.length}
+            />
             <div className='note-list-container'>
               {this.state.followingNotes.length === 0 ? (
                 <span>No notes found</span>

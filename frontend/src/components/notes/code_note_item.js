@@ -8,16 +8,21 @@ import CodeNoteTextPlaceholder from './code_note_placeholders/code_note_text_pla
 import { withRouter } from "react-router-dom";
 
 const CodeNoteItem = props => {
-  
-  function preventBubbleLink(e) {
+
+  function preventBubbleParent(e) {
     e.stopPropagation();
     props.history.push(`/notes/${props.id}`);
+  }
+
+  function preventBubbleLink(e) {
+    // e.stopPropagation();
+    props.history.push(`/users/${props.userId}`);
   }
   return (
     <>
       {props.id && props.username && props.userId && props.createdAt && props.codeBody ? (
         <div className="code-note-item" key={props.id}
-          onClick={() => preventBubbleLink}>
+          onClick={() => preventBubbleParent()}>
           <div className="note-item-top">
             <div className="note-stats">
               <div className="comment-count">
@@ -40,8 +45,10 @@ const CodeNoteItem = props => {
           </div>
           {props.userId && props.createdAt && props?.title ? (
             <div className="code-note-text">
-              <div className="updated-at-and-username">
-                <Link className="code-note-username" to={`/users/${props.userId}`}>
+              <div className="updated-at-and-username"
+                onClick={() => preventBubbleLink()}>
+                <Link className="code-note-username"
+                  to={`/users/${props.userId}`}>
                   @{props?.username}
                 </Link>
                 <span>{moment(props?.createdAt).fromNow()}</span>

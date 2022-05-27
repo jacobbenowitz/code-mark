@@ -20,9 +20,15 @@
     box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.12);
     border-radius: 5px;
   }
+
+  #hide-note-form {
+    position: absolute;
+    top: -21px;
+    right: -21px;
+  }
 }
 .tags-mobile-header {
-  padding-left: 0.5rem;
+  padding-left: 1rem;
   padding-bottom: 0.5rem;
   font-weight: 700;
   color: #959595;
@@ -43,6 +49,12 @@
   background-image: none;
   -ms-word-break: normal;
   word-break: normal;
+}
+
+.note-tag-mini.link {
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2), 
+  0px 0px 4px rgba(0, 0, 0, 0.08);
+  color: #9eeef2;
 }
 
 .select-wrapper {
@@ -158,14 +170,15 @@ button#tag-icon-save.disabled:hover {
 
 #hide-note-form {
   position: absolute;
-  top: 107px;
-  right: 67px;
+  top: -18px;
+  right: -18px;
 }
 
 .new-note-form {
   display: flex;
   flex-grow: 1;
   flex-flow: column wrap;
+  position: relative;
 }
 
 .title-input {
