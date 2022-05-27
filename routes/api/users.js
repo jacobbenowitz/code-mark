@@ -77,8 +77,14 @@ router.post('/login', (req, res) => {
         .then(isMatch => {
           if (isMatch) {
             const payload = {
-              currentUser: user
+              _id: user.id,
+              username: user.username,
+              followers: user.followers,
+              following: user.following,
+              note_likes: user.note_likes,
+              color: user.color
             };
+
             jwt.sign(
               payload,
               keys.secretOrKey,
@@ -99,7 +105,15 @@ router.post('/login', (req, res) => {
 })
 
 router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
-  return res.json(req.user);
+  const payload = {
+    _id: req.user.id,
+    username: req.user.username,
+    followers: req.user.followers,
+    following: req.user.following,
+    note_likes: req.user.note_likes,
+    color: req.user.color
+  }
+  return res.json(payload);
 })
 
 router.get('/:userId', (req, res) => {
@@ -112,10 +126,8 @@ router.get('/:userId', (req, res) => {
 
 // only backend route for updating a user's followers
 router.patch('/followers/:userId', passport.authenticate('jwt', { session: false }), (req, res) => {
-  // debugger;
   User.findById(req.params.userId)
     .then(user => {
-      // debugger;
       if (req.user.following.includes(user.id)) {
         user.followers = user.followers.filter(item => item.toString() !== req.user.id);
       } else {
@@ -123,7 +135,6 @@ router.patch('/followers/:userId', passport.authenticate('jwt', { session: false
       }
       user.save()
         .then(user => {
-          // debugger;
           // res.json({followedUser:user})
           if (user.followers.includes(req.user.id)) {
             req.user.following.push(user.id);
@@ -139,6 +150,7 @@ router.patch('/followers/:userId', passport.authenticate('jwt', { session: false
 })
 
 router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req, res) => {
+  debugger
   if (req.params.userId !== req.user.id) {
     res.status(400).json({ editnotallowed: 'Not Authorized to Edit User' })
   } else {
@@ -146,6 +158,7 @@ router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,
     if (!isValid) { return res.status(400).json(errors) }
     User.findById(req.params.userId)
       .then(mainuser => {
+        debugger
         User.findOne({ username: req.body.username })
           .then(user => {
             if (user && user.username !== req.user.username) {
