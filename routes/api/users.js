@@ -37,7 +37,8 @@ router.post('/register', (req, res) => {
               const newUser = new User({
                 username: req.body.username,
                 email: req.body.email,
-                password: req.body.password
+                password: req.body.password,
+                color: req.body.color
               })
 
               bcrypt.genSalt(10, (err, salt) => {
@@ -80,14 +81,15 @@ router.post('/login', (req, res) => {
               username: user.username,
               followers: user.followers,
               following: user.following,
-              note_likes: user.note_likes
+              note_likes: user.note_likes,
+              color: user.color
             };
 
             jwt.sign(
               payload,
               keys.secretOrKey,
               // Tell the key to expire in one hour
-              { expiresIn: 3600 },
+              { expiresIn: 86400 },
               (err, token) => {
                 res.json({
                   success: true,
@@ -108,7 +110,8 @@ router.get('/current', passport.authenticate('jwt', { session: false }), (req, r
     username: req.user.username,
     followers: req.user.followers,
     following: req.user.following,
-    note_likes: req.user.note_likes
+    note_likes: req.user.note_likes,
+    color: req.user.color
   }
   return res.json(payload);
 })
@@ -167,16 +170,11 @@ router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,
                   if (user && user.email !== req.user.email) {
                     return res.status(400).json({ email: "A user has already registered with this email address" })
                   } else {
+                    // debugger;
+                    let different = req.body.color !== mainuser.color;
                     mainuser.username = req.body.username || mainuser.username;
                     mainuser.email = req.body.email || mainuser.email;
-                    // mainuser.comment_likes = req.body.comment_likes || mainuser.comment_likes;    //update notes and comments the user liked
-                    // mainuser.note_likes = req.body.note_likes || mainuser.note_likes;
-                    // mainuser.following = req.body.following || mainuser.following;      //updates followings
-                    // User.findById(mainuser.following[mainuser.following.length - 1])
-                    //   .then(user => {
-                    //     user.followers.push(mainuser.id);
-                    //     user.save();
-                    //   })
+                    mainuser.color = req.body.color || mainuser.color;
                     if (req.body.password !== mainuser.password) {
                       bcrypt.genSalt(10, (err, salt) => {
                         bcrypt.hash(req.body.password, salt, (err, hash) => {
@@ -189,6 +187,22 @@ router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,
                       })
                     } else {
                       mainuser.save()
+                        .then(user => {
+                          // debugger;
+                          if(different){
+                            user.comments.forEach(commentId => {
+                              Comment.findById(commentId)
+                                .then(comment => {
+                                  comment.user = {
+                                    username: comment.user.username,
+                                    userId: comment.user.userId,
+                                    color: user.color
+                                  };
+                                  comment.save();
+                                })
+                            })
+                          }
+                        })
                         .then(user => res.json(user))
                         .catch(err => console.log(err))
                     }

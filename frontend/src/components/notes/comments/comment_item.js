@@ -3,6 +3,7 @@ import moment from 'moment';
 import { Link } from "react-router-dom";
 import CodeCommentReadOnly from "../../code_editor/code_comment_readonly";
 import LikeCommentIcon from "../like_comment_icon";
+import Avatar from "../../profile/avatar";
 
 class CommentItem extends React.Component {
 
@@ -72,6 +73,7 @@ class CommentItem extends React.Component {
 
 
   render() {
+    // debugger;
     return (
       <div>
         {/* modal div */}
@@ -101,11 +103,15 @@ class CommentItem extends React.Component {
           <div className="comment-top-wrapper">
             <div className="user-info-wrapper">
               <div className="user-details">
-                <div className="avatar-wrapper">
+                {/* <div className="avatar-wrapper">
                   <div className="avatar-container-sm">
                     <span>{this.props?.user.username.slice(0, 2).toUpperCase()}</span>
                   </div>
-                </div>
+                </div> */}
+                <Avatar 
+                  currentUser={this.props?.user}
+                  color={this.props?.user.color}
+                />
                 <Link to={`/users/${this.props.user.userId}`}
                   className="username-comment">{this.props.user?.username}</Link>
               </div>
