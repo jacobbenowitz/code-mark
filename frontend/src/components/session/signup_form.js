@@ -151,6 +151,28 @@ class SignupForm extends React.Component {
             </div>
           </form>
 
+          <div className='session-error-wrapper'>
+            <div className='session-error'>
+              {(this.state.password.length < 6 || this.state.password2.length < 6) ?
+                <i className="fa-solid fa-circle-xmark"></i>
+                :
+                <i className="fa-solid fa-circle-check"></i>
+              }
+              <span>Passwords must be 6 characters or more</span>
+            </div>
+
+            <div className='session-error'>
+              {(this.state.password !== this.state.password2 || this.state.password === '') ?
+                <i className="fa-solid fa-circle-xmark"></i>
+                :
+                <i className="fa-solid fa-circle-check"></i>
+              }
+              <span>Passwords Must Match</span>
+
+            </div>
+          </div>
+
+
           <span className="alt-session-link">
             <p>Already have an account?</p>
             <Link to={'/login'}>Login</Link>

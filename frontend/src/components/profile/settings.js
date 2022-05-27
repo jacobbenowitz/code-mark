@@ -1,6 +1,7 @@
 import React from 'react'
 import Avatar from './avatar';
 
+
 export default class Settings extends React.Component {
   constructor(props) {
     super(props);
@@ -15,6 +16,7 @@ export default class Settings extends React.Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.clearedErrors = false;
+    this.toggleSuccessModal = this.toggleSuccessModal.bind(this);
   }
 
   componentDidMount() {
@@ -44,6 +46,13 @@ export default class Settings extends React.Component {
     });
   };
 
+  toggleSuccessModal(){
+    const successModal = document.getElementById('success-modal');
+    successModal.className = "success-in modal-on" 
+    setTimeout(() => successModal.className = "success-out", 4000)
+    setTimeout(() => successModal.className = "modal-off", 5000)
+  }
+
   handleSubmit(e) {
     e.preventDefault();
     let user;
@@ -69,6 +78,7 @@ export default class Settings extends React.Component {
     )
     this.props.updateUser(user);
     this.setState({ updated: false })
+    this.toggleSuccessModal()
   }
 
   renderErrors() {
@@ -92,9 +102,21 @@ export default class Settings extends React.Component {
     }
   }
 
+  checkAllFields() {
+    if (this.state.password.length && this.state.password2.length) {
+      return true
+    }
+    else return false
+  }
+
   render() {
     return (
+  
       <div className='session center-simple'>
+        <div id='success-modal' className='modal-off'>
+          <i className="fa-solid fa-thumbs-up"></i>
+          <span>Account Successfully updated</span>
+        </div>
         <div id='confirm-modal-container' className='modal-off' >
           <div className='modal-wrapper'>
             <div className='cancel-modal'>
@@ -191,9 +213,33 @@ export default class Settings extends React.Component {
                 />
             </div>
             <div className='signup-buttons-wrapper'>
-              <button type='submit' disabled={!this.state.updated}
-                className={this.state.updated ? 'button-session' : 'button-session disabled'}>Update account</button>
+              <button type='submit' 
+                className={(this.state.password.length > 6 && this.state.password2.length > 6) ? 'button-session' : 'button-session disabled'}>Update account</button>
             </div>
+
+            <div className='session-error-wrapper'>
+              <div className='session-error'>
+                {(this.state.password.length < 6 || this.state.password2.length < 6) ? 
+                <i className="fa-solid fa-circle-xmark"></i>
+                :
+                <i className="fa-solid fa-circle-check"></i> 
+                }
+                <span>Passwords must be 6 characters or more</span>
+              </div>
+
+              <div className='session-error'> 
+                {(this.state.password !== this.state.password2 || this.state.password === '') ?
+                  <i className="fa-solid fa-circle-xmark"></i>
+                  :
+                  <i className="fa-solid fa-circle-check"></i>
+                }
+                <span>Passwords Must Match</span>
+               
+              </div>
+            </div>
+            
+    
+          
             {this.renderErrors()}
           </form>
         </div>
