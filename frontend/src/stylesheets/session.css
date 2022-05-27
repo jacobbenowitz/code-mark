@@ -14,7 +14,7 @@
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
 
   position: absolute;
-  width: 402px;
+  width: 413px;
   height: min-content;
   left: calc(50% - 402px/2);
   top: calc(50% - 591px/2);
@@ -166,6 +166,25 @@
     z-index: 399;
     background-color: #1c1b1b;
     
+}
+
+.fa-circle-xmark {
+  color: #A44B4B;
+}
+.fa-circle-check {
+  color: #15CF74;
+}
+
+.session-error{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    padding: 0.4rem;
+}
+.session-error-wrapper{
+    padding-top: 15px;
 }
 
 @keyframes successModalIn {

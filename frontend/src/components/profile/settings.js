@@ -191,9 +191,33 @@ export default class Settings extends React.Component {
               />
             </div>
             <div className='signup-buttons-wrapper'>
-              <button type='submit' disabled={!this.state.updated}
-              className={this.state.updated ? 'button-session' : 'button-session disabled'}>Update account</button>
+              <button type='submit' 
+                className={(this.state.password.length > 6 && this.state.password2.length > 6) ? 'button-session' : 'button-session disabled'}>Update account</button>
             </div>
+
+            <div className='session-error-wrapper'>
+              <div className='session-error'>
+                {(this.state.password.length < 6 || this.state.password2.length < 6) ? 
+                <i className="fa-solid fa-circle-xmark"></i>
+                :
+                <i className="fa-solid fa-circle-check"></i> 
+                }
+                <span>Passwords must be 6 characters or more</span>
+              </div>
+
+              <div className='session-error'> 
+                {(this.state.password !== this.state.password2 || this.state.password === '') ?
+                  <i className="fa-solid fa-circle-xmark"></i>
+                  :
+                  <i className="fa-solid fa-circle-check"></i>
+                }
+                <span>Passwords Must Match</span>
+               
+              </div>
+            </div>
+            
+    
+          
             {this.renderErrors()}
           </form>
         </div>
