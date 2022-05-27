@@ -174,8 +174,8 @@ class NewNote extends React.Component {
   }
 
 
-  handleSubmit(e) {
-    e.preventDefault();
+  handleSubmit() {
+    // e.preventDefault();
     const { title, codebody, textdetails, tags, keywordsSelected } = this.state;
 
     const note = {
@@ -295,6 +295,15 @@ class NewNote extends React.Component {
   };
 
   render() {
+    const col1 = [];
+    const col2 = [];
+    this.state.allKeywords?.map((keyword,idx) => {
+      if(idx % 2 === 0){
+        col1.push(keyword);
+      }else{
+        col2.push(keyword);
+      }
+    })
     return (
       <>
         <div id='resources-note-container' className='modal-off' >
@@ -302,15 +311,33 @@ class NewNote extends React.Component {
             <div id="resources-step-1" className='resources-modal'>
               <h4>Resources</h4>
               <span>Select the keywords that you'd like resources for</span>
-              <form className='resource-options'
-                onSubmit={this.handleSubmit}>
-                {this.state.allKeywords?.map((keyword, i) =>
-                  <CheckBoxItem keyword={keyword} index={i}
-                    key={i} updateKeywords={this.updateKeywords}
-                  />)
-                }
-                <button type="submit">Submit</button>
+              <form className='resource-options'>
+                <div className='keyword-options'>
+                  <div className='column1'>
+                    {
+                    col1?.map((keyword, i) =>
+                      <CheckBoxItem keyword={keyword} index={i}
+                      key={`col1-${i}`} updateKeywords={this.updateKeywords}
+                      />
+                      )
+                    }
+
+                  </div>
+                  <div className='column2'>
+                    {
+                    col2?.map((keyword, i) =>
+                      <CheckBoxItem keyword={keyword} index={i}
+                      key={`col2-${i}`} updateKeywords={this.updateKeywords}
+                      />
+                      )
+                    }
+
+                  </div>
+                </div>
               </form>
+              <div>
+                <button id='keyword-submit' onClick={() => this.handleSubmit()}>Submit</button>
+              </div>
             </div>
             <div id="resources-step-2" className='modal-off'>
               <h4>Success!</h4>
@@ -453,7 +480,7 @@ class NewNote extends React.Component {
                   onChange={this.update('newTag')}
                   placeholder={'New tag...'}
                   value={this.state.newTag.split(' ').join(' ')}
-                  maxlength = "50"
+                  maxLength = "50"
                 />
 
                 <button className={this.state.newTag.split(' ').join('').length ? '' : 'save-tag disabled' } id='tag-icon-save' type='submit'>

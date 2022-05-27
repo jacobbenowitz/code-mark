@@ -14,9 +14,8 @@
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
 
   position: absolute;
-  width: 413px;
+  width: 415px;
   height: min-content;
-  left: calc(50% - 402px/2);
   top: calc(50% - 591px/2);
 
   background: #202124;

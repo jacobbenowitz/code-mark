@@ -42,6 +42,11 @@
   margin-bottom: 0;
 }
 
+#resources-step-2 {
+  position: relative;
+  top: -250px;
+}
+
 .buttons-wrapper {
   display: flex;
   flex-direction: row;
@@ -123,7 +128,6 @@
 
 button#tag-icon-save.disabled:hover {
   background: #373737;
-
 }
 
 .save-tag.disabled {

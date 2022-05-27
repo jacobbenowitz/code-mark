@@ -89,7 +89,7 @@
   flex-direction: row;
   justify-content: space-between;
   padding-right: 2px;
-  width: 95%;
+  width: 100%;
 }
 
 .username-comment {
@@ -213,6 +213,13 @@ textarea {
   border: 1px solid white;
   background: #202124;
   border-radius: 8px;
+}
+
+@media only screen and (max-width: 600px) {
+  .new-comment-container {
+    width: fit-content;
+    max-width: 400px;
+  }
 }
 
 .comment-form {

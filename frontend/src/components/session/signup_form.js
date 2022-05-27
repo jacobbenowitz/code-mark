@@ -11,6 +11,7 @@ class SignupForm extends React.Component {
       username: '',
       password: '',
       password2: '',
+      color: '',
       errors: {}
     }
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -53,6 +54,7 @@ class SignupForm extends React.Component {
       username: this.state.username,
       password: this.state.password,
       password2: this.state.password2,
+      color: this.state.color
     };
 
     this.props.signup(user, this.props.history);
@@ -123,6 +125,17 @@ class SignupForm extends React.Component {
                 className="text-input"
               />
               {this.renderErrors('password2')}
+            </div>
+            <div className='form-input'>
+              <label htmlFor='color'>Color</label>
+              <input type={'color'}
+                value={this.state.color}
+                id="color-signup"
+                onChange={this.update('color')}
+              />
+              <div>
+                {this.state.color}
+              </div>
             </div>
             <div className='signup-buttons-wrapper'>
               <button type='submit'

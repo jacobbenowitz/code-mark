@@ -1,4 +1,5 @@
 import React from 'react'
+import Avatar from './avatar';
 
 
 export default class Settings extends React.Component {
@@ -9,6 +10,7 @@ export default class Settings extends React.Component {
       username: '',
       password: '',
       password2: '',
+      color: '',
       updated: false,
       errors: {}
     }
@@ -22,11 +24,12 @@ export default class Settings extends React.Component {
   }
 
   componentDidUpdate() {
-    const { email, username } = this.props.user;
+    const { email, username, color } = this.props.user;
     if (!this.state.email.length) {
       this.setState({
         email: email,
         username: username,
+        color: color
       })
     }
   }
@@ -53,6 +56,7 @@ export default class Settings extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     let user;
+    // debugger;
     this.state.password2.length ? (
       user = {
         id: this.props.currentUser.id,
@@ -60,6 +64,7 @@ export default class Settings extends React.Component {
         username: this.state.username,
         password: this.state.password,
         password2: this.state.password2,
+        color: this.state.color
       }
     ) : (
       user = {
@@ -68,6 +73,7 @@ export default class Settings extends React.Component {
         username: this.state.username,
         password: this.props.user.password,
         password2: this.props.user.password,
+        color: this.state.color
       }
     )
     this.props.updateUser(user);
@@ -189,6 +195,22 @@ export default class Settings extends React.Component {
                 placeholder='confirm password'
                 className="text-input"
               />
+            </div>
+            <div className='color-change-view'>
+              <div className="form-input">
+              {/* <div> */}
+                <label htmlFor="color">Color</label>
+                <input type={'color'}
+                  value={this.state.color}
+                  id="color-change"
+                  onChange={this.update('color')}
+                  />
+              </div>
+              {/* <div>{this.state.color}</div> */}
+              <Avatar 
+                currentUser={this.state}
+                color={this.state.color}
+                />
             </div>
             <div className='signup-buttons-wrapper'>
               <button type='submit' 
