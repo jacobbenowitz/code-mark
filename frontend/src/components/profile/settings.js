@@ -21,18 +21,15 @@ export default class Settings extends React.Component {
   }
 
   componentDidMount() {
-
-    debugger
     this.props.fetchUser(this.props.currentUser.id)
   }
 
   componentDidUpdate() {
     const { email, username, color } = this.props.user;
-    debugger
     if (Object.values(this.props.user).length &&
-      (!this.state.email.length || !this.state.username.length || 
+      (!this.state.email.length || !this.state.username.length ||
         this.props.errors !== this.state.errors)) {
-      
+
       this.setState({
         email: email,
         username: username,
@@ -43,7 +40,7 @@ export default class Settings extends React.Component {
   }
 
   confirmedDelete() {
-    this.props.removeUser(this.props.currentUser._id);
+    this.props.removeUser(this.props.currentUser.id);
     this.props.logout();
   }
 
@@ -67,7 +64,7 @@ export default class Settings extends React.Component {
     // debugger;
     this.state.password2.length ? (
       user = {
-        id: this.props.currentUser._id,
+        id: this.props.currentUser.id,
         email: this.state.email,
         username: this.state.username,
         password: this.state.password,
@@ -76,7 +73,7 @@ export default class Settings extends React.Component {
       }
     ) : (
       user = {
-        id: this.props.currentUser._id,
+        id: this.props.currentUser.id,
         email: this.state.email,
         username: this.state.username,
         password: this.props.user.password,
@@ -90,7 +87,7 @@ export default class Settings extends React.Component {
 
     // this.props.showModal(sucess: 'some message')
     // this.props.showModal(error: 'some message')
-    
+
     this.props.fetchCurrentUser()
     window.scrollTo(0, 0);
   }
@@ -114,7 +111,7 @@ export default class Settings extends React.Component {
 
   checkAllFields() {
 
-    if ( this.state.username !== this.props.user.username ||
+    if (this.state.username !== this.props.user.username ||
       this.state.email !== this.props.user.email ||
       this.state.color !== this.props.user.color ||
       (this.state.password === this.state.password2 &&
@@ -171,7 +168,7 @@ export default class Settings extends React.Component {
 
           <form onSubmit={this.checkAllFields() ?
             this.handleSubmit : undefined}>
-            
+
             <div className='color-change-view'>
               <div className="color-select-wrapper">
                 <i className="fa-solid fa-eye-dropper fa-xs"
@@ -236,7 +233,7 @@ export default class Settings extends React.Component {
               {this.renderErrors('password2')}
             </div>
             <div className='signup-buttons-wrapper'>
-              <button type='submit' 
+              <button type='submit'
                 className={this.checkAllFields() ? 'button-session' : 'button-session disabled'}>Update account</button>
             </div>
 
@@ -253,10 +250,10 @@ export default class Settings extends React.Component {
 
               {this.state.password.length ? (
                 <div className='session-error'>
-                  {(this.state.password.length < 6 || this.state.password2.length < 6) ? 
-                  <i className="fa-solid fa-circle-xmark"></i>
-                  :
-                  <i className="fa-solid fa-circle-check"></i> 
+                  {(this.state.password.length < 6 || this.state.password2.length < 6) ?
+                    <i className="fa-solid fa-circle-xmark"></i>
+                    :
+                    <i className="fa-solid fa-circle-check"></i>
                   }
                   <span>Passwords must be 6 characters or more</span>
                 </div>

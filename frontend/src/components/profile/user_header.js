@@ -6,7 +6,7 @@ const UserHeader = ({
   currentUser, user, userId, changeUserFollowers, userNotes }) => {
   let followButton;
 
-  if (currentUser._id !== user._id) {
+  if (currentUser.id !== user._id) {
     followButton = (
       <FollowButton
         changeUserFollowers={changeUserFollowers}

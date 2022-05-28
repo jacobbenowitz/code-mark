@@ -19,6 +19,7 @@
 
 .comment-outer-wrapper {
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: flex-start;
   padding: 20px;

@@ -63,7 +63,11 @@ router.post('/',
 
         const newComment = new Comment({
             // user: req.user.id,
-            user: { username: req.user.username, userId: req.user.id, color: req.user.id },
+            user: {
+                username: req.user.username,
+                userId: req.user.id,
+                color: req.color
+            },
             note: req.body.note,
             textbody: req.body.textbody,
             codeSnippet: req.body.codeSnippet

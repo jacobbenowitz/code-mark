@@ -15,7 +15,7 @@ class UserNotes extends React.Component {
 
   componentWillMount() {
     debugger
-    this.props.fetchUserNotes(this.props.currentUser?._id)
+    this.props.fetchUserNotes(this.props.currentUser?.id)
   };
 
   componentWillReceiveProps(nextState) {

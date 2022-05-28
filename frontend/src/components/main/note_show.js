@@ -42,7 +42,6 @@ export default class NoteShow extends React.Component {
   componentWillMount() {
     this.props.fetchNote(this.props.noteId);
     this.props.fetchNoteComments(this.props.noteId);
-    this.props.fetchCurrentUser();
   }
 
   componentDidMount() {
@@ -55,7 +54,9 @@ export default class NoteShow extends React.Component {
 
   componentDidUpdate() {
     const { note, comments } = this.props;
-    if (!Object.values(this.state.note).length || this.state.comments !== comments && Object.values(note).length && Object.values(comments).length) {
+    debugger
+    if (note && note !== this.state.note || this.state.comments !== comments) {
+      debugger
       const orderedComments = orderNoteComments(comments);
       this.setState({
         note: note,
@@ -63,6 +64,14 @@ export default class NoteShow extends React.Component {
         public: note.public
       })
     }
+    // if (!Object.values(this.state.note).length || this.state.comments !== comments && Object.values(note).length && Object.values(comments).length) {
+    //   debugger
+    //   this.setState({
+    //     note: note,
+    //     comments: orderedComments,
+    //     public: note.public
+    //   })
+    // }
   }
 
   deleteNote() {
@@ -330,7 +339,7 @@ export default class NoteShow extends React.Component {
             </div>
 
 
-            {this.props.currentUser._id === this.props.note.user.userId ? (
+            {this.props.currentUser.id === this.props.note.user.userId ? (
               <div className='edit-note icon-button'
                 onClick={() => this.toggleEditModal()}>
                 <i className="fa-solid fa-pen-to-square fa-lg"></i>
@@ -342,7 +351,7 @@ export default class NoteShow extends React.Component {
               ""
             }
 
-            {this.props.currentUser._id === this.props.note.user.userId ? (
+            {this.props.currentUser.id === this.props.note.user.userId ? (
               <div className='delete-note icon-button'
                 onClick={() => this.toggleDeleteModal()}>
                 <i className="fa-solid fa-trash fa-lg"></i>
@@ -429,7 +438,7 @@ export default class NoteShow extends React.Component {
 
             <div className='note-tags-wrapper'>
               <Tags note={this.state.note}
-                isCurrentUser={this.props.currentUser._id === this.props.note.user.userId}
+                isCurrentUser={this.props.currentUser.id === this.props.note.user.userId}
                 updateNote={this.props.updateNote}
               />
             </div>
@@ -440,7 +449,7 @@ export default class NoteShow extends React.Component {
                   <LikeNoteIcon
                     addNoteLike={this.props.addNoteLike}
                     removeNoteLike={this.props.removeNoteLike}
-                    currentUserId={this.props.currentUser._id}
+                    currentUserId={this.props.currentUser.id}
                     noteId={this.props.noteId}
                     likes={this.props.note.likes}
                   />
@@ -490,7 +499,7 @@ export default class NoteShow extends React.Component {
             </div>
             <CommentIndex
               selectedText={this.state.selectedText}
-              isCurrentUser={this.props.currentUser._id === this.props.note.user.userId}
+              isCurrentUser={this.props.currentUser.id === this.props.note.user.userId}
               currentUser={this.props.currentUser}
               comments={this.state.comments}
               newComment={this.props.newComment}

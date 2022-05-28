@@ -77,7 +77,7 @@ router.post('/login', (req, res) => {
         .then(isMatch => {
           if (isMatch) {
             const payload = {
-              _id: user.id,
+              id: user.id,
               username: user.username,
               followers: user.followers,
               following: user.following,
@@ -106,7 +106,7 @@ router.post('/login', (req, res) => {
 
 router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
   const payload = {
-    _id: req.user.id,
+    id: req.user.id,
     username: req.user.username,
     followers: req.user.followers,
     following: req.user.following,
@@ -187,10 +187,17 @@ router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,
                     } else {
                       mainuser.save()
                         .then(user => {
-                          res.json(user)
+                          const payload = {
+                            id: user.id,
+                            username: user.username,
+                            followers: user.followers,
+                            following: user.following,
+                            note_likes: user.note_likes,
+                            color: user.color
+                          };
                           // debugger;
-
-                          res.json(user)
+                          res.json(payload)
+                          // res.json(user)
                           if(different){
                             user.comments.forEach(commentId => {
                               Comment.findById(commentId)

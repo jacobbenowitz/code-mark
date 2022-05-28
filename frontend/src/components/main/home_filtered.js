@@ -23,7 +23,7 @@ export default class HomeFiltered extends React.Component {
 
   componentWillMount() {
     // debugger
-    // currentUser._id or id //
+    // currentUser.id or id //
     this.props.fetchUserNotes(this.props.currentUser.id);
     this.props.fetchCurrentUser();
   }
