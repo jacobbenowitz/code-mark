@@ -92,6 +92,39 @@
 .alt-session-link > p {
   margin-right: 0.5rem;
 }
+.color-select-wrapper {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  border-radius: 50%;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: #D7D8DB;
+  top: 14px;
+  left: 14px;
+  box-shadow: -2px 0px 12px rgb(0 0 0 / 30%);
+}
+
+.fa-eye-dropper {
+  position: absolute;
+}
+
+
+input[type='color'] {
+  opacity: 0%;
+	display: block;
+  border-radius: 50%;
+	width: 32px;
+	height: 32px;
+	border: none;
+}
 
 .text-input, .date-input {
   display: flex;

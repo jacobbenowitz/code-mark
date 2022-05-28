@@ -156,6 +156,23 @@ export default class Settings extends React.Component {
           </div>
           <h3>Update your account</h3>
           <form onSubmit={this.handleSubmit}>
+            <div className='color-change-view'>
+              <div className="color-select-wrapper">
+                <i className="fa-solid fa-eye-dropper"
+                  style={{ color: this.state.color }}
+                />
+                <input
+                  type={'color'}
+                  value={this.state.color}
+                  id="color-change"
+                  onChange={this.update('color')}
+                />
+              </div>
+              <Avatar
+                currentUser={this.state}
+                color={this.state.color}
+              />
+            </div>
             <div className='form-input'>
               <label htmlFor='email'>Email</label>
               <input type={'email'}
@@ -189,28 +206,12 @@ export default class Settings extends React.Component {
             <div className="form-input">
               <label htmlFor="password2">Confirm New Password</label>
               <input type={'password'}
-                value={this.state.password2}
+                // value={this.state.password2}
                 id="password-signup2"
                 onChange={this.update('password2')}
                 placeholder='confirm password'
                 className="text-input"
               />
-            </div>
-            <div className='color-change-view'>
-              <div className="form-input">
-              {/* <div> */}
-                <label htmlFor="color">Color</label>
-                <input type={'color'}
-                  value={this.state.color}
-                  id="color-change"
-                  onChange={this.update('color')}
-                  />
-              </div>
-              {/* <div>{this.state.color}</div> */}
-              <Avatar 
-                currentUser={this.state}
-                color={this.state.color}
-                />
             </div>
             <div className='signup-buttons-wrapper'>
               <button type='submit' 
@@ -234,7 +235,7 @@ export default class Settings extends React.Component {
                   <i className="fa-solid fa-circle-check"></i>
                 }
                 <span>Passwords Must Match</span>
-               
+              
               </div>
             </div>
             
