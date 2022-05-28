@@ -103,12 +103,7 @@ class CommentItem extends React.Component {
           <div className="comment-top-wrapper">
             <div className="user-info-wrapper">
               <div className="user-details">
-                {/* <div className="avatar-wrapper">
-                  <div className="avatar-container-sm">
-                    <span>{this.props?.user.username.slice(0, 2).toUpperCase()}</span>
-                  </div>
-                </div> */}
-                <Avatar
+                <Avatar 
                   handleClick={() => this.props.history.push(`/users/${this.props?.user.username}`)}
                   username={this.props?.user.username}
                   color={this.props?.user.color}

@@ -15,13 +15,15 @@ const CodeNoteItem = props => {
   // }
 
   // function preventBubbleLink(e) {
-  //   e.stopPropagation();
+  //   // e.stopPropagation();
   //   props.history.push(`/users/${props.userId}`);
   // }
+  
   return (
     <>
       {props.id && props.username && props.userId && props.createdAt && props.codeBody ? (
         <div className="code-note-item" key={props.id}>
+          {/* onClick={() => preventBubbleParent()}> */}
           <div className="note-item-top">
             <div className="note-stats">
               <div className="comment-count">
@@ -45,6 +47,7 @@ const CodeNoteItem = props => {
           {props.userId && props.createdAt && props?.title ? (
             <div className="code-note-text">
               <div className="updated-at-and-username">
+                {/* onClick={() => preventBubbleLink()}> */}
                 <Link className="code-note-username"
                   to={`/users/${props.userId}`}>
                   @{props?.username}

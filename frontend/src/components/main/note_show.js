@@ -55,10 +55,8 @@ export default class NoteShow extends React.Component {
 
   componentDidUpdate() {
     const { note, comments } = this.props;
-    // state note empty, state comments !== to props, props note and props comment length
     if (!Object.values(this.state.note).length || this.state.comments !== comments && Object.values(note).length && Object.values(comments).length) {
       const orderedComments = orderNoteComments(comments);
-
       this.setState({
         note: note,
         comments: orderedComments,

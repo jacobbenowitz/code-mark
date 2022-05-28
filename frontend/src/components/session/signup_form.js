@@ -134,16 +134,17 @@ class SignupForm extends React.Component {
               />
               {this.renderErrors('password2')}
             </div>
-            <div className='avatar-section-form'>
+            {/* <div className='avatar-section-form'>
               <span className='form-input-label'>Customize Avatar Color</span>
               <div className='avatar-form'>
-              <input type={'color'}
-                value={this.state.color}
-                id="color-signup"
-                onChange={this.update('color')}
-              />
+                <input type={'color'}
+                  value={this.state.color.length ?
+                    this.state.color : '#0D4649'}
+                  id="color-signup"
+                  onChange={this.update('color')}
+                />
               </div>
-            </div>
+            </div> */}
             <div className='signup-buttons-wrapper'>
               <button type='submit'
                 className={this.checkAllFields() ? 'button-session' : 'button-session disabled'}>Signup</button>
