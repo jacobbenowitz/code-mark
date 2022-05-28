@@ -26,9 +26,9 @@ const initialState = {
   isAuthenticated: false,
   user: {},
   tags: [],
-  followers: [],
-  following: [],
-  note_likes: []
+  // followers: [],
+  // following: [],
+  // note_likes: []
 };
 
 const SessionReducer = (prevState = initialState, action) => {

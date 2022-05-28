@@ -5,6 +5,7 @@ import configureStore from './store/store';
 import jwt_decode from 'jwt-decode';
 import { setAuthToken } from './util/session_api_util';
 import { logout } from './actions/session_actions';
+import { fetchCurrentUser } from './actions/session_actions';
 import App from './components/app';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -39,6 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   // render root component passing in store
   const root = document.getElementById('root');
+
+  // TESTING //
+  window.getState = store.getState()
 
   ReactDOM.render(<Root store={store} />, root);
 })

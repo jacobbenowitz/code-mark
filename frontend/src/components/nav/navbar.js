@@ -18,8 +18,12 @@ export default class NavBar extends React.Component {
 
   componentDidMount() {
     const { currentUser, fetchCurrentUser, loggedIn } = this.props;
-    fetchCurrentUser()
-    if (loggedIn && Object.values(currentUser).length) {
+    
+    if (loggedIn) {
+      fetchCurrentUser()
+    }
+
+    if (Object.values(currentUser).length) {
       this.setState({
         username: currentUser.username,
         color: currentUser.color
