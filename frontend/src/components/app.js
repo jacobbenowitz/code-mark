@@ -35,7 +35,7 @@ const App = () => (
     <header className="header-top-stack">
       <NavBarContainer />
     </header>
-
+      {/* <NotificationModal /> */}
     <Switch>
       <AuthRoute exact path='/signup'
         component={SignupFormContainer} />

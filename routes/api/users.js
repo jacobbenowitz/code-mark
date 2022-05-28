@@ -163,7 +163,7 @@ router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,
         User.findOne({ username: req.body.username })
           .then(user => {
             if (user && user.username !== req.user.username) {
-              return res.status(400).json({ email: "A user has already registered with this username" })
+              return res.status(400).json({ username: "A user has already registered with this username" })
             } else {
               User.findOne({ email: req.body.email })
                 .then(user => {
@@ -189,6 +189,7 @@ router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,
                       mainuser.save()
                         .then(user => {
                           // debugger;
+                          res.json(user)
                           if(different){
                             user.comments.forEach(commentId => {
                               Comment.findById(commentId)
@@ -203,7 +204,7 @@ router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,
                             })
                           }
                         })
-                        .then(user => res.json(user))
+                        // .then(user => res.json(user))
                         .catch(err => console.log(err))
                     }
                   }

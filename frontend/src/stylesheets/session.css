@@ -100,16 +100,45 @@
   flex-direction: column;
   flex-wrap: nowrap;
   align-items: center;
-  width: 24px;
-  height: 24px;
-  position: relative;
+  width: 20px;
+  height: 20px;
+  position: absolute;
   border-radius: 50%;
   box-sizing: border-box;
   overflow: hidden;
-  background-color: #D7D8DB;
-  top: 14px;
-  left: 14px;
+  background-color: #f3f3f5;
+  top: -6px;
+  left: 30px;
   box-shadow: -2px 0px 12px rgb(0 0 0 / 30%);
+}
+
+.color-change-view:hover::before {
+  content: "Customize your avatar color";
+  z-index: 20220;
+  width: max-content;
+  position: absolute;
+  right: -203px;
+  bottom: 61px;
+  text-align: end;
+  background: #393939;
+  padding: 0.4rem;
+  border-radius: 4px;
+  box-shadow: 0px 2px 16px rgb(0 0 0 / 30%);
+  animation: fadeIn 1000ms ease-in-out;
+}
+
+.color-change-view:hover::after {
+  position: absolute;
+  content: "";
+  top: -16px;
+  right: 0px;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 7px solid #393939;
+  box-shadow: 0px 2px 16px rgb(0 0 0 / 30%);
+  animation: fadeIn 1000ms ease-in-out;
 }
 
 .fa-eye-dropper {
@@ -246,4 +275,46 @@ input[type='color'] {
     box-shadow: 0px 0px 0px rgb(0 0 0 / 0%);
 
   }
+}
+
+/* FROM MAIN MAY 27 - DAY OF BUGS */
+
+.avatar-wrapper.form {
+  cursor: default;
+}
+
+input[type='color'] {
+  height: 52px;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+}
+
+.avatar-section-form {
+  width: 100%;
+}
+
+.form-input-label {
+  font-size: 14px;
+  color: #6E7377;
+}
+
+.color-select-input {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.avatar-form {
+  display: flex;
+  width: 100%;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
 }

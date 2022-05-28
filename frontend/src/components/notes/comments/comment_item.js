@@ -104,6 +104,7 @@ class CommentItem extends React.Component {
             <div className="user-info-wrapper">
               <div className="user-details">
                 <Avatar 
+                  handleClick={() => this.props.history.push(`/users/${this.props?.user.username}`)}
                   username={this.props?.user.username}
                   color={this.props?.user.color}
                 />

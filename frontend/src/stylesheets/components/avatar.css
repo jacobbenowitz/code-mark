@@ -32,10 +32,6 @@
 
 .color-change-view {
   display: flex;
-  /* flex-direction: row; */
-  flex-direction: column;
-  /* justify-content: space-around; */
   align-items: center;
-  width: 100%;
-  /* gap: 2rem; */
+  position: relative;
 }

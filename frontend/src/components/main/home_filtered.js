@@ -1,3 +1,4 @@
+
 import React from 'react';
 import NewNoteContainer from '../code_editor/new_note_container';
 import RecentNotesContainer from '../notes/recent_notes_container';
@@ -22,6 +23,8 @@ export default class HomeFiltered extends React.Component {
 
   componentWillMount() {
     this.props.fetchCurrentUser();
+    // debugger
+    // currentUser._id or id //
     this.props.fetchUserNotes(this.props.currentUser.id);
   }
 

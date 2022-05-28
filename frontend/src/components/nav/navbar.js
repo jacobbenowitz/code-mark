@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import UserNavModal from "./user_nav_modal";
 import MobileNav from "./mobile_nav";
 import Avatar from '../profile/avatar';
@@ -8,10 +8,39 @@ export default class NavBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modalOpen: false
+      modalOpen: false,
+      username: '',
+      color: ''
     }
     this.getLinks = this.getLinks.bind(this);
     this.handleClick = this.handleClick.bind(this);
+  }
+
+  componentDidMount() {
+    const { currentUser, fetchCurrentUser, loggedIn } = this.props;
+
+    fetchCurrentUser()
+
+    if (loggedIn && Object.values(currentUser).length) {
+      this.setState({
+        username: currentUser.username,
+        color: currentUser.color
+      })
+    }
+  }
+
+  componentDidUpdate() {
+    const { currentUser, loggedIn } = this.props;
+    // debugger
+    if (loggedIn) {
+      if (currentUser.color !== this.state.color ||
+        currentUser.username !== this.state.username) {
+        this.setState({
+          username: currentUser.username,
+          color: currentUser.color
+        })
+      }
+    }
   }
 
   handleClick(e) {
@@ -25,8 +54,8 @@ export default class NavBar extends React.Component {
     if (this.props.loggedIn) {
       return (
         <div>
-          <Link className="settings nav-item"
-            to={'/settings'}>Settings</Link>
+          <NavLink className="settings nav-item"
+            to={'/settings'}>Settings</NavLink>
           <Link className="logout nav-item" to={'/'}
             onClick={() => this.props.logout()}>Logout</Link>
         </div>
@@ -34,23 +63,21 @@ export default class NavBar extends React.Component {
     } else {
       return (
         <div className="user-links">
-          <Link to={'/signup'} className="signup button">Signup</Link>
-          <Link to={'/login'} className="login button">Login</Link>
+          <NavLink to={'/signup'} className="signup button">Signup</NavLink>
+          <NavLink to={'/login'} className="login button">Login</NavLink>
         </div>
       );
     }
   }
 
   render() {
-
     let avatarOrHamburger;
-
     window.innerWidth > 600 ? (
       avatarOrHamburger = (
         <Avatar
-          currentUser={this.props.currentUser}
+          username={this.state.username}
+          color={this.state.color}
           handleClick={this.handleClick}
-          color={this.props.currentUser?.color}
         />
       )
     ) : (

@@ -12,7 +12,7 @@ export const RECEIVE_USER = "RECEIVE_USER";
 export const RECEIVE_UPDATED_USER = "RECEIVE_UPDATED_USER";
 export const RECEIVE_DELETED_USER = "RECEIVE_DELETED_USER";
 export const RECEIVE_USER_NEW_FOLLOWING = "RECEIVE_USER_NEW_FOLLOWING";
-// export const RECEIVE_USER_UNFOLLOW = "RECEIVE_USER_UNFOLLOW";
+export const RECEIVE_USER_ERROR = "RECEIVE_USER_ERROR";
 
 export const receiveUsers = users => ({
     type: RECEIVE_USERS,
@@ -39,44 +39,40 @@ export const receiveUserNewFollowing = users => ({
     users
 })
 
-/// new actions for RECEIVE_USER_FOLLOW / UNFOLLOW
+export const receiveUserErrors = error => ({
+    type: RECEIVE_USER_ERROR,
+    error
+})
 
+// thunk actions
 
 export const fetchUsers = () => dispatch => (
     getUsers()
         .then(users => dispatch(receiveUsers(users)))
-        .catch(err => console.log(err))
+        .catch(err => dispatch(receiveUserErrors(err.response.data)))
 );
 
 export const fetchUser = userId => dispatch => {
     return getUser(userId)
         .then(user => dispatch(receiveUser(user)))
-        .catch(err => console.log(err))
+        .catch(err => dispatch(receiveUserErrors(err.response.data)))
 };
 
 export const updateUser = userData => dispatch => {
     return patchUser(userData)
         .then(user => dispatch(receiveUpdatedUser(user)))
-        .catch(err => console.log(err))
+        .catch(err => dispatch(receiveUserErrors(err.response.data)))
 }
 
 export const removeUser = userId => dispatch => {
     return deleteUser(userId)
         .then((userId) => dispatch(receiveDeletedUser(userId)))
-        .catch(err => console.log(err))
+        .catch(err => dispatch(receiveUserErrors(err.response.data)))
 }
 
 export const changeUserFollowers = (userId) => dispatch => {
     // debugger;
     return editUserFollowers(userId)
         .then(users => dispatch(receiveUserNewFollowing(users)))
-        .catch(err => console.log(err))
+        .catch(err => dispatch(receiveUserErrors(err.response.data)))
 }
-
-// export const removeUserFollower = (userData) => dispatch => {
-//     return patchUser(userData)
-//         .then(user => dispatch(receiveUpdatedUser(user)))
-//         .catch(err => console.log(err))
-// }
-
-/// edit user thunk replace above thunks

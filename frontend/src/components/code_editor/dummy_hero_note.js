@@ -340,7 +340,7 @@ export default class DummyHeroNote extends React.Component {
                                     onChange={this.update('newTag')}
                                     placeholder={'New tag...'}
                                     value={this.state.newTag.split(' ').join(' ')}
-                                    maxlength="50"
+                                    maxLength="50"
                                 />
 
                                 <button className={this.state.newTag.split(' ').join('').length ? '' : 'save-tag disabled'} id='tag-icon-save' type='submit'>

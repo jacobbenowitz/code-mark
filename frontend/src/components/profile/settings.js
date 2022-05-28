@@ -21,16 +21,21 @@ export default class Settings extends React.Component {
   }
 
   componentDidMount() {
+    debugger
     this.props.fetchUser(this.props.currentUser.id)
   }
 
   componentDidUpdate() {
     const { email, username, color } = this.props.user;
-    if (!this.state.email.length) {
+    debugger
+    if (Object.values(this.props.user).length &&
+      (!this.state.email.length || !this.state.username.length || 
+        this.props.errors !== this.state.errors)) {
       this.setState({
         email: email,
         username: username,
-        color: color
+        color: color,
+        errors: this.props.errors
       })
     }
   }
@@ -80,19 +85,19 @@ export default class Settings extends React.Component {
     this.props.updateUser(user);
     this.setState({ updated: false })
     this.toggleSuccessModal()
+    // this.props.showModal(sucess: 'some message')
+    // this.props.showModal(error: 'some message')
+    this.props.fetchCurrentUser()
+    window.scrollTo(0, 0);
   }
 
-  renderErrors() {
+  renderErrors(field) {
     return (
-      <ul className="error-list">
-        {Object.keys(this.state.errors).map((error, i) => (
-          <li key={`error-${i}`}>
-            {this.state.errors[error]}
-          </li>
-        ))}
-      </ul>
-    );
-  }
+      <span className="error-item" key={`error-${field}`}>
+        {this.state.errors[field]}
+      </span>
+    )
+  };
 
   toggleDeleteModal() {
     const deleteModal = document.getElementById('confirm-modal-container');
@@ -104,10 +109,12 @@ export default class Settings extends React.Component {
   }
 
   checkAllFields() {
-    if (this.state.password.length && this.state.password2.length) {
-      return true
-    }
-    else return false
+    if ( this.state.username !== this.props.user.username ||
+      this.state.email !== this.props.user.email ||
+      this.state.color !== this.props.user.color ||
+      (this.state.password === this.state.password2 &&
+        this.state.password2 !== '')
+    ) { return true } else return false
   }
 
   render() {
@@ -156,10 +163,12 @@ export default class Settings extends React.Component {
             </div>
           </div>
           <h3>Update your account</h3>
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.checkAllFields() ?
+            this.handleSubmit : undefined}>
+            
             <div className='color-change-view'>
               <div className="color-select-wrapper">
-                <i className="fa-solid fa-eye-dropper"
+                <i className="fa-solid fa-eye-dropper fa-xs"
                   style={{ color: this.state.color }}
                 />
                 <input
@@ -183,9 +192,10 @@ export default class Settings extends React.Component {
                 // placeholder='email'
                 className="text-input"
               />
+              {this.renderErrors('email')}
             </div>
             <div className='form-input'>
-              <label htmlFor='username'>username</label>
+              <label htmlFor='username'>Username</label>
               <input type={'text'}
                 value={this.state.username}
                 id="username-signup"
@@ -193,6 +203,7 @@ export default class Settings extends React.Component {
                 // placeholder='username'
                 className="text-input"
               />
+              {this.renderErrors('username')}
             </div>
             <div className='form-input'>
               <label htmlFor='password'>New Password</label>
@@ -203,6 +214,7 @@ export default class Settings extends React.Component {
                 placeholder='password'
                 className="text-input"
               />
+              {this.renderErrors('password')}
             </div>
             <div className="form-input">
               <label htmlFor="password2">Confirm New Password</label>
@@ -213,36 +225,44 @@ export default class Settings extends React.Component {
                 placeholder='confirm password'
                 className="text-input"
               />
+              {this.renderErrors('password2')}
             </div>
             <div className='signup-buttons-wrapper'>
               <button type='submit' 
-                className={(this.state.password.length > 6 && this.state.password2.length > 6) ? 'button-session' : 'button-session disabled'}>Update account</button>
+                className={this.checkAllFields() ? 'button-session' : 'button-session disabled'}>Update account</button>
             </div>
 
             <div className='session-error-wrapper'>
               <div className='session-error'>
-                {(this.state.password.length < 6 || this.state.password2.length < 6) ? 
-                <i className="fa-solid fa-circle-xmark"></i>
-                :
-                <i className="fa-solid fa-circle-check"></i> 
+                {this.checkAllFields() ?
+                  <i className="fa-solid fa-circle-check"></i>
+                  :
+                  <i className="fa-solid fa-circle-xmark"></i>
                 }
-                <span>Passwords must be 6 characters or more</span>
+                <span>At least one field must be updated</span>
               </div>
-
-              <div className='session-error'> 
-                {(this.state.password !== this.state.password2 || this.state.password === '') ?
+              {this.state.password.length ? (
+                <div className='session-error'>
+                  {(this.state.password.length < 6 || this.state.password2.length < 6) ? 
                   <i className="fa-solid fa-circle-xmark"></i>
                   :
-                  <i className="fa-solid fa-circle-check"></i>
-                }
-                <span>Passwords Must Match</span>
-              
-              </div>
+                  <i className="fa-solid fa-circle-check"></i> 
+                  }
+                  <span>Passwords must be 6 characters or more</span>
+                </div>
+              ) : ""}
+              {this.state.password.length ? (
+                <div className='session-error'>
+                  {(this.state.password !== this.state.password2 || this.state.password === '') ?
+                    <i className="fa-solid fa-circle-xmark"></i>
+                    :
+                    <i className="fa-solid fa-circle-check"></i>
+                  }
+                  <span>Passwords Must Match</span>
+
+                </div>
+              ) : ""}
             </div>
-            
-    
-          
-            {this.renderErrors()}
           </form>
         </div>
       </div>
