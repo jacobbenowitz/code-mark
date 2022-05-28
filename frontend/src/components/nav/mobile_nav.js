@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import Avatar from "../profile/avatar";
+import AvatarForm from "../profile/avatar_form";
 
 export default class MobileNav extends React.Component {
   constructor(props) {
@@ -72,8 +73,8 @@ export default class MobileNav extends React.Component {
             </div>
           </div>
           <div className="avatar-mobile">
-            <Avatar
-              currentUser={this.props.currentUser}
+            <AvatarForm
+              username={this.props.currentUser?.username}
               color={this.props.currentUser?.color}
             />
           </div>

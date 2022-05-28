@@ -1,5 +1,6 @@
 import React from 'react'
 import Avatar from './avatar';
+import AvatarForm from './avatar_form';
 
 
 export default class Settings extends React.Component {
@@ -168,8 +169,8 @@ export default class Settings extends React.Component {
                   onChange={this.update('color')}
                 />
               </div>
-              <Avatar
-                currentUser={this.state}
+              <AvatarForm
+                username={this.state.username}
                 color={this.state.color}
               />
             </div>

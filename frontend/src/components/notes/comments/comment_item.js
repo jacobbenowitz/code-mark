@@ -103,13 +103,8 @@ class CommentItem extends React.Component {
           <div className="comment-top-wrapper">
             <div className="user-info-wrapper">
               <div className="user-details">
-                {/* <div className="avatar-wrapper">
-                  <div className="avatar-container-sm">
-                    <span>{this.props?.user.username.slice(0, 2).toUpperCase()}</span>
-                  </div>
-                </div> */}
                 <Avatar 
-                  currentUser={this.props?.user}
+                  username={this.props?.user.username}
                   color={this.props?.user.color}
                 />
                 <Link to={`/users/${this.props.user.userId}`}
