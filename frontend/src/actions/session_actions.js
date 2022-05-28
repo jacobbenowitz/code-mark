@@ -35,7 +35,7 @@ export const fetchCurrentUser = () => dispatch => {
 export const login = user => dispatch => {
   return APIUtil.login(user).then(res => {
     const { token } = res.data;
-    debugger
+    // debugger
     localStorage.setItem('jwtToken', token);
     APIUtil.setAuthToken(token);
     const decoded = jwt_decode(token);
@@ -43,7 +43,7 @@ export const login = user => dispatch => {
   })
     .then(() => dispatch(receiveUserSignIn()))
     .catch(err => {
-      debugger
+      // debugger
       dispatch(receiveErrors(err.response.data));
     })
 };
