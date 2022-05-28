@@ -21,6 +21,7 @@ export default class Settings extends React.Component {
   }
 
   componentDidMount() {
+
     debugger
     this.props.fetchUser(this.props.currentUser.id)
   }
@@ -31,6 +32,7 @@ export default class Settings extends React.Component {
     if (Object.values(this.props.user).length &&
       (!this.state.email.length || !this.state.username.length || 
         this.props.errors !== this.state.errors)) {
+      
       this.setState({
         email: email,
         username: username,
@@ -41,7 +43,7 @@ export default class Settings extends React.Component {
   }
 
   confirmedDelete() {
-    this.props.removeUser(this.props.currentUser.id);
+    this.props.removeUser(this.props.currentUser._id);
     this.props.logout();
   }
 
@@ -52,9 +54,9 @@ export default class Settings extends React.Component {
     });
   };
 
-  toggleSuccessModal(){
+  toggleSuccessModal() {
     const successModal = document.getElementById('success-modal');
-    successModal.className = "success-in modal-on" 
+    successModal.className = "success-in modal-on"
     setTimeout(() => successModal.className = "success-out", 4000)
     setTimeout(() => successModal.className = "modal-off", 5000)
   }
@@ -65,7 +67,7 @@ export default class Settings extends React.Component {
     // debugger;
     this.state.password2.length ? (
       user = {
-        id: this.props.currentUser.id,
+        id: this.props.currentUser._id,
         email: this.state.email,
         username: this.state.username,
         password: this.state.password,
@@ -74,7 +76,7 @@ export default class Settings extends React.Component {
       }
     ) : (
       user = {
-        id: this.props.currentUser.id,
+        id: this.props.currentUser._id,
         email: this.state.email,
         username: this.state.username,
         password: this.props.user.password,
@@ -85,8 +87,10 @@ export default class Settings extends React.Component {
     this.props.updateUser(user);
     this.setState({ updated: false })
     this.toggleSuccessModal()
+
     // this.props.showModal(sucess: 'some message')
     // this.props.showModal(error: 'some message')
+    
     this.props.fetchCurrentUser()
     window.scrollTo(0, 0);
   }
@@ -109,6 +113,7 @@ export default class Settings extends React.Component {
   }
 
   checkAllFields() {
+
     if ( this.state.username !== this.props.user.username ||
       this.state.email !== this.props.user.email ||
       this.state.color !== this.props.user.color ||
@@ -119,7 +124,7 @@ export default class Settings extends React.Component {
 
   render() {
     return (
-  
+
       <div className='session center-simple'>
         <div id='success-modal' className='modal-off'>
           <i className="fa-solid fa-thumbs-up"></i>
@@ -163,6 +168,7 @@ export default class Settings extends React.Component {
             </div>
           </div>
           <h3>Update your account</h3>
+
           <form onSubmit={this.checkAllFields() ?
             this.handleSubmit : undefined}>
             
@@ -183,6 +189,7 @@ export default class Settings extends React.Component {
                 color={this.state.color}
               />
             </div>
+
             <div className='form-input'>
               <label htmlFor='email'>Email</label>
               <input type={'email'}
@@ -225,6 +232,7 @@ export default class Settings extends React.Component {
                 placeholder='confirm password'
                 className="text-input"
               />
+
               {this.renderErrors('password2')}
             </div>
             <div className='signup-buttons-wrapper'>
@@ -234,6 +242,7 @@ export default class Settings extends React.Component {
 
             <div className='session-error-wrapper'>
               <div className='session-error'>
+
                 {this.checkAllFields() ?
                   <i className="fa-solid fa-circle-check"></i>
                   :
@@ -241,6 +250,7 @@ export default class Settings extends React.Component {
                 }
                 <span>At least one field must be updated</span>
               </div>
+
               {this.state.password.length ? (
                 <div className='session-error'>
                   {(this.state.password.length < 6 || this.state.password2.length < 6) ? 
@@ -263,6 +273,7 @@ export default class Settings extends React.Component {
                 </div>
               ) : ""}
             </div>
+
           </form>
         </div>
       </div>

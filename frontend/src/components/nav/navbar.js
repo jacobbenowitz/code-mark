@@ -18,9 +18,7 @@ export default class NavBar extends React.Component {
 
   componentDidMount() {
     const { currentUser, fetchCurrentUser, loggedIn } = this.props;
-
     fetchCurrentUser()
-
     if (loggedIn && Object.values(currentUser).length) {
       this.setState({
         username: currentUser.username,
@@ -31,7 +29,6 @@ export default class NavBar extends React.Component {
 
   componentDidUpdate() {
     const { currentUser, loggedIn } = this.props;
-    // debugger
     if (loggedIn) {
       if (currentUser.color !== this.state.color ||
         currentUser.username !== this.state.username) {
@@ -57,7 +54,8 @@ export default class NavBar extends React.Component {
           <NavLink className="settings nav-item"
             to={'/settings'}>Settings</NavLink>
           <Link className="logout nav-item" to={'/'}
-            onClick={() => this.props.logout()}>Logout</Link>
+            onClick={() => this.props.logout()}>Logout
+          </Link>
         </div>
       );
     } else {
@@ -81,12 +79,12 @@ export default class NavBar extends React.Component {
         />
       )
     ) : (
-        avatarOrHamburger = (
-          <MobileNav
-            currentUser={this.props.currentUser}
-            logout={this.props.logout}
-          />
-        )
+      avatarOrHamburger = (
+        <MobileNav
+          currentUser={this.props.currentUser}
+          logout={this.props.logout}
+        />
+      )
     )
 
     const userLinks = this.getLinks();

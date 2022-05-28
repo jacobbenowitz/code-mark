@@ -13,6 +13,7 @@ export const getCurrentUser = () => {
 }
 
 export const patchUser = userData => {
+  debugger
   return axios.patch(`/api/users/${userData.id}`, userData)
 }
 

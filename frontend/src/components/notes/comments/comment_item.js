@@ -112,14 +112,14 @@ class CommentItem extends React.Component {
                   className="username-comment">{this.props.user?.username}</Link>
               </div>
               <div className="comment-icons">
-                {this.props.isCurrentUser || this.props.currentUser.id === this.props.comment.user.userId ? (
+                {this.props.isCurrentUser || this.props.currentUser._id === this.props.comment.user.userId ? (
                   <div className='delete-comments comment-icon-button'
                     aria-label="delete comment" title="delete"
                     onClick={() => this.toggleDeleteModal()}>
                     <i className="fa-solid fa-trash fa-lg"></i>
                   </div>
                 ) : ""}
-                {this.props.currentUser.id === this.props.comment.user.userId ? (
+                {this.props.currentUser._id === this.props.comment.user.userId ? (
                   <div className='edit-comments comment-icon-button'
                     aria-label="edit comment" title="edit"
                     onClick={() => this.toggleEdit()}>
@@ -131,7 +131,7 @@ class CommentItem extends React.Component {
                   <LikeCommentIcon
                     addCommentLike={this.props.addCommentLike}
                     removeCommentLike={this.props.removeCommentLike}
-                    currentUserId={this.props.currentUser.id}
+                    currentUserId={this.props.currentUser._id}
                     commentId={this.props.comment._id}
                     likes={this.props.comment.likes}
                   />

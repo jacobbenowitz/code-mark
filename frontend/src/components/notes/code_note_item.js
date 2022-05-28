@@ -18,7 +18,7 @@ const CodeNoteItem = props => {
   //   // e.stopPropagation();
   //   props.history.push(`/users/${props.userId}`);
   // }
-
+  
   return (
     <>
       {props.id && props.username && props.userId && props.createdAt && props.codeBody ? (

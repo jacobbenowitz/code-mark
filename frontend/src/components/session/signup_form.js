@@ -12,7 +12,7 @@ class SignupForm extends React.Component {
       username: '',
       password: '',
       password2: '',
-      color: '',
+      color: '#0D4649',
       errors: {}
     }
     this.handleSubmit = this.handleSubmit.bind(this);

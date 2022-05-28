@@ -1,5 +1,6 @@
 import React from "react";
 
+
 const AvatarForm = ({ color, username }) => (
   <div className="avatar-wrapper form"
     style={{ backgroundColor: color }}>

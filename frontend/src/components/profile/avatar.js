@@ -1,5 +1,6 @@
 import React from "react";
 
+
 const Avatar = ({ handleClick, color = '#0D4649', username = 'USER' }) => (
   <div className="avatar-wrapper" onClick={handleClick}
     style={{ backgroundColor: color }}>

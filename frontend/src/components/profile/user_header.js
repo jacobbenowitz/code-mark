@@ -6,7 +6,7 @@ const UserHeader = ({
   currentUser, user, userId, changeUserFollowers, userNotes }) => {
   let followButton;
 
-  if (currentUser.id !== user._id) {
+  if (currentUser._id !== user._id) {
     followButton = (
       <FollowButton
         changeUserFollowers={changeUserFollowers}
@@ -32,7 +32,7 @@ const UserHeader = ({
             <div className="icon-wrapper">
               <i className="fa-solid fa-comments fa-lg"></i>
             </div>
-              <span>{selectCommentsCount(userNotes)}</span>
+            <span>{selectCommentsCount(userNotes)}</span>
           </div>
 
           <div className="user-notes-stat followers">
@@ -49,7 +49,7 @@ const UserHeader = ({
             </div>
           </div>
         </div>
-        { followButton }
+        {followButton}
       </div>
     </div>
   )

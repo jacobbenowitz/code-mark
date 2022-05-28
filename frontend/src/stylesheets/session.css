@@ -26,6 +26,46 @@
   box-sizing: border-box;
 }
 
+.avatar-wrapper.form {
+  cursor: default;
+}
+
+input[type='color'] {
+  height: 52px;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+}
+
+.avatar-section-form {
+  width: 100%;
+}
+
+.form-input-label {
+  font-size: 14px;
+  color: #6E7377;
+}
+
+.color-select-input {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.avatar-form {
+  display: flex;
+  width: 100%;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
 .button-session {
   flex: 1;
 }
