@@ -170,7 +170,8 @@ router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,
                     return res.status(400).json({ email: "A user has already registered with this email address" })
                   } else {
                     // debugger;
-                    let different = req.body.color !== mainuser.color;
+                    let differentColor = req.body.color !== mainuser.color;
+                    let differentUsername = req.body.username !== mainuser.username;
                     mainuser.username = req.body.username || mainuser.username;
                     mainuser.email = req.body.email || mainuser.email;
                     mainuser.color = req.body.color || mainuser.color;
@@ -198,19 +199,29 @@ router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,
                           // debugger;
                           res.json(payload)
                           // res.json(user)
-                          if(different){
+                          if(differentColor || differentUsername){
                             user.comments.forEach(commentId => {
                               Comment.findById(commentId)
                                 .then(comment => {
                                   comment.user = {
-                                    username: comment.user.username,
+                                    username: differentUsername ? user.username : comment.user.username,
                                     userId: comment.user.userId,
-                                    color: user.color
+                                    color: differentColor ? user.color : comment.user.color
                                   };
                                   comment.save();
                                 })
                             })
                           }
+                          if(differentUsername){
+                            user.notes.forEach(noteId => {
+                              Note.findById(noteId)
+                                .then(note => {
+                                  note.user.username = user.username;
+                                  note.save();
+                                })
+                            })
+                          }
+
                         })
                         .catch(err => console.log(err))
                     }
