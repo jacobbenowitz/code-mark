@@ -25,6 +25,22 @@ button, .button {
   transition: color 250ms ease-in-out;
 }
 
+.cancel-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  padding: 6px 16px;
+  cursor: pointer;
+  background-color: #2D2D2D;
+  border-radius: 4px;
+  transition: background-color 250ms ease-in-out;
+}
+
+.cancel-button:hover {
+  background-color: #373737;
+}
+
 a.active {
   color: #37f3ff;
 }

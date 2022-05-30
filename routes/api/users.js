@@ -150,7 +150,6 @@ router.patch('/followers/:userId', passport.authenticate('jwt', { session: false
 })
 
 router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req, res) => {
-  debugger
   if (req.params.userId !== req.user.id) {
     res.status(400).json({ editnotallowed: 'Not Authorized to Edit User' })
   } else {
@@ -158,7 +157,6 @@ router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,
     if (!isValid) { return res.status(400).json(errors) }
     User.findById(req.params.userId)
       .then(mainuser => {
-        debugger
         User.findOne({ username: req.body.username })
           .then(user => {
             if (user && user.username !== req.user.username) {

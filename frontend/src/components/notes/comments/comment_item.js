@@ -19,6 +19,7 @@ class CommentItem extends React.Component {
     }
     this.handleEdit = this.handleEdit.bind(this);
     this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
+    this.toggleEdit = this.toggleEdit.bind(this);
   }
 
   componentDidMount() {
@@ -45,10 +46,12 @@ class CommentItem extends React.Component {
   }
 
   toggleEdit() {
+    // const input = document.
     if (this.state.editActive) {
       this.setState({ editActive: false })
     } else {
       this.setState({ editActive: true })
+
     }
   }
 
@@ -107,19 +110,12 @@ class CommentItem extends React.Component {
           </div>
         </div>
     )
-    
-    let testBox = (
-      <div className="testing-box"
-        style={{ "top": this.state.offsetY, "left": this.state.offsetX }}
-      />
-    )
 
     return (
       <div id={this.state.commentId || 'newComment'}
         className="comment-outer-wrapper"
         ref={this.state.commentId}
       >
-        {testBox}
         {deleteCommentModal}
           <div className="comment-top-wrapper">
             <div className="user-info-wrapper">
@@ -131,32 +127,33 @@ class CommentItem extends React.Component {
                 />
                 <Link to={`/users/${this.props.user.userId}`}
                   className="username-comment">{this.props.user?.username}</Link>
+            </div>
+            
+            <div className="comment-icons">
+              <div className='like-comments comment-icon-button'
+                aria-label="delete comments" title="like">
+                <LikeCommentIcon
+                  addCommentLike={this.props.addCommentLike}
+                  removeCommentLike={this.props.removeCommentLike}
+                  currentUserId={this.props.currentUser.id}
+                  commentId={this.props.comment._id}
+                  likes={this.props.comment.likes}
+                />
               </div>
-              <div className="comment-icons">
-                {this.props.isCurrentUser || this.props.currentUser.id === this.props.comment.user.userId ? (
+              {this.props.currentUser.id === this.props.comment.user.userId ? (
+                <div className='edit-comments comment-icon-button'
+                  aria-label="edit comment" title="edit"
+                  onClick={() => this.toggleEdit()}>
+                  <i className="fa-solid fa-pencil fa-lg"></i>
+                </div>
+              ) : ""}
+              {this.props.isCurrentUser || this.props.currentUser.id === this.props.comment.user.userId ? (
                   <div className='delete-comments comment-icon-button'
                     aria-label="delete comment" title="delete"
                     onClick={this.toggleDeleteModal}>
                     <i className="fa-solid fa-trash fa-lg"></i>
                   </div>
                 ) : ""}
-                {this.props.currentUser.id === this.props.comment.user.userId ? (
-                  <div className='edit-comments comment-icon-button'
-                    aria-label="edit comment" title="edit"
-                    onClick={() => this.toggleEdit()}>
-                    <i className="fa-solid fa-pencil fa-lg"></i>
-                  </div>
-                ) : ""}
-                <div className='like-comments comment-icon-button'
-                  aria-label="delete comments" title="like">
-                  <LikeCommentIcon
-                    addCommentLike={this.props.addCommentLike}
-                    removeCommentLike={this.props.removeCommentLike}
-                    currentUserId={this.props.currentUser.id}
-                    commentId={this.props.comment._id}
-                    likes={this.props.comment.likes}
-                  />
-                </div>
               </div>
             </div>
             <div className="comment-stats">
@@ -170,7 +167,8 @@ class CommentItem extends React.Component {
           {this.state.editActive ? (
             <div className="comment-wrapper">
               <form onSubmit={this.handleEdit} className='comment-form'>
-                <span className='comment-form-title'>Edit comment</span>
+              <span className='comment-form-title'>Edit comment</span>
+              {this.props.comment.codeSnippet ? (
                 <div className='add-code-snippet-wrapper'>
                   <div className="code-snippet-comment">
                     <div className="code-snippet-comment">
@@ -179,15 +177,22 @@ class CommentItem extends React.Component {
                     </div>
                   </div>
                 </div>
+              ) : ''}
                 <textarea
                   onChange={this.update('textbody')}
-                  id='comment-textarea'
+                  id={`comment-textarea-${this.props.comment._id}`}
                   className='comment-body-input'
-                  placeholder={'Have a question about this CodeMark? Let the author know!'}
+                  placeholder={'Have a something to say about this CodeMark? Let the author know!'}
                   value={this.state.textbody}
                   required
-                />
+              />
+              <div className="comment-edit-actions">
                 <button id="comment-submit" type='submit'>Update</button>
+                <span
+                  className="cancel-button"
+                  onClick={this.toggleEdit}>Cancel
+                </span>
+              </div>
               </form>
             </div>
           ) : (

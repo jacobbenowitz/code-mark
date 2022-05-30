@@ -111,7 +111,7 @@ export default class CommentForm extends React.Component {
                 onChange={this.update('textbody')}
                 id='comment-textarea'
                 className='comment-body-input'
-                placeholder={'Have a question about this CodeMark? Let the author know!'}
+                placeholder={'Have a something to say about this CodeMark? Let the author know!'}
                 value={this.state.textbody}
                 required
               />
@@ -133,7 +133,7 @@ export default class CommentForm extends React.Component {
                 onChange={this.update('textbody')}
                 id='comment-textarea'
                 className='comment-body-input'
-                placeholder={'Have a question about this CodeMark? Let the author know!'}
+                  placeholder={'Have a something to say about this CodeMark? Let the author know!'}
                 value={this.state.textbody}
                 required
               />

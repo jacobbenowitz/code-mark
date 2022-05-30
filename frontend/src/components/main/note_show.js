@@ -140,16 +140,6 @@ export default class NoteShow extends React.Component {
 
   exportImage() {
     const noteItem = document.getElementById('content-export');
-
-    // domtoimage.toPng(noteItem)
-    //   .then(function (dataUrl) {
-    //     var img = new Image();
-    //     img.src = dataUrl;
-    //     document.body.appendChild(img);
-    //   })
-    //   .catch(function (error) {
-    //     console.error('oops, something went wrong!', error);
-    //   });
     const username = this.state.note.user.username;
     const title = this.state.note.title;
     const scale = 2;
@@ -175,6 +165,7 @@ export default class NoteShow extends React.Component {
     const { note } = this.state;
     const contextMenu = document.getElementById("context-menu");
     const scope = document.querySelector("body");
+    // const scope = document.querySelector("#code-note-view");
     const codeNote = document.getElementById('code-note-view')
 
     // const normalizePozition = (mouseX, mouseY) => {
@@ -267,9 +258,6 @@ export default class NoteShow extends React.Component {
               let selection = window.getSelection().toString();
               navigator.clipboard.writeText(selection)
             }}>Copy selection</div>
-          {/* <div className="menu-item" onMouseDown={() =>
-            this.commentOnSelection(this.state.selection)}
-          >Comment 2</div> */}
         </div>
 
         {/* PHOTO EXPORT MODAL */}
@@ -277,15 +265,15 @@ export default class NoteShow extends React.Component {
           style={{'height': this.state.bodyHeight}}
         >
           <div className='action-buttons'>
-            <div className='cancel-export icon-button'
-              onClick={() => this.toggleExportModal()}>
-              <i className="fa-solid fa-xmark fa-xl" />
-              <span>cancel</span>
-            </div>
             <div className='export icon-button'
               onClick={() => this.exportImage()}>
               <i className="fa-solid fa-download" />
               <span>download</span>
+            </div>
+            <div className='cancel-export icon-button'
+              onClick={() => this.toggleExportModal()}>
+              <i className="fa-solid fa-xmark fa-xl" />
+              <span>cancel</span>
             </div>
           </div>
 

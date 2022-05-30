@@ -145,7 +145,7 @@
   /* display: flex;
   flex-direction: column;
   align-items: flex-start; */
-  padding: 10px;
+  padding: 10px 0;
   gap: 10px;
 
   width: 100%;
@@ -206,9 +206,9 @@ textarea {
   line-height: 2rem;
 }
 
-#comment-textarea:focus {
-  background-color: #2c2d30;
-  border: 0.5px solid white;
+.comment-body-input:focus {
+  background-color: #393a3c;
+  border-radius: 6px;
 }
 
 .new-comment-container {
@@ -234,11 +234,13 @@ textarea {
   width: 100%;
 }
 
-#comment-textarea {
+.comment-body-input {
   height: fit-content;
   padding: 0.4rem;
   width: 97%;
   resize: none;
+  background-color: #2c2d30;
+  border-radius: 6px;
 }
 
 #comment-submit {
@@ -246,3 +248,14 @@ textarea {
   bottom: 0px;
   align-self: flex-end;
 }
+
+.comment-edit-actions {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  place-self: flex-end;
+}
+
