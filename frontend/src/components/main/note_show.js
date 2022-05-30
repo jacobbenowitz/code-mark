@@ -54,9 +54,9 @@ export default class NoteShow extends React.Component {
 
   componentDidUpdate() {
     const { note, comments } = this.props;
-    debugger
+    // debugger
     if (note && note !== this.state.note || this.state.comments !== comments) {
-      debugger
+      // debugger
       const orderedComments = orderNoteComments(comments);
       this.setState({
         note: note,
@@ -76,8 +76,9 @@ export default class NoteShow extends React.Component {
 
   deleteNote() {
     this.props.removeNote(this.props.noteId).then(() => {
-      this.props.history.goBack()
+      this.props.history.goBack();
     })
+    // this.props.toggleModal();
   }
 
   toggleEditModal() {
@@ -324,7 +325,7 @@ export default class NoteShow extends React.Component {
         <div id='edit-note-container' className="modal-off">
           <div className='modal-wrapper'>
             <EditNote note={note} updateNote={updateNote}
-              currentUser={currentUser} noteId={noteId} />
+              currentUser={currentUser} noteId={noteId} toggleModal={this.props.toggleModal}/>
           </div>
         </div>
         <div className='note-show-container center-span-7'>
@@ -514,6 +515,7 @@ export default class NoteShow extends React.Component {
               noteId={this.props.noteId}
               addCommentLike={this.props.addCommentLike}
               removeCommentLike={this.props.removeCommentLike}
+              toggleModal={this.props.toggleModal}
             />
           </section>
         </div>

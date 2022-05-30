@@ -263,7 +263,8 @@ input[type='color'] {
     gap: 1rem;
     padding: 1rem 3rem;
     border-radius: 8px;
-    position: absolute;
+    /* position: absolute; */
+    position: fixed;
     top: 90px;
     z-index: 399;
     background-color: #1c1b1b;

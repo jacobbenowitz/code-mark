@@ -77,7 +77,7 @@ export const fetchNote = noteId => dispatch => (
 );
 
 export const fetchUserNotes = id => dispatch => {
-  debugger
+  // debugger
   return getUserNotes(id)
     .then(notes => dispatch(receiveUserNotes(notes)))
     .catch(err => dispatch(receiveNoteErrors(err)))

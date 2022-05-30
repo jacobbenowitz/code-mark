@@ -45,7 +45,7 @@ const SessionReducer = (prevState = initialState, action) => {
       const user = action.currentUser.id ? (
         action.currentUser
       ) : action.currentUser.currentUser
-      debugger
+      // debugger
       return {
         ...prevState,
         isAuthenticated: !!user,
@@ -57,7 +57,7 @@ const SessionReducer = (prevState = initialState, action) => {
         isSignedIn: true
       }
     case RECEIVE_UPDATED_USER:
-      debugger
+      // debugger
       nextState.user = action.user.data;
       return nextState;
     case RECEIVE_USER_NEW_FOLLOWING:
