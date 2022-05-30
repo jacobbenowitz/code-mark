@@ -261,6 +261,10 @@ button#tag-icon-save.disabled:hover {
   left: 75px;
 }
 
+.comment-code-mini {
+  width: 100%;
+}
+
 .cancel-modal, .resources-modal {
   background:#20212470;
   backdrop-filter: blur(8px);

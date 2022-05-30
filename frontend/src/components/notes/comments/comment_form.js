@@ -77,68 +77,45 @@ export default class CommentForm extends React.Component {
   }
 
   render() {
-    const tx = document.querySelectorAll("#code-snippet-new");
-    for (let i = 0; i < tx.length; i++) {
-      tx[i].setAttribute("style", "height:" + (tx[i].scrollHeight) + "px;overflow-y:hidden;");
-      tx[i].addEventListener("input", OnInput, false);
-    }
+    // const tx = document.querySelector("#new-comment-textarea");
+    // for (let i = 0; i < tx.length; i++) {
+    //   tx[i].setAttribute("style", "height:" + (tx[i].scrollHeight) + "px;overflow-y:hidden;");
+    //   tx[i].addEventListener("input", OnInput, false);
+    // }
 
-    function OnInput() {
-      this.style.height = "auto";
-      this.style.height = (this.scrollHeight) + "px";
-    }
+    // function OnInput() {
+    //   this.style.height = "auto";
+    //   this.style.height = (this.scrollHeight) + "px";
+    // }
 
     return (
       <>
         <div className='new-comment-container'>
-          {this.state.formActive ? (
             <form onSubmit={this.handleSubmit} className='comment-form'>
               <span className='comment-form-title'>Write a new comment</span>
+              <div className='button-absolute-wrapper'>
+                <div className={this.state.codeSnippet ? 'hidden' : 'icon-button'} id='code-highlight-button-2'
+                  onClick={this.promptCodeHighlight}>
+                  <i className="fa-solid fa-highlighter fa-lg"></i>
+                  <span>Mention code from the note in your comment</span>
+                </div>
+              </div>
               <div className='add-code-snippet-wrapper'>
                 <div className="code-snippet-comment">
-                  {/* onClick={this.promptCodeHighlight}> */}
-                  {/* <div className='icon-button' id='code-highlight-button-1'
-                    onClick={this.promptCodeHighlight}>
-                    <i class="fa-solid fa-highlighter fa-lg"></i>
-                    <span>Mention code from the note in your comment</span>
-                  </div> */}
                   <CodeCommentReadOnly
-                    promptCodeHighlight={this.promptCodeHighlight}
                     codeSnippet={this.state.codeSnippet} />
                 </div>
               </div>
               <textarea
                 onChange={this.update('textbody')}
-                id='comment-textarea'
+                id='new-comment-textarea'
                 className='comment-body-input'
                 placeholder={'Have a something to say about this CodeMark? Let the author know!'}
                 value={this.state.textbody}
                 required
               />
               <button id="comment-submit" type='submit'>Comment</button>
-            </form>
-          ) : (
-            <form onClick={this.toggleForm} className='comment-form'>
-              <span className='comment-form-title'>Write a new comment</span>
-              <div className='add-code-snippet-wrapper'>
-                <div className="code-snippet-comment">
-                  <div className='icon-button' id='code-highlight-button-2'
-                    onClick={this.promptCodeHighlight}>
-                    <i className="fa-solid fa-highlighter fa-lg"></i>
-                    <span>Mention code from the note in your comment</span>
-                  </div>
-                </div>
-              </div>
-              <textarea
-                onChange={this.update('textbody')}
-                id='comment-textarea'
-                className='comment-body-input'
-                  placeholder={'Have a something to say about this CodeMark? Let the author know!'}
-                value={this.state.textbody}
-                required
-              />
-            </form>
-          )}
+          </form>
         </div>
       </>
     )

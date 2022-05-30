@@ -166,6 +166,7 @@
 .code-note-body {
   width: 100%;
   font-size: 14px;
+  position: relative;
 }
 
 .cm-theme-dark {
@@ -357,6 +358,12 @@
   background-color: #35373E;
 }
 
+.selected-text {
+  text-decoration: underline;
+  background-color: #b7be5395;
+  color: rgb(119, 255, 15);
+}
+
 #note-export-modal {
   z-index: 1000;
   position: absolute;
@@ -385,4 +392,63 @@
 
 .export.icon-button:hover {
   background-color: #0f6a88;
+}
+
+#comment-highlight-text {
+  background-color: #20212470;
+  backdrop-filter: blur(8px);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 1rem;
+  place-items: center;
+  border-radius: 4px;
+  padding: 1rem 2rem;
+  position: absolute;
+  z-index: 200;
+    transition: background-color 300ms ease;
+}
+
+#comment-highlight-text.modal-on{
+  animation: slideIn 500ms ease-in;
+}
+#comment-highlight-text.modal-out{
+  animation: slideOut 500ms ease-out;
+}
+
+#comment-highlight-text.hover {
+  background-color: rgba(32, 33, 36, 0.737);
+}
+
+.comment-selection-title {
+  width: 100%;
+}
+
+.cm-theme-dark.comment-code {
+  width: 100%;
+}
+
+.modal-hidden {
+  opacity: 0%;
+}
+
+@keyframes slideIn {
+  0% {
+    left: -40px;
+    opacity: 0%;
+  }
+  100% {
+    left: 0;
+    opacity: 100%;
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    left: 0;
+    opacity: 100%;
+  }
+  100% {
+    left: -40px;
+    opacity: 0%;
+  }
 }

@@ -22,6 +22,8 @@ import LikeNoteIcon from '../notes/like_note_icon';
 import moment from 'moment';
 import SwitchButton from '../UI/switch_button';
 import CodeEditorExportImage from '../code_editor/code_editor_export_img';
+import CodeCommentReadOnly from '../code_editor/code_comment_readonly';
+import CodeCommentReadOnlyMini from '../code_editor/code_comment_readonly_mini';
 
 
 export default class NoteShow extends React.Component {
@@ -40,6 +42,7 @@ export default class NoteShow extends React.Component {
     this.exportImage = this.exportImage.bind(this);
     this.handlePublicSwitch = this.handlePublicSwitch.bind(this);
     this.toggleExportModal = this.toggleExportModal.bind(this);
+    this.commentOnSelection = this.commentOnSelection.bind(this)
   }
 
   componentWillMount() {
@@ -52,6 +55,16 @@ export default class NoteShow extends React.Component {
   }
 
   componentWillUnmount() {
+    const scope = document.querySelector("body");
+    // remove click eventListener for contextmenu
+    scope.removeEventListener("contextmenu", (event) => {
+      contextMenu.className = "";
+    });
+    
+    // remove click eventListener
+    scope.removeEventListener("click", (e) => {
+      contextMenu.className = "";
+    });
     this._isMounted = false;
   }
 
@@ -113,14 +126,12 @@ export default class NoteShow extends React.Component {
     })
   }
 
-  commentOnSelection(selection) {
-    this.setState({
-      selectedText: selection
-    })
+  commentOnSelection() {
     const commentSection = document.getElementById("comments");
-    // const newSnippetField = document.getElementById("code-snippet-new");
-    // newSnippetField.focus();
-    // newSnippetField.value = selection;
+    const newSnippetField = document.getElementById("new-comment-textarea");
+    debugger
+    newSnippetField.focus();
+    newSnippetField.value = this.state.selectedText;
     commentSection.scrollIntoView({ behavior: 'smooth' });
   }
 
@@ -165,7 +176,6 @@ export default class NoteShow extends React.Component {
     const { note } = this.state;
     const contextMenu = document.getElementById("context-menu");
     const scope = document.querySelector("body");
-    // const scope = document.querySelector("#code-note-view");
     const codeNote = document.getElementById('code-note-view')
 
     // const normalizePozition = (mouseX, mouseY) => {
@@ -203,28 +213,33 @@ export default class NoteShow extends React.Component {
     //   return { normalizedX, normalizedY };
     // };
 
-    scope.addEventListener("contextmenu", (event) => {
-      event.preventDefault();
+    ///////////// commented out context menu
 
-      const { clientX: mouseX, clientY: mouseY } = event;
+    // scope.addEventListener("contextmenu", (event) => {
+    //   event.preventDefault();
 
-      contextMenu.classList.remove("visible");
-      contextMenu.style.top = `${mouseY}px`;
-      contextMenu.style.left = `${mouseX}px`;
-
-      setTimeout(() => {
-        contextMenu.classList.add("visible");
-      });
-    });
+    //   const { clientX: mouseX, clientY: mouseY } = event;
+    //   if (contextMenu) {
+    //     contextMenu.classList.remove("visible");
+    //     contextMenu.style.top = `${mouseY}px`;
+    //     contextMenu.style.left = `${mouseX}px`;
+  
+    //     setTimeout(() => {
+    //       contextMenu.classList.add("visible");
+    //     });
+    //   }
+    // });
 
     // ? close the menu if the user clicks outside of it
-    scope.addEventListener("click", (e) => {
-      // add conditional id contextmenu is visible
-      if (e.target.offsetParent != contextMenu) {
-        contextMenu.classList.remove("visible");
-      }
-      contextMenu.classList.remove("visible");
-    });
+    // scope.addEventListener("click", (e) => {
+    //   // add conditional id contextmenu is visible
+    //   if (contextMenu && e.target.offsetParent != contextMenu) {
+    //     contextMenu.classList.remove("visible");
+    //   }
+    //   // contextMenu.classList.remove("visible");
+    // });
+
+    /////////// end commented out context menu
 
     // textarea resize
     // use state for textarea height and pass props 
@@ -240,15 +255,34 @@ export default class NoteShow extends React.Component {
     }
 
     // listen for selection and update state 
-    // document.onselectionchange = () => {
-    // let selection = document.getSelection()
-    // console.log(document.getSelection())
-    // this.setState({ selectedText: selection.toString() });
-    // };
+    document.onselectionchange = (e) => {
+      e.preventDefault()
+      const selectionString = document.getSelection().toString()
+      const selectionCommentModal = document.getElementById('comment-highlight-text')
+
+      this.setState({ selectedText: selectionString });
+      selectionCommentModal.className = 'modal-on'
+
+      selectionCommentModal.addEventListener('mouseenter', () => {
+        const modal = document.getElementById('comment-highlight-text')
+        modal.className = 'modal-on hover'
+      })
+
+      selectionCommentModal.addEventListener('mouseleave', () => {
+        setTimeout(() => {
+          selectionCommentModal.className = 'modal-out';
+          setTimeout(() => {
+            selectionCommentModal.className = 'modal-hidden'
+          }, 500)
+        }, 2000)
+      })
+    };
 
     return Object.values(note).length ? (
       <>
-        <div id="context-menu">
+        {/* NO LONGER USING CONTEXT MENU */}
+
+        {/* <div id="context-menu">
           <div className="menu-item" onMouseDown={() => {
             let selection = window.getSelection()
             this.commentOnSelection(selection.toString())
@@ -258,7 +292,7 @@ export default class NoteShow extends React.Component {
               let selection = window.getSelection().toString();
               navigator.clipboard.writeText(selection)
             }}>Copy selection</div>
-        </div>
+        </div> */}
 
         {/* PHOTO EXPORT MODAL */}
         <div id="note-export-modal" className='modal-off'
@@ -468,9 +502,23 @@ export default class NoteShow extends React.Component {
                   </div>
                 </div>
               </div>
+
               <CodeEditorNoteShow
                 codeBody={note.codebody}
               />
+
+              <div id='comment-highlight-text' className='modal-hidden'>
+                <div className='comment-selection-title'>
+                <span>Comment on this selection:</span>
+                </div>
+                <CodeCommentReadOnlyMini
+                  codeSnippet={this.state.selectedText}
+                />
+                <div className='icon-button' onClick={this.commentOnSelection}>
+                  <span>comment</span>
+                  <i className="fa-solid fa-arrow-right" />
+                </div>
+              </div>
             </div>
             <div className='note-textDetails'>
               <span className='textDetails-show'>
