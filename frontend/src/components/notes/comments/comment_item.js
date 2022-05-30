@@ -13,28 +13,20 @@ class CommentItem extends React.Component {
     this.state = {
       codeSnippet: "",
       textbody: "",
-      editActive: false
+      editActive: false,
+      deleteCommentModal: false,
+      commentId: ''
     }
     this.handleEdit = this.handleEdit.bind(this);
+    this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
   }
 
   componentDidMount() {
     this.setState({
       codeSnippet: this.props.comment.codeSnippet,
-      textbody: this.props.comment.textbody
+      textbody: this.props.comment.textbody,
+      commentId: this.props.comment._id,
     })
-  }
-
-  toggleDeleteModal(e) {
-    // mouseX = e.clientX;
-    // mouseY = e.clientY;
-    // console.log(mouseX, mouseY)
-    const deleteModal = document.getElementById('comment-delete-modal-container');
-    if (deleteModal.className === "modal-off") {
-      deleteModal.className = "modal-on";
-    } else {
-      deleteModal.className = "modal-off";
-    }
   }
 
   handleEdit(e) {
@@ -74,13 +66,26 @@ class CommentItem extends React.Component {
     }
   }
 
+  toggleDeleteModal(e) {
+    e.stopPropagation();
+
+    if (this.state.deleteCommentModal) {
+      this.setState({
+        deleteCommentModal: false
+      })
+    } else {
+      this.setState({
+        deleteCommentModal: true
+      })
+    }
+  }
+
 
   render() {
     // debugger;
-    return (
-      <div>
-        {/* modal div */}
-        <div id='comment-delete-modal-container' className='modal-off' >
+    let deleteCommentModal = (
+        <div id='comment-delete-modal-container'
+          className={this.state.deleteCommentModal ? 'modal-on' : 'modal-off'} >
           <div className='modal-wrapper-2'>
             <div className='cancel-modal'>
               <span>Are you sure you want to delete this comment?</span>
@@ -91,7 +96,7 @@ class CommentItem extends React.Component {
                   <span>Delete </span>
                 </div>
                 <div className='cancel icon-button'
-                  onClick={(e) => this.toggleDeleteModal(e)}>
+                  onClick={this.toggleDeleteModal}>
                   <i className="fa-solid fa-ban fa-lg"></i>
                   <span>
                     Cancel
@@ -101,8 +106,21 @@ class CommentItem extends React.Component {
             </div>
           </div>
         </div>
+    )
+    
+    let testBox = (
+      <div className="testing-box"
+        style={{ "top": this.state.offsetY, "left": this.state.offsetX }}
+      />
+    )
 
-        <div id={this.props.comment?._id || 'newComment'} className="comment-outer-wrapper">
+    return (
+      <div id={this.state.commentId || 'newComment'}
+        className="comment-outer-wrapper"
+        ref={this.state.commentId}
+      >
+        {testBox}
+        {deleteCommentModal}
           <div className="comment-top-wrapper">
             <div className="user-info-wrapper">
               <div className="user-details">
@@ -118,7 +136,7 @@ class CommentItem extends React.Component {
                 {this.props.isCurrentUser || this.props.currentUser.id === this.props.comment.user.userId ? (
                   <div className='delete-comments comment-icon-button'
                     aria-label="delete comment" title="delete"
-                    onClick={() => this.toggleDeleteModal()}>
+                    onClick={this.toggleDeleteModal}>
                     <i className="fa-solid fa-trash fa-lg"></i>
                   </div>
                 ) : ""}
@@ -188,7 +206,6 @@ class CommentItem extends React.Component {
             </div>
           )}
         </div>
-      </div >
     )
   }
 }

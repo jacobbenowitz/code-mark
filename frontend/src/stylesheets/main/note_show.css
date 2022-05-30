@@ -360,13 +360,29 @@
 #note-export-modal {
   z-index: 1000;
   position: absolute;
-  top: 50%;  
-  left: 50%;  
-  transform: translate(-50%, -50%);
   width: 100%;
-  height: 100%;
   display: flex;
   background-color: #1b1b1c;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  flex-direction: column;
+}
+
+.action-buttons {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.cancel-export.icon-button:hover {
+  background-color: #390000;
+}
+
+.export.icon-button:hover {
+  background-color: #0f6a88;
 }

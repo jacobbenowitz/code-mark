@@ -21,6 +21,7 @@ import { saveAs } from 'file-saver';
 import LikeNoteIcon from '../notes/like_note_icon';
 import moment from 'moment';
 import SwitchButton from '../UI/switch_button';
+import CodeEditorExportImage from '../code_editor/code_editor_export_img';
 
 
 export default class NoteShow extends React.Component {
@@ -33,10 +34,12 @@ export default class NoteShow extends React.Component {
       commentModal: false,
       public: undefined,
       textHeight: undefined,
+      bodyHeight: 0
     }
     this.deleteNote = this.deleteNote.bind(this);
     this.exportImage = this.exportImage.bind(this);
     this.handlePublicSwitch = this.handlePublicSwitch.bind(this);
+    this.toggleExportModal = this.toggleExportModal.bind(this);
   }
 
   componentWillMount() {
@@ -54,14 +57,15 @@ export default class NoteShow extends React.Component {
 
   componentDidUpdate() {
     const { note, comments } = this.props;
-    debugger
+    const body = document.getElementsByTagName('body');
+    const bodyHeight = body[0].clientHeight;
     if (note && note !== this.state.note || this.state.comments !== comments) {
-      debugger
       const orderedComments = orderNoteComments(comments);
       this.setState({
         note: note,
         comments: orderedComments,
-        public: note.public
+        public: note.public,
+        bodyHeight: bodyHeight
       })
     }
     // if (!Object.values(this.state.note).length || this.state.comments !== comments && Object.values(note).length && Object.values(comments).length) {
@@ -122,15 +126,20 @@ export default class NoteShow extends React.Component {
 
   toggleExportModal() {
     const exportModal = document.getElementById('note-export-modal');
+    const body = document.getElementsByTagName('body');
+    const bodyHeight = body[0].clientHeight;
+    console.log(bodyHeight)
+    this.setState({bodyHeight: bodyHeight})
     if (exportModal.className === 'modal-on') {
       exportModal.className = 'modal-off'
     } else {
       exportModal.className = 'modal-on'
+      window.scrollTo(0, 0)
     }
   }
 
   exportImage() {
-    const noteItem = document.getElementById('note-show-main');
+    const noteItem = document.getElementById('content-export');
 
     // domtoimage.toPng(noteItem)
     //   .then(function (dataUrl) {
@@ -141,7 +150,8 @@ export default class NoteShow extends React.Component {
     //   .catch(function (error) {
     //     console.error('oops, something went wrong!', error);
     //   });
-
+    const username = this.state.note.user.username;
+    const title = this.state.note.title;
     const scale = 2;
     const image = domtoimage.toPng(noteItem, {
       height: noteItem.offsetHeight * scale,
@@ -150,14 +160,9 @@ export default class NoteShow extends React.Component {
       },
       width: noteItem.offsetWidth * scale
     }).then(function (scaledImg) {
-      window.saveAs(scaledImg, 'test-img-scaled.png')
-    })
+      window.saveAs(scaledImg, `${title}-by-${username}-CodeMark`)
+    }).then(() => this.toggleExportModal())
 
-
-    // domtoimage.toBlob(noteItem, { height: 2000, width: 1000 })
-    //   .then(function (blob) {
-    //     window.saveAs(blob, 'test-img.png')
-    //   });
   };
 
   isMobile() {
@@ -166,7 +171,6 @@ export default class NoteShow extends React.Component {
 
 
   render() {
-
     const { currentUser, updateNote, noteId } = this.props;
     const { note } = this.state;
     const contextMenu = document.getElementById("context-menu");
@@ -269,14 +273,21 @@ export default class NoteShow extends React.Component {
         </div>
 
         {/* PHOTO EXPORT MODAL */}
-        <div id="note-export-modal" className='modal-off'>
-          <div className='export-controls'>
-            <div className='cancel icon-button'
+        <div id="note-export-modal" className='modal-off'
+          style={{'height': this.state.bodyHeight}}
+        >
+          <div className='action-buttons'>
+            <div className='cancel-export icon-button'
               onClick={() => this.toggleExportModal()}>
-              <i class="fa-solid fa-xmark fa-xl" />
+              <i className="fa-solid fa-xmark fa-xl" />
+              <span>cancel</span>
+            </div>
+            <div className='export icon-button'
+              onClick={() => this.exportImage()}>
+              <i className="fa-solid fa-download" />
+              <span>download</span>
             </div>
           </div>
-
 
           <div id='content-export' className='note-show-main'>
             <div className='note-show-title'>
@@ -287,7 +298,7 @@ export default class NoteShow extends React.Component {
               <TagsExport note={this.state.note} />
             </div>
             <div className='code-note-body' id='code-note-view'>
-              <CodeEditorReadOnly codeBody={note.codebody} />
+              <CodeEditorExportImage codeBody={note.codebody} />
             </div>
             <div className='note-textDetails'>
               <span className='textDetails-show'>

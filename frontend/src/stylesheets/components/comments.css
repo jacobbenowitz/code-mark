@@ -7,6 +7,15 @@
   gap: 2rem;
 }
 
+/* .testing-box {
+  z-index: 200;
+  width: 300px;
+  height: 150px;
+  background-color: #494949;
+  opacity: 40%;
+  position: absolute;
+} */
+
 .comment-stats {
   display: flex;
   align-items: center;
@@ -110,6 +119,7 @@
   align-items: flex-start;
   align-content: flex-start;
   gap: 2rem;
+  position: relative;
 }
 
 .user-details {
