@@ -394,18 +394,25 @@
   background-color: #0f6a88;
 }
 
+.comment-selection-title {
+  font-weight: 800;
+}
+
 #comment-highlight-text {
-  background-color: #20212470;
   backdrop-filter: blur(8px);
   display: grid;
   grid-template-rows: auto 1fr;
   gap: 1rem;
-  place-items: center;
+  place-items: flex-start;
   border-radius: 4px;
-  padding: 1rem 2rem;
+  padding: 1rem;
+  max-width: 300px;
   position: absolute;
+  top: -143px;
+  right: -50px;
   z-index: 200;
-    transition: background-color 300ms ease;
+  transition: background-color 300ms ease;
+  background-color: rgba(32, 33, 36, 0.475)
 }
 
 #comment-highlight-text.modal-on{
@@ -415,7 +422,7 @@
   animation: slideOut 500ms ease-out;
 }
 
-#comment-highlight-text.hover {
+#comment-highlight-text:hover {
   background-color: rgba(32, 33, 36, 0.737);
 }
 

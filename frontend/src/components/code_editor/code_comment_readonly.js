@@ -21,7 +21,7 @@ const CodeCommentReadOnly = props => {
     <CodeMirror
       className="comment-code"
       readOnly={true}
-      value={props.codeSnippet}
+      value={props.codeSnippet || 'Select text from the note above to comment'}
       width='100%'
       theme='dark'
       extensions={[

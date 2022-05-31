@@ -15,14 +15,6 @@ export default class CommentIndex extends React.Component {
       composeComment, selectedText, newComment, currentUser, fetchNoteComments } = this.props;
     return (
       <div className='comments-list'>
-        <CommentForm
-          noteId={noteId}
-          composeComment={composeComment}
-          selectedText={selectedText}
-          newComment={newComment}
-          currentUser={currentUser}
-          fetchNoteComments={fetchNoteComments}
-        />
         {comments ? (
           <div className='comment-items-list'>
             {comments.map(comment => {

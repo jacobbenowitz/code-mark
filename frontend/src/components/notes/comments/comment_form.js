@@ -77,29 +77,13 @@ export default class CommentForm extends React.Component {
   }
 
   render() {
-    // const tx = document.querySelector("#new-comment-textarea");
-    // for (let i = 0; i < tx.length; i++) {
-    //   tx[i].setAttribute("style", "height:" + (tx[i].scrollHeight) + "px;overflow-y:hidden;");
-    //   tx[i].addEventListener("input", OnInput, false);
-    // }
-
-    // function OnInput() {
-    //   this.style.height = "auto";
-    //   this.style.height = (this.scrollHeight) + "px";
-    // }
 
     return (
       <>
         <div className='new-comment-container'>
             <form onSubmit={this.handleSubmit} className='comment-form'>
-              <span className='comment-form-title'>Write a new comment</span>
-              <div className='button-absolute-wrapper'>
-                <div className={this.state.codeSnippet ? 'hidden' : 'icon-button'} id='code-highlight-button-2'
-                  onClick={this.promptCodeHighlight}>
-                  <i className="fa-solid fa-highlighter fa-lg"></i>
-                  <span>Mention code from the note in your comment</span>
-                </div>
-              </div>
+            <span className='comment-form-title'>Write a new comment</span>
+            <div className='cancel-snippet-button icon-only-button'></div>
               <div className='add-code-snippet-wrapper'>
                 <div className="code-snippet-comment">
                   <CodeCommentReadOnly
