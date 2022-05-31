@@ -129,7 +129,7 @@ export default class EditNote extends React.Component {
           <form onSubmit={this.state.codebody.length ? this.handleSubmit : ""}>
             <div className='note-input'>
               <input type={'text'}
-                onClick={this.placeholderTitle}
+                onClick={this.state.title === "Untitled note" ? this.placeholderTitle : undefined }
                 onChange={this.update('title')}
                 id='title-code'
                 className='title-input'

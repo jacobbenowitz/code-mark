@@ -363,7 +363,7 @@ class NewNote extends React.Component {
             <form onSubmit={this.state.codebody.length ? this.toggleResourcesModal : undefined}>
               <div id="note-title-input" className='note-input'>
                 <input type={'text'}
-                  onClick={this.placeholderTitle}
+                  onClick={this.state.title === "" ? this.placeholderTitle : undefined}
                   onChange={this.update('title')}
                   id='title-code'
                   className='title-input'
