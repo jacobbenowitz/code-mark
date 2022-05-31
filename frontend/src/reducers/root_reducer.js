@@ -5,12 +5,22 @@ import errors from './errors_reducer';
 import comments from './comments_reducer';
 import users from './users_reducer';
 
-const RootReducer = combineReducers({
+const AppReducer = combineReducers({
   session,
   notes,
   errors,
   comments,
   users
 });
+
+const RootReducer = (state,action) => {
+  state.errors = {
+    session: [],
+    notes: [],
+    comments: [],
+    users: []
+  };
+  return AppReducer(state,action);
+}
 
 export default RootReducer;

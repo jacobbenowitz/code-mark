@@ -64,7 +64,7 @@ router.post('/',
                 newNote.save().then(note => {
                     req.user.notes.push(newNote.id)
                     req.user.save()
-                        .then(() => res.json(note))
+                        .then(() => res.json([note,['success', 'Note Successfully Created!']]))
                 });
             })
     }
@@ -134,7 +134,7 @@ router.delete('/:id',
                     const userid = note.user.userId;
                     const comments = note.comments;
                     const likes = note.likes;
-                    res.json(note);
+                    res.json([note,['success', 'Note Successfully Deleted!']]);
                     Note.deleteOne({ _id: req.params.id })
                         .then(() => {
                             User.findById(userid)

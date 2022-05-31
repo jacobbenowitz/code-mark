@@ -74,7 +74,7 @@ class GlobalModal extends React.Component {
       messages: newmessages,
       modalOn: true
     },() => {
-      this.toggleSuccessModal();
+      this.state.messages.length > 0 ? this.toggleSuccessModal(): '';
     })
   }
   // if(messages.length === 0){
