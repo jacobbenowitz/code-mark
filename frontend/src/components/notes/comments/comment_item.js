@@ -5,6 +5,7 @@ import CodeCommentReadOnly from "../../code_editor/code_comment_readonly";
 import LikeCommentIcon from "../like_comment_icon";
 import Avatar from "../../profile/avatar";
 import TextareaAutosize from 'react-textarea-autosize';
+import { withRouter } from "react-router-dom";
 
 class CommentItem extends React.Component {
 
@@ -216,4 +217,4 @@ class CommentItem extends React.Component {
   }
 }
 
-export default CommentItem;
+export default withRouter(CommentItem);

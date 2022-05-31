@@ -103,9 +103,9 @@
 }
 
 #code-note-submit.disabled:hover::after {
-  content: "Invalid codebody";
+  content: "CodeMark must be at least 2 characters";
   position: absolute;
-  left: 75px;
+  right: 175px;
   white-space: nowrap;
   bottom: 0;
   overflow: hidden;
@@ -115,7 +115,7 @@
   border-radius: 4px;
   /* box-shadow: 0px 2px 16px rgb(0 0 0 / 30%); */
   animation: fadeIn 1000ms ease-in-out;
-  color: red;
+  color: rgb(221, 74, 74);
   display: flex;
 }
 
@@ -133,7 +133,7 @@
   border-radius: 4px;
   /* box-shadow: 0px 2px 16px rgb(0 0 0 / 30%); */
   animation: fadeIn 1000ms ease-in-out;
-  color: red;
+  color: rgb(221, 74, 74);
   display: flex;
 }
 
@@ -154,7 +154,7 @@
   border-radius: 4px;
   /* box-shadow: 0px 2px 16px rgb(0 0 0 / 30%); */
   animation: fadeIn 1000ms ease-in-out;
-  color: red;
+  color: rgb(221, 74, 74);
   display: flex;
 }
 

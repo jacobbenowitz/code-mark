@@ -224,13 +224,6 @@ class NewNote extends React.Component {
     });
   };
 
-  // handleResourcesSubmit(e) {
-  //   e.preventDefault();
-  // debugger
-  //   this.props.updateNote(noteData, noteId);
-  //   this.toggleResourcesModal();
-  // }
-
 
   toggleTagForm() {
     const tagForm = document.getElementById('new-tag-form-new-note');
@@ -429,11 +422,58 @@ class NewNote extends React.Component {
                   value={this.state.textdetails}
                 />
               </div>
-              {/* Need to add conditional logic to disable submit button if codebody empty */}
-              <button type='submit' id='code-note-submit'
-                className={(this.state.codebody.length > 1 && 
-                this.state.codebody.length < 5001) ? 'save-button' : "save-button disabled"}
-                >Save</button>
+              <div className='tags-header-wrapper'>
+                <span className='tags-header'>TAGS</span>
+                <div className='recommended-tag'
+                  onClick={() => this.addLangTag(this.state.suggestedLanguage)}>
+                  {this.state.suggestedLanguage ? (
+                    <>
+                      <span className='rec-tag'>Detected language:</span>
+                      <span className='lang-tag'>{this.state.suggestedLanguage}</span>
+                    </>) : " "}
+                </div>
+              </div>
+              <div className='tag-list'>
+                {
+                  this.state.tags?.map((tag, i) =>
+                    <NewNoteTagItem title={tag} key={`tag-${i}`}
+                      deleteTag={this.deleteTag}
+                    />)
+                }
+              </div>
+
+              <div className='note-tags-list new'>
+
+                <div className="tag-item-wrapper tag-icon-new new"
+                  id='toggle-tag-form-button'
+                  onClick={this.toggleTagForm}>
+                  {this.state.tagForm ? (
+                    <i className="fa-solid fa-minus"></i>
+                  ) : (
+                    <i className="fa-solid fa-circle-plus"></i>
+                  )}
+                </div>
+
+                <form onSubmit={this.state.newTag.split(' ').join('').length ? this.updateTags : undefined}
+                  className="tag-form-off" id="new-tag-form-new-note">
+                  <input type={'text'}
+                    className={'tag-form-input'}
+                    onChange={this.update('newTag')}
+                    placeholder={'New tag...'}
+                    value={this.state.newTag.split(' ').join(' ')}
+                    maxLength="50"
+                  />
+
+                  <button className={this.state.newTag.split(' ').join('').length ? '' : 'save-tag disabled'} id='tag-icon-save' type='submit'>
+                    <i className="fa-solid fa-floppy-disk" />
+                  </button>
+                </form>
+              </div>
+              <div className='submit-wrapper'>
+                <button type='submit' id='code-note-submit'
+                  className={(this.state.codebody.length > 1 && 
+                  this.state.codebody.length < 5001) ? 'save-button' : "save-button disabled"}>Save CodeMark</button>
+              </div>
             </form>
    
 
@@ -443,54 +483,6 @@ class NewNote extends React.Component {
               onClick={this.toggleForm}>
               <i className="fa-solid fa-square-minus"></i>
             </div>
-
-            <div className='recommended-tag'
-              onClick={() => this.addLangTag(this.state.suggestedLanguage)}>
-              {this.state.suggestedLanguage ? (
-                <>
-                  <span className='rec-tag'>Detected language:</span>
-                  <span className='lang-tag'>{this.state.suggestedLanguage}</span>
-                </>) : " "}
-            </div>
-
-            <div className='tag-list'>
-              <span>Tags</span>
-              {
-                this.state.tags?.map((tag, i) =>
-                  <NewNoteTagItem title={tag} key={`tag-${i}`}
-                    deleteTag={this.deleteTag}
-                  />)
-              }
-            </div>
-
-            <div className='note-tags-list new'>
-              
-              <div className="tag-item-wrapper tag-icon-new new"
-                id='toggle-tag-form-button'
-                onClick={this.toggleTagForm}>
-                {this.state.tagForm ? (
-                  <i className="fa-solid fa-minus"></i>
-                ) : (
-                  <i className="fa-solid fa-circle-plus"></i>
-                )}
-              </div>
-
-              <form onSubmit={this.state.newTag.split(' ').join('').length ? this.updateTags : undefined}
-                className="tag-form-off" id="new-tag-form-new-note">
-                <input type={'text'}
-                  className={'tag-form-input'}
-                  onChange={this.update('newTag')}
-                  placeholder={'New tag...'}
-                  value={this.state.newTag.split(' ').join(' ')}
-                  maxLength = "50"
-                />
-
-                <button className={this.state.newTag.split(' ').join('').length ? '' : 'save-tag disabled' } id='tag-icon-save' type='submit'>
-                  <i className="fa-solid fa-floppy-disk" />
-                </button>
-              </form>
-            </div>
-
           </div>
         </div>
         
