@@ -166,7 +166,7 @@
 .code-note-body {
   width: 100%;
   font-size: 14px;
-  position: relative;
+  /* position: relative; */
 }
 
 .cm-theme-dark {
@@ -398,36 +398,78 @@
   font-weight: 800;
 }
 
-#comment-highlight-text {
-  backdrop-filter: blur(8px);
-  display: grid;
-  grid-template-rows: auto 1fr;
-  gap: 1rem;
-  place-items: flex-start;
+.arrow-modal {
+  grid-row: 1 / span 3;
+  grid-column: 1 / span 1;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
   border-radius: 4px;
-  padding: 1rem;
-  max-width: 300px;
+  background-color: #35373e00;
+  transition: background-color 300ms ease-in-out;
+}
+
+.arrow-modal:hover {
+  background-color: #35373e58;
+}
+
+/* only show arrow of modal */
+.modal-compact {
+  transition: transform 500ms ease-in-out;
+  transform: translateX(285px);
+}
+/* show entire modal */
+.modal-expanded {
+  transition: transform 500ms ease-in-out;
+  transform: translateX(0px);
+}
+
+.modal-main {
+  grid-row: 1 / span 3;
+  grid-column: 2 / span 1;
+  display: grid;
+  grid-template-rows: auto auto auto;
+  gap: 0.75rem;
+}
+
+#comment-highlight-text {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 1rem;
+  place-items: center;
+  border-radius: 4px;
+  padding: 0.4rem;
+  width: 300px;
   position: absolute;
-  top: -143px;
-  right: -50px;
+  top: 500px;
+  right: 0px;
   z-index: 200;
+  background-color: rgba(198, 198, 198, 0.102);
+  backdrop-filter: blur(20px);
   transition: background-color 300ms ease;
-  background-color: rgba(32, 33, 36, 0.475)
+  transition: transform 500ms ease-in-out;
 }
 
 #comment-highlight-text.modal-on{
-  animation: slideIn 500ms ease-in;
+  animation: slideInRight 500ms ease-in;
 }
 #comment-highlight-text.modal-out{
-  animation: slideOut 500ms ease-out;
+  animation: slideOutRight 500ms ease-out;
 }
 
 #comment-highlight-text:hover {
-  background-color: rgba(32, 33, 36, 0.737);
+  background-color: rgba(198, 198, 198, 0.251)
 }
 
 .comment-selection-title {
   width: 100%;
+  display: flex;
+  gap: 0.7rem;
+  align-content: center;
+  align-items: center;
 }
 
 .cm-theme-dark.comment-code {
@@ -435,27 +477,27 @@
 }
 
 .modal-hidden {
-  opacity: 0%;
+  opacity: 50%;
 }
 
-@keyframes slideIn {
+@keyframes slideInRight {
   0% {
-    left: -40px;
-    opacity: 0%;
+    right: -100px;
+    /* opacity: 0%; */
   }
   100% {
-    left: 0;
-    opacity: 100%;
+    right: 10px;
+    /* opacity: 100%; */
   }
 }
 
-@keyframes slideOut {
+@keyframes slideOutRight {
   0% {
-    left: 0;
-    opacity: 100%;
+    right: 10px;
+    /* opacity: 100%; */
   }
   100% {
-    left: -40px;
-    opacity: 0%;
+    right: -100px;
+    /* opacity: 0%; */
   }
 }

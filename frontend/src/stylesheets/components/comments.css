@@ -52,6 +52,13 @@
 
 } */
 
+.cancel-snippet-button {
+  z-index: 100;
+  position: absolute;
+  top: 35px;
+  right: -15px;
+}
+
 .hidden {
   display: none;
 }

@@ -43,7 +43,9 @@ export default class NoteShow extends React.Component {
     this.exportImage = this.exportImage.bind(this);
     this.handlePublicSwitch = this.handlePublicSwitch.bind(this);
     this.toggleExportModal = this.toggleExportModal.bind(this);
-    this.commentOnSelection = this.commentOnSelection.bind(this)
+    this.commentOnSelection = this.commentOnSelection.bind(this);
+    this.clearSnippet = this.clearSnippet.bind(this);
+    this.toggleCommentModal = this.toggleCommentModal.bind(this);
   }
 
   componentWillMount() {
@@ -92,6 +94,25 @@ export default class NoteShow extends React.Component {
     // }
   }
 
+  // componentDidMount() {
+  //   debugger
+  //   if (Object.values(this.state.note).length) {
+  //     const noteMain = document.getElementById('note-show-main')
+  //     noteMain.onselectionchange = (e) => {
+  //       e.preventDefault()
+  //       const selectionString = document.getSelection().toString()
+  //       const selectionCommentModal = document.getElementById('comment-highlight-text')
+  
+  //       if (selectionString.length > 1) {
+  //         this.setState({
+  //           selectedText: selectionString,
+  //           commentModal: true
+  //         });
+  //       }
+  //     };
+  //   }
+  // }
+
   deleteNote() {
     this.props.removeNote(this.props.noteId).then(() => {
       this.props.history.goBack()
@@ -133,6 +154,10 @@ export default class NoteShow extends React.Component {
     commentSection.scrollIntoView({ behavior: 'smooth' });
   }
 
+  clearSnippet() {
+    this.setState({commentSnippet: ''})
+  }
+
   toggleExportModal() {
     const exportModal = document.getElementById('note-export-modal');
     const body = document.getElementsByTagName('body');
@@ -161,8 +186,11 @@ export default class NoteShow extends React.Component {
     }).then(function (scaledImg) {
       window.saveAs(scaledImg, `${title}-by-${username}-CodeMark`)
     }).then(() => this.toggleExportModal())
-
   };
+
+  toggleCommentModal() {
+    this.setState({ commentModal: !this.state.commentModal})
+  }
 
   isMobile() {
     return window.innerWidth < 600;
@@ -172,55 +200,19 @@ export default class NoteShow extends React.Component {
   render() {
     const { currentUser, updateNote, noteId } = this.props;
     const { note } = this.state;
-    const contextMenu = document.getElementById("context-menu");
-    const scope = document.querySelector("body");
-    const codeNote = document.getElementById('code-note-view')
 
-    // textarea resize
-    // use state for textarea height and pass props 
-    // const tx = document.querySelectorAll("textarea");
-    // for (let i = 0; i < tx.length; i++) {
-    //   tx[i].setAttribute("style", "height:" + (tx[i].scrollHeight) + "px;overflow-y:hidden;");
-    //   tx[i].addEventListener("input", OnInput, false);
-    // }
-
-    // function OnInput() {
-    //   this.style.height = "auto";
-    //   this.style.height = (this.scrollHeight) + "px";
-    // }
-
-    // listen for selection and update state 
     document.onselectionchange = (e) => {
-      e.preventDefault()
-      const selectionString = document.getSelection().toString()
-      const selectionCommentModal = document.getElementById('comment-highlight-text')
-
-      if (selectionString.length > 1) {
-        this.setState({ selectedText: selectionString });
-        // selectionCommentModal.className = 'modal-on'
-        // setTimeout(() => {
-        //   selectionCommentModal.className = 'modal-out';
-        //   setTimeout(() => {
-        //     selectionCommentModal.className = 'modal-hidden'
-        //   }, 500)
-        // }, 3000)
-        
-        // selectionCommentModal.addEventListener('mouseenter', () => {
-        //   const modal = document.getElementById('comment-highlight-text')
-        //   modal.className = 'modal-on hover'
-        // })
+        e.preventDefault()
+        const selectionString = document.getSelection().toString()
+        const selectionCommentModal = document.getElementById('comment-highlight-text')
   
-        // selectionCommentModal.addEventListener('mouseleave', () => {
-        //   setTimeout(() => {
-        //     selectionCommentModal.className = 'modal-out';
-        //     setTimeout(() => {
-        //       selectionCommentModal.className = 'modal-hidden'
-        //     }, 500)
-        //   }, 2000)
-        // })
-      }
-
-    };
+        if (selectionString.length > 1) {
+          this.setState({
+            selectedText: selectionString,
+            commentModal: true
+          });
+        }
+      };
 
     return Object.values(note).length ? (
       <>
@@ -433,17 +425,32 @@ export default class NoteShow extends React.Component {
                 </div>
               </div>
 
-              <div id='comment-highlight-text' className='modal-on'>
-                <div className='comment-selection-title'>
-                <span>Comment on this selection:</span>
+              <div id='comment-highlight-text'
+                className={this.state.commentModal ?
+                  'modal-expanded' : 'modal-compact'}>
+                <div className='arrow-modal'
+                  onClick={this.toggleCommentModal}
+                >
+                  {this.state.commentModal ? (
+                    <i className="fa-solid fa-chevron-right fa-xl" />
+                    ) : (
+                    <i className="fa-solid fa-chevron-left fa-xl" />
+                    )}
                 </div>
-                <CodeCommentReadOnlyMini
-                  codeSnippet={this.state.selectedText}
-                />
-                <div className='icon-button'
-                  onClick={this.commentOnSelection}>
-                  <span>Comment</span>
-                  <i className="fa-solid fa-arrow-right" />
+                
+                <div className='modal-main'>
+                  <div className='comment-selection-title'>
+                    <i className="fa-solid fa-comment" />
+                    <span>Comment on this selection:</span>
+                  </div>
+                  <CodeCommentReadOnlyMini
+                    codeSnippet={this.state.selectedText}
+                  />
+                  <div className='icon-button'
+                    onClick={this.commentOnSelection}>
+                    <span>Comment</span>
+                    <i className="fa-solid fa-arrow-right" />
+                  </div>
                 </div>
               </div>
 
@@ -481,6 +488,7 @@ export default class NoteShow extends React.Component {
               composeComment={this.props.composeComment}
               selectedText={this.state.commentSnippet}
               currentUser={currentUser}
+              clearSnippet={this.clearSnippet}
             />
             <CommentIndex
               selectedText={this.state.selectedText}

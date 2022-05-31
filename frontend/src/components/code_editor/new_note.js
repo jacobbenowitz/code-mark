@@ -10,6 +10,7 @@ import NewNoteTagItem from '../tags/new_note_tag_item';
 import { getKeywords } from '../../util/webscrap_util';
 import { EditorView } from '@codemirror/basic-setup';
 import { withRouter } from 'react-router-dom'
+import TextareaAutosize from 'react-textarea-autosize';
 
 class NewNote extends React.Component {
   constructor(props) {
@@ -420,7 +421,7 @@ class NewNote extends React.Component {
                 />
               </div>
               <div className='note-input'>
-                <textarea
+                <TextareaAutosize 
                   onChange={this.update('textdetails')}
                   id='details-textarea'
                   className='note-input-details'

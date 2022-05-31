@@ -7,6 +7,7 @@ import { html } from '@codemirror/lang-html';
 import { cpp } from '@codemirror/lang-cpp';
 import { css } from '@codemirror/lang-css';
 import { EditorView } from '@codemirror/basic-setup';
+import TextareaAutosize from 'react-textarea-autosize';
 
 export default class EditNote extends React.Component {
   constructor(props) {
@@ -148,7 +149,7 @@ export default class EditNote extends React.Component {
               />
             </div>
             <div className='note-input'>
-              <textarea
+              <TextareaAutosize
                 onChange={this.update('textdetails')}
                 id='details-textarea'
                 className='note-input-details'

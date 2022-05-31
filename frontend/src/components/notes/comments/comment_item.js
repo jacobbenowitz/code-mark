@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import CodeCommentReadOnly from "../../code_editor/code_comment_readonly";
 import LikeCommentIcon from "../like_comment_icon";
 import Avatar from "../../profile/avatar";
+import TextareaAutosize from 'react-textarea-autosize';
 
 class CommentItem extends React.Component {
 
@@ -178,13 +179,13 @@ class CommentItem extends React.Component {
                   </div>
                 </div>
               ) : ''}
-                <textarea
-                  onChange={this.update('textbody')}
-                  id={`comment-textarea-${this.props.comment._id}`}
-                  className='comment-body-input'
-                  placeholder={'Have a something to say about this CodeMark? Let the author know!'}
-                  value={this.state.textbody}
-                  required
+              <TextareaAutosize
+                onChange={this.update('textbody')}
+                id={`comment-textarea-${this.props.comment._id}`}
+                className='comment-body-input'
+                placeholder={'Have a something to say about this CodeMark? Let the author know!'}
+                value={this.state.textbody}
+                required
               />
               <div className="comment-edit-actions">
                 <button id="comment-submit" type='submit'>Update</button>

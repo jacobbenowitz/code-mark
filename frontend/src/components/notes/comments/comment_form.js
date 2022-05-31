@@ -1,6 +1,7 @@
 import React from 'react';
 import CommentItem from './comment_item';
 import CodeCommentReadOnly from '../../code_editor/code_comment_readonly';
+import TextareaAutosize from 'react-textarea-autosize';
 
 export default class CommentForm extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ export default class CommentForm extends React.Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleForm = this.toggleForm.bind(this);
+    this._clearSnippet = this._clearSnippet.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -26,8 +28,13 @@ export default class CommentForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     let { codeSnippet, textbody } = this.state;
+    let snippet;
+    if (codeSnippet === 'Select text from the note above to comment') {
+      snippet = ''
+    } else snippet = codeSnippet;
+
     const comment = {
-      codeSnippet: codeSnippet,
+      codeSnippet: snippet,
       textbody: textbody,
       note: this.props.noteId
     }
@@ -38,10 +45,7 @@ export default class CommentForm extends React.Component {
           codeSnippet: "",
           textbody: "",
         })
-      })
-    // .then(() => {
-    //   this.props.fetchNoteComments(this.props.noteId)
-    // })
+      }, () => this.props.clearSnippet())
   }
 
   update(type) {
@@ -50,6 +54,11 @@ export default class CommentForm extends React.Component {
         [type]: e.target.value
       })
     }
+  }
+
+  _clearSnippet() {
+    this.setState({ codeSnippet: '' })
+    this.props.clearSnippet()
   }
 
   toggleForm() {
@@ -78,27 +87,40 @@ export default class CommentForm extends React.Component {
 
   render() {
 
+    let cancelSnippetIcon;
+
+    if (this.state.codeSnippet.length) {
+      cancelSnippetIcon = (
+        <div title='remove code snippet'
+          className='cancel-snippet-button icon-only-button'
+          onClick={this._clearSnippet}
+        >
+          <i className="fa-solid fa-circle-minus" />
+        </div>
+      )
+    }
+
     return (
       <>
         <div className='new-comment-container'>
-            <form onSubmit={this.handleSubmit} className='comment-form'>
+          <form onSubmit={this.handleSubmit} className='comment-form'>
             <span className='comment-form-title'>Write a new comment</span>
-            <div className='cancel-snippet-button icon-only-button'></div>
-              <div className='add-code-snippet-wrapper'>
-                <div className="code-snippet-comment">
-                  <CodeCommentReadOnly
-                    codeSnippet={this.state.codeSnippet} />
-                </div>
+            <div className='add-code-snippet-wrapper'>
+              {cancelSnippetIcon}
+              <div className="code-snippet-comment">
+                <CodeCommentReadOnly
+                  codeSnippet={this.state.codeSnippet} />
               </div>
-              <textarea
-                onChange={this.update('textbody')}
-                id='new-comment-textarea'
-                className='comment-body-input'
-                placeholder={'Have a something to say about this CodeMark? Let the author know!'}
-                value={this.state.textbody}
-                required
-              />
-              <button id="comment-submit" type='submit'>Comment</button>
+            </div>
+            <TextareaAutosize
+              onChange={this.update('textbody')}
+              id='new-comment-textarea'
+              className='comment-body-input'
+              placeholder={'Have a something to say about this CodeMark? Let the author know!'}
+              value={this.state.textbody}
+              required
+            />
+            <button id="comment-submit" type='submit'>Comment</button>
           </form>
         </div>
       </>
