@@ -327,8 +327,12 @@ export default class NoteShow extends React.Component {
                         onToggle={this.handlePublicSwitch}
                       />
                     </div>
-                  </div>
+                    </div>
                 </div>
+                    <Tags note={this.state.note}
+                      isCurrentUser={this.props.currentUser.id === this.props.note.user.userId}
+                      updateNote={this.props.updateNote}
+                    />
               </div>
               ) : ''
             ) : (
@@ -365,17 +369,13 @@ export default class NoteShow extends React.Component {
                         </div>
                       </div>
                     </div>
+                      <Tags note={this.state.note}
+                        isCurrentUser={this.props.currentUser.id === this.props.note.user.userId}
+                        updateNote={this.props.updateNote}
+                      />
                   </div>
                 ) : ''
             )}
-            <div className='note-tags-wrapper'>
-              {note ? (
-                <Tags note={this.state.note}
-                  isCurrentUser={this.props.currentUser.id === this.props.note.user.userId}
-                  updateNote={this.props.updateNote}
-                />
-              ) : '' }
-            </div>
 
             {/* note main */}
             <div className='code-note-body' id='code-note-view'>
@@ -397,14 +397,14 @@ export default class NoteShow extends React.Component {
                       <div className='hidden' id='highlight-instructions'>
                         <span>Highlight any section of the CodeMark and right click to comment!</span>
                       </div>
-                      <div className='note-icon info-icon' id='highlight-comment-code-icon'>
-                        <i className="fa-solid fa-circle-question fa-lg"></i>
-                      </div>
                       <div id='export-img-icon' className='note-icon'
                         onClick={this.toggleExportModal}
                         // onClick={this.exportImage}
                         title="export a screenshot">
                         <i className="fa-solid fa-camera-retro fa-lg"></i>
+                      </div>
+                      <div className='note-icon info-icon' id='highlight-comment-code-icon'>
+                        <i className="fa-solid fa-circle-question fa-lg"></i>
                       </div>
                     </div>
                   </div>

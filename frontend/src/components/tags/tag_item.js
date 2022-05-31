@@ -44,10 +44,10 @@ class TagItem extends React.Component {
           </div>
           <span className="tag-text">{this.props.title}</span>
           {this.state.showDelete ? (
-            <button className='tag-delete-button'
+            <button className='delete-icon-button'
               onClick={() => this.deleteTag()}
             >
-              <span>delete</span>
+              <i className="fa-solid fa-trash"/>
             </button>
           ) : ('')}
         </div>

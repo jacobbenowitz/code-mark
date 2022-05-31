@@ -57,6 +57,20 @@ class NewNote extends React.Component {
     this.placeholderTitle = this.placeholderTitle.bind(this);
   }
 
+  componentDidMount() {
+    let codemirrors = document.getElementsByClassName('codemirror');
+    for (var i = 0; i < codemirrors.length; i++) {
+      codemirrors[i].style.display = 'none';
+    }
+    let chosen = document.getElementsByClassName('javascript');
+    for (var j = 0; j < chosen.length; j++) {
+      chosen[j].style.display = 'block';
+    }
+  }
+
+  componentDidUpdate() {
+    debugger
+  }
 
   update(type) {
     return e => {
@@ -85,17 +99,6 @@ class NewNote extends React.Component {
       codemirrors[i].style.display = 'none';
     }
     let chosen = document.getElementsByClassName(e.target.value);
-    for (var j = 0; j < chosen.length; j++) {
-      chosen[j].style.display = 'block';
-    }
-  }
-
-  componentDidMount() {
-    let codemirrors = document.getElementsByClassName('codemirror');
-    for (var i = 0; i < codemirrors.length; i++) {
-      codemirrors[i].style.display = 'none';
-    }
-    let chosen = document.getElementsByClassName('javascript');
     for (var j = 0; j < chosen.length; j++) {
       chosen[j].style.display = 'block';
     }
@@ -236,7 +239,8 @@ class NewNote extends React.Component {
     }
   }
 
-  updateTags() {
+  updateTags(e) {
+    e.preventDefault()
     let newTags = this.state.newTag.length ? (
       this.state.tags.concat([this.state.newTag])
     ) : [this.state.newTag]
@@ -353,7 +357,7 @@ class NewNote extends React.Component {
 
         <div className='new-note-container' id='new-note-full'>
           <div className='new-note-form'>
-            <form onSubmit={this.state.codebody.length ? this.toggleResourcesModal : undefined}>
+            <form>
               <div id="note-title-input" className='note-input'>
                 <input type={'text'}
                   onClick={this.placeholderTitle}
@@ -472,7 +476,9 @@ class NewNote extends React.Component {
               <div className='submit-wrapper'>
                 <button type='submit' id='code-note-submit'
                   className={(this.state.codebody.length > 1 && 
-                  this.state.codebody.length < 5001) ? 'save-button' : "save-button disabled"}>Save CodeMark</button>
+                    this.state.codebody.length < 5001) ? 'save-button' : "save-button disabled"}
+                  onClick={this.state.codebody.length ? this.toggleResourcesModal : undefined}
+                >Save CodeMark</button>
               </div>
             </form>
    

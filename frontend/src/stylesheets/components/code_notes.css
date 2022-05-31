@@ -31,9 +31,9 @@
   }
 }
 
-.mobile-notes {
+/* .mobile-notes {
   
-}
+} */
 
 
 .comment-count {
@@ -46,6 +46,17 @@
   gap: 0.3rem;
 }
 
+.top-row-details {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: flex-start;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+}
+
 .note-item-top {
   display: flex;
   flex-direction: row;
@@ -54,6 +65,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  position: relative;
 
 }
 

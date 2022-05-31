@@ -25,25 +25,32 @@ const CodeNoteItem = props => {
         <div className="code-note-item" key={props.id}>
           {/* onClick={() => preventBubbleParent()}> */}
           <div className="note-item-top">
-            <div className="note-stats">
-              <div className="comment-count">
-                <i className="fa-solid fa-comments"></i>
-                <span>{props.comments?.length || 0}</span>
+            <div className="top-row-details">
+              <div className="note-stats">
+                <div className="comment-count">
+                  <i className="fa-solid fa-comments"></i>
+                  <span>{props.comments?.length || 0}</span>
+                </div>
+                <div className="like-count">
+                  <i className="fa-solid fa-heart"></i>
+                  <span>{props.likes?.length || 0}</span>
+                </div>
               </div>
-              <div className="like-count">
-                <i className="fa-solid fa-heart"></i>
-                <span>{props.likes?.length || 0}</span>
-              </div>
+              <Link to={`/notes/${props.id}`} className="show-link-wrapper">
+                <div className="view-link">View
+                  <i className="fa-solid fa-arrow-right"></i></div>
+              </Link>
             </div>
-            <Link to={`/notes/${props.id}`} className="show-link-wrapper">
-              <div className="view-link">View
-                <i className="fa-solid fa-arrow-right"></i></div>
-            </Link>
+            {props.tags.length ? (
+              <div className="code-note-tags">
+                {props.tags?.map((tag, i) =>
+                  <div className="note-tag-mini" key={`${i}-tag`}>{tag}</div>)}
+              </div>
+            ) : ''}
           </div>
-          <div className="code-note-tags">
-            {props.tags?.map((tag, i) =>
-              <div className="note-tag-mini" key={`${i}-tag`}>{tag}</div>)}
-          </div>
+          {props.tags.length ? (
+            <div className="spacer-40-h"></div>
+          ): ''}
           {props.userId && props.createdAt && props?.title ? (
             <div className="code-note-text">
               <div className="updated-at-and-username">
