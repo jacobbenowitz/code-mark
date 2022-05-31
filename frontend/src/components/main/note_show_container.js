@@ -16,9 +16,10 @@ import {
 } from "../../actions/comment_actions";
 import { fetchUsers, fetchUser } from "../../actions/user_actions";
 import { fetchCurrentUser } from "../../actions/session_actions";
-import { toggleSuccessModal } from "../../util/modal_util";
+// import { toggleSuccessModal } from "../../util/modal_util";
 
 const mapStateToProps = (state, { match }) => {
+  // debugger;
   return {
     noteId: match.params.noteId,
     note: state.notes.all[match.params.noteId],
@@ -47,8 +48,8 @@ const mapDispatchToProps = dispatch => {
     addCommentLike: (data, commentId) =>
       dispatch(addCommentLike(data, commentId)),
     removeCommentLike: (data, commentId) => dispatch(removeCommentLike(data, commentId)),
-    fetchCurrentUser: () => dispatch(fetchCurrentUser()),
-    toggleModal: () => dispatch(toggleSuccessModal())
+    fetchCurrentUser: () => dispatch(fetchCurrentUser())
+    // toggleModal: () => dispatch(toggleSuccessModal())
   }
 }
 

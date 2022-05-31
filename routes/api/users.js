@@ -46,8 +46,8 @@ router.post('/register', (req, res) => {
                   if (err) throw err;
                   newUser.password = hash;
                   newUser.save()
-                    .then(user => res.json(user))
-                    .catch(err => console.log(err))
+                    .then(user => res.json([user,['success', 'User Successfully Registered!']]))
+                    .catch(err => res.json({user: err}))
                 })
               })
             }
@@ -197,7 +197,7 @@ router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,
                             color: user.color
                           };
                           // debugger;
-                          res.json(payload)
+                          res.json([payload,['success', 'User Account Successfully Updated!']])
                           // res.json(user)
                           if(differentColor || differentUsername){
                             user.comments.forEach(commentId => {
@@ -315,7 +315,7 @@ router.delete('/:userId', passport.authenticate('jwt', { session: false }), (req
             })
           })
       })
-      .then(() => res.json(req.params.userId)) // was id
+      .then(() => res.json([req.params.userId,['success', 'User Account Successfully Deleted!']])) // was id
       // .then(deleteuser => res.json(deleteuser._id)) // was id
       .catch(err =>
         res.status(404).json({ nouserfound: "No User Found With That ID" })

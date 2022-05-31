@@ -41,11 +41,13 @@ const notesReducer = (prevState = initialState, action) => {
       nextState.all[action.note.data._id] = action.note.data;
       return nextState;
     case RECEIVE_DELETE_NOTE:
+      debugger;
       delete nextState.all[action.noteId]
       delete nextState.user[action.noteId]
       return nextState;
     case RECEIVE_UPDATED_NOTE:
-      nextState.all[action.note.data._id] = action.note.data;
+      // debugger;
+      nextState.all[action.note.data[0]._id] = action.note.data[0];
       return nextState;
     case RECEIVE_NOTE_LIKE:
       nextState.all[action.note.data._id] = action.note.data;

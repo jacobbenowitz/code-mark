@@ -5,7 +5,7 @@ import {
   updateUser,
   removeUser
 } from '../../actions/user_actions';
-import { toggleSuccessModal } from '../../util/modal_util';
+// import { toggleSuccessModal } from '../../util/modal_util';
 import Settings from './settings';
 
 const mapStateToProps = (state, { match }) => {
@@ -22,8 +22,7 @@ const mapDispatchToProps = dispatch => {
     updateUser: userData => dispatch(updateUser(userData)),
     removeUser: userId => dispatch(removeUser(userId)),
     logout: () => logout(),
-    fetchCurrentUser: () => dispatch(fetchCurrentUser()),
-    toggleModal: () => dispatch(toggleSuccessModal())
+    fetchCurrentUser: () => dispatch(fetchCurrentUser())
   }
 }
 

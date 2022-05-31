@@ -110,7 +110,10 @@ router.patch('/:id/edit',
                         note.public = req.body.public
                     }
                     note.save()
-                        .then(note => res.json(note))
+                        .then(note => {
+                            res.json([note,['success', 'Note Successfully Updated!']])
+                            // res.json({success: 'Note Successfully Updated!'})
+                        })
                 }
             })
             .catch(err =>
@@ -131,12 +134,13 @@ router.delete('/:id',
                     const userid = note.user.userId;
                     const comments = note.comments;
                     const likes = note.likes;
+                    res.json(note);
                     Note.deleteOne({ _id: req.params.id })
                         .then(() => {
                             User.findById(userid)
                                 .then(user => {
                                     user.notes = user.notes.filter(item => item.toString() !== noteid);
-                                    user.save().then(user => res.json(user));
+                                    user.save();
                                 })
                         })
                         .then(() => {
@@ -149,7 +153,7 @@ router.delete('/:id',
                                         User.findById(comment.user.userId)
                                             .then(user => {
                                                 user.comments = user.comments.filter(item => item.toString() !== commentid);
-                                                user.save().then(user => res.json(user));
+                                                user.save();
                                             })
                                     })
                             })
@@ -159,7 +163,7 @@ router.delete('/:id',
                                 User.findById(likeId)
                                     .then(user => {
                                         user.note_likes = user.note_likes.filter(item => item.toString() !== noteid)
-                                        user.save().then(user => res.json(user));
+                                        user.save();
                                     })
                             })
                         })

@@ -59,7 +59,7 @@ class SignupForm extends React.Component {
     };
 
     this.props.signup(user, this.props.history);
-    this.props.toggleModal();
+    // this.props.toggleModal();
   }
 
   renderErrors(field) {

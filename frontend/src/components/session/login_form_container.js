@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { login } from '../../actions/session_actions';
-import { toggleSuccessModal } from '../../util/modal_util';
+// import { toggleSuccessModal } from '../../util/modal_util';
 import LoginForm from './login_form';
 
 const mapStateToProps = state => {
@@ -12,8 +12,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     login: user => dispatch(login(user)),
-    loginGuest: user => dispatch(login(user)),
-    toggleModal: () => dispatch(toggleSuccessModal())
+    loginGuest: user => dispatch(login(user))
   };
 };
 

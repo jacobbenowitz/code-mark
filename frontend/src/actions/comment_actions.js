@@ -103,13 +103,19 @@ export const composeComment = data => dispatch => {
 
 export const updateComment = (data, commentId) => dispatch => {
     return patchComment(data, commentId)
-        .then(comment => dispatch(receiveUpdateComment(comment.data)))
+        .then(comment => {
+            debugger;
+            dispatch(receiveUpdateComment(comment.data))
+        })
         .catch(err => dispatch(receiveCommentErrors(err)))
 };
 
 export const removeComment = (commentId) => dispatch => {
     return deleteComment(commentId)
-        .then(commentid => dispatch(receiveDeleteComment(commentid)))
+        .then(commentid => {
+            // debugger;
+            dispatch(receiveDeleteComment(commentid.data))
+        })
         .catch(err => dispatch(receiveCommentErrors(err)))
 };
 

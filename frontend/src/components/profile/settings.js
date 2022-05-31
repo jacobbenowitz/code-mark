@@ -42,7 +42,7 @@ export default class Settings extends React.Component {
   confirmedDelete() {
     this.props.removeUser(this.props.currentUser.id);
     this.props.logout();
-    this.props.toggleModal();
+    // this.props.toggleModal();
   }
 
   update(field) {
@@ -83,7 +83,7 @@ export default class Settings extends React.Component {
       }
     )
     this.props.updateUser(user);
-    this.props.toggleModal();
+    // this.props.toggleModal();
     this.setState({ updated: false })
     // this.toggleSuccessModal()
 

@@ -100,8 +100,8 @@ export default class EditNote extends React.Component {
     this.props.updateNote(note, this.props.noteId)
       .then(() => {
         this.toggleEditModal()
+        // this.props.toggleModal();
       })
-    // this.props.toggleModal();
   }
 
   placeholderTitle(e) {

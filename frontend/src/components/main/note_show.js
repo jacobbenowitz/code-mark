@@ -325,7 +325,7 @@ export default class NoteShow extends React.Component {
         <div id='edit-note-container' className="modal-off">
           <div className='modal-wrapper'>
             <EditNote note={note} updateNote={updateNote}
-              currentUser={currentUser} noteId={noteId} toggleModal={this.props.toggleModal}/>
+              currentUser={currentUser} noteId={noteId}/>
           </div>
         </div>
         <div className='note-show-container center-span-7'>
@@ -515,7 +515,7 @@ export default class NoteShow extends React.Component {
               noteId={this.props.noteId}
               addCommentLike={this.props.addCommentLike}
               removeCommentLike={this.props.removeCommentLike}
-              toggleModal={this.props.toggleModal}
+              // toggleModal={this.props.toggleModal}
             />
           </section>
         </div>
