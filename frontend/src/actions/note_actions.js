@@ -48,9 +48,9 @@ export const receiveUpdateNote = note => ({
   note
 })
 
-export const receiveDeleteNote = noteId => ({
+export const receiveDeleteNote = note => ({
   type: RECEIVE_DELETE_NOTE,
-  noteId
+  note
 })
 
 export const receiveNoteLike = note => ({
@@ -97,7 +97,8 @@ export const updateNote = (data, noteId) => dispatch => {
 
 export const removeNote = noteId => dispatch => (
   deleteNote(noteId)
-    .then(note => dispatch(receiveDeleteNote(note.id)))
+    // .then(note => dispatch(receiveDeleteNote(note.data._id)))
+    .then(note => dispatch(receiveDeleteNote(note.data)))
     .catch(err => dispatch(receiveNoteErrors(err)))
 );
 

@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { login } from '../../actions/session_actions';
+// import { toggleSuccessModal } from '../../util/modal_util';
 import LoginForm from './login_form';
 
 const mapStateToProps = state => {

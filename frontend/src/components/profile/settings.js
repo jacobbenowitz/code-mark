@@ -17,7 +17,7 @@ export default class Settings extends React.Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.clearedErrors = false;
-    this.toggleSuccessModal = this.toggleSuccessModal.bind(this);
+    // this.toggleSuccessModal = this.toggleSuccessModal.bind(this);
   }
 
   componentDidMount() {
@@ -26,6 +26,7 @@ export default class Settings extends React.Component {
 
   componentDidUpdate() {
     const { email, username, color } = this.props.user;
+    // debugger;
     if (Object.values(this.props.user).length &&
       (!this.state.email.length || !this.state.username.length ||
         this.props.errors !== this.state.errors)) {
@@ -42,6 +43,7 @@ export default class Settings extends React.Component {
   confirmedDelete() {
     this.props.removeUser(this.props.currentUser.id);
     this.props.logout();
+    // this.props.toggleModal();
   }
 
   update(field) {
@@ -51,12 +53,12 @@ export default class Settings extends React.Component {
     });
   };
 
-  toggleSuccessModal() {
-    const successModal = document.getElementById('success-modal');
-    successModal.className = "success-in modal-on"
-    setTimeout(() => successModal.className = "success-out", 4000)
-    setTimeout(() => successModal.className = "modal-off", 5000)
-  }
+  // toggleSuccessModal() {
+  //   const successModal = document.getElementById('success-modal');
+  //   successModal.className = "success-in modal-on"
+  //   setTimeout(() => successModal.className = "success-out", 4000)
+  //   setTimeout(() => successModal.className = "modal-off", 5000)
+  // }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -82,8 +84,9 @@ export default class Settings extends React.Component {
       }
     )
     this.props.updateUser(user);
+    // this.props.toggleModal();
     this.setState({ updated: false })
-    this.toggleSuccessModal()
+    // this.toggleSuccessModal()
 
     // this.props.showModal(sucess: 'some message')
     // this.props.showModal(error: 'some message')
@@ -124,10 +127,10 @@ export default class Settings extends React.Component {
     return (
 
       <div className='session center-simple'>
-        <div id='success-modal' className='modal-off'>
+        {/* <div id='success-modal' className='modal-off'>
           <i className="fa-solid fa-thumbs-up"></i>
           <span>Account Successfully updated</span>
-        </div>
+        </div> */}
         <div id='confirm-modal-container' className='modal-off' >
           <div className='modal-wrapper'>
             <div className='cancel-modal'>

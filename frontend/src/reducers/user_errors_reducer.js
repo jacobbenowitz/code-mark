@@ -1,4 +1,5 @@
 import {
+  RECEIVE_UPDATED_USER,
   RECEIVE_USER_ERROR
 } from "../actions/user_actions"
 
@@ -10,8 +11,11 @@ const userErrorsReducer = (prevState = _nullErrors, action) => {
   switch (action.type) {
     case RECEIVE_USER_ERROR:
       return action.error;
+    case RECEIVE_UPDATED_USER:
+      return action.user.data[1];
     default:
-      return prevState
+      // return prevState;
+      return _nullErrors;
   }
 }
 

@@ -255,19 +255,19 @@ input[type='color'] {
 
 #success-modal {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: nowrap;
     align-content: center;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     gap: 1rem;
     padding: 1rem 3rem;
     border-radius: 8px;
-    position: absolute;
+    position: sticky;
     top: 90px;
     z-index: 399;
     background-color: #1c1b1b;
-    
+    grid-column: 5 / span 4;
 }
 
 .fa-circle-xmark {

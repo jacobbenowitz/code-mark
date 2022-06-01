@@ -29,13 +29,14 @@ import FollowingContainer from './main/following_container';
 import FollowingFilteredContainer from './main/following_filtered_container';
 import LikedFilteredContainer from './main/liked_filtered_container';
 import LayoutDesign from './UI/layout_design';
+import GlobalModalContainer from './UI/global_modal_container';
 
 const App = () => (
   <div className="grid-pancake-stack">
     <header className="header-top-stack">
       <NavBarContainer />
     </header>
-      {/* <NotificationModal /> */}
+      <GlobalModalContainer />
     <Switch>
       <AuthRoute exact path='/signup'
         component={SignupFormContainer} />
