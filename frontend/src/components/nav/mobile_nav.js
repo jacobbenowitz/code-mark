@@ -13,9 +13,24 @@ export default class MobileNav extends React.Component {
   }
 
   toggleShowMenu() {
-    this.setState({
-      showMenu: !this.state.showMenu
-    })
+    debugger
+    const mask = document.getElementById('mobile-menu-mask')
+    const menu = document.getElementById('nav-menu-mobile')
+    if (mask.className === 'mask-on' || mask.className === 'mask-in') {
+      debugger
+      mask.className = 'mask-out'
+      menu.className = 'mask-out'
+      setTimeout(() => {
+        debugger
+        this.setState({
+          showMenu: !this.state.showMenu
+        })
+      }, 750)
+    } else {
+      this.setState({
+        showMenu: !this.state.showMenu
+      })
+    }
   }
 
 
@@ -23,11 +38,12 @@ export default class MobileNav extends React.Component {
 
     return (
       <nav>
-        <div className={'menu-wrapper'}
+        <div className='menu-wrapper'
           onClick={() => this.toggleShowMenu()}>
           <i className="fa-solid fa-bars fa-lg"></i>
         </div>
-        <div className={this.state.showMenu ? 'nav-menu-mobile menu-in' : 'nav-menu-mobile menu-out'}
+        <div id='nav-menu-mobile'
+          className={this.state.showMenu ? 'menu-in' : 'menu-off'}
           onClick={() => this.toggleShowMenu()}
         >
           <div className='nav-boxes'>
@@ -81,7 +97,8 @@ export default class MobileNav extends React.Component {
             />
           </div>
         </div>
-        <div className={this.state.showMenu ? 'mobile-menu-mask mask-in' : 'mobile-menu-mask mask-out'}
+        <div id='mobile-menu-mask'
+          className={this.state.showMenu ? 'mask-in' : 'mask-off'}
           onClick={() => this.toggleShowMenu()}
         />
       </nav>

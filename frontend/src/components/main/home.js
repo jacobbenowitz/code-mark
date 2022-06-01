@@ -9,6 +9,10 @@ import SectionTitle from '../UI/section_title';
 
 export default class Home extends React.Component {
 
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
+
   isMobile() {
     return window.innerWidth < 680;
   }
@@ -28,8 +32,7 @@ export default class Home extends React.Component {
               />
               <div className='tags-wrapper-mobile'>
                 <span className='tags-mobile-header'>Tags</span>
-                <div className="code-note-tags">
-                  <div className='tag-spacer'></div>
+                <div className="code-note-tags-main">
                   {this.props.tags?.map((tag, i) =>
                     <NavLink to={`/home/tags/${tag}`}>
                       <div className="note-tag-mini link"

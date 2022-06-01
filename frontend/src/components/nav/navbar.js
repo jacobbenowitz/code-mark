@@ -92,7 +92,7 @@ export default class NavBar extends React.Component {
     )
 
     const userLinks = this.getLinks();
-    const modalClass = this.state.modalOpen ? " on" : " modal-off";
+    const modalClass = this.state.modalOpen ? " on" : " off";
 
     return (
       <div id="nav-header">

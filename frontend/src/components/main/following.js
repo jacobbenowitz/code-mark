@@ -27,6 +27,10 @@ export default class Following extends React.Component {
     this.props.fetchUsers();
   }
 
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
+
   componentDidUpdate() {
     const { allNotes, allUsers, currentUser } = this.props;
 

@@ -23,6 +23,10 @@ export default class LikedNotes extends React.Component {
     this.props.fetchCurrentUser();
   };
 
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
+
   componentDidUpdate() {
     const { allNotes, likedNoteIds, currentUser } = this.props;
     if (Object.values(allNotes).length && likedNoteIds.length && !this.state.notes.length) {

@@ -1,51 +1,114 @@
 import React from "react"
 import { NavLink, Link } from "react-router-dom";
+import GitHubIcon from '@material-ui/icons/GitHub';
+import LinkedIn from '@material-ui/icons/LinkedIn';
+// import AngelList from '@material-ui/icons/Angellist';
 
 const NavFooter = () => (
     <div className="grid-bottom-stack"> 
         <div id="navFooter">
             <div id="footer-top">
                 <div className="nav-col-01">
-                    <div className="footer-header">
-                        <h5>Community</h5>
+                    <div className='pic-wrapper'>
+                        <img src={require('./images/Jacob.jpeg')} className='team-pics' />
                     </div>
+                  
+                  
                     <div className="footer-link-list">
-                        <NavLink to={'/'}>Discover</NavLink>
-                        <NavLink to={'/'}>Following</NavLink>
+                        <div className="footer-header">
+                            <h5>Jacob Benowitz</h5>
+                            <span className="footer-subheader">
+                                Techlead
+                            </span>
+                            
+                        </div>
+                      
+                        <div className="footer-link-item"> 
+                            <GitHubIcon sx={{ fontSize: 24 }} /> 
+                            <a href="https://github.com/jacobbenowitz" target="_blank" rel="noreferrer">
+                                Github
+                            </a>
+                        </div>
+                        <div className="footer-link-item"> 
+                            <LinkedIn sx={{ fontSize: 24 }} /> 
+                            <a href="https://github.com/jacobbenowitz/code-mark" target="_blank" rel="noreferrer">
+                                LinkedIn
+                            </a>
+                        </div>
+                        <div className="footer-link-item"> 
+                            <img src='https://simpleicons.org/icons/angellist.svg' className='angellist-icon' />
+                            <a href="https://github.com/jacobbenowitz/code-mark" target="_blank" rel="noreferrer">
+                                AngelList
+                            </a>
+                        </div>
                     </div>
                 </div>
 
                 <div className="nav-col-02">
-                    <div className="footer-header">
-                        <h5>Project Links</h5>
+                    <div className='pic-wrapper'>
+                        <img src={require('./images/Johnny.jpeg')} className='team-pics' />
                     </div>
                     <div className="footer-link-list">
+                        <div className="footer-header">
+                            <h5>Johnny Mei</h5>
+                            <span className="footer-subheader">
+                                Backend Lead
+                            </span>
+                        </div>
+                        <div className="footer-link-item"> 
+                            <GitHubIcon sx={{ fontSize: 24 }} />
+                            <a href="https://github.com/jacobbenowitz/code-mark" target="_blank" rel="noreferrer">
+                                Github
+                            </a>
+                        </div>
+                        <div className="footer-link-item"> 
+                            <LinkedIn sx={{ fontSize: 24 }} />
+                            <a href="https://github.com/jacobbenowitz/code-mark" target="_blank" rel="noreferrer">
+                                LinkedIn
+                            </a>
+                        </div>
+                        <div className="footer-link-item"> 
+                        <img src='https://simpleicons.org/icons/angellist.svg'  className='angellist-icon'/>
                         <a href="https://github.com/jacobbenowitz/code-mark" target="_blank" rel="noreferrer">
-                            CodeMark Github
+                             AngelList
                         </a>
+                        </div>
                     </div>
                 </div>
 
                 <div className="nav-col-03">
-                    <div className="footer-header">
-                        <h5>Developers</h5>
+                    <div className='pic-wrapper'> 
+                        <img src={require('./images/Chris.jpeg')} className='team-pics' />
                     </div>
                     <div className="footer-link-list">
-                        <a href="https://github.com/jacobbenowitz"
-                            className="a-link"
-                            target="_blank" rel="noreferrer">
-                            Jacob Benowitz
+                        <div className="footer-header">
+                            <h5>Christopher Moore</h5>
+                            <span className="footer-subheader">
+                                Frontend Lead
+                            </span>
+                        </div>
+                        <div className="footer-link-item">
+                            <img src='https://simpleicons.org/icons/angellist.svg' className='angellist-icon' />
+                            <a href="https://github.com/rmei6"
+                                className="a-link"
+                                target="_blank" rel="noreferrer">
+                                AngelList
+                            </a>
+                        </div>
+                        <div className="footer-link-item">
+                            <LinkedIn sx={{ fontSize: 18 }} />
+                            <a href="https://github.com/jacobbenowitz/code-mark" target="_blank" rel="noreferrer">
+                                LinkedIn
+                            </a>
+                        </div>
+                        <div className="footer-link-item"> 
+                        <GitHubIcon sx={{ fontSize: 18 }} />
+                        <a href="https://github.com/jacobbenowitz/code-mark" target="_blank" rel="noreferrer">
+                             Github
                         </a>
-                        <a href="https://github.com/MIFUNEKINSKi"
-                            className="a-link"
-                            target="_blank" rel="noreferrer">
-                            Christopher Moore
-                        </a>
-                        <a href="https://github.com/rmei6"
-                            className="a-link"
-                            target="_blank" rel="noreferrer">
-                            Johnny Mei
-                        </a>
+                        </div>
+                       
+                      
                     </div>
                 </div>
             </div>
@@ -65,7 +128,14 @@ const NavFooter = () => (
                         </svg>
 
                     </Link>
+              
                 </div>
+                <a id='bottom-codemark' href="https://github.com/jacobbenowitz/code-mark" target="_blank" rel="noreferrer">
+                    CodeMark Github
+                </a>
+                <a id='bottom-codemark' href="https://github.com/jacobbenowitz/code-mark/wiki" target="_blank" rel="noreferrer">
+                    CodeMark Wiki
+                </a>
             </div>
 
         </div>

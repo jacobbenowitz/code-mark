@@ -421,7 +421,7 @@ class NewNote extends React.Component {
               </div> */}
               <div className='note-input'>
                 <TextareaAutosize 
-                  onChange={() => this.update('textdetails')}
+                  onChange={this.update('textdetails')}
                   id='details-textarea'
                   className='note-input-details'
                   placeholder='Any additional notes?'
