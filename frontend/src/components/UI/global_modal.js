@@ -48,7 +48,7 @@ class GlobalModal extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     let {noteErrors,sessionErrors,userErrors,commentErrors} = nextProps;
-    debugger
+    // debugger
     var newmessages = [];
     if (noteErrors.length === undefined){
       Object.values(noteErrors).map(error => {

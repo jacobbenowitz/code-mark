@@ -14,9 +14,9 @@ class FilteredNotes extends React.Component {
       following: false
     };
   }
-
+  
   isMobile() {
-    return window.innerWidth < 600;
+    return window.innerWidth < 680;
   }
 
   componentWillMount() {

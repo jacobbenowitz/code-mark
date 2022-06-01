@@ -44,7 +44,7 @@ export default class HomeFiltered extends React.Component {
   }
 
   isMobile() {
-    return window.innerWidth < 600;
+    return window.innerWidth < 680;
   }
 
   render() {

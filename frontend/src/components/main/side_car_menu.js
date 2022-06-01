@@ -39,6 +39,7 @@ const SideCarMenu = ({ tags, tagType }) => {
               {/* <div className='stopper-wrapper'>
                 <div className='gradient-stopper' />
               </div> */}
+              <div className='spacer-50-h'></div>
             </div>
           </div>
         </div>

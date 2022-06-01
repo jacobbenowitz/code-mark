@@ -23,7 +23,7 @@ const SessionErrorsReducer = (prevState = _nullErrors, action) => {
     case RECEIVE_USER_LOGOUT:
       return action.message;
     case RECEIVE_USER_NOTES:
-      debugger
+      // debugger
       return prevState;
     default:
       // return state;

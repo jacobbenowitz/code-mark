@@ -233,6 +233,10 @@ footer {
 
 /* desktop */
 @media only screen and (min-width: 600px) {
+  header {
+    padding-left: 42px;
+    padding-right: 42px;
+  }
   .nav-col-01 {
     margin-left: 2rem;
     text-align: start;

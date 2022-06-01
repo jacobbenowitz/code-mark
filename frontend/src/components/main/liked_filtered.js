@@ -43,7 +43,7 @@ export default class LikedFiltered extends React.Component {
   }
 
   isMobile() {
-    return window.innerWidth < 600;
+    return window.innerWidth < 680;
   }
 
   render() {

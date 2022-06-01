@@ -74,7 +74,7 @@ export default class NavBar extends React.Component {
 
   render() {
     let avatarOrHamburger;
-    window.innerWidth > 600 ? (
+    window.innerWidth > 680 ? (
       avatarOrHamburger = (
         <Avatar
           username={this.state.username}

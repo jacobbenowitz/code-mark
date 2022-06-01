@@ -118,7 +118,7 @@ export default class NoteShow extends React.Component {
   }
 
   toggleEditModal() {
-    debugger
+    // debugger
     const editNoteModal = document.getElementById('edit-note-container');
     if (editNoteModal.className === "modal-off" || editNoteModal.className === "modal-out") {
       editNoteModal.className = "modal-on"
@@ -191,7 +191,7 @@ export default class NoteShow extends React.Component {
   }
 
   isMobile() {
-    return window.innerWidth < 600;
+    return window.innerWidth < 680;
   }
 
 

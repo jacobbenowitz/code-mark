@@ -61,6 +61,11 @@
   width: 100%;
 }
 
+.spacer-50-h {
+  height: 50px;
+  width: 100%;
+}
+
 @media only screen and (max-width: 600px) {
   .code-note-tags {
     display: flex;

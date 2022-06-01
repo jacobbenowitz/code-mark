@@ -18,8 +18,8 @@ body {
 
 .main-sidebar {
   display: grid;
-  grid-template-columns: minmax(150px, 25%) 1fr;
-  gap: 2rem;
+  grid-template-columns: minmax(215px, 15%) 1fr;
+    gap: 10%;
   grid-column: 1 / span 12;
   padding-top: 2rem;
   max-width: 100%;
@@ -92,4 +92,28 @@ html {
 }
 #bottom-footer-links a {
   margin-left: 10px;
+}
+
+@media only screen and (max-width: 775px) {
+  .main-sidebar {
+    display: grid;
+    grid-template-columns: minmax(175px, 15%) 1fr;
+    gap: 5%;
+    grid-column: 1 / span 12;
+    padding-top: 2rem;
+    max-width: 100%;
+    width: 100vw;
+  }
+}
+
+@media only screen and (max-width: 680px) {
+  .main-sidebar {
+    display: grid;
+    grid-template-columns: minmax(175px, 15%) 1fr;
+    gap: 5%;
+    grid-column: 1 / span 12;
+    padding-top: 2rem;
+    max-width: 100%;
+    width: 100vw;
+  }
 }
