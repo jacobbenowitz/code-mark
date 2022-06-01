@@ -10,7 +10,7 @@
 
 @media only screen and (max-width: 600px) {
   .new-note-container {
-    margin: 1rem;
+    margin-top: 1rem;
     box-sizing: border-box;
     padding: 1.4rem;
     display: flex;
@@ -27,7 +27,6 @@
   }
 }
 .tags-mobile-header {
-  padding-left: 1rem;
   padding-bottom: 0.5rem;
   font-weight: 700;
   color: #959595;
@@ -93,6 +92,7 @@
   flex-direction: column;
   align-content: flex-start;
   align-items: flex-start;
+  width: calc(100% + 10px);
 }
 
 

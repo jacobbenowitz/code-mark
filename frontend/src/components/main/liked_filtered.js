@@ -28,6 +28,10 @@ export default class LikedFiltered extends React.Component {
     this.props.fetchUsers();
   }
 
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
+
   componentDidUpdate() {
     const { allNotes, allUsers, currentUser, filter, likedNoteIds } = this.props;
     if (Object.values(allNotes).length && likedNoteIds.length && filter !== this.state.filter) {

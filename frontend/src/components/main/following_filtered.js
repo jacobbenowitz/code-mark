@@ -22,6 +22,10 @@ export default class FollowingFiltered extends React.Component {
     }
   }
 
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
+
   componentWillMount() {
     this.props.fetchNotes();
     this.props.fetchCurrentUser();

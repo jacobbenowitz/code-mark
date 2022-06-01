@@ -10,6 +10,10 @@ export default class Discover extends React.Component {
     this.props.fetchNotes();
   };
 
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
+
   isMobile(){
     // debugger;
     return window.innerWidth < 600;

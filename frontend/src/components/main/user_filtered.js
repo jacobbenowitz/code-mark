@@ -23,6 +23,10 @@ export default class UserFiltered extends React.Component {
     this.props.fetchCurrentUser()
   };
 
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
+
   componentWillReceiveProps(nextProps) {
     this.setState({
       user: nextProps.user,
@@ -30,12 +34,6 @@ export default class UserFiltered extends React.Component {
       currentUser: nextProps.currentUser
     })
 
-    // if (!this.state.userNotes.length && this.props.userNotes.length) {
-    //   this.setState({
-    //     user: this.props.user,
-    //     userNotes: this.props.userNotes,
-    //   });
-    // }
   }
 
   // isMobile

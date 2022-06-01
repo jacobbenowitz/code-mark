@@ -250,7 +250,7 @@ footer {
 
   .session {
   grid-column: 1 / span 12;
-  height: 75vh;
+  height: 82vh;
   background-color: #2D2D2D;
   }
 }
@@ -288,6 +288,7 @@ footer {
     padding-bottom: 1rem;
   }
 
+
   .footer-header{
     height: 115px;
     display: flex;
@@ -299,6 +300,9 @@ footer {
     padding-bottom: 10px;
   }
 
+  #user-modal.nav-modal-container {
+    right: 40px;
+  }
 
   #footer-bottom {
     padding: 1rem 0 1rem 0;
@@ -402,7 +406,7 @@ footer {
 }
 
 #user-modal.nav-modal-container {
-  right: 65px;
+  right: 42px;
   top: 70px;
   opacity: 100%;
 }
@@ -411,9 +415,12 @@ footer {
   animation: modalUp 700ms ease-in;
 }
 
-/* #user-modal.nav-modal-container.modal-off {
-  animation: modalDown 700ms ease-in;
-} */
+#user-modal.nav-modal-container.off {
+  /* animation: modalDown 700ms ease-in; */
+  top: 80px;
+  opacity: 0%;
+  visibility: hidden;
+}
 
 @keyframes modalUp {
   0% {
@@ -463,7 +470,7 @@ footer {
   gap: 2rem;
 }
 
-.nav-menu-mobile {
+#nav-menu-mobile {
   position: fixed;
   display: flex;
   top: 0;
@@ -478,7 +485,7 @@ footer {
   box-sizing: border-box;
 }
 
-.mobile-menu-mask {
+#mobile-menu-mask {
   position: fixed;
   display: flex;
   top: 0;
@@ -492,27 +499,29 @@ footer {
   backdrop-filter: blur(20px);
 }
 
-.nav-menu-mobile.menu-in {
+.menu-in {
   animation: menuIn 750ms ease-in-out;
   visibility: visible;
   transform: translateX(0px);
 }
 
-.nav-menu-mobile.menu-out {
-  animation: menuOut 750ms ease-in-out reverse;
+.menu-out {
+  animation: menuOut 750ms ease-in-out;
   transform: translateX(-400px);
   visibility: hidden;
 }
 
-.mobile-menu-mask.mask-in {
-  animation: maskIn 750ms ease-in-out;
-  transform: translateX(0px);
-  visibility: visible;
+.menu-off, .mask-off {
+  visibility: hidden;
 }
 
-.mobile-menu-mask.mask-out {
-  animation: menuOut 750ms ease-in-out;
-  visibility: hidden;
+.mask-in {
+  animation: maskIn 750ms ease-in-out;
+  transform: translateX(0px);
+}
+
+.mask-out {
+  animation: menuOut 750ms ease-out;
 }
 
 @keyframes menuIn {
@@ -538,10 +547,10 @@ footer {
   99% {
     opacity: 0%;
     visibility: visible;
-    transform: translateX(-400px);
+    transform: translateX(-300px);
   }
   100% {
-    transform: translateX(-400px);
+    transform: translateX(-300px);
     visibility: hidden;
   }
 }
@@ -552,7 +561,7 @@ footer {
   }
   1% {
     backdrop-filter: blur(0px);
-    transform: translateX(-450px);
+    transform: translateX(-650px);
     visibility: visible;
   }
   100% {
@@ -566,7 +575,7 @@ footer {
     backdrop-filter: blur(20px);
     transform: translateX(0px);
   }
-  99% {
+  79% {
     backdrop-filter: blur(0px);
     transform: translateX(-450px);
     visibility: visible;

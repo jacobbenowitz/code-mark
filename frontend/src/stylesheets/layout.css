@@ -23,7 +23,7 @@ body {
   grid-column: 1 / span 12;
   padding-top: 2rem;
   max-width: 100%;
-  width: 100vw;
+  width: 100%;
 }
 
 .header-top-stack {
@@ -102,7 +102,7 @@ html {
     grid-column: 1 / span 12;
     padding-top: 2rem;
     max-width: 100%;
-    width: 100vw;
+    width: 100%;
   }
 }
 
@@ -114,6 +114,6 @@ html {
     grid-column: 1 / span 12;
     padding-top: 2rem;
     max-width: 100%;
-    width: 100vw;
+    width: 100%;
   }
 }
