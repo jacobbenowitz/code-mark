@@ -25,7 +25,9 @@ class NewNote extends React.Component {
       suggestedLanguage: undefined,
       keywordsSelected: [],
       allKeywords: [],
-      newResources: []
+      newResources: [],
+      lang: javascript({ jsx: true}),
+      bodyHeight: 0
     }
     this.bindHandlers();
   }
@@ -44,6 +46,7 @@ class NewNote extends React.Component {
     this.toggleSuccessModal = this.toggleSuccessModal.bind(this);
     this.closeSuccessModal = this.closeSuccessModal.bind(this);
     this.placeholderTitle = this.placeholderTitle.bind(this);
+    this.updateCode = this.updateCode.bind(this);
   }
 
   componentDidMount() {
@@ -57,6 +60,16 @@ class NewNote extends React.Component {
     }
   }
 
+  componentDidUpdate(){
+    const body = document.getElementsByTagName('body');
+    const bodyHeight = body[0].clientHeight;
+    if(this.state.bodyHeight !== bodyHeight){
+      this.setState({
+        bodyHeight: bodyHeight
+      });
+    }
+  }
+
   update(type) {
     return e => {
       this.setState({
@@ -65,27 +78,33 @@ class NewNote extends React.Component {
     }
   }
 
-  updateCode() {
-    let lang = this.props.getLanguage(this.state.codebody)
-    return e => {
+  updateCode(e) {
+    // let lang = this.props.getLanguage(this.state.codebody)
+    let lang = this.props.getLanguage(e)
+    // debugger;
+    // return e => {
+    //   debugger;
       this.setState({
         codebody: e,
         suggestedLanguage: lang
       })
-    }
+    // }
   }
 
   handleChange(e) {
-    e.preventDefault();
-    // this.setState({lang: e.target.value});
-    let codemirrors = document.getElementsByClassName('codemirror');
-    for (var i = 0; i < codemirrors.length; i++) {
-      codemirrors[i].style.display = 'none';
-    }
-    let chosen = document.getElementsByClassName(e.target.value);
-    for (var j = 0; j < chosen.length; j++) {
-      chosen[j].style.display = 'block';
-    }
+    // e.preventDefault();
+    // // this.setState({lang: e.target.value});
+    // let codemirrors = document.getElementsByClassName('codemirror');
+    // for (var i = 0; i < codemirrors.length; i++) {
+    //   codemirrors[i].style.display = 'none';
+    // }
+    // let chosen = document.getElementsByClassName(e.target.value);
+    // for (var j = 0; j < chosen.length; j++) {
+    //   chosen[j].style.display = 'block';
+    // }
+    // debugger;
+    const languages = [javascript({ jsx: true}), html(), cpp(), css()];
+    this.setState({ lang: languages[parseInt(e.target.value)] });
   }
 
   toggleResourcesModal(e) {
@@ -170,7 +189,9 @@ class NewNote extends React.Component {
     e.preventDefault();
     // debugger
     // e.target.checked ? e.target.checked = false : e.target.checked = true;
-    const keyword = e.target.value || e.target.innerHTML;
+    debugger;
+    const keyword = e.target.value || e.target.innerText;
+    debugger;
     let spaceRemoved = keyword.replace(/\s/g, '');
     let result;
     // debugger
@@ -182,7 +203,29 @@ class NewNote extends React.Component {
     this.setState({
       keywordsSelected: result
     });
+    if(result.length === 5){
+      this.limitKeywords();
+    }else if(result.length === 4){
+      this.freeKeywords();
+    }
   };
+
+  limitKeywords() {
+    // debugger;
+    const keyword_checks = Object.values(document.getElementsByClassName('checkbox-option')).filter(ele => !ele.classList.contains('option-selected'));
+    keyword_checks.forEach(checkbox => {
+      checkbox.classList.add('disabled');
+      // checkbox.disabled = true;
+    })
+  }
+
+  freeKeywords(){
+    const disabled_keywords = Object.values(document.getElementsByClassName('checkbox-option disabled'));
+    disabled_keywords.forEach(disabled => {
+      disabled.classList.remove('disabled');
+      // checkbox.disabled = false;
+    })
+  }
 
 
   toggleTagForm() {
@@ -257,13 +300,17 @@ class NewNote extends React.Component {
         col2.push(keyword);
       }
     })
+    // debugger;
     return (
       <>
-        <div id='resources-note-container' className='modal-off' >
+        <div id='resources-note-container' className='modal-off' 
+        style={{height:this.state.bodyHeight}}
+        >
           <div className='modal-wrapper'>
             <div id="resources-step-1" className='resources-modal'>
               <h4>Resources</h4>
               <span>Select the keywords that you'd like resources for</span>
+              <span>Maximum 5 keywords allowed. Currently have {this.state.keywordsSelected.length} keywords</span>
               <form className='resource-options'>
                 <div className='keyword-options'>
                   <div className='column1'>
@@ -289,7 +336,7 @@ class NewNote extends React.Component {
                 </div>
               </form>
               <div>
-                <button id='keyword-submit' onClick={() => this.handleSubmit()}>Submit</button>
+                <button id='keyword-submit' onClick={this.handleSubmit}>Submit</button>
               </div>
             </div>
             <div id="resources-step-2" className='modal-off'>
@@ -322,12 +369,11 @@ class NewNote extends React.Component {
                   placeholder={'Untitled note'} />
               </div>
               <div className='select-wrapper'>
-                <select id='lang-select'
-                  value={this.state.lang} onChange={this.handleChange}>
-                  <option value={'javascript'} defaultValue>JavaScript</option>
-                  <option value={'html'}>HTML</option>
-                  <option value={'cpp'}>C++</option>
-                  <option value={'css'}>CSS</option>
+                <select id='lang-select' onChange={this.handleChange}>
+                  <option value={0} defaultValue>JavaScript</option>
+                  <option value={1}>HTML</option>
+                  <option value={2}>C++</option>
+                  <option value={3}>CSS</option>
                 </select>
               </div>
               <div className='note-input'>
@@ -337,11 +383,13 @@ class NewNote extends React.Component {
                   onChange={this.updateCode}
                   height="200px"
                   theme='dark'
-                  extensions={[javascript({ jsx: true }),
-                  EditorView.lineWrapping]}
+                  extensions={[this.state.lang,
+                    EditorView.lineWrapping]}
+                  // extensions={this.state.lang.push(
+                  //   EditorView.lineWrapping)}
                 />
               </div>
-              <div className='note-input'>
+              {/* <div className='note-input'>
                 <CodeMirror className='codemirror html'
                   value={this.state.codebody}
                   onChange={this.updateCode}
@@ -370,7 +418,7 @@ class NewNote extends React.Component {
                   extensions={[css(),
                   EditorView.lineWrapping]}
                 />
-              </div>
+              </div> */}
               <div className='note-input'>
                 <TextareaAutosize 
                   onChange={this.update('textdetails')}
@@ -453,11 +501,11 @@ class NewNote extends React.Component {
                 value={"Save a new note..."}
                 height="56px"
                 theme='dark'
-                extensions={[javascript({ jsx: true }),
+                extensions={[html(),
                 EditorView.lineWrapping]}
               />
             </div>
-            <div className='note-input' onClick={this.toggleForm}>
+            {/* <div className='note-input' onClick={this.toggleForm}>
               <CodeMirror className='codemirror html'
                 onMouseDown={this.toggleForm}
                 value={"Save a new note..."}
@@ -486,7 +534,7 @@ class NewNote extends React.Component {
                 extensions={[css(),
                 EditorView.lineWrapping]}
               />
-            </div>
+            </div> */}
           </div>
         </div>
       </>

@@ -169,6 +169,11 @@ button#tag-icon-save.disabled:hover {
   cursor: not-allowed;
 }
 
+.checkbox-option.disabled > input,.checkbox-option.disabled > label,.checkbox-option.disabled{
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 50%;
+}
 
 .tag-list {
     display: flex;

@@ -15,6 +15,16 @@
   background-color: blue;
 }
 
+.checkbox,.checkbox-label {
+  /* display: none; */
+  /* visibility: hidden; */
+  pointer-events: none;
+}
+
+.checkbox{
+  visibility: hidden;
+}
+
 .resource-icon-wrapper {
   width: 46px;
   height: 46px;

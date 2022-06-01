@@ -20,7 +20,8 @@ export default class EditNote extends React.Component {
       tags: [],
       newTag: "",
       suggestedLanguage: undefined,
-      isOpen: false // true when modal is open
+      isOpen: false, // true when modal is open
+      lang: javascript({ jsx: true})
     }
     this.bindHandlers();
   }
@@ -54,13 +55,10 @@ export default class EditNote extends React.Component {
     this.updateTags = this.updateTags.bind(this);
     this.toggleTagForm = this.toggleTagForm.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+
     this.placeholderTitle = this.placeholderTitle.bind(this);
     this.updateCode = this.updateCode.bind(this);
-    // this.updateKeywords = this.updateKeywords.bind(this);
-    // this.toggleResourcesModal = this.toggleResourcesModal.bind(this);
-    // this.toggleSuccessModal = this.toggleSuccessModal.bind(this);
-    // this.closeSuccessModal = this.closeSuccessModal.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   update(type) {
@@ -71,14 +69,14 @@ export default class EditNote extends React.Component {
     }
   }
 
-  updateCode() {
-    let lang = getLanguage(this.state.codebody)
-    return e => {
+
+  updateCode(e) {
+    let lang = this.props.getLanguage(e)
       this.setState({
         codebody: e,
         suggestedLanguage: lang
       })
-    }
+    // }
   }
 
   toggleEditModal() {
@@ -151,16 +149,18 @@ export default class EditNote extends React.Component {
   }
 
   handleChange(e) {
-    e.preventDefault();
-    // this.setState({lang: e.target.value});
-    let codemirrors = document.getElementsByClassName('codemirror');
-    for (var i = 0; i < codemirrors.length; i++) {
-      codemirrors[i].style.display = 'none';
-    }
-    let chosen = document.getElementsByClassName(e.target.value);
-    for (var j = 0; j < chosen.length; j++) {
-      chosen[j].style.display = 'block';
-    }
+    // e.preventDefault();
+    // // this.setState({lang: e.target.value});
+    // let codemirrors = document.getElementsByClassName('codemirror');
+    // for (var i = 0; i < codemirrors.length; i++) {
+    //   codemirrors[i].style.display = 'none';
+    // }
+    // let chosen = document.getElementsByClassName(e.target.value);
+    // for (var j = 0; j < chosen.length; j++) {
+    //   chosen[j].style.display = 'block';
+    // }
+    const languages = [javascript({ jsx: true}), html(), cpp(), css()];
+    this.setState({ lang: languages[parseInt(e.target.value)] });
   }
 
   placeholderTitle(e) {
@@ -197,12 +197,11 @@ export default class EditNote extends React.Component {
               placeholder={'Untitled note'} />
           </div>
           <div className='select-wrapper'>
-            <select id='lang-select'
-              value={this.state.lang} onChange={this.handleChange}>
-              <option value={'javascript'} defaultValue>JavaScript</option>
-              <option value={'html'}>HTML</option>
-              <option value={'cpp'}>C++</option>
-              <option value={'css'}>CSS</option>
+            <select id='lang-select' onChange={this.handleChange}>
+              <option value={0} defaultValue>JavaScript</option>
+              <option value={1}>HTML</option>
+              <option value={2}>C++</option>
+              <option value={3}>CSS</option>
             </select>
           </div>
           <div className='note-input'>
@@ -212,11 +211,11 @@ export default class EditNote extends React.Component {
               onChange={this.updateCode}
               height="200px"
               theme='dark'
-              extensions={[javascript({ jsx: true }),
-              EditorView.lineWrapping]}
+              extensions={[this.state.lang,
+                EditorView.lineWrapping]}
             />
           </div>
-          <div className='note-input'>
+          {/* <div className='note-input'>
             <CodeMirror className='codemirror html'
               value={this.state.codebody}
               onChange={this.updateCode}
@@ -245,13 +244,13 @@ export default class EditNote extends React.Component {
               extensions={[css(),
               EditorView.lineWrapping]}
             />
-          </div>
-            <TextareaAutosize
-              onChange={this.update('textdetails')}
-              id='details-textarea-edit'
-              className='note-input-details'
-              value={this.state.textdetails}
-            />
+          </div> */}
+          <TextareaAutosize
+            onChange={this.update('textdetails')}
+            id='details-textarea-edit'
+            className='note-input-details'
+            value={this.state.textdetails}
+          />
           <div className='tags-header-wrapper'>
             <span className='tags-header'>TAGS</span>
             <div className='recommended-tag'

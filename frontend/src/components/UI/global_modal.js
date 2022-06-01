@@ -102,6 +102,7 @@ class GlobalModal extends React.Component {
                 <span>{message[1]}</span>
               </div>
             )
+            // console.log(message);
           })
         }
         </div>

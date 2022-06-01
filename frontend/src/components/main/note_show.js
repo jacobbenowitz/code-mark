@@ -277,7 +277,7 @@ export default class NoteShow extends React.Component {
           </div>
         </div>
         {/* NOTE ACTIONS // NOTE MAIN */}
-        <div id='edit-note-container' className="modal-off">
+        <div id='edit-note-container' className="modal-off" style={{height:this.state.bodyHeight}}>
           <div className='modal-wrapper'>
             <EditNote
               getLanguage={getLanguage}
