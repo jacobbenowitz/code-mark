@@ -42,6 +42,7 @@ class CommentItem extends React.Component {
     }
 
     this.props.updateComment(comment, this.props.comment._id);
+    // this.props.toggleModal();
     this.setState({
       editActive: false
     })
@@ -59,6 +60,7 @@ class CommentItem extends React.Component {
 
   deleteComment() {
     this.props.removeComment(this.props.comment._id)
+    // this.props.toggleModal();
     // setTimeout(this.props.fetchNoteComments(this.props.noteId), 100)
     this.toggleDeleteModal();
   }

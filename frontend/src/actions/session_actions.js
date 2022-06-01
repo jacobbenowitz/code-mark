@@ -12,8 +12,9 @@ export const receiveCurrentUser = currentUser => ({
   currentUser
 })
 
-export const receiveUserSignIn = () => ({
-  type: RECEIVE_USER_SIGN_IN
+export const receiveUserSignIn = message => ({
+  type: RECEIVE_USER_SIGN_IN,
+  message
 })
 
 export const receiveErrors = errors => {
@@ -23,8 +24,9 @@ export const receiveErrors = errors => {
   }
 }
 
-export const logoutUser = () => ({
-  type: RECEIVE_USER_LOGOUT
+export const logoutUser = message => ({
+  type: RECEIVE_USER_LOGOUT,
+  message
 });
 
 export const fetchCurrentUser = () => dispatch => {
@@ -41,7 +43,7 @@ export const login = user => dispatch => {
     const decoded = jwt_decode(token);
     dispatch(receiveCurrentUser(decoded));
   })
-    .then(() => dispatch(receiveUserSignIn()))
+    .then(() => dispatch(receiveUserSignIn(['success', 'User Successfully Logged In!'])))
     .catch(err => {
       // debugger
       dispatch(receiveErrors(err.response.data));
@@ -53,7 +55,7 @@ export const logout = () => dispatch => {
   localStorage.removeItem('jwtToken')
   // also remove token from axios header
   APIUtil.setAuthToken(false)
-  dispatch(logoutUser())
+  dispatch(logoutUser(['success', 'User Successfully Logged Out!']))
 };
 
 export const signup = user => dispatch => {

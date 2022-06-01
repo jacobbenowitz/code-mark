@@ -13,4 +13,14 @@ const RootReducer = combineReducers({
   users
 });
 
+// const RootReducer = (state,action) => {
+//   state.errors = {
+//     session: [],
+//     notes: [],
+//     comments: [],
+//     users: []
+//   };
+//   return AppReducer(state,action);
+// }
+
 export default RootReducer;

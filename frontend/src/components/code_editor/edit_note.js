@@ -74,7 +74,10 @@ export default class EditNote extends React.Component {
       textdetails: textdetails
     }
     this.props.updateNote(note, this.props.noteId)
-      .then(() => this.toggleEditModal())
+      .then(() => {
+        this.toggleEditModal()
+        // this.props.toggleModal();
+      })
   }
 
   placeholderTitle(e) {
@@ -104,7 +107,7 @@ export default class EditNote extends React.Component {
           <form onSubmit={this.state.codebody.length ? this.handleSubmit : ""}>
             <div className='note-input'>
               <input type={'text'}
-                onClick={this.placeholderTitle}
+                onClick={this.state.title === "Untitled note" ? this.placeholderTitle : undefined }
                 onChange={this.update('title')}
                 id='title-code'
                 className='title-input'

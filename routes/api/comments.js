@@ -66,7 +66,7 @@ router.post('/',
             user: {
                 username: req.user.username,
                 userId: req.user.id,
-                color: req.color
+                color: req.user.color
             },
             note: req.body.note,
             textbody: req.body.textbody,
@@ -122,7 +122,7 @@ router.patch('/:id/edit',
                     comment.textbody = req.body.textbody || comment.textbody;
                     comment.likes = req.body.likes || comment.likes;
                     // comment.codeSnippet = req.body.codeSnippet;
-                    comment.save().then(comment => res.json(comment))
+                    comment.save().then(comment => res.json([comment,['success', 'Comment Successfully Updated!']]))
                 }
             })
             .catch(err =>
@@ -168,7 +168,7 @@ router.delete('/:id',
                                 })
                         })
                     })
-                    .then(() => res.json(commentid));
+                    .then(() => res.json([commentid,['success', 'Comment Successfully Deleted!']]));
                 // }
             })
             .catch(err =>

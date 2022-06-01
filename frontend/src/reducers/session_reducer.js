@@ -34,7 +34,7 @@ const initialState = {
 const SessionReducer = (prevState = initialState, action) => {
   Object.freeze(prevState);
   let nextState = merge({}, prevState);
-
+  // debugger;
   switch (action.type) {
     case RECEIVE_USER_LOGOUT:
       return {
@@ -52,13 +52,13 @@ const SessionReducer = (prevState = initialState, action) => {
         user: user
       }
     case RECEIVE_USER_SIGN_IN:
+      // debugger;
       return {
         ...prevState,
         isSignedIn: true
       }
     case RECEIVE_UPDATED_USER:
-      // debugger
-      nextState.user = action.user.data;
+      nextState.user = action.user.data[0];
       return nextState;
     case RECEIVE_USER_NEW_FOLLOWING:
       nextState.user = action.users.data.currentUser;

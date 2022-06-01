@@ -5,6 +5,7 @@ import {
   updateUser,
   removeUser
 } from '../../actions/user_actions';
+// import { toggleSuccessModal } from '../../util/modal_util';
 import Settings from './settings';
 
 const mapStateToProps = (state, { match }) => {

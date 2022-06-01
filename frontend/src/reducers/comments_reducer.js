@@ -22,7 +22,7 @@ import { merge } from 'lodash';
 const commentsReducer = (prevState = initialState, action) => {
     Object.freeze(prevState);
     let nextState = merge({}, prevState);
-
+    // debugger;
     switch (action.type) {
         case RECEIVE_NEW_COMMENT:
             let newComments = [...nextState.note, action.comment];
@@ -39,12 +39,12 @@ const commentsReducer = (prevState = initialState, action) => {
             return nextState;
         case RECEIVE_DELETE_COMMENT:
             nextState.note = nextState.note.filter(comment =>
-                comment._id !== action.commentId.data);
+                comment._id !== action.commentId[0]);
             return nextState;
         case RECEIVE_UPDATED_COMMENT:
             let updated = nextState.note.map(comment => {
-                if (comment._id === action.comment._id) {
-                    return action.comment
+                if (comment._id === action.comment[0]._id) {
+                    return action.comment[0]
                 }
                 else return comment
             });
