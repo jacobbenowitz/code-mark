@@ -6,7 +6,7 @@
   gap: 1.4rem;
   box-sizing: border-box;
   /* position: relative; */
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .spacer-150-h {
@@ -436,6 +436,12 @@
   padding: 2rem;
 }
 
+@media only screen and (max-width: 680px) {
+  .note-resources {
+    padding: 1rem;
+  }
+}
+
 #details-textarea, #details-textarea-edit {
   padding: 0.3rem;
   margin-top: 1.2rem;
@@ -486,14 +492,15 @@
   border-radius: 4px;
   font-size: 14px;
   font-weight: 700;
+  position: relative;
 }
 
-.public-status::before {
-  content: "Like this CodeMark";
+.public-status:hover::before {
+  content: "Public status of CodeMark";
   width: max-content;
   position: absolute;
-  left: 0px;
-  bottom: 45px;
+  right: 0px;
+  bottom: -45px;
   text-align: end;
   background: #393939;
   padding: 0.4rem;
@@ -505,11 +512,11 @@
 .public-status:hover::after {
   content: "";
   position: absolute;
-  top: -14px;
-  /* right: 12px; */
+  bottom: -15px;
+  right: 12px;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-top: 10px solid #37393e;
+  border-bottom: 10px solid #37393e;
     animation: fadeIn 1000ms ease-in-out;
 }
 

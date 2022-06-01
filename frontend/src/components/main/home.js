@@ -18,7 +18,7 @@ export default class Home extends React.Component {
   }
 
   render() {
-    if (window.innerWidth < 600) {
+    if (this.isMobile()) {
       return (
         <div className='main-mobile'>
           {/* mobile menu was here */}

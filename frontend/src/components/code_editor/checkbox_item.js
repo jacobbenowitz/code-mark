@@ -12,7 +12,6 @@ class CheckBoxItem extends React.Component {
   handleCheck(e){
     e.stopPropagation();
     this.setState({checked: !this.state.checked});
-    debugger;
     this.props.updateKeywords(e);
   }
   render() {

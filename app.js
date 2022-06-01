@@ -27,7 +27,7 @@ if (process.env.NODE_ENV === 'production') {
 // connect to MongoDB via mongoose
 mongoose
     .connect(db, { useNewUrlParser: true })
-    .then(() => console.log("Connected to MongoDB successfully"))
+    // .then(() => console.log("Connected to MongoDB successfully"))
     .catch(err => console.log(err));
 
 // setup middleware for body parser

@@ -180,7 +180,7 @@ router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,
                           mainuser.password = hash;
                           mainuser.save()
                             .then(user => res.json(user))
-                            .catch(err => console.log(err))
+                            // .catch(err => console.log(err))
                         })
                       })
                     } else {
@@ -222,7 +222,7 @@ router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,
                           }
 
                         })
-                        .catch(err => console.log(err))
+                        // .catch(err => console.log(err))
                     }
                   }
                 })

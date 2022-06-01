@@ -73,26 +73,26 @@ export const receiveCommentUnlike = comment => ({
 export const fetchComments = () => dispatch => (
     getComments()
         .then(comments => dispatch(receiveComments(comments.data)))
-        .catch(err => dispatch(receiveCommentErrors(err)))
+        // .catch(err => dispatch(receiveCommentErrors(err)))
 );
 
 export const fetchNoteComments = noteId => dispatch => {
     return getNoteComments(noteId)
         .then(comments => dispatch(receiveNoteComments(comments.data)))
-        .catch(err => dispatch(receiveCommentErrors(err)))
+        // .catch(err => dispatch(receiveCommentErrors(err)))
 };
 
 export const fetchComment = commentId => dispatch => (
     getComment(commentId)
         .then(comment => dispatch(receiveComment(comment.data)))
-        .catch(err => dispatch(receiveCommentErrors(err)))
+        // .catch(err => dispatch(receiveCommentErrors(err)))
 
 );
 
 export const fetchUserComments = id => dispatch => (
     getUserComments(id)
         .then(comments => dispatch(receiveUserComments(comments.data)))
-        .catch(err => dispatch(receiveCommentErrors(err)))
+        // .catch(err => dispatch(receiveCommentErrors(err)))
 );
 
 export const composeComment = data => dispatch => {

@@ -13,15 +13,12 @@ export default class MobileNav extends React.Component {
   }
 
   toggleShowMenu() {
-    debugger
     const mask = document.getElementById('mobile-menu-mask')
     const menu = document.getElementById('nav-menu-mobile')
     if (mask.className === 'mask-on' || mask.className === 'mask-in') {
-      debugger
       mask.className = 'mask-out'
       menu.className = 'mask-out'
       setTimeout(() => {
-        debugger
         this.setState({
           showMenu: !this.state.showMenu
         })

@@ -38,12 +38,10 @@ export default class UserFiltered extends React.Component {
 
   // isMobile
   isMobile(){
-    return window.innerWidth < 600;
+    return window.innerWidth < 680;
   }
 
   render() {
-    // debugger;
-    console.log(this.state)
     return (
       <div className={this.isMobile() ? 'main-mobile' : 'main-sidebar'}>
         {/* NEEDS TO BE REFACTORED FOR FILTERING USER'S TAGS (NOT HOME) */}

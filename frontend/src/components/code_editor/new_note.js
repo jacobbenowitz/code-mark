@@ -79,30 +79,15 @@ class NewNote extends React.Component {
   }
 
   updateCode(e) {
-    // let lang = this.props.getLanguage(this.state.codebody)
     let lang = this.props.getLanguage(e)
-    // debugger;
-    // return e => {
-    //   debugger;
       this.setState({
         codebody: e,
         suggestedLanguage: lang
       })
-    // }
   }
 
   handleChange(e) {
-    // e.preventDefault();
-    // // this.setState({lang: e.target.value});
-    // let codemirrors = document.getElementsByClassName('codemirror');
-    // for (var i = 0; i < codemirrors.length; i++) {
-    //   codemirrors[i].style.display = 'none';
-    // }
-    // let chosen = document.getElementsByClassName(e.target.value);
-    // for (var j = 0; j < chosen.length; j++) {
-    //   chosen[j].style.display = 'block';
-    // }
-    // debugger;
+
     const languages = [javascript({ jsx: true}), html(), cpp(), css()];
     this.setState({ lang: languages[parseInt(e.target.value)] });
   }
@@ -189,9 +174,7 @@ class NewNote extends React.Component {
     e.preventDefault();
     // debugger
     // e.target.checked ? e.target.checked = false : e.target.checked = true;
-    debugger;
     const keyword = e.target.value || e.target.innerText;
-    debugger;
     let spaceRemoved = keyword.replace(/\s/g, '');
     let result;
     // debugger
@@ -300,7 +283,6 @@ class NewNote extends React.Component {
         col2.push(keyword);
       }
     })
-    // debugger;
     return (
       <>
         <div id='resources-note-container' className='modal-off' 
@@ -385,40 +367,8 @@ class NewNote extends React.Component {
                   theme='dark'
                   extensions={[this.state.lang,
                     EditorView.lineWrapping]}
-                  // extensions={this.state.lang.push(
-                  //   EditorView.lineWrapping)}
                 />
               </div>
-              {/* <div className='note-input'>
-                <CodeMirror className='codemirror html'
-                  value={this.state.codebody}
-                  onChange={this.updateCode}
-                  height="200px"
-                  theme='dark'
-                  extensions={[html(),
-                  EditorView.lineWrapping]}
-                />
-              </div>
-              <div className='note-input'>
-                <CodeMirror className='codemirror cpp'
-                  value={this.state.codebody}
-                  onChange={this.updateCode}
-                  height="200px"
-                  theme='dark'
-                  extensions={[cpp(),
-                  EditorView.lineWrapping]}
-                />
-              </div>
-              <div className='note-input'>
-                <CodeMirror className='codemirror css'
-                  value={this.state.codebody}
-                  onChange={this.updateCode}
-                  height="200px"
-                  theme='dark'
-                  extensions={[css(),
-                  EditorView.lineWrapping]}
-                />
-              </div> */}
               <div className='note-input'>
                 <TextareaAutosize 
                   onChange={this.update('textdetails')}
@@ -505,36 +455,6 @@ class NewNote extends React.Component {
                 EditorView.lineWrapping]}
               />
             </div>
-            {/* <div className='note-input' onClick={this.toggleForm}>
-              <CodeMirror className='codemirror html'
-                onMouseDown={this.toggleForm}
-                value={"Save a new note..."}
-                height="56px"
-                theme='dark'
-                extensions={[html(),
-                EditorView.lineWrapping]}
-              />
-            </div>
-            <div className='note-input' onClick={this.toggleForm}>
-              <CodeMirror className='codemirror cpp'
-                onMouseDown={this.toggleForm}
-                value={"Save a new note..."}
-                height="56px"
-                theme='dark'
-                extensions={[cpp(),
-                EditorView.lineWrapping]}
-              />
-            </div>
-            <div className='note-input' onClick={this.toggleForm}>
-              <CodeMirror className='codemirror css'
-                onMouseDown={this.toggleForm}
-                value={"Save a new note..."}
-                height="56px"
-                theme='dark'
-                extensions={[css(),
-                EditorView.lineWrapping]}
-              />
-            </div> */}
           </div>
         </div>
       </>

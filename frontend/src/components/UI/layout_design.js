@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 import CodeNotePlaceholder from "../notes/code_note_placeholders/code_note_item_placeholder";
 
 const LayoutDesign = () => {
-  if (window.innerWidth > 600) {
+  if (window.innerWidth > 680) {
     return (
       <div className='main-sidebar'>
         <div className='nav-sidecar'>

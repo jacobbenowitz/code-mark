@@ -2,6 +2,8 @@
 .session {
   grid-column: 1 / span 12;
   min-height: 82vh;
+  height: fit-content;
+  padding: 2rem 0;
   background-color: #2D2D2D;
 }
 
@@ -69,6 +71,7 @@ input[type='color'] {
 .button-session {
   flex: 1;
 }
+
 .button-session.disabled {
   border: 1px solid transparent;
   color: #727272;
@@ -76,8 +79,6 @@ input[type='color'] {
   box-shadow: none;
   cursor: not-allowed;
 }
-
-
 
 .signup-buttons-wrapper {
   margin-top: 1rem;

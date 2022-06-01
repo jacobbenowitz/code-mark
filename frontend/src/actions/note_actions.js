@@ -66,13 +66,13 @@ export const receiveNoteUnlike = note => ({
 export const fetchNotes = () => dispatch => (
   getNotes()
     .then(notes => dispatch(receiveNotes(notes)))
-    .catch(err => dispatch(receiveNoteErrors(err)))
+    // .catch(err => dispatch(receiveNoteErrors(err)))
 );
 
 export const fetchNote = noteId => dispatch => (
   getNote(noteId)
     .then(note => dispatch(receiveNote(note)))
-    .catch(err => dispatch(receiveNoteErrors(err)))
+    // .catch(err => dispatch(receiveNoteErrors(err)))
 
 );
 
@@ -80,7 +80,7 @@ export const fetchUserNotes = id => dispatch => {
   // debugger
   return getUserNotes(id)
     .then(notes => dispatch(receiveUserNotes(notes)))
-    .catch(err => dispatch(receiveNoteErrors(err)))
+    // .catch(err => dispatch(receiveNoteErrors(err)))
 }
 
 export const composeNote = data => dispatch => {
