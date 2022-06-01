@@ -112,7 +112,7 @@
 
 .code-note-tags::-webkit-scrollbar,
 .note-tags-list::-webkit-scrollbar,
-.comment-body-input::-webkit-scrollbar {
+textarea::-webkit-scrollbar {
   display: none;
 }
 

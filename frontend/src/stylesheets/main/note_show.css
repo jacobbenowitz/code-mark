@@ -425,7 +425,7 @@
   padding: 2rem;
 }
 
-#details-textarea {
+#details-textarea, #details-textarea-edit {
   padding: 0.3rem;
   margin-top: 1.2rem;
   border-radius: 4px;
@@ -550,6 +550,10 @@
 .modal-compact {
   transition: transform 500ms ease-in-out;
   transform: translateX(285px);
+}
+
+#comment-highlight-text.modal-compact.hidden {
+  visibility: hidden;
 }
 /* show entire modal */
 .modal-expanded {

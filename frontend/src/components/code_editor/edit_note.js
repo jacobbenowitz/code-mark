@@ -8,6 +8,7 @@ import { cpp } from '@codemirror/lang-cpp';
 import { css } from '@codemirror/lang-css';
 import { EditorView } from '@codemirror/basic-setup';
 import TextareaAutosize from 'react-textarea-autosize';
+import NewNoteTagItem from '../tags/new_note_tag_item';
 
 export default class EditNote extends React.Component {
   constructor(props) {
@@ -26,10 +27,12 @@ export default class EditNote extends React.Component {
 
   componentDidMount() {
     this._isMounted = true;
+    const { note } = this.props;
     this.setState({
-      title: this.props.note.title,
-      codebody: this.props.note.codebody,
-      textdetails: this.props.note.textdetails,
+      title: note.title,
+      codebody: note.codebody,
+      textdetails: note.textdetails,
+      tags: note.tags
     })
     let codemirrors = document.getElementsByClassName('codemirror');
     for (var i = 0; i < codemirrors.length; i++) {
@@ -46,8 +49,18 @@ export default class EditNote extends React.Component {
   }
 
   bindHandlers() {
+    this.addLangTag = this.addLangTag.bind(this);
+    this.deleteTag = this.deleteTag.bind(this);
+    this.updateTags = this.updateTags.bind(this);
+    this.toggleTagForm = this.toggleTagForm.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.placeholderTitle = this.placeholderTitle.bind(this)
+    this.handleChange = this.handleChange.bind(this);
+    this.placeholderTitle = this.placeholderTitle.bind(this);
+    this.updateCode = this.updateCode.bind(this);
+    // this.updateKeywords = this.updateKeywords.bind(this);
+    // this.toggleResourcesModal = this.toggleResourcesModal.bind(this);
+    // this.toggleSuccessModal = this.toggleSuccessModal.bind(this);
+    // this.closeSuccessModal = this.closeSuccessModal.bind(this);
   }
 
   update(type) {
@@ -59,7 +72,7 @@ export default class EditNote extends React.Component {
   }
 
   updateCode() {
-    let lang = this.props.getLanguage(this.state.codebody)
+    let lang = getLanguage(this.state.codebody)
     return e => {
       this.setState({
         codebody: e,
@@ -70,25 +83,71 @@ export default class EditNote extends React.Component {
 
   toggleEditModal() {
     const editNoteModal = document.getElementById('edit-note-container');
+    const commentHighlightModal = document.getElementById('comment-highlight-text');
     if (editNoteModal.className = "modal-on") {
       editNoteModal.className = "modal-out"
+      commentHighlightModal.className = "modal-compact"
     } else {
       editNoteModal.className = "modal-on"
+      commentHighlightModal.className = "modal-compact hidden"
     }
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    let { title, codebody, textdetails } = this.state;
+    let { title, codebody, textdetails, tags } = this.state;
     let note = {
       title: title,
       codebody: codebody,
-      textdetails: textdetails
+      textdetails: textdetails,
+      tags: tags
     }
     this.props.updateNote(note, this.props.noteId)
       .then(() => {
         this.toggleEditModal()
       })
+  }
+
+  updateTags(e) {
+    e.preventDefault()
+    let newTags = this.state.newTag.length ? (
+      this.state.tags.concat([this.state.newTag])
+    ) : [this.state.newTag]
+    this.setState({
+      newTag: "",
+      tagForm: false,
+      tags: newTags
+    }, () => this.toggleTagForm())
+  }
+
+  addLangTag(lang) {
+    let newTags = this.state.newTag.length ? (
+      this.state.tags.concat(lang)
+    ) : [lang]
+    this.setState({
+      tags: newTags
+    })
+  }
+
+  deleteTag(title) {
+    let newTags = this.state.tags.filter(tag =>
+      tag !== title);
+
+    this.setState({
+      tags: newTags
+    })
+  }
+
+
+  toggleTagForm() {
+    const tagForm = document.getElementById('new-tag-form-new-note');
+    if (tagForm.className === "tag-form-off") {
+      this.setState({ tagForm: true }, () =>
+        tagForm.className = "tag-form-on")
+    } else {
+      this.setState({ tagForm: false }, () =>
+        tagForm.className = "tag-form-off")
+    }
   }
 
   handleChange(e) {
@@ -187,15 +246,12 @@ export default class EditNote extends React.Component {
               EditorView.lineWrapping]}
             />
           </div>
-          <div className='note-input'>
             <TextareaAutosize
-              onChange={() => this.update('textdetails')}
-              id='details-textarea'
+              onChange={this.update('textdetails')}
+              id='details-textarea-edit'
               className='note-input-details'
-              placeholder='Any additional notes?'
               value={this.state.textdetails}
             />
-          </div>
           <div className='tags-header-wrapper'>
             <span className='tags-header'>TAGS</span>
             <div className='recommended-tag'
@@ -228,8 +284,7 @@ export default class EditNote extends React.Component {
               )}
             </div>
 
-            <form onSubmit={this.state.newTag.split(' ').join('').length ? this.updateTags : undefined}
-              className="tag-form-off" id="new-tag-form-new-note">
+            <div className="tag-form-off" id="new-tag-form-new-note">
               <input type={'text'}
                 className={'tag-form-input'}
                 onChange={this.update('newTag')}
@@ -238,10 +293,12 @@ export default class EditNote extends React.Component {
                 maxLength="50"
               />
 
-              <button className={this.state.newTag.split(' ').join('').length ? '' : 'save-tag disabled'} id='tag-icon-save' type='submit'>
+              <button className={this.state.newTag.split(' ').join('').length ? '' : 'save-tag disabled'} id='tag-icon-save'
+                onClick={this.state.newTag.split(' ').join('').length ?
+                  this.updateTags : undefined}>
                 <i className="fa-solid fa-floppy-disk" />
               </button>
-            </form>
+            </div>
           </div>
           <div className='submit-wrapper'>
             <button type='submit' id='code-note-submit'

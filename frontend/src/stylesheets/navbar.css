@@ -226,7 +226,7 @@ footer {
 
   .session {
   grid-column: 1 / span 12;
-  height: 75vh;
+  height: 82vh;
   background-color: #2D2D2D;
   }
 }
@@ -345,9 +345,10 @@ footer {
 }
 
 #user-modal.nav-modal-container.off {
-  animation: modalDown 700ms ease-in;
+  /* animation: modalDown 700ms ease-in; */
   top: 80px;
   opacity: 0%;
+  visibility: hidden;
 }
 
 @keyframes modalUp {
