@@ -84,7 +84,7 @@ export default class Tags extends React.Component {
               )}
             </div>
           ) : undefined}
-          <div className='tags-overflow'>
+          <div className={this.props.isCurrentUser ? 'tags-overflow' : 'tags-overflow-sm'}>
             {
               this.state.tags?.map((tag, i) =>
                 <TagItem title={tag} key={`tag-${i}`}

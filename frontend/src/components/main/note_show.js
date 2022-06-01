@@ -395,7 +395,7 @@ export default class NoteShow extends React.Component {
                         </div>
                       </div>
                     </div>
-                    <div>
+                    <div className='tags-section-wrapper'>
                       <span className='tags-header'>TAGS</span>
                         <Tags note={this.state.note}
                           isCurrentUser={this.props.currentUser.id === this.props.note.user.userId}

@@ -58,6 +58,7 @@
   bottom: 0;
   z-index: 500;
   right: 0;
+  border-radius: 0 0 9px 0;
 }
 
 .nav-list-wrapper {

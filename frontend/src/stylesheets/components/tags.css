@@ -326,6 +326,24 @@ textarea::-webkit-scrollbar {
 .tags-overflow::-webkit-scrollbar  {
   display: none;
 }
+.tags-overflow-sm {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.8rem;
+  overflow-x: scroll;
+  line-break: revert;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  font-size: 14px;
+  white-space: nowrap;
+  width: 100%;
+  scroll-behavior: smooth;
+  position: absolute;
+  scrollbar-width: none;
+  height: 60px;
+}
 
 .tags-overflow {
   display: flex;
@@ -339,7 +357,7 @@ textarea::-webkit-scrollbar {
   scrollbar-width: none;
   font-size: 14px;
   white-space: nowrap;
-  max-width: 93%;
+  width: calc(100% - 50px);
   scroll-behavior: smooth;
   position: absolute;
   left: 50px;
@@ -353,6 +371,12 @@ textarea::-webkit-scrollbar {
   flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: baseline;
+}
+
+.tags-section-wrapper {
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 100%;
 }
 
 
