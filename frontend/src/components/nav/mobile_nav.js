@@ -20,12 +20,14 @@ export default class MobileNav extends React.Component {
 
 
   render() {
-    let mobileMenu;
-    let menuMask;
 
-    if (this.state.showMenu) {
-      mobileMenu = (
-        <div className='nav-menu-mobile'
+    return (
+      <nav>
+        <div className={'menu-wrapper'}
+          onClick={() => this.toggleShowMenu()}>
+          <i className="fa-solid fa-bars fa-lg"></i>
+        </div>
+        <div className={this.state.showMenu ? 'nav-menu-mobile menu-in' : 'nav-menu-mobile menu-out'}
           onClick={() => this.toggleShowMenu()}
         >
           <div className='nav-boxes'>
@@ -38,12 +40,12 @@ export default class MobileNav extends React.Component {
                     <span>Settings</span>
                   </div>
                 </NavLink>
-                <NavLink className="logout nav-item-container" to={'/'}
+                <div className="logout nav-item-container"
                   onClick={() => this.props.logout()}>
                   <div className='nav-item-link nav-home'>
                     <span>Logout</span>
                   </div>
-                </NavLink>
+                </div>
               </ul>
             </div>
             <div className='nav-pages'>
@@ -79,22 +81,9 @@ export default class MobileNav extends React.Component {
             />
           </div>
         </div>
-      )
-      menuMask = (
-        <div className="mobile-menu-mask"
+        <div className={this.state.showMenu ? 'mobile-menu-mask mask-in' : 'mobile-menu-mask mask-out'}
           onClick={() => this.toggleShowMenu()}
         />
-      )
-    }
-
-    return (
-      <nav>
-        <div className="menu-wrapper"
-          onClick={() => this.toggleShowMenu()}>
-          <i className="fa-solid fa-bars fa-lg"></i>
-        </div>
-        {mobileMenu}
-        {menuMask}
       </nav>
     )
   }

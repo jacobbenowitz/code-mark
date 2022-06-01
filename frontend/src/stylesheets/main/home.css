@@ -185,6 +185,25 @@
     padding-right: 10px;
     grid-column: 1 / span 2;
   }
+
+  .nav-boxes {
+    width: 100%;
+    padding-left: 24px;
+    padding-top: 24px;
+  }
+
+  .nav-item-link {
+    width: 100%;
+  }
+
+  .nav-item-container {
+    height: 60px;
+    place-items: center;
+  }
+}
+
+.nav-item-container {
+  font-weight: 600;
 }
 
 .global-modal-wrapper {
