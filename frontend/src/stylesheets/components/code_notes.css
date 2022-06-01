@@ -31,9 +31,9 @@
   }
 }
 
-.mobile-notes {
+/* .mobile-notes {
   
-}
+} */
 
 
 .comment-count {
@@ -46,6 +46,17 @@
   gap: 0.3rem;
 }
 
+.top-row-details {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: flex-start;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+}
+
 .note-item-top {
   display: flex;
   flex-direction: row;
@@ -54,6 +65,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  position: relative;
 
 }
 
@@ -93,7 +105,7 @@
   gap: 0.5rem;
   font-size: 18px;
   font-weight: 600;
-  white-space: nowrap;
+  overflow-wrap: break-word;
   padding: 0.6rem;
   border-radius: 4px;
   border: 1px solid transparent;
@@ -105,18 +117,26 @@
   /* filter: brightness(50%); */
 }
 
+.checkbox-option > label {
+  max-width: 92%;
+}
+
 .resource-options {
   display: flex;
   /* flex-direction: row; */
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  gap: 2rem;
+  /* gap: 2rem; */
   flex-wrap: wrap;
   height: 300px;
   overflow-y: scroll;
   padding-left: 10px;
   padding-right: 10px;
+  max-width: 100%;
+  width: 100%;
+  white-space: wrap;
+  text-align: initial;
 }
 
 /* .resource-options::-webkit-scrollbar {
@@ -151,6 +171,7 @@
 .keyword-options {
   display: flex;
   flex-direction: row;
+  width: 100%;
 }
 
 #keyword-submit {

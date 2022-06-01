@@ -24,6 +24,7 @@ const CodeEditorNoteShow = props => {
   return (
     <CodeMirror
       readOnly={true}
+      id='note-codemirror'
       value={props.codeBody}
       width='100%'
       theme='dark'

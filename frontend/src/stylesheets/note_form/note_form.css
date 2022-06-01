@@ -103,9 +103,9 @@
 }
 
 #code-note-submit.disabled:hover::after {
-  content: "Invalid codebody";
+  content: "CodeMark must be at least 2 characters";
   position: absolute;
-  left: 75px;
+  right: 175px;
   white-space: nowrap;
   bottom: 0;
   overflow: hidden;
@@ -115,7 +115,7 @@
   border-radius: 4px;
   /* box-shadow: 0px 2px 16px rgb(0 0 0 / 30%); */
   animation: fadeIn 1000ms ease-in-out;
-  color: red;
+  color: rgb(221, 74, 74);
   display: flex;
 }
 
@@ -133,7 +133,7 @@
   border-radius: 4px;
   /* box-shadow: 0px 2px 16px rgb(0 0 0 / 30%); */
   animation: fadeIn 1000ms ease-in-out;
-  color: red;
+  color: rgb(221, 74, 74);
   display: flex;
 }
 
@@ -154,7 +154,7 @@
   border-radius: 4px;
   /* box-shadow: 0px 2px 16px rgb(0 0 0 / 30%); */
   animation: fadeIn 1000ms ease-in-out;
-  color: red;
+  color: rgb(221, 74, 74);
   display: flex;
 }
 
@@ -305,9 +305,58 @@ button#tag-icon-save.disabled:hover {
 .modal-on {
   visibility: visible;
   display: block;
+  animation: modalOn 700ms ease-in-out;
+}
+
+.modal-out {
+  visibility: hidden;
+  animation: modalOff 700ms ease-in-out;
+}
+
+.modal-in {
+  animation: modalOn 700ms ease-in-out;
 }
 
 .modal-off {
   visibility: hidden;
-  /* display: none; */
+}
+
+@keyframes modalOn {
+  0% {
+    visibility: visible;
+    opacity: 0%;
+    transform: translateY(-200px);
+    filter: blur(20px);
+  }
+  100% {
+    visibility: visible;
+    opacity: 100%;
+    transform: translateY(0px);
+    filter: blur(0px);
+  }
+}
+
+@keyframes modalOff {
+  0% {
+    visibility: visible;
+    opacity: 100%;
+    transform: translateY(0px);
+    filter: blur(0px);
+  }
+  100% {
+    visibility: hidden;
+    opacity: 0%;
+    transform: translateY(200px);
+    filter: blur(20px);
+  }
+}
+
+.animate-grow {
+  animation: animateGrow 500ms ease-in-out;
+}
+
+@keyframes animateGrow {
+  0% {
+    transform: translateY();
+  }
 }

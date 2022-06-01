@@ -72,40 +72,44 @@ export default class Tags extends React.Component {
 
     return (
       <div className='note-tags-list'>
-        {this.props.isCurrentUser ? (
-          <div className="tag-item-wrapper tag-icon-new"
-            id='toggle-tag-form-button'
-            onClick={this.toggleTagForm}>
-            {this.state.tagForm ? (
-              <i className="fa-solid fa-minus"></i>
-            ) : (
-              <i className="fa-solid fa-circle-plus"></i>
-            )}
+        <div className='tag-top'>
+          {this.props.isCurrentUser ? (
+            <div className="tag-item-wrapper tag-icon-new"
+              id='toggle-tag-form-button'
+              onClick={this.toggleTagForm}>
+              {this.state.tagForm ? (
+                <i className="fa-solid fa-minus"></i>
+              ) : (
+                <i className="fa-solid fa-circle-plus"></i>
+              )}
+            </div>
+          ) : undefined}
+          <div className='tags-overflow'>
+            {
+              this.state.tags?.map((tag, i) =>
+                <TagItem title={tag} key={`tag-${i}`}
+                  isCurrentUser={this.props.isCurrentUser}
+                  updateNote={this.props.updateNote}
+                  note={this.props.note}
+                  tags={this.state.tags}
+                />)
+            }
           </div>
-        ) : undefined}
-
-
-        <form onSubmit={this.state.newTag.split(' ').join('').length ? this.handleSubmit : undefined}
-          className="tag-form-off" id="new-tag-form">
-          <input type={'text'}
-            className={'tag-form-input'}
-            onChange={this.update('newTag')}
-            placeholder={'New tag...'}
-            value={this.state.newTag}
-          />
-          <button className={this.state.newTag.split(' ').join('').length ? '' : 'save-tag disabled'} id='tag-icon-save' type='submit'>
-            <i className="fa-solid fa-floppy-disk" />
-          </button>
-        </form>
-        {
-          this.state.tags?.map((tag, i) =>
-            <TagItem title={tag} key={`tag-${i}`}
-              isCurrentUser={this.props.isCurrentUser}
-              updateNote={this.props.updateNote}
-              note={this.props.note}
-              tags={this.state.tags}
-            />)
-        }
+        </div>
+        <div className='tag-bottom'>
+          <form onSubmit={this.state.newTag.split(' ').join('').length ? this.handleSubmit : undefined}
+            className="tag-form-off" id="new-tag-form">
+            <input type={'text'}
+              className={'tag-form-input'}
+              onChange={this.update('newTag')}
+              placeholder={'New tag...'}
+              value={this.state.newTag}
+            />
+            <button className={this.state.newTag.split(' ').join('').length ? '' : 'save-tag disabled'} id='tag-icon-save' type='submit'>
+              <i className="fa-solid fa-floppy-disk" />
+            </button>
+          </form>
+        </div>
       </div>
     )
   }
