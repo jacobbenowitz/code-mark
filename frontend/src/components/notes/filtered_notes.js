@@ -21,7 +21,7 @@ class FilteredNotes extends React.Component {
 
   componentWillMount() {
     // this.props.userNotes ? this.render() :
-    // this.props.fetchUserNotes(this.props.currentUser._id)
+    // this.props.fetchUserNotes(this.props.currentUser.id)
   };
 
   componentWillReceiveProps(nextState) {

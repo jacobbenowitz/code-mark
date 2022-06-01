@@ -7,6 +7,7 @@ import { html } from '@codemirror/lang-html';
 import { cpp } from '@codemirror/lang-cpp';
 import { css } from '@codemirror/lang-css';
 import { EditorView } from '@codemirror/basic-setup';
+import TextareaAutosize from 'react-textarea-autosize';
 
 export default class EditNote extends React.Component {
   constructor(props) {
@@ -128,7 +129,7 @@ export default class EditNote extends React.Component {
           <form onSubmit={this.state.codebody.length ? this.handleSubmit : ""}>
             <div className='note-input'>
               <input type={'text'}
-                onClick={this.placeholderTitle}
+                onClick={this.state.title === "Untitled note" ? this.placeholderTitle : undefined }
                 onChange={this.update('title')}
                 id='title-code'
                 className='title-input'
@@ -148,7 +149,7 @@ export default class EditNote extends React.Component {
               />
             </div>
             <div className='note-input'>
-              <textarea
+              <TextareaAutosize
                 onChange={this.update('textdetails')}
                 id='details-textarea'
                 className='note-input-details'

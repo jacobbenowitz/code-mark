@@ -245,7 +245,6 @@ button#tag-icon-save.disabled:hover {
   backdrop-filter: blur(14px);
 }
 
-
 .modal-wrapper {
   position: relative;
   margin-top: auto;
@@ -255,8 +254,20 @@ button#tag-icon-save.disabled:hover {
   width: 75%;
 }
 
+#comment-delete-modal-container {
+  z-index: 200;
+  position: absolute;
+  top: 25px;
+  left: 75px;
+}
+
+.comment-code-mini {
+  width: 100%;
+}
+
 .cancel-modal, .resources-modal {
-  background: #2D2D2D;
+  background:#20212470;
+  backdrop-filter: blur(8px);
   display: grid;
   grid-template-rows: auto 1fr;
   gap: 1rem;
@@ -264,7 +275,7 @@ button#tag-icon-save.disabled:hover {
   place-items: center;
   border-radius: 4px;
   border: 1px solid #fafafa;
-  padding: 2rem;
+  padding: 2rem 3rem;
 }
 
 .modal-buttons {
@@ -288,6 +299,7 @@ button#tag-icon-save.disabled:hover {
   align-items: center;
   flex-wrap: nowrap;
   flex-direction: row;
+  gap: 1rem;
 }
 
 .modal-on {
@@ -298,11 +310,4 @@ button#tag-icon-save.disabled:hover {
 .modal-off {
   visibility: hidden;
   /* display: none; */
-}
-
-#comment-delete-modal-container {
-  z-index: 100;
-  position: relative;
-  top: 2rem;
-  left: 3rem;
 }

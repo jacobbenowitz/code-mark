@@ -8,27 +8,28 @@ import { cpp } from '@codemirror/lang-cpp';
 import { css } from '@codemirror/lang-css';
 import { EditorView } from '@codemirror/basic-setup';
 
-const CodeCommentReadOnly = props => {
-  const language = getLanguage(props.codeSnippet);
+const CodeEditorExportImage = (props) => {
+  const language = getLanguage(props.codeBody);
   const extensions = {
     'JavaScript': javascript({ jsx: true }),
     'HTML': html(),
     'CSS': css(),
     'C++': cpp(),
   }
-  // debugger
+  const fixedHeightEditor = EditorView.theme({
+    ".cm-scroller": { 'overflow': "auto" }
+  })
   return (
     <CodeMirror
-      className="comment-code"
       readOnly={true}
-      value={props.codeSnippet || 'Select text from the note above to comment'}
+      value={props.codeBody}
       width='100%'
       theme='dark'
       extensions={[
         extensions[language] ? extensions[language] : javascript({ jsx: true }),
-        EditorView.lineWrapping
+        EditorView.lineWrapping, fixedHeightEditor
       ]}
     />
   );
 }
-export default CodeCommentReadOnly;
+export default CodeEditorExportImage;
