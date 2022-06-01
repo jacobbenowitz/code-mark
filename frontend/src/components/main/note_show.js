@@ -59,8 +59,9 @@ export default class NoteShow extends React.Component {
 
   componentDidMount() {
     this._isMounted = true;
+    window.scrollTo(0, 0)
   }
-
+  
   componentWillUnmount() {
     const scope = document.querySelector("body");
     // remove click eventListener for contextmenu

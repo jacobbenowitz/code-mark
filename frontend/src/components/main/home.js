@@ -9,6 +9,10 @@ import SectionTitle from '../UI/section_title';
 
 export default class Home extends React.Component {
 
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
+
   isMobile() {
     return window.innerWidth < 680;
   }

@@ -150,7 +150,7 @@
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    height: 200vh;
+    height: 100vh;
     width: 100%;
     position: sticky; 
     top: 6rem;

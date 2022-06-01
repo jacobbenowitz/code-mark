@@ -255,6 +255,9 @@ footer {
     padding-bottom: 1rem;
   }
 
+  #user-modal.nav-modal-container {
+    right: 40px;
+  }
 
   #footer-bottom {
     padding: 1rem 0 1rem 0;
@@ -332,7 +335,7 @@ footer {
 }
 
 #user-modal.nav-modal-container {
-  right: 65px;
+  right: 42px;
   top: 70px;
   opacity: 100%;
 }
@@ -341,9 +344,11 @@ footer {
   animation: modalUp 700ms ease-in;
 }
 
-/* #user-modal.nav-modal-container.modal-off {
+#user-modal.nav-modal-container.off {
   animation: modalDown 700ms ease-in;
-} */
+  top: 80px;
+  opacity: 0%;
+}
 
 @keyframes modalUp {
   0% {
