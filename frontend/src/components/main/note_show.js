@@ -38,9 +38,10 @@ export default class NoteShow extends React.Component {
       selectedText: '',
       commentSnippet: '',
       commentModal: false,
-      public: undefined,
+      public: true,
       textHeight: undefined,
-      bodyHeight: 0
+      bodyHeight: 0,
+      isCurrentUser: false
     }
     this.deleteNote = this.deleteNote.bind(this);
     this.exportImage = this.exportImage.bind(this);
@@ -84,8 +85,9 @@ export default class NoteShow extends React.Component {
       this.setState({
         note: note,
         comments: orderedComments,
-        public: note.public,
-        bodyHeight: bodyHeight
+        public: note?.public,
+        bodyHeight: bodyHeight,
+        isCurrentUser: this.props.currentUser?.id === this.props.note?.user.userId
       })
     }
     // add selection listener to main note section ONLY
@@ -337,9 +339,10 @@ export default class NoteShow extends React.Component {
                   </div>
                   <div className='note-public-switch-wrapper'>
                     <div className='note-public-switch'>
-                      <SwitchButton
-                        isToggled={this.state.public}
-                        onToggle={this.handlePublicSwitch}
+                        <SwitchButton
+                          isCurrentUser={this.state.isCurrentUser}
+                          isToggled={this.state.public}
+                          onToggle={this.handlePublicSwitch}
                       />
                     </div>
                     </div>
@@ -379,6 +382,7 @@ export default class NoteShow extends React.Component {
                       <div className='note-public-switch-wrapper'>
                         <div className='note-public-switch'>
                           <SwitchButton
+                            isCurrentUser={this.state.isCurrentUser}
                             isToggled={this.state.public}
                             onToggle={this.handlePublicSwitch}
                           />

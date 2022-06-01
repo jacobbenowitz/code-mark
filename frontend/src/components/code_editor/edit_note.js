@@ -88,7 +88,6 @@ export default class EditNote extends React.Component {
     this.props.updateNote(note, this.props.noteId)
       .then(() => {
         this.toggleEditModal()
-        // this.props.toggleModal();
       })
   }
 
@@ -248,8 +247,8 @@ export default class EditNote extends React.Component {
             <button type='submit' id='code-note-submit'
               className={(this.state.codebody.length > 1 &&
                 this.state.codebody.length < 5001) ? 'save-button' : "save-button disabled"}
-              onClick={this.state.codebody.length ? this.toggleResourcesModal : undefined}
-            >Save CodeMark</button>
+              onClick={this.handleSubmit}
+            >Update CodeMark</button>
           </div>
 
           <div id='hide-note-form'
