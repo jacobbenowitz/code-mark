@@ -16,7 +16,6 @@ class NewNote extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      // lang: [javascript({ jsx: true })],
       title: "",
       codebody: "",
       textdetails: "",
@@ -28,17 +27,9 @@ class NewNote extends React.Component {
       allKeywords: [],
       newResources: []
     }
-    // this.resizeOnInput()
     this.bindHandlers();
   }
 
-  // DISABLED UNTIL SCRAPER IS RESOLVED
-  // componentWillReceiveProps(nextProps) {
-  // console.log(nextProps.newResources)
-  // this.setState({
-  //   newResources: nextProps.newResources
-  // })
-  // }
 
   bindHandlers() {
     this.addLangTag = this.addLangTag.bind(this);
@@ -46,9 +37,7 @@ class NewNote extends React.Component {
     this.updateTags = this.updateTags.bind(this);
     this.toggleTagForm = this.toggleTagForm.bind(this);
     this.updateKeywords = this.updateKeywords.bind(this);
-    // this.handleResourcesSubmit = this.handleResourcesSubmit.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.init = this.init.bind(this);
     this.toggleForm = this.toggleForm.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.toggleResourcesModal = this.toggleResourcesModal.bind(this);
@@ -86,7 +75,6 @@ class NewNote extends React.Component {
     }
   }
 
-
   handleChange(e) {
     e.preventDefault();
     // this.setState({lang: e.target.value});
@@ -102,7 +90,8 @@ class NewNote extends React.Component {
 
   toggleResourcesModal(e) {
     e.preventDefault();
-    const resourcesNoteModal = document.getElementById('resources-note-container');
+    const resourcesNoteModal =
+      document.getElementById('resources-note-container');
     if (resourcesNoteModal.className === "modal-off") {
       // debugger
       const keywords = getKeywords(this.state.codebody);
@@ -140,42 +129,14 @@ class NewNote extends React.Component {
     if (fullForm.style.display == 'none') {
       fullForm.style.display = 'flex';
       miniForm.style.display = 'none';
-      this.init();
     } else {
       fullForm.style.display = 'none';
       miniForm.style.display = 'flex';
     }
-    // codebody.focus();
   }
 
-  // credit https://stackoverflow.com/questions/454202/creating-a-textarea-with-auto-resize
-
-  init() {
-    const observe = (element, event, handler) => {
-      element.addEventListener(event, handler, false);
-    };
-
-    var text = document.getElementById('details-textarea');
-    function resize() {
-      text.style.height = 'auto';
-      text.style.height = text.scrollHeight + 'px';
-    }
-    /* 0-timeout to get the already changed text */
-    function delayedResize() {
-      window.setTimeout(resize, 0);
-    }
-    observe(text, 'change', resize);
-    observe(text, 'cut', delayedResize);
-    observe(text, 'paste', delayedResize);
-    observe(text, 'drop', delayedResize);
-    observe(text, 'keydown', delayedResize);
-
-    resize();
-  }
-
-
-  handleSubmit() {
-    // e.preventDefault();
+  handleSubmit(e) {
+    e.preventDefault();
     const { title, codebody, textdetails, tags, keywordsSelected } = this.state;
 
     const note = {
@@ -278,8 +239,6 @@ class NewNote extends React.Component {
     // selection.setBaseAndExtent(titleInput, 0, titleInput, 1);
   }
 
-
-
   renderErrors(field) {
     return (
       <span className="error-item" key={`error-${field}`}>
@@ -375,7 +334,7 @@ class NewNote extends React.Component {
                 <CodeMirror className='codemirror javascript'
                   id='codebody-js'
                   value={this.state.codebody}
-                  onChange={this.updateCode()}
+                  onChange={this.updateCode}
                   height="200px"
                   theme='dark'
                   extensions={[javascript({ jsx: true }),
@@ -385,7 +344,7 @@ class NewNote extends React.Component {
               <div className='note-input'>
                 <CodeMirror className='codemirror html'
                   value={this.state.codebody}
-                  onChange={this.updateCode()}
+                  onChange={this.updateCode}
                   height="200px"
                   theme='dark'
                   extensions={[html(),
@@ -395,7 +354,7 @@ class NewNote extends React.Component {
               <div className='note-input'>
                 <CodeMirror className='codemirror cpp'
                   value={this.state.codebody}
-                  onChange={this.updateCode()}
+                  onChange={this.updateCode}
                   height="200px"
                   theme='dark'
                   extensions={[cpp(),
@@ -405,7 +364,7 @@ class NewNote extends React.Component {
               <div className='note-input'>
                 <CodeMirror className='codemirror css'
                   value={this.state.codebody}
-                  onChange={this.updateCode()}
+                  onChange={this.updateCode}
                   height="200px"
                   theme='dark'
                   extensions={[css(),
@@ -414,7 +373,7 @@ class NewNote extends React.Component {
               </div>
               <div className='note-input'>
                 <TextareaAutosize 
-                  onChange={this.update('textdetails')}
+                  onChange={() => this.update('textdetails')}
                   id='details-textarea'
                   className='note-input-details'
                   placeholder='Any additional notes?'

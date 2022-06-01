@@ -244,9 +244,29 @@ textarea {
   width: 470px;
   min-height: 90px;
   height: fit-content;
-  border: 1px solid white;
-  background: #202124;
+  border: 1px solid transparent;
+  background-color: #202124b6;
   border-radius: 8px;
+  box-shadow: 0px 0px 20px rgb(0 0 0 / 0%);
+  transition: box-shadow 450ms ease-in-out;
+  transition: background-color 450ms ease-in-out-out;
+  transition: border 450ms ease-in-out;
+}
+
+.new-comment-container:hover {
+  border: 1px solid rgba(255, 255, 255, 0.502);
+  box-shadow: 0px 0px 20px rgb(0 0 0 / 20%);
+  background-color: #202124e5;
+  transition: box-shadow 450ms ease-in-out;
+  transition: background-color 450ms ease-in-out-out;
+  transition: border 450ms ease-in-out;
+}
+
+.new-comment-container:focus-within {
+  border: 1px solid white;
+  box-shadow: 0px 0px 20px rgb(0 0 0 / 60%);
+  background-color: #202124;
+
 }
 
 .comment-form {

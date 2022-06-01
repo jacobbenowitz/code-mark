@@ -23,7 +23,7 @@ class GlobalModal extends React.Component {
 
   getIcon(errorType) {
     return errorType === 'error' ?
-      <i className="fa-solid fa-xmark"></i>
+      <i className="fa-solid fa-xmark modal"></i>
       : <i className="fa-solid fa-thumbs-up"></i>
   }
 
@@ -46,8 +46,9 @@ class GlobalModal extends React.Component {
   //   if(){this.toggleSuccessModal();}
   // }
 
-  componentWillReceiveProps(nextProps){
+  componentWillReceiveProps(nextProps) {
     let {noteErrors,sessionErrors,userErrors,commentErrors} = nextProps;
+    debugger
     var newmessages = [];
     if (noteErrors.length === undefined){
       Object.values(noteErrors).map(error => {
@@ -87,26 +88,26 @@ class GlobalModal extends React.Component {
   render(){
     // this.toggleSuccessModal();
     return (
-      <div id='success-modal' className='modal-off'>
-      {/* {getIcon(error.key)} */}
-      {/* <span>{error.value}</span> */}
-      {/* {icon} */}
-      {
-        this.state.messages.map((message,idx) => {
-          // debugger;
-          // setTimeout(() => {
-
-            return <div className='modal-message' key={`error-message-${idx}`}>
-            {/* {icon} */}
-            <span>{this.getIcon(message[0])} {message[1]}</span>
-            </div>
-          // },5000)
-          }
-        )
-      }
+      <div className='global-modal-wrapper'>
+        <div id='success-modal' className='modal-off'>
+        {/* {getIcon(error.key)} */}
+        {/* <span>{error.value}</span> */}
+        {/* {icon} */}
+        {
+          this.state.messages.map((message,idx) => {
+            return ( 
+              <div className='modal-message'
+                key={`error-message-${idx}`}>
+                {this.getIcon(message[0])}
+                <span>{message[1]}</span>
+              </div>
+            )
+          })
+        }
+        </div>
       </div>
-    )
-  }
+      )
+    }
 }
 
 export default GlobalModal;

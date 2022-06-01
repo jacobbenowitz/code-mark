@@ -16,6 +16,9 @@ export default class EditNote extends React.Component {
       title: "",
       codebody: "",
       textdetails: "",
+      tags: [],
+      newTag: "",
+      suggestedLanguage: undefined,
       isOpen: false // true when modal is open
     }
     this.bindHandlers();
@@ -28,6 +31,14 @@ export default class EditNote extends React.Component {
       codebody: this.props.note.codebody,
       textdetails: this.props.note.textdetails,
     })
+    let codemirrors = document.getElementsByClassName('codemirror');
+    for (var i = 0; i < codemirrors.length; i++) {
+      codemirrors[i].style.display = 'none';
+    }
+    let chosen = document.getElementsByClassName('javascript');
+    for (var j = 0; j < chosen.length; j++) {
+      chosen[j].style.display = 'block';
+    }
   }
 
   componentWillUnmount() {
@@ -36,7 +47,6 @@ export default class EditNote extends React.Component {
 
   bindHandlers() {
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.init = this.init.bind(this);
     this.placeholderTitle = this.placeholderTitle.bind(this)
   }
 
@@ -49,9 +59,11 @@ export default class EditNote extends React.Component {
   }
 
   updateCode() {
+    let lang = this.props.getLanguage(this.state.codebody)
     return e => {
       this.setState({
-        codebody: e
+        codebody: e,
+        suggestedLanguage: lang
       })
     }
   }
@@ -59,7 +71,7 @@ export default class EditNote extends React.Component {
   toggleEditModal() {
     const editNoteModal = document.getElementById('edit-note-container');
     if (editNoteModal.className = "modal-on") {
-      editNoteModal.className = "modal-off"
+      editNoteModal.className = "modal-out"
     } else {
       editNoteModal.className = "modal-on"
     }
@@ -78,6 +90,19 @@ export default class EditNote extends React.Component {
         this.toggleEditModal()
         // this.props.toggleModal();
       })
+  }
+
+  handleChange(e) {
+    e.preventDefault();
+    // this.setState({lang: e.target.value});
+    let codemirrors = document.getElementsByClassName('codemirror');
+    for (var i = 0; i < codemirrors.length; i++) {
+      codemirrors[i].style.display = 'none';
+    }
+    let chosen = document.getElementsByClassName(e.target.value);
+    for (var j = 0; j < chosen.length; j++) {
+      chosen[j].style.display = 'block';
+    }
   }
 
   placeholderTitle(e) {
@@ -102,44 +127,137 @@ export default class EditNote extends React.Component {
       'C++': cpp(),
     }
     return (
-      <div className='new-note-container' id='edit-note-full'>
+      <div className='edit-note-container' id='note-edit-wrapper'>
         <div className='new-note-form'>
-          <form onSubmit={this.state.codebody.length ? this.handleSubmit : ""}>
-            <div className='note-input'>
+          <div id="note-title-input" className='note-input'>
+            <input type={'text'}
+              onClick={this.state.title === "" ? this.placeholderTitle : undefined}
+              onChange={this.update('title')}
+              id='title-code'
+              className='title-input'
+              value={this.state.title}
+              placeholder={'Untitled note'} />
+          </div>
+          <div className='select-wrapper'>
+            <select id='lang-select'
+              value={this.state.lang} onChange={this.handleChange}>
+              <option value={'javascript'} defaultValue>JavaScript</option>
+              <option value={'html'}>HTML</option>
+              <option value={'cpp'}>C++</option>
+              <option value={'css'}>CSS</option>
+            </select>
+          </div>
+          <div className='note-input'>
+            <CodeMirror className='codemirror javascript'
+              id='codebody-js'
+              value={this.state.codebody}
+              onChange={this.updateCode}
+              height="200px"
+              theme='dark'
+              extensions={[javascript({ jsx: true }),
+              EditorView.lineWrapping]}
+            />
+          </div>
+          <div className='note-input'>
+            <CodeMirror className='codemirror html'
+              value={this.state.codebody}
+              onChange={this.updateCode}
+              height="200px"
+              theme='dark'
+              extensions={[html(),
+              EditorView.lineWrapping]}
+            />
+          </div>
+          <div className='note-input'>
+            <CodeMirror className='codemirror cpp'
+              value={this.state.codebody}
+              onChange={this.updateCode}
+              height="200px"
+              theme='dark'
+              extensions={[cpp(),
+              EditorView.lineWrapping]}
+            />
+          </div>
+          <div className='note-input'>
+            <CodeMirror className='codemirror css'
+              value={this.state.codebody}
+              onChange={this.updateCode}
+              height="200px"
+              theme='dark'
+              extensions={[css(),
+              EditorView.lineWrapping]}
+            />
+          </div>
+          <div className='note-input'>
+            <TextareaAutosize
+              onChange={() => this.update('textdetails')}
+              id='details-textarea'
+              className='note-input-details'
+              placeholder='Any additional notes?'
+              value={this.state.textdetails}
+            />
+          </div>
+          <div className='tags-header-wrapper'>
+            <span className='tags-header'>TAGS</span>
+            <div className='recommended-tag'
+              onClick={() => this.addLangTag(this.state.suggestedLanguage)}>
+              {this.state.suggestedLanguage ? (
+                <>
+                  <span className='rec-tag'>Detected language:</span>
+                  <span className='lang-tag'>{this.state.suggestedLanguage}</span>
+                </>) : ""}
+            </div>
+          </div>
+          <div className='tag-list'>
+            {
+              this.state.tags?.map((tag, i) =>
+                <NewNoteTagItem title={tag} key={`tag-${i}`}
+                  deleteTag={this.deleteTag}
+                />)
+            }
+          </div>
+
+          <div className='note-tags-list new'>
+
+            <div className="tag-item-wrapper tag-icon-new new"
+              id='toggle-tag-form-button'
+              onClick={this.toggleTagForm}>
+              {this.state.tagForm ? (
+                <i className="fa-solid fa-minus"></i>
+              ) : (
+                <i className="fa-solid fa-circle-plus"></i>
+              )}
+            </div>
+
+            <form onSubmit={this.state.newTag.split(' ').join('').length ? this.updateTags : undefined}
+              className="tag-form-off" id="new-tag-form-new-note">
               <input type={'text'}
-                onClick={this.state.title === "Untitled note" ? this.placeholderTitle : undefined }
-                onChange={this.update('title')}
-                id='title-code'
-                className='title-input'
-                value={this.state.title}
-                placeholder={'Untitled note'} />
-            </div>
-            <div className='note-input'>
-              <CodeMirror
-                value={this.state.codebody}
-                onChange={this.updateCode()}
-                height="200px"
-                theme='dark'
-                extensions={[
-                  extensions[language] ? extensions[language] : javascript({ jsx: true }),
-                  EditorView.lineWrapping
-                ]}
+                className={'tag-form-input'}
+                onChange={this.update('newTag')}
+                placeholder={'New tag...'}
+                value={this.state.newTag.split(' ').join(' ')}
+                maxLength="50"
               />
-            </div>
-            <div className='note-input'>
-              <TextareaAutosize
-                onChange={this.update('textdetails')}
-                id='details-textarea'
-                className='note-input-details'
-                placeholder='Any additional notes?'
-                value={this.state.textdetails}
-              />
-            </div>
+
+              <button className={this.state.newTag.split(' ').join('').length ? '' : 'save-tag disabled'} id='tag-icon-save' type='submit'>
+                <i className="fa-solid fa-floppy-disk" />
+              </button>
+            </form>
+          </div>
+          <div className='submit-wrapper'>
             <button type='submit' id='code-note-submit'
-              className={(this.state.codebody.length > 1 && this.state.codebody.length < 5001) ? 'save-button' : "save-button disabled"}>Save</button>
-          </form>
-          <span className='hide-button'
-            onClick={this.toggleEditModal}>Hide</span>
+              className={(this.state.codebody.length > 1 &&
+                this.state.codebody.length < 5001) ? 'save-button' : "save-button disabled"}
+              onClick={this.state.codebody.length ? this.toggleResourcesModal : undefined}
+            >Save CodeMark</button>
+          </div>
+
+          <div id='hide-note-form'
+            className='icon-only-button'
+            title='hide form'
+            onClick={this.toggleEditModal}>
+            <i className="fa-solid fa-square-minus"></i>
+          </div>
         </div>
       </div>
     )

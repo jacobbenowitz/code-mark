@@ -11,6 +11,7 @@ import { orderNoteComments } from "../../util/selectors";
 import CommentItem from '../notes/comments/comment_item';
 import Tags from '../tags/tags';
 import TagsExport from '../tags/tags_export';
+import TagsExportSimple from '../tags/tags_export_simple';
 // credit context menu: https://itnext.io/how-to-create-a-custom-right-click-menu-with-javascript-9c368bb58724
 // textarea resize: https://stackoverflow.com/questions/20775824/after-clicking-on-selected-text-window-selection-is-not-giving-updated-range
 import CommentIndex from '../notes/comments/comment_index';
@@ -25,6 +26,7 @@ import SwitchButton from '../UI/switch_button';
 import CodeEditorExportImage from '../code_editor/code_editor_export_img';
 import CodeCommentReadOnly from '../code_editor/code_comment_readonly';
 import CodeCommentReadOnlyMini from '../code_editor/code_comment_readonly_mini';
+import { getLanguage } from '../../util/webscrap_util';
 
 
 export default class NoteShow extends React.Component {
@@ -116,20 +118,21 @@ export default class NoteShow extends React.Component {
   }
 
   toggleEditModal() {
+    debugger
     const editNoteModal = document.getElementById('edit-note-container');
-    if (editNoteModal.className === "modal-off") {
+    if (editNoteModal.className === "modal-off" || editNoteModal.className === "modal-out") {
       editNoteModal.className = "modal-on"
     } else {
-      editNoteModal.className = "modal-off"
+      editNoteModal.className = "modal-out"
     }
   }
 
   toggleDeleteModal() {
     const deleteModal = document.getElementById('confirm-modal-container');
-    if (deleteModal.className === "modal-off") {
+    if (deleteModal.className === "modal-off" || deleteModal.className === "modal-out") {
       deleteModal.className = "modal-on";
     } else {
-      deleteModal.className = "modal-off";
+      deleteModal.className = "modal-out";
     }
   }
 
@@ -158,10 +161,9 @@ export default class NoteShow extends React.Component {
     const exportModal = document.getElementById('note-export-modal');
     const body = document.getElementsByTagName('body');
     const bodyHeight = body[0].clientHeight;
-    console.log(bodyHeight)
     this.setState({ bodyHeight: bodyHeight })
     if (exportModal.className === 'modal-on') {
-      exportModal.className = 'modal-off'
+      exportModal.className = 'modal-out'
     } else {
       exportModal.className = 'modal-on'
       window.scrollTo(0, 0)
@@ -220,10 +222,12 @@ export default class NoteShow extends React.Component {
               <div className='content-wrapper'>
                 <div className='note-show-title'>
                   <span className='username'>@{note?.user.username}</span>
-                  <h1>{note.title}</h1>
+                  <h4>{note.title}</h4>
                 </div>
                 <div className='note-tags-wrapper'>
-                  <TagsExport note={this.state.note} />
+                  <TagsExportSimple
+                    tags={note.tags}
+                  />
                 </div>
                 <div className='code-note-body' id='code-note-view'>
                   <CodeEditorExportImage codeBody={note.codebody} />
@@ -263,10 +267,12 @@ export default class NoteShow extends React.Component {
             </div>
           </div>
         </div>
-        {/* NOTE EDIT MODAL */}
+        {/* NOTE ACTIONS // NOTE MAIN */}
         <div id='edit-note-container' className="modal-off">
           <div className='modal-wrapper'>
-            <EditNote note={note} updateNote={updateNote}
+            <EditNote
+              getLanguage={getLanguage}
+              note={note} updateNote={updateNote}
               currentUser={currentUser} noteId={noteId}/>
           </div>
         </div>
@@ -337,7 +343,8 @@ export default class NoteShow extends React.Component {
                       />
                     </div>
                     </div>
-                </div>
+                  </div>
+                  <span className='tags-header'>TAGS</span>
                     <Tags note={this.state.note}
                       isCurrentUser={this.props.currentUser.id === this.props.note.user.userId}
                       updateNote={this.props.updateNote}
@@ -378,10 +385,13 @@ export default class NoteShow extends React.Component {
                         </div>
                       </div>
                     </div>
-                      <Tags note={this.state.note}
-                        isCurrentUser={this.props.currentUser.id === this.props.note.user.userId}
-                        updateNote={this.props.updateNote}
-                      />
+                    <div>
+                      <span className='tags-header'>TAGS</span>
+                        <Tags note={this.state.note}
+                          isCurrentUser={this.props.currentUser.id === this.props.note.user.userId}
+                          updateNote={this.props.updateNote}
+                        />
+                    </div>
                   </div>
                 ) : ''
             )}

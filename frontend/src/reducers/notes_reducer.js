@@ -28,6 +28,7 @@ const notesReducer = (prevState = initialState, action) => {
       nextState.user.push(action.note.data[0]);
       return nextState;
     case RECEIVE_USER_NOTES:
+      debugger
       nextState.user = Object.values(action.notes.data)
       return nextState;
     case RECEIVE_NOTES:

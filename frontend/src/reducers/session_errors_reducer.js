@@ -4,18 +4,17 @@ import {
   RECEIVE_USER_SIGN_IN,
   RECEIVE_USER_LOGOUT,
 } from '../actions/session_actions';
+import { RECEIVE_USER_NOTES } from '../actions/note_actions';
 import { RECEIVE_DELETED_USER } from '../actions/user_actions';
 
 const _nullErrors = [];
 
-const SessionErrorsReducer = (state = _nullErrors, action) => {
-  Object.freeze(state);
+const SessionErrorsReducer = (prevState = _nullErrors, action) => {
+  Object.freeze(prevState);
   // debugger;
   switch (action.type) {
     case RECEIVE_SESSION_ERRORS:
       return action.errors;
-    case RECEIVE_CURRENT_USER:
-      return _nullErrors;
     case RECEIVE_DELETED_USER:
       return action.userId.data[1];
     case RECEIVE_USER_SIGN_IN:
@@ -23,6 +22,9 @@ const SessionErrorsReducer = (state = _nullErrors, action) => {
       return action.message;
     case RECEIVE_USER_LOGOUT:
       return action.message;
+    case RECEIVE_USER_NOTES:
+      debugger
+      return prevState;
     default:
       // return state;
       return _nullErrors;

@@ -32,10 +32,15 @@ const SideCarMenu = ({ tags, tagType }) => {
             </NavLink>
           </ul>
           <h5>Tags</h5>
-          <ul className='nav-list'>
-            {tags?.map((tag, i) =>
-              <NavTagItem tagType={tagType} tag={tag} key={`${i}-tag`} />)}
-          </ul>
+          <div className='nav-list-wrapper'>
+            <div className='nav-list tags-list'>
+              {tags?.map((tag, i) =>
+                <NavTagItem tagType={tagType} tag={tag} key={`${i}-tag`} />)}
+              {/* <div className='stopper-wrapper'>
+                <div className='gradient-stopper' />
+              </div> */}
+            </div>
+          </div>
         </div>
       </div>
     </div>

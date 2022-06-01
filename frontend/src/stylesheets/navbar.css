@@ -129,6 +129,7 @@ footer {
   display: grid;
   grid-template-rows: auto auto;
   background-color: #202124;
+  margin-top: 1.5rem;
 }
 @media only screen and (max-width: 800px) {
 

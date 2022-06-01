@@ -6,9 +6,9 @@ import comments from './comments_reducer';
 import users from './users_reducer';
 
 const RootReducer = combineReducers({
+  errors,
   session,
   notes,
-  errors,
   comments,
   users
 });

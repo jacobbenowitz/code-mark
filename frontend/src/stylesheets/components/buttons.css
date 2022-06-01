@@ -73,6 +73,13 @@ button:focus, .signup:focus, .login:focus, .hide-button:focus {
 
 .show-link-wrapper {
   align-self: flex-end;
+  background-color: #32323285;
+  transition: background-color 400ms ease-in-out;
+  border-radius: 4px;
+}
+
+.show-link-wrapper:hover {
+  background-color: #323232;
 }
 
 .view-link:hover {
@@ -147,14 +154,15 @@ button:focus, .signup:focus, .login:focus, .hide-button:focus {
   border-radius: 4px;
   width: fit-content;
   place-items: center;
-  background-color: #2D2D2D;
+  background-color: #262626db;
   box-shadow: 0px 0px 18px rgb(0 0 0 / 0%);
   transition: box-show 500ms ease-in-out;
+  transition: background-color 500ms ease-in-out;
 }
 
 .icon-button:hover {
   border: 0.5px solid white;
-  background-color: #2D2D2D;
+  background-color: #222121;
   box-shadow: 0px 0px 18px rgb(0 0 0 / 25%);
 }
 

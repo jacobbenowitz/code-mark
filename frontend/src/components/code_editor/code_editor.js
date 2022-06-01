@@ -33,9 +33,6 @@ class CodeEditor extends React.Component {
           height="200px"
           theme='dark'
           extensions={this.state.lang}
-          onChange={(value, viewUpdate) => {
-            console.log('value:', value);
-          }}
         />
       </div>
     );

@@ -35,7 +35,8 @@
   content: 'likes';
   position: absolute;
   width: max-content;
-  top: -40px;
+  z-index: 200;
+  bottom: -45px;
   left: -5px;
   background: #393939;
   padding: 0.4rem;
@@ -48,7 +49,8 @@
   content: 'time since updated';
   position: absolute;
   width: max-content;
-  top: -40px;
+  z-index: 200;
+  bottom: -45px;
   left: -5px;
   background: #393939;
   padding: 0.4rem;
@@ -57,11 +59,23 @@
   animation: fadeIn 1000ms ease-in-out;
 }
 
+.note-textDetails {
+  display: flex;
+  width: 100%;
+  padding: 1rem;
+  /* padding-left: 1rem; */
+  box-sizing: border-box;
+  border-left: 2px solid #4e4e4e;
+  background-color: #1b1b1c47;
+  border-radius: 0 4px 4px 0;
+}
+
 .note-stat.created-at:hover::before {
   content: 'time since created';
   position: absolute;
   width: max-content;
-  top: -40px;
+  z-index: 200;
+  bottom: -45px;
   left: -5px;
   background: #393939;
   padding: 0.4rem;
@@ -74,7 +88,8 @@
   content: 'comments';
   position: absolute;
   width: max-content;
-  top: -40px;
+  z-index: 200;
+  bottom: -45px;
   left: -5px;
   background: #393939;
   padding: 0.4rem;
@@ -96,6 +111,18 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.note-stat:hover::after {
+  content: "";
+  z-index: 200;
+  position: absolute;
+  left: 2px;
+  bottom: -14px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #37393e;
+  animation: fadeIn 1000ms ease-in-out;
 }
 
 .note-public-switch-wrapper {
@@ -288,7 +315,7 @@
   width: 248px;
   position: absolute;
   right: 0;
-  bottom: 40px;
+  bottom: 45px;
   text-align: end;
   background: #393939;
   padding: 0.4rem;
@@ -303,16 +330,52 @@
 }
 
 .info-icon:hover::before {
-  content: "Highlight any section of the CodeMark and right click to comment!";
+  content: "Highlight a section of the CodeMark to comment on it directly!";
   width: 260px;
   position: absolute;
   right: 0;
-  bottom: 40px;
+  bottom: 45px;
   text-align: end;
   background: #393939;
   padding: 0.4rem;
   border-radius: 4px;
   box-shadow: 0px 2px 16px rgb(0 0 0 / 30%);
+  animation: fadeIn 1000ms ease-in-out;
+}
+
+.note-icon.like:hover::before {
+  content: "Like this CodeMark";
+  width: max-content;
+  position: absolute;
+  left: 0px;
+  bottom: 45px;
+  text-align: end;
+  background: #393939;
+  padding: 0.4rem;
+  border-radius: 4px;
+  box-shadow: 0px 2px 16px rgb(0 0 0 / 30%);
+  animation: fadeIn 1000ms ease-in-out;
+}
+
+.info-icon:hover::after {
+  content: "";
+  position: absolute;
+  top: -14px;
+  /* right: 12px; */
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #37393e;
+    animation: fadeIn 1000ms ease-in-out;
+}
+
+.note-icon.like:hover::after, 
+#export-img-icon:hover::after {
+  content: "";
+  position: absolute;
+  top: -14px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #37393e;
   animation: fadeIn 1000ms ease-in-out;
 }
 
@@ -401,19 +464,27 @@
   flex-direction: column;
 }
 
+.tag-text.sm {
+  font-size: 14px;
+}
+
 .action-buttons {
   position: absolute;
   top: 2rem;
   right: 2rem;
   display: flex;
   flex-direction: row;
-  gap: 1rem;
+  gap: 3rem;
   align-items: center;
   justify-content: center;
 }
 
 .cancel-export.icon-button:hover {
   background-color: #390000;
+}
+
+.export.icon-button {
+  background-color: #094052;
 }
 
 .export.icon-button:hover {

@@ -9,21 +9,16 @@ import { withRouter } from "react-router-dom";
 
 const CodeNoteItem = props => {
 
-  // function preventBubbleParent(e) {
-  //   e.stopPropagation();
-  //   props.history.push(`/notes/${props.id}`);
-  // }
-
-  // function preventBubbleLink(e) {
-  //   // e.stopPropagation();
-  //   props.history.push(`/users/${props.userId}`);
-  // }
+  function preventBubbleLink(e) {
+    e.stopPropagation();
+    props.history.push(`/users/${props.userId}`);
+  }
   
   return (
     <>
       {props.id && props.username && props.userId && props.createdAt && props.codeBody ? (
-        <div className="code-note-item" key={props.id}>
-          {/* onClick={() => preventBubbleParent()}> */}
+        <div className="code-note-item" key={props.id}
+          onClick={() => props.history.push(`/notes/${props.id}`) }>
           <div className="note-item-top">
             <div className="top-row-details">
               <div className="note-stats">
@@ -41,20 +36,12 @@ const CodeNoteItem = props => {
                   <i className="fa-solid fa-arrow-right"></i></div>
               </Link>
             </div>
-            {props.tags.length ? (
-              <div className="code-note-tags">
-                {props.tags?.map((tag, i) =>
-                  <div className="note-tag-mini" key={`${i}-tag`}>{tag}</div>)}
-              </div>
-            ) : ''}
+            
           </div>
-          {props.tags.length ? (
-            <div className="spacer-40-h"></div>
-          ): ''}
           {props.userId && props.createdAt && props?.title ? (
             <div className="code-note-text">
-              <div className="updated-at-and-username">
-                {/* onClick={() => preventBubbleLink()}> */}
+              <div className="updated-at-and-username"
+                onClick={preventBubbleLink}>
                 <Link className="code-note-username"
                   to={`/users/${props.userId}`}>
                   @{props?.username}
@@ -67,7 +54,17 @@ const CodeNoteItem = props => {
               <span className="code-note-body">
                 {props?.textDetails.length < 260 ? props?.textDetails : `${props?.textDetails.slice(0, 260)}...`}
               </span>
+              {props.tags.length ? (
+                <div className="code-note-tags">
+                  {props.tags?.map((tag, i) =>
+                    <div className="note-tag-mini" key={`${i}-tag`}>{tag}</div>)}
+                </div>
+              ) : ''}
+              {props.tags.length ? (
+                <div className="spacer-30-h"></div>
+              ) : ''}
             </div>
+            
           ) : (
             <div className="code-note-text">
               <CodeNoteTextPlaceholder />

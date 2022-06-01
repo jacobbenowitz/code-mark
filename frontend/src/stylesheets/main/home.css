@@ -31,6 +31,38 @@
   opacity: 70%;
 }
 
+.nav-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 5px;
+  max-height: 400px;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* .nav-list.tags-list::after {
+  content: '';
+  display: block;
+  background-color: #0d464954;
+  height: 12px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+} */
+
+.nav-list-wrapper::after {
+  content: '';
+  display: block;
+  background-image: linear-gradient(transparent, #20212496, #202124);
+  height: 32px;
+  width: 100%;
+  position: absolute;
+  bottom: -1px;
+}
+
+
 @media only screen and (max-width: 600px) {
   .nav-boxes, .tags {
     z-index: 400;
@@ -64,10 +96,6 @@
     width: 100%;
   }
 
-  .nav-list {
-    width: 100%;
-  }
-
   .section-title {
     margin-bottom: 1.4rem;
     display: flex;
@@ -76,6 +104,7 @@
     align-items: flex-start;
     gap: 0.7rem;
     padding-left: 1rem;
+    width: 100%;
   }
 
   .note-list-container {
@@ -88,9 +117,6 @@
 @media only screen and (max-width: 900px)  {
   .nav-boxes, .tags {
     padding: 16px 0px 16px 16px;
-  }
-  .nav-list {
-    width: 100%;
   }
   .home-main {
     margin-top: 1.5rem;
@@ -108,10 +134,6 @@
     width: 80%;
     background: #202124;
     border-radius: 0px 9px 9px 0px;
-  }
-
-  .nav-list {
-    width: 100%;
   }
 
 
@@ -145,8 +167,19 @@
     align-items: flex-start;
     gap: 0.7rem;
     padding-left: 0.2rem;
+    width: 100%;
   }
 
+}
+
+.global-modal-wrapper {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  place-content: center;
+  align-items: center;
+  padding: 1rem 0 1rem 0;
+  top: 0;
 }
 
 .nav-item-link {
@@ -184,6 +217,7 @@
   padding: 0px;
   gap: 12px;
   width: 100%;
+  position: relative;
 }
 
 .nav-pages > h5 {
@@ -254,9 +288,7 @@
   align-items: center;
   padding: 5px 12px;
   gap: 1rem;
-  height: 48px;
-  background: #202124;
-  transition: background 500ms ease-in-out;
+  height: 38px;
   cursor: pointer;
 }
 
@@ -266,11 +298,11 @@
   height: auto;
 }
 
-.nav-item-link:hover {
+/* .nav-item-link:hover {
   background: #454545;
   color: #37F3FF;
   transition: background 500ms ease-in-out;
-}
+} */
 
 .nav-item-link:focus {
   background: #0D4649;
@@ -284,8 +316,26 @@
   background-color: #0D4649;
 
 }
+.nav-item-container {
+  width: 100%;
+  display: flex;
+  color: white;
+  border-radius: 8px 0 0 8px;
+  background-color: transparent;
+  transition: background-color 350ms ease-in-out;
+  transition: color 350ms ease-in-out;
+}
+
+.nav-item-container:hover {
+  background-color: #454545;
+  transition: background-color 350ms ease-in-out;
+  transition: color 350ms ease-in-out;
+}
 
 .nav-item-container.active {
-  color: #37F3FF;
+  color: white;
+  background-color: #0D4649;
+  transition: background-color 350ms ease-in-out;
+  transition: color 350ms ease-in-out;
 }
 
