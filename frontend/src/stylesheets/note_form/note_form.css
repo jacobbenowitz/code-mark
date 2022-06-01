@@ -305,9 +305,58 @@ button#tag-icon-save.disabled:hover {
 .modal-on {
   visibility: visible;
   display: block;
+  animation: modalOn 700ms ease-in-out;
+}
+
+.modal-out {
+  visibility: hidden;
+  animation: modalOff 700ms ease-in-out;
+}
+
+.modal-in {
+  animation: modalOn 700ms ease-in-out;
 }
 
 .modal-off {
   visibility: hidden;
-  /* display: none; */
+}
+
+@keyframes modalOn {
+  0% {
+    visibility: visible;
+    opacity: 0%;
+    transform: translateY(-200px);
+    filter: blur(20px);
+  }
+  100% {
+    visibility: visible;
+    opacity: 100%;
+    transform: translateY(0px);
+    filter: blur(0px);
+  }
+}
+
+@keyframes modalOff {
+  0% {
+    visibility: visible;
+    opacity: 100%;
+    transform: translateY(0px);
+    filter: blur(0px);
+  }
+  100% {
+    visibility: hidden;
+    opacity: 0%;
+    transform: translateY(200px);
+    filter: blur(20px);
+  }
+}
+
+.animate-grow {
+  animation: animateGrow 500ms ease-in-out;
+}
+
+@keyframes animateGrow {
+  0% {
+    transform: translateY();
+  }
 }

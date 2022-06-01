@@ -68,10 +68,6 @@ class NewNote extends React.Component {
     }
   }
 
-  componentDidUpdate() {
-    debugger
-  }
-
   update(type) {
     return e => {
       this.setState({
@@ -357,7 +353,6 @@ class NewNote extends React.Component {
 
         <div className='new-note-container' id='new-note-full'>
           <div className='new-note-form'>
-            <form>
               <div id="note-title-input" className='note-input'>
                 <input type={'text'}
                   onClick={this.placeholderTitle}
@@ -480,8 +475,6 @@ class NewNote extends React.Component {
                   onClick={this.state.codebody.length ? this.toggleResourcesModal : undefined}
                 >Save CodeMark</button>
               </div>
-            </form>
-   
 
             <div id='hide-note-form'
               className='icon-only-button'

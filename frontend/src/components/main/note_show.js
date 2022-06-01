@@ -18,6 +18,7 @@ import ResourceItem from '../notes/resources/resource_item';
 import { Link, Redirect } from 'react-router-dom';
 import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
+import codeMarkLogo from './logo/codemark-logo-primary.svg';
 import LikeNoteIcon from '../notes/like_note_icon';
 import moment from 'moment';
 import SwitchButton from '../UI/switch_button';
@@ -205,28 +206,33 @@ export default class NoteShow extends React.Component {
               <i className="fa-solid fa-download" />
               <span>download</span>
             </div>
-            <div className='cancel-export icon-button'
+            <div className='cancel-export icon-only-button'
               onClick={() => this.toggleExportModal()}>
               <i className="fa-solid fa-xmark fa-xl" />
-              <span>cancel</span>
             </div>
           </div>
-
-          <div id='content-export' className='note-show-main'>
-            <div className='note-show-title'>
-              <span className='username'>@{note?.user.username}</span>
-              <h1>{note.title}</h1>
-            </div>
-            <div className='note-tags-wrapper'>
-              <TagsExport note={this.state.note} />
-            </div>
-            <div className='code-note-body' id='code-note-view'>
-              <CodeEditorExportImage codeBody={note.codebody} />
-            </div>
-            <div className='note-textDetails'>
-              <span className='textDetails-show'>
-                {note.textdetails}
-              </span>
+          <div className='spacer-150-h'></div>
+          <div className='export-dots-wrapper'>
+            <div id='content-export' className='note-show-main'>
+              <div className='content-wrapper'>
+                <div className='note-show-title'>
+                  <span className='username'>@{note?.user.username}</span>
+                  <h1>{note.title}</h1>
+                </div>
+                <div className='note-tags-wrapper'>
+                  <TagsExport note={this.state.note} />
+                </div>
+                <div className='code-note-body' id='code-note-view'>
+                  <CodeEditorExportImage codeBody={note.codebody} />
+                </div>
+                <div className='note-textDetails'>
+                  <span className='textDetails-show'>
+                    {note.textdetails}
+                  </span>
+                </div>
+              </div>
+              <img className='export-logo'
+                src={codeMarkLogo} />
             </div>
           </div>
         </div>

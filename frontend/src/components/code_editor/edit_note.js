@@ -65,31 +65,6 @@ export default class EditNote extends React.Component {
     }
   }
 
-  // credit https://stackoverflow.com/questions/454202/creating-a-textarea-with-auto-resize
-
-  init() {
-    const observe = (element, event, handler) => {
-      element.addEventListener(event, handler, false);
-    };
-
-    var text = document.getElementById('details-textarea');
-    function resize() {
-      text.style.height = 'auto';
-      text.style.height = text.scrollHeight + 'px';
-    }
-    /* 0-timeout to get the already changed text */
-    function delayedResize() {
-      window.setTimeout(resize, 0);
-    }
-    observe(text, 'change', resize);
-    observe(text, 'cut', delayedResize);
-    observe(text, 'paste', delayedResize);
-    observe(text, 'drop', delayedResize);
-    observe(text, 'keydown', delayedResize);
-
-    resize();
-  }
-
   handleSubmit(e) {
     e.preventDefault();
     let { title, codebody, textdetails } = this.state;
