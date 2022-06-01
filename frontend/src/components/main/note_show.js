@@ -155,9 +155,8 @@ export default class NoteShow extends React.Component {
 
   commentOnSelection() {
     const commentSection = document.getElementById("comments");
-    const commentHighlightModal = document.getElementById('comment-highlight-text');
     this.setState({ commentSnippet: this.state.selectedText })
-    commentHighlightModal.className = "modal-compact"
+    this.toggleCommentModal()
     commentSection.scrollIntoView({ behavior: 'smooth' });
   }
 
@@ -240,11 +239,13 @@ export default class NoteShow extends React.Component {
                 <div className='code-note-body' id='code-note-view'>
                   <CodeEditorExportImage codeBody={note.codebody} />
                 </div>
-                <div className='note-textDetails'>
-                  <span className='textDetails-show'>
-                    {note.textdetails}
-                  </span>
-                </div>
+                {this.state.textdetails ? (
+                  <div className='note-textDetails'>
+                    <span className='textDetails-show'>
+                      {note.textdetails}
+                    </span>
+                  </div>
+                ) : ''}
               </div>
               <img className='export-logo'
                 src={codeMarkLogo} />
@@ -284,7 +285,7 @@ export default class NoteShow extends React.Component {
               currentUser={currentUser} noteId={noteId}/>
           </div>
         </div>
-        <div className='note-show-container center-span-7'>
+        <div className={this.isMobile() ? 'note-show-container span-12' : 'note-show-container center-span-7'}>
           <div className='note-show-top-icons'>
             <div className='back-page icon-button'
               onClick={() => this.props.history.goBack()}>
@@ -321,7 +322,8 @@ export default class NoteShow extends React.Component {
               <div className='note-show-title mobile'>
                 <Link className='username'
                   to={`/users/${note.user.userId}`}>@{note.user.username}</Link>
-                <h1>{note.title}</h1>
+                  <h1>{note.title}</h1>
+                  
                 <div className='note-stats-wrapper'>
                   <div className='note-stats'>
                     <div className='note-stat likes'>
@@ -332,8 +334,6 @@ export default class NoteShow extends React.Component {
                       <i className="fa-solid fa-comments"></i>
                       <span>{this.props.comments.length}</span>
                     </div>
-                  </div>
-                  <div className='note-stats'>
                     <div className='note-stat updated-at'>
                       <i className="fa-solid fa-pencil"></i>
                       <span>{moment(this.props.note.updatedAt).fromNow()}</span>
@@ -473,13 +473,13 @@ export default class NoteShow extends React.Component {
                 </>
                 ) :  <NoteShowEditorLoader />}
             </div>
+            {note?.textdetails ? (
             <div className='note-textDetails'>
-              {note ? (
                 <span className='textDetails-show'>
                   {note.textdetails}
                 </span>
-              ) : ''}
             </div>
+              ) : ''}
           </div>
 
           {this.props.note.resources?.length ? (

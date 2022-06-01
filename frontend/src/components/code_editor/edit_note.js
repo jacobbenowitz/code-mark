@@ -107,7 +107,7 @@ export default class EditNote extends React.Component {
         this.toggleEditModal()
       })
   }
-
+  
   updateTags(e) {
     e.preventDefault()
     let newTags = this.state.newTag.length ? (
