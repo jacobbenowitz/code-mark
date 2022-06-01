@@ -1,5 +1,6 @@
 import React from 'react';
 import CommentItem from './comment_item';
+import TextareaAutosize from 'react-textarea-autosize';
 
 export default class CommentFormModal extends React.Component {
   constructor(props) {
@@ -70,18 +71,19 @@ export default class CommentFormModal extends React.Component {
           <form onSubmit={this.handleSubmit} className='comment-form'>
             <div className='add-code-snippet-wrapper'>
               <div className="code-snippet-comment">
-                <textarea id='code-snippet-new-modal' className="code"
+                <TextareaAutosize
+                  id='code-snippet-new-modal'
+                  className="code"
                   value={this.state.codeSnippet}
                   onChange={this.update('codeSnippet')}
                 />
               </div>
             </div>
-            <textarea
+            <TextareaAutosize 
               onChange={this.update('textbody')}
               id='comment-textarea'
               className='comment-body-input'
               placeholder='Have a question about this CodeMark? Let the author know!'
-            // value={this.state.textbody}
             />
             <button id="comment-submit" type='submit'>Comment</button>
           </form>

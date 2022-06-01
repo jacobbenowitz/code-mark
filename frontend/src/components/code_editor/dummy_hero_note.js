@@ -11,6 +11,7 @@ import { getKeywords } from '../../util/webscrap_util';
 import { EditorView } from '@codemirror/basic-setup';
 import { withRouter } from 'react-router-dom'
 import { getLanguage } from "../../util/webscrap_util";
+import TextareaAutosize from 'react-textarea-autosize';
 
 
 export default class DummyHeroNote extends React.Component {
@@ -283,7 +284,7 @@ export default class DummyHeroNote extends React.Component {
                                 />
                             </div>
                             <div className='note-input'>
-                                <textarea
+                                <TextareaAutosize
                                     onChange={this.update('textdetails')}
                                     id='details-textarea'
                                     className='note-input-details'
@@ -291,7 +292,6 @@ export default class DummyHeroNote extends React.Component {
                                     value={this.state.textdetails}
                                 />
                             </div>
-                          
                             <button type='submit' id='code-note-submit'
                                 className={"save-button dummy disabled"}
                             >Save</button>
