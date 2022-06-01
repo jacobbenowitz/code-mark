@@ -12,23 +12,24 @@ class CheckBoxItem extends React.Component {
   handleCheck(e){
     e.stopPropagation();
     this.setState({checked: !this.state.checked});
+    debugger;
     this.props.updateKeywords(e);
   }
   render() {
     let { keyword, updateKeywords, index } = this.props;
     // debugger;
     return (
-      <div className={this.state.checked ? 'checkbox-option option-selected' : 'checkbox-option'} key={index}>
+      <div onClick={this.handleCheck} className={this.state.checked ? 'checkbox-option option-selected' : 'checkbox-option'} key={index}>
         <input type='checkbox' 
           id={`${keyword}-check`}
           key={`${keyword}-check`}
-          onMouseUp={this.handleCheck}
+          // onMouseUp={this.handleCheck}
           value={keyword}
           name={keyword}
           className='checkbox' />
         <label htmlFor={`${keyword}-check`}
           key={`${keyword}-label`}
-          onMouseUp={this.handleCheck}
+          // onMouseUp={this.handleCheck}
           className='checkbox-label'>
           {keyword} </label>
       </div>

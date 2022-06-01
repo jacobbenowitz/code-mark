@@ -25,6 +25,7 @@ async function getResources(keywords, codebody) {
     const notfound = languageKeywords.filter(word => !foundWords.includes(word))
     // debugger;
     let response = await Promise.all(getPromises(notfound));
+    debugger;
     let foundResources = response.map(ele => ele._doc);
     // return response.filter(ele => ele !== undefined);
     return foundResources.concat(savedResources).filter(ele => ele !== undefined);

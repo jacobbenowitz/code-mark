@@ -116,6 +116,7 @@
 .checkbox-option:hover {
   /* color: rgb(91, 171, 225); */
   /* filter: brightness(50%); */
+  border-color: #6EEBE7;
 }
 
 .checkbox-option > label {
