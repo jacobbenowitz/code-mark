@@ -14,7 +14,8 @@ const userErrorsReducer = (prevState = _nullErrors, action) => {
     case RECEIVE_UPDATED_USER:
       return action.user.data[1];
     default:
-      return prevState
+      // return prevState;
+      return _nullErrors;
   }
 }
 

@@ -19,12 +19,13 @@ const SessionErrorsReducer = (state = _nullErrors, action) => {
     case RECEIVE_DELETED_USER:
       return action.userId.data[1];
     case RECEIVE_USER_SIGN_IN:
-      debugger;
+      // debugger;
       return action.message;
     case RECEIVE_USER_LOGOUT:
       return action.message;
     default:
-      return state;
+      // return state;
+      return _nullErrors;
   }
 };
 

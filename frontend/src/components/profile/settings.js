@@ -26,6 +26,7 @@ export default class Settings extends React.Component {
 
   componentDidUpdate() {
     const { email, username, color } = this.props.user;
+    // debugger;
     if (Object.values(this.props.user).length &&
       (!this.state.email.length || !this.state.username.length ||
         this.props.errors !== this.state.errors)) {

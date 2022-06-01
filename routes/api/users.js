@@ -194,6 +194,7 @@ router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,
                             followers: user.followers,
                             following: user.following,
                             note_likes: user.note_likes,
+                            email: user.email,
                             color: user.color
                           };
                           // debugger;

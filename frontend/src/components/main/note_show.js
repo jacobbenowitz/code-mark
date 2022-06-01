@@ -75,9 +75,11 @@ export default class NoteShow extends React.Component {
   }
 
   deleteNote() {
-    this.props.removeNote(this.props.noteId).then(() => {
-      this.props.history.goBack();
-    })
+    this.props.history.goBack();
+    this.props.removeNote(this.props.noteId)
+    // .then(() => {
+    //   this.props.history.goBack();
+    // })
     // this.props.toggleModal();
   }
 

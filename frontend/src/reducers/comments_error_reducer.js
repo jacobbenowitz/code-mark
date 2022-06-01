@@ -16,12 +16,13 @@ const commentsErrorReducer = (prevState = _nullErrors, action) => {
         case RECEIVE_NEW_COMMENT:
             return _nullErrors;
         case RECEIVE_UPDATED_COMMENT:
-            debugger;
+            // debugger;
             return action.comment[1];
         case RECEIVE_DELETE_COMMENT:
             return action.commentId[1];
         default:
-            return prevState;
+            // return prevState;
+            return _nullErrors;
     }
 };
 

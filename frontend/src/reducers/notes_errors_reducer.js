@@ -1,4 +1,5 @@
 import { merge } from "lodash";
+import { RECEIVE_UPDATED_COMMENT } from "../actions/comment_actions";
 import {
   RECEIVE_NOTE_ERRORS,
   RECEIVE_NEW_NOTE,
@@ -22,8 +23,12 @@ const notesErrorReducer = (prevState = _nullErrors, action) => {
       return action.note.data[1];
     case RECEIVE_DELETE_NOTE:
       return action.note[1];
+    // case RECEIVE_UPDATED_COMMENT:
+    //   debugger;
+    //   return _nullErrors;
     default:
-      return prevState;
+      return _nullErrors;
+      // return prevState;
   }
 };
 
