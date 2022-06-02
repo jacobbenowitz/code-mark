@@ -180,10 +180,6 @@
   height: 30px;
 }
 
-.checkbox:checked + .checkbox-label {
-  /* color: red; */
-}
-
 .option-selected {
   background: #00000047;
   border-color: #6EEBE7;
