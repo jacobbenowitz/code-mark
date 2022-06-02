@@ -97,11 +97,8 @@ export const updateNote = (data, noteId) => dispatch => {
 
 export const removeNote = noteId => dispatch => (
   deleteNote(noteId)
-    // .then(note => dispatch(receiveDeleteNote(note.data._id)))
     .then(note => {
       dispatch(receiveDeleteNote(note.data))
-      // debugger
-      // dispatch(receiveNoteErrors(note.data[1]))
     })
     .catch(err => dispatch(receiveNoteErrors(err)))
 );

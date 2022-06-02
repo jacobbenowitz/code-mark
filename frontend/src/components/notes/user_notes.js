@@ -13,14 +13,17 @@ class UserNotes extends React.Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchUserNotes(this.props.currentUser?.id)
+    debugger
   };
-
-  componentWillReceiveProps(nextState) {
-    if (nextState.userNotes) {
+  
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.userNotes) {
+      let notes = orderUserNotes(nextProps.userNotes);
+      debugger
       this.setState({
-        userNotes: orderUserNotes(nextState.userNotes)
+        userNotes: notes
       })
     }
   }
@@ -30,6 +33,7 @@ class UserNotes extends React.Component {
   }
 
   render() {
+    debugger
     if (this.state.userNotes.length === 0) {
       return (<span>No notes found :(</span>)
     } else {

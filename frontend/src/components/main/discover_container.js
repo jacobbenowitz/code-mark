@@ -3,15 +3,16 @@ import { withRouter } from 'react-router-dom';
 import Discover from "./discover";
 import { fetchNotes } from "../../actions/note_actions";
 import { fetchUsers } from "../../actions/user_actions";
-import { filterOnlyPublicNotes } from "../../util/selectors";
+import { filterOnlyPublicNotes, orderUserNotes } from "../../util/selectors";
 import { selectNoteTags } from "../../util/selectors";
 
 
 const mapStateToProps = (state, { match }) => {
   const filteredNotes = filterOnlyPublicNotes(Object.values(state.notes.all))
+  const orderedNotes = orderUserNotes(filteredNotes)
   const discoverTags = selectNoteTags(filteredNotes)
   return {
-    allNotes: filteredNotes,
+    allNotes: orderedNotes,
     tags: discoverTags,
     currentUser: state.session.user,
     users: state.users.all,

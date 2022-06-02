@@ -5,7 +5,8 @@ import {
   filterOnlyPublicNotes,
   selectNoteTags,
   filterUsersById,
-  selectFollowingUsersNotes
+  selectFollowingUsersNotes,
+  orderUserNotes
 } from '../../util/selectors';
 import MobileNotes from './mobile_notes';
 import SectionTitle from '../UI/section_title';
@@ -40,11 +41,12 @@ export default class Following extends React.Component {
       const followingNotes =
       selectFollowingUsersNotes(followingUsers, allNotes)
       const publicNotes = filterOnlyPublicNotes(followingNotes)
+      const orderedNotes = orderUserNotes(publicNotes)
       const followingTags = selectNoteTags(publicNotes)
       if (followingNotes.length !== this.state.followingNotes.length ||
         followingTags.length !== this.state.followingTags.length) {
         this.setState({
-          followingNotes: publicNotes,
+          followingNotes: orderedNotes,
           followingTags: followingTags,
         })
       }

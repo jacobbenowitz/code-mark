@@ -12,7 +12,7 @@ import {
 const initialState = {
   all: {},
   user: [],
-  new: undefined,
+  new: {},
   newResources: []
 };
 
@@ -24,15 +24,16 @@ const notesReducer = (prevState = initialState, action) => {
 
   switch (action.type) {
     case RECEIVE_NEW_NOTE:
+      nextState.all[action.note.data[0]._id] = action.note.data[0];
       nextState.new = action.note.data[0];
       nextState.user.push(action.note.data[0]);
       return nextState;
     case RECEIVE_USER_NOTES:
-      // debugger
-      nextState.user = Object.values(action.notes.data)
+      // nextState.user = Object.values(action.notes.data)
+      nextState.user = action.notes.data
+      debugger
       return nextState;
     case RECEIVE_NOTES:
-      // k-v pairs of notes in obj {id: {key: data}, ...}
       let allNotes = {}
       action.notes.data.map(note =>
         allNotes[note._id] = note)
@@ -42,12 +43,14 @@ const notesReducer = (prevState = initialState, action) => {
       nextState.all[action.note.data._id] = action.note.data;
       return nextState;
     case RECEIVE_DELETE_NOTE:
-      // debugger;
+      debugger;
       delete nextState.all[action.note[0]._id]
-      delete nextState.user[action.note[0]._id]
+      nextState.user = nextState.user.filter(note =>
+        note._id !== action.note[0]._id
+      )
+      debugger;
       return nextState;
     case RECEIVE_UPDATED_NOTE:
-      // debugger;
       nextState.all[action.note.data[0]._id] = action.note.data[0];
       return nextState;
     case RECEIVE_NOTE_LIKE:

@@ -7,13 +7,13 @@ const AllNotes = (props) => {
     const col2 = [];
     // debugger;
     props.notes?.map((note, idx) => {
-        if (idx < 20) {
+        // if (idx < 20) {
             if (idx % 2 === 0) {
                 col1.push(note);
             } else {
                 col2.push(note);
             }
-        }
+        // }
     })
     // debugger;
     return (
