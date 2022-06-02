@@ -4,7 +4,8 @@ import {
   RECEIVE_NOTE_ERRORS,
   RECEIVE_NEW_NOTE,
   RECEIVE_UPDATED_NOTE,
-  RECEIVE_DELETE_NOTE
+  RECEIVE_DELETE_NOTE,
+  RECEIVE_USER_NOTES
 } from "../actions/note_actions";
 
 const _nullErrors = [];
@@ -26,6 +27,8 @@ const notesErrorReducer = (prevState = _nullErrors, action) => {
     // case RECEIVE_UPDATED_COMMENT:
     //   debugger;
     //   return _nullErrors;
+    case RECEIVE_USER_NOTES:
+      return prevState;
     default:
       return _nullErrors;
       // return prevState;
