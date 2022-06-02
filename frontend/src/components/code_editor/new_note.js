@@ -350,14 +350,17 @@ class NewNote extends React.Component {
                   value={this.state.title}
                   placeholder={'Untitled note'} />
               </div>
-              <div className='select-wrapper'>
-                <select id='lang-select' onChange={this.handleChange}>
-                  <option value={0} defaultValue>JavaScript</option>
-                  <option value={1}>HTML</option>
-                  <option value={2}>C++</option>
-                  <option value={3}>CSS</option>
-                </select>
-              </div>
+            <div className='select-wrapper'>
+              <span className='select-label'>
+                Editor Language:
+              </span>
+              <select id='lang-select' onChange={this.handleChange}>
+                <option value={0} defaultValue>JavaScript</option>
+                <option value={1}>HTML</option>
+                <option value={2}>C++</option>
+                <option value={3}>CSS</option>
+              </select>
+            </div>
               <div className='note-input'>
                 <CodeMirror className='codemirror javascript'
                   id='codebody-js'

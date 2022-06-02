@@ -36,14 +36,14 @@ export default class FollowButton extends React.Component {
         <button id='user-unfollow'
           onClick={() => this.handleUnfollow()}
         >
-          <i class="fa-solid fa-check-double" />
+          <i className="fa-solid fa-check-double" />
           Following
         </button>
         :
         <button id='user-follow'
           onClick={() => this.handleFollow()}
         >
-          <i class="fa-solid fa-circle-plus"></i>
+          <i className="fa-solid fa-circle-plus"></i>
           Follow
         </button>
     )

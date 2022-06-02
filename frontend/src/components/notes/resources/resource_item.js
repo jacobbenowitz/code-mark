@@ -17,7 +17,6 @@ const ResourceItem = ({ resource }) => (
       <a href={resource.link} target="_blank" className="resource-link"
       >{resource.link}</a>
     </div>
-
   </div>
 )
 

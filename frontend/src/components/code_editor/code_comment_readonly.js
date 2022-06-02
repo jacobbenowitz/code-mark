@@ -21,11 +21,11 @@ const CodeCommentReadOnly = props => {
     <CodeMirror
       className="comment-code"
       readOnly={true}
-      value={props.codeSnippet || 'Select text from the note above to comment'}
+      value={props.codeSnippet || 'Optional code snippet'}
       width='100%'
       theme='dark'
       extensions={[
-        extensions[language] ? extensions[language] : javascript({ jsx: true }),
+        extensions[language] ? extensions[language] : html(),
         EditorView.lineWrapping
       ]}
     />

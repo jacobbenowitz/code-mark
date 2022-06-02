@@ -117,10 +117,10 @@
     padding-left: 64px;
   }
   .home-main {
-    margin-top: 1.5rem;
-    padding-right: 42px;
+    /* margin-top: 1.5rem; */
+    /* padding-right: 42px; */
+    max-width: 100%;
     box-sizing: border-box;
-        width: 100%;
   }
 }
 
@@ -291,11 +291,10 @@
 
 .note-list-container {
   margin-top: 1.2rem;
-  /* display: grid; */
   display: flex;
-  /* grid-gap: 1rem; */
-  /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   flex-direction: column;
   justify-content: space-around;
   align-items: space-between;
@@ -322,7 +321,8 @@
 .column1{
   display: flex;
   flex-direction: column;
-  width: calc(100%/2 - 1rem);
+  flex: 1;
+  /* width: calc(100%/2 - 1rem); */
   gap: 1rem;
 }
 
@@ -330,7 +330,8 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  width: calc(100%/2 - 1rem);
+  flex: 1;
+  /* width: calc(100%/2 - 1rem); */
 }
 
 .nav-item-link {

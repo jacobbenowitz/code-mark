@@ -51,15 +51,12 @@ export default class NoteShow extends React.Component {
     this.clearSnippet = this.clearSnippet.bind(this);
     this.toggleCommentModal = this.toggleCommentModal.bind(this);
   }
-
-  componentWillMount() {
-    this.props.fetchNote(this.props.noteId);
-    this.props.fetchNoteComments(this.props.noteId);
-  }
-
+  
   componentDidMount() {
     this._isMounted = true;
-    window.scrollTo(0, 0)
+    this.props.fetchNote(this.props.noteId);
+    this.props.fetchNoteComments(this.props.noteId);
+    window.scrollTo(0, 0);
   }
   
   componentWillUnmount() {
@@ -68,20 +65,28 @@ export default class NoteShow extends React.Component {
     scope.removeEventListener("contextmenu", (event) => {
       contextMenu.className = "";
     });
-
+    
     // remove click eventListener
     scope.removeEventListener("click", (e) => {
       contextMenu.className = "";
     });
     this._isMounted = false;
   }
-
+  
   componentDidUpdate() {
-    const { note, comments } = this.props;
+    const { note, comments, currentUser, history } = this.props;
     const body = document.getElementsByTagName('body');
     const bodyHeight = body[0].clientHeight;
-
-    if (note && note !== this.state.note || this.state.comments !== comments) {
+    
+    
+    
+    if (note && (note !== this.state.note || this.state.comments
+      !== comments)) {
+      
+      if (currentUser?.id !== note.userId && !note.public) {
+        debugger
+        history.push(`/home`)
+      }
       const orderedComments = orderNoteComments(comments);
       this.setState({
         note: note,
@@ -201,7 +206,7 @@ export default class NoteShow extends React.Component {
   render() {
     const { currentUser, updateNote, noteId } = this.props;
     const { note } = this.state;
-
+    debugger
     return Object.values(note).length ? (
       <>
         {/* PHOTO EXPORT MODAL */}
@@ -484,8 +489,11 @@ export default class NoteShow extends React.Component {
                 <h4>Resources</h4>
               </div>
               <div className='resources-list'>
-                {this.props.note.resources?.map(resource =>
-                  <ResourceItem resource={resource} />
+                {this.props.note.resources?.map((resource, i) =>
+                  <ResourceItem
+                    resource={resource}
+                    key={`resource-${i}`}
+                  />
                 )}
               </div>
             </div>

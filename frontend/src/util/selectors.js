@@ -38,7 +38,10 @@ export const filterUsersByComment = (users, comment) => {
 }
 
 export const filterOnlyPublicNotes = notes => {
-  const filtered = notes.filter(note => note.public === true)
+  debugger
+  const filtered = notes.filter(note => {
+    return note.public === true
+  })
   debugger
   return filtered;
 }

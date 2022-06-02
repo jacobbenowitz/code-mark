@@ -306,7 +306,8 @@ textarea {
 .comment-body-input {
   height: fit-content;
   padding: 0.4rem;
-  width: 97%;
+  width: 100%;
+  margin-bottom: 0.8rem;
   resize: none;
   background-color: #2c2d30;
   border-radius: 6px;

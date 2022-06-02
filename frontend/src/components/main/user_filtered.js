@@ -18,9 +18,8 @@ export default class UserFiltered extends React.Component {
   }
 
   componentWillMount() {
-    this.props.fetchUserNotes(this.props.userId);
     this.props.fetchUser(this.props.userId);
-    this.props.fetchCurrentUser()
+    this.props.fetchUserNotes(this.props.userId);
   };
 
   componentDidMount() {
@@ -28,15 +27,16 @@ export default class UserFiltered extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      user: nextProps.user,
-      userNotes: nextProps.userNotes,
-      currentUser: nextProps.currentUser
-    })
-
+    const { user, userNotes, currentUser } = nextProps;
+    if (user && userNotes && currentUser) {
+      this.setState({
+        user: user,
+        userNotes: userNotes,
+        currentUser: currentUser
+      })
+    }
   }
 
-  // isMobile
   isMobile(){
     return window.innerWidth < 680;
   }

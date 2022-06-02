@@ -29,7 +29,7 @@ export default class CommentForm extends React.Component {
     e.preventDefault();
     let { codeSnippet, textbody } = this.state;
     let snippet;
-    if (codeSnippet === 'Select text from the note above to comment') {
+    if (codeSnippet === 'Optional code snippet') {
       snippet = ''
     } else snippet = codeSnippet;
 
