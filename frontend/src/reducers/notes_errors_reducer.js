@@ -28,6 +28,7 @@ const notesErrorReducer = (prevState = _nullErrors, action) => {
     //   debugger;
     //   return _nullErrors;
     case RECEIVE_USER_NOTES:
+      // debugger;
       return prevState;
     default:
       return _nullErrors;

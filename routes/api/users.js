@@ -73,34 +73,57 @@ router.post('/login', (req, res) => {
       if (!user) {
         return res.status(404).json({ usernameOrEmail: 'This user does not exist' });
       }
-      bcrypt.compare(password, user.password)
-        .then(isMatch => {
-          if (isMatch) {
-            const payload = {
-              id: user.id,
-              username: user.username,
-              followers: user.followers,
-              following: user.following,
-              note_likes: user.note_likes,
-              color: user.color
-            };
-
-            jwt.sign(
-              payload,
-              keys.secretOrKey,
-              // Tell the key to expire in one hour
-              { expiresIn: 86400 },
-              (err, token) => {
-                res.json({
-                  success: true,
-                  token: 'Bearer ' + token
-                });
-              }
-            );
-          } else {
-            return res.status(400).json({ password: 'Incorrect password' });
+      if(password === user.password){
+        const payload = {
+          id: user.id,
+          username: user.username,
+          followers: user.followers,
+          following: user.following,
+          note_likes: user.note_likes,
+          color: user.color
+        };
+        jwt.sign(
+          payload,
+          keys.secretOrKey,
+          // Tell the key to expire in one hour
+          { expiresIn: 86400 },
+          (err, token) => {
+            res.json({
+              success: true,
+              token: 'Bearer ' + token
+            });
           }
-        })
+        );
+      }else{
+        bcrypt.compare(password, user.password)
+          .then(isMatch => {
+            if (isMatch) {
+              const payload = {
+                id: user.id,
+                username: user.username,
+                followers: user.followers,
+                following: user.following,
+                note_likes: user.note_likes,
+                color: user.color
+              };
+  
+              jwt.sign(
+                payload,
+                keys.secretOrKey,
+                // Tell the key to expire in one hour
+                { expiresIn: 86400 },
+                (err, token) => {
+                  res.json({
+                    success: true,
+                    token: 'Bearer ' + token
+                  });
+                }
+              );
+            } else {
+              return res.status(400).json({ password: 'Incorrect password' });
+            }
+          })
+      }
     })
 })
 
