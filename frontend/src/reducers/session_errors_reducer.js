@@ -25,6 +25,8 @@ const SessionErrorsReducer = (prevState = _nullErrors, action) => {
     case RECEIVE_USER_NOTES:
       // debugger
       return prevState;
+    case RECEIVE_CURRENT_USER:
+      return prevState;
     default:
       // return state;
       return _nullErrors;
