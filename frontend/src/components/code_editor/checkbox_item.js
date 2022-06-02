@@ -9,6 +9,12 @@ class CheckBoxItem extends React.Component {
     this.handleCheck = this.handleCheck.bind(this);
   }
 
+  componentDidMount(){
+    if(this.props.selected){
+      this.setState({checked:true});
+    }
+  }
+
   handleCheck(e){
     e.stopPropagation();
     this.setState({checked: !this.state.checked});

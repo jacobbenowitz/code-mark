@@ -15,7 +15,7 @@ async function getResources(keywords, codebody) {
                 return resource;
             })
             .catch(err => {
-                return null
+                return null     //maybe just return google search url if api requests run out
             }));
     })
     let found = await Promise.all(search);
@@ -31,7 +31,7 @@ async function getResources(keywords, codebody) {
 }
 
 function getLanguage(codebody) {
-    const languages = ['Ruby', 'C', 'JavaScript', 'CSS', 'HTML'];
+    const languages = ['JavaScript', 'CSS', 'HTML', 'C++'];
     const code_test = hljs.highlightAuto(codebody, languages);
     return code_test.language;
 }

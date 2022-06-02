@@ -470,6 +470,7 @@ export default class NoteShow extends React.Component {
     
                   <CodeEditorNoteShow
                     codeBody={note.codebody}
+                    language={note.language}
                   />
                 </>
                 ) :  <NoteShowEditorLoader />}
