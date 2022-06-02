@@ -45,7 +45,7 @@
   padding: 0.4rem;
   border-radius: 4px;
   box-shadow: 0px 2px 16px rgb(0 0 0 / 30%);
-  animation: fadeIn 1000ms ease-in-out;
+  animation: fadeIn 500ms ease-in-out;
 }
 
 .note-stat.updated-at:hover::before {
@@ -59,7 +59,7 @@
   padding: 0.4rem;
   border-radius: 4px;
   box-shadow: 0px 2px 16px rgb(0 0 0 / 30%);
-  animation: fadeIn 1000ms ease-in-out;
+  animation: fadeIn 500ms ease-in-out;
 }
 
 .note-textDetails {
@@ -84,7 +84,7 @@
   padding: 0.4rem;
   border-radius: 4px;
   box-shadow: 0px 2px 16px rgb(0 0 0 / 30%);
-  animation: fadeIn 1000ms ease-in-out;
+  animation: fadeIn 500ms ease-in-out;
 }
 
 .note-stat.comments:hover::before {
@@ -98,7 +98,7 @@
   padding: 0.4rem;
   border-radius: 4px;
   box-shadow: 0px 2px 16px rgb(0 0 0 / 30%);
-  animation: fadeIn 1000ms ease-in-out;
+  animation: fadeIn 500ms ease-in-out;
 }
 
 .note-stats {
@@ -125,7 +125,7 @@
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   border-bottom: 10px solid #37393e;
-  animation: fadeIn 1000ms ease-in-out;
+  animation: fadeIn 500ms ease-in-out;
 }
 
 .note-public-switch-wrapper {
@@ -332,7 +332,7 @@
   padding: 0.4rem;
   border-radius: 4px;
   box-shadow: 0px 2px 16px rgb(0 0 0 / 30%);
-  animation: fadeIn 1000ms ease-in-out;
+  animation: fadeIn 500ms ease-in-out;
 }
 
 .note-icon:hover {
@@ -351,7 +351,7 @@
   padding: 0.4rem;
   border-radius: 4px;
   box-shadow: 0px 2px 16px rgb(0 0 0 / 30%);
-  animation: fadeIn 1000ms ease-in-out;
+  animation: fadeIn 500ms ease-in-out;
 }
 
 .note-icon.like:hover::before {
@@ -365,7 +365,7 @@
   padding: 0.4rem;
   border-radius: 4px;
   box-shadow: 0px 2px 16px rgb(0 0 0 / 30%);
-  animation: fadeIn 1000ms ease-in-out;
+  animation: fadeIn 500ms ease-in-out;
 }
 
 .info-icon:hover::after {
@@ -376,7 +376,7 @@
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   border-top: 10px solid #37393e;
-    animation: fadeIn 1000ms ease-in-out;
+    animation: fadeIn 500ms ease-in-out;
 }
 
 .note-icon.like:hover::after, 
@@ -387,7 +387,7 @@
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   border-top: 10px solid #37393e;
-  animation: fadeIn 1000ms ease-in-out;
+  animation: fadeIn 500ms ease-in-out;
 }
 
 @keyframes fadeIn {
@@ -511,7 +511,7 @@
   padding: 0.4rem;
   border-radius: 4px;
   box-shadow: 0px 2px 16px rgb(0 0 0 / 30%);
-  animation: fadeIn 1000ms ease-in-out;
+  animation: fadeIn 500ms ease-in-out;
 }
 
 .public-status:hover::after {
@@ -522,7 +522,7 @@
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   border-bottom: 10px solid #37393e;
-    animation: fadeIn 1000ms ease-in-out;
+    animation: fadeIn 500ms ease-in-out;
 }
 
 .action-buttons {

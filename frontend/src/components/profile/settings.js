@@ -25,6 +25,7 @@ export default class Settings extends React.Component {
   }
 
   componentDidUpdate() {
+    
     const { email, username, color } = this.props.user;
     // debugger;
     if (Object.values(this.props.user).length &&
@@ -113,13 +114,17 @@ export default class Settings extends React.Component {
   }
 
   checkAllFields() {
-
-    if (this.state.username !== this.props.user.username ||
+    debugger
+    if (this.props.user.username === 'DemoAccount' || this.props.user.email === 'demouser@gmail.com')
+     {return false}
+    else if (this.state.username !== this.props.user.username ||
       this.state.email !== this.props.user.email ||
       this.state.color !== this.props.user.color ||
       (this.state.password === this.state.password2 &&
         this.state.password2 !== '')
-    ) { return true } else return false
+    ) { return true } 
+    else 
+    {return false}
   }
 
   render() {
@@ -163,7 +168,7 @@ export default class Settings extends React.Component {
               <i className="fa-solid fa-arrow-left"></i>
               <span>Go back</span>
             </div>
-            <div className='icon-button' onClick={this.toggleDeleteModal}>
+            <div className={(this.props.user.username === 'DemoAccount' && this.props.user.email === 'demouser@gmail.com') ? 'icon-button disabled' : 'icon-button'} onClick={(this.props.user.username !== 'DemoAccount' && this.props.user.email !== 'demouser@gmail.com') ? this.toggleDeleteModal : undefined}>
               <i className="fa-solid fa-trash fa-lg"></i>
               <span>Delete account</span>
             </div>
@@ -241,6 +246,12 @@ export default class Settings extends React.Component {
                 className={this.checkAllFields() ? 'button-session' : 'button-session disabled'}>Update account</button>
             </div>
 
+            {(this.props.user.username === 'DemoAccount' || this.props.user.email === 'demouser@gmail.com') ? (
+              <div className='session-error'>
+                <i className="fa-solid fa-circle-xmark"></i>
+                <span>Cannot Delete/Update Demo User</span>
+              </div>
+            ) : 
             <div className='session-error-wrapper'>
               <div className='session-error'>
 
@@ -273,7 +284,9 @@ export default class Settings extends React.Component {
 
                 </div>
               ) : ""}
+              {/* add icon for demo  */}
             </div>
+            }
 
           </form>
         </div>

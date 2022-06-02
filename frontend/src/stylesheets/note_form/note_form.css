@@ -118,7 +118,7 @@
   padding: 0.4rem;
   border-radius: 4px;
   /* box-shadow: 0px 2px 16px rgb(0 0 0 / 30%); */
-  animation: fadeIn 1000ms ease-in-out;
+  animation: fadeIn 500ms ease-in-out;
   color: rgb(221, 74, 74);
   display: flex;
 }
@@ -136,7 +136,7 @@
   padding: 0.4rem;
   border-radius: 4px;
   /* box-shadow: 0px 2px 16px rgb(0 0 0 / 30%); */
-  animation: fadeIn 1000ms ease-in-out;
+  animation: fadeIn 500ms ease-in-out;
   color: rgb(221, 74, 74);
   display: flex;
 }
@@ -157,7 +157,7 @@
   padding: 0.4rem;
   border-radius: 4px;
   /* box-shadow: 0px 2px 16px rgb(0 0 0 / 30%); */
-  animation: fadeIn 1000ms ease-in-out;
+  animation: fadeIn 500ms ease-in-out;
   color: rgb(221, 74, 74);
   display: flex;
 }
@@ -315,16 +315,16 @@ button#tag-icon-save.disabled:hover {
 .modal-on {
   visibility: visible;
   display: block;
-  animation: modalOn 700ms ease-in-out;
+  animation: modalOn 350ms ease-in-out;
 }
 
 .modal-out {
-  animation: modalOff 700ms ease-in-out;
+  animation: modalOff 350ms ease-in-out;
   visibility: hidden;
 }
 
 .modal-in {
-  animation: modalOn 700ms ease-in-out;
+  animation: modalOn 350ms ease-in-out;
 }
 
 .modal-off {

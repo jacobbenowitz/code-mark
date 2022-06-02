@@ -42,7 +42,7 @@ class SignupForm extends React.Component {
   demoSignup = (e) => {
     e.preventDefault();
     const guest = {
-      usernameOrEmail: 'Guest',
+      usernameOrEmail: 'DemoAccount',
       password: 'password'
     }
     this.props.loginGuest(guest);

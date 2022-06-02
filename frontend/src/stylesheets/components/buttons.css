@@ -160,6 +160,14 @@ button:focus, .signup:focus, .login:focus, .hide-button:focus {
   transition: background-color 500ms ease-in-out;
 }
 
+.icon-button.disabled {
+  border: 1px solid transparent;
+  color: #727272;
+  background: #373737;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
 .icon-button:hover {
   border: 0.5px solid white;
   background-color: #222121;
