@@ -73,28 +73,28 @@ router.post('/login', (req, res) => {
       if (!user) {
         return res.status(404).json({ usernameOrEmail: 'This user does not exist' });
       }
-      if(password === user.password){
-        const payload = {
-          id: user.id,
-          username: user.username,
-          followers: user.followers,
-          following: user.following,
-          note_likes: user.note_likes,
-          color: user.color
-        };
-        jwt.sign(
-          payload,
-          keys.secretOrKey,
-          // Tell the key to expire in one hour
-          { expiresIn: 86400 },
-          (err, token) => {
-            res.json({
-              success: true,
-              token: 'Bearer ' + token
-            });
-          }
-        );
-      }else{
+      // if(password === user.password){      //bad idea since the whole point of hashing is to not have passwords revealed on database
+      //   const payload = {
+      //     id: user.id,
+      //     username: user.username,
+      //     followers: user.followers,
+      //     following: user.following,
+      //     note_likes: user.note_likes,
+      //     color: user.color
+      //   };
+      //   jwt.sign(
+      //     payload,
+      //     keys.secretOrKey,
+      //     // Tell the key to expire in one hour
+      //     { expiresIn: 86400 },
+      //     (err, token) => {
+      //       res.json({
+      //         success: true,
+      //         token: 'Bearer ' + token
+      //       });
+      //     }
+      //   );
+      // }else{
         bcrypt.compare(password, user.password)
           .then(isMatch => {
             if (isMatch) {
@@ -123,7 +123,7 @@ router.post('/login', (req, res) => {
               return res.status(400).json({ password: 'Incorrect password' });
             }
           })
-      }
+      // }
     })
 })
 

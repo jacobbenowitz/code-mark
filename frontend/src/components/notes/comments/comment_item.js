@@ -22,6 +22,7 @@ class CommentItem extends React.Component {
     this.handleEdit = this.handleEdit.bind(this);
     this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
+    this.removeModal = this.removeModal.bind(this);
   }
 
   componentDidMount() {
@@ -62,7 +63,19 @@ class CommentItem extends React.Component {
     this.props.removeComment(this.props.comment._id)
     // this.props.toggleModal();
     // setTimeout(this.props.fetchNoteComments(this.props.noteId), 100)
-    this.toggleDeleteModal();
+    this.removeModal();
+  }
+
+  removeModal(){
+    if (this.state.deleteCommentModal) {
+      this.setState({
+        deleteCommentModal: false
+      })
+    } else {
+      this.setState({
+        deleteCommentModal: true
+      })
+    }
   }
 
   update(type) {
