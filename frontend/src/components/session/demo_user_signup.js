@@ -22,48 +22,66 @@ const Demo = {
 
     // email
     await sleep(getRandomInt(25, 200))
-    email.value = "g"
+    email.value = "d"
     await sleep(getRandomInt(25, 200))
-    email.value = "gu"
+    email.value = "de"
     await sleep(getRandomInt(25, 200))
-    email.value = "gue"
+    email.value = "dem"
     await sleep(getRandomInt(25, 200))
-    email.value = "gues"
+    email.value = "demo"
     await sleep(getRandomInt(25, 200))
-    email.value = "guest"
+    email.value = "demou"
     await sleep(getRandomInt(25, 200))
-    email.value = "guest@"
+    email.value = "demous"
     await sleep(getRandomInt(25, 200))
-    email.value = "guest@g"
+    email.value = "demouse"
     await sleep(getRandomInt(25, 200))
-    email.value = "guest@gm"
+    email.value = "demouser"
     await sleep(getRandomInt(25, 200))
-    email.value = "guest@gma"
+    email.value = "demouser@"
     await sleep(getRandomInt(25, 200))
-    email.value = "guest@gmai"
+    email.value = "demouser@g"
     await sleep(getRandomInt(25, 200))
-    email.value = "guest@gmail"
+    email.value = "demouser@gm"
     await sleep(getRandomInt(25, 200))
-    email.value = "guest@gmail."
+    email.value = "demouser@gma"
     await sleep(getRandomInt(25, 200))
-    email.value = "guest@gmail.c"
+    email.value = "demouser@gmai"
     await sleep(getRandomInt(25, 200))
-    email.value = "guest@gmail.co"
+    email.value = "demouser@gmail"
     await sleep(getRandomInt(25, 200))
-    email.value = "guest@gmail.com"
+    email.value = "demouser@gmail."
+    await sleep(getRandomInt(25, 200))
+    email.value = "demouser@gmail.c"
+    await sleep(getRandomInt(25, 200))
+    email.value = "demouser@gmail.co"
+    await sleep(getRandomInt(25, 200))
+    email.value = "demouser@gmail.com"
     await sleep(550)
 
     // username
     await sleep(getRandomInt(25, 200))
-    username.value = "G"
+    username.value = "D"
     await sleep(getRandomInt(25, 200))
-    username.value = "Gu"
+    username.value = "De"
     await sleep(getRandomInt(25, 200))
-    username.value = "Gue"
+    username.value = "Dem"
     await sleep(getRandomInt(25, 200))
-    username.value = "Gues"
+    username.value = "Demo"
     await sleep(getRandomInt(25, 200))
-    username.value = "Guest"
+    username.value = "DemoA"
+    await sleep(getRandomInt(25, 200))
+    username.value = "DemoAc"
+    await sleep(getRandomInt(25, 200))
+    username.value = "DemoAcc"
+    await sleep(getRandomInt(25, 200))
+    username.value = "DemoAcco"
+    await sleep(getRandomInt(25, 200))
+    username.value = "DemoAccou"
+    await sleep(getRandomInt(25, 200))
+    username.value = "DemoAccoun"
+    await sleep(getRandomInt(25, 200))
+    username.value = "DemoAccount"
     await sleep(550)
 
     // password

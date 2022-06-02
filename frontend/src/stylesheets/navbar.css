@@ -443,11 +443,11 @@ footer {
 }
 
 #user-modal.nav-modal-container.on {
-  animation: modalUp 700ms ease-in;
+  animation: modalUp 350ms ease-in;
 }
 
 #user-modal.nav-modal-container.off {
-  /* animation: modalDown 700ms ease-in; */
+  /* animation: modalDown 350ms ease-in; */
   top: 80px;
   opacity: 0%;
   visibility: hidden;
@@ -531,13 +531,13 @@ footer {
 }
 
 .menu-in {
-  animation: menuIn 750ms ease-in-out;
+  animation: menuIn 375ms ease-in-out;
   visibility: visible;
   transform: translateX(0px);
 }
 
 .menu-out {
-  animation: menuOut 750ms ease-in-out;
+  animation: menuOut 375ms ease-in-out;
   transform: translateX(-400px);
   visibility: hidden;
 }
@@ -547,12 +547,12 @@ footer {
 }
 
 .mask-in {
-  animation: maskIn 750ms ease-in-out;
+  animation: maskIn 375ms ease-in-out;
   transform: translateX(0px);
 }
 
 .mask-out {
-  animation: menuOut 750ms ease-out;
+  animation: menuOut 375ms ease-out;
 }
 
 @keyframes menuIn {

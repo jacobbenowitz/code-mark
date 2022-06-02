@@ -498,7 +498,7 @@ export default class NoteShow extends React.Component {
           <section id={'comments'} className='note-comments'>
             <div className='comments-title'>
               <h4>Comments</h4>
-              <p>Select any part of the CodeMark above and right click to comment on that snippet!</p>
+              <p>Select any part of the CodeMark above to comment on that snippet!</p>
             </div>
             <CommentForm
               noteId={noteId}

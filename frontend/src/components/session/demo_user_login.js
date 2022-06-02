@@ -20,15 +20,27 @@ const Demo = {
        
         // username
         await sleep(getRandomInt(25, 200))
-        username.value = "G"
+        username.value = "D"
         await sleep(getRandomInt(25, 200))
-        username.value = "Gu"
+        username.value = "De"
         await sleep(getRandomInt(25, 200))
-        username.value = "Gue"
+        username.value = "Dem"
         await sleep(getRandomInt(25, 200))
-        username.value = "Gues"
+        username.value = "Demo"
         await sleep(getRandomInt(25, 200))
-        username.value = "Guest"
+        username.value = "DemoA"
+        await sleep(getRandomInt(25, 200))
+        username.value = "DemoAc"
+        await sleep(getRandomInt(25, 200))
+        username.value = "DemoAcc"
+        await sleep(getRandomInt(25, 200))
+        username.value = "DemoAcco"
+        await sleep(getRandomInt(25, 200))
+        username.value = "DemoAccou"
+        await sleep(getRandomInt(25, 200))
+        username.value = "DemoAccoun"
+        await sleep(getRandomInt(25, 200))
+        username.value = "DemoAccount"
         await sleep(550)
 
         // password

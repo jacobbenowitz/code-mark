@@ -165,7 +165,7 @@ input[type='color'] {
   padding: 0.4rem;
   border-radius: 4px;
   box-shadow: 0px 2px 16px rgb(0 0 0 / 30%);
-  animation: fadeIn 1000ms ease-in-out;
+  animation: fadeIn 500ms ease-in-out;
 }
 
 .color-change-view:hover::after {
@@ -179,7 +179,7 @@ input[type='color'] {
   border-right: 5px solid transparent;
   border-top: 7px solid #393939;
   box-shadow: 0px 2px 16px rgb(0 0 0 / 30%);
-  animation: fadeIn 1000ms ease-in-out;
+  animation: fadeIn 500ms ease-in-out;
 }
 
 .fa-eye-dropper {

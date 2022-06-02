@@ -37,13 +37,13 @@ export const fetchCurrentUser = () => dispatch => {
 export const login = user => dispatch => {
   return APIUtil.login(user).then(res => {
     const { token } = res.data;
-    // debugger
+    debugger
     localStorage.setItem('jwtToken', token);
     APIUtil.setAuthToken(token);
     const decoded = jwt_decode(token);
     dispatch(receiveCurrentUser(decoded));
   })
-    .then(() => dispatch(receiveUserSignIn(['success', 'User Successfully Logged In!'])))
+    .then(() => dispatch(receiveUserSignIn(['success', `Hello again, ${user.usernameOrEmail}`])))
     .catch(err => {
       // debugger
       dispatch(receiveErrors(err.response.data));
@@ -59,6 +59,7 @@ export const logout = () => dispatch => {
 };
 
 export const signup = user => dispatch => {
+  debugger
   return APIUtil.signup(user)
     .then(() => {
       APIUtil.login({
@@ -72,7 +73,7 @@ export const signup = user => dispatch => {
         dispatch(receiveCurrentUser(decoded));
       })
     })
-    .then(() => dispatch(receiveUserSignIn()))
+    .then(() => dispatch(receiveUserSignIn(['success', `Welcome to Codemark ${user.username}`])))
     .catch(err => dispatch(receiveErrors(err.response.data)))
 };
 
