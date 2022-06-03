@@ -20,7 +20,6 @@ export default class Home extends React.Component {
   }
 
   render() {
-    debugger
     if (this.isMobile()) {
       return (
         <div className='main-mobile'>

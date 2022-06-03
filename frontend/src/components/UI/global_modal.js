@@ -70,13 +70,14 @@ class GlobalModal extends React.Component {
     }else{
       newmessages = [noteErrors,sessionErrors,userErrors,commentErrors].filter(ele => ele.length > 0);
     }
-    // debugger;
-    this.setState({
-      messages: newmessages,
-      modalOn: true
-    },() => {
-      this.state.messages.length > 0 ? this.toggleSuccessModal(): '';
-    })
+    if (newmessages.length !== 0) {
+      this.setState({
+        messages: newmessages,
+        modalOn: true
+      },() => {
+        this.state.messages.length > 0 ? this.toggleSuccessModal(): '';
+      })
+    }
   }
   // if(messages.length === 0){
   //   messages = ['Success!'];

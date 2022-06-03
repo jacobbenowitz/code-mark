@@ -86,7 +86,7 @@ export default class NoteShow extends React.Component {
       !== comments)) {
       
       if (currentUser?.id !== note.userId && !note.public) {
-        debugger
+        // debugger
         history.push(`/home`)
       }
       const orderedComments = orderNoteComments(comments);
@@ -211,7 +211,7 @@ export default class NoteShow extends React.Component {
   render() {
     const { currentUser, updateNote, noteId } = this.props;
     const { note } = this.state;
-    debugger
+    // debugger
     return Object.values(note).length ? (
       <>
         {/* PHOTO EXPORT MODAL */}

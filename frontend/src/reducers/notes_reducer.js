@@ -31,7 +31,7 @@ const notesReducer = (prevState = initialState, action) => {
     case RECEIVE_USER_NOTES:
       // nextState.user = Object.values(action.notes.data)
       nextState.user = action.notes.data
-      debugger
+      // debugger
       return nextState;
     case RECEIVE_NOTES:
       let allNotes = {}
@@ -43,12 +43,12 @@ const notesReducer = (prevState = initialState, action) => {
       nextState.all[action.note.data._id] = action.note.data;
       return nextState;
     case RECEIVE_DELETE_NOTE:
-      debugger;
+      // debugger;
       delete nextState.all[action.note[0]._id]
       nextState.user = nextState.user.filter(note =>
         note._id !== action.note[0]._id
       )
-      debugger;
+      // debugger;
       return nextState;
     case RECEIVE_UPDATED_NOTE:
       nextState.all[action.note.data[0]._id] = action.note.data[0];

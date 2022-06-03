@@ -114,9 +114,10 @@ export default class Settings extends React.Component {
   }
 
   checkAllFields() {
-    debugger
-    if (this.props.user.username === 'DemoAccount' || this.props.user.email === 'demouser@gmail.com')
-     {return false}
+    // debugger
+    if (this.props.user.username === 'DemoAccount' || this.props.user.email === 'demouser@gmail.com') {
+      return false
+    }
     else if (this.state.username !== this.props.user.username ||
       this.state.email !== this.props.user.email ||
       this.state.color !== this.props.user.color ||

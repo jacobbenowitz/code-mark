@@ -32,7 +32,7 @@ class UserNotes extends React.Component {
   }
 
   render() {
-    debugger
+    // debugger
     // if (this.state.userNotes.length === 0) {
     //   return (
     //     <div className='desktop-notes'>
