@@ -21,10 +21,16 @@ class GlobalModal extends React.Component {
     }, 5000)
   }
 
-  getIcon(errorType) {
-    return errorType === 'error' ?
-      <i className="fa-solid fa-xmark modal"></i>
-      : <i className="fa-solid fa-thumbs-up"></i>
+  getIcon(errorType,message) {
+    if (errorType === 'error') 
+    { return <i className="fa-solid fa-xmark modal"></i>}
+      
+    else if (message[0] === 'Hello') 
+    { return '👋'}
+      
+    else 
+    { return <i className="fa-solid fa-thumbs-up"></i>}
+   
   }
 
   // var messages;
@@ -98,7 +104,7 @@ class GlobalModal extends React.Component {
             return ( 
               <div className='modal-message'
                 key={`error-message-${idx}`}>
-                {this.getIcon(message[0])}
+                {this.getIcon(message[0],message[1].split(' '))}
                 <span>{message[1]}</span>
               </div>
             )

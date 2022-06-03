@@ -6,7 +6,7 @@ const SectionTitle = ({ type, title, noteCount, filter }) => {
     return (
       <div className='section-title'>
         <h3>{title}</h3>
-        {noteCount === 1 ? (
+        {/* {noteCount === 1 ? (
           <div className="note-count">
             <span className="sub-white-right">{noteCount}</span>
             <span className="subtitle">Note</span>
@@ -16,7 +16,7 @@ const SectionTitle = ({ type, title, noteCount, filter }) => {
             <span className="subtitle">Notes:</span>
             <span className="sub-white">{noteCount}</span>
           </div>
-        )}
+        )} */}
       </div>
     )
   }
