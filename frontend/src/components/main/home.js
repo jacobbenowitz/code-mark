@@ -40,6 +40,10 @@ export default class Home extends React.Component {
                 changeUserFollowers={this.props.changeUserFollowers}
                 isCurrentUser={true}
                 noteCount={this.props?.userNotes.length}
+                fetchUsers={this.props.fetchUsers}
+                allUsers={this.props.allUsers}
+                followers={this.props.currentUser.followers}
+                following={this.props.currentUser.following}
               />
               <div className='tags-wrapper-mobile'>
                 <span className='tags-mobile-header'>Tags</span>
@@ -86,6 +90,10 @@ export default class Home extends React.Component {
                 changeUserFollowers={this.props.changeUserFollowers}
                 isCurrentUser={true}
                 noteCount={this.props?.userNotes.length}
+                fetchUsers={this.props.fetchUsers}
+                allUsers={this.props.allUsers}
+                followers={this.props.currentUser.followers}
+                following={this.props.currentUser.following}
               />
 
               <div className='note-list-container'>

@@ -57,6 +57,7 @@ export const selectCommentsCount = (userNotes) => {
 }
 
 export const filterUsersById = (allUsers, userIds) => {
+  debugger
   return userIds.map(userId => allUsers[userId])
 }
 

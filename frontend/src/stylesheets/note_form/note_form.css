@@ -238,18 +238,7 @@ button#tag-icon-save.disabled:hover {
 
 /* .code-editor */
 
-#edit-note-container {
-  position: absolute;
-  z-index: 200;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.14);
-  backdrop-filter: blur(14px);
-}
-
-#confirm-modal-container, #resources-note-container, #comment-modal-container {
+#confirm-modal-container, #resources-note-container, #comment-modal-container, #edit-note-container, #follower-header-container  {
   position: absolute;
   z-index: 200;
   top: 0;
