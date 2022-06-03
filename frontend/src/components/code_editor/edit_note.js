@@ -111,33 +111,37 @@ export default class EditNote extends React.Component {
   }
 
   toggleEditModal() {
-    const editNoteModal = document.getElementById('edit-note-container');
-    const commentHighlightModal = document.getElementById('comment-highlight-text');
-    if (editNoteModal.className = "modal-on") {
-      editNoteModal.className = "modal-out"
-      commentHighlightModal.className = "modal-compact"
+    // const editNoteModal = document.getElementById('edit-note-container');
+    const editNoteModal = document.getElementById('note-edit-wrapper');
+    // const commentHighlightModal = document.getElementById('comment-highlight-text');
+    if (editNoteModal.className = "edit-note-container modal-on") {
+      editNoteModal.className = "edit-note-container modal-out-removed"
+      // commentHighlightModal.className = "modal-compact"
     } else {
-      editNoteModal.className = "modal-on"
-      commentHighlightModal.className = "modal-compact hidden"
+      editNoteModal.className = "edit-note-container modal-on"
+      // commentHighlightModal.className = "modal-compact hidden"
     }
-    const resourcesNoteModal =
-      document.getElementById('resources-note-container');
-    if (resourcesNoteModal.className === "modal-off") {
+    const resourcesNoteModal = document.getElementById('resources-step-1');
+    if (resourcesNoteModal.className === "resources-modal modal-off") {
       // debugger
       const keywords = getKeywords(this.state.codebody);
       this.setState({
         allKeywords: [...new Set(this.state.keywordsSelected.concat(keywords))]
       }, () => {
-        resourcesNoteModal.className = "modal-on"
+        resourcesNoteModal.className = "resources-modal modal-on"
       })
     } else {
-      resourcesNoteModal.className = "modal-off"
+      resourcesNoteModal.className = "resources-modal modal-off"
     }
   }
 
   toggleResourceModal(){
     const step1 = document.getElementById('resources-step-1');
-    step1.className = 'modal-off'
+    step1.className = 'resources-modal modal-off';
+    const wrapper = document.getElementById('edit-note-container');
+    wrapper.className = 'modal-off';
+    const noteEdit = document.getElementById('note-edit-wrapper');
+    noteEdit.className = 'edit-note-container';
   }
   
   componentDidUpdate(){
@@ -300,50 +304,10 @@ export default class EditNote extends React.Component {
     })
     return (
       <>
-        <div id='resources-note-container' className='modal-off'>
-          <div className='modal-wrapper'>
-            <div id="resources-step-1" className='resources-modal'>
-              <h4>Resources</h4>
-              <span>Select the keywords that you'd like resources for</span>
-              <span>Maximum 5 keywords allowed. Currently have {this.state.keywordsSelected.length} keywords</span>
-              <form className='resource-options'>
-                <div className='keyword-options'>
-                  <div className='column1'>
-                    {
-                    col1?.map((keyword, i) =>
-                      <CheckBoxItem keyword={keyword} index={i}
-                      key={`col1-${i}`} updateKeywords={this.updateKeywords}
-                      selected={this.state.keywordsSelected.includes(keyword)}
-                      />
-                      )
-                    }
-
-                  </div>
-                  <div className='column2'>
-                    {
-                    col2?.map((keyword, i) =>
-                      <CheckBoxItem keyword={keyword} index={i}
-                      key={`col2-${i}`} updateKeywords={this.updateKeywords}
-                      selected={this.state.keywordsSelected.includes(keyword)}
-                      />
-                      )
-                    }
-
-                  </div>
-                </div>
-              </form>
-              <div>
-                <button id='keyword-submit' onClick={this.handleSubmit}>Submit</button>
-              </div>
-              <div id='hide-note-form'
-              className='icon-only-button'
-              title='hide form'
-              onClick={this.toggleResourceModal}>
-              <i className="fa-solid fa-square-minus"></i>
-            </div>
-            </div>
-          </div>
-        </div>
+        {/* <div id='resources-note-container' className='modal-off'>
+          <div className='modal-wrapper'> */}
+          {/* </div>
+        </div> */}
         <div className='edit-note-container' id='note-edit-wrapper'>
           <div className='new-note-form'>
             <div id="note-title-input" className='note-input'>
@@ -377,34 +341,34 @@ export default class EditNote extends React.Component {
             </div>
             {/* <div className='note-input'>
               <CodeMirror className='codemirror html'
-                value={this.state.codebody}
-                onChange={this.updateCode}
-                height="200px"
-                theme='dark'
-                extensions={[html(),
+              value={this.state.codebody}
+              onChange={this.updateCode}
+              height="200px"
+              theme='dark'
+              extensions={[html(),
                 EditorView.lineWrapping]}
-              />
-            </div>
-            <div className='note-input'>
-              <CodeMirror className='codemirror cpp'
+                />
+                </div>
+                <div className='note-input'>
+                <CodeMirror className='codemirror cpp'
                 value={this.state.codebody}
                 onChange={this.updateCode}
                 height="200px"
                 theme='dark'
                 extensions={[cpp(),
-                EditorView.lineWrapping]}
-              />
-            </div>
-            <div className='note-input'>
-              <CodeMirror className='codemirror css'
-                value={this.state.codebody}
-                onChange={this.updateCode}
-                height="200px"
-                theme='dark'
-                extensions={[css(),
-                EditorView.lineWrapping]}
-              />
-            </div> */}
+                  EditorView.lineWrapping]}
+                  />
+                  </div>
+                  <div className='note-input'>
+                  <CodeMirror className='codemirror css'
+                  value={this.state.codebody}
+                  onChange={this.updateCode}
+                  height="200px"
+                  theme='dark'
+                  extensions={[css(),
+                    EditorView.lineWrapping]}
+                    />
+                  </div> */}
             <TextareaAutosize
               onChange={this.update('textdetails')}
               id='details-textarea-edit'
@@ -475,6 +439,46 @@ export default class EditNote extends React.Component {
             </div>
           </div>
         </div>
+                  <div id="resources-step-1" className='resources-modal modal-off'>
+                    <h4>Resources</h4>
+                    <span>Select the keywords that you'd like resources for</span>
+                    <span>Maximum 5 keywords allowed. Currently have {this.state.keywordsSelected.length} keywords</span>
+                    <form className='resource-options'>
+                      <div className='keyword-options'>
+                        <div className='column1'>
+                          {
+                          col1?.map((keyword, i) =>
+                            <CheckBoxItem keyword={keyword} index={i}
+                            key={`col1-${i}`} updateKeywords={this.updateKeywords}
+                            selected={this.state.keywordsSelected.includes(keyword)}
+                            />
+                            )
+                          }
+          
+                        </div>
+                        <div className='column2'>
+                          {
+                          col2?.map((keyword, i) =>
+                            <CheckBoxItem keyword={keyword} index={i}
+                            key={`col2-${i}`} updateKeywords={this.updateKeywords}
+                            selected={this.state.keywordsSelected.includes(keyword)}
+                            />
+                            )
+                          }
+          
+                        </div>
+                      </div>
+                    </form>
+                    <div>
+                      <button id='keyword-submit' onClick={this.handleSubmit}>Submit</button>
+                    </div>
+                    <div id='hide-note-form'
+                    className='icon-only-button'
+                    title='hide form'
+                    onClick={this.toggleResourceModal}>
+                    <i className="fa-solid fa-square-minus"></i>
+                  </div>
+                  </div>
       </>
     )
   }

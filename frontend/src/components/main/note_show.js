@@ -124,11 +124,11 @@ export default class NoteShow extends React.Component {
   toggleEditModal() {
     // debugger
     const editNoteModal = document.getElementById('edit-note-container');
-    const commentHighlightModal = document.getElementById('comment-highlight-text');
+    // const commentHighlightModal = document.getElementById('comment-highlight-text');
 
     if (editNoteModal.className === "modal-off" || editNoteModal.className === "modal-out") {
       editNoteModal.className = "modal-on"
-      commentHighlightModal.className = "modal-compact hidden"
+      // commentHighlightModal.className = "modal-compact hidden"
     } else {
       editNoteModal.className = "modal-out"
     }
