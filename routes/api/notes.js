@@ -71,6 +71,20 @@ router.post('/',
     }
 );
 
+// route only for updating a note's tags 
+
+router.patch('/:id/tags', passport.authenticate('jwt',
+    { session: false }), (req, res) => {
+        Note.findById(req.params.id)
+            .then(note => {
+                note.tags = req.body.tags;
+                note.save()
+                    .then(note => res.json([note, ['success', 'Note Successfully Updated!']]))
+            })
+            .catch(err => res.status(404).json({ nonotefound: "No Note Found With That ID" }))
+});
+
+
 // only backend route for updating a note's likes
 router.patch('/note_likes/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
     Note.findById(req.params.id)

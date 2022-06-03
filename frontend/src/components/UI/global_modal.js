@@ -87,7 +87,6 @@ class GlobalModal extends React.Component {
   // }
   // debugger;
   render(){
-    // this.toggleSuccessModal();
     return (
       <div className='global-modal-wrapper'>
         <div id='success-modal' className='modal-off'>
@@ -96,6 +95,7 @@ class GlobalModal extends React.Component {
         {/* {icon} */}
         {
           this.state.messages.map((message,idx) => {
+            console.log(`message ${idx}: ${message}`)
             return ( 
               <div className='modal-message'
                 key={`error-message-${idx}`}>

@@ -365,7 +365,7 @@ export default class NoteShow extends React.Component {
                   <span className='tags-header'>TAGS</span>
                     <Tags note={this.state.note}
                       isCurrentUser={this.props.currentUser.id === this.props.note.user.userId}
-                      updateNote={this.props.updateNote}
+                      updateNoteTags={this.props.updateNoteTags}
                     />
               </div>
               ) : ''
@@ -408,7 +408,7 @@ export default class NoteShow extends React.Component {
                       <span className='tags-header'>TAGS</span>
                         <Tags note={this.state.note}
                           isCurrentUser={this.props.currentUser.id === this.props.note.user.userId}
-                          updateNote={this.props.updateNote}
+                          updateNoteTags={this.props.updateNoteTags}
                         />
                     </div>
                   </div>

@@ -5,7 +5,8 @@ import {
   writeNote,
   patchNote,
   deleteNote,
-  patchNoteLikes
+  patchNoteLikes,
+  patchNoteTags
 } from '../util/note_api_util';
 
 export const RECEIVE_NOTES = "RECEIVE_NOTES";
@@ -63,6 +64,8 @@ export const receiveNoteUnlike = note => ({
   note
 })
 
+// thunk actions
+
 export const fetchNotes = () => dispatch => (
   getNotes()
     .then(notes => dispatch(receiveNotes(notes)))
@@ -83,7 +86,7 @@ export const fetchUserNotes = id => dispatch => {
   return getUserNotes(id)
     .then(notes => dispatch(receiveUserNotes(notes)))
     .catch(err => console.log(err))
-}
+};
 
 export const composeNote = data => dispatch => {
   return writeNote(data)
@@ -97,11 +100,15 @@ export const updateNote = (data, noteId) => dispatch => {
     .catch(err => dispatch(receiveNoteErrors(err)))
 };
 
+export const updateNoteTags = (tags, noteId) => dispatch => {
+  return patchNoteTags(tags, noteId)
+    .then(note => dispatch(receiveUpdateNote(note)))
+    .catch(err => dispatch(receiveNoteErrors(err)))
+};
+
 export const removeNote = noteId => dispatch => (
   deleteNote(noteId)
-    .then(note => {
-      dispatch(receiveDeleteNote(note.data))
-    })
+    .then(note => dispatch(receiveDeleteNote(note.data)))
     .catch(err => dispatch(receiveNoteErrors(err)))
 );
 
@@ -109,10 +116,10 @@ export const addNoteLike = (data, noteId) => dispatch => (
   patchNoteLikes(data, noteId)
     .then(note => dispatch(receiveNoteLike(note)))
     .catch(err => dispatch(receiveNoteErrors(err)))
-)
+);
 
 export const removeNoteLike = (data, noteId) => dispatch => (
   patchNoteLikes(data, noteId)
     .then(note => dispatch(receiveNoteUnlike(note)))
     .catch(err => dispatch(receiveNoteErrors(err)))
-)
+);

@@ -1,11 +1,14 @@
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
 import NoteShow from "./note_show";
 import {
   addNoteLike,
   fetchNote,
-  removeNote, removeNoteLike, updateNote
+  removeNote,
+  removeNoteLike,
+  updateNote,
+  updateNoteTags
 } from "../../actions/note_actions";
+
 import {
   fetchNoteComments,
   removeComment,
@@ -14,9 +17,9 @@ import {
   addCommentLike,
   removeCommentLike,
 } from "../../actions/comment_actions";
+
 import { fetchUsers, fetchUser } from "../../actions/user_actions";
 import { fetchCurrentUser } from "../../actions/session_actions";
-// import { toggleSuccessModal } from "../../util/modal_util";
 
 const mapStateToProps = (state, { match }) => {
   // debugger;
@@ -48,8 +51,8 @@ const mapDispatchToProps = dispatch => {
     addCommentLike: (data, commentId) =>
       dispatch(addCommentLike(data, commentId)),
     removeCommentLike: (data, commentId) => dispatch(removeCommentLike(data, commentId)),
-    fetchCurrentUser: () => dispatch(fetchCurrentUser())
-    // toggleModal: () => dispatch(toggleSuccessModal())
+    fetchCurrentUser: () => dispatch(fetchCurrentUser()),
+    updateNoteTags: (tags, noteId) => dispatch(updateNoteTags(tags, noteId))
   }
 }
 

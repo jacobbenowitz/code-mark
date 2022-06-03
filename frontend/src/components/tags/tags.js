@@ -13,41 +13,66 @@ export default class Tags extends React.Component {
     this.toggleTagForm = this.toggleTagForm.bind(this);
   }
 
-  componentDidCatch() {
-    this.setState({
-      tags: this.props.note.tags,
-    })
-  }
+  // componentDidCatch() {
+  //   this.setState({
+  //     tags: this.props.note.tags,
+  //   })
+  // }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      tags: nextProps.note.tags
-    })
+    if (nextProps.note.tags !== this.state.tags) {
+      this.setState({
+        tags: nextProps.note.tags
+      })
+    }
   }
 
   update(type) {
     return e => {
+      
       this.setState({
         [type]: e.target.value
       })
     }
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-    let newTags = this.state.tags.concat([this.state.newTag]);
+  removeWhiteSpace(tag) {
+    let cleaned = tag.replace(/\s{2,}/g, ' ');
 
-    const { title, codebody, textdetails, resources, _id } = this.props.note;
-
-    let nextNote = {
-      title: title,
-      codebody: codebody,
-      textdetails: textdetails,
-      resources: resources,
-      tags: newTags,
+    if (cleaned.slice(cleaned.length - 1) === " ") {
+      cleaned = cleaned.slice(0, cleaned.length - 1)
     }
 
-    this.props.updateNote(nextNote, _id)
+    if (cleaned.slice(0, 1) === " ") {
+      cleaned = cleaned.slice(1)
+    }
+
+    return cleaned;
+  }
+
+  validateTags() {
+    const { newTag, tags } = this.state;
+
+    const cleaned = this.removeWhiteSpace(newTag)
+    
+    if (cleaned.length === 0 ||
+      tags.includes(cleaned) ||
+      cleaned.split(' ').join('').length === 0
+    ) {
+      return false
+    }
+    else return true
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    const { _id } = this.props.note;
+
+    const cleaned = this.removeWhiteSpace(this.state.newTag)
+    
+    let newTags = [...new Set(this.state.tags.concat(cleaned))]
+
+    this.props.updateNoteTags({tags: newTags}, _id)
       .then(() => (
         this.setState({
           newTag: "",
@@ -89,7 +114,7 @@ export default class Tags extends React.Component {
               this.state.tags?.map((tag, i) =>
                 <TagItem title={tag} key={`tag-${i}`}
                   isCurrentUser={this.props.isCurrentUser}
-                  updateNote={this.props.updateNote}
+                  updateNoteTags={this.props.updateNoteTags}
                   note={this.props.note}
                   tags={this.state.tags}
                 />)
@@ -105,7 +130,7 @@ export default class Tags extends React.Component {
               placeholder={'New tag...'}
               value={this.state.newTag}
             />
-            <button className={this.state.newTag.split(' ').join('').length ? '' : 'save-tag disabled'} id='tag-icon-save' type='submit'>
+            <button className={this.validateTags() ? 'save-tag' : 'save-tag disabled'} id='tag-icon-save' type='submit'>
               <i className="fa-solid fa-floppy-disk" />
             </button>
           </form>
