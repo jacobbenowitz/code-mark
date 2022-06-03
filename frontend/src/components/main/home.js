@@ -6,6 +6,8 @@ import { NavLink } from 'react-router-dom';
 import NavTagItem from '../tags/nav_tag_item';
 import SideCarMenu from './side_car_menu';
 import SectionTitle from '../UI/section_title';
+import SidebarLoader from '../lazy_loaders/placeholder_components/sidebar_loader';
+
 
 export default class Home extends React.Component {
 
@@ -18,6 +20,7 @@ export default class Home extends React.Component {
   }
 
   render() {
+    debugger
     if (this.isMobile()) {
       return (
         <div className='main-mobile'>

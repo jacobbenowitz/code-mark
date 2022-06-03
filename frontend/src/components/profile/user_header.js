@@ -17,7 +17,7 @@ const UserHeader = ({
   }
   return (
     <div className="user-header-wrapper">
-      <h1>{user.username}'s Notes</h1>
+      <h3>Notes by {user.username}</h3>
       <div className="user-header-stats">
         <div className="user-stats">
 

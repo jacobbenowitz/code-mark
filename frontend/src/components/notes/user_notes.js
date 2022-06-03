@@ -4,6 +4,7 @@ import { orderUserNotes } from '../../util/selectors';
 import CodeNoteItem from './code_note_item';
 import AllNotes from '../main/all_notes';
 import MobileNotes from '../main/mobile_notes';
+import CodeNoteItemLoader from '../lazy_loaders/placeholder_components/code_note_loader';
 
 class UserNotes extends React.Component {
   constructor(props) {
@@ -15,13 +16,11 @@ class UserNotes extends React.Component {
 
   componentDidMount() {
     this.props.fetchUserNotes(this.props.currentUser?.id)
-    debugger
   };
   
   componentWillReceiveProps(nextProps) {
     if (nextProps.userNotes) {
       let notes = orderUserNotes(nextProps.userNotes);
-      debugger
       this.setState({
         userNotes: notes
       })
@@ -35,7 +34,19 @@ class UserNotes extends React.Component {
   render() {
     debugger
     if (this.state.userNotes.length === 0) {
-      return (<span>No notes found :(</span>)
+      return (
+        <div className='desktop-notes'>
+          <div className='column1'>
+            <CodeNoteItemLoader />
+            <CodeNoteItemLoader />
+            <CodeNoteItemLoader />
+          </div>
+          <div className='column2'>
+            <CodeNoteItemLoader />
+            <CodeNoteItemLoader />
+          </div>
+        </div>
+      )
     } else {
       return (
         this.isMobile() ?
