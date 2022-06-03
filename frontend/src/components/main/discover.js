@@ -34,14 +34,11 @@ export default class Discover extends React.Component {
               type={'default'}
             />
             <div className='note-list-container'>
-              {this.props.allNotes.length === 0 ? (
-                <span>No notes found</span>
-              ) :
+              {
                 this.isMobile() ?
                 <MobileNotes notes={this.props.allNotes} />
                 : <AllNotes notes={this.props.allNotes} />
               }
-
             </div>
           </div>
         </div>
