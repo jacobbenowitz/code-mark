@@ -71,13 +71,13 @@ export default class EditNote extends React.Component {
     this.updateTags = this.updateTags.bind(this);
     this.toggleTagForm = this.toggleTagForm.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-
     this.placeholderTitle = this.placeholderTitle.bind(this);
     this.updateCode = this.updateCode.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.updateKeywords = this.updateKeywords.bind(this);
     this.toggleEditModal = this.toggleEditModal.bind(this);
     this.toggleResourceModal = this.toggleResourceModal.bind(this);
+    this.cancelTextEdit = this.cancelTextEdit.bind(this);
   }
 
   update(type) {
@@ -103,10 +103,10 @@ export default class EditNote extends React.Component {
     const commentHighlightModal = document.getElementById('comment-highlight-text');
     if (editNoteModal.className = "modal-on") {
       editNoteModal.className = "modal-out"
-      commentHighlightModal.className = "modal-compact"
+      this.props.toggleCommentModalVisibility()
     } else {
       editNoteModal.className = "modal-on"
-      commentHighlightModal.className = "modal-compact hidden"
+      this.props.toggleCommentModalVisibility()
     }
   }
 

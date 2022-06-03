@@ -18,7 +18,7 @@ const NoteShowTopLoader = (props) => (
     <rect x="255" y="83" rx="7" ry="7" width="113" height="14" />
     <rect x="129" y="83" rx="7" ry="7" width="113" height="14" />
     <rect x="80" y="83" rx="7" ry="7" width="32" height="14" />
-    <rect x="33" y="90" rx="7" ry="7" width="32" height="20" />
+    <rect x="33" y="80" rx="7" ry="7" width="32" height="20" />
     <rect x="33" y="117" rx="7" ry="7" width="32" height="14" />
     <rect x="33" y="140" rx="3" ry="3" width="32" height="26" />
     <rect x="608" y="74" rx="16" ry="16" width="134" height="31" />

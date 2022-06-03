@@ -15,6 +15,7 @@ const UserHeader = ({
       />
     )
   }
+  
   return (
     <div className="user-header-wrapper">
       <h3>Notes by {user.username}</h3>

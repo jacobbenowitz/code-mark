@@ -16,17 +16,19 @@ const CodeCommentReadOnly = props => {
     'CSS': css(),
     'C++': cpp(),
   }
-  
+  const fixedHeightEditor = EditorView.theme({
+    "&": { 'max-height': "200px", 'min-height': "100px" },
+    ".cm-scroller": { 'overflow': "auto" }
+  })
   return (
     <CodeMirror
-      className="comment-code"
       readOnly={true}
-      value={props.codeSnippet || 'Optional code snippet'}
+      value={props.codeSnippet}
       width='100%'
       theme='dark'
       extensions={[
-        extensions[language] ? extensions[language] : html(),
-        EditorView.lineWrapping
+        extensions[props.language] ? extensions[props.language] : javascript({ jsx: true }),
+        EditorView.lineWrapping, fixedHeightEditor
       ]}
     />
   );

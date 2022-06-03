@@ -47,6 +47,10 @@ export default class NoteShow extends React.Component {
       isCurrentUser: false,
       hideCommentModal: false
     }
+    this.bindHandlers()
+  }
+
+  bindHandlers() {
     this.deleteNote = this.deleteNote.bind(this);
     this.exportImage = this.exportImage.bind(this);
     this.handlePublicSwitch = this.handlePublicSwitch.bind(this);
@@ -54,6 +58,7 @@ export default class NoteShow extends React.Component {
     this.commentOnSelection = this.commentOnSelection.bind(this);
     this.clearSnippet = this.clearSnippet.bind(this);
     this.toggleCommentModal = this.toggleCommentModal.bind(this);
+    this.toggleCommentModalVisibility = this.toggleCommentModalVisibility.bind(this);
   }
   
   componentDidMount() {
@@ -116,7 +121,6 @@ export default class NoteShow extends React.Component {
     }
   }
 
-
   deleteNote() {
     setTimeout(() => {
       this.props.removeNote(this.props.noteId)
@@ -133,8 +137,12 @@ export default class NoteShow extends React.Component {
 
     } else {
       editNoteModal.className = "modal-out"
-      this.setState({hideCommentModal: true})
+      this.setState({hideCommentModal: false})
     }
+  }
+
+  toggleCommentModalVisibility() {
+    this.setState({ hideCommentModal: !this.state.hideCommentModal })
   }
 
   toggleDeleteModal() {
@@ -159,7 +167,10 @@ export default class NoteShow extends React.Component {
 
   commentOnSelection() {
     const commentSection = document.getElementById("comments");
-    this.setState({ commentSnippet: this.state.selectedText })
+    this.setState({
+      commentSnippet: this.state.selectedText,
+      selectedText: ''
+    })
     this.toggleCommentModal()
     commentSection.scrollIntoView({ behavior: 'smooth' });
   }
@@ -288,8 +299,12 @@ export default class NoteShow extends React.Component {
           <div className='modal-wrapper'>
             <EditNote
               getLanguage={getLanguage}
-              note={note} updateNote={updateNote}
-              currentUser={currentUser} noteId={noteId}/>
+              note={note}
+              updateNote={updateNote}
+              currentUser={currentUser}
+              noteId={noteId}
+              toggleCommentModalVisibility={this.toggleCommentModalVisibility}
+            />
           </div>
         </div>
         <div className={this.isMobile() ? 'note-show-container span-12' : 'note-show-container center-span-7'}>
@@ -462,16 +477,27 @@ export default class NoteShow extends React.Component {
                       <div className='modal-main'>
                         <div className='comment-selection-title'>
                           <i className="fa-solid fa-comment" />
-                          <span>Comment on this selection:</span>
+                          {this.state.selectedText ? (
+                            <span>Comment on this selection:</span>
+                            ) : (
+                              <span>Select code from this note to comment on it directly</span>
+                              )}
                         </div>
-                        <CodeCommentReadOnlyMini
-                          codeSnippet={this.state.selectedText}
-                        />
-                        <div className='icon-button'
-                          onClick={this.commentOnSelection}>
-                          <span>Comment</span>
-                          <i className="fa-solid fa-arrow-right" />
-                        </div>
+                        {
+                          this.state.selectedText ? (
+                          <CodeCommentReadOnlyMini
+                              codeSnippet={this.state.selectedText} />
+                          ) : ''
+                        }
+                        {
+                          this.state.selectedText ? (
+                            <div className='icon-button'
+                              onClick={this.commentOnSelection}>
+                              <span>Comment</span>
+                              <i className="fa-solid fa-arrow-right" />
+                            </div>
+                          ) : ''
+                        }
                       </div>
                     </div>
                   )}

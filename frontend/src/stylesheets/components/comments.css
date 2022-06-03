@@ -6,6 +6,9 @@
   align-items: flex-start;
   gap: 2rem;
   animation: fadeIn 300ms ease-in-out;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* .testing-box {
