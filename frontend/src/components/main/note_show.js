@@ -41,7 +41,8 @@ export default class NoteShow extends React.Component {
       public: true,
       textHeight: undefined,
       bodyHeight: 0,
-      isCurrentUser: false
+      isCurrentUser: false,
+      hideCommentModal: false
     }
     this.deleteNote = this.deleteNote.bind(this);
     this.exportImage = this.exportImage.bind(this);
@@ -77,8 +78,6 @@ export default class NoteShow extends React.Component {
     const { note, comments, currentUser, history } = this.props;
     const body = document.getElementsByTagName('body');
     const bodyHeight = body[0].clientHeight;
-    
-    
     
     if (note && (note !== this.state.note || this.state.comments
       !== comments)) {
@@ -117,20 +116,22 @@ export default class NoteShow extends React.Component {
 
 
   deleteNote() {
-    this.props.history.goBack();
-    this.props.removeNote(this.props.noteId)
+    setTimeout(() => {
+      this.props.removeNote(this.props.noteId)
+    }, 200)
+    this.props.history.goBack()
   }
 
   toggleEditModal() {
     // debugger
     const editNoteModal = document.getElementById('edit-note-container');
-    const commentHighlightModal = document.getElementById('comment-highlight-text');
 
     if (editNoteModal.className === "modal-off" || editNoteModal.className === "modal-out") {
       editNoteModal.className = "modal-on"
-      commentHighlightModal.className = "modal-compact hidden"
+      this.setState({hideCommentModal: true})
     } else {
       editNoteModal.className = "modal-out"
+      this.setState({hideCommentModal: true})
     }
   }
 
@@ -254,7 +255,9 @@ export default class NoteShow extends React.Component {
           </div>
         </div>
         {/* DELETE NOTE MODAL */}
-        <div id='confirm-modal-container' className='modal-off' >
+        <div id='confirm-modal-container' className='modal-off'
+          style={{ 'height': this.state.bodyHeight }}
+        >
           <div className='modal-wrapper'>
             <div className='cancel-modal'>
               <span>Are you sure you want to delete this note?</span>
@@ -278,7 +281,8 @@ export default class NoteShow extends React.Component {
           </div>
         </div>
         {/* NOTE ACTIONS // NOTE MAIN */}
-        <div id='edit-note-container' className="modal-off" style={{height:this.state.bodyHeight}}>
+        <div id='edit-note-container' className="modal-off"
+          style={{ height: this.state.bodyHeight }}>
           <div className='modal-wrapper'>
             <EditNote
               getLanguage={getLanguage}
@@ -440,33 +444,35 @@ export default class NoteShow extends React.Component {
                   </div>
                   
                   {/* COMMENT MODAL */}
-                  <div id='comment-highlight-text'
-                    className={this.state.commentModal ?
-                      'modal-expanded' : 'modal-compact'}>
-                    <div className='arrow-modal'
-                      onClick={this.toggleCommentModal}
-                    >
-                      {this.state.commentModal ? (
-                        <i className="fa-solid fa-chevron-right fa-xl" />
-                      ) : (
-                        <i className="fa-solid fa-chevron-left fa-xl" />
-                      )}
-                    </div>
-                    <div className='modal-main'>
-                      <div className='comment-selection-title'>
-                        <i className="fa-solid fa-comment" />
-                        <span>Comment on this selection:</span>
+                  {this.state.hideCommentModal ? '' : (
+                    <div id='comment-highlight-text'
+                      className={this.state.commentModal ?
+                        'modal-expanded' : 'modal-compact'}>
+                      <div className='arrow-modal'
+                        onClick={this.toggleCommentModal}
+                      >
+                        {this.state.commentModal ? (
+                          <i className="fa-solid fa-chevron-right fa-xl" />
+                        ) : (
+                          <i className="fa-solid fa-chevron-left fa-xl" />
+                        )}
                       </div>
-                      <CodeCommentReadOnlyMini
-                        codeSnippet={this.state.selectedText}
-                      />
-                      <div className='icon-button'
-                        onClick={this.commentOnSelection}>
-                        <span>Comment</span>
-                        <i className="fa-solid fa-arrow-right" />
+                      <div className='modal-main'>
+                        <div className='comment-selection-title'>
+                          <i className="fa-solid fa-comment" />
+                          <span>Comment on this selection:</span>
+                        </div>
+                        <CodeCommentReadOnlyMini
+                          codeSnippet={this.state.selectedText}
+                        />
+                        <div className='icon-button'
+                          onClick={this.commentOnSelection}>
+                          <span>Comment</span>
+                          <i className="fa-solid fa-arrow-right" />
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  )}
     
                   <CodeEditorNoteShow
                     codeBody={note.codebody}

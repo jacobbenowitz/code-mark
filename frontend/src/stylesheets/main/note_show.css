@@ -454,6 +454,8 @@
   width: 100%;
   border-radius: 4px;
   transition: border-bottom 300ms ease-in;
+  border-bottom: 0.5px solid transparent;
+  
 }
 
 #title-code:hover {
@@ -620,6 +622,27 @@
 
 #comment-highlight-text:hover {
   background-color: rgba(198, 198, 198, 0.251)
+}
+
+@media only screen and (max-width: 680px) {
+  #comment-highlight-text {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 1rem;
+    place-items: center;
+    border-radius: 4px;
+    padding: 0.4rem;
+    width: 300px;
+    position: fixed;
+    top: 590px;
+    right: 17px;
+    z-index: 200;
+    background-color: rgba(198, 198, 198, 0.102);
+    backdrop-filter: blur(20px);
+    transition: background-color 300ms ease;
+    transition: transform 500ms ease-in-out;
+  }
 }
 
 .comment-selection-title {

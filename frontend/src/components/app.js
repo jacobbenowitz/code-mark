@@ -30,6 +30,7 @@ import FollowingFilteredContainer from './main/following_filtered_container';
 import LikedFilteredContainer from './main/liked_filtered_container';
 import LayoutDesign from './UI/layout_design';
 import GlobalModalContainer from './UI/global_modal_container';
+import TestLazyLoad from './lazy_loaders/test_lazy_load';
 
 const App = () => (
   <div className="grid-pancake-stack">
@@ -66,6 +67,8 @@ const App = () => (
         component={SettingsContainer} />
       <Route exact path='/dev/main-layout'
         component={LayoutDesign} />
+      <Route exact path='/dev/test-lazy'
+        component={TestLazyLoad} />
       <AuthRoute path="/"
         component={SplashPage} />
     </Switch>

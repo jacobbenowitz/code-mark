@@ -1,10 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import SidebarLoader from '../lazy_loaders/placeholder_components/sidebar_loader';
 import NavTagItem from '../tags/nav_tag_item';
 
 const SideCarMenu = ({ tags, tagType }) => {
 
-  return (
+  return tags ? (
     <div className='nav-sidecar'>
       <div className='nav-boxes'>
         <div className='nav-pages'>
@@ -43,6 +44,12 @@ const SideCarMenu = ({ tags, tagType }) => {
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  ) : (
+    <div className='nav-sidecar'>
+      <div className='nav-boxes'>
+          <SidebarLoader />
       </div>
     </div>
   )

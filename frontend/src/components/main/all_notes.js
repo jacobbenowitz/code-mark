@@ -1,22 +1,21 @@
 import React from "react"
-import ContentLoader from "react-content-loader"
 import CodeNoteItem from "../notes/code_note_item"
+import CodeNoteItemLoader from "../lazy_loaders/placeholder_components/code_note_loader";
 
 const AllNotes = (props) => {
     const col1 = [];
     const col2 = [];
     // debugger;
     props.notes?.map((note, idx) => {
-        // if (idx < 20) {
+        if (idx < 20) {
             if (idx % 2 === 0) {
                 col1.push(note);
             } else {
                 col2.push(note);
             }
-        // }
+        }
     })
-    // debugger;
-    return (
+    return props.notes.length ? (
         <div className='desktop-notes'>
             <div className='column1'>
                 {col1.map((note) =>
@@ -53,7 +52,20 @@ const AllNotes = (props) => {
                 )}
             </div>
         </div>
+    ) : (
+        <div className='desktop-notes'>
+            <div className='column1'>
+                <CodeNoteItemLoader />
+                <CodeNoteItemLoader />
+                <CodeNoteItemLoader />
+            </div>
+            <div className='column2'>
+                <CodeNoteItemLoader />
+                <CodeNoteItemLoader />
+            </div>
+        </div>
     )
+
 }
 
 

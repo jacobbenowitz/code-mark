@@ -1,9 +1,10 @@
 import React from "react";
+import HomeHeaderLoader from "../lazy_loaders/placeholder_components/home_header_loader";
 
 const SectionTitle = ({ type, title, noteCount, filter }) => {
   let sectionTitleEle;
   if (type === 'default') {
-    return (
+    sectionTitleEle = (
       <div className='section-title'>
         <h3>{title}</h3>
         {noteCount === 1 ? (
@@ -21,7 +22,7 @@ const SectionTitle = ({ type, title, noteCount, filter }) => {
     )
   }
   if (type === 'filtered') {
-    return (
+    sectionTitleEle = (
     <div className='section-title'>
       <h3>{title}</h3>
         <div className="subtitle-wrapper">
@@ -44,5 +45,13 @@ const SectionTitle = ({ type, title, noteCount, filter }) => {
       </div>
     )
   }
+
+  return (
+    noteCount ? (
+      sectionTitleEle
+    ) : (
+        <HomeHeaderLoader />
+    )
+  )
 }
 export default SectionTitle;
