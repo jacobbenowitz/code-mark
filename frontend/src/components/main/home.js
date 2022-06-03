@@ -23,7 +23,6 @@ export default class Home extends React.Component {
     if (this.isMobile()) {
       return (
         <div className='main-mobile'>
-          {/* mobile menu was here */}
           <div className='home-main'>
             <NewNoteContainer />
             <div className='notes-section'>

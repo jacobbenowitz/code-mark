@@ -32,22 +32,6 @@ class UserNotes extends React.Component {
   }
 
   render() {
-    // debugger
-    // if (this.state.userNotes.length === 0) {
-    //   return (
-    //     <div className='desktop-notes'>
-    //       <div className='column1'>
-    //         <CodeNoteItemLoader />
-    //         <CodeNoteItemLoader />
-    //         <CodeNoteItemLoader />
-    //       </div>
-    //       <div className='column2'>
-    //         <CodeNoteItemLoader />
-    //         <CodeNoteItemLoader />
-    //       </div>
-    //     </div>
-    //   )
-    // } else {
       return (
         this.isMobile() ?
           <MobileNotes notes={this.state.userNotes} />

@@ -34,7 +34,7 @@ const initialState = {
 const SessionReducer = (prevState = initialState, action) => {
   Object.freeze(prevState);
   let nextState = merge({}, prevState);
-  // debugger;
+
   switch (action.type) {
     case RECEIVE_USER_LOGOUT:
       return {
@@ -45,14 +45,13 @@ const SessionReducer = (prevState = initialState, action) => {
       const user = action.currentUser.id ? (
         action.currentUser
       ) : action.currentUser.currentUser
-      // debugger
+
       return {
         ...prevState,
         isAuthenticated: !!user,
         user: user
       }
     case RECEIVE_USER_SIGN_IN:
-      // debugger;
       return {
         ...prevState,
         isSignedIn: true
@@ -75,7 +74,6 @@ const SessionReducer = (prevState = initialState, action) => {
       let newUniqueTags =
         [...new Set(nextState.tags.concat(action.note.data.tags))]
       nextState.tags = newUniqueTags;
-      // debugger
       return nextState;
     case RECEIVE_NOTE_LIKE:
       nextState.user.note_likes = nextState.user.note_likes.concat(

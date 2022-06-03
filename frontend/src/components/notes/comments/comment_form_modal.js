@@ -15,7 +15,6 @@ export default class CommentFormModal extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // debugger
     this.setState({
       codeSnippet: nextProps.selectedText
     })
@@ -48,19 +47,7 @@ export default class CommentFormModal extends React.Component {
   }
 
   render() {
-    // debugger
-    // const tx = document.getElementsByTagName("textarea");
-    // for (let i = 0; i < tx.length; i++) {
-    //   tx[i].setAttribute("style", "height:" + (tx[i].scrollHeight) + "px;overflow-y:hidden;");
-    //   tx[i].addEventListener("input", OnInput, false);
-    // }
 
-    // function OnInput() {
-    //   this.style.height = "auto";
-    //   this.style.height = (this.scrollHeight) + "px";
-    // }
-    // const codeSnippetField = document.getElementById('code-snippet-new');
-    // codeSnippetField.focus()
     return (
       <>
         <div className='new-comment-container'>

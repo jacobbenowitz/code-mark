@@ -73,7 +73,6 @@ export const removeUser = userId => dispatch => {
 }
 
 export const changeUserFollowers = (userId) => dispatch => {
-    // debugger;
     return editUserFollowers(userId)
         .then(users => dispatch(receiveUserNewFollowing(users)))
         .catch(err => dispatch(receiveUserErrors(err.response.data)))

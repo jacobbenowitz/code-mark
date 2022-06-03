@@ -22,7 +22,6 @@ import { fetchUsers, fetchUser } from "../../actions/user_actions";
 import { fetchCurrentUser } from "../../actions/session_actions";
 
 const mapStateToProps = (state, { match }) => {
-  // debugger;
   return {
     noteId: match.params.noteId,
     note: state.notes.all[match.params.noteId],

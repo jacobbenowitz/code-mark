@@ -53,7 +53,6 @@ export default class FollowingFiltered extends React.Component {
   }
 
   isMobile(){
-    // debugger;
     return window.innerWidth < 680;
   }
 

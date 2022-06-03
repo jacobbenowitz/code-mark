@@ -16,7 +16,7 @@ const CodeCommentReadOnly = props => {
     'CSS': css(),
     'C++': cpp(),
   }
-  // debugger
+  
   return (
     <CodeMirror
       className="comment-code"

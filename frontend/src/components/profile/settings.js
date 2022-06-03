@@ -25,9 +25,8 @@ export default class Settings extends React.Component {
   }
 
   componentDidUpdate() {
-    
     const { email, username, color } = this.props.user;
-    // debugger;
+
     if (Object.values(this.props.user).length &&
       (!this.state.email.length || !this.state.username.length ||
         this.props.errors !== this.state.errors)) {
@@ -64,7 +63,7 @@ export default class Settings extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     let user;
-    // debugger;
+
     this.state.password2.length ? (
       user = {
         id: this.props.currentUser.id,
@@ -114,7 +113,7 @@ export default class Settings extends React.Component {
   }
 
   checkAllFields() {
-    // debugger
+    
     if (this.props.user.username === 'DemoAccount' || this.props.user.email === 'demouser@gmail.com') {
       return false
     }

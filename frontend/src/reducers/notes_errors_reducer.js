@@ -12,23 +12,16 @@ const _nullErrors = [];
 
 const notesErrorReducer = (prevState = _nullErrors, action) => {
   Object.freeze(prevState);
-  let nextState = merge({},prevState);
-  // debugger;
+  let nextState = merge({}, prevState);
+  
   switch (action.type) {
     case RECEIVE_NOTE_ERRORS:
       return action.errors;
-    // case RECEIVE_NEW_NOTE:
-    //   return action.note.data[1];
     case RECEIVE_UPDATED_NOTE:
-      // debugger;
       return action.note.data[1];
     case RECEIVE_DELETE_NOTE:
       return action.note[1];
-    // case RECEIVE_UPDATED_COMMENT:
-    //   debugger;
-    //   return _nullErrors;
     case RECEIVE_USER_NOTES:
-      // debugger;
       return prevState;
     default:
       return _nullErrors;

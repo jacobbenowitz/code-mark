@@ -15,7 +15,6 @@ export default class Discover extends React.Component {
   }
 
   isMobile(){
-    // debugger;
     return window.innerWidth < 680;
   }
 

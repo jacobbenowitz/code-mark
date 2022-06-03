@@ -23,7 +23,6 @@ async function getResources(keywords, codebody) {
     let savedResources = found.filter(ele => ele !== null).map(ele => ele._doc);
     let foundWords = savedResources.map(ele => ele.keyword);
     const notfound = languageKeywords.filter(word => !foundWords.includes(word))
-    // debugger;
     let response = await Promise.all(getPromises(notfound));
     let foundResources = response.map(ele => ele._doc);
     // return response.filter(ele => ele !== undefined);
@@ -37,7 +36,6 @@ function getLanguage(codebody) {
 }
 
 function getPromises(keywords) {
-    // debugger;
     const resources = [];
     keywords.forEach(keyword => {
         resources.push(getGoogleAdvice(keyword)
@@ -50,15 +48,12 @@ function getPromises(keywords) {
                 return newResource.save()
                     .then(() => { return newResource; })
                     .catch(err => {
-                        // debugger
                     });
-                // return newResource;
             })
             .catch(err => {
-                // debugger
+                console.log(err)
             }));
     });
-    // debugger;
     return resources;
 }
 
@@ -82,7 +77,7 @@ const getGoogleAdvice = (search) => {
             }
         })
         .catch(err => {
-            // debugger;
+            console.log(err)
         })
 }
 

@@ -123,7 +123,6 @@ export default class EditNote extends React.Component {
     }
     const resourcesNoteModal = document.getElementById('resources-step-1');
     if (resourcesNoteModal.className === "resources-modal modal-off") {
-      // debugger
       const keywords = getKeywords(this.state.codebody);
       this.setState({
         allKeywords: [...new Set(this.state.keywordsSelected.concat(keywords))]
@@ -169,12 +168,10 @@ export default class EditNote extends React.Component {
 
   updateKeywords(e) {
     e.preventDefault();
-    // debugger
     // e.target.checked ? e.target.checked = false : e.target.checked = true;
     const keyword = e.target.value || e.target.innerText;
     let spaceRemoved = keyword.replace(/\s/g, '');
     let result;
-    // debugger
     this.state.keywordsSelected.includes(spaceRemoved) ? (
       result = this.state.keywordsSelected.filter(word => word !== spaceRemoved)
     ) : (
@@ -192,7 +189,6 @@ export default class EditNote extends React.Component {
   };
 
   limitKeywords() {
-    // debugger;
     const keyword_checks = Object.values(document.getElementsByClassName('checkbox-option')).filter(ele => !ele.classList.contains('option-selected'));
     keyword_checks.forEach(checkbox => {
       checkbox.classList.add('disabled');

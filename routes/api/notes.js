@@ -50,7 +50,6 @@ router.post('/',
         }
         getResources(req.body.keywords, req.body.codebody)
             .then(resources => {
-                // debugger;
                 const newNote = new Note({
                     codebody: req.body.codebody,
                     user: { username: req.user.username, userId: req.user.id },
@@ -68,6 +67,7 @@ router.post('/',
                         .then(() => res.json([note,['success', 'Note Successfully Created!']]))
                 });
             })
+            .catch(err => console.log(err))
     }
 );
 

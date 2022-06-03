@@ -5,7 +5,6 @@ import CodeNoteItemLoader from "../lazy_loaders/placeholder_components/code_note
 const AllNotes = (props) => {
     const col1 = [];
     const col2 = [];
-    // debugger;
     props.notes?.map((note, idx) => {
         if (idx < 20) {
             if (idx % 2 === 0) {

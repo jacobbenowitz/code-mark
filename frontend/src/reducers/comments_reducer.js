@@ -22,7 +22,6 @@ import { merge } from 'lodash';
 const commentsReducer = (prevState = initialState, action) => {
     Object.freeze(prevState);
     let nextState = merge({}, prevState);
-    // debugger;
     switch (action.type) {
         case RECEIVE_NEW_COMMENT:
             let newComments = [...nextState.note, action.comment];

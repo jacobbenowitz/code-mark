@@ -98,7 +98,6 @@ class NewNote extends React.Component {
     const resourcesNoteModal =
       document.getElementById('resources-note-container');
     if (resourcesNoteModal.className === "modal-off") {
-      // debugger
       const keywords = getKeywords(this.state.codebody);
       this.setState({
         allKeywords: keywords
@@ -152,7 +151,7 @@ class NewNote extends React.Component {
       keywords: keywordsSelected,
       language: language_name
     }
-    // debugger
+    
     this.props.composeNote(note)
       .then(() => (
         this.setState({
@@ -174,12 +173,12 @@ class NewNote extends React.Component {
   // remove if possible
   updateKeywords(e) {
     e.preventDefault();
-    // debugger
+    
     // e.target.checked ? e.target.checked = false : e.target.checked = true;
     const keyword = e.target.value || e.target.innerText;
     let spaceRemoved = keyword.replace(/\s/g, '');
     let result;
-    // debugger
+    
     this.state.keywordsSelected.includes(spaceRemoved) ? (
       result = this.state.keywordsSelected.filter(word => word !== spaceRemoved)
     ) : (
@@ -196,7 +195,6 @@ class NewNote extends React.Component {
   };
 
   limitKeywords() {
-    // debugger;
     const keyword_checks = Object.values(document.getElementsByClassName('checkbox-option')).filter(ele => !ele.classList.contains('option-selected'));
     keyword_checks.forEach(checkbox => {
       checkbox.classList.add('disabled');

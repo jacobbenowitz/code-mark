@@ -25,7 +25,6 @@ class FilteredNotes extends React.Component {
   };
 
   componentWillReceiveProps(nextState) {
-    // debugger
     if (nextState.userNotes && nextState.filter !== this.state.filter) {
       let filtered = filterNotesByTag(nextState.filter, nextState.userNotes);
       this.setState({

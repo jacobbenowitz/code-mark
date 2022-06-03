@@ -115,7 +115,6 @@ export const updateComment = (data, commentId) => dispatch => {
 export const removeComment = (commentId) => dispatch => {
     return deleteComment(commentId)
         .then(commentid => {
-            // debugger;
             dispatch(receiveDeleteComment(commentid.data))
         })
         .catch(err => dispatch(receiveCommentErrors(err)))

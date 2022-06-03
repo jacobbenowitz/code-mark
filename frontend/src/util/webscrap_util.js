@@ -9,7 +9,6 @@ export function getLanguage(codebody) {
 }
 
 export function getKeywords(codebody) {
-    // debugger
     const comment_markers = { 'JavaScript': /(\/\/.*\n)/g, 'HTML': /(<!--.*-->)/g, 'CSS': /(\/\*.*\*\/)/g, 'C': /(\/\/.*\n)/g, 'Ruby': /(#.*\n)/g };
     const comment_replace = { 'JavaScript': '\n', 'HTML': '', 'CSS': '', 'C': '\n', 'Ruby': '\n' };
     const languages = ['Ruby', 'C', 'JavaScript', 'CSS', 'HTML'];

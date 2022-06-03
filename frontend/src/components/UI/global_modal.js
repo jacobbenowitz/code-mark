@@ -48,7 +48,7 @@ class GlobalModal extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     let {noteErrors,sessionErrors,userErrors,commentErrors} = nextProps;
-    // debugger
+
     var newmessages = [];
     if (noteErrors.length === undefined){
       Object.values(noteErrors).map(error => {
@@ -85,14 +85,12 @@ class GlobalModal extends React.Component {
   // }else{
   //   icon = getIcon('error');
   // }
-  // debugger;
+
   render(){
     return (
       <div className='global-modal-wrapper'>
         <div id='success-modal' className='modal-off'>
-        {/* {getIcon(error.key)} */}
-        {/* <span>{error.value}</span> */}
-        {/* {icon} */}
+        
         {
           this.state.messages.map((message,idx) => {
             console.log(`message ${idx}: ${message}`)

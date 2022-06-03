@@ -6,13 +6,6 @@ class RecentNotes extends React.Component {
     super(props);
   }
 
-  // componentWillReceiveProps(nextState) {
-  //   debugger
-  //   this.setState({
-  //     note: nextState.newNote
-  //   })
-  // }
-
   render() {
     return this.props.note ? (
       <div className='note-list-container'>

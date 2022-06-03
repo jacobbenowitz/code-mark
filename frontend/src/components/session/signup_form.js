@@ -84,22 +84,24 @@ class SignupForm extends React.Component {
         <div id='session-form'>
           <h3>Create a new account</h3>
           <form onSubmit={this.handleSubmit}>
-            <AvatarForm
-              color={this.state.color.length ?
-                this.state.color : '#0D4649'}
-              username={this.state.username.length ?
-                this.state.username : 'USER'}
-            />
-            <div className='form-input'>
-              <label htmlFor='email'>Email</label>
-              <input type={'email'}
-                id="email-signup"
-                value={this.state.email}
-                onChange={this.update('email')}
-                placeholder='email'
-                className="text-input"
+            <div className='color-change-view'>
+              <div className="color-select-wrapper">
+                <i className="fa-solid fa-eye-dropper fa-xs"
+                  style={{ color: this.state.color }}
+                />
+                <input
+                  type={'color'}
+                  value={this.state.color}
+                  id="color-change"
+                  onChange={this.update('color')}
+                />
+              </div>
+              <AvatarForm
+                color={this.state.color.length ?
+                  this.state.color : '#0D4649'}
+                username={this.state.username.length ?
+                  this.state.username : 'USER'}
               />
-              {this.renderErrors('email')}
             </div>
             
             <div className='form-input'>
@@ -113,6 +115,19 @@ class SignupForm extends React.Component {
               />
               {this.renderErrors('username')}
             </div>
+
+            <div className='form-input'>
+              <label htmlFor='email'>Email</label>
+              <input type={'email'}
+                id="email-signup"
+                value={this.state.email}
+                onChange={this.update('email')}
+                placeholder='email'
+                className="text-input"
+              />
+              {this.renderErrors('email')}
+            </div>
+
             <div className='form-input'>
               <label htmlFor='password'>Password</label>
               <input type={'password'}
