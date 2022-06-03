@@ -49,12 +49,14 @@ export const receiveUserErrors = error => ({
 export const fetchUsers = () => dispatch => (
     getUsers()
         .then(users => dispatch(receiveUsers(users)))
+        .catch(err => console.log(err))
         // .catch(err => dispatch(receiveUserErrors(err.response.data)))
 );
 
 export const fetchUser = userId => dispatch => {
     return getUser(userId)
         .then(user => dispatch(receiveUser(user)))
+        .catch(err => console.log(err))
         // .catch(err => dispatch(receiveUserErrors(err.response.data)))
 };
 

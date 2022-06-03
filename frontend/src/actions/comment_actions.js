@@ -73,18 +73,21 @@ export const receiveCommentUnlike = comment => ({
 export const fetchComments = () => dispatch => (
     getComments()
         .then(comments => dispatch(receiveComments(comments.data)))
+        .catch(err => console.log(err))
         // .catch(err => dispatch(receiveCommentErrors(err)))
 );
 
 export const fetchNoteComments = noteId => dispatch => {
     return getNoteComments(noteId)
         .then(comments => dispatch(receiveNoteComments(comments.data)))
+        .catch(err => console.log(err))
         // .catch(err => dispatch(receiveCommentErrors(err)))
 };
 
 export const fetchComment = commentId => dispatch => (
     getComment(commentId)
         .then(comment => dispatch(receiveComment(comment.data)))
+        .catch(err => console.log(err))
         // .catch(err => dispatch(receiveCommentErrors(err)))
 
 );
@@ -92,21 +95,20 @@ export const fetchComment = commentId => dispatch => (
 export const fetchUserComments = id => dispatch => (
     getUserComments(id)
         .then(comments => dispatch(receiveUserComments(comments.data)))
+        .catch(err => console.log(err))
         // .catch(err => dispatch(receiveCommentErrors(err)))
 );
 
 export const composeComment = data => dispatch => {
     return writeComment(data)
         .then(comment => dispatch(receiveNewComment(comment.data)))
-        .catch(err => dispatch(receiveCommentErrors(err)))
+        .catch(err => console.log(err))
+        // .catch(err => dispatch(receiveCommentErrors(err)))
 };
 
 export const updateComment = (data, commentId) => dispatch => {
     return patchComment(data, commentId)
-        .then(comment => {
-            // debugger;
-            dispatch(receiveUpdateComment(comment.data))
-        })
+        .then(comment => dispatch(receiveUpdateComment(comment.data)))
         .catch(err => dispatch(receiveCommentErrors(err)))
 };
 
@@ -128,5 +130,6 @@ export const addCommentLike = (data, commentId) => dispatch => (
 export const removeCommentLike = (data, commentId) => dispatch => (
     patchCommentLikes(data, commentId)
         .then(comment => dispatch(receiveCommentUnlike(comment)))
-        .catch(err => dispatch(receiveCommentErrors(err)))
+        .catch(err => console.log(err))
+        // .catch(err => dispatch(receiveCommentErrors(err)))
 )
