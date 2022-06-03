@@ -48,23 +48,28 @@ class GlobalModal extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     let {noteErrors,sessionErrors,userErrors,commentErrors} = nextProps;
-
+    debugger;
     var newmessages = [];
     if (noteErrors.length === undefined){
-      Object.values(noteErrors).map(error => {
+      var content = (noteErrors.response === undefined) ? noteErrors : noteErrors.response.data;
+      Object.values(content).map(error => {
         newmessages.push(['error',error]);
       })
     }else if(sessionErrors.length === undefined){
-      Object.values(sessionErrors).map(error => {
+      var content = (sessionErrors.response === undefined) ? sessionErrors : sessionErrors.response.data;
+      Object.values(content).map(error => {
         newmessages.push(['error',error]);
       })
     }else if(userErrors.length === undefined){
-      Object.values(userErrors).map(error => {
+      var content = (userErrors.response === undefined) ? userErrors : userErrors.response.data;
+      Object.values(content).map(error => {
         newmessages.push(['error',error]);
       })
     }
     else if(commentErrors.length === undefined){
-      Object.values(commentErrors).map(error => {
+      var content = (commentErrors.response === undefined) ? commentErrors : commentErrors.response.data;
+      debugger;
+      Object.values(content).map(error => {
         newmessages.push(['error',error]);
       })
     }else{

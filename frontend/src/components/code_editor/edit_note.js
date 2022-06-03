@@ -21,7 +21,9 @@ export default class EditNote extends React.Component {
       'C++': cpp(),
     }
     const keywords = [];
-    this.props.note.resources.forEach(resource => {
+    // debugger;
+    this.props.note?.resources?.forEach(resource => {
+      // debugger;
       keywords.push(resource.keyword.split(' ')[1])
     })
     this.state = {

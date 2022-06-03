@@ -301,7 +301,7 @@ export default class NoteShow extends React.Component {
                 Back
               </span>
             </div>
-            {this.props.currentUser.id === this.props.note.user.userId ? (
+            {this.props.currentUser.id === this.props.note?.user.userId ? (
               <div className='edit-note icon-button'
                 onClick={() => this.toggleEditModal()}>
                 <i className="fa-solid fa-pen-to-square fa-lg"></i>
@@ -312,7 +312,7 @@ export default class NoteShow extends React.Component {
             ) :
               ""
             }
-            {this.props.currentUser.id === this.props.note.user.userId ? (
+            {this.props.currentUser.id === this.props.note?.user.userId ? (
               <div className='delete-note icon-button'
                 onClick={() => this.toggleDeleteModal()}>
                 <i className="fa-solid fa-trash fa-lg"></i>
@@ -335,7 +335,7 @@ export default class NoteShow extends React.Component {
                   <div className='note-stats'>
                     <div className='note-stat likes'>
                       <i className="fa-solid fa-heart"></i>
-                      <span>{this.props.note.likes.length}</span>
+                      <span>{this.props.note?.likes.length}</span>
                     </div>
                     <div className="note-stat comments">
                       <i className="fa-solid fa-comments"></i>
@@ -343,11 +343,11 @@ export default class NoteShow extends React.Component {
                     </div>
                     <div className='note-stat updated-at'>
                       <i className="fa-solid fa-pencil"></i>
-                      <span>{moment(this.props.note.updatedAt).fromNow()}</span>
+                      <span>{moment(this.props.note?.updatedAt).fromNow()}</span>
                     </div>
                     <div className='note-stat created-at'>
                       <i className="fa-solid fa-cloud-arrow-up"></i>
-                      <span>{moment(this.props.note.createdAt).fromNow()}</span>
+                      <span>{moment(this.props.note?.createdAt).fromNow()}</span>
                     </div>
                   </div>
                   <div className='note-public-switch-wrapper'>
@@ -362,7 +362,7 @@ export default class NoteShow extends React.Component {
                   </div>
                   <span className='tags-header'>TAGS</span>
                     <Tags note={this.state.note}
-                      isCurrentUser={this.props.currentUser.id === this.props.note.user.userId}
+                      isCurrentUser={this.props.currentUser.id === this.props.note?.user.userId}
                       updateNoteTags={this.props.updateNoteTags}
                     />
               </div>
@@ -377,7 +377,7 @@ export default class NoteShow extends React.Component {
                       <div className='note-stats'>
                         <div className='note-stat likes'>
                           <i className="fa-solid fa-heart"></i>
-                          <span>{this.props.note.likes.length}</span>
+                          <span>{this.props.note?.likes.length}</span>
                         </div>
                         <div className="note-stat comments">
                           <i className="fa-solid fa-comments"></i>
@@ -385,11 +385,11 @@ export default class NoteShow extends React.Component {
                         </div>
                         <div className='note-stat updated-at'>
                           <i className="fa-solid fa-pencil"></i>
-                          <span>{moment(this.props.note.updatedAt).fromNow()}</span>
+                          <span>{moment(this.props.note?.updatedAt).fromNow()}</span>
                         </div>
                         <div className='note-stat created-at'>
                           <i className="fa-solid fa-cloud-arrow-up"></i>
-                          <span>{moment(this.props.note.createdAt).fromNow()}</span>
+                          <span>{moment(this.props.note?.createdAt).fromNow()}</span>
                         </div>
                       </div>
                       <div className='note-public-switch-wrapper'>
@@ -405,7 +405,7 @@ export default class NoteShow extends React.Component {
                     <div className='tags-section-wrapper'>
                       <span className='tags-header'>TAGS</span>
                         <Tags note={this.state.note}
-                          isCurrentUser={this.props.currentUser.id === this.props.note.user.userId}
+                          isCurrentUser={this.props.currentUser.id === this.props.note?.user.userId}
                           updateNoteTags={this.props.updateNoteTags}
                         />
                     </div>
@@ -425,7 +425,7 @@ export default class NoteShow extends React.Component {
                         removeNoteLike={this.props.removeNoteLike}
                         currentUserId={this.props.currentUser.id}
                         noteId={this.props.noteId}
-                        likes={this.props.note.likes}
+                        likes={this.props.note?.likes}
                       />
                     </div>
 
@@ -492,13 +492,13 @@ export default class NoteShow extends React.Component {
               ) : ''}
           </div>
 
-          {this.props.note.resources?.length ? (
+          {this.props.note?.resources?.length ? (
             <div className='note-resources'>
               <div className='resources-title'>
                 <h4>Resources</h4>
               </div>
               <div className='resources-list'>
-                {this.props.note.resources?.map((resource, i) =>
+                {this.props.note?.resources?.map((resource, i) =>
                   <ResourceItem
                     resource={resource}
                     key={`resource-${i}`}
@@ -522,7 +522,7 @@ export default class NoteShow extends React.Component {
             />
             <CommentIndex
               selectedText={this.state.selectedText}
-              isCurrentUser={this.props.currentUser.id === this.props.note.user.userId}
+              isCurrentUser={this.props.currentUser.id === this.props.note?.user.userId}
               currentUser={this.props.currentUser}
               comments={this.state.comments}
               updateComment={this.props.updateComment}
