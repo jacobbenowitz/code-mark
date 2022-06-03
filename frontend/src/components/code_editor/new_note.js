@@ -322,6 +322,9 @@ class NewNote extends React.Component {
               <div>
                 <button id='keyword-submit' onClick={this.handleSubmit}>Submit</button>
               </div>
+              <div>
+                <button id='keyword-cancel' onClick={this.closeSuccessModal}>Cancel</button>
+              </div>
             </div>
             <div id="resources-step-2" className='modal-off'>
               <h4>Success!</h4>
