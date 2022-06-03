@@ -28,6 +28,7 @@ const CodeNoteItem = props => {
               <i className="fa-solid fa-heart"></i>
               <span>{props.likes?.length || 0}</span>
             </div>
+
           </div>
           <Link to={`/notes/${props.id}`} className="show-link-wrapper">
             <div className="view-link">View
@@ -71,7 +72,8 @@ const CodeNoteItem = props => {
       {props.codeBody.length ? (
         <div className="code-note-preview">
           <CodeEditorReadOnly
-            codeBody={props.codeBody} />
+            codeBody={props.codeBody}
+            language={props.language} />
         </div>
       ) : (
         <CodeBodyPlaceholder />

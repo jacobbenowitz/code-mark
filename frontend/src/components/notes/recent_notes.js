@@ -26,6 +26,7 @@ class RecentNotes extends React.Component {
           textDetails={this.props.note?.textdetails}
           codeBody={this.props.note?.codebody}
           createdAt={this.propsnote?.createdAt}
+          language={note.language}
         />
       </div>
     ) : (

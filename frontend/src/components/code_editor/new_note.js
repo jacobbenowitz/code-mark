@@ -27,6 +27,7 @@ class NewNote extends React.Component {
       allKeywords: [],
       newResources: [],
       lang: javascript({ jsx: true}),
+      language_name: 'JavaScript',
       bodyHeight: 0
     }
     this.bindHandlers();
@@ -87,9 +88,9 @@ class NewNote extends React.Component {
   }
 
   handleChange(e) {
-
     const languages = [javascript({ jsx: true}), html(), cpp(), css()];
-    this.setState({ lang: languages[parseInt(e.target.value)] });
+    const language_names = ['JavaScript','HTML','C++','CSS'];
+    this.setState({ lang: languages[parseInt(e.target.value)], language_name: language_names[parseInt(e.target.value)] });
   }
 
   toggleResourcesModal(e) {
@@ -141,14 +142,15 @@ class NewNote extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const { title, codebody, textdetails, tags, keywordsSelected } = this.state;
+    const { title, codebody, textdetails, tags, keywordsSelected, language_name } = this.state;
 
     const note = {
       title: (title.length ? title : "Untitled note"),
       codebody: codebody,
       textdetails: textdetails,
       tags: tags,
-      keywords: keywordsSelected
+      keywords: keywordsSelected,
+      language: language_name
     }
     // debugger
     this.props.composeNote(note)
@@ -319,6 +321,9 @@ class NewNote extends React.Component {
               </form>
               <div>
                 <button id='keyword-submit' onClick={this.handleSubmit}>Submit</button>
+              </div>
+              <div>
+                <button id='keyword-cancel' onClick={this.closeSuccessModal}>Cancel</button>
               </div>
             </div>
             <div id="resources-step-2" className='modal-off'>

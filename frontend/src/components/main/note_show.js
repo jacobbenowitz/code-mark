@@ -129,6 +129,7 @@ export default class NoteShow extends React.Component {
     if (editNoteModal.className === "modal-off" || editNoteModal.className === "modal-out") {
       editNoteModal.className = "modal-on"
       this.setState({hideCommentModal: true})
+
     } else {
       editNoteModal.className = "modal-out"
       this.setState({hideCommentModal: true})
@@ -476,6 +477,7 @@ export default class NoteShow extends React.Component {
     
                   <CodeEditorNoteShow
                     codeBody={note.codebody}
+                    language={note.language}
                   />
                 </>
                 ) :  <NoteShowEditorLoader />}

@@ -2,17 +2,28 @@ import React from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
 import { oneDark } from '@codemirror/theme-one-dark';
-import { getLanguage } from '../../util/webscrap_util';
+import { getLanguage, getKeywords } from '../../util/webscrap_util';
 import { html } from '@codemirror/lang-html';
 import { cpp } from '@codemirror/lang-cpp';
 import { css } from '@codemirror/lang-css';
 import { EditorView } from '@codemirror/basic-setup';
 import TextareaAutosize from 'react-textarea-autosize';
 import NewNoteTagItem from '../tags/new_note_tag_item';
+import CheckBoxItem from './checkbox_item';
 
 export default class EditNote extends React.Component {
   constructor(props) {
     super(props)
+    const extensions = {
+      'JavaScript': javascript({ jsx: true }),
+      'HTML': html(),
+      'CSS': css(),
+      'C++': cpp(),
+    }
+    const keywords = [];
+    this.props.note.resources.forEach(resource => {
+      keywords.push(resource.keyword.split(' ')[1])
+    })
     this.state = {
       title: "",
       codebody: "",
@@ -21,7 +32,10 @@ export default class EditNote extends React.Component {
       newTag: "",
       suggestedLanguage: undefined,
       isOpen: false, // true when modal is open
-      lang: javascript({ jsx: true})
+      lang: extensions[this.props.note.language],
+      language_name: this.props.note.language,
+      keywordsSelected: keywords,
+      allKeywords: []
     }
     this.bindHandlers();
   }
@@ -43,6 +57,8 @@ export default class EditNote extends React.Component {
     for (var j = 0; j < chosen.length; j++) {
       chosen[j].style.display = 'block';
     }
+    let select_lang = document.getElementById('lang-select');
+    select_lang.value = this.props.note.language;
   }
 
   componentWillUnmount() {
@@ -59,6 +75,9 @@ export default class EditNote extends React.Component {
     this.placeholderTitle = this.placeholderTitle.bind(this);
     this.updateCode = this.updateCode.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.updateKeywords = this.updateKeywords.bind(this);
+    this.toggleEditModal = this.toggleEditModal.bind(this);
+    this.toggleResourceModal = this.toggleResourceModal.bind(this);
   }
 
   update(type) {
@@ -79,7 +98,7 @@ export default class EditNote extends React.Component {
     // }
   }
 
-  toggleEditModal() {
+  cancelTextEdit(){
     const editNoteModal = document.getElementById('edit-note-container');
     const commentHighlightModal = document.getElementById('comment-highlight-text');
     if (editNoteModal.className = "modal-on") {
@@ -91,19 +110,102 @@ export default class EditNote extends React.Component {
     }
   }
 
+  toggleEditModal() {
+    // const editNoteModal = document.getElementById('edit-note-container');
+    const editNoteModal = document.getElementById('note-edit-wrapper');
+    // const commentHighlightModal = document.getElementById('comment-highlight-text');
+    if (editNoteModal.className = "edit-note-container modal-on") {
+      editNoteModal.className = "edit-note-container modal-out-removed"
+      // commentHighlightModal.className = "modal-compact"
+    } else {
+      editNoteModal.className = "edit-note-container modal-on"
+      // commentHighlightModal.className = "modal-compact hidden"
+    }
+    const resourcesNoteModal = document.getElementById('resources-step-1');
+    if (resourcesNoteModal.className === "resources-modal modal-off") {
+      // debugger
+      const keywords = getKeywords(this.state.codebody);
+      this.setState({
+        allKeywords: [...new Set(this.state.keywordsSelected.concat(keywords))]
+      }, () => {
+        resourcesNoteModal.className = "resources-modal modal-on"
+      })
+    } else {
+      resourcesNoteModal.className = "resources-modal modal-off"
+    }
+  }
+
+  toggleResourceModal(){
+    const step1 = document.getElementById('resources-step-1');
+    step1.className = 'resources-modal modal-off';
+    const wrapper = document.getElementById('edit-note-container');
+    wrapper.className = 'modal-off';
+    const noteEdit = document.getElementById('note-edit-wrapper');
+    noteEdit.className = 'edit-note-container';
+  }
+  
+  componentDidUpdate(){
+    if(this.state.keywordsSelected.length === 5){
+      this.limitKeywords();
+    }
+  }
+
   handleSubmit(e) {
     e.preventDefault();
-    let { title, codebody, textdetails, tags } = this.state;
+    let { title, codebody, textdetails, tags, language_name, keywordsSelected } = this.state;
     let note = {
       title: title,
       codebody: codebody,
       textdetails: textdetails,
-      tags: tags
+      tags: tags,
+      language: language_name,
+      keywords: keywordsSelected
     }
     this.props.updateNote(note, this.props.noteId)
       .then(() => {
-        this.toggleEditModal()
+        this.toggleResourceModal()
       })
+  }
+
+  updateKeywords(e) {
+    e.preventDefault();
+    // debugger
+    // e.target.checked ? e.target.checked = false : e.target.checked = true;
+    const keyword = e.target.value || e.target.innerText;
+    let spaceRemoved = keyword.replace(/\s/g, '');
+    let result;
+    // debugger
+    this.state.keywordsSelected.includes(spaceRemoved) ? (
+      result = this.state.keywordsSelected.filter(word => word !== spaceRemoved)
+    ) : (
+      result = [spaceRemoved, ...this.state.keywordsSelected]
+    )
+    this.setState({
+      keywordsSelected: result
+    });
+    // if(result.length === 5){
+    //   this.limitKeywords();
+    // }else 
+    if(result.length === 4){
+      this.freeKeywords();
+    }
+  };
+
+  limitKeywords() {
+    // debugger;
+    const keyword_checks = Object.values(document.getElementsByClassName('checkbox-option')).filter(ele => !ele.classList.contains('option-selected'));
+    keyword_checks.forEach(checkbox => {
+      checkbox.classList.add('disabled');
+      // checkbox.disabled = true;
+    })
+  }
+
+  freeKeywords(){
+    const disabled_keywords = Object.values(document.getElementsByClassName('checkbox-option disabled'));
+    disabled_keywords.forEach(disabled => {
+      disabled.classList.remove('disabled');
+      // checkbox.disabled = false;
+    })
   }
   
   updateTags(e) {
@@ -159,8 +261,15 @@ export default class EditNote extends React.Component {
     // for (var j = 0; j < chosen.length; j++) {
     //   chosen[j].style.display = 'block';
     // }
-    const languages = [javascript({ jsx: true}), html(), cpp(), css()];
-    this.setState({ lang: languages[parseInt(e.target.value)] });
+    const languages = {
+      'JavaScript': javascript({ jsx: true }),
+      'HTML': html(),
+      'CSS': css(),
+      'C++': cpp(),
+    }
+    // const languages = [javascript({ jsx: true}), html(), cpp(), css()];
+    // const language_names = ['JavaScript','HTML','C++','CSS'];
+    this.setState({ lang: languages[e.target.value], language_name: e.target.value });
   }
 
   placeholderTitle(e) {
@@ -184,137 +293,193 @@ export default class EditNote extends React.Component {
       'CSS': css(),
       'C++': cpp(),
     }
+    const col1 = [];
+    const col2 = [];
+    this.state.allKeywords?.map((keyword,idx) => {
+      if(idx % 2 === 0){
+        col1.push(keyword);
+      }else{
+        col2.push(keyword);
+      }
+    })
     return (
-      <div className='edit-note-container' id='note-edit-wrapper'>
-        <div className='new-note-form'>
-          <div id="note-title-input" className='note-input'>
-            <input type={'text'}
-              onClick={this.state.title === "" ? this.placeholderTitle : undefined}
-              onChange={this.update('title')}
-              id='title-code'
-              className='title-input'
-              value={this.state.title}
-              placeholder={'Untitled note'} />
-          </div>
-          <div className='select-wrapper'>
-            <select id='lang-select' onChange={this.handleChange}>
-              <option value={0} defaultValue>JavaScript</option>
-              <option value={1}>HTML</option>
-              <option value={2}>C++</option>
-              <option value={3}>CSS</option>
-            </select>
-          </div>
-          <div className='note-input'>
-            <CodeMirror className='codemirror javascript'
-              id='codebody-js'
-              value={this.state.codebody}
-              onChange={this.updateCode}
-              height="200px"
-              theme='dark'
-              extensions={[this.state.lang,
-                EditorView.lineWrapping]}
-            />
-          </div>
-          {/* <div className='note-input'>
-            <CodeMirror className='codemirror html'
+      <>
+        {/* <div id='resources-note-container' className='modal-off'>
+          <div className='modal-wrapper'> */}
+          {/* </div>
+        </div> */}
+        <div className='edit-note-container' id='note-edit-wrapper'>
+          <div className='new-note-form'>
+            <div id="note-title-input" className='note-input'>
+              <input type={'text'}
+                onClick={this.state.title === "" ? this.placeholderTitle : undefined}
+                onChange={this.update('title')}
+                id='title-code'
+                className='title-input'
+                value={this.state.title}
+                placeholder={'Untitled note'} />
+            </div>
+            <div className='select-wrapper'>
+              {/* <span>{this.props.note.language}</span> */}
+              <select id='lang-select' onChange={this.handleChange}>
+                <option value={'JavaScript'}>JavaScript</option>
+                <option value={'HTML'}>HTML</option>
+                <option value={'C++'}>C++</option>
+                <option value={'CSS'}>CSS</option>
+              </select>
+            </div>
+            <div className='note-input'>
+              <CodeMirror className='codemirror javascript'
+                id='codebody-js'
+                value={this.state.codebody}
+                onChange={this.updateCode}
+                height="200px"
+                theme='dark'
+                extensions={[this.state.lang,
+                  EditorView.lineWrapping]}
+              />
+            </div>
+            {/* <div className='note-input'>
+              <CodeMirror className='codemirror html'
               value={this.state.codebody}
               onChange={this.updateCode}
               height="200px"
               theme='dark'
               extensions={[html(),
-              EditorView.lineWrapping]}
+                EditorView.lineWrapping]}
+                />
+                </div>
+                <div className='note-input'>
+                <CodeMirror className='codemirror cpp'
+                value={this.state.codebody}
+                onChange={this.updateCode}
+                height="200px"
+                theme='dark'
+                extensions={[cpp(),
+                  EditorView.lineWrapping]}
+                  />
+                  </div>
+                  <div className='note-input'>
+                  <CodeMirror className='codemirror css'
+                  value={this.state.codebody}
+                  onChange={this.updateCode}
+                  height="200px"
+                  theme='dark'
+                  extensions={[css(),
+                    EditorView.lineWrapping]}
+                    />
+                  </div> */}
+            <TextareaAutosize
+              onChange={this.update('textdetails')}
+              id='details-textarea-edit'
+              className='note-input-details'
+              value={this.state.textdetails}
             />
-          </div>
-          <div className='note-input'>
-            <CodeMirror className='codemirror cpp'
-              value={this.state.codebody}
-              onChange={this.updateCode}
-              height="200px"
-              theme='dark'
-              extensions={[cpp(),
-              EditorView.lineWrapping]}
-            />
-          </div>
-          <div className='note-input'>
-            <CodeMirror className='codemirror css'
-              value={this.state.codebody}
-              onChange={this.updateCode}
-              height="200px"
-              theme='dark'
-              extensions={[css(),
-              EditorView.lineWrapping]}
-            />
-          </div> */}
-          <TextareaAutosize
-            onChange={this.update('textdetails')}
-            id='details-textarea-edit'
-            className='note-input-details'
-            value={this.state.textdetails}
-          />
-          <div className='tags-header-wrapper'>
-            <span className='tags-header'>TAGS</span>
-            <div className='recommended-tag'
-              onClick={() => this.addLangTag(this.state.suggestedLanguage)}>
-              {this.state.suggestedLanguage ? (
-                <>
-                  <span className='rec-tag'>Detected language:</span>
-                  <span className='lang-tag'>{this.state.suggestedLanguage}</span>
-                </>) : ""}
+            <div className='tags-header-wrapper'>
+              <span className='tags-header'>TAGS</span>
+              <div className='recommended-tag'
+                onClick={() => this.addLangTag(this.state.suggestedLanguage)}>
+                {this.state.suggestedLanguage ? (
+                  <>
+                    <span className='rec-tag'>Detected language:</span>
+                    <span className='lang-tag'>{this.state.suggestedLanguage}</span>
+                  </>) : ""}
+              </div>
             </div>
-          </div>
-          <div className='tag-list'>
-            {
-              this.state.tags?.map((tag, i) =>
-                <NewNoteTagItem title={tag} key={`tag-${i}`}
-                  deleteTag={this.deleteTag}
-                />)
-            }
-          </div>
-
-          <div className='note-tags-list new'>
-
-            <div className="tag-item-wrapper tag-icon-new new"
-              id='toggle-tag-form-button'
-              onClick={this.toggleTagForm}>
-              {this.state.tagForm ? (
-                <i className="fa-solid fa-minus"></i>
-              ) : (
-                <i className="fa-solid fa-circle-plus"></i>
-              )}
+            <div className='tag-list'>
+              {
+                this.state.tags?.map((tag, i) =>
+                  <NewNoteTagItem title={tag} key={`tag-${i}`}
+                    deleteTag={this.deleteTag}
+                  />)
+              }
             </div>
 
-            <div className="tag-form-off" id="new-tag-form-new-note">
-              <input type={'text'}
-                className={'tag-form-input'}
-                onChange={this.update('newTag')}
-                placeholder={'New tag...'}
-                value={this.state.newTag.split(' ').join(' ')}
-                maxLength="50"
-              />
+            <div className='note-tags-list new'>
 
-              <button className={this.state.newTag.split(' ').join('').length ? '' : 'save-tag disabled'} id='tag-icon-save'
-                onClick={this.state.newTag.split(' ').join('').length ?
-                  this.updateTags : undefined}>
-                <i className="fa-solid fa-floppy-disk" />
-              </button>
+              <div className="tag-item-wrapper tag-icon-new new"
+                id='toggle-tag-form-button'
+                onClick={this.toggleTagForm}>
+                {this.state.tagForm ? (
+                  <i className="fa-solid fa-minus"></i>
+                ) : (
+                  <i className="fa-solid fa-circle-plus"></i>
+                )}
+              </div>
+
+              <div className="tag-form-off" id="new-tag-form-new-note">
+                <input type={'text'}
+                  className={'tag-form-input'}
+                  onChange={this.update('newTag')}
+                  placeholder={'New tag...'}
+                  value={this.state.newTag.split(' ').join(' ')}
+                  maxLength="50"
+                />
+
+                <button className={this.state.newTag.split(' ').join('').length ? '' : 'save-tag disabled'} id='tag-icon-save'
+                  onClick={this.state.newTag.split(' ').join('').length ?
+                    this.updateTags : undefined}>
+                  <i className="fa-solid fa-floppy-disk" />
+                </button>
+              </div>
             </div>
-          </div>
-          <div className='submit-wrapper'>
-            <button type='submit' id='code-note-submit'
-              className={(this.state.codebody.length > 1 &&
-                this.state.codebody.length < 5001) ? 'save-button' : "save-button disabled"}
-              onClick={this.handleSubmit}
-            >Update CodeMark</button>
-          </div>
+            <div className='submit-wrapper'>
+              <button type='submit' id='code-note-submit'
+                className={(this.state.codebody.length > 1 &&
+                  this.state.codebody.length < 5001) ? 'save-button' : "save-button disabled"}
+                onClick={this.toggleEditModal}
+              >Update CodeMark</button>
+            </div>
 
-          <div id='hide-note-form'
-            className='icon-only-button'
-            title='hide form'
-            onClick={this.toggleEditModal}>
-            <i className="fa-solid fa-square-minus"></i>
+            <div id='hide-note-form'
+              className='icon-only-button'
+              title='hide form'
+              onClick={this.cancelTextEdit}>
+              <i className="fa-solid fa-square-minus"></i>
+            </div>
           </div>
         </div>
-      </div>
+                  <div id="resources-step-1" className='resources-modal modal-off'>
+                    <h4>Resources</h4>
+                    <span>Select the keywords that you'd like resources for</span>
+                    <span>Maximum 5 keywords allowed. Currently have {this.state.keywordsSelected.length} keywords</span>
+                    <form className='resource-options'>
+                      <div className='keyword-options'>
+                        <div className='column1'>
+                          {
+                          col1?.map((keyword, i) =>
+                            <CheckBoxItem keyword={keyword} index={i}
+                            key={`col1-${i}`} updateKeywords={this.updateKeywords}
+                            selected={this.state.keywordsSelected.includes(keyword)}
+                            />
+                            )
+                          }
+          
+                        </div>
+                        <div className='column2'>
+                          {
+                          col2?.map((keyword, i) =>
+                            <CheckBoxItem keyword={keyword} index={i}
+                            key={`col2-${i}`} updateKeywords={this.updateKeywords}
+                            selected={this.state.keywordsSelected.includes(keyword)}
+                            />
+                            )
+                          }
+          
+                        </div>
+                      </div>
+                    </form>
+                    <div>
+                      <button id='keyword-submit' onClick={this.handleSubmit}>Submit</button>
+                    </div>
+                    <div id='hide-note-form'
+                    className='icon-only-button'
+                    title='hide form'
+                    onClick={this.toggleResourceModal}>
+                    <i className="fa-solid fa-square-minus"></i>
+                  </div>
+                  </div>
+      </>
     )
   }
 }

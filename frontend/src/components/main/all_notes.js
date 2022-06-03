@@ -31,6 +31,7 @@ const AllNotes = (props) => {
                         comments={note.comments}
                         updatedAt={note.updatedAt}
                         createdAt={note.createdAt}
+                        language={note.language}
                     />
                 )}
             </div>
@@ -48,6 +49,7 @@ const AllNotes = (props) => {
                         comments={note.comments}
                         updatedAt={note.updatedAt}
                         createdAt={note.createdAt}
+                        language={note.language}
                     />
                 )}
             </div>
