@@ -71,12 +71,10 @@ export default class FollowingFiltered extends React.Component {
               filter={this.state.filter}
             />
             <div className='note-list-container'>
-              {this.state.followingNotes.length === 0 ? (
-                <span>No notes found</span>
-              ) :
-              this.isMobile() ?
-              <MobileNotes notes={this.state.followingNotes} />
-              : <AllNotes notes={this.state.followingNotes} />
+              {
+                this.isMobile() ?
+                  <MobileNotes notes={this.state.followingNotes} />
+                  : <AllNotes notes={this.state.followingNotes} />
               }
 
             </div>

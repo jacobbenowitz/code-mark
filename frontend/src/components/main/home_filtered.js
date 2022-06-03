@@ -63,11 +63,7 @@ export default class HomeFiltered extends React.Component {
               noteCount={this.state.userNotes.length}
             />
             <div className='note-list-container'>
-              {/* <FilteredNotesContainer /> */}
-              {this.state.userNotes.length === 0 ? (
-                <span>No notes found</span>
-              ) :
-                this.isMobile() ?
+              {this.isMobile() ?
                   <MobileNotes notes={this.state.userNotes} />
                   : <AllNotes notes={this.state.userNotes} />
               }

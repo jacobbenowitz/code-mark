@@ -61,10 +61,7 @@ export default class UserFiltered extends React.Component {
               ) : ""}
             </div>
             <div className={'note-list-container'}>
-              {this.props.userNotes.length === 0 ? (
-                <span>No notes found</span>
-              ) :
-                // <AllNotes notes={this.props.userNotes} />
+              {
                 this.isMobile() ?
                   <MobileNotes notes={this.props.userNotes} />
                   : <AllNotes notes={this.props.userNotes} />

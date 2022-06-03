@@ -5,6 +5,7 @@
   flex-wrap: nowrap;
   align-items: flex-start;
   gap: 2rem;
+  animation: fadeIn 300ms ease-in-out;
 }
 
 /* .testing-box {

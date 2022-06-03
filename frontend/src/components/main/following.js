@@ -70,10 +70,7 @@ export default class Following extends React.Component {
               noteCount={this.state.followingNotes.length}
             />
             <div className='note-list-container'>
-              {this.state.followingNotes.length === 0 ? (
-                <span>No notes found</span>
-              ) :
-                this.isMobile() ?
+              {this.isMobile() ?
                   <MobileNotes notes={this.state.followingNotes} />
                   : <AllNotes notes={this.state.followingNotes} />
               }

@@ -64,10 +64,7 @@ export default class LikedFiltered extends React.Component {
               noteCount={this.state.likedNotes.length}
             />
             <div className='note-list-container'>
-              {this.state.likedNotes.length === 0 ? (
-                <span>No notes found</span>
-              ) :
-              this.isMobile() ?
+              {this.isMobile() ?
                 <MobileNotes notes={this.state.likedNotes} />
                 : <AllNotes notes={this.state.likedNotes} />
               }

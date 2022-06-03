@@ -59,12 +59,10 @@ export default class LikedNotes extends React.Component {
               noteCount={this.state.notes.length}
             />
             <div className='note-list-container'>
-              {this.state.notes.length === 0 ? (
-                <span>No notes found</span>
-              ) :
-              this.isMobile() ?
-              <MobileNotes notes={this.state.notes} />
-              : <AllNotes notes={this.state.notes} />
+              {
+                this.isMobile() ?
+                <MobileNotes notes={this.state.notes} />
+                : <AllNotes notes={this.state.notes} />
               }
             </div>
           </div>

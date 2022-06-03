@@ -27,6 +27,9 @@ import CodeEditorExportImage from '../code_editor/code_editor_export_img';
 import CodeCommentReadOnly from '../code_editor/code_comment_readonly';
 import CodeCommentReadOnlyMini from '../code_editor/code_comment_readonly_mini';
 import { getLanguage } from '../../util/webscrap_util';
+import NoteShowTopLoader from '../lazy_loaders/note_show_top_loader';
+import ActionIconsLoader from '../lazy_loaders/note_show_action_icons_loader';
+import NoteCommentsLoader from '../lazy_loaders/note_show_comments_loader';
 
 
 export default class NoteShow extends React.Component {
@@ -539,7 +542,17 @@ export default class NoteShow extends React.Component {
         </div>
       </>
     ) : (
-      <NoteShowEditorLoader />
+        <div className='note-show-container center-span-7'>
+          <div className="note-show-top-icons">
+            <ActionIconsLoader />
+          </div>
+          <div className='note-show-main'>
+            <NoteShowTopLoader />
+          </div>
+          <div className='note-comments'>
+            <NoteCommentsLoader />
+          </div>
+        </div>
     )
 
   }

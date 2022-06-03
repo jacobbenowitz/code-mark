@@ -56,9 +56,7 @@ export default class DiscoverFiltered extends React.Component {
               title={'Discover'}
             />
             <div className='note-list-container'>
-              {this.state.notes.length === 0 ? (
-                <span>No notes found</span>
-              ) :
+              {
                 this.isMobile() ?
                 <MobileNotes notes={this.state.notes} />
                 : <AllNotes notes={this.state.notes} />

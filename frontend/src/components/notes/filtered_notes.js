@@ -37,29 +37,9 @@ class FilteredNotes extends React.Component {
 
 
   render() {
-    // 
-    if (this.state.notes.length === 0) {
-      return (<span>No notes found</span>)
-    } else {
-      return (
-        // this.state.notes.map(note =>
-        //   <CodeNoteItem key={note._id}
-        //     likes={note.likes}
-        //     title={note.title}
-        //     username={note.user.username}
-        //     userId={note.user.userId}
-        //     tags={note.tags}
-        //     textDetails={note.textdetails}
-        //     codeBody={note.codebody}
-        //     id={note._id}
-        //     createdAt={note.createdAt}
-        //   />
-        // )
-        this.isMobile() ?
-          <MobileNotes notes={this.state.notes} />
-          : <AllNotes notes={this.state.notes} />
-      )
-    }
+    this.isMobile() ?
+      <MobileNotes notes={this.state.notes} />
+      : <AllNotes notes={this.state.notes} />
   }
 }
 

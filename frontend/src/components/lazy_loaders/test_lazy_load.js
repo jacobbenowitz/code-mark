@@ -3,6 +3,7 @@ import SidebarLoader from "./placeholder_components/sidebar_loader";
 import NewNoteLoader from "./placeholder_components/new_note_loader";
 import HomeHeaderLoader from "./placeholder_components/home_header_loader";
 import CodeNoteItemLoader from "./placeholder_components/code_note_loader";
+import NoteShowTopLoader from "./note_show_top_loader";
 
 const TestLazyLoad = () => {
   function isMobile() {
@@ -68,6 +69,7 @@ const TestLazyLoad = () => {
             </div>
           </div>
         </div>
+        <NoteShowTopLoader />
       </div>
     </div>
     )
