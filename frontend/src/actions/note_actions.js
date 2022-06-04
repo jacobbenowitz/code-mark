@@ -6,7 +6,8 @@ import {
   patchNote,
   deleteNote,
   patchNoteLikes,
-  patchNoteTags
+  patchNoteTags,
+  patchNotePublicStatus
 } from '../util/note_api_util';
 
 export const RECEIVE_NOTES = "RECEIVE_NOTES";
@@ -107,6 +108,12 @@ export const composeNote = data => dispatch => {
 
 export const updateNote = (data, noteId) => dispatch => {
   return patchNote(data, noteId)
+    .then(note => dispatch(receiveUpdateNote(note)))
+    .catch(err => dispatch(receiveNoteErrors(err)))
+};
+
+export const updateNotePublicStatus = (data, noteId) => dispatch => {
+  return patchNotePublicStatus(data, noteId)
     .then(note => dispatch(receiveUpdateNote(note)))
     .catch(err => dispatch(receiveNoteErrors(err)))
 };

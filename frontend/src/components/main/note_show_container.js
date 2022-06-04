@@ -6,6 +6,7 @@ import {
   removeNote,
   removeNoteLike,
   updateNote,
+  updateNotePublicStatus,
   updateNoteTags
 } from "../../actions/note_actions";
 
@@ -51,7 +52,9 @@ const mapDispatchToProps = dispatch => {
       dispatch(addCommentLike(data, commentId)),
     removeCommentLike: (data, commentId) => dispatch(removeCommentLike(data, commentId)),
     fetchCurrentUser: () => dispatch(fetchCurrentUser()),
-    updateNoteTags: (tags, noteId) => dispatch(updateNoteTags(tags, noteId))
+    updateNoteTags: (tags, noteId) => dispatch(updateNoteTags(tags, noteId)),
+    updateNotePublicStatus: (data, noteId) =>
+      dispatch(updateNotePublicStatus(data, noteId))
   }
 }
 

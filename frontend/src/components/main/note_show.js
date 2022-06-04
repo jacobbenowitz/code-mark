@@ -2,17 +2,12 @@ import React from 'react';
 import { saveAs } from 'file-saver';
 import NoteShowEditorLoader from '../code_editor/code_show_editor_loader';
 import CodeEditorNoteShow from '../code_editor/code_editor_note_show_readonly';
-import EditNote from '../code_editor/edit_note';
 import CommentForm from '../notes/comments/comment_form';
 import { orderNoteComments } from "../../util/selectors";
-import Tags from '../tags/tags';
 import domtoimage from 'dom-to-image';
 import CommentIndex from '../notes/comments/comment_index';
 import ResourceItem from '../notes/resources/resource_item';
-import { Link } from 'react-router-dom';
 import LikeNoteIcon from '../notes/like_note_icon';
-import moment from 'moment';
-import SwitchButton from '../UI/switch_button';
 import CodeCommentReadOnlyMini from '../code_editor/code_comment_readonly_mini';
 import { getLanguage } from '../../util/webscrap_util';
 import NoteShowTopLoader from '../lazy_loaders/note_show_top_loader';
@@ -20,6 +15,9 @@ import ActionIconsLoader from '../lazy_loaders/note_show_action_icons_loader';
 import NoteCommentsLoader from '../lazy_loaders/note_show_comments_loader';
 import PhotoExportModal from '../modals/photo_export_modal';
 import DeleteNoteModal from '../modals/delete_note_modal';
+import EditNoteModal from '../modals/edit_note_modal';
+import NoteTopActionIcons from './note_show/top_action_icons';
+import NoteShowHeader from './note_show/note_show_header';
 
 export default class NoteShow extends React.Component {
   constructor(props) {
@@ -30,7 +28,7 @@ export default class NoteShow extends React.Component {
       selectedText: '',
       commentSnippet: '',
       commentModal: false,
-      public: true,
+      isPublic: true,
       textHeight: undefined,
       bodyHeight: 0,
       isCurrentUser: false,
@@ -43,6 +41,7 @@ export default class NoteShow extends React.Component {
     this.deleteNote = this.deleteNote.bind(this);
     this.handlePublicSwitch = this.handlePublicSwitch.bind(this);
     this.toggleExportModal = this.toggleExportModal.bind(this);
+    this.toggleEditModal = this.toggleEditModal.bind(this);
     this.commentOnSelection = this.commentOnSelection.bind(this);
     this.clearSnippet = this.clearSnippet.bind(this);
     this.toggleCommentModal = this.toggleCommentModal.bind(this);
@@ -70,14 +69,14 @@ export default class NoteShow extends React.Component {
     if (note && (note !== this.state.note || this.state.comments
       !== comments)) {
       
-      if (currentUser?.id !== note.userId && !note.public) {
+      if (currentUser?.id !== note.user.userId && !note.public) {
         history.push(`/home`)
       }
       const orderedComments = orderNoteComments(comments);
       this.setState({
         note: note,
         comments: orderedComments,
-        public: note?.public,
+        isPublic: note.public,
         bodyHeight: bodyHeight,
         isCurrentUser: this.props.currentUser?.id === this.props.note?.user.userId
       })
@@ -132,12 +131,13 @@ export default class NoteShow extends React.Component {
   }
 
   handlePublicSwitch() {
-    let newStatus = !this.state.public
-    this.props.updateNote(
+    debugger
+    let newStatus = !this.state.isPublic
+    this.props.updateNotePublicStatus(
       { public: newStatus }, this.props.noteId
     ).then(() => {
       this.setState(
-        { public: newStatus }
+        { isPublic: newStatus }
       )
     })
   }
@@ -196,8 +196,10 @@ export default class NoteShow extends React.Component {
 
 
   render() {
-    const { currentUser, updateNote, noteId } = this.props;
-    const { note, bodyHeight } = this.state;
+    const { currentUser, updateNote, noteId,
+      comments, updateNoteTags } = this.props;
+    const { note, bodyHeight, isCurrentUser,
+      isPublic } = this.state;
     
     return Object.values(note).length ? (
       <>
@@ -206,149 +208,47 @@ export default class NoteShow extends React.Component {
           note={note}
           toggleExportModal={this.toggleExportModal}
           exportImage={this.exportImage}
-          />
+        />
+
         <DeleteNoteModal
           deleteNote={this.deleteNote}
           bodyHeight={bodyHeight}
           toggleDeleteModal={this.toggleDeleteModal}
         />
-        {/* NOTE ACTIONS // NOTE MAIN */}
-        {note ? (
-        <div id='edit-note-container' className="modal-off"
-          style={{ height: this.state.bodyHeight }}>
-          <div className='modal-wrapper'>
-            <EditNote
-              getLanguage={getLanguage}
-              note={note}
-              updateNote={updateNote}
-              currentUser={currentUser}
-              noteId={noteId}
-              toggleCommentModalVisibility={this.toggleCommentModalVisibility}
-            />
-          </div>
-        </div>
-        ) : ''}
-        <div className={this.isMobile() ? 'note-show-container span-12' : 'note-show-container center-span-7'}>
-          <div className='note-show-top-icons'>
-            <div className='back-page icon-button'
-              onClick={() => this.props.history.goBack()}>
-              <i className="fa-solid fa-arrow-left fa-lg"></i>
-              <span>
-                Back
-              </span>
-            </div>
-            {this.props.currentUser.id === this.props.note.user.userId ? (
-              <div className='edit-note icon-button'
-                onClick={() => this.toggleEditModal()}>
-                <i className="fa-solid fa-pen-to-square fa-lg"></i>
-                <span>
-                  Edit
-                </span>
-              </div>
-            ) :
-              ""
-            }
-            {this.props.currentUser.id === this.props.note.user.userId ? (
-              <div className='delete-note icon-button'
-                onClick={() => this.toggleDeleteModal()}>
-                <i className="fa-solid fa-trash fa-lg"></i>
-                <span>
-                  Delete
-                </span>
-              </div>
-            ) : ""}
-          </div>
+        
+        <EditNoteModal
+          bodyHeight={bodyHeight}
+          getLanguage={getLanguage}
+          note={note}
+          updateNote={updateNote}
+          currentUser={currentUser}
+          noteId={noteId}
+          toggleCommentModalVisibility={this.toggleCommentModalVisibility}
+        />
+
+        <div className={this.isMobile() ?
+          'note-show-container span-12' : 'note-show-container center-span-7'}>
+          
+          <NoteTopActionIcons 
+            history={this.props.history}
+            currentUser={currentUser}
+            note={note}
+            toggleEditModal={this.toggleEditModal}
+            toggleDeleteModal={this.toggleDeleteModal}
+            isCurrentUser={isCurrentUser}
+          />
+          
           {/* NOTE SHOW MAIN */}
           <div id="note-show-main" className='note-show-main'>
-            {this.isMobile() ? (
-              note ? (
-              <div className='note-show-title mobile'>
-                <Link className='username'
-                  to={`/users/${note.user.userId}`}>@{note.user.username}</Link>
-                  <h1>{note.title}</h1>
-                  
-                <div className='note-stats-wrapper'>
-                  <div className='note-stats'>
-                    <div className='note-stat likes'>
-                      <i className="fa-solid fa-heart"></i>
-                      <span>{this.props.note.likes.length}</span>
-                    </div>
-                    <div className="note-stat comments">
-                      <i className="fa-solid fa-comments"></i>
-                      <span>{this.props.comments.length}</span>
-                    </div>
-                    <div className='note-stat updated-at'>
-                      <i className="fa-solid fa-pencil"></i>
-                      <span>{moment(this.props.note.updatedAt).fromNow()}</span>
-                    </div>
-                    <div className='note-stat created-at'>
-                      <i className="fa-solid fa-cloud-arrow-up"></i>
-                      <span>{moment(this.props.note.createdAt).fromNow()}</span>
-                    </div>
-                  </div>
-                  <div className='note-public-switch-wrapper'>
-                    <div className='note-public-switch'>
-                        <SwitchButton
-                          isCurrentUser={this.state.isCurrentUser}
-                          isToggled={this.state.public}
-                          onToggle={this.handlePublicSwitch}
-                      />
-                    </div>
-                    </div>
-                  </div>
-                    <Tags note={this.state.note}
-                      isCurrentUser={this.props.currentUser.id === this.props.note.user.userId}
-                      updateNoteTags={this.props.updateNoteTags}
-                    />
-              </div>
-              ) : ''
-            ) : (
-                note ? (
-                  <div className='note-show-title'>
-                    <Link className='username'
-                      to={`/users/${note.user.userId}`}>@{note.user.username}</Link>
-                    <h1>{note.title}</h1>
-                    <div className='note-stats-wrapper'>
-                      <div className='note-stats'>
-                        <div className='note-stat likes'>
-                          <i className="fa-solid fa-heart"></i>
-                          <span>{this.props.note.likes.length}</span>
-                        </div>
-                        <div className="note-stat comments">
-                          <i className="fa-solid fa-comments"></i>
-                          <span>{this.props.comments.length}</span>
-                        </div>
-                        <div className='note-stat updated-at'>
-                          <i className="fa-solid fa-pencil"></i>
-                          <span>{moment(this.props.note.updatedAt).fromNow()}</span>
-                        </div>
-                        <div className='note-stat created-at'>
-                          <i className="fa-solid fa-cloud-arrow-up"></i>
-                          <span>{moment(this.props.note.createdAt).fromNow()}</span>
-                        </div>
-                      </div>
-                      <div className='note-public-switch-wrapper'>
-                        <div className='note-public-switch'>
-                          <SwitchButton
-                            isCurrentUser={this.state.isCurrentUser}
-                            isToggled={this.state.public}
-                            onToggle={this.handlePublicSwitch}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div className='tags-section-wrapper'>
-                      {this.state.note?.tags.length ? (
-                        <span className='tags-header'>TAGS</span>
-                      ) : ''}
-                        <Tags note={this.state.note}
-                          isCurrentUser={this.props.currentUser.id === this.props.note.user.userId}
-                          updateNoteTags={this.props.updateNoteTags}
-                        />
-                    </div>
-                  </div>
-                ) : ''
-            )}
+            <NoteShowHeader
+              note={note}
+              isCurrentUser={isCurrentUser}
+              comments={comments}
+              isPublic={isPublic}
+              handlePublicSwitch={this.handlePublicSwitch}
+              updateNoteTags={updateNoteTags}
+              isMobile={this.isMobile}
+            />
 
             {/* note main */}
             <div className='code-note-body' id='code-note-view'>
