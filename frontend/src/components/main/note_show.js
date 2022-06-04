@@ -1,36 +1,24 @@
 import React from 'react';
-import CodeEditorReadOnly from '../code_editor/code_editor_readonly';
+import { saveAs } from 'file-saver';
 import NoteShowEditorLoader from '../code_editor/code_show_editor_loader';
 import CodeEditorNoteShow from '../code_editor/code_editor_note_show_readonly';
 import EditNote from '../code_editor/edit_note';
-import CommentFormContainer from '../notes/comments/comment_form_container';
 import CommentForm from '../notes/comments/comment_form';
-import CommentFormModal from '../notes/comments/comment_form_modal';
-// import { selectNoteComments } from "../../util/selectors";
 import { orderNoteComments } from "../../util/selectors";
-import CommentItem from '../notes/comments/comment_item';
 import Tags from '../tags/tags';
-import TagsExport from '../tags/tags_export';
-import TagsExportSimple from '../tags/tags_export_simple';
-// credit context menu: https://itnext.io/how-to-create-a-custom-right-click-menu-with-javascript-9c368bb58724
-// textarea resize: https://stackoverflow.com/questions/20775824/after-clicking-on-selected-text-window-selection-is-not-giving-updated-range
+import domtoimage from 'dom-to-image';
 import CommentIndex from '../notes/comments/comment_index';
 import ResourceItem from '../notes/resources/resource_item';
-import { Link, Redirect } from 'react-router-dom';
-import domtoimage from 'dom-to-image';
-import { saveAs } from 'file-saver';
-import codeMarkLogo from './logo/codemark-logo-primary.svg';
+import { Link } from 'react-router-dom';
 import LikeNoteIcon from '../notes/like_note_icon';
 import moment from 'moment';
 import SwitchButton from '../UI/switch_button';
-import CodeEditorExportImage from '../code_editor/code_editor_export_img';
-import CodeCommentReadOnly from '../code_editor/code_comment_readonly';
 import CodeCommentReadOnlyMini from '../code_editor/code_comment_readonly_mini';
 import { getLanguage } from '../../util/webscrap_util';
 import NoteShowTopLoader from '../lazy_loaders/note_show_top_loader';
 import ActionIconsLoader from '../lazy_loaders/note_show_action_icons_loader';
 import NoteCommentsLoader from '../lazy_loaders/note_show_comments_loader';
-
+import PhotoExportModal from '../modals/photo_export_modal';
 
 export default class NoteShow extends React.Component {
   constructor(props) {
@@ -52,14 +40,15 @@ export default class NoteShow extends React.Component {
 
   bindHandlers() {
     this.deleteNote = this.deleteNote.bind(this);
-    this.exportImage = this.exportImage.bind(this);
     this.handlePublicSwitch = this.handlePublicSwitch.bind(this);
     this.toggleExportModal = this.toggleExportModal.bind(this);
     this.commentOnSelection = this.commentOnSelection.bind(this);
     this.clearSnippet = this.clearSnippet.bind(this);
     this.toggleCommentModal = this.toggleCommentModal.bind(this);
-    this.toggleCommentModalVisibility = this.toggleCommentModalVisibility.bind(this);
-  }
+    this.toggleCommentModalVisibility =
+      this.toggleCommentModalVisibility.bind(this);
+    this.exportImage = this.exportImage.bind(this)
+      ;  }
   
   componentDidMount() {
     this._isMounted = true;
@@ -69,16 +58,6 @@ export default class NoteShow extends React.Component {
   }
   
   componentWillUnmount() {
-    const scope = document.querySelector("body");
-    // remove click eventListener for contextmenu
-    scope.removeEventListener("contextmenu", (event) => {
-      contextMenu.className = "";
-    });
-    
-    // remove click eventListener
-    scope.removeEventListener("click", (e) => {
-      contextMenu.className = "";
-    });
     this._isMounted = false;
   }
   
@@ -102,10 +81,7 @@ export default class NoteShow extends React.Component {
         isCurrentUser: this.props.currentUser?.id === this.props.note?.user.userId
       })
     }
-    // add selection listener to main note section ONLY
     if (Object.values(this.state.note).length) {
-      // event listener does not work on div ? therefore must use document...
-      // const noteMain = document.getElementById('note-codemirror')
       document.onselectionchange = (e) => {
         e.preventDefault()
         const selectionString = document.getSelection().toString()
@@ -192,10 +168,15 @@ export default class NoteShow extends React.Component {
     }
   }
 
+  toggleCommentModal() {
+    this.setState({ commentModal: !this.state.commentModal })
+  }
+
   exportImage() {
+    const { note } = this.state;
     const noteItem = document.getElementById('content-export');
-    const username = this.state.note.user.username;
-    const title = this.state.note.title;
+    const username = note.user.username;
+    const title = note.title;
     const scale = 2;
     const image = domtoimage.toPng(noteItem, {
       height: noteItem.offsetHeight * scale,
@@ -204,13 +185,9 @@ export default class NoteShow extends React.Component {
       },
       width: noteItem.offsetWidth * scale
     }).then(function (scaledImg) {
-      window.saveAs(scaledImg, `${title}-by-${username}-CodeMark`)
-    }).then(() => this.toggleExportModal())
+      saveAs(scaledImg, `${title}-by-${username}-CodeMark`)
+    }).then(() => toggleExportModal())
   };
-
-  toggleCommentModal() {
-    this.setState({ commentModal: !this.state.commentModal })
-  }
 
   isMobile() {
     return window.innerWidth < 680;
@@ -219,57 +196,20 @@ export default class NoteShow extends React.Component {
 
   render() {
     const { currentUser, updateNote, noteId } = this.props;
-    const { note } = this.state;
+    const { note, bodyHeight } = this.state;
     
     return Object.values(note).length ? (
       <>
         {/* PHOTO EXPORT MODAL */}
-        <div id="note-export-modal" className='modal-off'
-          style={{ 'height': this.state.bodyHeight }}
-        >
-          <div className='action-buttons'>
-            <div className='export icon-button'
-              onClick={() => this.exportImage()}>
-              <i className="fa-solid fa-download" />
-              <span>download</span>
-            </div>
-            <div className='cancel-export icon-only-button'
-              onClick={() => this.toggleExportModal()}>
-              <i className="fa-solid fa-xmark fa-xl" />
-            </div>
-          </div>
-          <div className='spacer-150-h'></div>
-          <div className='export-dots-wrapper'>
-            <div id='content-export' className='note-show-main'>
-              <div className='content-wrapper'>
-                <div className='note-show-title'>
-                  <span className='username'>@{note?.user.username}</span>
-                  <h4>{note.title}</h4>
-                </div>
-                <div className='note-tags-wrapper'>
-                  <TagsExportSimple
-                    tags={note.tags}
-                  />
-                </div>
-                <div className='code-note-body' id='code-note-view'>
-                  <CodeEditorExportImage codeBody={note.codebody} />
-                </div>
-                {this.state.textdetails ? (
-                  <div className='note-textDetails'>
-                    <span className='textDetails-show'>
-                      {note.textdetails}
-                    </span>
-                  </div>
-                ) : ''}
-              </div>
-              <img className='export-logo'
-                src={codeMarkLogo} />
-            </div>
-          </div>
-        </div>
+        <PhotoExportModal
+          bodyHeight={bodyHeight}
+          note={note}
+          toggleExportModal={this.toggleExportModal}
+          exportImage={this.exportImage}
+        />
         {/* DELETE NOTE MODAL */}
         <div id='confirm-modal-container' className='modal-off'
-          style={{ 'height': this.state.bodyHeight }}
+          style={{ 'height': bodyHeight }}
         >
           <div className='modal-wrapper'>
             <div className='cancel-modal'>

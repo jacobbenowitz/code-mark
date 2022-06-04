@@ -474,6 +474,22 @@
   .note-resources {
     padding: 1rem;
   }
+
+.export-dots-wrapper {    
+  padding: 0;    
+  width: 100vw;    
+  max-width: 100%;
+  border: 1px dashed #35373E;	    
+}
+
+#content-export {		    
+  display: flex;	    
+  padding: 2rem 1rem 3.5rem 1rem;	    
+  position: relative;
+}
+  .content-wrapper {
+    width: 100%;
+  }
 }
 
 #details-textarea, #details-textarea-edit {
