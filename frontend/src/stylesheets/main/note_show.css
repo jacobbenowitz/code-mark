@@ -213,7 +213,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: 0.7rem;
   }
 

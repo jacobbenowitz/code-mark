@@ -46,8 +46,8 @@
   align-items: flex-start;
   padding: 0px;
   gap: 8px;
-  width: 100%;
-  max-width: 100%;
+  width: calc(100% + 1rem);
+  max-width:calc(100% + 1rem);
   overflow: hidden;
   height: auto;
   overflow-x: scroll;

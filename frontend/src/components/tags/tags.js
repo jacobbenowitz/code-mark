@@ -6,6 +6,7 @@ export default class Tags extends React.Component {
     super(props);
     this.state = {
       tags: [],
+      note: {},
       newTag: "",
       tagForm: false
     }
@@ -13,16 +14,18 @@ export default class Tags extends React.Component {
     this.toggleTagForm = this.toggleTagForm.bind(this);
   }
 
-  // componentDidCatch() {
-  //   this.setState({
-  //     tags: this.props.note.tags,
-  //   })
-  // }
+  componentDidCatch() {
+    this.setState({
+      tags: this.props.note.tags,
+      note: this.props.note,
+    })
+  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.note.tags !== this.state.tags) {
       this.setState({
-        tags: nextProps.note.tags
+        tags: nextProps.note.tags,
+        note: nextProps.note
       })
     }
   }
@@ -66,7 +69,7 @@ export default class Tags extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const { _id } = this.props.note;
+    const { _id } = this.state.note;
 
     const cleaned = this.removeWhiteSpace(this.state.newTag)
     
@@ -99,32 +102,35 @@ export default class Tags extends React.Component {
 
     if (this.state.tags.length) {
       tagsTop = (
-        <div className='tag-top'>
-          {this.props.isCurrentUser ? (
-            <div className="tag-item-wrapper tag-icon-new"
-              id='toggle-tag-form-button'
-              onClick={this.toggleTagForm}>
-              {this.state.tagForm ? (
-                <i className="fa-solid fa-minus"></i>
-              ) : (
-                <i className="fa-solid fa-circle-plus"></i>
-              )}
+        <>
+          <span className='tags-header'>TAGS</span>
+          <div className='tag-top'>
+            {this.props.isCurrentUser ? (
+              <div className="tag-item-wrapper tag-icon-new"
+                id='toggle-tag-form-button'
+                onClick={this.toggleTagForm}>
+                {this.state.tagForm ? (
+                  <i className="fa-solid fa-minus"></i>
+                ) : (
+                  <i className="fa-solid fa-circle-plus"></i>
+                )}
+              </div>
+            ) : undefined}
+            
+            <div className={this.props.isCurrentUser ?
+              'tags-overflow' : 'tags-overflow-sm'}>
+              {
+                this.state.tags?.map((tag, i) =>
+                  <TagItem title={tag} key={`tag-${i}`}
+                    isCurrentUser={this.props.isCurrentUser}
+                    updateNoteTags={this.props.updateNoteTags}
+                    note={this.state.note}
+                    tags={this.state.tags}
+                  />)
+              }
             </div>
-          ) : undefined}
-
-          <div className={this.props.isCurrentUser ?
-            'tags-overflow' : 'tags-overflow-sm'}>
-            {
-              this.state.tags?.map((tag, i) =>
-                <TagItem title={tag} key={`tag-${i}`}
-                  isCurrentUser={this.props.isCurrentUser}
-                  updateNoteTags={this.props.updateNoteTags}
-                  note={this.props.note}
-                  tags={this.state.tags}
-                />)
-            }
           </div>
-        </div>
+        </>
       )
     }
 
