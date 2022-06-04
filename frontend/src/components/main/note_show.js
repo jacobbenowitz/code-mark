@@ -19,6 +19,7 @@ import NoteShowTopLoader from '../lazy_loaders/note_show_top_loader';
 import ActionIconsLoader from '../lazy_loaders/note_show_action_icons_loader';
 import NoteCommentsLoader from '../lazy_loaders/note_show_comments_loader';
 import PhotoExportModal from '../modals/photo_export_modal';
+import DeleteNoteModal from '../modals/delete_note_modal';
 
 export default class NoteShow extends React.Component {
   constructor(props) {
@@ -200,39 +201,17 @@ export default class NoteShow extends React.Component {
     
     return Object.values(note).length ? (
       <>
-        {/* PHOTO EXPORT MODAL */}
         <PhotoExportModal
           bodyHeight={bodyHeight}
           note={note}
           toggleExportModal={this.toggleExportModal}
           exportImage={this.exportImage}
+          />
+        <DeleteNoteModal
+          deleteNote={this.deleteNote}
+          bodyHeight={bodyHeight}
+          toggleDeleteModal={this.toggleDeleteModal}
         />
-        {/* DELETE NOTE MODAL */}
-        <div id='confirm-modal-container' className='modal-off'
-          style={{ 'height': bodyHeight }}
-        >
-          <div className='modal-wrapper'>
-            <div className='cancel-modal'>
-              <span>Are you sure you want to delete this note?</span>
-              <div className='modal-buttons'>
-                <div className='delete-note icon-button'
-                  onClick={() => this.deleteNote()}>
-                  <i className="fa-solid fa-trash fa-lg"></i>
-                  <span>
-                    Delete
-                  </span>
-                </div>
-                <div className='cancel icon-button'
-                  onClick={() => this.toggleDeleteModal()}>
-                  <i className="fa-solid fa-ban fa-lg"></i>
-                  <span>
-                    Cancel
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
         {/* NOTE ACTIONS // NOTE MAIN */}
         {note ? (
         <div id='edit-note-container' className="modal-off"
