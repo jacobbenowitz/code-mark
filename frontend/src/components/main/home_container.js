@@ -5,7 +5,8 @@ import { withRouter } from "react-router-dom";
 const mapStateToProps = state => {
   return {
     userNotes: state.notes.user,
-    tags: state.session.tags
+    tags: state.session.tags,
+    status: state.notes.status
   }
 }
 

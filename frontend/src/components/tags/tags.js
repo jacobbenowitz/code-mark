@@ -95,8 +95,10 @@ export default class Tags extends React.Component {
 
   render() {
 
-    return (
-      <div className='note-tags-list'>
+    let tagsTop, tagsBottom;
+
+    if (this.state.tags.length) {
+      tagsTop = (
         <div className='tag-top'>
           {this.props.isCurrentUser ? (
             <div className="tag-item-wrapper tag-icon-new"
@@ -109,7 +111,9 @@ export default class Tags extends React.Component {
               )}
             </div>
           ) : undefined}
-          <div className={this.props.isCurrentUser ? 'tags-overflow' : 'tags-overflow-sm'}>
+
+          <div className={this.props.isCurrentUser ?
+            'tags-overflow' : 'tags-overflow-sm'}>
             {
               this.state.tags?.map((tag, i) =>
                 <TagItem title={tag} key={`tag-${i}`}
@@ -121,20 +125,12 @@ export default class Tags extends React.Component {
             }
           </div>
         </div>
-        <div className='tag-bottom'>
-          <form onSubmit={this.state.newTag.split(' ').join('').length ? this.handleSubmit : undefined}
-            className="tag-form-off" id="new-tag-form">
-            <input type={'text'}
-              className={'tag-form-input'}
-              onChange={this.update('newTag')}
-              placeholder={'New tag...'}
-              value={this.state.newTag}
-            />
-            <button className={this.validateTags() ? 'save-tag' : 'save-tag disabled'} id='tag-icon-save' type='submit'>
-              <i className="fa-solid fa-floppy-disk" />
-            </button>
-          </form>
-        </div>
+      )
+    }
+
+    return (
+      <div className='note-tags-list'>
+        {tagsTop}
       </div>
     )
   }

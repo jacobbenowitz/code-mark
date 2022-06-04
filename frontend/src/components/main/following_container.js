@@ -28,7 +28,8 @@ const mapStateToProps = (state) => {
     followingUsers: followingUsers,
     currentUser: currentUser,
     noteCount: orderedNotes?.length,
-    followingTags: followingTags
+    followingTags: followingTags,
+    status: state.notes.status
   }
 }
 

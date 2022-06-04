@@ -28,13 +28,14 @@ export default class LikedNotes extends React.Component {
   }
 
   componentDidUpdate() {
-    const { allNotes, likedNoteIds, currentUser } = this.props;
-    if (Object.values(allNotes).length && likedNoteIds.length && !this.state.notes.length) {
+    const { allNotes, likedNoteIds, currentUser, status } = this.props;
+    if (status !== this.state.status || Object.values(allNotes).length && likedNoteIds.length && !this.state.notes.length) {
       const likedNotes = selectLikedNotes(allNotes, likedNoteIds);
       const likedTags = selectNoteTags(likedNotes)
       this.setState({
         notes: likedNotes,
-        likedTags: likedTags
+        likedTags: likedTags,
+        status: status
       })
     }
   }
@@ -57,12 +58,20 @@ export default class LikedNotes extends React.Component {
               type={'default'}
               title={'Liked'}
               noteCount={this.state.notes.length}
+              status={this.state.status}
             />
             <div className='note-list-container'>
               {
                 this.isMobile() ?
-                <MobileNotes notes={this.state.notes} />
-                : <AllNotes notes={this.state.notes} />
+                  <MobileNotes
+                    notes={this.state.notes}
+                    status={this.state.status}
+                  />
+                  :
+                  <AllNotes
+                    notes={this.state.notes}
+                    status={this.state.status}
+                  />
               }
             </div>
           </div>

@@ -328,6 +328,10 @@ textarea::-webkit-scrollbar {
 .tags-overflow::-webkit-scrollbar  {
   display: none;
 }
+.tags-overflow-sm::-webkit-scrollbar  {
+  display: none;
+}
+
 .tags-overflow-sm {
   display: flex;
   flex-direction: row;

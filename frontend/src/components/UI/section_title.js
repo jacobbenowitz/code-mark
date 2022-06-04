@@ -1,9 +1,28 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import SectionTitleLoaderMobile from "../lazy_loaders/mobile/section_title_loader_mobile";
 import HomeHeaderLoader from "../lazy_loaders/placeholder_components/home_header_loader";
 
-const SectionTitle = ({ type, title, noteCount, filter }) => {
+const SectionTitle = ({ type, title,
+  noteCount, filter, status, mobile = false }) => {
+  
   let sectionTitleEle;
-  if (type === 'default') {
+  // debugger
+  if (status === 'BUSY' || noteCount === 0 && status === 'IDLE' || !status) {
+    mobile ? (
+      sectionTitleEle = (
+        <div className='section-title'>
+          <SectionTitleLoaderMobile />
+        </div>
+      )
+    ) : (
+      sectionTitleEle = (
+        <div className='section-title'>
+          <HomeHeaderLoader />
+        </div>
+      ) 
+    )
+  } else if (type === 'default' && status === 'DONE' && noteCount > 0) {
     sectionTitleEle = (
       <div className='section-title'>
         <h3>{title}</h3>
@@ -20,8 +39,7 @@ const SectionTitle = ({ type, title, noteCount, filter }) => {
         )}
       </div>
     )
-  }
-  if (type === 'filtered') {
+  } else if (type === 'filtered' && status === 'DONE') {
     sectionTitleEle = (
     <div className='section-title'>
       <h3>{title}</h3>
@@ -44,14 +62,47 @@ const SectionTitle = ({ type, title, noteCount, filter }) => {
       </div>
       </div>
     )
+  } else if (noteCount === 0 && status === 'DONE') {
+    if (title === 'Following' || title === 'My Notes') {
+      sectionTitleEle = (
+        <div className = "none-found-message">
+          <h3>Welcome to CodeMark 👋 </h3>
+          <span>Go to the&nbsp;<Link className="link"
+            to={'/discover'}>Discover</Link>&nbsp;
+            section to find some new friends to follow 🫣
+          </span>
+        </div>
+      )
+    } else if (title === 'Discover') {
+      sectionTitleEle = (
+        <div className = "none-found-message">
+          <h3>No notes found 😞 </h3>
+            <span>
+              Go to the Discover section to find some new friends to follow 🫣
+            </span>
+        </div>
+      )
+    } else if (title === 'Liked') {
+      sectionTitleEle = (
+        <div className = "none-found-message">
+          <h3>No notes found 😞 </h3>
+            <span>
+            You'll be sure to find some interesting CodeMarks in the &nbsp;<Link className="link"
+              to={'/discover'}>Discover</Link>&nbsp; section. Go check it out, don't be shy 🙈
+            </span>
+        </div>
+      )
+    } else {
+      sectionTitleEle = (
+        <div className = "none-found-message">
+          <h3>No notes found 😞 </h3>
+        </div>
+      )
+    }
   }
-
+  
   return (
-    noteCount ? (
-      sectionTitleEle
-    ) : (
-        <HomeHeaderLoader />
-    )
+    sectionTitleEle
   )
 }
 export default SectionTitle;

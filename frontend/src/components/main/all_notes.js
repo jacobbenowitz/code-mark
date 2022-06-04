@@ -14,58 +14,64 @@ const AllNotes = (props) => {
             }
         }
     })
-    return props.notes.length ? (
-        <div className='desktop-notes'>
-            <div className='column1'>
-                {col1.map((note) =>
-                    <CodeNoteItem key={note._id}
-                        title={note.title}
-                        tags={note.tags}
-                        likes={note.likes}
-                        username={note.user.username}
-                        userId={note.user.userId}
-                        textDetails={note.textdetails}
-                        codeBody={note.codebody}
-                        id={note._id}
-                        comments={note.comments}
-                        updatedAt={note.updatedAt}
-                        createdAt={note.createdAt}
-                        language={note.language}
-                    />
-                )}
+    if (props.status === 'BUSY' || !props.status) {
+        return (
+            <div className='desktop-notes'>
+                <div className='column1'>
+                    <CodeNoteItemLoader />
+                    <CodeNoteItemLoader />
+                    <CodeNoteItemLoader />
+                </div>
+                <div className='column2'>
+                    <CodeNoteItemLoader />
+                    <CodeNoteItemLoader />
+                </div>
             </div>
-            <div className='column2'>
-                {col2.map((note) =>
-                    <CodeNoteItem key={note._id}
-                        title={note.title}
-                        tags={note.tags}
-                        likes={note.likes}
-                        username={note.user.username}
-                        userId={note.user.userId}
-                        textDetails={note.textdetails}
-                        codeBody={note.codebody}
-                        id={note._id}
-                        comments={note.comments}
-                        updatedAt={note.updatedAt}
-                        createdAt={note.createdAt}
-                        language={note.language}
-                    />
-                )}
+        )
+    }
+    // debugger
+    if (props.status === 'DONE' || (props.notes && props.status === 'IDLE') ) {
+        return (
+            <div className='desktop-notes'>
+                    <div className='column1'>
+                        {col1.map((note) =>
+                            <CodeNoteItem key={note._id}
+                                title={note.title}
+                                tags={note.tags}
+                                likes={note.likes}
+                                username={note.user.username}
+                                userId={note.user.userId}
+                                textDetails={note.textdetails}
+                                codeBody={note.codebody}
+                                id={note._id}
+                                comments={note.comments}
+                                updatedAt={note.updatedAt}
+                                createdAt={note.createdAt}
+                                language={note.language}
+                            />
+                        )}
+                    </div>
+                    <div className='column2'>
+                        {col2.map((note) =>
+                            <CodeNoteItem key={note._id}
+                                title={note.title}
+                                tags={note.tags}
+                                likes={note.likes}
+                                username={note.user.username}
+                                userId={note.user.userId}
+                                textDetails={note.textdetails}
+                                codeBody={note.codebody}
+                                id={note._id}
+                                comments={note.comments}
+                                updatedAt={note.updatedAt}
+                                createdAt={note.createdAt}
+                                language={note.language}
+                            />
+                        )}
+                    </div>
             </div>
-        </div>
-    ) : (
-        <div className='desktop-notes'>
-            <div className='column1'>
-                <CodeNoteItemLoader />
-                <CodeNoteItemLoader />
-                <CodeNoteItemLoader />
-            </div>
-            <div className='column2'>
-                <CodeNoteItemLoader />
-                <CodeNoteItemLoader />
-            </div>
-        </div>
-    )
+        )
+    }
 
 }
 

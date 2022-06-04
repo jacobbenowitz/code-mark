@@ -73,8 +73,7 @@ export const filterUsersById = (allUsers, userIds) => {
 }
 
 export const selectFollowingUsersNotes = (users, allNotes) => {
-  debugger
-  if (Object.values(allNotes).length && users.length) {
+  if (allNotes && users) {
     const usersNoteIds = users.map(user => user?.notes).flat()
     const followingNotes = selectNotesById(usersNoteIds, allNotes)
     return followingNotes;

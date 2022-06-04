@@ -27,8 +27,7 @@ const CodeCommentReadOnly = props => {
       width='100%'
       theme='dark'
       extensions={[
-        extensions[props.language] ? extensions[props.language] : javascript({ jsx: true }),
-        EditorView.lineWrapping, fixedHeightEditor
+        extensions[props.language] ? extensions[props.language] : javascript({ jsx: true }), EditorView.lineWrapping, fixedHeightEditor
       ]}
     />
   );

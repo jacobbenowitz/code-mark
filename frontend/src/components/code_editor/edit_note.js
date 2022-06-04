@@ -298,6 +298,7 @@ export default class EditNote extends React.Component {
         col2.push(keyword);
       }
     })
+
     return (
       <>
         {/* <div id='resources-note-container' className='modal-off'>

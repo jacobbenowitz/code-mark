@@ -4,75 +4,38 @@ import NewNoteLoader from "./placeholder_components/new_note_loader";
 import HomeHeaderLoader from "./placeholder_components/home_header_loader";
 import CodeNoteItemLoader from "./placeholder_components/code_note_loader";
 import NoteShowTopLoader from "./note_show_top_loader";
+import UserNotesContainer from "../notes/user_notes_container";
+import SectionTitle from "../UI/section_title";
+import SectionTitleLoaderMobile from "../lazy_loaders/mobile/section_title_loader_mobile"
+import TagsMobileLoader from "./mobile/tags_loader_mobile";
+import NewNoteLoaderMobile from "./mobile/new_note_loader_mobile"
 
 const TestLazyLoad = () => {
   function isMobile() {
     return window.innerWidth < 680;
   }
-
-  if (isMobile()) {
-    return (
+  return (
+    // HOME MOBILE 
       <div className='main-mobile'>
         <div className='home-main'>
-          {/* <NewNoteContainer /> */}
+        <NewNoteLoaderMobile />
           <div className='notes-section'>
-            {/* <SectionTitle
-              title={'My Notes'}
-              noteCount={this.props?.userNotes.length}
-              type={'default'}
-            /> */}
+          <div className='section-title'>
+            <SectionTitleLoaderMobile />
+          </div>
             <div className='tags-wrapper-mobile'>
-              <span className='tags-mobile-header'>Tags</span>
-              <div className="code-note-tags-main">
-                {/* {this.props.tags?.map((tag, i) =>
-                  <NavLink to={`/home/tags/${tag}`}>
-                    <div className="note-tag-mini link"
-                      key={`${i}-tag`}>
-                      {tag}
-                    </div>
-                  </NavLink>
-                )} */}
-                <div className='tag-spacer'></div>
-              </div>
+            <div className="code-note-tags-main">
+              <TagsMobileLoader />
             </div>
-            {/* <div className='note-list-container'>
-              <UserNotesContainer />
-            </div> */}
-          </div>
-        </div>
-      </div>
-    )
-  } else return (
-    <div className='main-sidebar'>
-      <div className='nav-sidecar'>
-        <div className="nav-boxes">
-          <SidebarLoader />
-        </div>
-      </div>
-      <div className='home-main'>
-        <div className='new-note-form' >
-          <NewNoteLoader />
-        </div>
-        <div className='notes-section'>
-          <HomeHeaderLoader />
-          <div className='note-list-container'>
-            <div className='desktop-notes'>
-              <div className='column1'>
-                <CodeNoteItemLoader />
-                <CodeNoteItemLoader />
-                <CodeNoteItemLoader />
-              </div>
-              <div className='column2'>
-                <CodeNoteItemLoader />
-                <CodeNoteItemLoader />
-              </div>
+            </div>
+            <div className='note-list-container'>
             </div>
           </div>
         </div>
-        <NoteShowTopLoader />
-      </div>
     </div>
-    )
+
+    // NOTE SHOW MOBILE
+  )
 }
 
 export default TestLazyLoad;

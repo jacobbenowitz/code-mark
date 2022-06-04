@@ -31,12 +31,20 @@ export default class Discover extends React.Component {
               title={'Discover Notes'}
               noteCount={this.props.noteCount}
               type={'default'}
+              status={this.props.status}
             />
             <div className='note-list-container'>
               {
                 this.isMobile() ?
-                <MobileNotes notes={this.props.allNotes} />
-                : <AllNotes notes={this.props.allNotes} />
+                  <MobileNotes
+                    notes={this.props.allNotes}
+                    status={this.props.status}
+                  />
+                  :
+                  <AllNotes
+                    notes={this.props.allNotes}
+                    status={this.props.status}
+                  />
               }
             </div>
           </div>

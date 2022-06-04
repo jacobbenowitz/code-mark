@@ -10,7 +10,8 @@ class UserNotes extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userNotes: []
+      userNotes: [],
+      status: 'IDLE'
     };
   }
 
@@ -19,10 +20,11 @@ class UserNotes extends React.Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.userNotes) {
-      let notes = orderUserNotes(nextProps.userNotes);
+    if (nextProps.status !== this.state.status) {
+      let notes = orderUserNotes(nextProps.userNotes)
       this.setState({
-        userNotes: notes
+        userNotes: notes,
+        status: nextProps.status
       })
     }
   }
@@ -34,10 +36,16 @@ class UserNotes extends React.Component {
   render() {
     return (
       this.isMobile() ?
-        <MobileNotes notes={this.state.userNotes} />
-        : <AllNotes notes={this.state.userNotes} />
+        <MobileNotes
+          notes={this.state.userNotes}
+          status={this.state.status}
+        />
+        :
+        <AllNotes
+          notes={this.state.userNotes}
+          status={this.state.status}
+        />
     )
-    // }
   }
 }
 

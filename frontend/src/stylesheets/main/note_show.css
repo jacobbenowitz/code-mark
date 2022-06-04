@@ -9,9 +9,13 @@
   width: 100%;
   overflow: hidden;
 } */
+@media only screen and (min-width: 680px) {
+  .note-show-container {
+    grid-column: 3 / span 8;
+  }
+}
 
 .note-show-container {
-  grid-column: 3 / span 8;
   display: flex;
   margin-top: 1.2rem;
   margin-bottom: 5rem;
@@ -185,6 +189,8 @@
     width: 100%;
     max-width: 100vw;
     padding: 10px;
+    gap: 0.5rem;
+    overflow: visible;
     animation: fadeIn 300ms ease-in-out;
   }
 

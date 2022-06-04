@@ -42,7 +42,11 @@ h5 {
 a {
   font-size: 16px;
 }
-
+.link {
+  color: #10b3bf;
+  text-decoration: underline;
+  font-weight: 700;
+}
 a:hover {
   color: #37F3FF;
 }

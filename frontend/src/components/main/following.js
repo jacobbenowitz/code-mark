@@ -28,13 +28,14 @@ export default class Following extends React.Component {
 
   componentDidUpdate() {
     const { followingNotes, followingUsers, currentUser,
-      noteCount, followingTags } = this.props;
+      noteCount, followingTags, status } = this.props;
 
-    if (followingNotes && Object.values(followingUsers).length && (this.state.followingNotes !== followingNotes || this.state.followingTags !== followingTags)) {
+    if (status !== this.state.status || followingNotes && Object.values(followingUsers).length && (this.state.followingNotes !== followingNotes || this.state.followingTags !== followingTags)) {
       this.setState({
-          followingNotes: followingNotes,
-          followingTags: followingTags,
-          noteCount: noteCount
+        followingNotes: followingNotes,
+        followingTags: followingTags,
+        noteCount: noteCount,
+        status: status
       })
     }
   }
@@ -53,14 +54,22 @@ export default class Following extends React.Component {
             <SectionTitle
               type={'default'}
               title={'Following'}
-              noteCount={this.state.followingNotes.length}
+              noteCount={this.state.noteCount}
+              status={this.state.status}
             />
             <div className='note-list-container'>
-              {this.isMobile() ?
-                  <MobileNotes notes={this.state.followingNotes} />
-                  : <AllNotes notes={this.state.followingNotes} />
+              {
+                this.isMobile() ?
+                  <MobileNotes
+                    notes={this.state.followingNotes}
+                    status={this.state.status}
+                  />
+                  :
+                  <AllNotes
+                    notes={this.state.followingNotes}
+                    status={this.state.status}
+                  />
               }
-
             </div>
           </div>
         </div>

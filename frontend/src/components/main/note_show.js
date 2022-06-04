@@ -294,6 +294,7 @@ export default class NoteShow extends React.Component {
           </div>
         </div>
         {/* NOTE ACTIONS // NOTE MAIN */}
+        {note ? (
         <div id='edit-note-container' className="modal-off"
           style={{ height: this.state.bodyHeight }}>
           <div className='modal-wrapper'>
@@ -307,6 +308,7 @@ export default class NoteShow extends React.Component {
             />
           </div>
         </div>
+        ) : ''}
         <div className={this.isMobile() ? 'note-show-container span-12' : 'note-show-container center-span-7'}>
           <div className='note-show-top-icons'>
             <div className='back-page icon-button'
@@ -375,7 +377,9 @@ export default class NoteShow extends React.Component {
                     </div>
                     </div>
                   </div>
-                  <span className='tags-header'>TAGS</span>
+                  {this.state.note?.tags.length ? (
+                    <span className='tags-header'>TAGS</span>
+                  ) : ''}
                     <Tags note={this.state.note}
                       isCurrentUser={this.props.currentUser.id === this.props.note.user.userId}
                       updateNoteTags={this.props.updateNoteTags}
@@ -418,7 +422,9 @@ export default class NoteShow extends React.Component {
                       </div>
                     </div>
                     <div className='tags-section-wrapper'>
-                      <span className='tags-header'>TAGS</span>
+                      {this.state.note?.tags.length ? (
+                        <span className='tags-header'>TAGS</span>
+                      ) : ''}
                         <Tags note={this.state.note}
                           isCurrentUser={this.props.currentUser.id === this.props.note.user.userId}
                           updateNoteTags={this.props.updateNoteTags}
@@ -461,7 +467,7 @@ export default class NoteShow extends React.Component {
                   </div>
                   
                   {/* COMMENT MODAL */}
-                  {this.state.hideCommentModal ? '' : (
+                  {this.state.hideCommentModal && note ? '' : (
                     <div id='comment-highlight-text'
                       className={this.state.commentModal ?
                         'modal-expanded' : 'modal-compact'}>
@@ -550,7 +556,7 @@ export default class NoteShow extends React.Component {
               selectedText={this.state.selectedText}
               isCurrentUser={this.props.currentUser.id === this.props.note.user.userId}
               currentUser={this.props.currentUser}
-              comments={this.state.comments}
+              comments={this.state?.comments}
               updateComment={this.props.updateComment}
               removeComment={this.props.removeComment}
               note={this.props.note}

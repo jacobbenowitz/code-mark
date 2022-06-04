@@ -10,6 +10,7 @@ const mapStateToProps = (state, { match }) => {
     allNotes: state.notes.all,
     likedNoteIds: state.session.user.note_likes,
     currentUser: state.session.user,
+    status: state.notes.status
   }
 }
 

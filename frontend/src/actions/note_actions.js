@@ -18,6 +18,8 @@ export const RECEIVE_UPDATED_NOTE = "RECEIVE_UPDATED_NOTE";
 export const RECEIVE_DELETE_NOTE = "RECEIVE_DELETE_NOTE";
 export const RECEIVE_NOTE_LIKE = "RECEIVE_NOTE_LIKE";
 export const RECEIVE_NOTE_UNLIKE = "RECEIVE_NOTE_UNLIKE";
+export const REQUEST_USER_NOTES = "REQUEST_USER_NOTES";
+export const REQUEST_ALL_NOTES = "REQUEST_ALL_NOTES";
 
 export const receiveNotes = notes => ({
   type: RECEIVE_NOTES,
@@ -64,24 +66,34 @@ export const receiveNoteUnlike = note => ({
   note
 })
 
+export const requestUserNotes = () => ({
+  type: REQUEST_USER_NOTES
+})
+
+export const requestAllNotes = () => ({
+  type: REQUEST_ALL_NOTES
+})
+
 // thunk actions
 
-export const fetchNotes = () => dispatch => (
-  getNotes()
-    .then(notes => dispatch(receiveNotes(notes)))
-    .catch(err => console.log(err))
-    // .catch(err => dispatch(receiveNoteErrors(err)))
-);
+export const fetchNotes = () => dispatch => {
+  dispatch(requestAllNotes())
+  return getNotes()
+  .then(notes => dispatch(receiveNotes(notes)))
+  .catch(err => console.log(err))
+  // .catch(err => dispatch(receiveNoteErrors(err)))
+};
 
 export const fetchNote = noteId => dispatch => (
   getNote(noteId)
-    .then(note => dispatch(receiveNote(note)))
-    .catch(err => console.log(err))
-    // .catch(err => dispatch(receiveNoteErrors(err)))
-
-);
-
-export const fetchUserNotes = id => dispatch => {
+  .then(note => dispatch(receiveNote(note)))
+  .catch(err => console.log(err))
+  // .catch(err => dispatch(receiveNoteErrors(err)))
+  
+  );
+  
+  export const fetchUserNotes = id => dispatch => {
+  dispatch(requestUserNotes())
   return getUserNotes(id)
     .then(notes => dispatch(receiveUserNotes(notes)))
     .catch(err => console.log(err))
