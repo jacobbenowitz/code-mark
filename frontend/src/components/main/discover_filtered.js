@@ -41,8 +41,9 @@ export default class DiscoverFiltered extends React.Component {
   }
 
   render() {
+    const { mobile, filter, notes } = this.state;
     return (
-      <div className={this.isMobile() ? 'main-mobile' : 'main-sidebar'}>
+      <div className={mobile ? 'main-mobile' : 'main-sidebar'}>
         <div className='nav-sidecar'>
           <SideCarMenu tagType={'discover'} tags={this.props.tags} />
         </div>
@@ -51,15 +52,22 @@ export default class DiscoverFiltered extends React.Component {
           <div className='notes-section'>
             <SectionTitle
               type={'filtered'}
-              noteCount={this.state.notes.length}
-              filter={this.state.filter}
+              noteCount={notes.length}
+              filter={filter}
               title={'Discover'}
+              status={this.props.status}
             />
             <div className='note-list-container'>
               {
-                this.isMobile() ?
-                <MobileNotes notes={this.state.notes} />
-                : <AllNotes notes={this.state.notes} />
+                mobile ?
+                  <MobileNotes
+                    notes={notes}
+                    status={this.props.status}
+                  />
+                  : <AllNotes
+                    notes={notes}
+                    status={this.props.status}
+                  />
               }
             </div>
           </div>
