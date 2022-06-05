@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import SidebarLoader from '../lazy_loaders/placeholder_components/sidebar_loader';
+import SidebarLoader from '../content_loaders/placeholder_components/sidebar_loader';
 import NavTagItem from '../tags/nav_tag_item';
 
 const SideCarMenu = ({ tags, tagType }) => {

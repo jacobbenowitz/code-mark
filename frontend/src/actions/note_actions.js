@@ -21,6 +21,7 @@ export const RECEIVE_NOTE_LIKE = "RECEIVE_NOTE_LIKE";
 export const RECEIVE_NOTE_UNLIKE = "RECEIVE_NOTE_UNLIKE";
 export const REQUEST_USER_NOTES = "REQUEST_USER_NOTES";
 export const REQUEST_ALL_NOTES = "REQUEST_ALL_NOTES";
+export const REQUEST_NOTE = "REQUEST_NOTE";
 
 export const receiveNotes = notes => ({
   type: RECEIVE_NOTES,
@@ -73,6 +74,10 @@ export const requestUserNotes = () => ({
 
 export const requestAllNotes = () => ({
   type: REQUEST_ALL_NOTES
+})
+
+export const requestNote = () => ({
+  type: REQUEST_NOTE
 })
 
 // thunk actions

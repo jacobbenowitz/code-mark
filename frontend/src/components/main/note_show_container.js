@@ -25,6 +25,7 @@ import { fetchCurrentUser } from "../../actions/session_actions";
 const mapStateToProps = (state, { match }) => {
   return {
     noteId: match.params.noteId,
+    status: state.notes.status,
     note: state.notes.all[match.params.noteId],
     currentUser: state.session.user,
     comments: state.comments.note,

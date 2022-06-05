@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import SectionTitleLoaderMobile from "../lazy_loaders/mobile/section_title_loader_mobile";
-import HomeHeaderLoader from "../lazy_loaders/placeholder_components/home_header_loader";
+import SectionTitleLoaderMobile from "../content_loaders/mobile/section_title_loader_mobile";
+import HomeHeaderLoader from "../content_loaders/placeholder_components/home_header_loader";
 
 const SectionTitle = ({ type, title,
   noteCount, filter, status, mobile = false }) => {

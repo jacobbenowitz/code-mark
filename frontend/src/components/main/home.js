@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 import NavTagItem from '../tags/nav_tag_item';
 import SideCarMenu from './side_car_menu';
 import SectionTitle from '../UI/section_title';
-import SidebarLoader from '../lazy_loaders/placeholder_components/sidebar_loader';
+import SidebarLoader from '../content_loaders/placeholder_components/sidebar_loader';
 import MobileTagsHome from './mobile/mobile_tags_home';
 
 

@@ -1,6 +1,6 @@
 import React from "react"
 import CodeNoteItem from "../notes/code_note_item"
-import CodeNoteItemLoader from "../lazy_loaders/placeholder_components/code_note_loader";
+import CodeNoteItemLoader from "../content_loaders/placeholder_components/code_note_loader";
 
 const AllNotes = (props) => {
     const col1 = [];

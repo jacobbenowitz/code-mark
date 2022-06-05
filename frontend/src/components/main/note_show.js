@@ -4,11 +4,8 @@ import CommentForm from '../notes/comments/comment_form';
 import { orderNoteComments } from "../../util/selectors";
 import domtoimage from 'dom-to-image';
 import CommentIndex from '../notes/comments/comment_index';
-import ResourceItem from '../notes/resources/resource_item';
 import { getLanguage } from '../../util/webscrap_util';
-import NoteShowTopLoader from '../lazy_loaders/note_show_top_loader';
-import ActionIconsLoader from '../lazy_loaders/note_show_action_icons_loader';
-import NoteCommentsLoader from '../lazy_loaders/note_show_comments_loader';
+import NoteCommentsLoader from '../content_loaders/note_show_comments_loader';
 import PhotoExportModal from '../modals/photo_export_modal';
 import DeleteNoteModal from '../modals/delete_note_modal';
 import EditNoteModal from '../modals/edit_note_modal';
@@ -16,6 +13,7 @@ import NoteTopActionIcons from './note_show/top_action_icons';
 import NoteShowHeader from './note_show/note_show_header';
 import NoteShowCodeAndDetails from './note_show/note_code_main';
 import CommentModal from '../modals/comment_modal';
+import NoteResources from './note_show/note_resources';
 
 export default class NoteShow extends React.Component {
   constructor(props) {
@@ -60,26 +58,31 @@ export default class NoteShow extends React.Component {
   }
   
   componentDidUpdate() {
-    const { note, comments, currentUser, history } = this.props;
+    const { note, comments, currentUser, history, status } = this.props;
     const body = document.getElementsByTagName('body');
     const bodyHeight = body[0].clientHeight;
     
-    if (note && (note !== this.state.note || this.state.comments
-      !== comments)) {
-      
+    
+    
+    if (status === "BUSY" && this.state.status !== "BUSY") {
+      this.setState({status: status})
+    }
+    if (status === "DONE" && (note !== this.state.note || comments !== this.state.comments)) {
       if (currentUser?.id !== note.user.userId && !note.public) {
         history.push(`/home`)
       }
       const orderedComments = orderNoteComments(comments);
+      
       this.setState({
         note: note,
         comments: orderedComments,
         isPublic: note.public,
         bodyHeight: bodyHeight,
-        isCurrentUser: this.props.currentUser?.id === this.props.note?.user.userId
+        isCurrentUser: currentUser.id === note.user.userId,
+        status: status
       })
     }
-    if (Object.values(this.state.note).length) {
+    if (status === "DONE") {
       document.onselectionchange = (e) => {
         e.preventDefault()
         const selectionString = document.getSelection().toString()
@@ -200,45 +203,52 @@ export default class NoteShow extends React.Component {
       comments, updateNoteTags } = this.props;
     
     const { note, bodyHeight, isCurrentUser, commentModal,
-      isPublic, hideCommentModal, selectedText } = this.state;
+      isPublic, hideCommentModal, selectedText, status } = this.state;
     
-    return Object.values(note).length ? (
-      <>
-        <PhotoExportModal
-          bodyHeight={bodyHeight}
-          note={note}
-          toggleExportModal={this.toggleExportModal}
-          exportImage={this.exportImage}
-        />
+    let modals;
 
-        <DeleteNoteModal
-          deleteNote={this.deleteNote}
-          bodyHeight={bodyHeight}
-          toggleDeleteModal={this.toggleDeleteModal}
-        />
-        
-        <EditNoteModal
-          bodyHeight={bodyHeight}
-          getLanguage={getLanguage}
-          note={note}
-          updateNote={updateNote}
-          currentUser={currentUser}
-          noteId={noteId}
-          toggleCommentModalVisibility={this.toggleCommentModalVisibility}
-        />
+    if (status === "DONE") {
+      modals = (
+        <>
+          <PhotoExportModal
+            bodyHeight={bodyHeight}
+            note={note}
+            toggleExportModal={this.toggleExportModal}
+            exportImage={this.exportImage}
+          />
 
-        {/* COMMENT MODAL */}
-        {this.state.hideCommentModal && note ? '' : (
+          <DeleteNoteModal
+            deleteNote={this.deleteNote}
+            bodyHeight={bodyHeight}
+            toggleDeleteModal={this.toggleDeleteModal}
+          />
+          
+          <EditNoteModal
+            bodyHeight={bodyHeight}
+            getLanguage={getLanguage}
+            note={note}
+            updateNote={updateNote}
+            currentUser={currentUser}
+            noteId={noteId}
+            toggleCommentModalVisibility={this.toggleCommentModalVisibility}
+          />
+
           <CommentModal
             commentModal={commentModal}
             toggleCommentModal={this.toggleCommentModal}
             selectedText={selectedText}
             commentOnSelection={this.commentOnSelection}
+            hideCommentModal={hideCommentModal}
           />
-        )}
+        </>
+      )
+    }
+    
+    return (
+      <>
+        { modals }
 
-        <div className={this.isMobile() ?
-          'note-show-container span-12' : 'note-show-container center-span-7'}>
+        <div className={'note-show-container'}>
           
           <NoteTopActionIcons 
             history={this.props.history}
@@ -247,6 +257,7 @@ export default class NoteShow extends React.Component {
             toggleEditModal={this.toggleEditModal}
             toggleDeleteModal={this.toggleDeleteModal}
             isCurrentUser={isCurrentUser}
+            status={status}
           />
           
           <div id="note-show-main" className='note-show-main'>
@@ -259,35 +270,25 @@ export default class NoteShow extends React.Component {
               handlePublicSwitch={this.handlePublicSwitch}
               updateNoteTags={updateNoteTags}
               isMobile={this.isMobile}
+              status={status}
             />
-
-            {/* note main */}
-            {/* <NoteShowCodeAndDetails 
+            
+            <NoteShowCodeAndDetails 
               note={note}
               addNoteLike={this.props.addNoteLike}
               removeNoteLike={this.props.removeNoteLike}
               currentUser={currentUser}
               noteId={noteId}
               toggleExportModal={this.toggleExportModal}
-            /> */}
+              status={status}
+            />
           </div>
+          
+          <NoteResources
+            note={note}
+            status={status}
+          />
 
-          {this.props.note.resources?.length ? (
-            <div className='note-resources'>
-              <div className='resources-title'>
-                <h4>Resources</h4>
-              </div>
-              <div className='resources-list'>
-                {this.props.note.resources?.map((resource, i) =>
-                  <ResourceItem
-                    resource={resource}
-                    key={`resource-${i}`}
-                  />
-                )}
-              </div>
-            </div>
-          ) : ''}
-          {/* COMMENTS SECTION */}
           <section id={'comments'} className='note-comments'>
             <div className='comments-title'>
               <h4>Comments</h4>
@@ -300,7 +301,7 @@ export default class NoteShow extends React.Component {
               currentUser={currentUser}
               clearSnippet={this.clearSnippet}
             />
-            <CommentIndex
+            {/* <CommentIndex
               selectedText={this.state.selectedText}
               isCurrentUser={this.props.currentUser.id === this.props.note.user.userId}
               currentUser={this.props.currentUser}
@@ -314,24 +315,11 @@ export default class NoteShow extends React.Component {
               noteId={this.props.noteId}
               addCommentLike={this.props.addCommentLike}
               removeCommentLike={this.props.removeCommentLike}
-              // toggleModal={this.props.toggleModal}
-            />
+              status={status}
+            /> */}
           </section>
         </div>
       </>
-    ) : (
-        <div className='note-show-container center-span-7'>
-          <div className="note-show-top-icons">
-            <ActionIconsLoader />
-          </div>
-          <div className='note-show-main'>
-            <NoteShowTopLoader />
-          </div>
-          <div className='note-comments'>
-            <NoteCommentsLoader />
-          </div>
-        </div>
     )
-
   }
 }

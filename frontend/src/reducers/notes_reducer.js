@@ -8,7 +8,8 @@ import {
   RECEIVE_NOTE_LIKE,
   RECEIVE_NOTE_UNLIKE,
   REQUEST_USER_NOTES,
-  REQUEST_ALL_NOTES
+  REQUEST_ALL_NOTES,
+  REQUEST_NOTE
 } from '../actions/note_actions';
 
 // status reflects the status of data being fetched
@@ -49,6 +50,7 @@ const notesReducer = (prevState = initialState, action) => {
       nextState.all = allNotes;
       return nextState;
     case RECEIVE_NOTE:
+      nextState.status = DONE;
       nextState.all[action.note.data._id] = action.note.data;
       return nextState;
     case RECEIVE_DELETE_NOTE:
@@ -71,6 +73,8 @@ const notesReducer = (prevState = initialState, action) => {
     case REQUEST_ALL_NOTES:
       nextState.status = BUSY;
       return nextState;
+    case REQUEST_NOTE:
+      nextState.status = BUSY;
     default:
       return prevState;
   }

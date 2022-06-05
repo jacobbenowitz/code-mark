@@ -30,15 +30,15 @@ import FollowingFilteredContainer from './main/following_filtered_container';
 import LikedFilteredContainer from './main/liked_filtered_container';
 import LayoutDesign from './UI/layout_design';
 import GlobalModalContainer from './UI/global_modal_container';
-import TestLazyLoad from './lazy_loaders/test_lazy_load';
-import NoteShowLazyLoad from './lazy_loaders/note_show_lazy_load';
+import TestLazyLoad from './content_loaders/test_lazy_load';
+import NoteShowLazyLoad from './content_loaders/note_show_lazy_load';
 
 const App = () => (
   <div className="grid-pancake-stack">
     <header className="header-top-stack">
       <NavBarContainer />
     </header>
-      <GlobalModalContainer />
+    <GlobalModalContainer />
     <Switch>
       <AuthRoute exact path='/signup'
         component={SignupFormContainer} />

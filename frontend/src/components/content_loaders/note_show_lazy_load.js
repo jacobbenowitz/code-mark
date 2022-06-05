@@ -12,6 +12,9 @@ const NoteShowLazyLoad = () => {
   }
   return (
     // HOME MOBILE 
+
+    // NOTE SHOW MOBILE
+    <>
       <div className='main-mobile'>
         <div className='home-main'>
         <div className="note-show-container span-12">
@@ -41,8 +44,8 @@ const NoteShowLazyLoad = () => {
         </div>
         </div>
     </div>
-
-    // NOTE SHOW MOBILE
+    
+    </>
   )
 }
 

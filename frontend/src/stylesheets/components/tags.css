@@ -54,6 +54,8 @@
   justify-content: center;
   flex-wrap: wrap;
   align-content: flex-start;
+  height: fit-content;
+  min-height: 85px;
 }
 
 .spacer-30-h {
