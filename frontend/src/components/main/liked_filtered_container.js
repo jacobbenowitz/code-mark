@@ -12,7 +12,8 @@ const mapStateToProps = (state, {match}) => {
     allUsers: state.users.all,
     currentUser: state.session.user,
     likedNoteIds: state.session.user.note_likes,
-    filter: match.params.tag
+    filter: match.params.tag,
+    status: state.notes.status
   }
 }
 

@@ -28,6 +28,7 @@ class UserNotes extends React.Component {
       })
     }
   }
+  
 
   isMobile() {
     return window.innerWidth < 680;
