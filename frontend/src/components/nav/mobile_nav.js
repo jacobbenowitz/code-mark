@@ -22,7 +22,7 @@ export default class MobileNav extends React.Component {
         this.setState({
           showMenu: !this.state.showMenu
         })
-      }, 750)
+      }, 375)
     } else {
       this.setState({
         showMenu: !this.state.showMenu
