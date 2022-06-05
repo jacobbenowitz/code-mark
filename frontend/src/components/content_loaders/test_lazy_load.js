@@ -15,6 +15,10 @@ import NoteShowActionIconsLoaderDesktop from "./desktop/note_show_action_icons_l
 import NoteShowMainLoader from "./note_show_main_loader";
 import NoteShowHeaderDesktopLoader from "./desktop/note_show_header_loader_desktop";
 import PublicSwitchLoader from "./placeholder_components/public_switch_loader";
+import NoteShowTopLoaderMobile from "./mobile/note_show_top_loader_mobile";
+import NoteShowTitleStatsLoaderMobile from "./mobile/note_show_title_stats_loader_mobile";
+import NoteShowCodeNoteLoaderMobile from "./mobile/note_show_code_note_loader_mobile";
+import NoteShowTagsLoaderMobile from "./mobile/note_show_tags_loader_mobile";
 
 const TestLazyLoad = () => {
   function isMobile() {
@@ -40,26 +44,36 @@ const TestLazyLoad = () => {
           </div>
         </div>
       </div> */}
-
+      <div className='grid-spacer-1-2' />
       <div className='note-show-container'>
-        <div className='note-show-top-icons-loader'>
+        <div className='note-show-top-icons'>
           <NoteShowActionIconsLoaderDesktop />
         </div>
         <div className='note-show-main'>
-          <div className={'note-show-title'}>
-            <div className="loader-wrapper">
+          <div className='note-show-title'>
+            {/* mobile */}
+            <NoteShowTitleStatsLoaderMobile /> 
+            <NoteShowTagsLoaderMobile />
+            {/* desktop */}
+            {/* <div className="loader-wrapper">
               <NoteShowHeaderDesktopLoader />
               <div className="public-loader">
                 <PublicSwitchLoader />
               </div>
-            </div>
+            </div> */}
           </div>
-          <NoteShowMainLoader />
+          {/* mobile */}
+          <div className='code-note-body' id='code-note-view'>
+            <NoteShowCodeNoteLoaderMobile />
+          </div>
+          {/* desktop */}
+          {/* <NoteShowMainLoader /> */}
         </div>
         <div className='note-comments'>
           <NoteCommentsLoader />
         </div>
       </div>
+      <div className='grid-spacer-11-12' />
     </>
   )
 }

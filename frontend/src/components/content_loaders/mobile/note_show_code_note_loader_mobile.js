@@ -12,11 +12,11 @@ const NoteShowCodeNoteLoaderMobile = (props) => (
     style={{ width: '100%' }}
     preserveAspectRatio="none"
   >
-    <rect x="1" y="1" rx="28" ry="28" width="30" height="30" />
-    <rect x="0" y="42" rx="6" ry="6" width="370" height="300" />
-    <rect x="340" y="1" rx="28" ry="28" width="30" height="30" />
-    <rect x="304" y="1" rx="28" ry="28" width="30" height="30" />
-    <rect x="-1" y="351" rx="4" ry="4" width="370" height="59" />
+    <rect x="1" y="6" rx="28" ry="28" width="30" height="30" />
+    <rect x="340" y="6" rx="28" ry="28" width="30" height="30" />
+    <rect x="304" y="6" rx="28" ry="28" width="30" height="30" />
+    <rect x="0" y="47" rx="6" ry="6" width="370" height="300" />
+    <rect x="-1" y="356" rx="4" ry="4" width="370" height="59" />
   </ContentLoader>
 )
 

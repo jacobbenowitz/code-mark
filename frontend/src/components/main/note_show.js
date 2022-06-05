@@ -28,7 +28,8 @@ export default class NoteShow extends React.Component {
       textHeight: undefined,
       bodyHeight: 0,
       isCurrentUser: false,
-      hideCommentModal: false
+      hideCommentModal: false,
+      isMobile: false 
     }
     this.bindHandlers()
   }
@@ -51,6 +52,7 @@ export default class NoteShow extends React.Component {
     this.props.fetchNote(this.props.noteId);
     this.props.fetchNoteComments(this.props.noteId);
     window.scrollTo(0, 0);
+    this.setState({isMobile: this.isMobile()})
   }
   
   componentWillUnmount() {
@@ -61,8 +63,11 @@ export default class NoteShow extends React.Component {
     const { note, comments, currentUser, history, status } = this.props;
     const body = document.getElementsByTagName('body');
     const bodyHeight = body[0].clientHeight;
-    
-    
+    const isMobileBool = this.isMobile();
+
+    if (isMobileBool !== this.state.isMobile) {
+      this.setState({ isMobile: isMobileBool })
+    }
     
     if (status === "BUSY" && this.state.status !== "BUSY") {
       this.setState({status: status})
@@ -86,7 +91,6 @@ export default class NoteShow extends React.Component {
       document.onselectionchange = (e) => {
         e.preventDefault()
         const selectionString = document.getSelection().toString()
-        const selectionCommentModal = document.getElementById('comment-highlight-text')
 
         if (selectionString.length > 1) {
           this.setState({
@@ -243,9 +247,9 @@ export default class NoteShow extends React.Component {
     }
     
     return (
-      <>
+      <div className='note-show-wrapper grid-12-col'>
         { modals }
-
+        <div className='grid-spacer-1-2' />
         <div className={'note-show-container'}>
           
           <NoteTopActionIcons 
@@ -267,7 +271,7 @@ export default class NoteShow extends React.Component {
               isPublic={isPublic}
               handlePublicSwitch={this.handlePublicSwitch}
               updateNoteTags={updateNoteTags}
-              isMobile={this.isMobile}
+              isMobile={this.state.isMobile}
               status={status}
             />
 
@@ -279,12 +283,14 @@ export default class NoteShow extends React.Component {
               noteId={noteId}
               toggleExportModal={this.toggleExportModal}
               status={status}
+              isMobile={this.state.isMobile}
             />
           </div>
           
           <NoteResources
             note={note}
             status={status}
+            isMobile={this.state.isMobile}
           />
 
           <section id={'comments'} className='note-comments'>
@@ -318,7 +324,8 @@ export default class NoteShow extends React.Component {
             />
           </section>
         </div>
-      </>
+        <div className='grid-spacer-11-12' />
+      </div>
     )
   }
 }

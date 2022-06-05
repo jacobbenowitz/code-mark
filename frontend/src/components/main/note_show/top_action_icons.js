@@ -2,7 +2,7 @@ import React from "react";
 import NoteShowActionIconsLoaderDesktop from "../../content_loaders/desktop/note_show_action_icons_loader_desktop";
 
 
-const NoteTopActionIcons = ({ history, currentUser, status,
+const NoteTopActionIcons = ({ history, isMobile, status,
   note, toggleDeleteModal, toggleEditModal, isCurrentUser }) => {
   
   let editButton, deleteButton, noteActionIcons;
@@ -44,7 +44,7 @@ const NoteTopActionIcons = ({ history, currentUser, status,
     )
   } else {
     noteActionIcons = (
-      <div className='note-show-top-icons-loader'>
+      <div className='note-show-top-icons'>
         <NoteShowActionIconsLoaderDesktop />
       </div>
     )

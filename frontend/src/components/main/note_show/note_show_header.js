@@ -5,6 +5,8 @@ import moment from 'moment';
 import SwitchButton from '../../UI/switch_button';
 import NoteShowHeaderDesktopLoader from "../../content_loaders/desktop/note_show_header_loader_desktop";
 import PublicSwitchLoader from "../../content_loaders/placeholder_components/public_switch_loader";
+import NoteShowTitleStatsLoaderMobile from "../../content_loaders/mobile/note_show_title_stats_loader_mobile";
+import NoteShowTagsLoaderMobile from "../../content_loaders/mobile/note_show_tags_loader_mobile";
 
 const NoteShowHeader = ({
   note,
@@ -63,14 +65,23 @@ const NoteShowHeader = ({
       </>
     )
   } else {
-    headerContent = (
-      <div className="loader-wrapper">
-        <NoteShowHeaderDesktopLoader />
-        <div className="public-loader">
-          <PublicSwitchLoader />
-        </div>
-      </div>
+    if (isMobile) {
+      headerContent = (
+        <>
+          <NoteShowTitleStatsLoaderMobile />
+          <NoteShowTagsLoaderMobile />
+        </>
+
       )
+    } else {
+      headerContent = (
+        <div className="loader-wrapper">
+          <NoteShowHeaderDesktopLoader />
+          <div className="public-loader">
+            <PublicSwitchLoader />
+          </div>
+        </div>
+      )}
     }
     
     return (

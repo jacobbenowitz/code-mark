@@ -6,19 +6,35 @@
   box-sizing: border-box;
   max-width: 100%;
   width: 100%;
-  overflow: hidden;
   flex-direction: column;
   flex-wrap: nowrap;
   align-content: center;
   justify-content: flex-start;
   align-items: center;
-    grid-column: 1 / span 12;
+  grid-column: 1 / span 12;
+}
+
+.grid-spacer-1-2 {
+  grid-column: 1 / span 2;
+  width: calc(100vw / 10);
+}
+
+.grid-spacer-11-12 {
+  grid-column: 11 / span 2;
+  width: calc(100vw / 10);
+}
+
+.note-show-wrapper {
+  grid-column: 1 / span 12;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 
 @media only screen and (min-width: 680px) {
   .note-show-container {
     grid-column: 3 / span 8;
+    overflow: hidden;
   }
 }
 
@@ -34,8 +50,8 @@
 
 .note-show-top-icons {
   display: flex;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  /* padding-left: 2rem;
+  padding-right: 2rem; */
   justify-content: space-between;
   box-sizing: border-box;
   max-width: 100%;
@@ -176,12 +192,13 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 2rem;
+  /* padding: 2rem; */
+  margin-top: 1.4rem;
   gap: 2rem;
   box-sizing: border-box;
   max-width: 100%;
   width: 100%;
-  overflow: hidden;
+    overflow: visible;
   animation: fadeIn 300ms ease-in-out;
 }
 
@@ -230,6 +247,12 @@
   .note-stat {
     font-size: 14px;
   }
+
+  .grid-spacer-1-2, .grid-spacer-11-12 {
+    display: none;
+  }
+
+
 }
 
 .export-dots-wrapper {
@@ -467,7 +490,6 @@
 }
 
 .note-resources {
-  padding: 2rem;
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
@@ -667,7 +689,7 @@
   width: 300px;
   position: fixed;
   top: 500px;
-  right: 5px;
+  right: 15px;
   z-index: 200;
   background-color: rgba(198, 198, 198, 0.102);
   backdrop-filter: blur(20px);
@@ -698,7 +720,7 @@
     width: 300px;
     position: fixed;
     top: 590px;
-    right: 5px;
+    right: 15px;
     z-index: 200;
     background-color: rgba(198, 198, 198, 0.102);
     backdrop-filter: blur(20px);

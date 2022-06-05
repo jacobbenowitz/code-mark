@@ -1,5 +1,4 @@
 .note-comments {
-  padding: 2rem;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -9,16 +8,8 @@
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
+  margin-top: 2rem;
 }
-
-/* .testing-box {
-  z-index: 200;
-  width: 300px;
-  height: 150px;
-  background-color: #494949;
-  opacity: 40%;
-  position: absolute;
-} */
 
 .comment-stats {
   display: flex;

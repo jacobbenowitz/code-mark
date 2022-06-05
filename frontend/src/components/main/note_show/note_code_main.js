@@ -3,10 +3,12 @@ import NoteShowEditorLoader from '../../code_editor/code_show_editor_loader'
 import CodeEditorNoteShow from '../../code_editor/code_editor_note_show_readonly';
 import LikeNoteIcon from '../../notes/like_note_icon';
 import NoteShowMainLoader from "../../content_loaders/note_show_main_loader";
+import NoteShowCodeNoteLoaderMobile from "../../content_loaders/mobile/note_show_code_note_loader_mobile";
 
 
 const NoteShowCodeAndDetails = ({
   note,
+  isMobile,
   status,
   addNoteLike,
   removeNoteLike,
@@ -61,9 +63,14 @@ const NoteShowCodeAndDetails = ({
       </>
     )
   } else {
+    if (isMobile) {
+      noteShowMain = (
+        <NoteShowCodeNoteLoaderMobile />
+      )
+    } else {
     noteShowMain = (
       <NoteShowMainLoader />
-    )
+    )}
   }
   return (
     <> 
