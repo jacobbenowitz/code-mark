@@ -17,20 +17,32 @@ const mapStateToProps = (state) => {
   const followingUserIds = currentUser.following;
   const allUsers = state.users.all;
   const allNotes = state.notes.all;
-  const followingUsers = filterUsersById(allUsers, followingUserIds)
-  const followingNotes = selectFollowingUsersNotes(followingUsers, allNotes)
-  const publicNotes = filterOnlyPublicNotes(followingNotes)
-  const orderedNotes = orderUserNotes(publicNotes)
-  const followingTags = selectNoteTags(publicNotes)
+  const status = state.notes.status;
 
-  return {
-    followingNotes: orderedNotes,
-    followingUsers: followingUsers,
-    currentUser: currentUser,
-    noteCount: orderedNotes?.length,
-    followingTags: followingTags,
-    status: state.notes.status
+  if (allUsers && status === 'DONE') {
+    const followingUsers = filterUsersById(allUsers, followingUserIds)
+    const followingNotes = selectFollowingUsersNotes(followingUsers, allNotes)
+    const publicNotes = filterOnlyPublicNotes(followingNotes)
+    const orderedNotes = orderUserNotes(publicNotes)
+    const followingTags = selectNoteTags(publicNotes)
+
+    return {
+      followingNotes: orderedNotes,
+      followingTags: followingTags,
+      followingUsers: followingUsers,
+      currentUser: currentUser,
+      status: status
+    }
+  } else {
+    return {
+      followingNotes: [],
+      followingTags: [],
+      followingUsers: [],
+      currentUser: currentUser,
+      status: status
+    }
   }
+
 }
 
 const mapDispatchToProps = dispatch => {

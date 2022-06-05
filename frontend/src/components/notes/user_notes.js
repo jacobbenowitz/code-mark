@@ -19,13 +19,20 @@ class UserNotes extends React.Component {
     this.props.fetchUserNotes(this.props.currentUser?.id)
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.status !== this.state.status) {
-      let notes = orderUserNotes(nextProps.userNotes)
+  
+  componentDidUpdate() {
+    const mobileStatus = this.isMobile();
+    const { status, userNotes } = this.props;
+
+    if (status !== this.state.status) {
+      let notes = orderUserNotes(userNotes)
       this.setState({
         userNotes: notes,
-        status: nextProps.status
+        status: status
       })
+    }
+    if (this.state.mobile !== mobileStatus) {
+      this.setState({ mobile: mobileStatus })
     }
   }
   
@@ -35,18 +42,22 @@ class UserNotes extends React.Component {
   }
 
   render() {
-    
+    const { mobile, userNotes, status } = this.state;
+
     return (
-      this.isMobile() ?
-        <MobileNotes
-          notes={this.state.userNotes}
-          status={this.state.status}
-        />
-        :
-        <AllNotes
-          notes={this.state.userNotes}
-          status={this.state.status}
-        />
+      <>
+        {  mobile ?
+          <MobileNotes
+            notes={userNotes}
+            status={status}
+          />
+          :
+          <AllNotes
+            notes={userNotes}
+            status={status}
+          />
+        }
+      </>
     )
   }
 }

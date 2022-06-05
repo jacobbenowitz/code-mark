@@ -10,6 +10,7 @@ import {
   orderUserNotes
 } from '../../util/selectors';
 import SectionTitle from '../UI/section_title';
+import MobileNotes from './mobile_notes';
 
 
 export default class FollowingFiltered extends React.Component {
@@ -51,9 +52,9 @@ export default class FollowingFiltered extends React.Component {
         filter: filter
       })
       
-      if (this.state.mobile !== mobileStatus) {
-        this.setState({ mobile: mobileStatus })
-      }
+    }
+    if (this.state.mobile !== mobileStatus) {
+      this.setState({ mobile: mobileStatus })
     }
   }
 

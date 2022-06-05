@@ -70,6 +70,7 @@ export default class HomeFiltered extends React.Component {
             />
             <div className='note-list-container'>
               <FilteredNotes 
+                mobile={mobile}
                 notes={userNotes}
                 status={this.props.status}
               />

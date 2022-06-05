@@ -20,6 +20,7 @@ export default class DiscoverFiltered extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0)
+    this.setState({ mobile: this.isMobile() })
   }
 
   componentWillMount() {
@@ -33,6 +34,14 @@ export default class DiscoverFiltered extends React.Component {
         notes: orderUserNotes(filtered),
         filter: nextState.filter
       })
+    }
+  }
+
+  componentDidUpdate() {
+    const mobileStatus = this.isMobile();
+
+    if (this.state.mobile !== mobileStatus) {
+      this.setState({ mobile: mobileStatus })
     }
   }
 

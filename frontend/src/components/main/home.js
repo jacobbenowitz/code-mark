@@ -1,13 +1,9 @@
 import React from 'react';
 import NewNoteContainer from '../code_editor/new_note_container';
 import UserNotesContainer from '../notes/user_notes_container';
-import RecentNotesContainer from '../notes/recent_notes_container';
-import { NavLink } from 'react-router-dom';
-import NavTagItem from '../tags/nav_tag_item';
 import SideCarMenu from './side_car_menu';
 import SectionTitle from '../UI/section_title';
-import SidebarLoader from '../content_loaders/placeholder_components/sidebar_loader';
-import MobileTagsHome from './mobile/mobile_tags_home';
+import MobileTagsHome from './mobile/mobile_tags';
 
 
 export default class Home extends React.Component {
@@ -42,7 +38,10 @@ export default class Home extends React.Component {
 
     if (mobile && this.props.tags) {
       mobileTags = (
-        <MobileTagsHome tags={this.props.tags} />
+        <MobileTagsHome
+          tags={this.props.tags}
+          type={'home'}
+        />
       )
     }
 

@@ -73,7 +73,7 @@ export default class LikedFiltered extends React.Component {
               status={this.props.status}
             />
             <div className='note-list-container'>
-              {this.isMobile() ?
+              {mobile ?
                 <MobileNotes
                   notes={likedNotes}
                   status={this.props.status}
@@ -83,7 +83,6 @@ export default class LikedFiltered extends React.Component {
                   status={this.props.status}
                 />
               }
-
             </div>
           </div>
         </div>

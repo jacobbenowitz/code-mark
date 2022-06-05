@@ -102,7 +102,9 @@ const SectionTitle = ({ type, title,
   }
   
   return (
-    sectionTitleEle
+    <>
+      {sectionTitleEle}
+    </>
   )
 }
 export default SectionTitle;

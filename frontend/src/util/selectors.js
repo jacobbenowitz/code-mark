@@ -50,7 +50,7 @@ export const filterUsersByComment = (users, comment) => {
 }
 
 export const filterOnlyPublicNotes = notes => {
-  if (notes) {
+  if (notes && Object.values(notes).length) {
     return notes.filter(note => note.public === true)
   }
 }
