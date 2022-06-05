@@ -655,7 +655,7 @@
   width: 300px;
   position: fixed;
   top: 500px;
-  right: 20px;
+  right: 5px;
   z-index: 200;
   background-color: rgba(198, 198, 198, 0.102);
   backdrop-filter: blur(20px);

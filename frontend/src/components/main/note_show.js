@@ -1,14 +1,10 @@
 import React from 'react';
 import { saveAs } from 'file-saver';
-import NoteShowEditorLoader from '../code_editor/code_show_editor_loader';
-import CodeEditorNoteShow from '../code_editor/code_editor_note_show_readonly';
 import CommentForm from '../notes/comments/comment_form';
 import { orderNoteComments } from "../../util/selectors";
 import domtoimage from 'dom-to-image';
 import CommentIndex from '../notes/comments/comment_index';
 import ResourceItem from '../notes/resources/resource_item';
-import LikeNoteIcon from '../notes/like_note_icon';
-import CodeCommentReadOnlyMini from '../code_editor/code_comment_readonly_mini';
 import { getLanguage } from '../../util/webscrap_util';
 import NoteShowTopLoader from '../lazy_loaders/note_show_top_loader';
 import ActionIconsLoader from '../lazy_loaders/note_show_action_icons_loader';
@@ -18,6 +14,8 @@ import DeleteNoteModal from '../modals/delete_note_modal';
 import EditNoteModal from '../modals/edit_note_modal';
 import NoteTopActionIcons from './note_show/top_action_icons';
 import NoteShowHeader from './note_show/note_show_header';
+import NoteShowCodeAndDetails from './note_show/note_code_main';
+import CommentModal from '../modals/comment_modal';
 
 export default class NoteShow extends React.Component {
   constructor(props) {
@@ -47,8 +45,8 @@ export default class NoteShow extends React.Component {
     this.toggleCommentModal = this.toggleCommentModal.bind(this);
     this.toggleCommentModalVisibility =
       this.toggleCommentModalVisibility.bind(this);
-    this.exportImage = this.exportImage.bind(this)
-      ;  }
+    this.exportImage = this.exportImage.bind(this);
+  }
   
   componentDidMount() {
     this._isMounted = true;
@@ -160,7 +158,9 @@ export default class NoteShow extends React.Component {
     const exportModal = document.getElementById('note-export-modal');
     const body = document.getElementsByTagName('body');
     const bodyHeight = body[0].clientHeight;
+
     this.setState({ bodyHeight: bodyHeight })
+
     if (exportModal.className === 'modal-on') {
       exportModal.className = 'modal-out'
     } else {
@@ -198,8 +198,9 @@ export default class NoteShow extends React.Component {
   render() {
     const { currentUser, updateNote, noteId,
       comments, updateNoteTags } = this.props;
-    const { note, bodyHeight, isCurrentUser,
-      isPublic } = this.state;
+    
+    const { note, bodyHeight, isCurrentUser, commentModal,
+      isPublic, hideCommentModal, selectedText } = this.state;
     
     return Object.values(note).length ? (
       <>
@@ -226,6 +227,16 @@ export default class NoteShow extends React.Component {
           toggleCommentModalVisibility={this.toggleCommentModalVisibility}
         />
 
+        {/* COMMENT MODAL */}
+        {this.state.hideCommentModal && note ? '' : (
+          <CommentModal
+            commentModal={commentModal}
+            toggleCommentModal={this.toggleCommentModal}
+            selectedText={selectedText}
+            commentOnSelection={this.commentOnSelection}
+          />
+        )}
+
         <div className={this.isMobile() ?
           'note-show-container span-12' : 'note-show-container center-span-7'}>
           
@@ -238,8 +249,8 @@ export default class NoteShow extends React.Component {
             isCurrentUser={isCurrentUser}
           />
           
-          {/* NOTE SHOW MAIN */}
           <div id="note-show-main" className='note-show-main'>
+            
             <NoteShowHeader
               note={note}
               isCurrentUser={isCurrentUser}
@@ -251,93 +262,14 @@ export default class NoteShow extends React.Component {
             />
 
             {/* note main */}
-            <div className='code-note-body' id='code-note-view'>
-              {note ? (
-                <>
-                
-                  <div className='icons-wrapper'>
-                    <div className='icons-left-col'>
-                      <LikeNoteIcon
-                        addNoteLike={this.props.addNoteLike}
-                        removeNoteLike={this.props.removeNoteLike}
-                        currentUserId={this.props.currentUser.id}
-                        noteId={this.props.noteId}
-                        likes={this.props.note.likes}
-                      />
-                    </div>
-
-                    <div className='icons-right-col'>
-                      <div className='hidden' id='highlight-instructions'>
-                        <span>Highlight any section of the CodeMark and right click to comment!</span>
-                      </div>
-                      <div id='export-img-icon' className='note-icon'
-                        onClick={this.toggleExportModal}
-                        // onClick={this.exportImage}
-                        title="export a screenshot">
-                        <i className="fa-solid fa-camera-retro fa-lg"></i>
-                      </div>
-                      <div className='note-icon info-icon' id='highlight-comment-code-icon'>
-                        <i className="fa-solid fa-circle-question fa-lg"></i>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {/* COMMENT MODAL */}
-                  {this.state.hideCommentModal && note ? '' : (
-                    <div id='comment-highlight-text'
-                      className={this.state.commentModal ?
-                        'modal-expanded' : 'modal-compact'}>
-                      <div className='arrow-modal'
-                        onClick={this.toggleCommentModal}
-                      >
-                        {this.state.commentModal ? (
-                          <i className="fa-solid fa-chevron-right fa-xl" />
-                        ) : (
-                          <i className="fa-solid fa-chevron-left fa-xl" />
-                        )}
-                      </div>
-                      <div className='modal-main'>
-                        <div className='comment-selection-title'>
-                          <i className="fa-solid fa-comment" />
-                          {this.state.selectedText ? (
-                            <span>Comment on this selection:</span>
-                            ) : (
-                              <span>Select code from this note to comment on it directly</span>
-                              )}
-                        </div>
-                        {
-                          this.state.selectedText ? (
-                          <CodeCommentReadOnlyMini
-                              codeSnippet={this.state.selectedText} />
-                          ) : ''
-                        }
-                        {
-                          this.state.selectedText ? (
-                            <div className='icon-button'
-                              onClick={this.commentOnSelection}>
-                              <span>Comment</span>
-                              <i className="fa-solid fa-arrow-right" />
-                            </div>
-                          ) : ''
-                        }
-                      </div>
-                    </div>
-                  )}
-    
-                  <CodeEditorNoteShow
-                    codeBody={note.codebody}
-                    language={note.language}
-                  />
-                </>
-                ) :  <NoteShowEditorLoader />}
-            </div>
-            {note?.textdetails ? (
-            <div className='note-textDetails'>
-                <span className='textDetails-show'>
-                  {note.textdetails}
-                </span>
-            </div>
-              ) : ''}
+            {/* <NoteShowCodeAndDetails 
+              note={note}
+              addNoteLike={this.props.addNoteLike}
+              removeNoteLike={this.props.removeNoteLike}
+              currentUser={currentUser}
+              noteId={noteId}
+              toggleExportModal={this.toggleExportModal}
+            /> */}
           </div>
 
           {this.props.note.resources?.length ? (
