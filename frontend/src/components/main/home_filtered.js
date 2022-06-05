@@ -1,15 +1,11 @@
 
 import React from 'react';
-import NewNoteContainer from '../code_editor/new_note_container';
-import RecentNotesContainer from '../notes/recent_notes_container';
-import { NavLink } from 'react-router-dom';
-import NavTagItem from '../tags/nav_tag_item';
-import FilteredNotesContainer from '../notes/filtered_notes_container';
 import SideCarMenu from './side_car_menu';
 import AllNotes from './all_notes';
 import { filterNotesByTag, orderUserNotes } from '../../util/selectors';
 import MobileNotes from './mobile_notes';
 import SectionTitle from '../UI/section_title';
+import FilteredNotes from '../notes/filtered_notes';
 
 export default class HomeFiltered extends React.Component {
   constructor(props) {
@@ -17,13 +13,15 @@ export default class HomeFiltered extends React.Component {
     this.state = {
       userNotes: [],
       tags: [],
-      filter: undefined
+      filter: undefined,
+      mobile: false
     }
   }
 
   componentWillMount() {
     this.props.fetchUserNotes(this.props.currentUser.id);
     this.props.fetchCurrentUser();
+    this.setState({ mobile: this.isMobile() })
   }
 
   componentDidMount() {
@@ -32,6 +30,8 @@ export default class HomeFiltered extends React.Component {
 
   componentDidUpdate() {
     const { userNotes, currentUser, tags, filter } = this.props;
+    const mobileStatus = this.isMobile();
+
     if (userNotes.length && Object.values(currentUser).length
       && filter !== this.state.filter) {
 
@@ -42,6 +42,9 @@ export default class HomeFiltered extends React.Component {
         tags: tags,
         filter: filter
       })
+      if (this.state.mobile !== mobileStatus) {
+        this.setState({ mobile: mobileStatus })
+      }
     }
   }
 
@@ -50,23 +53,26 @@ export default class HomeFiltered extends React.Component {
   }
 
   render() {
+    const { mobile, filter, userNotes } = this.state;
     return (
-      <div className={this.isMobile() ? 'main-mobile' : 'main-sidebar'}>
+      <div className={mobile ? 'main-mobile' : 'main-sidebar'}>
         <SideCarMenu tagType={'home'} tags={this.props.tags} />
 
         <div className='home-main'>
           <div className='notes-section'>
             <SectionTitle
               title={'My notes'}
-              filter={this.state.filter}
+              filter={filter}
               type={'filtered'}
-              noteCount={this.state.userNotes.length}
+              noteCount={userNotes.length}
+              status={this.props.status}
+              mobile={mobile}
             />
             <div className='note-list-container'>
-              {this.isMobile() ?
-                  <MobileNotes notes={this.state.userNotes} />
-                  : <AllNotes notes={this.state.userNotes} />
-              }
+              <FilteredNotes 
+                notes={userNotes}
+                status={this.props.status}
+              />
             </div>
           </div>
         </div>

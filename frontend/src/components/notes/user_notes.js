@@ -34,6 +34,7 @@ class UserNotes extends React.Component {
   }
 
   render() {
+    
     return (
       this.isMobile() ?
         <MobileNotes

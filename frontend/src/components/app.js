@@ -32,6 +32,8 @@ import LayoutDesign from './UI/layout_design';
 import GlobalModalContainer from './UI/global_modal_container';
 import TestLazyLoad from './content_loaders/test_lazy_load';
 import NoteShowLazyLoad from './content_loaders/note_show_lazy_load';
+import NotFound from './NotFound';
+
 
 const App = () => (
   <div className="grid-pancake-stack">
@@ -74,6 +76,8 @@ const App = () => (
         component={NoteShowLazyLoad} />
       <AuthRoute path="/"
         component={SplashPage} />
+      <Route path="*"
+        component={NotFound} />
     </Switch>
 
     <footer>
