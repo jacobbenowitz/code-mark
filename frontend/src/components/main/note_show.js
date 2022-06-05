@@ -132,7 +132,6 @@ export default class NoteShow extends React.Component {
   }
 
   handlePublicSwitch() {
-    debugger
     let newStatus = !this.state.isPublic
     this.props.updateNotePublicStatus(
       { public: newStatus }, this.props.noteId
@@ -199,11 +198,10 @@ export default class NoteShow extends React.Component {
 
 
   render() {
-    const { currentUser, updateNote, noteId,
-      comments, updateNoteTags } = this.props;
+    const { currentUser, updateNote, noteId, updateNoteTags, updateComment, removeComment, users, deletedComments, fetchNote, addCommentLike, removeCommentLike, fetchNoteComments  } = this.props;
     
     const { note, bodyHeight, isCurrentUser, commentModal,
-      isPublic, hideCommentModal, selectedText, status } = this.state;
+      isPublic, hideCommentModal, selectedText, status, comments } = this.state;
     
     let modals;
 
@@ -272,7 +270,7 @@ export default class NoteShow extends React.Component {
               isMobile={this.isMobile}
               status={status}
             />
-            
+
             <NoteShowCodeAndDetails 
               note={note}
               addNoteLike={this.props.addNoteLike}
@@ -301,22 +299,23 @@ export default class NoteShow extends React.Component {
               currentUser={currentUser}
               clearSnippet={this.clearSnippet}
             />
-            {/* <CommentIndex
-              selectedText={this.state.selectedText}
-              isCurrentUser={this.props.currentUser.id === this.props.note.user.userId}
-              currentUser={this.props.currentUser}
-              comments={this.state?.comments}
-              updateComment={this.props.updateComment}
-              removeComment={this.props.removeComment}
-              note={this.props.note}
-              users={this.props.users}
-              deletedComments={this.props.deletedComments}
-              fetchNote={this.props.fetchNote}
-              noteId={this.props.noteId}
-              addCommentLike={this.props.addCommentLike}
-              removeCommentLike={this.props.removeCommentLike}
+            <CommentIndex
+              selectedText={selectedText}
+              isCurrentUser={isCurrentUser}
+              currentUser={currentUser}
+              comments={comments}
+              updateComment={updateComment}
+              removeComment={removeComment}
+              note={note}
+              users={users}
+              deletedComments={deletedComments}
+              fetchNote={fetchNote}
+              noteId={noteId}
+              addCommentLike={addCommentLike}
+              removeCommentLike={removeCommentLike}
+              fetchNoteComments={fetchNoteComments}
               status={status}
-            /> */}
+            />
           </section>
         </div>
       </>

@@ -17,7 +17,7 @@ const CodeCommentReadOnly = props => {
     'C++': cpp(),
   }
   const fixedHeightEditor = EditorView.theme({
-    "&": { 'max-height': "200px", 'min-height': "100px" },
+    "&": { 'max-height': "200px"},
     ".cm-scroller": { 'overflow': "auto" }
   })
   return (
