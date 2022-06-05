@@ -11,6 +11,7 @@ import {
   selectLikedNotes
 } from '../../util/selectors';
 import SectionTitle from '../UI/section_title';
+import MobileNotes from './mobile_notes';
 
 export default class LikedFiltered extends React.Component {
   constructor(props) {
@@ -27,6 +28,7 @@ export default class LikedFiltered extends React.Component {
     this.props.fetchNotes();
     this.props.fetchCurrentUser();
     this.props.fetchUsers();
+    this.setState({ mobile: this.isMobile() })
   }
 
   componentDidMount() {
@@ -47,9 +49,9 @@ export default class LikedFiltered extends React.Component {
         filter: filter
       })
 
-      if (this.state.mobile !== mobileStatus) {
-        this.setState({ mobile: mobileStatus })
-      }
+    }
+    if (this.state.mobile !== mobileStatus) {
+      this.setState({ mobile: mobileStatus })
     }
   }
 

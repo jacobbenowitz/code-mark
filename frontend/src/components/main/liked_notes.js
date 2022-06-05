@@ -8,13 +8,17 @@ import {
 } from '../../util/selectors';
 import { selectNoteTags, selectLikedNotes } from "../../util/selectors";
 import SectionTitle from '../UI/section_title';
+import MobileTags from './mobile/mobile_tags';
 
 export default class LikedNotes extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      notes: [],
-      likedTags: []
+      likedNotes: [],
+      likedTags: [],
+      noteCount: 0,
+      status: 'IDLE',
+      mobile: false,
     }
   }
 
@@ -29,14 +33,22 @@ export default class LikedNotes extends React.Component {
 
   componentDidUpdate() {
     const { allNotes, likedNoteIds, currentUser, status } = this.props;
-    if (status !== this.state.status || Object.values(allNotes).length && likedNoteIds.length && !this.state.notes.length) {
+    const mobileStatus = this.isMobile();
+
+    if (status === 'DONE' && likedNoteIds.length && !this.state.likedNotes.length) {
       const likedNotes = selectLikedNotes(allNotes, likedNoteIds);
       const likedTags = selectNoteTags(likedNotes)
+      console.log(likedNotes)
       this.setState({
-        notes: likedNotes,
+        likedNotes: likedNotes,
+        noteCount: likedNotes.length,
         likedTags: likedTags,
         status: status
       })
+    }
+
+    if (this.state.mobile !== mobileStatus) {
+      this.setState({ mobile: mobileStatus })
     }
   }
 
@@ -46,10 +58,30 @@ export default class LikedNotes extends React.Component {
 
 
   render() {
+    const { mobile, status, likedNotes, likedTags, noteCount } = this.state;
+    let sideCarMenu, mobileTags;
+
+    if (!mobile) {
+      sideCarMenu = (
+        <SideCarMenu
+          tagType={'likes'}
+          tags={likedTags}
+        />
+      )
+    }
+
+    if (mobile && likedTags) {
+      mobileTags = (
+        <MobileTags
+          tags={likedTags}
+          type={'likes'}
+        />
+      )
+    }
     return (
-      <div className={this.isMobile() ? 'main-mobile' : 'main-sidebar'}>
+      <div className={mobile ? 'main-mobile' : 'main-sidebar'}>
         <div className='nav-sidecar'>
-          <SideCarMenu tagType={'likes'} tags={this.state.likedTags} />
+        { sideCarMenu}
         </div>
 
         <div className='home-main'>
@@ -57,20 +89,21 @@ export default class LikedNotes extends React.Component {
             <SectionTitle
               type={'default'}
               title={'Liked'}
-              noteCount={this.state.notes.length}
-              status={this.state.status}
+              noteCount={noteCount}
+              status={status}
             />
+            { mobileTags }
             <div className='note-list-container'>
               {
-                this.isMobile() ?
+                mobile ?
                   <MobileNotes
-                    notes={this.state.notes}
-                    status={this.state.status}
+                    notes={likedNotes}
+                    status={status}
                   />
                   :
                   <AllNotes
-                    notes={this.state.notes}
-                    status={this.state.status}
+                    notes={likedNotes}
+                    status={status}
                   />
               }
             </div>
