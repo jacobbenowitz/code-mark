@@ -17,30 +17,17 @@ const Demo = {
             return Math.floor(Math.random() * (max - min) + min);
         }
 
-       
         // username
         await sleep(getRandomInt(25, 200))
-        username.value = "D"
+        username.value = "G"
         await sleep(getRandomInt(25, 200))
-        username.value = "De"
+        username.value = "Gu"
         await sleep(getRandomInt(25, 200))
-        username.value = "Dem"
+        username.value = "Gue"
         await sleep(getRandomInt(25, 200))
-        username.value = "Demo"
+        username.value = "Gues"
         await sleep(getRandomInt(25, 200))
-        username.value = "DemoA"
-        await sleep(getRandomInt(25, 200))
-        username.value = "DemoAc"
-        await sleep(getRandomInt(25, 200))
-        username.value = "DemoAcc"
-        await sleep(getRandomInt(25, 200))
-        username.value = "DemoAcco"
-        await sleep(getRandomInt(25, 200))
-        username.value = "DemoAccou"
-        await sleep(getRandomInt(25, 200))
-        username.value = "DemoAccoun"
-        await sleep(getRandomInt(25, 200))
-        username.value = "DemoAccount"
+        username.value = "Guest"
         await sleep(550)
 
         // password
@@ -60,8 +47,7 @@ const Demo = {
         password.value = "passwor"
         await sleep(getRandomInt(25, 200))
         password.value = "password"
-
-    
+        
         // submit
         submit.click()
 
