@@ -40,14 +40,14 @@ export default class EditNote extends React.Component {
   componentDidMount() {
     this._isMounted = true;
     const { note } = this.props;
-    debugger
+
     if (note.resources.length && note.resources[0].keyword) {
       const keywords = [];
       this.props.note.resources.forEach(resource => {
         keywords.push(resource.keyword.split(' ')[1])
       })
     }
-
+    
     this.setState({
       title: note.title,
       codebody: note.codebody,
