@@ -70,11 +70,9 @@ export default class Tags extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const { _id } = this.state.note;
-
     const cleaned = this.removeWhiteSpace(this.state.newTag)
-    
     let newTags = [...new Set(this.state.tags.concat(cleaned))]
-
+    
     this.props.updateNoteTags({tags: newTags}, _id)
       .then(() => (
         this.setState({
@@ -86,14 +84,6 @@ export default class Tags extends React.Component {
   }
 
   toggleTagForm() {
-    // const tagForm = document.getElementById('new-tag-form');
-    // if (tagForm.className === "tag-form-off") {
-    //   this.setState({ tagForm: true }, () =>
-    //     tagForm.className = "tag-form-on")
-    // } else {
-    //   this.setState({ tagForm: false }, () =>
-    //     tagForm.className = "tag-form-off")
-    // }
     this.setState({tagForm: !this.state.tagForm})
   }
 
@@ -137,22 +127,21 @@ export default class Tags extends React.Component {
     if (this.state.tagForm) {
       tagsBottom = (
         <div className="tag-form-on" id="new-tag-form">
-            <input type={'text'}
-              className={'tag-form-input'}
-              onChange={this.update('newTag')}
-              placeholder={'New tag...'}
-              value={this.state.newTag}
-            />
+          <input type={'text'}
+            className={'tag-form-input'}
+            onChange={this.update('newTag')}
+            placeholder={'New tag...'}
+            value={this.state.newTag}
+          />
           <button className={this.state.newTag.split(' ').join('').length ?
             '' : 'save-tag disabled'} id='tag-icon-save'
-            onClick={this.state.newTag.split(' ').join('').length ? this.handleSubmit : undefined}
-          >
-              <i className="fa-solid fa-floppy-disk" />
-            </button>
-
+            onClick={this.state.newTag.split(' ').join('').length ?
+              this.handleSubmit : undefined}
+            >
+            <i className="fa-solid fa-floppy-disk" />
+          </button>
         </div>
       )
-
     }
 
     return (

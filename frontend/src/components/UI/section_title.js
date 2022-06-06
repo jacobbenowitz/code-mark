@@ -7,7 +7,6 @@ const SectionTitle = ({ type, title,
   noteCount, filter, status, mobile = false }) => {
   
   let sectionTitleEle;
-  // debugger
   if (status === 'BUSY' || noteCount === 0 && status === 'IDLE' || !status) {
     mobile ? (
       sectionTitleEle = (
@@ -63,13 +62,12 @@ const SectionTitle = ({ type, title,
       </div>
     )
   } else if (noteCount === 0 && status === 'DONE') {
-    if (title === 'Following' || title === 'My Notes') {
+    if (title === 'Following') {
       sectionTitleEle = (
         <div className = "none-found-message">
-          <h3>Welcome to CodeMark 👋 </h3>
+          <h3>Not following anyone 😞 </h3>
           <span>Go to the&nbsp;<Link className="link"
-            to={'/discover'}>Discover</Link>&nbsp;
-            section to find some new friends to follow 🫣
+            to={'/discover'}>Discover</Link>&nbsp;section to find some new friends to follow 🫣
           </span>
         </div>
       )
@@ -85,11 +83,21 @@ const SectionTitle = ({ type, title,
     } else if (title === 'Liked') {
       sectionTitleEle = (
         <div className = "none-found-message">
-          <h3>No notes found 😞 </h3>
+          <h3>No notes liked yet 😞 </h3>
             <span>
-            You'll be sure to find some interesting CodeMarks in the &nbsp;<Link className="link"
-              to={'/discover'}>Discover</Link>&nbsp; section. Go check it out, don't be shy 🙈
+            You'll be sure to find some interesting CodeMarks in the&nbsp;<Link className="link"
+              to={'/discover'}>Discover</Link>&nbsp;section. Go check it out, don't be shy 🙈
             </span>
+        </div>
+      )
+    } else if (title === 'My Notes') {
+      sectionTitleEle = (
+        <div className="none-found-message">
+          <h3>Welcome to CodeMark 👋 </h3>
+          <span>
+            Time to create your first note 🎉 ! Click on the new note form above to get started. Or, if you want to explore CodeMarks check out the&nbsp;<Link className="link"
+              to={'/discover'}>Discover</Link>&nbsp;section.
+          </span>
         </div>
       )
     } else {

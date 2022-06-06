@@ -19,8 +19,8 @@ export default class Following extends React.Component {
   }
 
   componentWillMount() {
-    this.props.fetchNotes();
     this.props.fetchCurrentUser();
+    this.props.fetchNotes();
     this.props.fetchUsers();
   }
 
@@ -32,13 +32,12 @@ export default class Following extends React.Component {
     const { followingNotes, followingTags, followingUsers,
       currentUser, status } = this.props;
     const mobileStatus = this.isMobile();
-
     if (status !== this.state.status) {
       this.setState({
-        followingNotes: followingNotes,
-        followingTags: followingTags,
-        followingUsers: followingUsers,
-        noteCount: followingNotes?.length,
+        followingNotes: followingNotes ? followingNotes : [],
+        followingTags: followingTags ? followingTags : [],
+        followingUsers: followingUsers ? followingUsers : [],
+        noteCount: followingNotes?.length || 0,
         status: status
       })
     }
@@ -61,12 +60,12 @@ export default class Following extends React.Component {
       sideCarMenu = (
         <SideCarMenu
           tagType={'following'}
-          tags={followingTags}
+          tags={followingTags ? followingTags : []}
         />
       )
     }
 
-    if (mobile) {
+    if (mobile && followingTags) {
       mobileTags = (
         <MobileTags
           tags={followingTags}

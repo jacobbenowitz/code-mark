@@ -24,7 +24,6 @@ export default class LikedNotes extends React.Component {
 
   componentWillMount() {
     this.props.fetchNotes();
-    this.props.fetchCurrentUser();
   };
 
   componentDidMount() {
@@ -34,15 +33,17 @@ export default class LikedNotes extends React.Component {
   componentDidUpdate() {
     const { allNotes, likedNoteIds, currentUser, status } = this.props;
     const mobileStatus = this.isMobile();
-
-    if (status === 'DONE' && likedNoteIds.length && !this.state.likedNotes.length) {
+    if (status === 'DONE' && likedNoteIds.length !== this.state.likedNotes.length) {
       const likedNotes = selectLikedNotes(allNotes, likedNoteIds);
       const likedTags = selectNoteTags(likedNotes)
-      console.log(likedNotes)
       this.setState({
         likedNotes: likedNotes,
         noteCount: likedNotes.length,
         likedTags: likedTags,
+        status: status
+      })
+    } else if (status === 'DONE' && likedNoteIds.length === 0 && this.state.status !== 'DONE') {
+      this.setState({
         status: status
       })
     }

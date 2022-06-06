@@ -14,7 +14,7 @@ const AllNotes = (props) => {
             }
         }
     })
-    if (props.status === 'BUSY' || !props.status) {
+    if (props.status === 'BUSY' || !props.notes) {
         return (
             <div className='desktop-notes'>
                 <div className='column1'>
@@ -28,9 +28,7 @@ const AllNotes = (props) => {
                 </div>
             </div>
         )
-    }
-    // debugger
-    if (props.status === 'DONE' || (props.notes && props.status === 'IDLE') ) {
+    } else if (props.status === 'DONE' || (props.notes.length && props.status === 'IDLE') ) {
         return (
             <div className='desktop-notes'>
                     <div className='column1'>
@@ -69,6 +67,15 @@ const AllNotes = (props) => {
                             />
                         )}
                     </div>
+            </div>
+        )
+    } else {
+        return (
+            <div className='desktop-notes'>
+                <div className='column1'>
+                </div>
+                <div className='column2'>
+                </div>
             </div>
         )
     }

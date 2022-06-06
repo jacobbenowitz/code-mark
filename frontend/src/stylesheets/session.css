@@ -16,7 +16,7 @@
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
   
   position: absolute;
-  max-width: 415px;
+  max-width: 95%;
   width: max-content;
   height: min-content;
   /* top: calc(50% - 591px/2); */
@@ -96,7 +96,7 @@ input[type='color'] {
 
 .demo_button {
   border: 1px solid transparent;
-  background: #2d2d2d00;
+  background: #198087;
   margin-left: 2rem;
 }
 
