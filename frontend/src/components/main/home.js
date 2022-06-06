@@ -3,8 +3,8 @@ import NewNoteContainer from '../code_editor/new_note_container';
 import UserNotesContainer from '../notes/user_notes_container';
 import SideCarMenu from './side_car_menu';
 import SectionTitle from '../UI/section_title';
+import UserHeader from '../profile/user_header';
 import MobileTagsHome from './mobile/mobile_tags';
-
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -25,7 +25,7 @@ export default class Home extends React.Component {
 
   render() {
     const { mobile } = this.state;
-    let sideCarMenu, mobileTags;
+    let sideCarMenu, mobileTags, userHeader;
 
     if (!mobile) {
       sideCarMenu = (
@@ -44,6 +44,23 @@ export default class Home extends React.Component {
         />
       )
     }
+    
+    if (this.props.currentUser) {
+      userHeader = (
+        <UserHeader
+          user={this.props.currentUser}
+          userNotes={this.props.userNotes}
+          currentUser={this.props.currentUser}
+          userId={this.props.currentUser.id}
+          changeUserFollowers={this.props.changeUserFollowers}
+          isCurrentUser={true}
+          noteCount={this.props?.userNotes.length}
+          fetchUsers={this.props.fetchUsers}
+          allUsers={this.props.allUsers}
+          followers={this.props.currentUser.followers}
+          following={this.props.currentUser.following}
+        />
+      )
 
     return (
       <div className={mobile ? 'main-mobile' : 'main-sidebar'}>
@@ -58,6 +75,7 @@ export default class Home extends React.Component {
               status={this.props.status}
               mobile={this.state.mobile}
             />
+            {userHeader}
             {mobileTags}
             <div className='note-list-container'>
               <UserNotesContainer />
