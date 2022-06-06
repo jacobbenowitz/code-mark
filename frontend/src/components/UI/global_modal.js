@@ -56,27 +56,27 @@ class GlobalModal extends React.Component {
     debugger;
     var newmessages = [];
     if (noteErrors.length === undefined){
-      var content = (noteErrors.response === undefined) ? noteErrors : noteErrors.response.data;
-      Object.values(content).map(error => {
-        newmessages.push(['error',error]);
-      })
+      var content = (noteErrors.response === undefined) ? noteErrors : noteErrors.response.statusText;
+      // Object.values(content).map(error => {
+        newmessages.push(['error',content]);
+      // })
     }else if(sessionErrors.length === undefined){
-      var content = (sessionErrors.response === undefined) ? sessionErrors : sessionErrors.response.data;
-      Object.values(content).map(error => {
-        newmessages.push(['error',error]);
-      })
+      var content = (sessionErrors.response === undefined) ? sessionErrors : sessionErrors.response.statusText;
+      // Object.values(content).map(error => {
+        newmessages.push(['error',content]);
+      // })
     }else if(userErrors.length === undefined){
-      var content = (userErrors.response === undefined) ? userErrors : userErrors.response.data;
-      Object.values(content).map(error => {
-        newmessages.push(['error',error]);
-      })
+      var content = (userErrors.response === undefined) ? userErrors : userErrors.response.statusText;
+      // Object.values(content).map(error => {
+        newmessages.push(['error',content]);
+      // })
     }
     else if(commentErrors.length === undefined){
-      var content = (commentErrors.response === undefined) ? commentErrors : commentErrors.response.data;
-      debugger;
-      Object.values(content).map(error => {
-        newmessages.push(['error',error]);
-      })
+      var content = (commentErrors.response === undefined) ? commentErrors : commentErrors.response.statusText;
+      // debugger;
+      // Object.values(content).map(error => {
+        newmessages.push(['error',content]);
+      // })
     }else{
       newmessages = [noteErrors,sessionErrors,userErrors,commentErrors].filter(ele => ele.length > 0);
     }

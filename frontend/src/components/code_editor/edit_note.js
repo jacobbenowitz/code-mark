@@ -41,8 +41,8 @@ export default class EditNote extends React.Component {
     this._isMounted = true;
     const { note } = this.props;
 
+    const keywords = [];
     if (note.resources.length && note.resources[0].keyword) {
-      const keywords = [];
       this.props.note.resources.forEach(resource => {
         keywords.push(resource.keyword.split(' ')[1])
       })
@@ -52,7 +52,8 @@ export default class EditNote extends React.Component {
       title: note.title,
       codebody: note.codebody,
       textdetails: note.textdetails,
-      tags: note.tags
+      tags: note.tags,
+      keywordsSelected: keywords
     })
     let codemirrors = document.getElementsByClassName('codemirror');
     for (var i = 0; i < codemirrors.length; i++) {

@@ -63,7 +63,7 @@ export default class LikedFiltered extends React.Component {
     const { mobile, filter, likedNotes, likedTags } = this.state;
     return (
       <div className={mobile ? 'main-mobile' : 'main-sidebar'}>
-        <SideCarMenu tagType={'likes'} tags={likedTags} />
+        <SideCarMenu tagType={'likes'} tags={likedTags} status={this.props.status}/>
 
         <div className='home-main'>
           <div className='notes-section'>

@@ -66,7 +66,7 @@ export default class FollowingFiltered extends React.Component {
     const { mobile, filter, followingNotes, followingTags } = this.state;
     return (
       <div className={mobile ? 'main-mobile' : 'main-sidebar'}>
-        <SideCarMenu tagType={'following'} tags={followingTags} />
+        <SideCarMenu tagType={'following'} tags={followingTags} status={this.props.status} />
 
         <div className='home-main'>
           <div className='notes-section'>

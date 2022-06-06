@@ -67,6 +67,7 @@ export default class LikedNotes extends React.Component {
         <SideCarMenu
           tagType={'likes'}
           tags={likedTags}
+          status={this.props.status}
         />
       )
     }

@@ -32,6 +32,7 @@ export default class Home extends React.Component {
         <SideCarMenu
           tagType={'home'}
           tags={this.props.tags}
+          status={this.props.status}
         />
       )
     }
@@ -45,23 +46,23 @@ export default class Home extends React.Component {
       )
     }
     
-    if (this.props.currentUser) {
-      userHeader = (
-        <UserHeader
-          user={this.props.currentUser}
-          userNotes={this.props.userNotes}
-          currentUser={this.props.currentUser}
-          userId={this.props.currentUser.id}
-          changeUserFollowers={this.props.changeUserFollowers}
-          isCurrentUser={true}
-          noteCount={this.props?.userNotes.length}
-          fetchUsers={this.props.fetchUsers}
-          allUsers={this.props.allUsers}
-          followers={this.props.currentUser.followers}
-          following={this.props.currentUser.following}
-        />
-      )
-    }
+    // if (this.props.currentUser) {
+    //   userHeader = (
+    //     <UserHeader
+    //       user={this.props.currentUser}
+    //       userNotes={this.props.userNotes}
+    //       currentUser={this.props.currentUser}
+    //       userId={this.props.currentUser.id}
+    //       changeUserFollowers={this.props.changeUserFollowers}
+    //       isCurrentUser={true}
+    //       noteCount={this.props?.userNotes.length}
+    //       fetchUsers={this.props.fetchUsers}
+    //       allUsers={this.props.allUsers}
+    //       followers={this.props.currentUser.followers}
+    //       following={this.props.currentUser.following}
+    //     />
+    //   )
+    // }
 
     return (
       <div className={mobile ? 'main-mobile' : 'main-sidebar'}>
@@ -76,7 +77,7 @@ export default class Home extends React.Component {
               status={this.props.status}
               mobile={this.state.mobile}
             />
-            {userHeader}
+            {/* {userHeader} */}
             {mobileTags}
             <div className='note-list-container'>
               <UserNotesContainer />

@@ -56,7 +56,7 @@ export default class HomeFiltered extends React.Component {
     const { mobile, filter, userNotes } = this.state;
     return (
       <div className={mobile ? 'main-mobile' : 'main-sidebar'}>
-        <SideCarMenu tagType={'home'} tags={this.props.tags} />
+        <SideCarMenu tagType={'home'} tags={this.props.tags} status={this.props.status} />
 
         <div className='home-main'>
           <div className='notes-section'>

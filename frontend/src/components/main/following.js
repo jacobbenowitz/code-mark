@@ -61,6 +61,7 @@ export default class Following extends React.Component {
         <SideCarMenu
           tagType={'following'}
           tags={followingTags ? followingTags : []}
+          status={this.props.status}
         />
       )
     }

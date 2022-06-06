@@ -43,6 +43,7 @@ export default class Discover extends React.Component {
         <SideCarMenu
           tagType={'discover'}
           tags={this.props.tags}
+          status={this.props.status}
         />
       )
     }
@@ -55,6 +56,7 @@ export default class Discover extends React.Component {
         />
       )
     }
+    // debugger;
     return (
       <div className={mobile ? 'main-mobile' : 'main-sidebar'}>
         { sideCarMenu }

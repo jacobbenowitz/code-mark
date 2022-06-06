@@ -54,7 +54,7 @@ export default class DiscoverFiltered extends React.Component {
     return (
       <div className={mobile ? 'main-mobile' : 'main-sidebar'}>
         <div className='nav-sidecar'>
-          <SideCarMenu tagType={'discover'} tags={this.props.tags} />
+          <SideCarMenu tagType={'discover'} tags={this.props.tags} status={this.props.status} />
         </div>
 
         <div className='home-main'>
