@@ -312,6 +312,15 @@ footer {
   z-index: 1000;
   background: #202124d4;
   box-sizing: border-box;
+  visibility: hidden;
+}
+
+#nav-menu-mobile.menu-in {
+  visibility: visible;
+}
+
+#nav-menu-mobile.menu-out {
+  visibility: hidden;
 }
 
 #mobile-menu-mask {
@@ -326,6 +335,14 @@ footer {
   z-index: 999;
   background: #9c9b9b13;
   backdrop-filter: blur(20px);
+  visibility: hidden;
+}
+
+#mobile-menu-mask.mask-in {
+  visibility: visible;
+}
+#mobile-menu-mask.mask-out {
+  visibility: hidden;
 }
 
 .menu-in {
@@ -336,6 +353,7 @@ footer {
 
 .menu-out {
   animation: menuOut 375ms ease-in-out;
+  transform: translateX(-400px);
   transform: translateX(-400px);
   visibility: hidden;
 }
@@ -350,7 +368,7 @@ footer {
 }
 
 .mask-out {
-  animation: menuOut 375ms ease-out;
+  animation: menuOut 375ms ease-in-out;
 }
 
 @keyframes menuIn {
@@ -379,7 +397,7 @@ footer {
     transform: translateX(-300px);
   }
   100% {
-    transform: translateX(-300px);
+    transform: translateX(-1400px);
     visibility: hidden;
   }
 }
@@ -410,6 +428,7 @@ footer {
     visibility: visible;
   }
   100% {
+    transform: translateX(-1450px);
     visibility: hidden;
   }
 }
@@ -520,12 +539,6 @@ footer {
     justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
-  }
-
-  .session {
-  grid-column: 1 / span 12;
-  height: 82vh;
-  background-color: #2D2D2D;
   }
 
   #navFooter {

@@ -29,21 +29,34 @@ const NoteShowHeader = ({
 
         <div className='note-stats-wrapper'>
           <div className='note-stats'>
-            <div className='note-stat likes'>
-              <i className="fa-solid fa-heart"></i>
-              <span>{note.likes.length}</span>
+            <div className="note-stats-col">
+              <div className='note-stat likes'>
+                <div className="note-stat-icon-wrapper">
+                  <i className="fa-solid fa-heart"></i>
+                </div>
+                <span>{note.likes.length}</span>
+              </div>
+              <div className="note-stat comments">
+                <div className="note-stat-icon-wrapper">
+                  <i className="fa-solid fa-comments"></i>
+                </div>
+                <span>{comments.length}</span>
+              </div>
             </div>
-            <div className="note-stat comments">
-              <i className="fa-solid fa-comments"></i>
-              <span>{comments.length}</span>
-            </div>
-            <div className='note-stat updated-at'>
-              <i className="fa-solid fa-pencil"></i>
-              <span>{moment(note.updatedAt).fromNow()}</span>
-            </div>
-            <div className='note-stat created-at'>
-              <i className="fa-solid fa-cloud-arrow-up"></i>
-              <span>{moment(note.createdAt).fromNow()}</span>
+
+            <div className="note-stats-col">
+              <div className='note-stat updated-at'>
+                <div className="note-stat-icon-wrapper">
+                  <i className="fa-solid fa-pencil"></i>
+                </div>
+                <span>{moment(note.updatedAt).fromNow()}</span>
+              </div>
+              <div className='note-stat created-at'>
+                <div className="note-stat-icon-wrapper">
+                  <i className="fa-solid fa-cloud-arrow-up"></i>
+                </div>
+                <span>{moment(note.createdAt).fromNow()}</span>
+              </div>
             </div>
           </div>
           <div className='note-public-switch-wrapper'>

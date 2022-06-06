@@ -24,7 +24,7 @@ class UserNotes extends React.Component {
     const mobileStatus = this.isMobile();
     const { status, userNotes } = this.props;
 
-    if (status !== this.state.status) {
+    if (status !== this.state.status || userNotes !== this.state.userNotes) {
       let notes = orderUserNotes(userNotes)
       this.setState({
         userNotes: notes,

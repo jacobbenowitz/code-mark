@@ -34,7 +34,8 @@ const CommentModal = ({
     }
 
     commentModalItem = (
-      <>
+      <div id='comment-highlight-text' className={commentModal ?
+        'modal-expanded' : 'modal-compact'}>
         <div className='arrow-modal'
           onClick={toggleCommentModal}
         >
@@ -52,15 +53,14 @@ const CommentModal = ({
           { codePreview }
           { commentButton }
         </div>
-      </>
+      </div>
     )
   }
   
-return (
-  <div id='comment-highlight-text' className={commentModal ?
-    'modal-expanded' : 'modal-compact'}>
+  return (
+  <>
     {commentModalItem}
-  </div>
+  </>
   )
 }
 

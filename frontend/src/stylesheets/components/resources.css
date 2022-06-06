@@ -22,7 +22,8 @@
 }
 
 .checkbox{
-  visibility: hidden;
+  /* visibility: hidden; */
+  display: none;
 }
 
 .resource-icon-wrapper {
@@ -40,6 +41,10 @@
   padding: 0px;
   gap: 4px;
   height: 46px;
+}
+
+.resources-header {
+  
 }
 
 .resource-heading {

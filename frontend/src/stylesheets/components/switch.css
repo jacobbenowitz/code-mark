@@ -8,9 +8,9 @@
 .switch::after {
   content: 'Public Note';
   position: absolute;
-  right: 80px;
+  right: 0;
   width: max-content;
-  top: 8px;
+  top: -30px;
   font-weight: 600;
 }
 

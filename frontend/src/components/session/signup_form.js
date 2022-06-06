@@ -42,7 +42,7 @@ class SignupForm extends React.Component {
   demoSignup = (e) => {
     e.preventDefault();
     const guest = {
-      usernameOrEmail: 'DemoAccount',
+      usernameOrEmail: 'Guest',
       password: 'password'
     }
     this.props.loginGuest(guest);
@@ -82,7 +82,7 @@ class SignupForm extends React.Component {
     return (
       <div className='session center-simple'>
         <div id='session-form'>
-          <h3>Create a new account</h3>
+          <h3>Join CodeMark</h3>
           <form onSubmit={this.handleSubmit}>
             <div className='color-change-view'>
               <div className="color-select-wrapper">

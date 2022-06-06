@@ -29,7 +29,7 @@ const Demo = {
         await sleep(getRandomInt(25, 200))
         username.value = "Guest"
         await sleep(550)
-
+        
         // password
         await sleep(getRandomInt(25, 200))
         password.value = "p"
@@ -47,6 +47,7 @@ const Demo = {
         password.value = "passwor"
         await sleep(getRandomInt(25, 200))
         password.value = "password"
+        await sleep(550)
         
         // submit
         submit.click()

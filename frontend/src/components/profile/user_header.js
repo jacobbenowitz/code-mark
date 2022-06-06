@@ -17,11 +17,8 @@ export default class UserHeader extends React.Component {
 componentDidUpdate() {
   const body = document.getElementsByTagName('body');
   const bodyHeight = body[0].clientHeight;
-  // debugger
-  // if (Object.values(this.props.allUsers).length && !this.state.followers.length && this.props.currentUser ) {
+
   if (bodyHeight !== this.state.bodyHeight) {
-    // debugger
-    
     // const followers = filterUsersById(this.props.allUsers, this.props.followers)
     this.setState({ 
       // followers: followers,
@@ -31,14 +28,13 @@ componentDidUpdate() {
 
 }
 
-componentDidMount() {
-  if (!Object.values(this.props.allUsers).length) {
-    this.props.fetchUsers()
+  componentDidMount() {
+    if (!this.props.allUsers) {
+      this.props.fetchUsers()
+    }
   }
-}
 
 toggleFollowerModal() {
-  // debugger
   const FollowerHeaderModal = document.getElementById('follower-header-container');
   // const commentHighlightModal = document.getElementById('comment-highlight-text');
 
