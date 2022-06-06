@@ -37,10 +37,6 @@ body {
 .center-simple {
   display: grid;
   place-items: center;
-  align-items: center;
-  /* justify-items: center;
-  align-content: center;
-  justify-content: center; */
 }
 
 .grid-12-col {
@@ -115,5 +111,11 @@ html {
     padding-top: 2rem;
     max-width: 100%;
     width: 100%;
+  }
+
+  .center-simple {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
