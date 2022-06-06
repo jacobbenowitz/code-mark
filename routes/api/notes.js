@@ -13,8 +13,6 @@ const getResources = require('../../resources/resources');
 router.get('/', (req, res) => {
     Note.find()
         .then(notes => {
-            // debugger;
-            // res.json(notes)
             res.json(notes.filter(note => !note._doc.sample))
         })
         .catch(err => res.status(404).json({ nonotesfound: 'No Notes Found' }));

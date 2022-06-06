@@ -65,7 +65,6 @@ class GlobalModal extends React.Component {
       }
     }else if(sessionErrors.length === undefined){
       var content = (sessionErrors.response === undefined) ? sessionErrors : sessionErrors.response.data;
-      // debugger;
       if(typeof content === 'object'){
         Object.values(content).map(error => {
           newmessages.push(['error',error]);
@@ -85,7 +84,6 @@ class GlobalModal extends React.Component {
     }
     else if(commentErrors.length === undefined){
       var content = (commentErrors.response === undefined) ? commentErrors : commentErrors.response.data;
-      // debugger;
       if(typeof content === 'object'){
         Object.values(content).map(error => {
           newmessages.push(['error',error]);

@@ -20,6 +20,19 @@ const Demo = {
       return Math.floor(Math.random() * (max - min) + min);
     }
 
+    // username
+    await sleep(getRandomInt(25, 200))
+    username.value = "G"
+    await sleep(getRandomInt(25, 200))
+    username.value = "Gu"
+    await sleep(getRandomInt(25, 200))
+    username.value = "Gue"
+    await sleep(getRandomInt(25, 200))
+    username.value = "Gues"
+    await sleep(getRandomInt(25, 200))
+    username.value = "Guest"
+    await sleep(550)
+
     // email
     await sleep(getRandomInt(25, 200))
     email.value = "d"
@@ -57,19 +70,6 @@ const Demo = {
     email.value = "demouser@gmail.co"
     await sleep(getRandomInt(25, 200))
     email.value = "demouser@gmail.com"
-    await sleep(550)
-
-    // username
-    await sleep(getRandomInt(25, 200))
-    username.value = "G"
-    await sleep(getRandomInt(25, 200))
-    username.value = "Gu"
-    await sleep(getRandomInt(25, 200))
-    username.value = "Gue"
-    await sleep(getRandomInt(25, 200))
-    username.value = "Gues"
-    await sleep(getRandomInt(25, 200))
-    username.value = "Guest"
     await sleep(550)
 
     // password

@@ -66,9 +66,9 @@ export default class NoteShow extends React.Component {
     };
   }
   
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
+  // componentWillUnmount() {
+  //   this._isMounted = false;
+  // }
   
   componentDidUpdate() {
     const { note, comments, currentUser, history, status } = this.props;
@@ -85,7 +85,6 @@ export default class NoteShow extends React.Component {
       this.setState({status: status})
     }
     if (status === "DONE" && (note !== this.state.note || comments !== this.state.comments)) {
-      // debugger
       if (currentUser?.id !== note.user.userId && !note.public) {
         history.push(`/home`)
       }
@@ -223,7 +222,6 @@ export default class NoteShow extends React.Component {
     let modals;
 
     if (status === "DONE") {
-      // debugger
       modals = (
         <>
           <PhotoExportModal

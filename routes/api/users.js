@@ -50,7 +50,6 @@ router.post('/register', (req, res) => {
                       res.json([user,['success', 'User Successfully Registered!']])
                       Note.findById('629e5961cb981eeef9b649a0')     //id of template note in Jacob account
                         .then(note => {
-                          // debugger;
                           const newNote = new Note({
                             user: { username: user.username, userId: user.id },
                             codebody: note.codebody,
