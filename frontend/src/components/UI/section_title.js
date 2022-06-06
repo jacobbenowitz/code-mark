@@ -25,17 +25,6 @@ const SectionTitle = ({ type, title,
     sectionTitleEle = (
       <div className='section-title'>
         <h3>{title}</h3>
-        {/* {noteCount === 1 ? (
-          <div className="note-count">
-            <span className="sub-white-right">{noteCount}</span>
-            <span className="subtitle">Note</span>
-          </div>
-        ) : (
-          <div className="note-count">
-            <span className="subtitle">Notes:</span>
-            <span className="sub-white">{noteCount}</span>
-          </div>
-        )} */}
       </div>
     )
   } else if (type === 'filtered' && status === 'DONE') {

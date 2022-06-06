@@ -246,6 +246,7 @@ button#tag-icon-save.disabled:hover {
   display: flex;
   gap: 5px;
   margin-top: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .mobile-column {
@@ -483,6 +484,5 @@ button#tag-icon-save.disabled:hover {
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: flex-start;
-    
   }
 }

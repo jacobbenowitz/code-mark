@@ -35,8 +35,9 @@ body {
 }
 
 .center-simple {
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  place-content: center;
 }
 
 .grid-12-col {

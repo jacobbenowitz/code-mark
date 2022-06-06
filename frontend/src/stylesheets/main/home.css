@@ -325,7 +325,7 @@
   align-items: center;
   padding: 5px 12px;
   gap: 1rem;
-  height: 38px;
+  min-height: 38px;
   cursor: pointer;
 }
 
