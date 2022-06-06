@@ -27,6 +27,10 @@ const NoteSchema = new Schema({
   },
   language: {
     type: String
+  },
+  sample: {
+    type: Boolean,
+    default: false
   }
 },
 {timestamps: true}

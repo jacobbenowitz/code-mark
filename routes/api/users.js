@@ -46,7 +46,32 @@ router.post('/register', (req, res) => {
                   if (err) throw err;
                   newUser.password = hash;
                   newUser.save()
-                    .then(user => res.json([user,['success', 'User Successfully Registered!']]))
+                    .then(user => {
+                      res.json([user,['success', 'User Successfully Registered!']])
+                      Note.findById('629e5961cb981eeef9b649a0')     //id of template note in Jacob account
+                        .then(note => {
+                          // debugger;
+                          const newNote = new Note({
+                            user: { username: user.username, userId: user.id },
+                            codebody: note.codebody,
+                            title: note.title,
+                            textdetails: note.textdetails,
+                            comments: note.comments,
+                            resources: note.resources,
+                            tags: note.tags,
+                            likes: note.likes,
+                            language: note.language,
+                            public: false,
+                            sample: true
+                          })
+                          newNote.save()
+                            .then(note => {
+                              user.notes.push(note.id);
+                              user.save();
+                            })
+                        })
+                        .catch(err => res.json({user: err}))
+                    })
                     .catch(err => res.json({user: err}))
                 })
               })
