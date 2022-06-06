@@ -41,7 +41,7 @@ const notesReducer = (prevState = initialState, action) => {
       return nextState;
     case RECEIVE_USER_NOTES:
       let allNotesUser = {}
-      action.notes.data.forEach(note => allNotes[note._id] = note)
+      action.notes.data.forEach(note => allNotesUser[note._id] = note)
       nextState.all = allNotesUser;
       nextState.user = action.notes.data;
       nextState.status = DONE;
