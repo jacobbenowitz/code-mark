@@ -14,7 +14,8 @@ const mapStateToProps = (state, { match }) => {
     allNotes: publicNotes,
     tags: discoverTags,
     currentUser: state.session.user,
-    filter: match.params.tag
+    filter: match.params.tag,
+    status: state.notes.status
   }
 }
 

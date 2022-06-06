@@ -1,13 +1,40 @@
 .note-show-container {
-  display: grid;
-  grid-template-rows: auto 1fr auto auto;
-  margin-top: 3rem;
+  display: flex;
+  margin-top: 1.2rem;
   margin-bottom: 5rem;
   gap: 1.4rem;
   box-sizing: border-box;
-  max-width: 100vw;
+  max-width: 100%;
   width: 100%;
-  overflow: hidden;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
+  grid-column: 1 / span 12;
+}
+
+.grid-spacer-1-2 {
+  grid-column: 1 / span 2;
+  width: calc(100vw / 10);
+}
+
+.grid-spacer-11-12 {
+  grid-column: 11 / span 2;
+  width: calc(100vw / 10);
+}
+
+.note-show-wrapper {
+  grid-column: 1 / span 12;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+
+@media only screen and (min-width: 680px) {
+  .note-show-container {
+    grid-column: 3 / span 8;
+  }
 }
 
 .spacer-150-h {
@@ -16,12 +43,28 @@
   display: block;
 }
 
+.tags-section-wrapper, .note-show-top-icons, .note-show-title, .code-note-body, .note-resources, .note-comments {
+  animation: fadeIn 300ms ease-in;
+}
+
 .note-show-top-icons {
   display: flex;
+  /* padding-left: 2rem;
+  padding-right: 2rem; */
+  justify-content: space-between;
+  box-sizing: border-box;
+  max-width: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.note-show-top-icons-loader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
   padding-left: 2rem;
   padding-right: 2rem;
-  justify-content: space-between;
-  animation: fadeIn 300ms ease-in-out;
 }
 
 .note-stat {
@@ -148,8 +191,13 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 2rem;
+  /* padding: 2rem; */
+  margin-top: 1.4rem;
   gap: 2rem;
+  box-sizing: border-box;
+  max-width: 100%;
+  width: 100%;
+    overflow: visible;
   animation: fadeIn 300ms ease-in-out;
 }
 
@@ -160,6 +208,8 @@
     width: 100%;
     max-width: 100vw;
     padding: 10px;
+    gap: 1.5rem;
+    overflow: visible;
     animation: fadeIn 300ms ease-in-out;
   }
 
@@ -196,6 +246,15 @@
   .note-stat {
     font-size: 14px;
   }
+
+  .grid-spacer-1-2, .grid-spacer-11-12 {
+    display: none;
+  }
+
+  .note-show-container {
+    overflow-x: hidden;
+  }
+
 }
 
 .export-dots-wrapper {
@@ -433,12 +492,30 @@
 }
 
 .note-resources {
-  padding: 2rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 @media only screen and (max-width: 680px) {
   .note-resources {
     padding: 1rem;
+  }
+
+.export-dots-wrapper {    
+  padding: 0;    
+  width: 100vw;    
+  max-width: 100%;
+  border: 1px dashed #35373E;	    
+}
+
+#content-export {		    
+  display: flex;	    
+  padding: 2rem 1rem 3.5rem 1rem;	    
+  position: relative;
+}
+  .content-wrapper {
+    width: 100%;
   }
 }
 
@@ -589,9 +666,16 @@
 .modal-main {
   grid-row: 1 / span 3;
   grid-column: 2 / span 1;
-  display: grid;
-  grid-template-rows: auto auto auto;
+  display: flex;
+  flex-direction: column;
   gap: 0.75rem;
+}
+
+.loader-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
 #comment-highlight-text {
@@ -605,7 +689,7 @@
   width: 300px;
   position: fixed;
   top: 500px;
-  right: 12px;
+  right: 15px;
   z-index: 200;
   background-color: rgba(198, 198, 198, 0.102);
   backdrop-filter: blur(20px);
@@ -636,7 +720,7 @@
     width: 300px;
     position: fixed;
     top: 590px;
-    right: 17px;
+    right: 15px;
     z-index: 200;
     background-color: rgba(198, 198, 198, 0.102);
     backdrop-filter: blur(20px);

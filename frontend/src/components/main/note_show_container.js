@@ -6,6 +6,7 @@ import {
   removeNote,
   removeNoteLike,
   updateNote,
+  updateNotePublicStatus,
   updateNoteTags
 } from "../../actions/note_actions";
 
@@ -24,6 +25,7 @@ import { fetchCurrentUser } from "../../actions/session_actions";
 const mapStateToProps = (state, { match }) => {
   return {
     noteId: match.params.noteId,
+    status: state.notes.status,
     note: state.notes.all[match.params.noteId],
     currentUser: state.session.user,
     comments: state.comments.note,
@@ -51,7 +53,9 @@ const mapDispatchToProps = dispatch => {
       dispatch(addCommentLike(data, commentId)),
     removeCommentLike: (data, commentId) => dispatch(removeCommentLike(data, commentId)),
     fetchCurrentUser: () => dispatch(fetchCurrentUser()),
-    updateNoteTags: (tags, noteId) => dispatch(updateNoteTags(tags, noteId))
+    updateNoteTags: (tags, noteId) => dispatch(updateNoteTags(tags, noteId)),
+    updateNotePublicStatus: (data, noteId) =>
+      dispatch(updateNotePublicStatus(data, noteId))
   }
 }
 

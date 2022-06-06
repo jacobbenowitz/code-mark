@@ -16,7 +16,7 @@
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
   
   position: absolute;
-  max-width: 415px;
+  max-width: 95%;
   width: max-content;
   height: min-content;
   /* top: calc(50% - 591px/2); */
@@ -96,7 +96,7 @@ input[type='color'] {
 
 .demo_button {
   border: 1px solid transparent;
-  background: #2d2d2d00;
+  background: #198087;
   margin-left: 2rem;
 }
 
@@ -246,6 +246,10 @@ input[type='color'] {
   color: #15CF74;
 }
 
+.global-modal-in-out {
+  animation: successModalInOut 5s ease-in-out;
+}
+
 .success-in {
   animation: successModalIn 1s ease-in;
 }
@@ -272,9 +276,11 @@ input[type='color'] {
   padding: 0.7rem 1.4rem;
   border-radius: 8px;
   position: relative;
-  top: 60px;
+  top: 0px;
   z-index: 399;
-  background-color: #1c1b1b;
+  background-color: rgba(198, 198, 198, 0.102);
+  backdrop-filter: blur(20px);
+  box-shadow: 0px 0px 16px rgb(0 0 0 / 30%);
 }
 
 .fa-circle-xmark {
@@ -304,7 +310,7 @@ input[type='color'] {
 
   }
   100%{
-    top: 70px;
+    top: 65px;
     opacity: 100%;
     box-shadow: 0px 0px 12px rgb(0 0 0 / 60%);
   }
@@ -312,7 +318,7 @@ input[type='color'] {
 
 @keyframes successModalOut {
   0%{
-    top: 70px;
+    top: 65px;
     opacity: 100%;
     box-shadow: 0px 0px 12px rgb(0 0 0 / 60%);
   }
@@ -324,7 +330,26 @@ input[type='color'] {
   }
 }
 
-/* FROM MAIN MAY 27 - DAY OF BUGS */
+@keyframes successModalInOut {
+  0%{
+    top: 0px;
+    opacity: 0%;
+  }
+
+  15%{
+    top: 65px;
+    opacity: 100%;
+  }
+  
+  85%{
+    top: 65px;
+    opacity: 100%;
+  }
+  100%{
+    top: 0px;
+    opacity: 0%;
+  }
+}
 
 .avatar-wrapper.form {
   cursor: default;

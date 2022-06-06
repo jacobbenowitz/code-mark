@@ -4,40 +4,61 @@ import { orderUserNotes } from '../../util/selectors';
 import CodeNoteItem from './code_note_item';
 import AllNotes from '../main/all_notes';
 import MobileNotes from '../main/mobile_notes';
-import CodeNoteItemLoader from '../lazy_loaders/placeholder_components/code_note_loader';
+import CodeNoteItemLoader from '../content_loaders/placeholder_components/code_note_loader';
 
 class UserNotes extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userNotes: []
+      userNotes: [],
+      status: 'IDLE'
     };
   }
 
   componentDidMount() {
     this.props.fetchUserNotes(this.props.currentUser?.id)
   };
+
   
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.userNotes) {
-      let notes = orderUserNotes(nextProps.userNotes);
+  componentDidUpdate() {
+    const mobileStatus = this.isMobile();
+    const { status, userNotes } = this.props;
+
+    if (status !== this.state.status) {
+      let notes = orderUserNotes(userNotes)
       this.setState({
-        userNotes: notes
+        userNotes: notes,
+        status: status
       })
     }
+    if (this.state.mobile !== mobileStatus) {
+      this.setState({ mobile: mobileStatus })
+    }
   }
+  
 
-  isMobile(){
+  isMobile() {
     return window.innerWidth < 680;
   }
 
   render() {
-      return (
-        this.isMobile() ?
-          <MobileNotes notes={this.state.userNotes} />
-          : <AllNotes notes={this.state.userNotes} />
-      )
-    // }
+    const { mobile, userNotes, status } = this.state;
+
+    return (
+      <>
+        {  mobile ?
+          <MobileNotes
+            notes={userNotes}
+            status={status}
+          />
+          :
+          <AllNotes
+            notes={userNotes}
+            status={status}
+          />
+        }
+      </>
+    )
   }
 }
 

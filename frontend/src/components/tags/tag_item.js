@@ -8,6 +8,7 @@ class TagItem extends React.Component {
     }
 
     this.toggleDelete = this.toggleDelete.bind(this);
+    this.deleteTag = this.deleteTag.bind(this)
   }
 
   deleteTag() {
@@ -34,14 +35,17 @@ class TagItem extends React.Component {
     return (
       isCurrentUser ? (
         <div className="tag-item-wrapper"
-          onMouseEnter={this.toggleDelete} onMouseLeave={this.toggleDelete}>
+          onTouchEnd={this.toggleDelete}
+          onMouseEnter={this.toggleDelete}
+          onMouseLeave={this.toggleDelete}>
           <div className="tag-icon-wrapper">
             <i className="fa-solid fa-tag"></i>
           </div>
           <span className="tag-text">{title}</span>
           {this.state.showDelete ? (
             <button className='delete-icon-button'
-              onClick={() => this.deleteTag()}
+              onClick={this.deleteTag}
+              onTouchEnd={this.deleteTag}
             >
               <i className="fa-solid fa-trash"/>
             </button>

@@ -30,14 +30,17 @@ import FollowingFilteredContainer from './main/following_filtered_container';
 import LikedFilteredContainer from './main/liked_filtered_container';
 import LayoutDesign from './UI/layout_design';
 import GlobalModalContainer from './UI/global_modal_container';
-import TestLazyLoad from './lazy_loaders/test_lazy_load';
+import TestLazyLoad from './content_loaders/test_lazy_load';
+import NoteShowLazyLoad from './content_loaders/note_show_lazy_load';
+import NotFound from './NotFound';
+
 
 const App = () => (
   <div className="grid-pancake-stack">
     <header className="header-top-stack">
       <NavBarContainer />
     </header>
-      <GlobalModalContainer />
+    <GlobalModalContainer />
     <Switch>
       <AuthRoute exact path='/signup'
         component={SignupFormContainer} />
@@ -67,10 +70,14 @@ const App = () => (
         component={SettingsContainer} />
       <Route exact path='/dev/main-layout'
         component={LayoutDesign} />
-      <Route exact path='/dev/test-lazy'
+      <Route exact path='/dev/home/lazy-load'
         component={TestLazyLoad} />
+      <Route exact path='/dev/note/lazy-load'
+        component={NoteShowLazyLoad} />
       <AuthRoute path="/"
         component={SplashPage} />
+      <Route path="*"
+        component={NotFound} />
     </Switch>
 
     <footer>

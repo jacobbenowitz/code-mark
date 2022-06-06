@@ -11,6 +11,7 @@ import {
   selectLikedNotes
 } from '../../util/selectors';
 import SectionTitle from '../UI/section_title';
+import MobileNotes from './mobile_notes';
 
 export default class LikedFiltered extends React.Component {
   constructor(props) {
@@ -18,7 +19,8 @@ export default class LikedFiltered extends React.Component {
     this.state = {
       likedNotes: [],
       likedTags: [],
-      filter: undefined
+      filter: undefined,
+      mobile: false
     }
   }
 
@@ -26,6 +28,7 @@ export default class LikedFiltered extends React.Component {
     this.props.fetchNotes();
     this.props.fetchCurrentUser();
     this.props.fetchUsers();
+    this.setState({ mobile: this.isMobile() })
   }
 
   componentDidMount() {
@@ -34,6 +37,8 @@ export default class LikedFiltered extends React.Component {
 
   componentDidUpdate() {
     const { allNotes, allUsers, currentUser, filter, likedNoteIds } = this.props;
+    const mobileStatus = this.isMobile();
+
     if (Object.values(allNotes).length && likedNoteIds.length && filter !== this.state.filter) {
       const likedNotes = selectLikedNotes(allNotes, likedNoteIds);
       const likedTags = selectNoteTags(likedNotes)
@@ -43,6 +48,10 @@ export default class LikedFiltered extends React.Component {
         likedTags: likedTags,
         filter: filter
       })
+
+    }
+    if (this.state.mobile !== mobileStatus) {
+      this.setState({ mobile: mobileStatus })
     }
   }
 
@@ -51,24 +60,31 @@ export default class LikedFiltered extends React.Component {
   }
 
   render() {
+    const { mobile, filter, likedNotes, likedTags } = this.state;
     return (
-      <div className={this.isMobile() ? 'main-mobile' : 'main-sidebar'}>
-        <SideCarMenu tagType={'likes'} tags={this.state.likedTags} />
+      <div className={mobile ? 'main-mobile' : 'main-sidebar'}>
+        <SideCarMenu tagType={'likes'} tags={likedTags} />
 
         <div className='home-main'>
           <div className='notes-section'>
             <SectionTitle
               type={'filtered'}
-              filter={this.state.filter}
+              filter={filter}
               title={'Liked'}
-              noteCount={this.state.likedNotes.length}
+              noteCount={likedNotes.length}
+              status={this.props.status}
             />
             <div className='note-list-container'>
-              {this.isMobile() ?
-                <MobileNotes notes={this.state.likedNotes} />
-                : <AllNotes notes={this.state.likedNotes} />
+              {mobile ?
+                <MobileNotes
+                  notes={likedNotes}
+                  status={this.props.status}
+                />
+                : <AllNotes
+                  notes={likedNotes}
+                  status={this.props.status}
+                />
               }
-
             </div>
           </div>
         </div>
