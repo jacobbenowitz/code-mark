@@ -13,10 +13,10 @@ const NoteShowMainLoader = (props) => (
     preserveAspectRatio="none"
   >
     
-    <rect x="33" y="0" rx="12" ry="12" width="22" height="22" />
-    <rect x="685" y="0" rx="12" ry="12" width="22" height="22" />
-    <rect x="714" y="0" rx="12" ry="12" width="22" height="22" />
-    <rect x="33" y="30" rx="6" ry="6" width="713" height="200" />
+    <rect x="0" y="0" rx="12" ry="12" width="22" height="22" />
+    <rect x="715" y="0" rx="12" ry="12" width="22" height="22" />
+    <rect x="744" y="0" rx="12" ry="12" width="22" height="22" />
+    <rect x="0" y="30" rx="6" ry="6" width="775" height="200" />
   </ContentLoader>
 )
 

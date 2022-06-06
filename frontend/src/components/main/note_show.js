@@ -52,7 +52,18 @@ export default class NoteShow extends React.Component {
     this.props.fetchNote(this.props.noteId);
     this.props.fetchNoteComments(this.props.noteId);
     window.scrollTo(0, 0);
-    this.setState({isMobile: this.isMobile()})
+    
+    document.onselectionchange = (e) => {
+      e.preventDefault()
+      const selectionString = document.getSelection().toString()
+
+      if (selectionString.length > 1) {
+        this.setState({
+          selectedText: selectionString,
+          commentModal: true
+        });
+      }
+    };
   }
   
   componentWillUnmount() {
@@ -88,19 +99,9 @@ export default class NoteShow extends React.Component {
         status: status
       })
     }
-    if (status === "DONE") {
-      document.onselectionchange = (e) => {
-        e.preventDefault()
-        const selectionString = document.getSelection().toString()
-
-        if (selectionString.length > 1) {
-          this.setState({
-            selectedText: selectionString,
-            commentModal: true
-          });
-        }
-      };
-    }
+    // if (status === "DONE") {
+      
+    // }
   }
 
   deleteNote() {
@@ -211,6 +212,7 @@ export default class NoteShow extends React.Component {
     let modals;
 
     if (status === "DONE") {
+      debugger
       modals = (
         <>
           <PhotoExportModal

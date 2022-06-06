@@ -20,10 +20,7 @@ export default class EditNote extends React.Component {
       'CSS': css(),
       'C++': cpp(),
     }
-    const keywords = [];
-    this.props.note.resources.forEach(resource => {
-      keywords.push(resource.keyword.split(' ')[1])
-    })
+    
     this.state = {
       title: "",
       codebody: "",
@@ -34,7 +31,7 @@ export default class EditNote extends React.Component {
       isOpen: false, // true when modal is open
       lang: extensions[this.props.note.language],
       language_name: this.props.note.language,
-      keywordsSelected: keywords,
+      keywordsSelected: [],
       allKeywords: []
     }
     this.bindHandlers();
@@ -43,6 +40,14 @@ export default class EditNote extends React.Component {
   componentDidMount() {
     this._isMounted = true;
     const { note } = this.props;
+
+    if (note.resources.length && note.resources[1].keyword) {
+      const keywords = [];
+      this.props.note.resources.forEach(resource => {
+        keywords.push(resource.keyword.split(' ')[1])
+      })
+    }
+
     this.setState({
       title: note.title,
       codebody: note.codebody,
@@ -61,9 +66,9 @@ export default class EditNote extends React.Component {
     select_lang.value = this.props.note.language;
   }
 
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
+  // componentWillUnmount() {
+  //   this._isMounted = false;
+  // }
 
   bindHandlers() {
     this.addLangTag = this.addLangTag.bind(this);
