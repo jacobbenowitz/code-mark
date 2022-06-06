@@ -294,6 +294,11 @@ button#tag-icon-save.disabled:hover {
   resize: none;
 }
 
+.note-input {
+  width: 100%;
+}
+
+
 
 #confirm-modal-container, #resources-note-container, 
 #comment-modal-container, #edit-note-container, #follower-header-container {
@@ -455,4 +460,8 @@ button#tag-icon-save.disabled:hover {
     justify-content: flex-start;
     align-items: flex-start;
   }
+}
+
+.codemirror-wrapper {
+  width: 100%;
 }

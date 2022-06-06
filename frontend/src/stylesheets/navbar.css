@@ -522,12 +522,6 @@ footer {
     flex-wrap: wrap;
   }
 
-  .session {
-  grid-column: 1 / span 12;
-  height: 82vh;
-  background-color: #2D2D2D;
-  }
-
   #navFooter {
     display: grid;
     grid-template-rows: auto auto;

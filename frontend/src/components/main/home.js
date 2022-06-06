@@ -76,7 +76,7 @@ export default class Home extends React.Component {
               status={this.props.status}
               mobile={this.state.mobile}
             />
-            {userHeader}
+            {/* {userHeader} */}
             {mobileTags}
             <div className='note-list-container'>
               <UserNotesContainer />

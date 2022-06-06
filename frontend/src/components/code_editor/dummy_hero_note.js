@@ -189,13 +189,13 @@ export default class DummyHeroNote extends React.Component {
                                 <option value={3}>CSS</option>
                             </select>
                         </div>
-                        <div className='note-input'>
+                        <div className='codemirror-wrapper'>
                             <CodeMirror className='codemirror javascript'
                                 id='codebody-js'
                                 value={this.state.codebody}
                                 onChange={this.updateCode}
                                 height="100px"
-                                width='300px'
+                                width='100%'
                                 theme='dark'
                                 extensions={[this.state.lang,
                                 EditorView.lineWrapping]}

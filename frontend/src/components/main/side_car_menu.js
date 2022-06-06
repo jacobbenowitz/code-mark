@@ -5,6 +5,8 @@ import NavTagItem from '../tags/nav_tag_item';
 
 const SideCarMenu = ({ tags, tagType }) => {
 
+  
+
   return tags ? (
     <div className='nav-sidecar'>
       <div className='nav-boxes'>

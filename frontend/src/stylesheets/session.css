@@ -15,10 +15,10 @@
   border-radius: 4px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
   
-  position: absolute;
-  max-width: 95%;
-  width: max-content;
-  height: min-content;
+  /* position: absolute; */
+  max-width: 100%;
+  /* width: max-content; */
+  /* height: min-content; */
   /* top: calc(50% - 591px/2); */
 
   background: #202124;
@@ -91,7 +91,7 @@ input[type='color'] {
 }
 
 #session-form > h3 {
-  padding-bottom: 15px;
+  padding-bottom: 2rem;
 }
 
 .demo_button {
@@ -393,4 +393,18 @@ input[type='color'] {
 
 .fa-xmark.modal {
   color: #A44B4B;
+}
+
+@media only screen and (max-width: 680px) {
+  .session {
+    grid-column: 1 / span 12;
+    height: fit-content;
+    padding: 2rem 0;
+    background-color: #2D2D2D;
+  }
+
+  #session-form {
+    padding: 1rem;
+    width: 90%;
+  }
 }

@@ -19,8 +19,6 @@ componentDidUpdate() {
   const bodyHeight = body[0].clientHeight;
   debugger
   if (Object.values(this.props.allUsers).length && !this.state.followers.length && this.props.currentUser) {
-    debugger
-    
     const followers = filterUsersById(this.props.allUsers, this.props.followers)
     this.setState({ 
       followers: followers,
@@ -82,7 +80,7 @@ render () {
 
   return (
     <>
-    { followModal }
+    {/* { followModal } */}
     <div className="user-header-wrapper">
       <h3>Notes by {user.username}</h3>
       <div className="user-header-stats">

@@ -27,6 +27,7 @@
     grid-column: 1 / span 2;
     grid-row: 1 / span 1;
     margin-right: 28px;
+    margin-right: 2rem;
   }
 
   #features-right-container {
