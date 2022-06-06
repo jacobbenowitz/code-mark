@@ -44,8 +44,11 @@ export default class UserFiltered extends React.Component {
   render() {
     return (
       <div className={this.isMobile() ? 'main-mobile' : 'main-sidebar'}>
-        {/* NEEDS TO BE REFACTORED FOR FILTERING USER'S TAGS (NOT HOME) */}
-        <SideCarMenu tags={this.props.tags} tagType={'/home'} status={this.props.status}/>
+        <SideCarMenu
+          tags={this.props.tags}
+          tagType={'/home'}
+          status={this.props.status}
+        />
         <div className='home-main'>
           <div className='notes-section'>
             <div className='section-title'>
@@ -57,14 +60,21 @@ export default class UserFiltered extends React.Component {
                   currentUser={this.state.currentUser}
                   userId={this.props.userId}
                   changeUserFollowers={this.props.changeUserFollowers}
+                  fetchUsers={this.props.fetchUsers}
                 />
               ) : ""}
             </div>
             <div className={'note-list-container'}>
               {
                 this.isMobile() ?
-                  <MobileNotes notes={this.props.userNotes} />
-                  : <AllNotes notes={this.props.userNotes} />
+                  <MobileNotes
+                    notes={this.props.userNotes}
+                    status={this.props.status}
+                  />
+                  : <AllNotes
+                    notes={this.props.userNotes}
+                    status={this.props.status}
+                  />
               }
             </div>
           </div>

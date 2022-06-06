@@ -53,7 +53,6 @@ const commentsReducer = (prevState = initialState, action) => {
             nextState.note = action.comments;
             return nextState;
         case RECEIVE_COMMENT_LIKE:
-            // debugger
             let nextComments = nextState.note.map(comment => {
                 if (comment._id === action.comment.data._id) {
                     return action.comment.data

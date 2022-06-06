@@ -4,6 +4,7 @@ import CodeEditorNoteShow from '../../code_editor/code_editor_note_show_readonly
 import LikeNoteIcon from '../../notes/like_note_icon';
 import NoteShowMainLoader from "../../content_loaders/note_show_main_loader";
 import NoteShowCodeNoteLoaderMobile from "../../content_loaders/mobile/note_show_code_note_loader_mobile";
+import ReactTextareaAutosize from "react-textarea-autosize";
 
 
 const NoteShowCodeAndDetails = ({
@@ -20,10 +21,11 @@ const NoteShowCodeAndDetails = ({
   if (status === 'DONE') {
     if (note.textdetails) {
       noteTextDetails = (
-        <div className='note-textDetails'>
-          <span className='textDetails-show'>
-            {note.textdetails}
-          </span>
+        <div className='note-text-details'>
+          <ReactTextareaAutosize
+            className="textarea-details"
+            value={note.textdetails}
+          />
         </div>
       )
     }

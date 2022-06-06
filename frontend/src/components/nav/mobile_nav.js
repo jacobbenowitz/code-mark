@@ -15,7 +15,7 @@ export default class MobileNav extends React.Component {
   toggleShowMenu() {
     const mask = document.getElementById('mobile-menu-mask')
     const menu = document.getElementById('nav-menu-mobile')
-    if (mask.className === 'mask-on' || mask.className === 'mask-in') {
+    if (mask.className === 'mask-in') {
       mask.className = 'mask-out'
       menu.className = 'mask-out'
       setTimeout(() => {
@@ -45,23 +45,6 @@ export default class MobileNav extends React.Component {
         >
           <div className='nav-boxes'>
             <div className='nav-pages'>
-              <ul className='nav-list'>
-                <h5>Account</h5>
-                <NavLink className="settings nav-item-container"
-                  to={'/settings'}>
-                  <div className='nav-item-link settings'>
-                    <span>Settings</span>
-                  </div>
-                </NavLink>
-                <div className="logout nav-item-container"
-                  onClick={() => this.props.logout()}>
-                  <div className='nav-item-link nav-home'>
-                    <span>Logout</span>
-                  </div>
-                </div>
-              </ul>
-            </div>
-            <div className='nav-pages'>
               <h5>Pages</h5>
               <ul className='nav-list'>
                 <NavLink to={'/home'} className='nav-item-container'>
@@ -84,6 +67,23 @@ export default class MobileNav extends React.Component {
                     <img src="https://code-mark.s3.amazonaws.com/type%3DFollowing.svg" /> <span>Liked</span>
                   </div>
                 </NavLink>
+              </ul>
+            </div>
+            <div className='nav-pages'>
+              <ul className='nav-list'>
+                <h5>Account</h5>
+                <NavLink className="settings nav-item-container"
+                  to={'/settings'}>
+                  <div className='nav-item-link settings'>
+                    <span>Settings</span>
+                  </div>
+                </NavLink>
+                <div className="logout nav-item-container"
+                  onClick={() => this.props.logout()}>
+                  <div className='nav-item-link nav-home'>
+                    <span>Logout</span>
+                  </div>
+                </div>
               </ul>
             </div>
           </div>

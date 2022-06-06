@@ -101,9 +101,13 @@ export default class NoteShow extends React.Component {
         status: status
       })
     }
-    // if (status === "DONE") {
-      
-    // }
+    if (this.state.bodyHeight !== bodyHeight ||
+      this.state.bodyWidth !== bodyWidth) {
+      this.setState({
+        bodyHeight: bodyHeight,
+        bodyWidth: bodyWidth,
+      })
+    }
   }
 
   deleteNote() {
@@ -214,7 +218,7 @@ export default class NoteShow extends React.Component {
     
 
     const { note, bodyHeight, bodyWidth, isCurrentUser, commentModal,
-      isPublic, hideCommentModal, selectedText, status, comments } = this.state;
+      isPublic, hideCommentModal, selectedText, status, comments, isMobile } = this.state;
     
     let modals;
 
@@ -244,6 +248,7 @@ export default class NoteShow extends React.Component {
             currentUser={currentUser}
             noteId={noteId}
             toggleCommentModalVisibility={this.toggleCommentModalVisibility}
+            isMobile={isMobile}
           />
 
           <CommentModal
@@ -282,7 +287,7 @@ export default class NoteShow extends React.Component {
               isPublic={isPublic}
               handlePublicSwitch={this.handlePublicSwitch}
               updateNoteTags={updateNoteTags}
-              isMobile={this.state.isMobile}
+              isMobile={isMobile}
               status={status}
             />
 

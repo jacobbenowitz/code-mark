@@ -28,11 +28,11 @@ export default class LikedFiltered extends React.Component {
     this.props.fetchNotes();
     this.props.fetchCurrentUser();
     this.props.fetchUsers();
-    this.setState({ mobile: this.isMobile() })
   }
-
+  
   componentDidMount() {
     window.scrollTo(0, 0)
+    this.setState({ mobile: this.isMobile() })
   }
 
   componentDidUpdate() {

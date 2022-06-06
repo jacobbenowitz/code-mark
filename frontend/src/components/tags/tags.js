@@ -88,26 +88,14 @@ export default class Tags extends React.Component {
   }
 
   render() {
-
-    let tagsTop, tagsBottom;
+    const { tagForm } = this.state;
+    let tagsTop, tagsInput, tagsForm;
 
     if (this.state.tags.length) {
       tagsTop = (
         <>
           <span className='tags-header'>TAGS</span>
           <div className='tag-top'>
-            {this.props.isCurrentUser ? (
-              <div className="tag-item-wrapper tag-icon-new"
-                id='toggle-tag-form-button'
-                onClick={this.toggleTagForm}>
-                {this.state.tagForm ? (
-                  <i className="fa-solid fa-minus"></i>
-                ) : (
-                  <i className="fa-solid fa-circle-plus"></i>
-                )}
-              </div>
-            ) : undefined}
-            
             <div className={this.props.isCurrentUser ?
               'tags-overflow' : 'tags-overflow-sm'}>
               {
@@ -124,30 +112,48 @@ export default class Tags extends React.Component {
         </>
       )
     }
-    if (this.state.tagForm) {
-      tagsBottom = (
-        <div className="tag-form-on" id="new-tag-form">
-          <input type={'text'}
-            className={'tag-form-input'}
-            onChange={this.update('newTag')}
-            placeholder={'New tag...'}
-            value={this.state.newTag}
-          />
-          <button className={this.state.newTag.split(' ').join('').length ?
-            '' : 'save-tag disabled'} id='tag-icon-save'
-            onClick={this.state.newTag.split(' ').join('').length ?
-              this.handleSubmit : undefined}
+
+    if (this.props.isCurrentUser) {
+        tagsInput = (
+          <div className={tagForm ? "tag-form-on" : "tag-form-off"}
+            id="new-tag-form">
+            <input type={'text'}
+              className={'tag-form-input'}
+              onChange={this.update('newTag')}
+              placeholder={'New tag...'}
+              value={this.state.newTag}
+            />
+            <button className={this.state.newTag.split(' ').join('').length ?
+              '' : 'save-tag disabled'} id='tag-icon-save'
+              onClick={this.state.newTag.split(' ').join('').length ?
+                this.handleSubmit : undefined}
             >
-            <i className="fa-solid fa-floppy-disk" />
-          </button>
+              <i className="fa-solid fa-floppy-disk" />
+            </button>
+          </div>
+        )
+
+      tagsForm = (
+        <div className='tags-form-wrapper'>
+          <div className="tag-item-wrapper tag-icon-new"
+            id='toggle-tag-form-button'
+            onClick={this.toggleTagForm}>
+            {this.state.tagForm ? (
+              <i className="fa-solid fa-minus"></i>
+            ) : (
+              <i className="fa-solid fa-circle-plus"></i>
+            )}
+          </div>
+          {tagsInput}
         </div>
       )
     }
 
+
     return (
       <div className='note-tags-list'>
         {tagsTop}
-        {tagsBottom}
+        {tagsForm}
       </div>
     )
   }

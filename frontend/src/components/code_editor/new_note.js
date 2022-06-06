@@ -212,7 +212,7 @@ class NewNote extends React.Component {
 
 
   toggleTagForm() {
-    const tagForm = document.getElementById('new-tag-form-new-note');
+    const tagForm = document.getElementById('new-tag-form');
     if (tagForm.className === "tag-form-off") {
       this.setState({ tagForm: true }, () =>
         tagForm.className = "tag-form-on")
@@ -317,11 +317,13 @@ class NewNote extends React.Component {
                   </div>
                 </div>
               </form>
-              <div>
-                <button id='keyword-submit' onClick={this.handleSubmit}>Submit</button>
-              </div>
-              <div>
-                <button id='keyword-cancel' onClick={this.closeSuccessModal}>Cancel</button>
+              <div className='keyword-buttons'> 
+                <div>
+                  <button id='keyword-submit' onClick={this.handleSubmit}>Submit</button>
+                </div>
+                <div>
+                  <button id='keyword-cancel' onClick={this.handleSubmit}>No Resources</button>
+                </div>
               </div>
             </div>
             <div id="resources-step-2" className='modal-off'>
@@ -404,7 +406,7 @@ class NewNote extends React.Component {
                 }
               </div>
 
-              <div className='note-tags-list new'>
+            <div className='tags-form-wrapper'>
 
                 <div className="tag-item-wrapper tag-icon-new new"
                   id='toggle-tag-form-button'
@@ -417,7 +419,7 @@ class NewNote extends React.Component {
                 </div>
 
                 <form onSubmit={this.state.newTag.split(' ').join('').length ? this.updateTags : undefined}
-                  className="tag-form-off" id="new-tag-form-new-note">
+                  className="tag-form-off" id="new-tag-form">
                   <input type={'text'}
                     className={'tag-form-input'}
                     onChange={this.update('newTag')}
@@ -439,7 +441,7 @@ class NewNote extends React.Component {
                 >Save CodeMark</button>
               </div>
 
-            <div id='hide-note-form'
+            <div id='hide-new-note-form'
               className='icon-only-button'
               title='hide form'
               onClick={this.toggleForm}>

@@ -38,7 +38,7 @@ const PhotoExportModal = ({
               <CodeEditorExportImage codeBody={note.codebody} />
             </div>
             {note.textdetails ? (
-              <div className='note-textDetails'>
+              <div className='note-text-details'>
                 <span className='textDetails-show'>
                   {note.textdetails}
                 </span>

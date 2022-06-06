@@ -38,9 +38,9 @@ body {
   display: grid;
   place-items: center;
   align-items: center;
-  justify-items: center;
+  /* justify-items: center;
   align-content: center;
-  justify-content: center;
+  justify-content: center; */
 }
 
 .grid-12-col {

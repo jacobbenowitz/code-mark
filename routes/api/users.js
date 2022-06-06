@@ -269,7 +269,6 @@ router.delete('/:userId', passport.authenticate('jwt', { session: false }), (req
         var noteLikesIds = deleteuser.note_likes;
         var followers = deleteuser.followers;
         var following = deleteuser.following;
-        debugger;
         User.deleteOne({ _id: deleteuser.id })
           .then(() => {
             followers.forEach(followerId => {

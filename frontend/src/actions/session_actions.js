@@ -45,9 +45,6 @@ export const login = user => dispatch => {
     dispatch(receiveCurrentUser(decoded));
   })
     .then(() => dispatch(receiveUserSignIn(['success', `Hello again, ${user.usernameOrEmail}`])))
-    // .catch(err => {
-    //   dispatch(receiveErrors(err.response.data));
-    // })
     .catch(err => dispatch(receiveErrors(err)))
 };
 

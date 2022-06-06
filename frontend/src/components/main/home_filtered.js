@@ -21,11 +21,11 @@ export default class HomeFiltered extends React.Component {
   componentWillMount() {
     this.props.fetchUserNotes(this.props.currentUser.id);
     this.props.fetchCurrentUser();
-    this.setState({ mobile: this.isMobile() })
   }
-
+  
   componentDidMount() {
     window.scrollTo(0, 0)
+    this.setState({ mobile: this.isMobile() })
   }
 
   componentDidUpdate() {

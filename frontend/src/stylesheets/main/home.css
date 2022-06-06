@@ -84,7 +84,7 @@
   }
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 680px) {
 
   .nav-boxes {
     display: flex;
@@ -118,6 +118,7 @@
     width: 100%;
     position: sticky; 
     top: 6rem;
+    
   }
 
   .notes-section {
@@ -175,16 +176,15 @@
     width: 100%;
   }
 
-  .note-list-container {
-    padding-left: 10px;
-    box-sizing: border-box;
-    padding-right: 10px;
-  }
-
   .nav-boxes {
     width: 100%;
     padding-left: 24px;
     padding-top: 24px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    gap: 2.5rem;
   }
 
   .nav-item-link {
@@ -251,6 +251,7 @@
   gap: 12px;
   width: 100%;
   position: relative;
+  animation: fadeIn 300ms ease-in;
 }
 
 .nav-pages > h5 {
