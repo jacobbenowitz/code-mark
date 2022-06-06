@@ -52,7 +52,7 @@ export default class NoteShow extends React.Component {
     this.props.fetchNote(this.props.noteId);
     this.props.fetchNoteComments(this.props.noteId);
     window.scrollTo(0, 0);
-    
+
     document.onselectionchange = (e) => {
       e.preventDefault()
       const selectionString = document.getSelection().toString()
@@ -84,7 +84,7 @@ export default class NoteShow extends React.Component {
       this.setState({status: status})
     }
     if (status === "DONE" && (note !== this.state.note || comments !== this.state.comments)) {
-      debugger
+      // debugger
       if (currentUser?.id !== note.user.userId && !note.public) {
         history.push(`/home`)
       }
@@ -212,7 +212,7 @@ export default class NoteShow extends React.Component {
     let modals;
 
     if (status === "DONE") {
-      debugger
+      // debugger
       modals = (
         <>
           <PhotoExportModal

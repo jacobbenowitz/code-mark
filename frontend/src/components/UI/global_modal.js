@@ -91,8 +91,8 @@ class GlobalModal extends React.Component {
         <div id='success-modal' className='modal-off'>
         
         {
-          this.state.messages.map((message,idx) => {
-            console.log(`message ${idx}: ${message}`)
+          this.state.messages?.map((message,idx) => {
+            // console.log(`message ${idx}: ${message}`)
             return ( 
               <div className='modal-message'
                 key={`error-message-${idx}`}>
