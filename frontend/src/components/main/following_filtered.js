@@ -10,6 +10,7 @@ import {
   orderUserNotes
 } from '../../util/selectors';
 import SectionTitle from '../UI/section_title';
+import MobileNotes from './mobile_notes';
 
 
 export default class FollowingFiltered extends React.Component {
@@ -34,7 +35,8 @@ export default class FollowingFiltered extends React.Component {
 
   componentDidUpdate() {
     const { allNotes, allUsers, currentUser, filter } = this.props;
-    // && filter !== this.state.filter
+    const mobileStatus = this.isMobile();
+
     if (Object.values(allNotes).length && Object.values(allUsers).length && filter !== this.state.filter) {
       const followingUserIds = currentUser.following;
       const followingUsers = filterUsersById(allUsers, followingUserIds)
@@ -49,34 +51,43 @@ export default class FollowingFiltered extends React.Component {
         followingTags: followingTags,
         filter: filter
       })
+      
+    }
+    if (this.state.mobile !== mobileStatus) {
+      this.setState({ mobile: mobileStatus })
     }
   }
 
   isMobile(){
-    // debugger;
     return window.innerWidth < 680;
   }
 
   render() {
+    const { mobile, filter, followingNotes, followingTags } = this.state;
     return (
-      <div className={this.isMobile() ? 'main-mobile' : 'main-sidebar'}>
-        <SideCarMenu tagType={'following'} tags={this.state.followingTags} />
+      <div className={mobile ? 'main-mobile' : 'main-sidebar'}>
+        <SideCarMenu tagType={'following'} tags={followingTags} />
 
         <div className='home-main'>
           <div className='notes-section'>
             <SectionTitle
               type={'filtered'}
               title={'Following'}
-              noteCount={this.state.followingNotes.length}
-              filter={this.state.filter}
+              noteCount={followingNotes.length}
+              filter={filter}
+              status={this.props.status}
             />
             <div className='note-list-container'>
-              {this.state.followingNotes.length === 0 ? (
-                <span>No notes found</span>
-              ) :
-              this.isMobile() ?
-              <MobileNotes notes={this.state.followingNotes} />
-              : <AllNotes notes={this.state.followingNotes} />
+              {
+                mobile ?
+                  <MobileNotes
+                    notes={followingNotes}
+                    status={this.props.status}
+                  />
+                  : <AllNotes
+                    notes={followingNotes}
+                    status={this.props.status}
+                  />
               }
 
             </div>

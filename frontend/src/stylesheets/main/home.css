@@ -59,24 +59,94 @@
   z-index: 500;
   right: 0;
   border-radius: 0 0 9px 0;
+  pointer-events: none
 }
 
 .nav-list-wrapper {
   position: relative;
   display: flex;
   width: 100%;
+  border-radius: 0 0 9px 0;
+  overflow: hidden;
 }
-/* 
-.nav-list.tags-list {
-  position: absolute;
-} */
 
 
-@media only screen and (max-width: 600px) {
+@media only screen and (min-width: 900px)  {
+  .nav-boxes, .tags {
+    padding-left: 64px;
+  }
+  .home-main {
+    /* margin-top: 1.5rem; */
+    grid-template-rows: auto 1fr 1fr;;
+    padding-right: 42px;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+
+  .nav-boxes {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-left: 42px;
+    gap: 10px;
+    width: 100%;
+    max-height: 100%;
+    height: fit-content;
+    box-sizing: border-box;
+    border-radius: 0px 9px 9px 0px;
+    background: #202124;
+  }
+
+  .home-main {
+    display: grid;
+    grid-template-rows: auto 1fr 1fr;
+    gap: 2rem;
+    box-sizing: border-box;
+    width: 100%;
+    padding-right: 42px;
+  }
+
+  .nav-sidecar {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    height: 100vh;
+    width: 100%;
+    position: sticky; 
+    top: 6rem;
+  }
+
+  .notes-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    animation: fadeIn 250ms ease-in;
+  }
+
+  .section-title {
+    margin-bottom: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    gap: 0.7rem;
+    padding-left: 0.2rem;
+    width: 100%;
+    animation: fadeIn 250ms ease-in;
+  }
+
+}
+
+@media only screen and (max-width: 680px) {
   .home-main {
     padding-left: 10px;
     padding-right: 10px;
     grid-column: 1 / span 2;
+    grid-template-rows: auto 1fr 1fr;;
     box-sizing: border-box;
     width: 100%;
   }
@@ -110,97 +180,6 @@
     box-sizing: border-box;
     padding-right: 10px;
   }
-}
-
-@media only screen and (min-width: 900px)  {
-  .nav-boxes, .tags {
-    padding-left: 64px;
-  }
-  .home-main {
-    /* margin-top: 1.5rem; */
-    /* padding-right: 42px; */
-    max-width: 100%;
-    box-sizing: border-box;
-  }
-}
-
-@media only screen and (min-width: 600px) {
-  /* .nav-boxes, .tags {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-start;
-    padding: 24px 0px 24px 24px;
-    gap: 10px;
-    width: 80%;
-    background: #202124;
-    border-radius: 0px 9px 9px 0px;
-  } */
-
-  .nav-boxes {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding-left: 42px;
-    gap: 10px;
-    width: 100%;
-    max-height: 100%;
-    height: fit-content;
-    box-sizing: border-box;
-    border-radius: 0px 9px 9px 0px;
-    background: #202124;
-  }
-
-  .home-main {
-    display: grid;
-    grid-template-rows: auto auto auto;
-    gap: 2rem;
-    box-sizing: border-box;
-        width: 100%;
-  }
-
-  .nav-sidecar {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    height: 100vh;
-    width: 100%;
-    position: sticky; 
-    top: 6rem;
-  }
-
-  .notes-section {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .section-title {
-    margin-bottom: 1.4rem;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-items: flex-start;
-    gap: 0.7rem;
-    padding-left: 0.2rem;
-    width: 100%;
-  }
-
-}
-
-@media only screen and (max-width: 680px) {
-  .nav-sidecar {
-    display: none;
-  }
-
-  .home-main {
-    padding-left: 10px;
-    padding-right: 10px;
-    grid-column: 1 / span 2;
-    box-sizing: border-box;
-        width: 100%;
-  }
 
   .nav-boxes {
     width: 100%;
@@ -218,6 +197,7 @@
   }
 }
 
+
 .nav-item-container {
   font-weight: 600;
 }
@@ -227,6 +207,8 @@
   z-index: 199;
   display: flex;
   width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
   place-content: center;
   align-items: center;
   padding: 1rem 0 1rem 0;
@@ -308,6 +290,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
+  animation: fadeIn 250ms ease-in;
 }
 
 .mobile-notes {
@@ -316,6 +299,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  animation: fadeIn 250ms ease-in;
 }
 
 .column1{

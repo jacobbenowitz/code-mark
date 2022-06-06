@@ -55,7 +55,7 @@ toggleFollowerModal() {
 render () { 
   const {currentUser, user, userId, changeUserFollowers, userNotes, isCurrentUser = false, noteCount} = this.props
 
-  let followButton;
+  let followButton, followModal;
   if (currentUser.id !== userId) {
     followButton = (
       <FollowButton
@@ -64,24 +64,30 @@ render () {
         currentUser={currentUser}
       />
     )
-    }
-  return (
-    <div className="user-header-wrapper">
-      {isCurrentUser ? (
-        ""
-      ): <h1>{user.username}'s Notes</h1>
-    }
-     
-      <div id='follower-header-container' className="modal-off" style={{ height: this.state.bodyHeight }} >
+  }
+  
+  if (this.state.followers) {
+    followModal = (
+     <div id='follower-header-container' 
+          className="modal-off" 
+          style={{ height: this.state.bodyHeight }} 
+      >
         <div className='modal-wrapper'>
         <Followers 
-            toggleFollowerModal = {this.toggleFollowerModal}
-            followers = {this.state.followers}
-
+            toggleFollowerModal={this.toggleFollowerModal}
+            followers={this.state.followers}
         />
         </div>
       </div>
+    )
+    
+  }
 
+  return (
+    <>
+   { followModal }
+    <div className="user-header-wrapper">
+      <h3>Notes by {user.username}</h3>
       <div className="user-header-stats">
         <div className="user-stats">
 
@@ -118,6 +124,7 @@ render () {
         {followButton}
       </div>
     </div>
+    </>
   )
   }
 }

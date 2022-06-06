@@ -8,22 +8,17 @@ class TagItem extends React.Component {
     }
 
     this.toggleDelete = this.toggleDelete.bind(this);
+    this.deleteTag = this.deleteTag.bind(this)
   }
 
   deleteTag() {
-    let newTags = this.props.tags.filter(tag =>
-      tag !== this.props.title);
-    const { title, codebody, textdetails, resources, _id } = this.props.note;
-
-    let nextNote = {
-      title: title,
-      codebody: codebody,
-      textdetails: textdetails,
-      resources: resources,
-      tags: newTags
-    }
-    // / 
-    this.props.updateNote(nextNote, _id)
+    const { tags, _id } = this.props.note;
+    const { updateNoteTags, title } = this.props;
+    
+    let newTags = tags.filter(tag =>
+      tag !== title);
+    
+    updateNoteTags({tags: newTags}, _id)
   }
 
   toggleDelete() {
@@ -35,17 +30,22 @@ class TagItem extends React.Component {
   }
 
   render() {
+    const { isCurrentUser, title } = this.props;
+
     return (
-      this.props.isCurrentUser ? (
+      isCurrentUser ? (
         <div className="tag-item-wrapper"
-          onMouseEnter={this.toggleDelete} onMouseLeave={this.toggleDelete}>
+          onTouchEnd={this.toggleDelete}
+          onMouseEnter={this.toggleDelete}
+          onMouseLeave={this.toggleDelete}>
           <div className="tag-icon-wrapper">
             <i className="fa-solid fa-tag"></i>
           </div>
-          <span className="tag-text">{this.props.title}</span>
+          <span className="tag-text">{title}</span>
           {this.state.showDelete ? (
             <button className='delete-icon-button'
-              onClick={() => this.deleteTag()}
+              onClick={this.deleteTag}
+              onTouchEnd={this.deleteTag}
             >
               <i className="fa-solid fa-trash"/>
             </button>
@@ -56,7 +56,7 @@ class TagItem extends React.Component {
           <div className="tag-icon-wrapper">
             <i className="fa-solid fa-tag"></i>
           </div>
-          <span className="tag-text">{this.props.title}</span>
+          <span className="tag-text">{title}</span>
         </div>
       )
     )

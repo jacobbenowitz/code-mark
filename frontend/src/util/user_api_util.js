@@ -13,7 +13,6 @@ export const getCurrentUser = () => {
 }
 
 export const patchUser = userData => {
-  // debugger
   return axios.patch(`/api/users/${userData.id}`, userData)
 }
 
@@ -21,7 +20,6 @@ export const deleteUser = userId => {
   return axios.delete(`/api/users/${userId}`)
 }
 
-// edit user following util
 export const editUserFollowers = userId => {
   return axios.patch(`/api/users/followers/${userId}`)
 }

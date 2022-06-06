@@ -37,6 +37,16 @@
   margin-right: 0.4rem;
 }
 
+.none-found-message {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  max-width: 100%;
+  box-sizing: border-box;
+  gap: 1rem;
+}
+
 .user-header-stats {
   display: flex;
   width: 100%;
@@ -59,7 +69,23 @@
   align-content: center;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 900px) {
+  .user-header-stats {
+    display: flex;
+    width: 100%;
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+    align-items: flex-start;
+    position: relative;
+  }
+}
+
+
+
+@media only screen and (max-width: 680px) {
   .user-header-stats {
     display: flex;
     width: 100%;

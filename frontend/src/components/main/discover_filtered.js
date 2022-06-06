@@ -20,6 +20,7 @@ export default class DiscoverFiltered extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0)
+    this.setState({ mobile: this.isMobile() })
   }
 
   componentWillMount() {
@@ -36,13 +37,22 @@ export default class DiscoverFiltered extends React.Component {
     }
   }
 
+  componentDidUpdate() {
+    const mobileStatus = this.isMobile();
+
+    if (this.state.mobile !== mobileStatus) {
+      this.setState({ mobile: mobileStatus })
+    }
+  }
+
   isMobile(){
     return window.innerWidth < 680;
   }
 
   render() {
+    const { mobile, filter, notes } = this.state;
     return (
-      <div className={this.isMobile() ? 'main-mobile' : 'main-sidebar'}>
+      <div className={mobile ? 'main-mobile' : 'main-sidebar'}>
         <div className='nav-sidecar'>
           <SideCarMenu tagType={'discover'} tags={this.props.tags} />
         </div>
@@ -51,17 +61,22 @@ export default class DiscoverFiltered extends React.Component {
           <div className='notes-section'>
             <SectionTitle
               type={'filtered'}
-              noteCount={this.state.notes.length}
-              filter={this.state.filter}
+              noteCount={notes.length}
+              filter={filter}
               title={'Discover'}
+              status={this.props.status}
             />
             <div className='note-list-container'>
-              {this.state.notes.length === 0 ? (
-                <span>No notes found</span>
-              ) :
-                this.isMobile() ?
-                <MobileNotes notes={this.state.notes} />
-                : <AllNotes notes={this.state.notes} />
+              {
+                mobile ?
+                  <MobileNotes
+                    notes={notes}
+                    status={this.props.status}
+                  />
+                  : <AllNotes
+                    notes={notes}
+                    status={this.props.status}
+                  />
               }
             </div>
           </div>

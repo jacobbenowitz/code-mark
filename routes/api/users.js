@@ -139,13 +139,14 @@ router.get('/current', passport.authenticate('jwt', { session: false }), (req, r
   return res.json(payload);
 })
 
+
 router.get('/:userId', (req, res) => {
-  User.findById(req.params.userId)
-    .then(user => res.json(user))
-    .catch(err =>
-      res.status(404).json({ nouserfound: "No User Found With That ID" })
-    );
-});
+    User.findById(req.params.userId)
+      .then(user => res.json(user))
+      .catch(err =>
+        res.status(404).json({ nouserfound: "No User Found With That ID" })
+    )
+})
 
 // only backend route for updating a user's followers
 router.patch('/followers/:userId', passport.authenticate('jwt', { session: false }), (req, res) => {
@@ -190,7 +191,6 @@ router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,
                   if (user && user.email !== req.user.email) {
                     return res.status(400).json({ email: "A user has already registered with this email address" })
                   } else {
-                    // debugger;
                     let differentColor = req.body.color !== mainuser.color;
                     let differentUsername = req.body.username !== mainuser.username;
                     mainuser.username = req.body.username || mainuser.username;
@@ -218,7 +218,6 @@ router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,
                             email: user.email,
                             color: user.color
                           };
-                          // debugger;
                           res.json([payload,['success', 'User Account Successfully Updated!']])
                           // res.json(user)
                           if(differentColor || differentUsername){
@@ -245,7 +244,7 @@ router.patch('/:userId', passport.authenticate('jwt', { session: false }), (req,
                           }
 
                         })
-                        // .catch(err => console.log(err))
+                        .catch(err => console.log(err))
                     }
                   }
                 })
@@ -270,6 +269,7 @@ router.delete('/:userId', passport.authenticate('jwt', { session: false }), (req
         var noteLikesIds = deleteuser.note_likes;
         var followers = deleteuser.followers;
         var following = deleteuser.following;
+        debugger;
         User.deleteOne({ _id: deleteuser.id })
           .then(() => {
             followers.forEach(followerId => {

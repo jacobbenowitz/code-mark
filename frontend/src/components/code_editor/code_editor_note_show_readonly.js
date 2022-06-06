@@ -29,7 +29,8 @@ const CodeEditorNoteShow = props => {
       width='100%'
       theme='dark'
       extensions={[
-        extensions[language] ? extensions[language] : javascript({ jsx: true }),
+        // extensions[language] ? extensions[language] : javascript({ jsx: true }),
+        extensions[props.language] ? extensions[props.language] : javascript({ jsx: true }),
         EditorView.lineWrapping, fixedHeightEditor
       ]}
     />

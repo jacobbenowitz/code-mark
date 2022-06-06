@@ -6,13 +6,6 @@ class RecentNotes extends React.Component {
     super(props);
   }
 
-  // componentWillReceiveProps(nextState) {
-  //   debugger
-  //   this.setState({
-  //     note: nextState.newNote
-  //   })
-  // }
-
   render() {
     return this.props.note ? (
       <div className='note-list-container'>
@@ -26,6 +19,7 @@ class RecentNotes extends React.Component {
           textDetails={this.props.note?.textdetails}
           codeBody={this.props.note?.codebody}
           createdAt={this.propsnote?.createdAt}
+          language={note.language}
         />
       </div>
     ) : (

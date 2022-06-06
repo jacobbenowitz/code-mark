@@ -55,7 +55,6 @@ class CommentItem extends React.Component {
       this.setState({ editActive: false })
     } else {
       this.setState({ editActive: true })
-
     }
   }
 
@@ -102,7 +101,6 @@ class CommentItem extends React.Component {
 
 
   render() {
-    // debugger;
     let deleteCommentModal = (
         <div id='comment-delete-modal-container'
           className={this.state.deleteCommentModal ? 'modal-on' : 'modal-off'} >

@@ -1,17 +1,9 @@
 import React from 'react';
 import AllNotes from './all_notes';
 import SideCarMenu from './side_car_menu';
-import {
-  filterOnlyPublicNotes,
-  selectNoteTags,
-  filterUsersById,
-  selectFollowingUsersNotes,
-  orderUserNotes
-} from '../../util/selectors';
 import MobileNotes from './mobile_notes';
 import SectionTitle from '../UI/section_title';
-
-
+import MobileTags from './mobile/mobile_tags';
 
 export default class Following extends React.Component {
   constructor(props) {
@@ -19,12 +11,16 @@ export default class Following extends React.Component {
     this.state = {
       followingNotes: [],
       followingTags: [],
+      followingUsers: [],
+      noteCount: 0,
+      mobile: false,
+      status: 'IDLE'
     }
   }
 
   componentWillMount() {
-    this.props.fetchNotes();
     this.props.fetchCurrentUser();
+    this.props.fetchNotes();
     this.props.fetchUsers();
   }
 
@@ -33,24 +29,23 @@ export default class Following extends React.Component {
   }
 
   componentDidUpdate() {
-    const { allNotes, allUsers, currentUser } = this.props;
-
-    if (Object.values(allNotes).length && Object.values(allUsers).length && !this.state.followingNotes.length) {
-      const followingUserIds = currentUser.following;
-      const followingUsers = filterUsersById(allUsers, followingUserIds)
-      const followingNotes =
-      selectFollowingUsersNotes(followingUsers, allNotes)
-      const publicNotes = filterOnlyPublicNotes(followingNotes)
-      const orderedNotes = orderUserNotes(publicNotes)
-      const followingTags = selectNoteTags(publicNotes)
-      if (followingNotes.length !== this.state.followingNotes.length ||
-        followingTags.length !== this.state.followingTags.length) {
-        this.setState({
-          followingNotes: orderedNotes,
-          followingTags: followingTags,
-        })
-      }
+    const { followingNotes, followingTags, followingUsers,
+      currentUser, status } = this.props;
+    const mobileStatus = this.isMobile();
+    if (status !== this.state.status) {
+      this.setState({
+        followingNotes: followingNotes ? followingNotes : [],
+        followingTags: followingTags ? followingTags : [],
+        followingUsers: followingUsers ? followingUsers : [],
+        noteCount: followingNotes?.length || 0,
+        status: status
+      })
     }
+
+    if (this.state.mobile !== mobileStatus) {
+      this.setState({ mobile: mobileStatus })
+    }
+
   }
 
   isMobile() {
@@ -58,26 +53,53 @@ export default class Following extends React.Component {
   }
 
   render() {
+    const { mobile, status, noteCount, followingTags, followingNotes } = this.state;
+    let sideCarMenu, mobileTags;
+
+    if (!mobile) {
+      sideCarMenu = (
+        <SideCarMenu
+          tagType={'following'}
+          tags={followingTags ? followingTags : []}
+        />
+      )
+    }
+
+    if (mobile && followingTags) {
+      mobileTags = (
+        <MobileTags
+          tags={followingTags}
+          type={'following'}
+        />
+      )
+    }
+
     return (
-      <div className={this.isMobile() ? 'main-mobile' : 'main-sidebar'}>
-        <SideCarMenu tagType={'following'} tags={this.state.followingTags} />
+      <div className={mobile ? 'main-mobile' : 'main-sidebar'}>
+        { sideCarMenu }
 
         <div className='home-main'>
           <div className='notes-section'>
             <SectionTitle
               type={'default'}
               title={'Following'}
-              noteCount={this.state.followingNotes.length}
+              noteCount={noteCount}
+              status={status}
             />
+            { mobileTags }
             <div className='note-list-container'>
-              {this.state.followingNotes.length === 0 ? (
-                <span>No notes found</span>
-              ) :
-                this.isMobile() ?
-                  <MobileNotes notes={this.state.followingNotes} />
-                  : <AllNotes notes={this.state.followingNotes} />
+              {
+                mobile ?
+                  <MobileNotes
+                    notes={followingNotes}
+                    status={status}
+                  />
+                  :
+                  <AllNotes
+                    notes={followingNotes}
+                    status={status}
+                  />
               }
-
             </div>
           </div>
         </div>

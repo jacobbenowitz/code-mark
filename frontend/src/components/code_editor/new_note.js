@@ -27,6 +27,7 @@ class NewNote extends React.Component {
       allKeywords: [],
       newResources: [],
       lang: javascript({ jsx: true}),
+      language_name: 'JavaScript',
       bodyHeight: 0
     }
     this.bindHandlers();
@@ -87,9 +88,9 @@ class NewNote extends React.Component {
   }
 
   handleChange(e) {
-
     const languages = [javascript({ jsx: true}), html(), cpp(), css()];
-    this.setState({ lang: languages[parseInt(e.target.value)] });
+    const language_names = ['JavaScript','HTML','C++','CSS'];
+    this.setState({ lang: languages[parseInt(e.target.value)], language_name: language_names[parseInt(e.target.value)] });
   }
 
   toggleResourcesModal(e) {
@@ -97,7 +98,6 @@ class NewNote extends React.Component {
     const resourcesNoteModal =
       document.getElementById('resources-note-container');
     if (resourcesNoteModal.className === "modal-off") {
-      // debugger
       const keywords = getKeywords(this.state.codebody);
       this.setState({
         allKeywords: keywords
@@ -141,16 +141,17 @@ class NewNote extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const { title, codebody, textdetails, tags, keywordsSelected } = this.state;
+    const { title, codebody, textdetails, tags, keywordsSelected, language_name } = this.state;
 
     const note = {
       title: (title.length ? title : "Untitled note"),
       codebody: codebody,
       textdetails: textdetails,
       tags: tags,
-      keywords: keywordsSelected
+      keywords: keywordsSelected,
+      language: language_name
     }
-    // debugger
+    
     this.props.composeNote(note)
       .then(() => (
         this.setState({
@@ -172,12 +173,12 @@ class NewNote extends React.Component {
   // remove if possible
   updateKeywords(e) {
     e.preventDefault();
-    // debugger
+    
     // e.target.checked ? e.target.checked = false : e.target.checked = true;
     const keyword = e.target.value || e.target.innerText;
     let spaceRemoved = keyword.replace(/\s/g, '');
     let result;
-    // debugger
+    
     this.state.keywordsSelected.includes(spaceRemoved) ? (
       result = this.state.keywordsSelected.filter(word => word !== spaceRemoved)
     ) : (
@@ -194,7 +195,6 @@ class NewNote extends React.Component {
   };
 
   limitKeywords() {
-    // debugger;
     const keyword_checks = Object.values(document.getElementsByClassName('checkbox-option')).filter(ele => !ele.classList.contains('option-selected'));
     keyword_checks.forEach(checkbox => {
       checkbox.classList.add('disabled');
@@ -319,6 +319,9 @@ class NewNote extends React.Component {
               </form>
               <div>
                 <button id='keyword-submit' onClick={this.handleSubmit}>Submit</button>
+              </div>
+              <div>
+                <button id='keyword-cancel' onClick={this.closeSuccessModal}>Cancel</button>
               </div>
             </div>
             <div id="resources-step-2" className='modal-off'>

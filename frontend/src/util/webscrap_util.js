@@ -9,7 +9,6 @@ export function getLanguage(codebody) {
 }
 
 export function getKeywords(codebody) {
-    // debugger
     const comment_markers = { 'JavaScript': /(\/\/.*\n)/g, 'HTML': /(<!--.*-->)/g, 'CSS': /(\/\*.*\*\/)/g, 'C': /(\/\/.*\n)/g, 'Ruby': /(#.*\n)/g };
     const comment_replace = { 'JavaScript': '\n', 'HTML': '', 'CSS': '', 'C': '\n', 'Ruby': '\n' };
     const languages = ['Ruby', 'C', 'JavaScript', 'CSS', 'HTML'];
@@ -24,6 +23,7 @@ export function getKeywords(codebody) {
     let words = lines.join(" ").replaceAll("\"", "'");
     words = words.split(" ");
     words = [...new Set(words)];
+    words = words.filter(word => word.replace(/[^A-Za-z]/g,'').length > 0);
     // words = words.filter(word => !ignore.includes(word));
     return words.filter(word => word.length > 1);
     // return words.map(word => code_test.language + ' ' + word);

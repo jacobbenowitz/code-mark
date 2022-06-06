@@ -11,19 +11,17 @@ const _nullErrors = [];
 
 const SessionErrorsReducer = (prevState = _nullErrors, action) => {
   Object.freeze(prevState);
-  // debugger;
+
   switch (action.type) {
     case RECEIVE_SESSION_ERRORS:
       return action.errors;
     case RECEIVE_DELETED_USER:
       return action.userId.data[1];
     case RECEIVE_USER_SIGN_IN:
-      // debugger;
       return action.message;
     case RECEIVE_USER_LOGOUT:
       return action.message;
     case RECEIVE_USER_NOTES:
-      // debugger
       return prevState;
     case RECEIVE_CURRENT_USER:
       return prevState;

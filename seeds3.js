@@ -15,7 +15,7 @@ const seedDB = async () => {
       // await User.deleteMany();
       // await Note.updateMany({"likes":{$exists:false}},{$set:{"likes":[]}});
     //   await Note.updateMany({"public":{$exists:false}},{$set:{"public":true}});
-      await User.updateMany({"color":{$exists:false}},{$set:{"color":"rgb(14, 70, 73)"}});
+      await Note.updateMany({"language":{$exists:false}},{$set:{"language":"JavaScript"}});
       // await Comment.updateMany({"likes":{$exists:false}},{$set:{"likes":[]}});
       // await User.insertMany(seedUsers);
       // await seed(seedUsers,seedNotes);

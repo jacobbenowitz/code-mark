@@ -13,11 +13,10 @@ class GlobalModal extends React.Component {
 
   toggleSuccessModal() {
     const successModal = document.getElementById('success-modal');
-    successModal.className = "success-in modal-on"
-    setTimeout(() => successModal.className = "success-out", 4000)
+    successModal.className = "global-modal-in-out"
+    // setTimeout(() => successModal.className = "success-out", 4000)
     setTimeout(() => {
       successModal.className = "modal-off";
-      // this.setState({})
     }, 5000)
   }
 
@@ -54,35 +53,41 @@ class GlobalModal extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     let {noteErrors,sessionErrors,userErrors,commentErrors} = nextProps;
-    // debugger
+    debugger;
     var newmessages = [];
     if (noteErrors.length === undefined){
-      Object.values(noteErrors).map(error => {
+      var content = (noteErrors.response === undefined) ? noteErrors : noteErrors.response.data;
+      Object.values(content).map(error => {
         newmessages.push(['error',error]);
       })
     }else if(sessionErrors.length === undefined){
-      Object.values(sessionErrors).map(error => {
+      var content = (sessionErrors.response === undefined) ? sessionErrors : sessionErrors.response.data;
+      Object.values(content).map(error => {
         newmessages.push(['error',error]);
       })
     }else if(userErrors.length === undefined){
-      Object.values(userErrors).map(error => {
+      var content = (userErrors.response === undefined) ? userErrors : userErrors.response.data;
+      Object.values(content).map(error => {
         newmessages.push(['error',error]);
       })
     }
     else if(commentErrors.length === undefined){
-      Object.values(commentErrors).map(error => {
+      var content = (commentErrors.response === undefined) ? commentErrors : commentErrors.response.data;
+      debugger;
+      Object.values(content).map(error => {
         newmessages.push(['error',error]);
       })
     }else{
       newmessages = [noteErrors,sessionErrors,userErrors,commentErrors].filter(ele => ele.length > 0);
     }
-    // debugger;
-    this.setState({
-      messages: newmessages,
-      modalOn: true
-    },() => {
-      this.state.messages.length > 0 ? this.toggleSuccessModal(): '';
-    })
+    if (newmessages.length !== 0) {
+      this.setState({
+        messages: newmessages,
+        modalOn: true
+      },() => {
+        this.state.messages.length > 0 ? this.toggleSuccessModal(): '';
+      })
+    }
   }
   // if(messages.length === 0){
   //   messages = ['Success!'];
@@ -90,17 +95,15 @@ class GlobalModal extends React.Component {
   // }else{
   //   icon = getIcon('error');
   // }
-  // debugger;
+
   render(){
-    // this.toggleSuccessModal();
     return (
       <div className='global-modal-wrapper'>
         <div id='success-modal' className='modal-off'>
-        {/* {getIcon(error.key)} */}
-        {/* <span>{error.value}</span> */}
-        {/* {icon} */}
+        
         {
-          this.state.messages.map((message,idx) => {
+          this.state.messages?.map((message,idx) => {
+            // console.log(`message ${idx}: ${message}`)
             return ( 
               <div className='modal-message'
                 key={`error-message-${idx}`}>

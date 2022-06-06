@@ -15,7 +15,7 @@ async function getResources(keywords, codebody) {
                 return resource;
             })
             .catch(err => {
-                return null
+                return null     //maybe just return google search url if api requests run out
             }));
     })
     let found = await Promise.all(search);
@@ -23,7 +23,6 @@ async function getResources(keywords, codebody) {
     let savedResources = found.filter(ele => ele !== null).map(ele => ele._doc);
     let foundWords = savedResources.map(ele => ele.keyword);
     const notfound = languageKeywords.filter(word => !foundWords.includes(word))
-    // debugger;
     let response = await Promise.all(getPromises(notfound));
     let foundResources = response.map(ele => ele._doc);
     // return response.filter(ele => ele !== undefined);
@@ -31,13 +30,12 @@ async function getResources(keywords, codebody) {
 }
 
 function getLanguage(codebody) {
-    const languages = ['Ruby', 'C', 'JavaScript', 'CSS', 'HTML'];
+    const languages = ['JavaScript', 'CSS', 'HTML', 'C++'];
     const code_test = hljs.highlightAuto(codebody, languages);
     return code_test.language;
 }
 
 function getPromises(keywords) {
-    // debugger;
     const resources = [];
     keywords.forEach(keyword => {
         resources.push(getGoogleAdvice(keyword)
@@ -50,15 +48,12 @@ function getPromises(keywords) {
                 return newResource.save()
                     .then(() => { return newResource; })
                     .catch(err => {
-                        // debugger
                     });
-                // return newResource;
             })
             .catch(err => {
-                // debugger
+                console.log(err)
             }));
     });
-    // debugger;
     return resources;
 }
 
@@ -82,7 +77,7 @@ const getGoogleAdvice = (search) => {
             }
         })
         .catch(err => {
-            // debugger;
+            console.log(err)
         })
 }
 

@@ -32,22 +32,23 @@ export const logoutUser = message => ({
 export const fetchCurrentUser = () => dispatch => {
   return getCurrentUser()
     .then(user => dispatch(receiveCurrentUser(user.data)))
+    // .catch(err => console.log(err))
+    .catch(err => dispatch(receiveErrors(err)))
 }
 
 export const login = user => dispatch => {
   return APIUtil.login(user).then(res => {
     const { token } = res.data;
-    debugger
     localStorage.setItem('jwtToken', token);
     APIUtil.setAuthToken(token);
     const decoded = jwt_decode(token);
     dispatch(receiveCurrentUser(decoded));
   })
     .then(() => dispatch(receiveUserSignIn(['success', `Hello again, ${user.usernameOrEmail}`])))
-    .catch(err => {
-      // debugger
-      dispatch(receiveErrors(err.response.data));
-    })
+    // .catch(err => {
+    //   dispatch(receiveErrors(err.response.data));
+    // })
+    .catch(err => dispatch(receiveErrors(err)))
 };
 
 export const logout = () => dispatch => {
@@ -59,7 +60,6 @@ export const logout = () => dispatch => {
 };
 
 export const signup = user => dispatch => {
-  debugger
   return APIUtil.signup(user)
     .then(() => {
       APIUtil.login({
@@ -74,6 +74,7 @@ export const signup = user => dispatch => {
       })
     })
     .then(() => dispatch(receiveUserSignIn(['success', `Welcome to Codemark ${user.username}`])))
-    .catch(err => dispatch(receiveErrors(err.response.data)))
+    // .catch(err => dispatch(receiveErrors(err.response.data)))
+    .catch(err => dispatch(receiveErrors(err)))
 };
 

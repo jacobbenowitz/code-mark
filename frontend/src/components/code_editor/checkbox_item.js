@@ -9,6 +9,12 @@ class CheckBoxItem extends React.Component {
     this.handleCheck = this.handleCheck.bind(this);
   }
 
+  componentDidMount(){
+    if(this.props.selected){
+      this.setState({checked:true});
+    }
+  }
+
   handleCheck(e){
     e.stopPropagation();
     this.setState({checked: !this.state.checked});
@@ -16,7 +22,6 @@ class CheckBoxItem extends React.Component {
   }
   render() {
     let { keyword, updateKeywords, index } = this.props;
-    // debugger;
     return (
       <div onClick={this.handleCheck} className={this.state.checked ? 'checkbox-option option-selected' : 'checkbox-option'} key={index}>
         <input type='checkbox' 

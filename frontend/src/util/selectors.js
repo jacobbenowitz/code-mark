@@ -9,62 +9,75 @@ function orderByDate(a, b) {
 }
 
 export const orderUserNotes = (notes) => {
-  return notes.sort(orderByDate);
+  if (notes) {
+    return notes.sort(orderByDate);
+  }
 }
 
 export const orderNoteComments = (comments) => {
-  return comments?.sort(orderByDate);
+  if (comments) {
+    return comments?.sort(orderByDate);
+  }
 }
 
 export const selectNoteComments = (comments, noteId) => {
-
-  return comments?.filter(comment => {
-    return comment.note === noteId
-  })
+  if (comments) {
+    return comments?.filter(comment => {
+      return comment.note === noteId
+    })
+  }
 }
 
 export const selectNoteTags = notes => {
-  const tags = notes.map(note => note.tags);
-  const uniqueTags = [...new Set(tags.flat())]
-  return uniqueTags;
+  if (notes) {
+    const tags = notes.map(note => note.tags);
+    const uniqueTags = [...new Set(tags.flat())]
+    return uniqueTags;
+  }
 }
 
 export const filterNotesByTag = (tag, notes) => {
-  return notes.filter(note => note.tags.includes(tag))
+  if (notes) {
+    return notes.filter(note => note.tags.includes(tag))
+  }
 }
 
 export const filterUsersByComment = (users, comment) => {
-  return Object.values(users)?.filter(user => user._id === comment.user)[0]
+  if (users && comment) {
+    return Object.values(users).filter(user =>
+      user._id === comment.user)[0]
+  }
 }
 
 export const filterOnlyPublicNotes = notes => {
-  debugger
-  const filtered = notes.filter(note => {
-    return note.public === true
-  })
-  debugger
-  return filtered;
+  if (notes && Object.values(notes).length) {
+    return notes.filter(note => note.public === true)
+  }
 }
 
 export const selectLikedNotes = (notes, likedIds) => {
-  return likedIds.map(id => notes[id])
+  if (Object.values(notes).length) {
+    return likedIds.map(id => notes[id])
+  }
 }
 
 export const selectCommentsCount = (userNotes) => {
-
   const allComments = userNotes.map(note => note.comments)
   return allComments.flat().length;
 }
 
 export const filterUsersById = (allUsers, userIds) => {
-  debugger
-  return userIds.map(userId => allUsers[userId])
+  if (Object.values(allUsers).length) {
+    return userIds.map(userId => allUsers[userId])
+  }
 }
 
 export const selectFollowingUsersNotes = (users, allNotes) => {
-  const usersNoteIds = users.map(user => user?.notes).flat()
-  const followingNotes = selectNotesById(usersNoteIds, allNotes)
-  return followingNotes;
+  if (allNotes && users) {
+    const usersNoteIds = users.map(user => user?.notes).flat()
+    const followingNotes = selectNotesById(usersNoteIds, allNotes)
+    return followingNotes;
+  }
 }
 
 export const selectNotesById = (noteIds, allNotes) => {

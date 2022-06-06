@@ -28,12 +28,9 @@ const usersReducer = (prevState = initialState, action) => {
             nextState.all = allUsers;
             return nextState;
         case RECEIVE_USER_NEW_FOLLOWING:
-            // debugger;
-            // nextState.all[action.user.data._id] = action.user.data;
             nextState.user = action.users.data.followedUser;
             return nextState;
         case RECEIVE_UPDATED_USER:
-            // debugger;
             nextState.user = action.user.data[0];
             return nextState;
         default:

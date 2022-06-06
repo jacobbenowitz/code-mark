@@ -22,7 +22,6 @@ import { merge } from 'lodash';
 const commentsReducer = (prevState = initialState, action) => {
     Object.freeze(prevState);
     let nextState = merge({}, prevState);
-    // debugger;
     switch (action.type) {
         case RECEIVE_NEW_COMMENT:
             let newComments = [...nextState.note, action.comment];
@@ -54,8 +53,9 @@ const commentsReducer = (prevState = initialState, action) => {
             nextState.note = action.comments;
             return nextState;
         case RECEIVE_COMMENT_LIKE:
+            // debugger
             let nextComments = nextState.note.map(comment => {
-                if (comment._id = action.comment.data._id) {
+                if (comment._id === action.comment.data._id) {
                     return action.comment.data
                 } else return comment
             })
@@ -63,7 +63,7 @@ const commentsReducer = (prevState = initialState, action) => {
             return nextState;
         case RECEIVE_COMMENT_UNLIKE:
             let unlikedComments = nextState.note.map(comment => {
-                if (comment._id = action.comment.data._id) {
+                if (comment._id === action.comment.data._id) {
                     return action.comment.data
                 } else return comment
             })

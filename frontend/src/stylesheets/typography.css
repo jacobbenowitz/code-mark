@@ -42,7 +42,11 @@ h5 {
 a {
   font-size: 16px;
 }
-
+.link {
+  color: #10b3bf;
+  text-decoration: underline;
+  font-weight: 700;
+}
 a:hover {
   color: #37F3FF;
 }
@@ -55,3 +59,8 @@ strong {
   font-weight: 800;
 }
 
+@media only screen and (max-width: 680px) {
+  h1 {
+    font-size: 2.4rem;
+  }
+}

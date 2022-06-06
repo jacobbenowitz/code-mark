@@ -50,7 +50,6 @@ router.post('/',
         }
         getResources(req.body.keywords, req.body.codebody)
             .then(resources => {
-                // debugger;
                 const newNote = new Note({
                     codebody: req.body.codebody,
                     user: { username: req.user.username, userId: req.user.id },
@@ -58,7 +57,8 @@ router.post('/',
                     textdetails: req.body.textdetails,
                     resources: resources,
                     tags: req.body.tags,
-                    public: req.body.public
+                    public: req.body.public,
+                    language: req.body.language
                 });
 
                 newNote.save().then(note => {
@@ -67,8 +67,40 @@ router.post('/',
                         .then(() => res.json([note,['success', 'Note Successfully Created!']]))
                 });
             })
+            .catch(err => console.log(err))
     }
 );
+
+// route only for updating a note's tags 
+router.patch('/:id/tags', passport.authenticate('jwt',
+    { session: false }), (req, res) => {
+        Note.findById(req.params.id)
+            .then(note => {
+                note.tags = req.body.tags;
+                note.save()
+                    .then(note => res.json([note, ['success', 'Note Successfully Updated!']]))
+            })
+            .catch(err => res.status(404).json({ nonotefound: "No Note Found With That ID" }))
+});
+
+// route only for updating a note's public status
+router.patch('/:id/public', passport.authenticate('jwt',
+    { session: false }), (req, res) => {
+        Note.findById(req.params.id)
+            .then(note => {
+                note.public = req.body.public;
+                let noteMessage;
+                if (req.body.public === true) {
+                    noteMessage = 'This note is now public'
+                } else {
+                    noteMessage = 'This note is now private'
+                }
+                note.save()
+                    .then(note => res.json([note, ['success', noteMessage]]))
+            })
+            .catch(err => res.status(404).json({ nonotefound: "No Note Found With That ID" }))
+});
+
 
 // only backend route for updating a note's likes
 router.patch('/note_likes/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
@@ -99,20 +131,25 @@ router.patch('/:id/edit',
                 if (note.user.userId.toString() !== req.user.id) {
                     res.status(404).json({ editnotallowed: 'Not Authorized To Edit Note' })
                 } else {
-                    note.codebody = req.body.codebody || note.codebody;
-                    note.title = req.body.title || note.title;
-                    note.textdetails = req.body.textdetails || note.textdetails;
-                    // note.resources = req.body.resources;
-                    note.likes = req.body.likes || note.likes;
-                    note.tags = req.body.tags || note.tags;
-                    if (req.body.public != null &&
-                        req.body.public !== undefined) {
-                        note.public = req.body.public
-                    }
-                    note.save()
-                        .then(note => {
-                            res.json([note,['success', 'Note Successfully Updated!']])
-                            // res.json({success: 'Note Successfully Updated!'})
+                    getResources(req.body.keywords, req.body.codebody)
+                        .then(resources => {
+                            note.codebody = req.body.codebody || note.codebody;
+                            note.title = req.body.title || note.title;
+                            note.textdetails = req.body.textdetails || note.textdetails;
+                            // note.resources = req.body.resources;
+                            note.likes = req.body.likes || note.likes;
+                            note.tags = req.body.tags || note.tags;
+                            note.language = req.body.language || note.language;
+                            note.resources = resources || note.resources;
+                            if (req.body.public != null &&
+                                req.body.public !== undefined) {
+                                note.public = req.body.public
+                            }
+                            note.save()
+                                .then(note => {
+                                    res.json([note,['success', 'Note Successfully Updated!']])
+                                    // res.json({success: 'Note Successfully Updated!'})
+                                })
                         })
                 }
             })

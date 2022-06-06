@@ -72,7 +72,6 @@ export default class DummyHeroNote extends React.Component {
         const resourcesNoteModal =
             document.getElementById('resources-note-container');
         if (resourcesNoteModal.className === "modal-off") {
-            // debugger
             const keywords = getKeywords(this.state.codebody);
             this.setState({
                 allKeywords: keywords

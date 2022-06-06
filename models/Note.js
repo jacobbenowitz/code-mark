@@ -24,6 +24,9 @@ const NoteSchema = new Schema({
   public: {
     type: Boolean,
     default: true
+  },
+  language: {
+    type: String
   }
 },
 {timestamps: true}

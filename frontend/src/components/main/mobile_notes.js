@@ -16,6 +16,7 @@ const MobileNotes = (props) => (
               comments={note.comments}
               updatedAt={note.updatedAt}
               createdAt={note.createdAt}
+              language={note.language}
               />
           )}
   </div>

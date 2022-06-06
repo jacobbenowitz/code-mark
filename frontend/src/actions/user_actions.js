@@ -49,30 +49,36 @@ export const receiveUserErrors = error => ({
 export const fetchUsers = () => dispatch => (
     getUsers()
         .then(users => dispatch(receiveUsers(users)))
+        // .catch(err => console.log(err))
         // .catch(err => dispatch(receiveUserErrors(err.response.data)))
+        .catch(err => dispatch(receiveUserErrors(err)))
 );
 
 export const fetchUser = userId => dispatch => {
     return getUser(userId)
         .then(user => dispatch(receiveUser(user)))
+        // .catch(err => console.log(err))
         // .catch(err => dispatch(receiveUserErrors(err.response.data)))
+        .catch(err => dispatch(receiveUserErrors(err)))
 };
 
 export const updateUser = userData => dispatch => {
     return patchUser(userData)
         .then(user => dispatch(receiveUpdatedUser(user)))
-        .catch(err => dispatch(receiveUserErrors(err.response.data)))
+        // .catch(err => dispatch(receiveUserErrors(err.response.data)))
+        .catch(err => dispatch(receiveUserErrors(err)))
 }
 
 export const removeUser = userId => dispatch => {
     return deleteUser(userId)
         .then((userId) => dispatch(receiveDeletedUser(userId)))
-        .catch(err => dispatch(receiveUserErrors(err.response.data)))
+        // .catch(err => dispatch(receiveUserErrors(err.response.data)))
+        .catch(err => dispatch(receiveUserErrors(err)))
 }
 
 export const changeUserFollowers = (userId) => dispatch => {
-    // debugger;
     return editUserFollowers(userId)
         .then(users => dispatch(receiveUserNewFollowing(users)))
-        .catch(err => dispatch(receiveUserErrors(err.response.data)))
+        // .catch(err => dispatch(receiveUserErrors(err.response.data)))
+        .catch(err => dispatch(receiveUserErrors(err)))
 }
