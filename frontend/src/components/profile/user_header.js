@@ -17,7 +17,7 @@ export default class UserHeader extends React.Component {
 componentDidUpdate() {
   const body = document.getElementsByTagName('body');
   const bodyHeight = body[0].clientHeight;
-  // if (Object.values(this.props.allUsers).length && !this.state.followers.length && this.props.currentUser ) {
+
   if (bodyHeight !== this.state.bodyHeight) {
     // const followers = filterUsersById(this.props.allUsers, this.props.followers)
     this.setState({ 

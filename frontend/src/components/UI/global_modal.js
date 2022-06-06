@@ -55,26 +55,44 @@ class GlobalModal extends React.Component {
     let {noteErrors,sessionErrors,userErrors,commentErrors} = nextProps;
     var newmessages = [];
     if (noteErrors.length === undefined){
-      var content = (noteErrors.response === undefined) ? noteErrors : noteErrors.response.statusText;
-      // Object.values(content).map(error => {
-        newmessages.push(['error',content]);
-      // })
+      var content = (noteErrors.response === undefined) ? noteErrors : noteErrors.response.data;
+      if(typeof content === 'object'){
+        Object.values(content).map(error => {
+          newmessages.push(['error',error]);
+        })
+      }else if(typeof content === 'string'){
+        newmessages.push(['error',noteErrors.response.statusText]);
+      }
     }else if(sessionErrors.length === undefined){
-      var content = (sessionErrors.response === undefined) ? sessionErrors : sessionErrors.response.statusText;
-      // Object.values(content).map(error => {
-        newmessages.push(['error',content]);
-      // })
+      var content = (sessionErrors.response === undefined) ? sessionErrors : sessionErrors.response.data;
+      // debugger;
+      if(typeof content === 'object'){
+        Object.values(content).map(error => {
+          newmessages.push(['error',error]);
+        })
+      }else if(typeof content === 'string'){
+        newmessages.push(['error',sessionErrors.response.statusText]);
+      }
     }else if(userErrors.length === undefined){
-      var content = (userErrors.response === undefined) ? userErrors : userErrors.response.statusText;
-      // Object.values(content).map(error => {
-        newmessages.push(['error',content]);
-      // })
+      var content = (userErrors.response === undefined) ? userErrors : userErrors.response.data;
+      if(typeof content === 'object'){
+        Object.values(content).map(error => {
+          newmessages.push(['error',error]);
+        })
+      }else if(typeof content === 'string'){
+        newmessages.push(['error',userErrors.response.statusText]);
+      }
     }
     else if(commentErrors.length === undefined){
-      var content = (commentErrors.response === undefined) ? commentErrors : commentErrors.response.statusText;
-      // Object.values(content).map(error => {
-        newmessages.push(['error',content]);
-      // })
+      var content = (commentErrors.response === undefined) ? commentErrors : commentErrors.response.data;
+      // debugger;
+      if(typeof content === 'object'){
+        Object.values(content).map(error => {
+          newmessages.push(['error',error]);
+        })
+      }else if(typeof content === 'string'){
+        newmessages.push(['error',commentErrors.response.statusText]);
+      }
     }else{
       newmessages = [noteErrors,sessionErrors,userErrors,commentErrors].filter(ele => ele.length > 0);
     }

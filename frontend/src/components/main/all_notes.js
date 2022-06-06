@@ -14,6 +14,7 @@ const AllNotes = (props) => {
             }
         }
     })
+
     if((!props.notes || props.notes?.length === 0) && (props.status === 'DONE' || props.status === 'IDLE')){
         return (
             <div className='desktop-notes'>
