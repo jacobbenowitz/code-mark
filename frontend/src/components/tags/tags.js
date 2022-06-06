@@ -86,14 +86,15 @@ export default class Tags extends React.Component {
   }
 
   toggleTagForm() {
-    const tagForm = document.getElementById('new-tag-form');
-    if (tagForm.className === "tag-form-off") {
-      this.setState({ tagForm: true }, () =>
-        tagForm.className = "tag-form-on")
-    } else {
-      this.setState({ tagForm: false }, () =>
-        tagForm.className = "tag-form-off")
-    }
+    // const tagForm = document.getElementById('new-tag-form');
+    // if (tagForm.className === "tag-form-off") {
+    //   this.setState({ tagForm: true }, () =>
+    //     tagForm.className = "tag-form-on")
+    // } else {
+    //   this.setState({ tagForm: false }, () =>
+    //     tagForm.className = "tag-form-off")
+    // }
+    this.setState({tagForm: !this.state.tagForm})
   }
 
   render() {
@@ -133,10 +134,31 @@ export default class Tags extends React.Component {
         </>
       )
     }
+    if (this.state.tagForm) {
+      tagsBottom = (
+        <div className="tag-form-on" id="new-tag-form">
+            <input type={'text'}
+              className={'tag-form-input'}
+              onChange={this.update('newTag')}
+              placeholder={'New tag...'}
+              value={this.state.newTag}
+            />
+          <button className={this.state.newTag.split(' ').join('').length ?
+            '' : 'save-tag disabled'} id='tag-icon-save'
+            onClick={this.state.newTag.split(' ').join('').length ? this.handleSubmit : undefined}
+          >
+              <i className="fa-solid fa-floppy-disk" />
+            </button>
+
+        </div>
+      )
+
+    }
 
     return (
       <div className='note-tags-list'>
         {tagsTop}
+        {tagsBottom}
       </div>
     )
   }

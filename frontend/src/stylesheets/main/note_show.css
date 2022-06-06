@@ -34,7 +34,6 @@
 @media only screen and (min-width: 680px) {
   .note-show-container {
     grid-column: 3 / span 8;
-    overflow: hidden;
   }
 }
 
@@ -252,6 +251,9 @@
     display: none;
   }
 
+  .note-show-container {
+    overflow-x: hidden;
+  }
 
 }
 
