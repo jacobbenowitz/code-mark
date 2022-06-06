@@ -20,7 +20,7 @@ export default class EditNote extends React.Component {
       'CSS': css(),
       'C++': cpp(),
     }
-    
+
     this.state = {
       title: "",
       codebody: "",

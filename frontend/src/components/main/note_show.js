@@ -206,6 +206,7 @@ export default class NoteShow extends React.Component {
   render() {
     const { currentUser, updateNote, noteId, updateNoteTags, updateComment, removeComment, users, deletedComments, fetchNote, addCommentLike, removeCommentLike, fetchNoteComments  } = this.props;
     
+
     const { note, bodyHeight, isCurrentUser, commentModal,
       isPublic, hideCommentModal, selectedText, status, comments } = this.state;
     
@@ -295,6 +296,7 @@ export default class NoteShow extends React.Component {
             status={status}
             isMobile={this.state.isMobile}
           />
+
 
           <section id={'comments'} className='note-comments'>
             <div className='comments-title'>
