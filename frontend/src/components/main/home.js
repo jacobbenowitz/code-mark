@@ -61,6 +61,7 @@ export default class Home extends React.Component {
           following={this.props.currentUser.following}
         />
       )
+    }
 
     return (
       <div className={mobile ? 'main-mobile' : 'main-sidebar'}>

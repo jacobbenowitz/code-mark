@@ -8,7 +8,7 @@ const mapStateToProps = state => {
     userNotes: state.notes.user,
     tags: state.session.tags,
     currentUser: state.session.user,
-    allUsers: state.users.all
+    allUsers: state.users.all,
     status: state.notes.status
   }
 }

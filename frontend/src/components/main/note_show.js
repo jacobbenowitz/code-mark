@@ -74,6 +74,7 @@ export default class NoteShow extends React.Component {
     const { note, comments, currentUser, history, status } = this.props;
     const body = document.getElementsByTagName('body');
     const bodyHeight = body[0].clientHeight;
+    const bodyWidth = body[0].clientWidth;
     const isMobileBool = this.isMobile();
 
     if (isMobileBool !== this.state.isMobile) {
@@ -95,6 +96,7 @@ export default class NoteShow extends React.Component {
         comments: orderedComments,
         isPublic: note.public,
         bodyHeight: bodyHeight,
+        bodyWidth: bodyWidth,
         isCurrentUser: currentUser.id === note.user.userId,
         status: status
       })
@@ -166,8 +168,12 @@ export default class NoteShow extends React.Component {
     const exportModal = document.getElementById('note-export-modal');
     const body = document.getElementsByTagName('body');
     const bodyHeight = body[0].clientHeight;
+    const bodyWidth = body[0].clientWidth;
 
-    this.setState({ bodyHeight: bodyHeight })
+    this.setState({
+      bodyHeight: bodyHeight,
+      bodyWidth: bodyWidth
+    })
 
     if (exportModal.className === 'modal-on') {
       exportModal.className = 'modal-out'
@@ -207,7 +213,7 @@ export default class NoteShow extends React.Component {
     const { currentUser, updateNote, noteId, updateNoteTags, updateComment, removeComment, users, deletedComments, fetchNote, addCommentLike, removeCommentLike, fetchNoteComments  } = this.props;
     
 
-    const { note, bodyHeight, isCurrentUser, commentModal,
+    const { note, bodyHeight, bodyWidth, isCurrentUser, commentModal,
       isPublic, hideCommentModal, selectedText, status, comments } = this.state;
     
     let modals;
@@ -231,6 +237,7 @@ export default class NoteShow extends React.Component {
           
           <EditNoteModal
             bodyHeight={bodyHeight}
+            bodyWidth={bodyWidth}
             getLanguage={getLanguage}
             note={note}
             updateNote={updateNote}

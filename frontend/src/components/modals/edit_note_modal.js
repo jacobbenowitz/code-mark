@@ -1,9 +1,9 @@
 import React from "react";
 import EditNote from '../code_editor/edit_note';
 
-const EditNoteModal = ({ bodyHeight, getLanguage, note, updateNote, currentUser, noteId, toggleCommentModalVisibility }) => (
+const EditNoteModal = ({ bodyHeight, bodyWidth, getLanguage, note, updateNote, currentUser, noteId, toggleCommentModalVisibility }) => (
   <div id='edit-note-container' className="modal-off"
-    style={{ height: bodyHeight }}>
+    style={{ height: bodyHeight, width: bodyWidth }}>
     <div className='modal-wrapper'>
       <EditNote
         getLanguage={getLanguage}

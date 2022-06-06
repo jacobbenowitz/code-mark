@@ -311,7 +311,7 @@ export default class EditNote extends React.Component {
           {/* </div>
         </div> */}
         <div className='edit-note-container' id='note-edit-wrapper'>
-          <div className='new-note-form'>
+          <div className='edit-note-form'>
             <div id="note-title-input" className='note-input'>
               <input type={'text'}
                 onClick={this.state.title === "" ? this.placeholderTitle : undefined}
@@ -336,6 +336,7 @@ export default class EditNote extends React.Component {
                 value={this.state.codebody}
                 onChange={this.updateCode}
                 height="200px"
+                width='100%'
                 theme='dark'
                 extensions={[this.state.lang,
                   EditorView.lineWrapping]}

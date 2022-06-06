@@ -116,7 +116,9 @@
   justify-content: flex-end;
   align-items: center;
   flex-direction: row;
+  width: 100%;
 }
+
 .select-label {
   font-size: 14px;
   font-weight: 600;
@@ -239,8 +241,8 @@ button#tag-icon-save.disabled:hover {
 }
 
 .tag-list {
-    display: flex;
-    gap: 5px;
+  display: flex;
+  gap: 5px;
 }
 
 .view-note {
@@ -270,6 +272,12 @@ button#tag-icon-save.disabled:hover {
   flex-grow: 1;
   flex-flow: column wrap;
   position: relative;
+}
+
+.edit-note-form {
+  display: flex;
+  flex-flow: column wrap;
+  width: 100%;
 }
 
 .title-input {
@@ -317,6 +325,7 @@ button#tag-icon-save.disabled:hover {
   align-content: center;
   flex-wrap: nowrap;
   flex-direction: column;
+  overflow: hidden;
 }
 
 #comment-delete-modal-container {
@@ -433,5 +442,17 @@ button#tag-icon-save.disabled:hover {
 @keyframes animateGrow {
   0% {
     transform: translateY();
+  }
+}
+
+@media only screen and (max-width: 680px) {
+  .tag-list {
+    display: flex;
+    gap: 5px;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
   }
 }

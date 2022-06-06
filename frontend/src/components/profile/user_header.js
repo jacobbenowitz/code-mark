@@ -49,9 +49,6 @@ toggleFollowerModal() {
   }
 }
 
-  
- 
-
 render () { 
   const {currentUser, user, userId, changeUserFollowers, userNotes, isCurrentUser = false, noteCount} = this.props
 
@@ -68,24 +65,24 @@ render () {
   
   if (this.state.followers) {
     followModal = (
-     <div id='follower-header-container' 
-          className="modal-off" 
-          style={{ height: this.state.bodyHeight }} 
-      >
-        <div className='modal-wrapper'>
+    <div id='follower-header-container' 
+      className="modal-off" 
+      style={{ height: this.state.bodyHeight }} 
+    >
+      <div className='modal-wrapper'>
         <Followers 
             toggleFollowerModal={this.toggleFollowerModal}
             followers={this.state.followers}
         />
-        </div>
       </div>
+    </div>
     )
     
   }
 
   return (
     <>
-   { followModal }
+    { followModal }
     <div className="user-header-wrapper">
       <h3>Notes by {user.username}</h3>
       <div className="user-header-stats">
