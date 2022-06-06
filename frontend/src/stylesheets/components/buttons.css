@@ -108,6 +108,7 @@ button:focus, .signup:focus, .login:focus, .hide-button:focus {
 #hidden-demo {
   display: none;
 }
+
 .sign-up-large {
   display: flex;
   flex-direction: column;
@@ -118,10 +119,6 @@ button:focus, .signup:focus, .login:focus, .hide-button:focus {
   padding: 0 24px 0 24px;
   height: 56px;
   min-width: 180px;
-  left: 20px;
-  top: 190px;
-
-  /* white */
 
   color: #222222;
   background: #FFFFFF;
@@ -217,4 +214,10 @@ button:focus, .signup:focus, .login:focus, .hide-button:focus {
 .icon-only-button:hover {
   background-color: rgba(85, 82, 82, 0.8);
   box-shadow: 0px 0px 11px rgb(0 0 0 / 30%);
+}
+
+@media only screen and (max-width: 680px) {
+  .sign-up-large {
+    width: 100%;
+  }
 }

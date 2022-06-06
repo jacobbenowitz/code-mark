@@ -3,8 +3,7 @@ import AllNotes from './all_notes';
 import SideCarMenu from './side_car_menu';
 import MobileNotes from './mobile_notes';
 import SectionTitle from '../UI/section_title';
-
-
+import MobileTags from './mobile/mobile_tags';
 
 export default class Following extends React.Component {
   constructor(props) {
@@ -12,13 +11,16 @@ export default class Following extends React.Component {
     this.state = {
       followingNotes: [],
       followingTags: [],
-      noteCount: 0
+      followingUsers: [],
+      noteCount: 0,
+      mobile: false,
+      status: 'IDLE'
     }
   }
 
   componentWillMount() {
-    this.props.fetchNotes();
     this.props.fetchCurrentUser();
+    this.props.fetchNotes();
     this.props.fetchUsers();
   }
 
@@ -27,16 +29,23 @@ export default class Following extends React.Component {
   }
 
   componentDidUpdate() {
-    const { followingNotes, followingUsers, currentUser,
-      noteCount, followingTags } = this.props;
-
-    if (followingNotes && Object.values(followingUsers).length && (this.state.followingNotes !== followingNotes || this.state.followingTags !== followingTags)) {
+    const { followingNotes, followingTags, followingUsers,
+      currentUser, status } = this.props;
+    const mobileStatus = this.isMobile();
+    if (status !== this.state.status) {
       this.setState({
-          followingNotes: followingNotes,
-          followingTags: followingTags,
-          noteCount: noteCount
+        followingNotes: followingNotes ? followingNotes : [],
+        followingTags: followingTags ? followingTags : [],
+        followingUsers: followingUsers ? followingUsers : [],
+        noteCount: followingNotes?.length || 0,
+        status: status
       })
     }
+
+    if (this.state.mobile !== mobileStatus) {
+      this.setState({ mobile: mobileStatus })
+    }
+
   }
 
   isMobile() {
@@ -44,23 +53,53 @@ export default class Following extends React.Component {
   }
 
   render() {
+    const { mobile, status, noteCount, followingTags, followingNotes } = this.state;
+    let sideCarMenu, mobileTags;
+
+    if (!mobile) {
+      sideCarMenu = (
+        <SideCarMenu
+          tagType={'following'}
+          tags={followingTags ? followingTags : []}
+        />
+      )
+    }
+
+    if (mobile && followingTags) {
+      mobileTags = (
+        <MobileTags
+          tags={followingTags}
+          type={'following'}
+        />
+      )
+    }
+
     return (
-      <div className={this.isMobile() ? 'main-mobile' : 'main-sidebar'}>
-        <SideCarMenu tagType={'following'} tags={this.state.followingTags} />
+      <div className={mobile ? 'main-mobile' : 'main-sidebar'}>
+        { sideCarMenu }
 
         <div className='home-main'>
           <div className='notes-section'>
             <SectionTitle
               type={'default'}
               title={'Following'}
-              noteCount={this.state.followingNotes.length}
+              noteCount={noteCount}
+              status={status}
             />
+            { mobileTags }
             <div className='note-list-container'>
-              {this.isMobile() ?
-                  <MobileNotes notes={this.state.followingNotes} />
-                  : <AllNotes notes={this.state.followingNotes} />
+              {
+                mobile ?
+                  <MobileNotes
+                    notes={followingNotes}
+                    status={status}
+                  />
+                  :
+                  <AllNotes
+                    notes={followingNotes}
+                    status={status}
+                  />
               }
-
             </div>
           </div>
         </div>

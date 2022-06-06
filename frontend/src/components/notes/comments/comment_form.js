@@ -87,7 +87,7 @@ export default class CommentForm extends React.Component {
 
   render() {
 
-    let cancelSnippetIcon;
+    let cancelSnippetIcon, codeSnippet;
 
     if (this.state.codeSnippet.length) {
       cancelSnippetIcon = (
@@ -96,6 +96,12 @@ export default class CommentForm extends React.Component {
           onClick={this._clearSnippet}
         >
           <i className="fa-solid fa-circle-minus" />
+        </div>
+      )
+      codeSnippet = (
+        <div className="code-snippet-comment">
+          <CodeCommentReadOnly
+            codeSnippet={this.state.codeSnippet} />
         </div>
       )
     }
@@ -107,10 +113,7 @@ export default class CommentForm extends React.Component {
             <span className='comment-form-title'>Write a new comment</span>
             <div className='add-code-snippet-wrapper'>
               {cancelSnippetIcon}
-              <div className="code-snippet-comment">
-                <CodeCommentReadOnly
-                  codeSnippet={this.state.codeSnippet} />
-              </div>
+              {codeSnippet}
             </div>
             <TextareaAutosize
               onChange={this.update('textbody')}

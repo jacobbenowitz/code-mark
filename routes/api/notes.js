@@ -72,7 +72,6 @@ router.post('/',
 );
 
 // route only for updating a note's tags 
-
 router.patch('/:id/tags', passport.authenticate('jwt',
     { session: false }), (req, res) => {
         Note.findById(req.params.id)
@@ -80,6 +79,24 @@ router.patch('/:id/tags', passport.authenticate('jwt',
                 note.tags = req.body.tags;
                 note.save()
                     .then(note => res.json([note, ['success', 'Note Successfully Updated!']]))
+            })
+            .catch(err => res.status(404).json({ nonotefound: "No Note Found With That ID" }))
+});
+
+// route only for updating a note's public status
+router.patch('/:id/public', passport.authenticate('jwt',
+    { session: false }), (req, res) => {
+        Note.findById(req.params.id)
+            .then(note => {
+                note.public = req.body.public;
+                let noteMessage;
+                if (req.body.public === true) {
+                    noteMessage = 'This note is now public'
+                } else {
+                    noteMessage = 'This note is now private'
+                }
+                note.save()
+                    .then(note => res.json([note, ['success', noteMessage]]))
             })
             .catch(err => res.status(404).json({ nonotefound: "No Note Found With That ID" }))
 });

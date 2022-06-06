@@ -13,11 +13,10 @@ class GlobalModal extends React.Component {
 
   toggleSuccessModal() {
     const successModal = document.getElementById('success-modal');
-    successModal.className = "success-in modal-on"
-    setTimeout(() => successModal.className = "success-out", 4000)
+    successModal.className = "global-modal-in-out"
+    // setTimeout(() => successModal.className = "success-out", 4000)
     setTimeout(() => {
       successModal.className = "modal-off";
-      // this.setState({})
     }, 5000)
   }
 
@@ -97,8 +96,8 @@ class GlobalModal extends React.Component {
         <div id='success-modal' className='modal-off'>
         
         {
-          this.state.messages.map((message,idx) => {
-            console.log(`message ${idx}: ${message}`)
+          this.state.messages?.map((message,idx) => {
+            // console.log(`message ${idx}: ${message}`)
             return ( 
               <div className='modal-message'
                 key={`error-message-${idx}`}>

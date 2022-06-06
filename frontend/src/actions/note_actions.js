@@ -6,7 +6,8 @@ import {
   patchNote,
   deleteNote,
   patchNoteLikes,
-  patchNoteTags
+  patchNoteTags,
+  patchNotePublicStatus
 } from '../util/note_api_util';
 
 export const RECEIVE_NOTES = "RECEIVE_NOTES";
@@ -18,6 +19,9 @@ export const RECEIVE_UPDATED_NOTE = "RECEIVE_UPDATED_NOTE";
 export const RECEIVE_DELETE_NOTE = "RECEIVE_DELETE_NOTE";
 export const RECEIVE_NOTE_LIKE = "RECEIVE_NOTE_LIKE";
 export const RECEIVE_NOTE_UNLIKE = "RECEIVE_NOTE_UNLIKE";
+export const REQUEST_USER_NOTES = "REQUEST_USER_NOTES";
+export const REQUEST_ALL_NOTES = "REQUEST_ALL_NOTES";
+export const REQUEST_NOTE = "REQUEST_NOTE";
 
 export const receiveNotes = notes => ({
   type: RECEIVE_NOTES,
@@ -64,29 +68,38 @@ export const receiveNoteUnlike = note => ({
   note
 })
 
+export const requestUserNotes = () => ({
+  type: REQUEST_USER_NOTES
+})
+
+export const requestAllNotes = () => ({
+  type: REQUEST_ALL_NOTES
+})
+
+export const requestNote = () => ({
+  type: REQUEST_NOTE
+})
+
 // thunk actions
 
-export const fetchNotes = () => dispatch => (
-  getNotes()
-    .then(notes => dispatch(receiveNotes(notes)))
-    // .catch(err => console.log(err))
-    .catch(err => dispatch(receiveNoteErrors(err)))
-);
+export const fetchNotes = () => dispatch => {
+  dispatch(requestAllNotes())
+  return getNotes()
+  .then(notes => dispatch(receiveNotes(notes)))
+  .catch(err => dispatch(receiveNoteErrors(err)))
+};
 
 export const fetchNote = noteId => dispatch => (
   getNote(noteId)
-    .then(note => dispatch(receiveNote(note)))
-    // .catch(err => console.log(err))
-    .catch(err => dispatch(receiveNoteErrors(err)))
-
+  .then(note => dispatch(receiveNote(note)))
+  .catch(err => dispatch(receiveNoteErrors(err)))
 );
-
+  
 export const fetchUserNotes = id => dispatch => {
+  dispatch(requestUserNotes())
   return getUserNotes(id)
     .then(notes => dispatch(receiveUserNotes(notes)))
-    // .catch(err => console.log(err))
     .catch(err => dispatch(receiveNoteErrors(err)))
-
 };
 
 export const composeNote = data => dispatch => {
@@ -97,6 +110,12 @@ export const composeNote = data => dispatch => {
 
 export const updateNote = (data, noteId) => dispatch => {
   return patchNote(data, noteId)
+    .then(note => dispatch(receiveUpdateNote(note)))
+    .catch(err => dispatch(receiveNoteErrors(err)))
+};
+
+export const updateNotePublicStatus = (data, noteId) => dispatch => {
+  return patchNotePublicStatus(data, noteId)
     .then(note => dispatch(receiveUpdateNote(note)))
     .catch(err => dispatch(receiveNoteErrors(err)))
 };

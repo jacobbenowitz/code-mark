@@ -6,6 +6,7 @@ export default class Tags extends React.Component {
     super(props);
     this.state = {
       tags: [],
+      note: {},
       newTag: "",
       tagForm: false
     }
@@ -13,16 +14,18 @@ export default class Tags extends React.Component {
     this.toggleTagForm = this.toggleTagForm.bind(this);
   }
 
-  // componentDidCatch() {
-  //   this.setState({
-  //     tags: this.props.note.tags,
-  //   })
-  // }
+  componentDidCatch() {
+    this.setState({
+      tags: this.props.note.tags,
+      note: this.props.note,
+    })
+  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.note.tags !== this.state.tags) {
       this.setState({
-        tags: nextProps.note.tags
+        tags: nextProps.note.tags,
+        note: nextProps.note
       })
     }
   }
@@ -66,12 +69,10 @@ export default class Tags extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const { _id } = this.props.note;
-
+    const { _id } = this.state.note;
     const cleaned = this.removeWhiteSpace(this.state.newTag)
-    
     let newTags = [...new Set(this.state.tags.concat(cleaned))]
-
+    
     this.props.updateNoteTags({tags: newTags}, _id)
       .then(() => (
         this.setState({
@@ -83,58 +84,70 @@ export default class Tags extends React.Component {
   }
 
   toggleTagForm() {
-    const tagForm = document.getElementById('new-tag-form');
-    if (tagForm.className === "tag-form-off") {
-      this.setState({ tagForm: true }, () =>
-        tagForm.className = "tag-form-on")
-    } else {
-      this.setState({ tagForm: false }, () =>
-        tagForm.className = "tag-form-off")
-    }
+    this.setState({tagForm: !this.state.tagForm})
   }
 
   render() {
 
+    let tagsTop, tagsBottom;
+
+    if (this.state.tags.length) {
+      tagsTop = (
+        <>
+          <span className='tags-header'>TAGS</span>
+          <div className='tag-top'>
+            {this.props.isCurrentUser ? (
+              <div className="tag-item-wrapper tag-icon-new"
+                id='toggle-tag-form-button'
+                onClick={this.toggleTagForm}>
+                {this.state.tagForm ? (
+                  <i className="fa-solid fa-minus"></i>
+                ) : (
+                  <i className="fa-solid fa-circle-plus"></i>
+                )}
+              </div>
+            ) : undefined}
+            
+            <div className={this.props.isCurrentUser ?
+              'tags-overflow' : 'tags-overflow-sm'}>
+              {
+                this.state.tags?.map((tag, i) =>
+                  <TagItem title={tag} key={`tag-${i}`}
+                    isCurrentUser={this.props.isCurrentUser}
+                    updateNoteTags={this.props.updateNoteTags}
+                    note={this.state.note}
+                    tags={this.state.tags}
+                  />)
+              }
+            </div>
+          </div>
+        </>
+      )
+    }
+    if (this.state.tagForm) {
+      tagsBottom = (
+        <div className="tag-form-on" id="new-tag-form">
+          <input type={'text'}
+            className={'tag-form-input'}
+            onChange={this.update('newTag')}
+            placeholder={'New tag...'}
+            value={this.state.newTag}
+          />
+          <button className={this.state.newTag.split(' ').join('').length ?
+            '' : 'save-tag disabled'} id='tag-icon-save'
+            onClick={this.state.newTag.split(' ').join('').length ?
+              this.handleSubmit : undefined}
+            >
+            <i className="fa-solid fa-floppy-disk" />
+          </button>
+        </div>
+      )
+    }
+
     return (
       <div className='note-tags-list'>
-        <div className='tag-top'>
-          {this.props.isCurrentUser ? (
-            <div className="tag-item-wrapper tag-icon-new"
-              id='toggle-tag-form-button'
-              onClick={this.toggleTagForm}>
-              {this.state.tagForm ? (
-                <i className="fa-solid fa-minus"></i>
-              ) : (
-                <i className="fa-solid fa-circle-plus"></i>
-              )}
-            </div>
-          ) : undefined}
-          <div className={this.props.isCurrentUser ? 'tags-overflow' : 'tags-overflow-sm'}>
-            {
-              this.state.tags?.map((tag, i) =>
-                <TagItem title={tag} key={`tag-${i}`}
-                  isCurrentUser={this.props.isCurrentUser}
-                  updateNoteTags={this.props.updateNoteTags}
-                  note={this.props.note}
-                  tags={this.state.tags}
-                />)
-            }
-          </div>
-        </div>
-        <div className='tag-bottom'>
-          <form onSubmit={this.state.newTag.split(' ').join('').length ? this.handleSubmit : undefined}
-            className="tag-form-off" id="new-tag-form">
-            <input type={'text'}
-              className={'tag-form-input'}
-              onChange={this.update('newTag')}
-              placeholder={'New tag...'}
-              value={this.state.newTag}
-            />
-            <button className={this.validateTags() ? 'save-tag' : 'save-tag disabled'} id='tag-icon-save' type='submit'>
-              <i className="fa-solid fa-floppy-disk" />
-            </button>
-          </form>
-        </div>
+        {tagsTop}
+        {tagsBottom}
       </div>
     )
   }

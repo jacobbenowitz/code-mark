@@ -55,7 +55,6 @@ class CommentItem extends React.Component {
       this.setState({ editActive: false })
     } else {
       this.setState({ editActive: true })
-
     }
   }
 

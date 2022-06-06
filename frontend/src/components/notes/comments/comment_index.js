@@ -5,37 +5,42 @@ import CommentFormContainer from './comment_form_container';
 import CommentForm from './comment_form';
 import { filterUsersByComment } from "../../../util/selectors";
 
-export default class CommentIndex extends React.Component {
-  constructor(props) {
-    super(props);
+const CommentIndex = ({ note, comments, isCurrentUser, removeComment, noteId, updateComment, removeCommentLike, composeComment, selectedText, newComment, currentUser, fetchNoteComments, addCommentLike, fetchNote }) => {
+  
+  let commentsList;
 
-  }
-  render() {
-    const { note, comments, isCurrentUser, removeComment, noteId, updateComment,
-      composeComment, selectedText, newComment, currentUser, fetchNoteComments } = this.props;
-    return (
-      <div className='comments-list'>
-        {comments ? (
-          <div className='comment-items-list'>
-            {comments.map(comment => {
-              return <CommentItem
-                addCommentLike={this.props.addCommentLike}
-                removeCommentLike={this.props.removeCommentLike}
-                updateComment={updateComment}
-                isCurrentUser={isCurrentUser}
-                currentUser={currentUser}
-                key={comment._id}
-                id={comment._id}
-                comment={comment}
-                user={comment.user}
-                removeComment={removeComment}
-                fetchNote={this.props.fetchNote}
-                fetchNoteComments={fetchNoteComments}
-                noteId={this.props.noteId}
-              />
-            })}
-          </div>) : ''}
+  if (comments) {
+    commentsList = (
+      <div className='comment-items-list'>
+        {
+          comments.map(comment => 
+            <CommentItem
+              addCommentLike={addCommentLike}
+              removeCommentLike={removeCommentLike}
+              updateComment={updateComment}
+              isCurrentUser={isCurrentUser}
+              currentUser={currentUser}
+              key={comment._id}
+              id={comment._id}
+              comment={comment}
+              user={comment.user}
+              removeComment={removeComment}
+              fetchNote={fetchNote}
+              fetchNoteComments={fetchNoteComments}
+              noteId={noteId}
+            />)
+        }
       </div>
     )
   }
+
+
+  return (
+    <div className='comments-list'>
+      {commentsList}
+    </div>
+  )
+
 }
+
+export default CommentIndex;

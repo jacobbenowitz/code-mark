@@ -31,3 +31,7 @@ export const patchNoteLikes = (data, id) => (
 export const patchNoteTags = (tags, noteId) => (
   axios.patch(`/api/notes/${noteId}/tags`, tags)
 )
+
+export const patchNotePublicStatus = (data, noteId) => (
+  axios.patch(`/api/notes/${noteId}/public`, data)
+)
