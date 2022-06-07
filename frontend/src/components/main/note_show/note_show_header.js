@@ -18,7 +18,21 @@ const NoteShowHeader = ({
   handlePublicSwitch,
   updateNoteTags }) => {
   
-  let headerContent;
+  let headerContent, publicSwitch;
+
+  if (!note.sample) {
+    publicSwitch = (
+      <div className='note-public-switch-wrapper'>
+        <div className='note-public-switch'>
+          <SwitchButton
+            isCurrentUser={isCurrentUser}
+            isToggled={isPublic}
+            onToggle={handlePublicSwitch}
+          />
+        </div>
+      </div>
+    )
+  }
   
   if (status === 'DONE') {
     headerContent = (
@@ -59,15 +73,7 @@ const NoteShowHeader = ({
               </div>
             </div>
           </div>
-          <div className='note-public-switch-wrapper'>
-            <div className='note-public-switch'>
-              <SwitchButton
-                isCurrentUser={isCurrentUser}
-                isToggled={isPublic}
-                onToggle={handlePublicSwitch}
-              />
-            </div>
-          </div>
+          {publicSwitch}
         </div>
         <div className='tags-section-wrapper'>
           <Tags note={note}

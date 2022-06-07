@@ -12,6 +12,27 @@
 
 #new-note-mini {
   cursor: pointer;
+  border: 0.5px solid #ffffff86;
+  background-color: #202124b6;
+  box-shadow: 0px 0px 20px rgb(0 0 0 / 0%);
+  transition: box-shadow 450ms ease-in-out;
+  transition: background-color 450ms ease-in-out-out;
+  transition: border 450ms ease-in-out;
+}
+
+#new-note-mini:hover {
+    border: 0.5px solid #ffffffdb;
+  box-shadow: 0px 0px 20px rgb(0 0 0 / 20%);
+  background-color: #202124e5;
+  transition: box-shadow 450ms ease-in-out;
+  transition: background-color 450ms ease-in-out-out;
+  transition: border 450ms ease-in-out;
+}
+
+#new-note-mini:focus-within {
+  border: 0.5px solid white;
+  box-shadow: 0px 0px 20px rgb(0 0 0 / 60%);
+  background-color: #202124;
 }
 
 @media only screen and (max-width: 680px) {

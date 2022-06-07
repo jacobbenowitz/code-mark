@@ -157,8 +157,8 @@
   min-height: 90px;
   height: fit-content;
   border: 1px solid transparent;
-  background-color: #202124b6;
   border-radius: 8px;
+  background-color: #202124b6;
   box-shadow: 0px 0px 20px rgb(0 0 0 / 0%);
   transition: box-shadow 450ms ease-in-out;
   transition: background-color 450ms ease-in-out-out;

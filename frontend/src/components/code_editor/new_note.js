@@ -457,7 +457,7 @@ class NewNote extends React.Component {
             <div className='note-input' onClick={this.toggleForm}>
               <CodeMirror className='codemirror javascript'
                 onMouseDown={this.toggleForm}
-                value={"Save a new note..."}
+                value={"Create a new note..."}
                 height="56px"
                 theme='dark'
                 extensions={[html(),

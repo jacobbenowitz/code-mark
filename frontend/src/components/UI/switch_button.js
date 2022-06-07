@@ -6,7 +6,7 @@ const SwitchButton = ({onToggle, isToggled, isCurrentUser}) => {
       <label className='switch'>
         <input type='checkbox'
           checked={isToggled}
-          onChange={() => onToggle()}
+          onChange={onToggle}
         />
         <span className='slider' />
       </label>
