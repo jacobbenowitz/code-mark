@@ -13,19 +13,37 @@ import {
 } from '../../util/selectors';
 
 const mapStateToProps = (state) => {
+  
   const currentUser = state.session.user;
+  const followingUserIds = currentUser.following;
   const allUsers = state.users.all;
   const allNotes = state.notes.all;
   const status = state.notes.status;
+  
   debugger
 
   return {
     currentUser: currentUser,
+    followingUserIds: followingUserIds,
     allUsers: allUsers,
     allNotes: allNotes,
     status: status
   }
+
+  // const followingUsers = filterUsersById(allUsers, followingUserIds)
+  // const followingNotes = selectFollowingUsersNotes(followingUsers, allNotes)
+  // const publicNotes = filterOnlyPublicNotes(followingNotes)
+  // const orderedNotes = orderUserNotes(publicNotes)
+  // const followingTags = selectNoteTags(publicNotes)
   
+  // return {
+  //   followingNotes: orderedNotes,
+  //   followingTags: followingTags,
+  //   followingUsers: followingUsers,
+  //   currentUser: currentUser,
+  //   status: status
+  // }
+
 }
 
 const mapDispatchToProps = dispatch => {

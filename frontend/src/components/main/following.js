@@ -37,15 +37,18 @@ export default class Following extends React.Component {
     const { allNotes, allUsers, currentUser, status } = this.props;
       
     const mobileStatus = this.isMobile();
-      
-    if (allUsers && currentUser && status !== this.state.status) {
+    
+    debugger
+    
+    // if (allUsers && currentUser && status !== this.state.status) {
+      if (allUsers && status === 'DONE' && currentUser?.following.length !== this.state.followingUsers.length)  {
+        debugger
       const followingIds = currentUser.following
       const followingUsers = filterUsersById(allUsers, followingIds)
       const followingNotes = selectFollowingUsersNotes(followingUsers, allNotes)
       const publicNotes = filterOnlyPublicNotes(followingNotes)
       const orderedNotes = orderUserNotes(publicNotes)
       const followingTags = selectNoteTags(publicNotes)
-      debugger
 
       this.setState({
         followingNotes: orderedNotes,
@@ -66,8 +69,10 @@ export default class Following extends React.Component {
   render() {
     const { mobile, status, followingNotes,
       followingTags, followingUsers } = this.state;
+    
     // const { followingNotes, followingTags, followingUsers,
     //   currentUser } = this.props;
+    
     debugger
 
     let sideCarMenu, mobileTags;
