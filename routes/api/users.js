@@ -296,21 +296,21 @@ router.delete('/:userId', passport.authenticate('jwt', { session: false }), (req
 
         User.deleteOne({ _id: deleteuser.id })
           .then(() => {
-            followers.forEach(followerId => {
+            followers.forEach(followerId => { //deleting follower references
               User.findById(followerId)
                 .then(user => {
                   user.following = user.following.filter(item => item.toString() !== req.params.userId);
                   user.save();
                 })
             })
-            following.forEach(followId => {
+            following.forEach(followId => { //deleting following references
               User.findById(followId)
                 .then(user => {
                   user.followers = user.followers.filter(item => item.toString() !== req.params.userId);
                   user.save();
                 })
             })
-            commentLikesIds.forEach(commentLikeId => {
+            commentLikesIds.forEach(commentLikeId => {  //deleting comment likes
               Comment.findById(commentLikeId)
                 .then(comment => {
                   comment.likes = comment.likes.filter(item => item.toString() !== req.params.userId);
@@ -318,7 +318,7 @@ router.delete('/:userId', passport.authenticate('jwt', { session: false }), (req
                 })
                 .catch(err => res.status(404).json({ nocommentfound: "No Comment Found With That ID" }))
             })
-            noteLikesIds.forEach(noteLikeId => {
+            noteLikesIds.forEach(noteLikeId => {  //deleting note likes
               Note.findById(noteLikeId)
                 .then(note => {
                   note.likes = note.likes.filter(item => item.toString() !== req.params.userId);
@@ -326,14 +326,14 @@ router.delete('/:userId', passport.authenticate('jwt', { session: false }), (req
                 })
                 .catch(err => res.status(404).json({ nonotefound: "No Note Found With That ID" }))
             })
-            commentIds.forEach(commentid => {
+            commentIds.forEach(commentid => { //deleting comments
               Comment.findById(commentid)
                 .then(comment => {
                   Comment.deleteOne({ _id: commentid })
                 })
                 .catch(err => res.status(404).json({ nocommentfound: "No Comment Found With That ID" }))
             })
-            noteIds.forEach(noteId => {
+            noteIds.forEach(noteId => { //deleting notes
               Note.findById(noteId)
                 .then(note => {
                   const innercommentIds = note.comments;

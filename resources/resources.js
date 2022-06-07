@@ -11,7 +11,6 @@ async function getResources(keywords, codebody) {
     languageKeywords.forEach(keyword => {
         search.push(Resource.findOne({ keyword: keyword })
             .then(resource => {
-                // found.push(resource);
                 return resource;
             })
             .catch(err => {
@@ -19,13 +18,11 @@ async function getResources(keywords, codebody) {
             }));
     })
     let found = await Promise.all(search);
-    // console.log(found);
     let savedResources = found.filter(ele => ele !== null).map(ele => ele._doc);
     let foundWords = savedResources.map(ele => ele.keyword);
     const notfound = languageKeywords.filter(word => !foundWords.includes(word))
     let response = await Promise.all(getPromises(notfound));
     let foundResources = response.map(ele => ele._doc);
-    // return response.filter(ele => ele !== undefined);
     return foundResources.concat(savedResources).filter(ele => ele !== undefined);
 }
 
@@ -64,6 +61,7 @@ const AXIOS_OPTIONS = {
     },
 };
 
+//get search results
 const getGoogleAdvice = (search) => {
     const encodedString = encodeURI(search);
     return axios
