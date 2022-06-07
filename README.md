@@ -31,21 +31,15 @@
 <br>
 
 <table>
-
 <td>
   <img src="frontend/public/mockups/CodeMark_Home_Mobile.png">
 </td>
-
 <td>
   <img src="frontend/public/mockups/CodeMark_Home_Desktop.png">
 </td>
-
 <td>
   <img src="frontend/public/mockups/CodeMark_Note_Show.png">
 </td>
-
-
-</tr>
 </table>
 
 
@@ -117,8 +111,14 @@ Limited each note to a maximum of 5 keywords to reduce our Google Search API cal
 
 Live demo of the repsonsive content loaders in action: https://code-mark.herokuapp.com/#/dev/note/lazy-load
 
-<img src="frontend/public/mockups/desktop-content-loaders.gif" height=325>
-<img src="frontend/public/mockups/mobile-content-loaders.gif" height=325>
+<table>
+  <td>
+    <img src="frontend/public/mockups/desktop-content-loaders.gif" height=300>
+  </td>
+  <td>
+    <img src="frontend/public/mockups/mobile-content-loaders.gif" height=300>
+  </td>
+</table>
 
 <br>
 
