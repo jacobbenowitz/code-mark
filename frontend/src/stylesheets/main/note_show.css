@@ -586,6 +586,7 @@
 #note-export-modal {
   z-index: 1000;
   position: absolute;
+  top: 0;
   width: 100%;
   display: flex;
   background-color: #1b1b1c;

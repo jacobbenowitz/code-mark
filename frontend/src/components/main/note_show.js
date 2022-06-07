@@ -204,7 +204,7 @@ export default class NoteShow extends React.Component {
       width: noteItem.offsetWidth * scale
     }).then(function (scaledImg) {
       saveAs(scaledImg, `${title}-by-${username}-CodeMark`)
-    }).then(() => toggleExportModal())
+    }).then(() => this.toggleExportModal())
   };
 
   isMobile() {

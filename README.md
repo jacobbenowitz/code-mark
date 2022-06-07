@@ -113,6 +113,7 @@ Limited each note to a maximum of 5 keywords to reduce our Google Search API cal
 - Add loading states to thunk action creators, check loading state in components to conditionally render components based on status of data
 - Maintain the same outer ```div``` elements and ```classes```
 
+<br>
 
 ### Frontend Form Validations
 **Challenge**
@@ -134,8 +135,9 @@ To improve the UX, we provide a message on hover that clearly states why the sub
 The image is generated from a modal designed to reduce the content visible to the most important information
 - The image is saved as an .png and is exported at 2x the actual viewport resolution to ensure a legible export without artifacts
 
-[ gif ]
+<img src="frontend/public/gifs/export_image_modal.gif" width=600>
 
+<br>
 
 ### Highlight Code to Comment
 
@@ -144,8 +146,10 @@ The image is generated from a modal designed to reduce the content visible to th
 
 **Solution**
 - To save users’ time and energy, we implemented a modal that only shows up when text is selected, providing an easy interface for commenting on the highlighted code
-  
-[ gif ]
+
+<img src="frontend/public/gifs/highlight_to_comment.gif" width=600>
+
+<br>
 
 ### Global Modal - Success and Error Messages
 Challenge
@@ -159,6 +163,8 @@ Solution
 
 <img src="frontend/public/gifs/global_modal.gif" width=450>
 
+
+<br>
 
 ### Custom Backend Routes
 
@@ -176,6 +182,108 @@ Solution
 ## Code Snippets
 
 ### Conditional Rendering
+```javascript
+// first case: user has no notes 
+if ((!props.notes || props.notes?.length === 0)
+        && (props.status === 'DONE' || props.status === 'IDLE')) {
+        return (
+            <div className='desktop-notes'>
+                <div className='column1'>
+                </div>
+                <div className='column2'>
+                </div>
+            </div>
+        )
+    // second case: notes are being fetched
+    } else if (props.status === 'BUSY') {
+        return (
+            <div className='desktop-notes'>
+                <div className='column1'>
+                    <CodeNoteItemLoader />
+                    <CodeNoteItemLoader />
+                    <CodeNoteItemLoader />
+                </div>
+                <div className='column2'>
+                    <CodeNoteItemLoader />
+                    <CodeNoteItemLoader />
+                </div>
+            </div>
+        )
+    // third case: notes have been fetched and are in state
+    } else if (props.status === 'DONE' ||
+        (props.notes.length && props.status === 'IDLE')) {
+        return (
+            <div className='desktop-notes'>
+                    <div className='column1'>
+                        {col1.map((note) =>
+                            <CodeNoteItem key={note._id}
+                                title={note.title}
+                                tags={note.tags}
+                                likes={note.likes}
+                                username={note.user.username}
+                                userId={note.user.userId}
+                                textDetails={note.textdetails}
+                                codeBody={note.codebody}
+                                // ...
+                            />
+                        )}
+                    </div>
+                    <div className='column2'>
+                        {col2.map((note) =>
+                            <CodeNoteItem key={note._id}
+                                title={note.title}
+                                tags={note.tags}
+                                likes={note.likes}
+                                username={note.user.username}
+                                userId={note.user.userId}
+                                textDetails={note.textdetails}
+                                codeBody={note.codebody}
+                                // ...
+                            />
+                        )}
+                    </div>
+            </div>
+        )
+    } 
+```
 
 ### Multi-Step Modals
+```javascript
+// toggle primary edit modal to edit a note
+  toggleEditModal() {
+    const editNoteModal = document.getElementById('note-edit-wrapper');
+    const resourcesNoteModal = document.getElementById('resources-step-1');
+
+    if (editNoteModal.className = "edit-note-container modal-on") {
+      editNoteModal.className = "edit-note-container modal-out-removed"
+    } else {
+      editNoteModal.className = "edit-note-container modal-on"
+    }
+
+    if (resourcesNoteModal.className === "resources-modal modal-off") {
+      // call getKeywords to extract keywords used for getting resources
+      const keywords = getKeywords(this.state.codebody);
+      this.setState({
+        allKeywords: [...new Set(this.state.keywordsSelected.concat(keywords))]
+      }, () => {
+        // toggle next modal on where user selects their keywords 
+        resourcesNoteModal.className = "resources-modal modal-on"
+      })
+    } else {
+      resourcesNoteModal.className = "resources-modal modal-off"
+    }
+  }
+
+  toggleResourceModal(){
+    // resource modal toggled after step one is completed
+    const step1 = document.getElementById('resources-step-1');
+    step1.className = 'resources-modal modal-off';
+    const wrapper = document.getElementById('edit-note-container');
+    // reset modals to initial state
+    wrapper.className = 'modal-off';
+    const noteEdit = document.getElementById('note-edit-wrapper');
+    noteEdit.className = 'edit-note-container';
+  }
+```
+
 ### Resources

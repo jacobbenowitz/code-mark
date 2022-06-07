@@ -117,17 +117,15 @@ export default class EditNote extends React.Component {
   }
 
   toggleEditModal() {
-    // const editNoteModal = document.getElementById('edit-note-container');
     const editNoteModal = document.getElementById('note-edit-wrapper');
-    // const commentHighlightModal = document.getElementById('comment-highlight-text');
+    const resourcesNoteModal = document.getElementById('resources-step-1');
+
     if (editNoteModal.className = "edit-note-container modal-on") {
       editNoteModal.className = "edit-note-container modal-out-removed"
-      // commentHighlightModal.className = "modal-compact"
     } else {
       editNoteModal.className = "edit-note-container modal-on"
-      // commentHighlightModal.className = "modal-compact hidden"
     }
-    const resourcesNoteModal = document.getElementById('resources-step-1');
+
     if (resourcesNoteModal.className === "resources-modal modal-off") {
       const keywords = getKeywords(this.state.codebody);
       this.setState({

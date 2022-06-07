@@ -40,6 +40,22 @@
   transition: background-color 250ms ease-in;
 }
 
+.note-tags-list-export {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding-bottom: 1.2rem;
+  gap: 8px;
+  width: 100%;
+  overflow: hidden;
+  height: auto;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
 .note-tags-list {
   display: flex;
   flex-direction: column;

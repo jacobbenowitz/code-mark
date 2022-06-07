@@ -12,7 +12,7 @@ const PhotoExportModal = ({
     >
       <div className='action-buttons'>
         <div className='export icon-button'
-          onClick={() => exportImage()}>
+          onClick={exportImage}>
           <i className="fa-solid fa-download" />
           <span>download</span>
         </div>

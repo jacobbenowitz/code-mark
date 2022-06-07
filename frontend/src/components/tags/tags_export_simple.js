@@ -9,7 +9,7 @@ const TagsExportSimple = ({ tags }) => {
   ))
 
   return (
-    <div className='note-tags-list'>
+    <div className='note-tags-list-export'>
       {noteTags}
     </div>
   )
