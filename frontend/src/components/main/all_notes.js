@@ -41,46 +41,69 @@ const AllNotes = (props) => {
         )
     } else if (props.status === 'DONE' ||
         (props.notes.length && props.status === 'IDLE')) {
-        return (
-            <div className='desktop-notes'>
-                    <div className='column1'>
-                        {col1.map((note) =>
-                            <CodeNoteItem key={note._id}
-                                title={note.title}
-                                tags={note.tags}
-                                likes={note.likes}
-                                username={note.user.username}
-                                userId={note.user.userId}
-                                textDetails={note.textdetails}
-                                codeBody={note.codebody}
-                                id={note._id}
-                                comments={note.comments}
-                                updatedAt={note.updatedAt}
-                                createdAt={note.createdAt}
-                                language={note.language}
-                            />
-                        )}
-                    </div>
-                    <div className='column2'>
-                        {col2.map((note) =>
-                            <CodeNoteItem key={note._id}
-                                title={note.title}
-                                tags={note.tags}
-                                likes={note.likes}
-                                username={note.user.username}
-                                userId={note.user.userId}
-                                textDetails={note.textdetails}
-                                codeBody={note.codebody}
-                                id={note._id}
-                                comments={note.comments}
-                                updatedAt={note.updatedAt}
-                                createdAt={note.createdAt}
-                                language={note.language}
-                            />
-                        )}
-                    </div>
-            </div>
-        )
+        // if (props.notes.length === 1) {
+        //     return (
+        //         <div className='mobile-notes'>
+        //             {props.notes?.map((note) =>
+        //                 <CodeNoteItem key={note._id}
+        //                     title={note.title}
+        //                     tags={note.tags}
+        //                     likes={note.likes}
+        //                     username={note.user.username}
+        //                     userId={note.user.userId}
+        //                     textDetails={note.textdetails}
+        //                     codeBody={note.codebody}
+        //                     id={note._id}
+        //                     comments={note.comments}
+        //                     updatedAt={note.updatedAt}
+        //                     createdAt={note.createdAt}
+        //                     language={note.language}
+        //                 />
+        //             )}
+        //         </div>
+        //     )
+        // } else {
+            return (
+                <div className='desktop-notes'>
+                        <div className='column1'>
+                            {col1.map((note) =>
+                                <CodeNoteItem key={note._id}
+                                    title={note.title}
+                                    tags={note.tags}
+                                    likes={note.likes}
+                                    username={note.user.username}
+                                    userId={note.user.userId}
+                                    textDetails={note.textdetails}
+                                    codeBody={note.codebody}
+                                    id={note._id}
+                                    comments={note.comments}
+                                    updatedAt={note.updatedAt}
+                                    createdAt={note.createdAt}
+                                    language={note.language}
+                                />
+                            )}
+                        </div>
+                        <div className='column2'>
+                            {col2.map((note) =>
+                                <CodeNoteItem key={note._id}
+                                    title={note.title}
+                                    tags={note.tags}
+                                    likes={note.likes}
+                                    username={note.user.username}
+                                    userId={note.user.userId}
+                                    textDetails={note.textdetails}
+                                    codeBody={note.codebody}
+                                    id={note._id}
+                                    comments={note.comments}
+                                    updatedAt={note.updatedAt}
+                                    createdAt={note.createdAt}
+                                    language={note.language}
+                                />
+                            )}
+                        </div>
+                </div>
+            )
+        // }
     } 
     else {
         return (

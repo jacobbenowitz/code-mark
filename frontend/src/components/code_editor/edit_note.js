@@ -372,7 +372,8 @@ export default class EditNote extends React.Component {
                 id='codebody-js'
                 value={this.state.codebody}
                 onChange={this.updateCode}
-                height="200px"
+                minHeight="200px"
+                maxHeight="400px"
                 width='100%'
                 theme='dark'
                 extensions={[this.state.lang,

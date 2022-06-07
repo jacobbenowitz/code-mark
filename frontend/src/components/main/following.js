@@ -35,14 +35,10 @@ export default class Following extends React.Component {
 
   componentDidUpdate() {
     const { allNotes, allUsers, currentUser, status } = this.props;
-      
     const mobileStatus = this.isMobile();
     
-    debugger
-    
-
     if (allUsers && status === 'DONE' && currentUser?.following.length !== this.state.followingUsers.length)  {
-        debugger
+  
       const followingIds = currentUser.following
       const followingUsers = filterUsersById(allUsers, followingIds)
       const followingNotes = selectFollowingUsersNotes(followingUsers, allNotes)
@@ -72,10 +68,6 @@ export default class Following extends React.Component {
     const { mobile, status, followingNotes,
       followingTags, followingUsers } = this.state;
     
-    // const { followingNotes, followingTags, followingUsers,
-    //   currentUser } = this.props;
-    
-    debugger
 
     let sideCarMenu, mobileTags;
     

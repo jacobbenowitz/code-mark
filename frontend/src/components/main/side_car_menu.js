@@ -5,7 +5,7 @@ import NavTagItem from '../tags/nav_tag_item';
 
 const SideCarMenu = ({ tags, tagType, status }) => {
   let navBoxes;
-  debugger
+  
   if (status === 'BUSY' || status === 'IDLE'){
     navBoxes = (
         <div className='nav-boxes'>

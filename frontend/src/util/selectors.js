@@ -51,7 +51,6 @@ export const filterUsersByComment = (users, comment) => {
 
 export const filterOnlyPublicNotes = notes => {
   if (notes && Object.values(notes).length) {
-    debugger
     return notes.filter(note => note.public === true)
     // return notes.filter(note => note.public === true && note.sample === false)
   }
