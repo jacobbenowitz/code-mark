@@ -108,12 +108,17 @@ Limited each note to a maximum of 5 keywords to reduce our Google Search API cal
 **Challenge**
 - Determining when and when not to show placeholders
 - Retaining the structure of the page between loading and ready states
+- Responsively resising content loaders for all window sizes
 
 **Solution**
 - Add loading states to thunk action creators, check loading state in components to conditionally render components based on status of data
 - Maintain the same outer ```div``` elements and ```classes```
+- Implement svg content loaders utilizing create-react-content-loader to form skeletons
 
-<img src="frontend/public/mockups/content_loaders_mobile_note_show.png" height=450>
+Live demo of the repsonsive content loaders in action: https://code-mark.herokuapp.com/#/dev/note/lazy-load
+
+<img src="frontend/public/mockups/desktop-content-loaders.gif" height=325>
+<img src="frontend/public/mockups/mobile-content-loaders.gif" height=325>
 
 <br>
 

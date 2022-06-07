@@ -1,8 +1,9 @@
 import React from "react";
+import NoteResourcesListLoaderDesktop from "../../content_loaders/mobile/note_resources_list_loader_desktop";
 import NoteResourcesListLoaderMobile from '../../content_loaders/mobile/note_resources_list_loader_mobile'
 import ResourceItem from '../../notes/resources/resource_item';
 
-const NoteResources = ({ note, status }) => {
+const NoteResources = ({ note, status, isMobile }) => {
 
   let noteResources;
 
@@ -25,9 +26,15 @@ const NoteResources = ({ note, status }) => {
       )
     }
   } else if (status === "BUSY") {
-    noteResources = (
-      <NoteResourcesListLoaderMobile />
-    )
+    if (isMobile) {
+      noteResources = (
+        <NoteResourcesListLoaderMobile />
+      )
+    } else {
+      noteResources = (
+        <NoteResourcesListLoaderDesktop />
+      )
+    }
   }
   
   return (

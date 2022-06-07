@@ -5,47 +5,69 @@ import NoteShowResourcesLoaderMobile from "./mobile/note_show_resources_loader_m
 import NoteShowTagsLoaderMobile from "./mobile/note_show_tags_loader_mobile";
 import NoteShowTitleStatsLoaderMobile from "./mobile/note_show_title_stats_loader_mobile";
 import NoteShowTopLoaderMobile from "./mobile/note_show_top_loader_mobile";
+import NoteShowActionIconsLoaderDesktop from "./desktop/note_show_action_icons_loader_desktop";
+import NoteShowMainLoader from "./note_show_main_loader";
+import NoteShowHeaderDesktopLoader from './desktop/note_show_header_loader_desktop'
+import PublicSwitchLoader from "./placeholder_components/public_switch_loader";
+import NoteResourcesListLoaderDesktop from "./mobile/note_resources_list_loader_desktop";
 
 const NoteShowLazyLoad = () => {
-  function isMobile() {
-    return window.innerWidth < 680;
-  }
-  return (
-    // HOME MOBILE 
+  let headerContent, noteShowMain, noteResources;
 
-    // NOTE SHOW MOBILE
-    <>
-      <div className='main-mobile'>
-        <div className='home-main'>
-        <div className="note-show-container span-12">
+  if (window.innerWidth < 680) {
+    headerContent = (
+      <>
+        <NoteShowTitleStatsLoaderMobile />
+        <NoteShowTagsLoaderMobile />
+      </>
+    )
+    noteShowMain = (
+      <NoteShowCodeNoteLoaderMobile />
+    )
+    noteResources = (
+      <div className="resources-list">
+        <NoteResourcesListLoaderMobile />
+      </div>
+    )
+  } else {
+    headerContent = (
+      <div className="loader-wrapper">
+        <NoteShowHeaderDesktopLoader />
+      </div>
+    )
+    noteShowMain = (
+      <NoteShowMainLoader />
+    )
+    noteResources = (
+      <div className="resources-list">
+        <NoteResourcesListLoaderDesktop />
+      </div>
+    )
+  }
+  
+  return (
+    
+    <div className='note-show-wrapper grid-12-col'>
+      <div className='grid-spacer-1-2' />
+        <div className="note-show-container">
           <div className="note-show-top-icons">
-            <NoteShowTopLoaderMobile />
+            <NoteShowActionIconsLoaderDesktop />
           </div>
-          <div id="note-show-main" className="note-show-main">
-            <div className="note-show-title mobile">
-              <NoteShowTitleStatsLoaderMobile />
-              <div className="note-tags-list">
-                <NoteShowTagsLoaderMobile />
-              </div>
-            </div>
-            <div id="code-note-view" className="code-note-body">
-              <NoteShowCodeNoteLoaderMobile />
-            </div>
-          </div>
+        
+        <div id="note-show-main" className="note-show-main">
+          {headerContent}
+          {noteShowMain}
+        </div>
           <div className="note-resources">
-            <NoteShowResourcesLoaderMobile />
-            <div className="resources-list"> 
-              <NoteResourcesListLoaderMobile />
-            </div>
+              {noteResources}
           </div>
           <div id="comments" className="note-comments">
             {/* implement on commentItem component */}
           </div>
         </div>
-        </div>
-    </div>
+      <div className='grid-spacer-11-12' />
     
-    </>
+    </div>
   )
 }
 
