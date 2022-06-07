@@ -9,9 +9,8 @@ import { selectNoteTags } from "../../util/selectors";
 
 const mapStateToProps = (state, { match }) => {
   const filteredNotes = filterOnlyPublicNotes(Object.values(state.notes.all))
-  const orderedNotes = orderUserNotes(filteredNotes)
   const discoverTags = selectNoteTags(filteredNotes)
-  debugger
+  const orderedNotes = orderUserNotes(filteredNotes)
   return {
     allNotes: orderedNotes,
     tags: discoverTags,

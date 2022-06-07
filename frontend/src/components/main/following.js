@@ -4,6 +4,13 @@ import SideCarMenu from './side_car_menu';
 import MobileNotes from './mobile_notes';
 import SectionTitle from '../UI/section_title';
 import MobileTags from './mobile/mobile_tags';
+import {
+  filterOnlyPublicNotes,
+  selectNoteTags,
+  filterUsersById,
+  selectFollowingUsersNotes,
+  orderUserNotes
+} from '../../util/selectors';
 
 export default class Following extends React.Component {
   constructor(props) {
@@ -20,29 +27,34 @@ export default class Following extends React.Component {
 
   
   componentDidMount() {
-    this.props.fetchCurrentUser();
-    this.props.fetchNotes();
-    this.props.fetchUsers();
     window.scrollTo(0, 0)
+    this.props.fetchCurrentUser();
+    this.props.fetchUsers();
+    this.props.fetchNotes();
   }
 
   componentDidUpdate() {
-    // debugger
-    const { followingNotes, followingTags, followingUsers,
-      currentUser, status } = this.props;
+    const { allNotes, allUsers, currentUser, status } = this.props;
+      
     const mobileStatus = this.isMobile();
-    if (status !== this.state.status) {
-      this.setState({
-        followingNotes: followingNotes ? followingNotes : [],
-        followingTags: followingTags ? followingTags : [],
-        followingUsers: followingUsers ? followingUsers : [],
-        noteCount: followingNotes?.length || 0,
-        status: status
-      })
-    }
+      
+    if (allUsers && currentUser && status !== this.state.status) {
+      const followingIds = currentUser.following
+      const followingUsers = filterUsersById(allUsers, followingIds)
+      const followingNotes = selectFollowingUsersNotes(followingUsers, allNotes)
+      const publicNotes = filterOnlyPublicNotes(followingNotes)
+      const orderedNotes = orderUserNotes(publicNotes)
+      const followingTags = selectNoteTags(publicNotes)
+      debugger
 
-    if (this.state.mobile !== mobileStatus) {
-      this.setState({ mobile: mobileStatus })
+      this.setState({
+        followingNotes: orderedNotes,
+        followingTags: followingTags,
+        followingUsers: followingUsers,
+        noteCount: publicNotes?.length || 0,
+        status: status,
+        mobile: mobileStatus
+      })
     }
 
   }
@@ -52,15 +64,20 @@ export default class Following extends React.Component {
   }
 
   render() {
-    const { mobile, status, noteCount, followingTags, followingNotes } = this.state;
-    let sideCarMenu, mobileTags;
+    const { mobile, status, followingNotes,
+      followingTags, followingUsers } = this.state;
+    // const { followingNotes, followingTags, followingUsers,
+    //   currentUser } = this.props;
+    debugger
 
+    let sideCarMenu, mobileTags;
+    
     if (!mobile) {
       sideCarMenu = (
         <SideCarMenu
           tagType={'following'}
-          tags={followingTags ? followingTags : []}
-          status={this.props.status}
+          tags={followingTags}
+          status={status}
         />
       )
     }
@@ -83,7 +100,7 @@ export default class Following extends React.Component {
             <SectionTitle
               type={'default'}
               title={'Following'}
-              noteCount={noteCount}
+              noteCount={followingNotes?.length || 0}
               status={status}
             />
             { mobileTags }

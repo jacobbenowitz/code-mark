@@ -88,7 +88,6 @@ export default class Tags extends React.Component {
     this.setState({ tagForm: !this.state.tagForm })
     setTimeout(() => {
       if (!prevStatus) {
-        // debugger
         let input = document.getElementById('tag-form-input')
         input.focus()
       }

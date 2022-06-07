@@ -5,14 +5,14 @@ import NavTagItem from '../tags/nav_tag_item';
 
 const SideCarMenu = ({ tags, tagType, status }) => {
   let navBoxes;
-
+  debugger
   if (status === 'BUSY' || status === 'IDLE'){
     navBoxes = (
         <div className='nav-boxes'>
             <SidebarLoader />
         </div>
     )
-  } else if (status === 'DONE'){
+  } else if (status === 'DONE') {
     if (tags){
       navBoxes = (
           <div className='nav-boxes'>
@@ -61,7 +61,38 @@ const SideCarMenu = ({ tags, tagType, status }) => {
             </div>
           </div>
       )
-    } 
+    } else {
+      navBoxes = (
+        <div className='nav-boxes'>
+          <div className='nav-pages'>
+            <h5>Pages</h5>
+            <ul className='nav-list'>
+              <NavLink to={'/home'} className='nav-item-container'>
+                <div className='nav-item-link nav-home'>
+                  <img src="https://code-mark.s3.amazonaws.com/type%3DHome.svg" /> <span>Home</span>
+                </div>
+              </NavLink>
+              <NavLink to={'/discover'} className='nav-item-container'>
+                <div className='nav-item-link'>
+                  <img src="https://code-mark.s3.amazonaws.com/type%3DDiscover.svg" /> <span>Discover</span>
+                </div>
+              </NavLink>
+              <NavLink to={'/following'} className='nav-item-container'>
+                <div className='nav-item-link'>
+                  <img src="https://code-mark.s3.amazonaws.com/type%3DFollowing.svg" /> <span>Following</span>
+                </div>
+              </NavLink>
+              <NavLink to={'/likes'} className='nav-item-container'>
+                <div className='nav-item-link'>
+                  <img src="https://code-mark.s3.amazonaws.com/type%3DFollowing.svg" /> <span>Liked</span>
+                </div>
+              </NavLink>
+            </ul>
+            <div className='spacer-30-h'></div>
+          </div>
+        </div>
+      )
+    }
   } else {
     navBoxes = (
         <div className='nav-boxes'>

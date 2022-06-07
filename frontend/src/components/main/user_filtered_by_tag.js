@@ -41,7 +41,6 @@ export default class UserFilteredByTag extends React.Component {
   componentDidUpdate() {
     const { userNotes, user, currentUser,
       userId, filter, status } = this.props;
-    debugger
     if (filter !== this.state.filter && userNotes && user && status === 'DONE') {
       const publicNotes = filterOnlyPublicNotes(Object.values(userNotes))
       const filteredNotes = filterNotesByTag(filter, publicNotes)
@@ -64,7 +63,6 @@ export default class UserFilteredByTag extends React.Component {
 
   render() {
     const { userNotes, userTags, user, filter, mobile, status } = this.state;
-    debugger
     return (
       <div className={mobile ? 'main-mobile' : 'main-sidebar'}>
         {/* /users/:userId/tags/:tag */}
@@ -93,7 +91,7 @@ export default class UserFilteredByTag extends React.Component {
               /> */}
             <div className={'note-list-container'}>
               {
-                mobile || userNotes.length === 1 ?
+                mobile ?
                   <MobileNotes
                     notes={userNotes}
                     status={status}
