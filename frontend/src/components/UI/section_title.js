@@ -32,10 +32,14 @@ const SectionTitle = ({ type, title,
     <div className='section-title'>
       <h3>{title}</h3>
         <div className="subtitle-wrapper">
+          <div className="filter-by">
+            <span className="subtitle">Filtered by:</span>
+            <span className="filter-tag">{filter}</span>
+          </div>
           {noteCount === 1 ? (
             <div className="note-count">
               <span className="sub-white-right">{noteCount}</span>
-              <span className="subtitle">Note</span>
+              <span className="subtitle">Note found</span>
             </div>
           ) : (
             <div className="note-count">
@@ -43,10 +47,6 @@ const SectionTitle = ({ type, title,
                 <span className="sub-white">{noteCount}</span>
             </div>
           )}
-        <div className="filter-by">
-          <span className="subtitle">Filtered By:</span>
-          <span className="sub-white">{filter}</span>
-        </div>
       </div>
       </div>
     )

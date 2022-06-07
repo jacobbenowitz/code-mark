@@ -223,6 +223,27 @@
   max-width: 80%;
 }
 
+.filter-tag {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px 12px;
+  gap: 12px;
+  background: #35373E;
+  border-radius: 4px;
+  white-space: nowrap;
+  margin-left: 1rem;
+}
+
+.filter-by {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .sub-white {
   font-weight: 600;
   margin-left: 0.5rem;

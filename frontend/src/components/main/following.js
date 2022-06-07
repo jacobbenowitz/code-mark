@@ -40,8 +40,8 @@ export default class Following extends React.Component {
     
     debugger
     
-    // if (allUsers && currentUser && status !== this.state.status) {
-      if (allUsers && status === 'DONE' && currentUser?.following.length !== this.state.followingUsers.length)  {
+
+    if (allUsers && status === 'DONE' && currentUser?.following.length !== this.state.followingUsers.length)  {
         debugger
       const followingIds = currentUser.following
       const followingUsers = filterUsersById(allUsers, followingIds)
@@ -58,6 +58,8 @@ export default class Following extends React.Component {
         status: status,
         mobile: mobileStatus
       })
+    } else if (this.state.status === 'IDLE' && status === 'DONE' && currentUser?.following.length === 0) {
+      this.setState({status: status})
     }
 
   }
