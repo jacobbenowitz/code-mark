@@ -113,6 +113,8 @@ Limited each note to a maximum of 5 keywords to reduce our Google Search API cal
 - Add loading states to thunk action creators, check loading state in components to conditionally render components based on status of data
 - Maintain the same outer ```div``` elements and ```classes```
 
+<img src="frontend/public/mockups/content_loaders_mobile_note_show.png" height=450>
+
 <br>
 
 ### Frontend Form Validations
