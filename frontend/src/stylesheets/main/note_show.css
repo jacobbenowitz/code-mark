@@ -707,6 +707,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-end;
+  width: 100%;
 }
 
 #comment-highlight-text {
