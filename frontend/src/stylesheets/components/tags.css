@@ -164,7 +164,7 @@ textarea::-webkit-scrollbar {
   display: flex;
 }
 #new-tag-form.tag-form-off {
-  display: none;
+  visibility: hidden;
 }
 #new-tag-form.tag-form-on {
   display: flex;

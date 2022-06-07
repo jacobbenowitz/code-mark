@@ -84,7 +84,16 @@ export default class Tags extends React.Component {
   }
 
   toggleTagForm() {
-    this.setState({tagForm: !this.state.tagForm})
+    let prevStatus = this.state.tagForm;
+    this.setState({ tagForm: !this.state.tagForm })
+    setTimeout(() => {
+      if (!prevStatus) {
+        // debugger
+        let input = document.getElementById('tag-form-input')
+        input.focus()
+      }
+
+    },200)
   }
 
   render() {
@@ -115,10 +124,11 @@ export default class Tags extends React.Component {
 
     if (this.props.isCurrentUser) {
         tagsInput = (
-          <div className={tagForm ? "tag-form-on" : "tag-form-off"}
+          <form className={tagForm ? "tag-form-on" : "tag-form-off"}
             id="new-tag-form">
             <input type={'text'}
               className={'tag-form-input'}
+              id={'tag-form-input'}
               onChange={this.update('newTag')}
               placeholder={'New tag...'}
               value={this.state.newTag}
@@ -130,7 +140,7 @@ export default class Tags extends React.Component {
             >
               <i className="fa-solid fa-floppy-disk" />
             </button>
-          </div>
+          </form>
         )
 
       tagsForm = (

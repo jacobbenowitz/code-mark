@@ -18,17 +18,16 @@ export default class Following extends React.Component {
     }
   }
 
-  componentWillMount() {
+  
+  componentDidMount() {
     this.props.fetchCurrentUser();
     this.props.fetchNotes();
     this.props.fetchUsers();
-  }
-
-  componentDidMount() {
     window.scrollTo(0, 0)
   }
 
   componentDidUpdate() {
+    // debugger
     const { followingNotes, followingTags, followingUsers,
       currentUser, status } = this.props;
     const mobileStatus = this.isMobile();

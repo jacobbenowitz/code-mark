@@ -46,8 +46,9 @@ export default class UserFiltered extends React.Component {
       <div className={this.isMobile() ? 'main-mobile' : 'main-sidebar'}>
         <SideCarMenu
           tags={this.props.tags}
-          tagType={'/home'}
+          tagType={`users/${this.state.user._id}`}
           status={this.props.status}
+          user={this.props.userId}
         />
         <div className='home-main'>
           <div className='notes-section'>

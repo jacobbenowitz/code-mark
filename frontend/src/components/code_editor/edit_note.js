@@ -106,7 +106,7 @@ export default class EditNote extends React.Component {
 
   cancelTextEdit(){
     const editNoteModal = document.getElementById('edit-note-container');
-    const commentHighlightModal = document.getElementById('comment-highlight-text');
+    const commentHighlightModal = document.getElementById('comment-highlight-text');    
     if (editNoteModal.className = "modal-on") {
       editNoteModal.className = "modal-out"
       this.props.toggleCommentModalVisibility()
@@ -167,6 +167,7 @@ export default class EditNote extends React.Component {
     this.props.updateNote(note, this.props.noteId)
       .then(() => {
         this.toggleResourceModal()
+        this.props.toggleCommentModalVisibility()
       })
   }
 
@@ -240,7 +241,7 @@ export default class EditNote extends React.Component {
 
 
   toggleTagForm() {
-    const tagForm = document.getElementById('new-tag-form-new-note');
+    const tagForm = document.getElementById('new-tag-form');
     if (tagForm.className === "tag-form-off") {
       this.setState({ tagForm: true }, () =>
         tagForm.className = "tag-form-on")
@@ -404,7 +405,7 @@ export default class EditNote extends React.Component {
               }
             </div>
 
-            <div className='note-tags-list new'>
+            <div className='tags-form-wrapper'>
               <div className="tag-item-wrapper tag-icon-new new"
                 id='toggle-tag-form-button'
                 onClick={this.toggleTagForm}>
@@ -415,7 +416,7 @@ export default class EditNote extends React.Component {
                 )}
               </div>
 
-              <div className="tag-form-off" id="new-tag-form-new-note">
+              <form className="tag-form-off" id="new-tag-form">
                 <input type={'text'}
                   className={'tag-form-input'}
                   onChange={this.update('newTag')}
@@ -429,7 +430,7 @@ export default class EditNote extends React.Component {
                     this.updateTags : undefined}>
                   <i className="fa-solid fa-floppy-disk" />
                 </button>
-              </div>
+              </form>
             </div>
             <div className='submit-wrapper'>
               <button type='submit' id='code-note-submit'

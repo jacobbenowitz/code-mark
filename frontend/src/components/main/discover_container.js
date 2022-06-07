@@ -11,6 +11,7 @@ const mapStateToProps = (state, { match }) => {
   const filteredNotes = filterOnlyPublicNotes(Object.values(state.notes.all))
   const orderedNotes = orderUserNotes(filteredNotes)
   const discoverTags = selectNoteTags(filteredNotes)
+  debugger
   return {
     allNotes: orderedNotes,
     tags: discoverTags,

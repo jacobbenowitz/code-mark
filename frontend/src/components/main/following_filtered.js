@@ -73,7 +73,7 @@ export default class FollowingFiltered extends React.Component {
             <SectionTitle
               type={'filtered'}
               title={'Following'}
-              noteCount={followingNotes.length}
+              noteCount={followingNotes?.length}
               filter={filter}
               status={this.props.status}
             />

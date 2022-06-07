@@ -46,7 +46,10 @@ const SideCarMenu = ({ tags, tagType, status }) => {
                 <div className='nav-list-wrapper'>
                   <div className='nav-list tags-list'>
                     {tags?.map((tag, i) =>
-                      <NavTagItem tagType={tagType} tag={tag} key={`${i}-tag`} />)}
+                      <NavTagItem
+                        tagType={tagType}
+                        tag={tag}
+                        key={`${i}-tag`} />)}
                     { <div className='stopper-wrapper'>
                       <div className='gradient-stopper' />
                     </div> }

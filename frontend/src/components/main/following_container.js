@@ -25,7 +25,8 @@ const mapStateToProps = (state) => {
     const publicNotes = filterOnlyPublicNotes(followingNotes)
     const orderedNotes = orderUserNotes(publicNotes)
     const followingTags = selectNoteTags(publicNotes)
-
+    
+    debugger
     return {
       followingNotes: orderedNotes,
       followingTags: followingTags,

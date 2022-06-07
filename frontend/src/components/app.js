@@ -8,7 +8,6 @@ import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/signup_form_container';
 import NavFooter from "./nav/footer";
 import SettingsContainer from './profile/settings_container';
-import Footer from './nav/footer';
 import '../stylesheets/reset.css';
 import '../stylesheets/app.css';
 import '../stylesheets/session.css';
@@ -24,6 +23,7 @@ import HomeFilteredContainer from './main/home_filtered_container';
 import DiscoverContainer from './main/discover_container';
 import DiscoverFilteredContainer from './main/discover_filtered_container';
 import UserFilteredContainer from './main/user_filtered_container';
+import UserFilteredByTagContainer from './main/user_filtered_by_tag_container'
 import LikedNotesContainer from './main/liked_notes_container';
 import FollowingContainer from './main/following_container';
 import FollowingFilteredContainer from './main/following_filtered_container';
@@ -50,10 +50,12 @@ const App = () => (
         component={HomeContainer} />
       <ProtectedRoute exact path={'/notes/:noteId'}
         component={NoteShowContainer} />
-      <ProtectedRoute path='/home/tags/:tag'
+      <ProtectedRoute exact path='/home/tags/:tag'
         component={HomeFilteredContainer} />
-      <ProtectedRoute path='/users/:userId'
+      <ProtectedRoute exact path='/users/:userId'
         component={UserFilteredContainer} />
+      <ProtectedRoute exact path='/users/:userId/tags/:tag'
+        component={UserFilteredByTagContainer} />
       <ProtectedRoute exact path='/discover'
         component={DiscoverContainer} />
       <ProtectedRoute exact path='/discover/tags/:tag'

@@ -51,7 +51,7 @@ export const filterUsersByComment = (users, comment) => {
 
 export const filterOnlyPublicNotes = notes => {
   if (notes && Object.values(notes).length) {
-    return notes.filter(note => note.public === true)
+    return notes.filter(note => note.public === true && note.sample === false)
   }
 }
 
@@ -73,6 +73,7 @@ export const filterUsersById = (allUsers, userIds) => {
 }
 
 export const selectFollowingUsersNotes = (users, allNotes) => {
+debugger  
   if (allNotes && users) {
     const usersNoteIds = users.map(user => user?.notes).flat()
     const followingNotes = selectNotesById(usersNoteIds, allNotes)
@@ -81,6 +82,7 @@ export const selectFollowingUsersNotes = (users, allNotes) => {
 }
 
 export const selectNotesById = (noteIds, allNotes) => {
-  const filteredNotes = noteIds.map(noteId => allNotes[noteId])
+  const selectedNotes = noteIds.map(noteId => allNotes[noteId])
+  const filteredNotes = selectedNotes.filter(note => !note.sample)
   return filteredNotes;
 }
