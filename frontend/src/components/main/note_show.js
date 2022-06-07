@@ -5,7 +5,6 @@ import { orderNoteComments } from "../../util/selectors";
 import domtoimage from 'dom-to-image';
 import CommentIndex from '../notes/comments/comment_index';
 import { getLanguage } from '../../util/webscrap_util';
-import NoteCommentsLoader from '../content_loaders/note_show_comments_loader';
 import PhotoExportModal from '../modals/photo_export_modal';
 import DeleteNoteModal from '../modals/delete_note_modal';
 import EditNoteModal from '../modals/edit_note_modal';
@@ -45,6 +44,7 @@ export default class NoteShow extends React.Component {
     this.toggleCommentModalVisibility =
       this.toggleCommentModalVisibility.bind(this);
     this.exportImage = this.exportImage.bind(this);
+    this.handleSelection = this.handleSelection.bind(this);
   }
   
   componentDidMount() {
@@ -53,22 +53,26 @@ export default class NoteShow extends React.Component {
     this.props.fetchNoteComments(this.props.noteId);
     window.scrollTo(0, 0);
 
-    document.onselectionchange = (e) => {
-      e.preventDefault()
-      const selectionString = document.getSelection().toString()
-
-      if (selectionString.length > 1) {
-        this.setState({
-          selectedText: selectionString,
-          commentModal: true
-        });
-      }
-    };
+    // document.onselectionchange = (e) => this.handleSelection(e)
+    document.addEventListener('selectionchange', this.handleSelection)
   }
   
-  // componentWillUnmount() {
-  //   this._isMounted = false;
-  // }
+  componentWillUnmount() {
+    document.removeEventListener('selectionchange', this.handleSelection)
+    this._isMounted = false;
+  }
+
+  handleSelection(e) {
+  e.preventDefault()
+  const selectionString = document.getSelection().toString()
+
+  if (selectionString.length > 1) {
+    this.setState({
+      selectedText: selectionString,
+      commentModal: true
+    });
+  }
+};
   
   componentDidUpdate() {
     const { note, comments, currentUser, history, status } = this.props;
