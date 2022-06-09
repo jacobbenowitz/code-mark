@@ -8,38 +8,43 @@ export default class UserHeader extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      bodyHeight: 0,
-      followers: []
+      followers: [],
+      following: [],
+      status: 'IDLE'
     }
     this.toggleFollowerModal = this.toggleFollowerModal.bind(this)
 }
 
-componentDidUpdate() {
-  const body = document.getElementsByTagName('body');
-  const bodyHeight = body[0].clientHeight;
+  componentDidUpdate() {
+    debugger
+  
 
-  if (bodyHeight !== this.state.bodyHeight) {
-    // const followers = filterUsersById(this.props.allUsers, this.props.followers)
-    this.setState({ 
-      // followers: followers,
-      bodyHeight: bodyHeight
-    })
+    if (this.props.userStatus === 'DONE' && this.state.status === 'BUSY' && this.props.user ) {
+      const followers = filterUsersById(this.props.allUsers, this.props.user.followers)
+      const following = filterUsersById(this.props.allUsers, this.props.user.following)
+
+      this.setState({
+        followers: followers,
+        following: following,
+        status: 'DONE'
+      })
+    }
+
   }
 
-}
-
   componentDidMount() {
-    if (!this.props.allUsers) {
-      this.props.fetchUsers()
-    }
+   this.props.fetchUsers()
+   this.setState({
+     status: 'BUSY'
+   }) 
   }
 
 toggleFollowerModal() {
-  const FollowerHeaderModal = document.getElementById('follower-header-container');
+  const FollowerHeaderModal = document.getElementById('following-modal');
   // const commentHighlightModal = document.getElementById('comment-highlight-text');
 
   if (FollowerHeaderModal.className === "modal-off" || FollowerHeaderModal.className === "modal-out") {
-    FollowerHeaderModal.className = "modal-on"
+    FollowerHeaderModal.className = "modal-in"
     // commentHighlightModal.className = "modal-compact hidden"
   } else {
     FollowerHeaderModal.className = "modal-out"
@@ -60,27 +65,27 @@ render () {
     )
   }
   
-  if (this.state.followers) {
+  if (this.state.followers || this.state.following) {
     followModal = (
-    <div id='follower-header-container' 
-      className="modal-off" 
-      style={{ height: this.state.bodyHeight }} 
+    <div id='following-modal' 
+      className="modal-off"  
     >
-      <div className='modal-wrapper'>
         <Followers 
             toggleFollowerModal={this.toggleFollowerModal}
             followers={this.state.followers}
+            following={this.state.following}
         />
-      </div>
+
     </div>
     )
     
   }
 
+  debugger
   return (
     <>
-    {/* { followModal } */}
     <div className="user-header-wrapper">
+    { followModal }
       <h3>Notes by {user.username}</h3>
       <div className="user-header-stats">
         <div className="user-stats">
@@ -106,11 +111,11 @@ render () {
             <div className="flex-wrapper margin-right"
               onClick={() => this.toggleFollowerModal()}
             >
-              <span>{user.followers?.length }</span>
+              <span>{user?.followers.length || 0 }</span>
               <span className="text-light">Followers</span>
             </div>
             <div className="flex-wrapper">
-              <span>{user.following?.length}</span>
+              <span>{user?.following.length || 0}</span>
               <span className="text-light">Following</span>
             </div>
           </div>

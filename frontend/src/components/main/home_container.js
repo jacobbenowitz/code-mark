@@ -4,12 +4,15 @@ import { withRouter } from "react-router-dom";
 import {fetchUsers} from '../../actions/user_actions'
 
 const mapStateToProps = state => {
+  debugger
   return {
     userNotes: state.notes.user,
     tags: state.session.tags,
     currentUser: state.session.user,
     allUsers: state.users.all,
-    status: state.notes.status
+    user: state.users.user,
+    status: state.notes.status,
+    userStatus: state.users.status
   }
 }
 

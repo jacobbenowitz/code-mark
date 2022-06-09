@@ -7,11 +7,17 @@ import {
 
 import { merge } from 'lodash';
 
+const BUSY = 'BUSY';
+const IDLE = 'IDLE';
+const DONE = 'DONE';
+
 const initialState = {
     all: {},
     user: {},
-    new: undefined
+    new: undefined,
+    status: IDLE
 }
+
 
 const usersReducer = (prevState = initialState, action) => {
     Object.freeze(prevState);
@@ -20,12 +26,14 @@ const usersReducer = (prevState = initialState, action) => {
     switch (action.type) {
         case RECEIVE_USER:
             nextState.user = action.user.data;
+            nextState.status = DONE;
             return nextState;
         case RECEIVE_USERS:
             let allUsers = {};
             nextState.all = action.users.data.map(user => 
                 allUsers[user._id] = user)
             nextState.all = allUsers;
+            nextState.status = DONE;
             return nextState;
         case RECEIVE_USER_NEW_FOLLOWING:
             nextState.user = action.users.data.followedUser;
