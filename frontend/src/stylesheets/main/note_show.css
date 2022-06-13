@@ -724,6 +724,7 @@
     z-index: 201;
     padding: 15px;
     box-sizing: border-box;
+    min-height: 40px;
 }
 
 .following-header{

@@ -43,7 +43,7 @@ export default class UserFiltered extends React.Component {
   }
 
   render() {
-    console.log(this.state.user)
+
     return (
       <div className={this.isMobile() ? 'main-mobile' : 'main-sidebar'}>
         <SideCarMenu
@@ -64,17 +64,11 @@ export default class UserFiltered extends React.Component {
                     userId={this.props.userId}
                     changeUserFollowers={this.props.changeUserFollowers}
                     fetchUsers={this.props.fetchUsers}
-                    // user={this.props.currentUser}
-                    currentUser={this.props.currentUser}
-                    // userId={this.props.currentUser.id}
                     isCurrentUser={false}
-                    // noteCount={this.props?.userNotes.length}
-                    fetchUsers={this.props.fetchUsers}
                     allUsers={this.props.allUsers}
                     followers={this.state.user.followers}
                     following={this.state.user.following}
                     userStatus={this.props.userStatus}
-
                 />
               ) : ""}
             </div>

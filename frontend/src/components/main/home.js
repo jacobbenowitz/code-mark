@@ -61,6 +61,7 @@ export default class Home extends React.Component {
           followers={this.props.currentUser.followers}
           following={this.props.currentUser.following}
           userStatus={this.props.userStatus}
+          fetchUser={this.props.fetchUser}
         />
       )
     }

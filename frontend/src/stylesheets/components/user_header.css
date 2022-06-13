@@ -140,7 +140,7 @@
 }
 
 .user-notes-stat.notes:hover::before {
-  content: 'total notes';
+  content: 'Total notes created';
   position: absolute;
   width: max-content;
   z-index: 200;
@@ -166,7 +166,7 @@
 }
 
 .user-notes-stat.comments:hover::before {
-  content: 'total comments received';
+  content: 'Total comments received';
   position: absolute;
   width: max-content;
   z-index: 200;
@@ -192,7 +192,7 @@
 }
 
 .user-notes-stat.followers:hover::before {
-  content: 'total followers and following';
+  content: 'View list of followers and following';
   position: absolute;
   width: max-content;
   z-index: 200;
@@ -215,4 +215,8 @@
   border-right: 10px solid transparent;
   border-bottom: 10px solid #393939;
   animation: fadeIn 500ms ease-in-out;
+}
+
+.user-notes-stat.followers {
+  cursor: pointer;
 }

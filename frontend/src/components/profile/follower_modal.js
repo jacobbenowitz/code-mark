@@ -13,8 +13,8 @@ const Followers = ({ followers, following, toggleFollowerModal}) => {
             <span className="following-header"> Followers </span>
             <ul className="user-list"> 
                 {followers.map((follower,i) => (
-                <li key={`follower-${i}`}>
-                        <Link target="_blank" to={`/users/${follower._id}`}> {follower.username} </Link>
+                <li key={`follower-${i}`} className='username'>
+                    <Link target="_blank" to={`/users/${follower._id}`}> @{follower.username} </Link>
                 </li>
                 ))}
             </ul>

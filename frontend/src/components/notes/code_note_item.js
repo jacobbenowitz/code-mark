@@ -41,7 +41,7 @@ const CodeNoteItem = props => {
         <div className="code-note-text">
           <div className="updated-at-and-username"
             onClick={preventBubbleLink}>
-            <Link className="code-note-username"
+            <Link className="username"
               to={`/users/${props.userId}`}>
               @{props?.username}
             </Link>
