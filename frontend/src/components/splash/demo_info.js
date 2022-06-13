@@ -13,9 +13,8 @@ export const DemoInfo = (
                         <h4>Grow as a coder</h4>
                     </div>
                     <div className="info-desc-box">
-                        <p>Get immediate feedback with your note save. 
-                            Our internet research algorithm find valuable 
-                            resources online so you can reinforce the code you're
+                        <p>Learn more about your code!  Our algorithm scours the internet
+                            to find the best resources online so you can reinforce the code you're
                             learning with additional documentation.</p>
                     </div>
                 </div>
@@ -46,8 +45,8 @@ export const DemoInfo = (
                         <h4>Join the Community</h4>
                     </div>
                     <div className="info-desc-box">
-                        <p>With the ability to share notes, and comment on others'
-                            pages, you're joining a community of active learners.
+                        <p>With the ability discover new code, see what code is active, and comment on others'
+                            notes, you're joining a community of active learners.
                         </p>
                     </div>
                 </div>
@@ -62,10 +61,9 @@ export const DemoInfo = (
                         <h4>Improve faster</h4>
                     </div>
                     <div className="info-desc-box">
-                        <p>By saving your notes, and being able to peruse the 
-                            notes and comments of others, you're laying down 
-                            neurons in the fastest way possible, propelling 
-                            your codebase and knowledge exponentially!
+                        <p>By being able to sort your notes by language, and discover new code snippets
+                            in those languages, your knowledge can either go wide or deep, as you drill down 
+                            on concepts or want to dabble and learn something new.  
                         </p>
                     </div>
                 </div>

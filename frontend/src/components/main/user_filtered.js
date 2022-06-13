@@ -20,6 +20,7 @@ export default class UserFiltered extends React.Component {
   componentWillMount() {
     this.props.fetchUser(this.props.userId);
     this.props.fetchUserNotes(this.props.userId);
+    this.props.fetchUsers()
   };
 
   componentDidMount() {
@@ -42,6 +43,7 @@ export default class UserFiltered extends React.Component {
   }
 
   render() {
+    console.log(this.state.user)
     return (
       <div className={this.isMobile() ? 'main-mobile' : 'main-sidebar'}>
         <SideCarMenu
@@ -56,12 +58,23 @@ export default class UserFiltered extends React.Component {
               {Object.values(this.state.currentUser).length &&
                 Object.values(this.state.user).length ? (
                 <UserHeader
-                  user={this.state.user}
-                  userNotes={this.state.userNotes}
-                  currentUser={this.state.currentUser}
-                  userId={this.props.userId}
-                  changeUserFollowers={this.props.changeUserFollowers}
-                  fetchUsers={this.props.fetchUsers}
+                    user={this.state.user}
+                    userNotes={this.state.userNotes}
+                    currentUser={this.state.currentUser}
+                    userId={this.props.userId}
+                    changeUserFollowers={this.props.changeUserFollowers}
+                    fetchUsers={this.props.fetchUsers}
+                    // user={this.props.currentUser}
+                    currentUser={this.props.currentUser}
+                    // userId={this.props.currentUser.id}
+                    isCurrentUser={false}
+                    // noteCount={this.props?.userNotes.length}
+                    fetchUsers={this.props.fetchUsers}
+                    allUsers={this.props.allUsers}
+                    followers={this.state.user.followers}
+                    following={this.state.user.following}
+                    userStatus={this.props.userStatus}
+
                 />
               ) : ""}
             </div>

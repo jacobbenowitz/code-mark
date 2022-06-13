@@ -182,6 +182,9 @@ export default class DummyHeroNote extends React.Component {
                                 placeholder={'Signup to save'} />
                         </div>
                         <div className='select-wrapper'>
+                            <span className='select-label'>
+                                Editor Language:
+                            </span>
                             <select id='lang-select' onChange={this.handleChange}>
                                 <option value={0} defaultValue>JavaScript</option>
                                 <option value={1}>HTML</option>
