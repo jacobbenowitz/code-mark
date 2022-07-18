@@ -81,6 +81,7 @@
 
 .spacer-50-h {
   height: 50px;
+  min-height: 50px;
   width: 100%;
 }
 

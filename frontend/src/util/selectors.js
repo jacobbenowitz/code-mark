@@ -30,7 +30,8 @@ export const selectNoteComments = (comments, noteId) => {
 
 export const selectNoteTags = notes => {
   if (notes) {
-    const tags = notes.map(note => note.tags);
+    const sorted = notes.sort(orderByDate);
+    const tags = sorted.map(note => note.tags);
     const uniqueTags = [...new Set(tags.flat())]
     return uniqueTags;
   }
