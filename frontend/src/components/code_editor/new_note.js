@@ -8,7 +8,7 @@ import { css } from '@codemirror/lang-css';
 import CheckBoxItem from './checkbox_item';
 import NewNoteTagItem from '../tags/new_note_tag_item';
 import { getKeywords } from '../../util/webscrap_util';
-import { EditorView } from '@codemirror/basic-setup';
+import { EditorView } from 'codemirror';
 import { withRouter } from 'react-router-dom'
 import TextareaAutosize from 'react-textarea-autosize';
 
@@ -26,7 +26,7 @@ class NewNote extends React.Component {
       keywordsSelected: [],
       allKeywords: [],
       newResources: [],
-      lang: javascript({ jsx: true}),
+      lang: javascript({ jsx: true }),
       language_name: 'JavaScript',
       bodyHeight: 0
     }
@@ -61,10 +61,10 @@ class NewNote extends React.Component {
     }
   }
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     const body = document.getElementsByTagName('body');
     const bodyHeight = body[0].clientHeight;
-    if(this.state.bodyHeight !== bodyHeight){
+    if (this.state.bodyHeight !== bodyHeight) {
       this.setState({
         bodyHeight: bodyHeight
       });
@@ -81,15 +81,15 @@ class NewNote extends React.Component {
 
   updateCode(e) {
     let lang = this.props.getLanguage(e)
-      this.setState({
-        codebody: e,
-        suggestedLanguage: lang
-      })
+    this.setState({
+      codebody: e,
+      suggestedLanguage: lang
+    })
   }
 
   handleChange(e) {
-    const languages = [javascript({ jsx: true}), html(), cpp(), css()];
-    const language_names = ['JavaScript','HTML','C++','CSS'];
+    const languages = [javascript({ jsx: true }), html(), cpp(), css()];
+    const language_names = ['JavaScript', 'HTML', 'C++', 'CSS'];
     this.setState({ lang: languages[parseInt(e.target.value)], language_name: language_names[parseInt(e.target.value)] });
   }
 
@@ -151,7 +151,7 @@ class NewNote extends React.Component {
       keywords: keywordsSelected,
       language: language_name
     }
-    
+
     this.props.composeNote(note)
       .then(() => (
         this.setState({
@@ -173,12 +173,12 @@ class NewNote extends React.Component {
   // remove if possible
   updateKeywords(e) {
     e.preventDefault();
-    
+
     // e.target.checked ? e.target.checked = false : e.target.checked = true;
     const keyword = e.target.value || e.target.innerText;
     let spaceRemoved = keyword.replace(/\s/g, '');
     let result;
-    
+
     this.state.keywordsSelected.includes(spaceRemoved) ? (
       result = this.state.keywordsSelected.filter(word => word !== spaceRemoved)
     ) : (
@@ -187,9 +187,9 @@ class NewNote extends React.Component {
     this.setState({
       keywordsSelected: result
     });
-    if(result.length === 5){
+    if (result.length === 5) {
       this.limitKeywords();
-    }else if(result.length === 4){
+    } else if (result.length === 4) {
       this.freeKeywords();
     }
   };
@@ -202,7 +202,7 @@ class NewNote extends React.Component {
     })
   }
 
-  freeKeywords(){
+  freeKeywords() {
     const disabled_keywords = Object.values(document.getElementsByClassName('checkbox-option disabled'));
     disabled_keywords.forEach(disabled => {
       disabled.classList.remove('disabled');
@@ -252,11 +252,11 @@ class NewNote extends React.Component {
     })
   }
 
-  placeholderTitle(e){
+  placeholderTitle(e) {
     // const title = this.state.codebody.slice(0, 20);
     const title = this.state.codebody.split('\n')[0];
     const selection = window.getSelection();
-    
+
     this.setState({ title: title });
     setTimeout(() => {
       const titleInput = document.getElementById('title-code');
@@ -276,17 +276,17 @@ class NewNote extends React.Component {
   render() {
     const col1 = [];
     const col2 = [];
-    this.state.allKeywords?.map((keyword,idx) => {
-      if(idx % 2 === 0){
+    this.state.allKeywords?.map((keyword, idx) => {
+      if (idx % 2 === 0) {
         col1.push(keyword);
-      }else{
+      } else {
         col2.push(keyword);
       }
     })
     return (
       <>
-        <div id='resources-note-container' className='modal-off' 
-        style={{height:this.state.bodyHeight}}
+        <div id='resources-note-container' className='modal-off'
+          style={{ height: this.state.bodyHeight }}
         >
           <div className='modal-wrapper'>
             <div id="resources-step-1" className='resources-modal'>
@@ -297,27 +297,27 @@ class NewNote extends React.Component {
                 <div className='keyword-options'>
                   <div className='column1'>
                     {
-                    col1?.map((keyword, i) =>
-                      <CheckBoxItem keyword={keyword} index={i}
-                      key={`col1-${i}`} updateKeywords={this.updateKeywords}
-                      />
+                      col1?.map((keyword, i) =>
+                        <CheckBoxItem keyword={keyword} index={i}
+                          key={`col1-${i}`} updateKeywords={this.updateKeywords}
+                        />
                       )
                     }
 
                   </div>
                   <div className='column2'>
                     {
-                    col2?.map((keyword, i) =>
-                      <CheckBoxItem keyword={keyword} index={i}
-                      key={`col2-${i}`} updateKeywords={this.updateKeywords}
-                      />
+                      col2?.map((keyword, i) =>
+                        <CheckBoxItem keyword={keyword} index={i}
+                          key={`col2-${i}`} updateKeywords={this.updateKeywords}
+                        />
                       )
                     }
 
                   </div>
                 </div>
               </form>
-              <div className='keyword-buttons'> 
+              <div className='keyword-buttons'>
                 <div>
                   <button id='keyword-submit' onClick={this.handleSubmit}>Submit</button>
                 </div>
@@ -346,15 +346,15 @@ class NewNote extends React.Component {
 
         <div className='new-note-container' id='new-note-full'>
           <div className='new-note-form'>
-              <div id="note-title-input" className='note-input'>
-                <input type={'text'}
-                  onClick={this.state.title === "" ? this.placeholderTitle : undefined}
-                  onChange={this.update('title')}
-                  id='title-code'
-                  className='title-input'
-                  value={this.state.title}
-                  placeholder={'Untitled note'} />
-              </div>
+            <div id="note-title-input" className='note-input'>
+              <input type={'text'}
+                onClick={this.state.title === "" ? this.placeholderTitle : undefined}
+                onChange={this.update('title')}
+                id='title-code'
+                className='title-input'
+                value={this.state.title}
+                placeholder={'Untitled note'} />
+            </div>
             <div className='select-wrapper'>
               <span className='select-label'>
                 Editor Language:
@@ -366,81 +366,81 @@ class NewNote extends React.Component {
                 <option value={3}>CSS</option>
               </select>
             </div>
-              <div className='note-input'>
-                <CodeMirror className='codemirror javascript'
-                  id='codebody-js'
-                  value={this.state.codebody}
-                  onChange={this.updateCode}
-                  minHeight="200px"
-                  maxHeight="400px"
-                  theme='dark'
-                  extensions={[this.state.lang,
-                    EditorView.lineWrapping]}
-                />
+            <div className='note-input'>
+              <CodeMirror className='codemirror javascript'
+                id='codebody-js'
+                value={this.state.codebody}
+                onChange={this.updateCode}
+                minHeight="200px"
+                maxHeight="400px"
+                theme='dark'
+                extensions={[this.state.lang,
+                EditorView.lineWrapping]}
+              />
+            </div>
+            <div className='note-input'>
+              <TextareaAutosize
+                onChange={this.update('textdetails')}
+                id='details-textarea'
+                className='note-input-details'
+                placeholder='Any additional notes?'
+                value={this.state.textdetails}
+              />
+            </div>
+            <div className='tags-header-wrapper'>
+              <span className='tags-header'>TAGS</span>
+              <div className='recommended-tag'
+                onClick={() => this.addLangTag(this.state.suggestedLanguage)}>
+                {this.state.suggestedLanguage ? (
+                  <>
+                    <span className='rec-tag'>Detected language:</span>
+                    <span className='lang-tag'>{this.state.suggestedLanguage}</span>
+                  </>) : " "}
               </div>
-              <div className='note-input'>
-                <TextareaAutosize 
-                  onChange={this.update('textdetails')}
-                  id='details-textarea'
-                  className='note-input-details'
-                  placeholder='Any additional notes?'
-                  value={this.state.textdetails}
-                />
-              </div>
-              <div className='tags-header-wrapper'>
-                <span className='tags-header'>TAGS</span>
-                <div className='recommended-tag'
-                  onClick={() => this.addLangTag(this.state.suggestedLanguage)}>
-                  {this.state.suggestedLanguage ? (
-                    <>
-                      <span className='rec-tag'>Detected language:</span>
-                      <span className='lang-tag'>{this.state.suggestedLanguage}</span>
-                    </>) : " "}
-                </div>
-              </div>
-              <div className='tag-list'>
-                {
-                  this.state.tags?.map((tag, i) =>
-                    <NewNoteTagItem title={tag} key={`tag-${i}`}
-                      deleteTag={this.deleteTag}
-                    />)
-                }
-              </div>
+            </div>
+            <div className='tag-list'>
+              {
+                this.state.tags?.map((tag, i) =>
+                  <NewNoteTagItem title={tag} key={`tag-${i}`}
+                    deleteTag={this.deleteTag}
+                  />)
+              }
+            </div>
 
             <div className='tags-form-wrapper'>
 
-                <div className="tag-item-wrapper tag-icon-new new"
-                  id='toggle-tag-form-button'
-                  onClick={this.toggleTagForm}>
-                  {this.state.tagForm ? (
-                    <i className="fa-solid fa-minus"></i>
-                  ) : (
-                    <i className="fa-solid fa-circle-plus"></i>
-                  )}
-                </div>
-
-                <form onSubmit={this.state.newTag.split(' ').join('').length ? this.updateTags : undefined}
-                  className="tag-form-off" id="new-tag-form">
-                  <input type={'text'}
-                    className={'tag-form-input'}
-                    onChange={this.update('newTag')}
-                    placeholder={'New tag...'}
-                    value={this.state.newTag.split(' ').join(' ')}
-                    maxLength="50"
-                  />
-
-                  <button className={this.state.newTag.split(' ').join('').length ? '' : 'save-tag disabled'} id='tag-icon-save' type='submit'>
-                    <i className="fa-solid fa-floppy-disk" />
-                  </button>
-                </form>
+              <div className="tag-item-wrapper tag-icon-new new"
+                id='toggle-tag-form-button'
+                onClick={this.toggleTagForm}>
+                {this.state.tagForm ? (
+                  <i className="fa-solid fa-minus"></i>
+                ) : (
+                  <i className="fa-solid fa-circle-plus"></i>
+                )}
               </div>
-              <div className='submit-wrapper'>
-                <button type='submit' id='code-note-submit'
-                  className={(this.state.codebody.length > 1 && 
-                    this.state.codebody.length < 5001) ? 'save-button' : "save-button disabled"}
-                  onClick={this.state.codebody.length ? this.toggleResourcesModal : undefined}
-                >Save CodeMark</button>
-              </div>
+
+              <form onSubmit={this.state.newTag.split(' ').join('').length ? this.updateTags : undefined}
+                className="tag-form-off" id="new-tag-form">
+                <input type={'text'}
+                  className={'tag-form-input'}
+                  onChange={this.update('newTag')}
+                  placeholder={'New tag...'}
+                  value={this.state.newTag.split(' ').join(' ')}
+                  maxLength="50"
+                />
+
+                <button className={this.state.newTag.split(' ').join('').length ? '' : 'save-tag disabled'} id='tag-icon-save' type='submit'>
+                  <i className="fa-solid fa-floppy-disk" />
+                </button>
+              </form>
+            </div>
+            <div className='submit-wrapper'>
+              <button type='submit' id='code-note-submit'
+                className={(this.state.codebody.length > 1 &&
+                  this.state.codebody.length < 5001) ? 'save-button' : "save-button disabled"}
+                onClick={this.state.codebody.length ? this.toggleResourcesModal : undefined}
+              >Save CodeMark</button>
+            </div>
 
             <div id='hide-new-note-form'
               className='icon-only-button'
@@ -450,7 +450,7 @@ class NewNote extends React.Component {
             </div>
           </div>
         </div>
-        
+
         <div className='new-note-container' id='new-note-mini'
           onClick={this.toggleForm}>
           <div className='new-note-form' onClick={this.toggleForm}>

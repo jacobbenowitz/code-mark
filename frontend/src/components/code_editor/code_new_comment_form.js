@@ -6,7 +6,7 @@ import { getLanguage } from '../../util/webscrap_util';
 import { html } from '@codemirror/lang-html';
 import { cpp } from '@codemirror/lang-cpp';
 import { css } from '@codemirror/lang-css';
-import { EditorView } from '@codemirror/basic-setup';
+import { EditorView } from 'codemirror';
 
 const CodeNewComment = props => {
   const language = getLanguage(props.codeSnippet);

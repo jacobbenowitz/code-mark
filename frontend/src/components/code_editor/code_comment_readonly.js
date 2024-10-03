@@ -6,7 +6,7 @@ import { getLanguage } from '../../util/webscrap_util';
 import { html } from '@codemirror/lang-html';
 import { cpp } from '@codemirror/lang-cpp';
 import { css } from '@codemirror/lang-css';
-import { EditorView } from '@codemirror/basic-setup';
+import { EditorView } from 'codemirror';
 
 const CodeCommentReadOnly = props => {
   const language = getLanguage(props.codeSnippet);
@@ -17,7 +17,7 @@ const CodeCommentReadOnly = props => {
     'C++': cpp(),
   }
   const fixedHeightEditor = EditorView.theme({
-    "&": { 'max-height': "200px"},
+    "&": { 'max-height': "200px" },
     ".cm-scroller": { 'overflow': "auto" }
   })
   return (

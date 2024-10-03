@@ -6,7 +6,7 @@ import { getLanguage, getKeywords } from '../../util/webscrap_util';
 import { html } from '@codemirror/lang-html';
 import { cpp } from '@codemirror/lang-cpp';
 import { css } from '@codemirror/lang-css';
-import { EditorView } from '@codemirror/basic-setup';
+import { EditorView } from 'codemirror';
 import TextareaAutosize from 'react-textarea-autosize';
 import NewNoteTagItem from '../tags/new_note_tag_item';
 import CheckBoxItem from './checkbox_item';
@@ -47,7 +47,7 @@ export default class EditNote extends React.Component {
         keywords.push(resource.keyword.split(' ')[1])
       })
     }
-    
+
     this.setState({
       title: note.title,
       codebody: note.codebody,
@@ -97,16 +97,16 @@ export default class EditNote extends React.Component {
 
   updateCode(e) {
     let lang = this.props.getLanguage(e)
-      this.setState({
-        codebody: e,
-        suggestedLanguage: lang
-      })
+    this.setState({
+      codebody: e,
+      suggestedLanguage: lang
+    })
     // }
   }
 
-  cancelTextEdit(){
+  cancelTextEdit() {
     const editNoteModal = document.getElementById('edit-note-container');
-    const commentHighlightModal = document.getElementById('comment-highlight-text');    
+    const commentHighlightModal = document.getElementById('comment-highlight-text');
     if (editNoteModal.className = "modal-on") {
       editNoteModal.className = "modal-out"
       this.props.toggleCommentModalVisibility()
@@ -138,7 +138,7 @@ export default class EditNote extends React.Component {
     }
   }
 
-  toggleResourceModal(){
+  toggleResourceModal() {
     const step1 = document.getElementById('resources-step-1');
     step1.className = 'resources-modal modal-off';
     const wrapper = document.getElementById('edit-note-container');
@@ -146,9 +146,9 @@ export default class EditNote extends React.Component {
     const noteEdit = document.getElementById('note-edit-wrapper');
     noteEdit.className = 'edit-note-container';
   }
-  
-  componentDidUpdate(){
-    if(this.state.keywordsSelected.length === 5){
+
+  componentDidUpdate() {
+    if (this.state.keywordsSelected.length === 5) {
       this.limitKeywords();
     }
   }
@@ -188,7 +188,7 @@ export default class EditNote extends React.Component {
     // if(result.length === 5){
     //   this.limitKeywords();
     // }else 
-    if(result.length === 4){
+    if (result.length === 4) {
       this.freeKeywords();
     }
   };
@@ -201,14 +201,14 @@ export default class EditNote extends React.Component {
     })
   }
 
-  freeKeywords(){
+  freeKeywords() {
     const disabled_keywords = Object.values(document.getElementsByClassName('checkbox-option disabled'));
     disabled_keywords.forEach(disabled => {
       disabled.classList.remove('disabled');
       // checkbox.disabled = false;
     })
   }
-  
+
   updateTags(e) {
     e.preventDefault()
     let newTags = this.state.newTag.length ? (
@@ -294,8 +294,8 @@ export default class EditNote extends React.Component {
     if (!isMobile) {
       const col1 = [];
       const col2 = [];
-      allKeywords?.map((keyword,idx) => {
-        if (idx % 2 === 0){
+      allKeywords?.map((keyword, idx) => {
+        if (idx % 2 === 0) {
           col1.push(keyword);
         } else {
           col2.push(keyword);
@@ -345,7 +345,7 @@ export default class EditNote extends React.Component {
       <>
         {/* <div id='resources-note-container' className='modal-off'>
           <div className='modal-wrapper'> */}
-          {/* </div>
+        {/* </div>
         </div> */}
         <div className='edit-note-container' id='note-edit-wrapper'>
           <div className='edit-note-form'>
@@ -377,7 +377,7 @@ export default class EditNote extends React.Component {
                 width='100%'
                 theme='dark'
                 extensions={[this.state.lang,
-                  EditorView.lineWrapping]}
+                EditorView.lineWrapping]}
               />
             </div>
             <TextareaAutosize
@@ -467,11 +467,11 @@ export default class EditNote extends React.Component {
             <button id='keyword-submit' onClick={this.handleSubmit}>Submit</button>
           </div>
           <div id='hide-note-form'
-          className='icon-only-button'
-          title='hide form'
-          onClick={this.toggleResourceModal}>
-          <i className="fa-solid fa-square-minus"></i>
-        </div>
+            className='icon-only-button'
+            title='hide form'
+            onClick={this.toggleResourceModal}>
+            <i className="fa-solid fa-square-minus"></i>
+          </div>
         </div>
       </>
     )

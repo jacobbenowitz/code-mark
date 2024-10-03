@@ -8,7 +8,7 @@ import { css } from '@codemirror/lang-css';
 import CheckBoxItem from './checkbox_item';
 import NewNoteTagItem from '../tags/new_note_tag_item';
 import { getKeywords } from '../../util/webscrap_util';
-import { EditorView } from '@codemirror/basic-setup';
+import { EditorView } from 'codemirror';
 import { withRouter } from 'react-router-dom'
 import TextareaAutosize from 'react-textarea-autosize';
 import { getLanguage } from '../../util/webscrap_util';
@@ -287,8 +287,7 @@ export default class DummyHeroNote extends React.Component {
                                 height="56px"
                                 width='320px'
                                 theme='dark'
-                                extensions={[html(),
-                                EditorView.lineWrapping]}
+                                extensions={[html(), EditorView.lineWrapping]}
                             />
                         </div>
                     </div>
